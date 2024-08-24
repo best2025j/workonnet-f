@@ -2,8 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+
+@font-face {
+  font-family: "Nexa";
+  src: url("~/assets/fonts/Nexa-ExtraLight.ttf");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Nexa";
+  src: url("~/assets/fonts/Nexa-Heavy.ttf");
+  font-weight: 900;
+}
+
 html, body {
-  font-family: Nexa;
+  font-family: "Nexa";
 }
 
 /* scrollbar */
