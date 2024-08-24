@@ -107,6 +107,11 @@ module.exports = {
         22: '88px',
         19: '76px',
       },
+      borderRadius: {
+        none: '0',
+        sm: '0.125rem',
+        10: '10px',
+      },
       transformOrigin: {
         0: '0%',
       },
