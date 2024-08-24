@@ -17,7 +17,7 @@ const route = useRoute();
     <section class="flex space-x-4">
       <!-- Link to Job Seeker Dashboard -->
       <NuxtLink
-        to="/jobseeker"
+        to="/dashboard/jobseeker"
         class="bg-blue-500 text-white py-2 px-6 rounded-lg shadow hover:bg-blue-600 transition duration-300"
       >
         I'm a Job Seeker
@@ -25,7 +25,7 @@ const route = useRoute();
 
       <!-- Link to Recruiter Dashboard -->
       <NuxtLink
-        to="/recruiter"
+        to="/dashboard/recruiter"
         class="bg-green-500 text-white py-2 px-6 rounded-lg shadow hover:bg-green-600 transition duration-300"
       >
         I'm a Recruiter
