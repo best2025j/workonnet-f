@@ -5,5 +5,6 @@ const route = useRoute()
 <template>
   <div>
     <h1 class="text-purple-700 font-bold text-5xl">This is the home page</h1>
+    <Table />
   </div>
 </template>
