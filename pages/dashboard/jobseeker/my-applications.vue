@@ -1,11 +1,19 @@
 <script setup lang="ts">
 definePageMeta({
-    name: 'My Applications',
-  layout: 'dashboard'
-})
+  name: "My Applications",
+  layout: "dashboard",
+});
 </script>
+
 <template>
+  <div class="py-2 w-full">
+    <AppNav />
     <div>
-        <h3>My applications</h3>
+      <!--  -->
+      <div class="w-full">
+        <!--  -->
+        <AppCard />
+      </div>
     </div>
+  </div>
 </template>
