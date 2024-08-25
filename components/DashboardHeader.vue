@@ -2,7 +2,7 @@
 </script>
 
 <template>
-    <header class="text-black bg-white items-center flex py-4 text-xs sticky top-0 z-10">
+    <header class="text-[#3D3D3D] bg-white items-center flex py-4 text-xs sticky top-0 z-10">
       <div class="container mx-auto flex justify-between items-center">
       <h1 class="text-3xl text-[#FE8900] font-bold">{{$route?.meta?.name}}</h1>
       <nav>

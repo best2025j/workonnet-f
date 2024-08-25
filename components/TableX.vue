@@ -7,12 +7,12 @@ export default {
 
 <template>
   <div class="h-full">
-    <div class="min-w-full h-full bg-[#FFFBEC] rounded-xl">
+    <div class="min-w-full h-full bg-[#FFFBEC] rounded-10">
       <div class="flex justify-between text-justify items-center p-2">
         <img
           src="https://via.placeholder.com/50"
           alt="Google"
-          class="w-10 h-10 rounded-full"
+          class="w-10 h-10 rounded-10"
         />
         <div class="flex flex-col">
           <h1 class="text-sm font-bold">Social Media Assistant</h1>
@@ -33,7 +33,7 @@ export default {
         </div>
         <div class="">
           <span
-            class="px-6 py-2 rounded-lg font-bold bg-[#FFF6D3] text-xs text-[#FE8900]"
+            class="px-6 py-2 rounded-10 font-bold bg-[#FFF6D3] text-xs text-[#FE8900]"
             >In Review</span
           >
         </div>
@@ -54,12 +54,12 @@ export default {
       </div>
     </div>
 
-    <div class="min-w-full h-full rounded-xl">
+    <div class="min-w-full h-full rounded-10">
       <div class="flex justify-between text-justify items-center p-2">
         <img
           src="https://via.placeholder.com/50"
           alt="Google"
-          class="w-10 h-10 rounded-full"
+          class="w-10 h-10 rounded-10"
         />
         <div class="flex flex-col">
           <h1 class="text-sm font-bold">HR Manager</h1>
@@ -80,7 +80,7 @@ export default {
         </div>
         <div class="">
           <span
-            class="px-6 py-2 rounded-lg font-bold bg-[#FFDEE0] text-xs text-[#F60C17]"
+            class="px-6 py-2 rounded-10 font-bold bg-[#FFDEE0] text-xs text-[#F60C17]"
             >Not selected</span
           >
         </div>
@@ -101,12 +101,12 @@ export default {
       </div>
     </div>
 
-    <div class="min-w-full h-full bg-[#FFFBEC] rounded-xl">
+    <div class="min-w-full h-full bg-[#FFFBEC] rounded-10">
       <div class="flex justify-between text-justify items-center p-2">
         <img
           src="https://via.placeholder.com/50"
           alt="Google"
-          class="w-10 h-10 rounded-full"
+          class="w-10 h-10 rounded-10"
         />
         <div class="flex flex-col">
           <h1 class="text-sm font-bold">Admin Assistant</h1>
@@ -127,7 +127,7 @@ export default {
         </div>
         <div class="">
           <span
-            class="px-6 py-2 rounded-lg font-bold bg-[#D1EFFF] text-xs text-[#006EFF]"
+            class="px-6 py-2 rounded-10 font-bold bg-[#D1EFFF] text-xs text-[#006EFF]"
             >Pending</span
           >
         </div>
@@ -148,12 +148,12 @@ export default {
       </div>
     </div>
 
-    <div class="min-w-full h-full rounded-xl">
+    <div class="min-w-full h-full rounded-10">
       <div class="flex justify-between text-justify items-center p-2">
         <img
           src="https://via.placeholder.com/50"
           alt="Google"
-          class="w-10 h-10 rounded-full"
+          class="w-10 h-10 rounded-10"
         />
         <div class="flex flex-col">
           <h1 class="text-sm font-bold">Customer Care Rep</h1>
@@ -174,7 +174,7 @@ export default {
         </div>
         <div class="">
           <span
-            class="px-6 py-2 rounded-lg font-bold bg-[#DAFEEF] text-xs text-[#0FA968]"
+            class="px-6 py-2 rounded-10 font-bold bg-[#DAFEEF] text-xs text-[#0FA968]"
             >Selected</span
           >
         </div>

@@ -19,6 +19,10 @@ html, body {
   font-family: "Nexa";
 }
 
+/* body::-webkit-scrollbar:horizontal {
+  display: none !important;
+} */
+
 /* scrollbar */
 
 /* width */
@@ -28,7 +32,7 @@ html, body {
 }
 
 .scrollbar-hide::-webkit-scrollbar {
-  display: none;
+  display: none !important;
 }
 
 /* For IE, Edge and Firefox */
