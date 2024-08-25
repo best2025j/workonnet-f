@@ -1,8 +1,4 @@
-<script setup lang="ts">
-
-
-
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="flex w-full">
@@ -12,7 +8,7 @@
     </div>
 
     <!-- Main Content Area -->
-    <div class="flex-1 w-full h-full bg-[#F6F6F6]">
+    <div class="flex-1 w-full h-full bg-black-50 ">
       <DashboardHeader class="px-4 h-full" />
 
       <main class="px-4 pt-4 h-full">
