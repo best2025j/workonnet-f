@@ -1,6 +1,8 @@
 <script setup lang="ts">
 const route = useRoute();
 </script>
+
+
 <template>
   <div
     class="min-h-screen bg-gray-100 flex flex-col items-center justify-center"
@@ -31,7 +33,3 @@ const route = useRoute();
     </section>
   </div>
 </template>
-
-<style scoped>
-/* You can add custom styles here if needed */
-</style>

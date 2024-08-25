@@ -2,11 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body {
+  font-family: Nexa;
+}
+
 /* scrollbar */
 
 /* width */
 ::-webkit-scrollbar {
-  width: 10px !important;
+  width: 6px !important;
+  height: 26px !important;
 }
 
 .scrollbar-hide::-webkit-scrollbar {
@@ -27,13 +32,15 @@
 /* Handle */
 ::-webkit-scrollbar-thumb {
   /* background: #0A193F; */
-  background: #0960cd;
+  background: #6D6D6D
+;
   border-radius: 10px !important;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   /* background: #0A193F; */
-  background: #0960cd;
+  background: #6D6D6D
+;
   border-radius: 10px !important;
 }

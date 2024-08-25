@@ -1,46 +1,20 @@
-<script>
-import JobSeekerHeader from "@/components/JobSeekerHeader.vue";
-import JobSeekerSideNav from "@/components/JobSeekerSideNav.vue";
-
-export default {
-  components: {
-    JobSeekerHeader,
-    JobSeekerSideNav,
-  },
-};
+<script setup lang="ts">
+definePageMeta({
+  name: 'Dashboard',
+  layout: 'dashboard'
+})
 </script>
 
-<!-- style for sc -->
-<style scoped>
-/* Hide scrollbar for Chrome, Safari and Opera */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.no-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-</style>
-
 <template>
-  <div class="flex">
-    <!-- Side Navigation -->
-    <JobSeekerSideNav />
-
-    <!-- Main Content Area -->
-    <div class="flex-1 bg-[#E7E7E7]">
-      <JobSeekerHeader />
-      <main class="px-4 mt-6">
+ <div class="pt-5">
         <!-- Dashboard content goes here -->
         <h2 class="text-2xl font-bold">Good Morning, Stanley</h2>
         <p class="text-sm">
           Here’s what’s happening with your job application since you joined us.
         </p>
 
-        <!--  -->
-        <div class="flex gap-4">
+        <!-- card -->
+        <div class="flex gap-4 w-full">
           <div>
             <div class="py-4">
               <div class="rounded-xl w-[210px] bg-white h-full">
@@ -60,7 +34,7 @@ export default {
               </div>
             </div>
 
-            <div class="">
+            <div class="mt-3">
               <div class="rounded-xl w-[210px] bg-white h-full">
                 <div class="px-4 pt-2">
                   <h3 class="text-base whitespace-nowrap font-bold">
@@ -79,7 +53,9 @@ export default {
             </div>
           </div>
 
-          <div class="font-[Nexa] bg-[#FFFFFF] w-96 rounded-lg px-4 py-4 mt-4">
+          <div
+            class="font-[Nexa] bg-[#FFFFFF] w-full rounded-lg px-4 py-4 h-72 mt-4"
+          >
             <h3 class="font-bold">Jobs Applied Status</h3>
             <div class="flex gap-4 items-center">
               <div class="flex flex-col items-center pt-6">
@@ -88,9 +64,10 @@ export default {
                   class="w-32 h-32 rounded-full border-8 border-black/20"
                 ></div>
                 <button
-                  class="text-[#007AFF] text-sm border border-[#007AFF] mt-6 w-[9.7rem] h-5"
+                  class="text-[#007AFF] text-sm mt-6 w-full px-2 flex gap-2 h-5"
                 >
                   View all applications
+                  <IconsArrowRight />
                 </button>
               </div>
 
@@ -121,7 +98,7 @@ export default {
           </div>
 
           <div
-            class="font-[Nexa] bg-[#FFFFFF] w-96 h-72 rounded-lg mt-2 shadow-lg"
+            class="font-[Nexa] bg-[#FFFFFF] w-full h-72 rounded-lg shadow-lg mt-4"
           >
             <h3 class="font-bold border-b p-4 text-lg text-gray-800">
               Upcoming Interviews
@@ -131,9 +108,7 @@ export default {
             </h3>
 
             <!-- Scrollable Content Area -->
-            <div
-              class="overflow-y-auto h-[calc(100%-120px)] scroll-smooth no-scrollbar"
-            >
+            <div class="overflow-y-auto h-[calc(100%-120px)] no-scrollbar">
               <div class="flex justify-between items-center p-4">
                 <h6 class="text-gray-700 font-light whitespace-nowrap">
                   10:00 AM
@@ -193,11 +168,8 @@ export default {
             </div>
           </div>
         </div>
-      </main>
-    </div>
-  </div>
+        <!--  -->
+        <RecentAppHistory />
+      </div>
+  
 </template>
-
-<style scoped>
-/* Add any additional styles for the dashboard here */
-</style>
