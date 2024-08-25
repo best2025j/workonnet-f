@@ -8,7 +8,7 @@ definePageMeta({
 </script>
 
 <template>
-  <div class="pt-5 text-[#3D3D3D]">
+  <div class="pt-4 pr-4 text-black-900 w-full">
     <!-- Dashboard content goes here -->
     <h2 class="text-2xl font-bold">Good Morning, Stanley</h2>
     <p class="text-sm">
@@ -16,7 +16,9 @@ definePageMeta({
     </p>
 
     <!-- card -->
-    <div class="flex gap-4 w-full">
+    <div class="flex space-x-4 w-full">
+     <div class="flex space-x-4 w-3/5">
+
       <div>
         <div class="py-4">
           <div class="rounded-10 w-[210px] bg-white h-full">
@@ -92,17 +94,20 @@ definePageMeta({
           </div>
         </div>
       </div>
+     </div>
 
-      <div class="font-[Nexa] bg-[#FFFFFF] w-full h-72 rounded-10 mt-4">
-        <h3 class="font-bold border-b p-4 text-lg text-gray-800">
+      <div class="font-[Nexa] bg-[#FFFFFF] h-72 rounded-10 mt-4  w-2/5">
+        <h3 class="font-bold border-b px-4 py-4 text-base text-gray-800">
           Upcoming Interviews
         </h3>
-        <h3 class="border-b p-4 text-base text-gray-600">
+        <h3 class="border-b px-4 py-4 text-xs text-gray-600">
           <b>Today</b>, 26th August 2024.
         </h3>
 
         <!-- Scrollable Content Area -->
-        <div class="overflow-y-auto h-[calc(100%-120px)] no-scrollbar">
+        <div
+          class="overflow-y-auto h-[calc(100%-120px)] no-scrollbar text-xs px-4"
+        >
           <div class="flex justify-between items-center p-4">
             <h6 class="text-gray-700 font-light whitespace-nowrap">10:00 AM</h6>
             <div class="w-full h-[1px] bg-gray-300 mx-4"></div>

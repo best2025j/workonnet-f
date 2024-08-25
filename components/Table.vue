@@ -1,6 +1,5 @@
 <template>
   <!-- table -->
-  <div class="">
     <div class="align-middle inline-block min-w-full">
       <div class="overflow-hidden mt-2">
         <table class="min-w-full table-fixed">
@@ -11,9 +10,14 @@
                   <div class="flex flex-col">
                     <img src="/ms.png" alt="Google" class="w-10 h-10 rounded" />
                   </div>
-                  <div class="text-left flex flex-col">
-                    <span class="text-sm font-bold ">Social Media Assistant</span
-                    ><span class="text-sm font-semimedium">Microsoft</span>
+
+                  <div
+                    class="text-left flex flex-col w-[104px] whitespace-break-spaces"
+                  >
+                    <span class="text-sm font-bold"
+                      >Social Media Assistant</span
+                    >
+                    <span class="text-sm font-semimedium">Microsoft</span>
                   </div>
                 </div>
               </td>
@@ -58,6 +62,7 @@
                 </div>
               </td>
             </tr>
+
             <tr class="text-[#3D3D3D]">
               <td class="py-6 whitespace-nowrap pl-4">
                 <div class="flex space-x-4">
@@ -68,8 +73,10 @@
                       class="w-10 h-10 rounded"
                     />
                   </div>
-                  <div class="text-left flex flex-col">
-                    <span class="text-sm font-bold ">Social Media Assistant</span
+                  <div
+                    class="text-left w-[104px] flex whitespace-break-spaces flex-col"
+                  >
+                    <span class="text-sm font-bold">Social Media Assistant</span
                     ><span class="text-sm font-semimedium">Microsoft</span>
                   </div>
                 </div>
@@ -114,6 +121,7 @@
                 </div>
               </td>
             </tr>
+
             <tr class="text-[#3D3D3D] bg-westside-50">
               <td class="py-6 whitespace-nowrap pl-4">
                 <div class="flex space-x-4">
@@ -124,8 +132,10 @@
                       class="w-10 h-10 rounded"
                     />
                   </div>
-                  <div class="text-left flex flex-col">
-                    <span class="text-sm font-bold ">Social Media Assistant</span
+                  <div
+                    class="text-left w-[104px] flex whitespace-break-spaces flex-col"
+                  >
+                    <span class="text-sm font-bold">Social Media Assistant</span
                     ><span class="text-sm font-semimedium">Microsoft</span>
                   </div>
                 </div>
@@ -170,6 +180,7 @@
                 </div>
               </td>
             </tr>
+
             <tr class="text-[#3D3D3D]">
               <td class="py-6 whitespace-nowrap pl-4">
                 <div class="flex space-x-4">
@@ -180,8 +191,10 @@
                       class="w-10 h-10 rounded"
                     />
                   </div>
-                  <div class="text-left flex flex-col">
-                    <span class="text-sm font-bold ">Social Media Assistant</span
+                  <div
+                    class="text-left w-[104px] flex whitespace-break-spaces flex-col"
+                  >
+                    <span class="text-sm font-bold">Social Media Assistant</span
                     ><span class="text-sm font-semimedium">Microsoft</span>
                   </div>
                 </div>
@@ -230,6 +243,5 @@
         </table>
       </div>
     </div>
-  </div>
   <!-- end of table -->
 </template>
