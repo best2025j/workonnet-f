@@ -11,7 +11,7 @@
     <div class="flex-1 w-full h-full bg-black-50 ">
       <DashboardHeader class="px-4 h-full" />
 
-      <main class="px-4 pt-4 h-full">
+      <main class="px-4 pt-4 min-h-screen">
         <slot />
       </main>
     </div>

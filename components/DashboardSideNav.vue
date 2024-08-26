@@ -11,31 +11,32 @@ import SettingIcon from "./icons/SettingIcon.vue";
 const route = useRoute();
 
 const links = [
-  { to: "/dashboard/jobseeker", icon: DashBoardIcon, name: "Dashboard" },
+  { to: "/dashboard/jobseeker", icon: DashBoardIcon, name: "Dashboard", pageName: 'dashboard.index' },
   {
-    to: "/dashboard/jobseeker/my-applications",
+    to: "/dashboard/jobseeker/my-applications?tab=applied",
     icon: ApplicationIcon,
     name: "My Applications",
+    pageName: 'dashboard.my-applications'
   },
-  { to: "/dashboard/jobseeker/find-jobs", icon: SearchIcon, name: "Find Jobs" },
-  { to: "/dashboard/jobseeker/messages", icon: MessageIcon, name: "Messages" },
+  { to: "/dashboard/jobseeker/find-jobs", icon: SearchIcon, name: "Find Jobs", pageName: 'dashboard.find-jobs' },
+  { to: "/dashboard/jobseeker/messages", icon: MessageIcon, name: "Messages", pageName: 'dashboard.messages' },
   {
     to: "/dashboard/jobseeker/browse-companies",
     icon: CompanyIcon,
     name: "Browse Companies (AI)",
+    pageName: 'dashboard.browse-companies'
   },
-  { to: "/dashboard/jobseeker/pricing", icon: NairaIcon, name: "Pricing" },
+  { to: "/dashboard/jobseeker/pricing", icon: NairaIcon, name: "Pricing", pageName: 'dashboard.pricing' },
   {
     to: "/dashboard/jobseeker/my-profile",
     icon: ProfileIcon,
     name: "My Public Profile",
+    pageName: 'dashboard.my-profile'
   },
-  { to: "/dashboard/jobseeker/settings", icon: SettingIcon, name: "Settings" },
+  { to: "/dashboard/jobseeker/settings", icon: SettingIcon, name: "Settings", pageName: 'dashboard.settings' },
 ];
 
-const isActive = (path: string) => route.path === path;
-
-console.log(route.path);
+const isActive = (pageName: string) => route.meta?.pageName === pageName;
 </script>
 
 <template>
@@ -52,18 +53,16 @@ console.log(route.path);
           <NuxtLink
             :to="link.to"
             :class="[
-              'flex items-center py-4',
-              isActive(link.to)
-                ? 'bg-westside-100   text-primary-1 border-primary-1 border-l-4 pl-11 font-[900]'
-                : 'pl-12',
-              'text-xs',
+              'flex items-center py-4 pl-12 text-xs',
             ]"
+            exactActiveClass="bg-westside-100   text-primary-1 border-primary-1 border-l-4 !pl-11 font-[900]"
+            activeClass="bg-westside-100   text-primary-1 border-primary-1 border-l-4 !pl-11 font-[900]"
           >
             <!-- Render Icon -->
             <component
               :is="link.icon"
               class="inline-block mr-2"
-              :isActive="isActive(link.to)"
+              :isActive="isActive(link.pageName)"
             />
             {{ link.name }}
           </NuxtLink>
@@ -72,13 +71,12 @@ console.log(route.path);
 
       <!--  Logout Button -->
       <div class="absolute bottom-0 left-0 right-0 w-full">
-        <NuxtLink
-          to="/logout"
+        <button
           class="flex py-6 w-full gap-2 pl-12 justify-start rounded hover:text-primary-1"
         >
           <IconsLogoutIcon />
           Logout
-        </NuxtLink>
+        </button>
       </div>
     </nav>
   </aside>

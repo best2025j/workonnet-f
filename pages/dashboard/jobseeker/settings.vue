@@ -1,6 +1,7 @@
 <script setup lang="ts">
 definePageMeta({
     name: 'Settings',
+    pageName: 'dashboard.settings',
   layout: 'dashboard'
 })
 </script>

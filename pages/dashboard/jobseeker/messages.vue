@@ -1,6 +1,7 @@
 <script setup lang="ts">
 definePageMeta({
-  name: "Messages",
+    name: "Messages",
+    pageName: 'dashboard.messages',
   layout: "dashboard",
 });
 </script>

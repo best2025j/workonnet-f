@@ -1,6 +1,7 @@
 <script setup lang="ts">
 definePageMeta({
     name: 'Pricing',
+    pageName: 'dashboard.pricing',
   layout: 'dashboard'
 })
 </script>
