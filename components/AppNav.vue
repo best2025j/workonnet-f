@@ -32,6 +32,8 @@ const isActive = (currentTab: TABS) => route?.query?.tab === currentTab;
 // const changeTab = (routeTo: TABS) => router.push(`/dashboard/jobseeker/my-applications?tab=${routeTo}`);
 </script>
 
+
+
 <template>
   <nav class="flex w-3/5 border-b-2">
     <ul class="flex gap-x-6 items-center">
@@ -42,7 +44,7 @@ const isActive = (currentTab: TABS) => route?.query?.tab === currentTab;
           :class="[
             'flex items-center',
             isActive(link.tabId)
-              ? 'text-primary-1 border-primary-1 p-2 font-bold rounded-t-[10px] border-b-4 '
+              ? 'text-primary-1 border-primary-1 p-2 curv font-bold rounded-t-[10px] border-b-4 '
               : '',
           ]"
         >
