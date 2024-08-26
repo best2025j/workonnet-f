@@ -8,7 +8,7 @@ definePageMeta({
 </script>
 
 <template>
-  <div class="flex gap-4">
+  <div class="flex gap-4 text-black-600">
     <div class="">
       <div class="flex space-x-4 items-center">
         <img src="/ms.png" alt="ms image" />
@@ -189,12 +189,136 @@ definePageMeta({
     <div class="bg-white w-full rounded-10">
       <div class="flex items-center flex-col space-y-3 py-4 border-b-2">
         <img src="/ms.png" alt="" />
-          <h1 class="text base font-bold">Social Media Assistant</h1>
-          <p class="text-xs">Microsoft</p>
+        <h1 class="text base font-bold">Social Media Assistant</h1>
+        <p class="text-xs">Microsoft</p>
       </div>
       <!--  -->
-      <div>
-        
+      <div class="flex gap-x-6 p-6 border-b-2">
+        <div class="space-y-4">
+          <div class="space-y-2">
+            <h1 class="text-xs">Job Type</h1>
+            <h1 class="font-bold text-sm">Full-time</h1>
+          </div>
+
+          <div class="space-y-2">
+            <h1 class="text-xs">Location</h1>
+            <h1 class="font-bold text-sm">Paris, France</h1>
+          </div>
+
+          <div class="space-y-2">
+            <h1 class="text-xs">Salary</h1>
+            <h1 class="font-bold text-sm">$4,000 to $5,000/month</h1>
+          </div>
+        </div>
+        <!--  -->
+        <div class="space-y-4">
+          <div class="space-y-2">
+            <h1 class="text-xs">Work Type</h1>
+            <h1 class="font-bold text-sm">Hybrid</h1>
+          </div>
+
+          <div class="space-y-2">
+            <h1 class="text-xs">Experience</h1>
+            <h1 class="font-bold text-sm">4 years</h1>
+          </div>
+
+          <div>
+            <button class="bg-primary-1 px-4 py-3 text-xs rounded-8 text-white">
+              Apply Now
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!--  -->
+      <div class="space-y-4 py-4">
+        <div class="px-6 space-y-2">
+          <h1 class="font-bold">Description</h1>
+          <div class="px-4">
+            <ul class="list-disc text-xs">
+              <li class="">
+                In this role, you’ll work underneath a Marketing Manager to
+                optimize our paid advertising channels.
+              </li>
+              <li>
+                This position is ideal for someone with 1+ years of experience
+                in paid ads who is eager to apply their expertise to platforms
+                such as Meta, X, Google and LinkedIn.
+              </li>
+              <li>
+                You'll also be working deeply in our CRM (HubSpot) and alongside
+                our creative + content teams and will be responsible for helping
+                to understand and track attribution cross-platform.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!--  -->
+        <div class="px-6 space-y-2">
+          <h1 class="font-bold">Key Responsibilities</h1>
+          <div class="px-4">
+            <ul class="list-disc text-xs">
+              <li class="">
+                In this role, you’ll work underneath a Marketing Manager to
+                optimize our paid advertising channels.
+              </li>
+              <li>
+                This position is ideal for someone with 1+ years of experience
+                in paid ads who is eager to apply their expertise to platforms
+                such as Meta, X, Google and LinkedIn.
+              </li>
+              <li>
+                You'll also be working deeply in our CRM (HubSpot) and alongside
+                our creative + content teams and will be responsible for helping
+                to understand and track attribution cross-platform.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!--  -->
+        <div class="px-6 space-y-2">
+          <h1 class="font-bold">Qualification</h1>
+          <div class="px-4">
+            <ul class="list-disc text-xs">
+              <li class="">
+                In this role, you’ll work underneath a Marketing Manager to
+                optimize our paid advertising channels.
+              </li>
+              <li>
+                This position is ideal for someone with 1+ years of experience
+                in paid ads who is eager to apply their expertise to platforms
+                such as Meta, X, Google and LinkedIn.
+              </li>
+              <li>
+                You'll also be working deeply in our CRM (HubSpot) and alongside
+                our creative + content teams and will be responsible for helping
+                to understand and track attribution cross-platform.
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!--  -->
+        <div class="px-6 space-y-2">
+          <h1 class="font-bold">How to apply</h1>
+          <div class="px-4">
+            <ul class="list-disc text-xs">
+              <li class="">
+                In this role, you’ll work underneath a Marketing Manager to
+                optimize our paid advertising channels.
+              </li>
+              <li>
+                This position is ideal for someone with 1+ years of experience
+                in paid ads who is eager to apply their expertise to platforms
+                such as Meta, X, Google and LinkedIn.
+              </li>
+              <li>
+                You'll also be working deeply in our CRM (HubSpot) and alongside
+                our creative + content teams and will be responsible for helping
+                to understand and track attribution cross-platform.
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   </div>
