@@ -185,8 +185,8 @@ definePageMeta({
       </div>
     </div>
 
-    <!--  -->
-    <div class="bg-white w-full rounded-10">
+    <!--second div  -->
+    <div class="bg-white w-full rounded-10 mr-8">
       <div class="flex items-center flex-col space-y-3 py-4 border-b-2">
         <img src="/ms.png" alt="" />
         <h1 class="text base font-bold">Social Media Assistant</h1>
@@ -259,18 +259,35 @@ definePageMeta({
           <div class="px-4">
             <ul class="list-disc text-xs">
               <li class="">
-                In this role, you’ll work underneath a Marketing Manager to
-                optimize our paid advertising channels.
+                Develop and execute paid advertising campaigns across various
+                digital platforms.
               </li>
               <li>
-                This position is ideal for someone with 1+ years of experience
-                in paid ads who is eager to apply their expertise to platforms
-                such as Meta, X, Google and LinkedIn.
+                Analyze conversion events using Google Analytics to inform
+                campaign strategies.
               </li>
               <li>
-                You'll also be working deeply in our CRM (HubSpot) and alongside
-                our creative + content teams and will be responsible for helping
-                to understand and track attribution cross-platform.
+                Utilize Google Tag Manager to deploy tracking tags and manage
+                marketing data.
+              </li>
+              <li>
+                Create compelling ad materials and write effective ad copy.
+              </li>
+              <li>Track and report on campaign performance metrics weekly.</li>
+              <li>
+                Maintain and update performance dashboards with the latest data.
+              </li>
+              <li>
+                Dive into our CRM and help understand channel attribution.
+              </li>
+              <li>Work alongside the creative team to get assets made.</li>
+              <li>
+                Collaborate closely with the marketing team to ensure alignment
+                with overall marketing objectives.
+              </li>
+              <li>
+                Help the team get landing page tests over the line that you'll
+                run conversion tests on.
               </li>
             </ul>
           </div>
@@ -281,18 +298,29 @@ definePageMeta({
           <div class="px-4">
             <ul class="list-disc text-xs">
               <li class="">
-                In this role, you’ll work underneath a Marketing Manager to
-                optimize our paid advertising channels.
+                1-2 years of experience in managing paid advertising campaigns.
               </li>
               <li>
-                This position is ideal for someone with 1+ years of experience
-                in paid ads who is eager to apply their expertise to platforms
-                such as Meta, X, Google and LinkedIn.
+                Proficient in Google Analytics and Google Tag Manager for
+                tracking and data management.
               </li>
               <li>
-                You'll also be working deeply in our CRM (HubSpot) and alongside
-                our creative + content teams and will be responsible for helping
-                to understand and track attribution cross-platform.
+                Ability to create visually appealing ad creatives and write
+                effective ad copy.
+              </li>
+              <li>
+                Skilled in analyzing, tracking, and reporting on campaign
+                metrics.
+              </li>
+              <li>Proficient in using formulas in Google Sheets.</li>
+              <li>Knowledgable in a CRM (pref HubSpot)</li>
+              <li>
+                Strong communication skills and the ability to work effectively
+                in a remote environment.
+              </li>
+              <li>
+                Speak quickly. Everyone on our team is a fast-talker. This
+                matters to us ;)
               </li>
             </ul>
           </div>
@@ -302,14 +330,11 @@ definePageMeta({
           <h1 class="font-bold">How to apply</h1>
           <div class="px-4">
             <ul class="list-disc text-xs">
-              <li class="">
-                In this role, you’ll work underneath a Marketing Manager to
-                optimize our paid advertising channels.
-              </li>
               <li>
-                This position is ideal for someone with 1+ years of experience
-                in paid ads who is eager to apply their expertise to platforms
-                such as Meta, X, Google and LinkedIn.
+                Please submit your resume + video highlighting your experience
+                in paid advertising and your proficiency with Paid Channels,
+                Google Analytics, Google Tag Manager and a CRM.Include relevant
+                work samples or any case studies showcasing your expertise.
               </li>
               <li>
                 You'll also be working deeply in our CRM (HubSpot) and alongside
