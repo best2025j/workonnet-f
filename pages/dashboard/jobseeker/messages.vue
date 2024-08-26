@@ -1,14 +1,114 @@
 <script setup lang="ts">
 definePageMeta({
-    name: "Messages",
-    pageName: 'dashboard.messages',
+  name: "Messages",
+  title: "Messages",
+  pageName: "dashboard.messages",
   layout: "dashboard",
 });
+
+import { ref } from "vue";
+import { useRoute } from "vue-router";
+import Message from "@/components/Message.vue";
+
+const route = useRoute();
+const userName = ref("John Doe"); // Default name, replace with dynamic data
+
+// Sample messages
+const messages = ref([
+  { id: 1, text: "Hello, how are you?", sender: "John Doe" },
+  { id: 2, text: "I'm good, thanks! How about you?", sender: "You" },
+  {
+    id: 3,
+    text: "I'm doing well, just working on a project.",
+    sender: "John Doe",
+  },
+]);
+
+// For handling new messages
+const newMessage = ref("");
+
+const sendMessage = () => {
+  if (newMessage.value.trim()) {
+    messages.value.push({
+      id: Date.now(),
+      text: newMessage.value,
+      sender: "You",
+    });
+    newMessage.value = ""; // Clear input after sending the message
+  }
+};
 </script>
 
-
 <template>
-  <div>
-    <h3>Messages</h3>
+  <div class="flex h-full flex-grow w-full">
+    <ChatSideNav />
+    <div>
+      <div class="h-full flex flex-col">
+        <!-- Chat Header -->
+        <header
+          class="bg-white text-black-900 p-4 flex items-center justify-between"
+        >
+          <div class="flex items-center space-x-2">
+            <img src="/Ellipse 12.png" alt="no image" />
+            <div>
+              <h2 class="text-sm font-semibold">{{ userName }}(Senior Recruiter)</h2>
+              <span class="text-xs">Microsoft Inc.</span>
+            </div>
+          </div>
+
+          <div class="flex gap-x-4">
+            <span class=""
+              ><svg
+                width="20"
+                height="20"
+                viewBox="0 0 20 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M19.5344 18.4655L15.475 14.4155C16.9077 12.7098 17.6266 10.5169 17.4817 8.29403C17.3369 6.07118 16.3394 3.99008 14.6975 2.48476C13.0555 0.979436 10.8958 0.16612 8.66878 0.214438C6.44175 0.262757 4.31934 1.16898 2.74422 2.7441C1.1691 4.31922 0.262879 6.44163 0.21456 8.66866C0.166242 10.8957 0.979558 13.0554 2.48488 14.6974C3.9902 16.3393 6.07131 17.3367 8.29415 17.4816C10.517 17.6265 12.7099 16.9076 14.4156 15.4749L18.4656 19.5343C18.609 19.6729 18.8006 19.7504 19 19.7504C19.1994 19.7504 19.391 19.6729 19.5344 19.5343C19.6752 19.3921 19.7542 19.2 19.7542 18.9999C19.7542 18.7998 19.6752 18.6077 19.5344 18.4655ZM1.75002 8.8749C1.75002 7.46571 2.1679 6.08816 2.9508 4.91646C3.73371 3.74476 4.84648 2.83153 6.1484 2.29226C7.45033 1.75299 8.88293 1.61189 10.265 1.88681C11.6472 2.16173 12.9167 2.84032 13.9132 3.83677C14.9096 4.83321 15.5882 6.10277 15.8631 7.48488C16.138 8.867 15.9969 10.2996 15.4577 11.6015C14.9184 12.9034 14.0052 14.0162 12.8335 14.7991C11.6618 15.582 10.2842 15.9999 8.87502 15.9999C6.98612 15.9974 5.17529 15.246 3.83963 13.9103C2.50397 12.5746 1.7525 10.7638 1.75002 8.8749Z"
+                  fill="black"
+                />
+              </svg>
+            </span>
+
+            <span
+              ><svg
+                width="6"
+                height="22"
+                viewBox="0 0 6 22"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M5.625 11C5.625 11.5192 5.47105 12.0267 5.18261 12.4584C4.89417 12.8901 4.4842 13.2265 4.00455 13.4252C3.52489 13.6239 2.99709 13.6758 2.48789 13.5746C1.97869 13.4733 1.51096 13.2233 1.14385 12.8562C0.776733 12.489 0.526726 12.0213 0.42544 11.5121C0.324154 11.0029 0.376137 10.4751 0.574817 9.99546C0.773497 9.5158 1.10995 9.10583 1.54163 8.81739C1.97331 8.52896 2.48083 8.375 3 8.375C3.69543 8.37747 4.36168 8.65483 4.85343 9.14658C5.34518 9.63832 5.62253 10.3046 5.625 11ZM3 6.125C3.51918 6.125 4.02669 5.97105 4.45837 5.68261C4.89005 5.39417 5.2265 4.9842 5.42518 4.50455C5.62386 4.02489 5.67585 3.49709 5.57456 2.98789C5.47328 2.47869 5.22327 2.01096 4.85616 1.64385C4.48904 1.27673 4.02131 1.02673 3.51211 0.92544C3.00291 0.824154 2.47511 0.876137 1.99546 1.07482C1.5158 1.2735 1.10583 1.60995 0.817394 2.04163C0.528955 2.47331 0.375001 2.98083 0.375001 3.5C0.377472 4.19543 0.654827 4.86168 1.14658 5.35343C1.63832 5.84518 2.30457 6.12253 3 6.125ZM3 15.875C2.48083 15.875 1.97331 16.029 1.54163 16.3174C1.10995 16.6058 0.773497 17.0158 0.574817 17.4955C0.376137 17.9751 0.324154 18.5029 0.42544 19.0121C0.526726 19.5213 0.776733 19.989 1.14385 20.3562C1.51096 20.7233 1.97869 20.9733 2.48789 21.0746C2.99709 21.1758 3.52489 21.1239 4.00455 20.9252C4.4842 20.7265 4.89417 20.3901 5.18261 19.9584C5.47105 19.5267 5.625 19.0192 5.625 18.5C5.62253 17.8046 5.34518 17.1383 4.85343 16.6466C4.36168 16.1548 3.69543 15.8775 3 15.875Z"
+                  fill="black"
+                />
+              </svg>
+            </span>
+          </div>
+        </header>
+
+        <!-- Chat Messages -->
+        <main class="flex-grow p-4 overflow-y-auto bg-gray-100 flex flex-col">
+          <Message
+            v-for="message in messages"
+            :key="message.id"
+            :message="message"
+            :isSentByCurrentUser="message.sender === 'You'"
+          />
+        </main>
+
+        <!-- Chat Input -->
+        <footer class="px-4 pb-4">
+          <input
+            v-model="newMessage"
+            @keyup.enter="sendMessage"
+            class="w-full p-2 bg-gray-900 text-white rounded"
+            placeholder="Type a message"
+          />
+        </footer>
+      </div>
+    </div>
   </div>
 </template>

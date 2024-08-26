@@ -44,7 +44,7 @@ const isActive = (currentTab: TABS) => route?.query?.tab === currentTab;
           :class="[
             'flex items-center',
             isActive(link.tabId)
-              ? 'text-primary-1 border-primary-1 p-2 curv font-bold rounded-t-[10px] border-b-4 '
+              ? 'text-primary-1 border-primary-1 p-2 font-bold rounded-t-10 border-b-4 '
               : '',
           ]"
         >

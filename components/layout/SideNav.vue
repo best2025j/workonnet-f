@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import ApplicationIcon from "./icons/ApplicationIcon.vue";
-import CompanyIcon from "./icons/CompanyIcon.vue";
-import DashBoardIcon from "./icons/DashboardIcon.vue";
-import MessageIcon from "./icons/MessageIcon.vue";
-import NairaIcon from "./icons/NairaIcon.vue";
-import ProfileIcon from "./icons/ProfileIcon.vue";
-import SearchIcon from "./icons/SearchIcon.vue";
-import SettingIcon from "./icons/SettingIcon.vue";
+import ApplicationIcon from '../icons/ApplicationIcon.vue';
+import CompanyIcon from "../icons/CompanyIcon.vue";
+import DashBoardIcon from "../icons/DashboardIcon.vue";
+import MessageIcon from "../icons/MessageIcon.vue";
+import NairaIcon from "../icons/NairaIcon.vue";
+import ProfileIcon from "../icons/ProfileIcon.vue";
+import SearchIcon from "../icons/SearchIcon.vue";
+import SettingIcon from "../icons/SettingIcon.vue";
 
 const route = useRoute();
 
@@ -53,10 +53,9 @@ const isActive = (pageName: string) => route.meta?.pageName === pageName;
           <NuxtLink
             :to="link.to"
             :class="[
-              'flex items-center py-4 pl-12 text-xs',
+              isActive(link.pageName) ? 'bg-westside-100 text-primary-1 border-primary-1 border-l-4 !pl-11 font-[900]' : 'pl-12',
+              'flex items-center py-4 text-xs',
             ]"
-            exactActiveClass="bg-westside-100   text-primary-1 border-primary-1 border-l-4 !pl-11 font-[900]"
-            activeClass="bg-westside-100   text-primary-1 border-primary-1 border-l-4 !pl-11 font-[900]"
           >
             <!-- Render Icon -->
             <component

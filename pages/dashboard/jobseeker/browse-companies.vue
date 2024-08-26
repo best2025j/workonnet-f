@@ -1,6 +1,7 @@
 <script setup lang="ts">
 definePageMeta({
-    name: "Browse Companies (Ai)",
+  name: "Browse Companies (Ai)",
+  title: "Browse Companies (Ai)",
     pageName: 'dashboard.browse-companies',
   layout: "dashboard",
 });

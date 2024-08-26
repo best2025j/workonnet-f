@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import Blank from '~/components/Blank.vue';
 
 definePageMeta({
   name: "My Applications",
+  title: "My Applications",
   pageName: "dashboard.my-applications",
   layout: "dashboard",
 });
@@ -15,7 +15,6 @@ definePageMeta({
       <!--  -->
       <div class="w-full">
         <!-- content for applied -->
-
         <div v-if="$route?.query?.tab === TABS.APPLIED">
           <AppCards />
         </div>
@@ -28,19 +27,20 @@ definePageMeta({
         <!-- content for interview -->
 
         <div v-if="$route?.query?.tab === TABS.INTERVIEW">
-          <Blank />
+          <AppBlank />
         </div>
 
         <!-- content for offered -->
 
         <div v-if="$route?.query?.tab === TABS.OFFERED">
-          <Blank />
+          <AppBlank />
         </div>
         <!-- content for rejected -->
 
         <div v-if="$route?.query?.tab === TABS.REJECTED">
-          <RejectCard />
+          <AppRejectCard />
         </div>
+        <!--  -->
       </div>
     </div>
   </div>

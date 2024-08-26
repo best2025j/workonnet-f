@@ -1,6 +1,4 @@
-<script lang="ts">
-export default {};
-</script>
+<script lang="ts"></script>
 
 <template>
   <div class="bg-white rounded-10 w-2/4 my-8">
@@ -125,11 +123,13 @@ export default {};
         </div>
       </div>
 
-      <div class="flex flex-col justify-end relative right-5 top-12 w-32">
-        <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
-          Track Application
-        </button>
-      </div>
+      <nuxt-link to="/dashboard/jobseeker/my-applications/track-app">
+        <div class="flex flex-col justify-end relative right-5 top-12 w-32">
+          <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
+            Track Application
+          </button>
+        </div>
+      </nuxt-link>
     </div>
   </div>
 </template>

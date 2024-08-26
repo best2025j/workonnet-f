@@ -6,7 +6,7 @@
   >
     <div class="container mx-auto flex justify-between items-center">
       <h1 class="text-3xl text-primary-1 font-bold">
-        {{ $route?.meta?.name }}
+        {{ $route?.meta?.title }}
       </h1>
       <nav>
         <NuxtLink

@@ -1,15 +1,14 @@
 <script setup lang="ts">
-import ButtonBlueRight from "~/components/ul/ButtonBlueRight.vue";
-
 definePageMeta({
   name: "Dashboard",
-  pageName: 'dashboard.index',
+  title: "Dashboard",
+  pageName: "dashboard.index",
   layout: "dashboard",
 });
 </script>
 
 <template>
-  <div class="pt-4 pr-4 text-black-900 w-full ">
+  <div class="pt-4 pr-4 text-black-900 w-full">
     <!-- Dashboard content goes here -->
     <h2 class="text-2xl font-bold">Good Morning, Stanley</h2>
     <p class="text-sm">
@@ -62,7 +61,7 @@ definePageMeta({
               <div
                 class="w-32 h-32 rounded-full border-8 border-black/20"
               ></div>
-              <ButtonBlueRight />
+              <BtnBlueRight />
             </div>
 
             <div class="space-y-4">
@@ -183,6 +182,6 @@ definePageMeta({
       </div>
     </div>
     <!--  -->
-    <RecentAppHistory />
+    <DashboardRecentAppHistory />
   </div>
 </template>

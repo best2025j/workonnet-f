@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import Table from "./Table.vue";
-import ButtonBlueRight from "./ul/ButtonBlueRight.vue";
+
 </script>
 
 <template>
@@ -11,7 +10,7 @@ import ButtonBlueRight from "./ul/ButtonBlueRight.vue";
           Recent Application History
         </h1>
         <!-- Ensure the icon component is used correctly -->
-        <div class="pb-6"><ButtonBlueRight /></div>
+        <div class="pb-6"><BtnBlueRight /></div>
       </div>
       <!-- table -->
       <Table />
@@ -19,7 +18,9 @@ import ButtonBlueRight from "./ul/ButtonBlueRight.vue";
     </div>
     <!-- first table -->
     <div class="w-2/5">
-      <div class="text-black-900 bg-white  w-full divide-y rounded-10 flex-grow h-full">
+      <div
+        class="text-black-900 bg-white w-full divide-y rounded-10 flex-grow h-full"
+      >
         <div class="mx-auto h-12 flex justify-between items-center p-4">
           <h1 class="text-base text-black-900 font-bold">Offered jobs</h1>
           <!-- Ensure the icon component is used correctly -->
