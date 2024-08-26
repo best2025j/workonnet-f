@@ -34,45 +34,44 @@ const prevSlide = () => {
     
    <NuxtLayout></NuxtLayout>
 
-<div class="flex items-center justify-center gap-4 mt-14 mx-2">
+<div class="flex items-center justify-center gap-4 mb-10 mt-14 mx-2">
 
-    <div class="flex flex-col w-full mb-20 ">
+    <div class="flex flex-col w-full ">
 <h2 class="text-center text-4xl mb-10 font-['Nexa'] font-black" >Create Account</h2>
-<div class="flex flex-col items-center justify-center gap-8" >
-    <button class="flex gap-4 items-center justify-center border-2 font-['Nexa'] border-[#344054] border-solid px-5 py-2 w-1/2  text-[#344054] rounded-md">
+<div class="flex flex-col items-center justify-center gap-8 mt-5" >
+    <button class="flex gap-4 items-center justify-center font-['Nexa'] border-2 border-[#344054] border-solid px-5 py-2 w-1/2  text-[#344054] rounded-md">
         <img :src="googleLogo" alt="" class="w-6">
         Continue with Google
     </button>
-    <button class="flex gap-3 items-center justify-center font-['Nexa']  bg-[#0A66C2]  px-5 py-2 w-1/2  text-white rounded-md">
+    <button class="flex gap-3 items-center justify-center font-['Nexa'] bg-[#0A66C2]  px-5 py-2 w-1/2  text-white rounded-md">
         <img :src="linkedinlogo" alt="" class="w-8" >
         Continue with LinkedIn
         </button>
 </div>
 <form class="flex flex-col mt-6 mx-auto items-start justify-center text-left w-[50%] max-w-md">
-  <div class="flex flex-col w-full">
+    <label class="text-xl font-extralight mb-2 text-left mt-4 font-['Nexa']" >Full Name
+    </label>
+    <input type="email" placeholder="Enter full name here" class="w-full font-['Nexa'] rounded-md px-3 py-2 border-2 border-gray-300 border-solid" >
+    
     <label class="text-xl font-extralight mb-2 text-left mt-4 font-['Nexa']" >Email
     </label>
     <input type="email" placeholder="Enter email address here" class="w-full font-['Nexa'] rounded-md px-3 py-2 border-2 border-gray-300 border-solid" >
     
-   
-  <label class="text-xl font-extralight mb-2 font-['Nexa'] text-left mt-4">Password</label>
-  <input
+    <label class="text-xl font-extralight mb-2 font-['Nexa'] text-left mt-4" >Create Password
+    </label>
+    <input
       placeholder="......"
       class="placeholder-custom outline-none w-full px-3 py-2 border-2 border-solid border-[#D1D1D1] rounded-md font-['Nexa'] "
     />
-  <div class="flex justify-end mt-2">
-    <NuxtLink class="text-black underline cursor-pointer font-['Nexa']" to="/auth/passwordforgotten"> Forgot Password?</NuxtLink>
-  </div>
-</div>
-    <button class="w-full bg-[#FE8900] font-['Poppins'] font-black text-white mt-20 text-sm py-3 rounded-md">
-        <NuxtLink to="/auth/activationcode">Sign In</NuxtLink>
+    <button class="w-full bg-[#FE8900] font-['Nexa'] font-black text-white mt-20 text-sm py-3 rounded-md">
+      <NuxtLink to="/auth/activationcode"> Create Account</NuxtLink>
     </button>
 </form>
-<p class="text-center mt-10 mb-5 text-xl font-thin font-['Nexa']">Don't have an account? <NuxtLink to="/auth/signup"  class="font-light font-['Nexa'] text-blue-700" >Sign up</NuxtLink> </p>
+<p class="text-center mt-10 mb-5 text-xl font-['Nexa']">Already have an account? <NuxtLink to="/auth/signin"  class="font-light font-['Nexa'] text-blue-700" >Sign In</NuxtLink> </p>
     </div>
 
     <div class=" bg-custom-gradient w-[70%] mr-5 rounded-xl ">
-        <div class="flex items-center justify-center gap-10 mx-4 mt-10">
+        <div class="flex items-center  justify-center gap-10 mx-4 mt-10">
             <h1 class="text-4xl font-['Georgia'] font-normal text-white mx-6">What Our Jobseekers Said.</h1>
             <img :src="asterix" alt="">
         </div>

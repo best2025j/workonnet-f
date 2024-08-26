@@ -9,7 +9,11 @@ module.exports = {
     './error.vue',
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'custom-gradient': 'linear-gradient(284.94deg, #B7680C 1.22%, #FE8900 100%)',
+      },
+    },
   },
   plugins: [],
 };
