@@ -11,7 +11,9 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "nuxt": "^3.12.4",
+    "@heroicons/vue": "^2.1.5",
+    "@nuxt/image": "^1.7.0",
+    "nuxt": "^3.13.0",
     "vue": "latest"
   },
   "devDependencies": {

@@ -1,10 +1,13 @@
+<script setup lang="ts">
+import workLogo from '@/assets/images/workconnectlogo.png';
+</script>
 <template>
     <div>
-        <header class="w-ful h-20 flex items-center justify-between mx-10" >
+        <header class="w-full h-20 flex items-center justify-between mx-10" >
         <img :src="workLogo" alt="">
 <div>
   <nav class="">
-    <ul class="flex gap-5 text-lg font-['Nexa'] font-semibold">
+    <ul class="flex gap-5 text-sm text-black-300">
       <li>
         <NuxtLink to="/" class="py-1">
           Home
@@ -33,17 +36,13 @@
     </div>
     </div>
 </template>
-
-<script setup>
-import workLogo from '@/assets/images/workconnectlogo.png';
-</script>
-
 <style  scoped>
-.router-link-exact-active{
+.router-link-exact-active {
   border-bottom: 5px solid #FE8900;
   color: #FE8900;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  font-weight: 900;
 
 }
 </style>

@@ -2,4 +2,64 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Nexa';
+  src: url('~/assets/fonts/Nexa-ExtraLight.ttf');
+  font-weight: normal;
+}
 
+@font-face {
+  font-family: 'Nexa';
+  src: url('~/assets/fonts/Nexa-Heavy.ttf');
+  font-weight: 900;
+}
+
+html,
+body {
+  font-family: 'Nexa';
+}
+
+body {
+  overflow: none !important;
+}
+
+body::-webkit-scrollbar:horizontal {
+  display: none !important;
+}
+
+/* scrollbar */
+
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 20px;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none !important;
+}
+
+/* For IE, Edge and Firefox */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1 !important;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  /* background: #0A193F; */
+  background: #6d6d6d;
+  border-radius: 10px !important;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  /* background: #0A193F; */
+  background: #6d6d6d;
+  border-radius: 10px !important;
+}
