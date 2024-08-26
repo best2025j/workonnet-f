@@ -65,11 +65,8 @@ definePageMeta({
               </span>
 
               <div class="flex flex-col">
-                <h1 class="font-bold">Stage 0: Applied for Job </h1>
-                <p class="text-xs">
-                  You profile has been sent to the Microsoft team
-                </p>
-                <p class="text-xs">Applied On: 2024-07-29 09:21:33</p>
+                <h1 class="font-bold">Stage 1: Profile Review </h1>
+                <p class="text-xs">Your profile is reviewed at this stage</p>
               </div>
             </div>
             <!--  -->
@@ -90,11 +87,8 @@ definePageMeta({
               </span>
 
               <div class="flex flex-col">
-                <h1 class="font-bold">Stage 0: Applied for Job </h1>
-                <p class="text-xs">
-                  You profile has been sent to the Microsoft team
-                </p>
-                <p class="text-xs">Applied On: 2024-07-29 09:21:33</p>
+                <h1 class="font-bold">Stage 2: Interview</h1>
+                <p class="text-xs">Get interviewed</p>
               </div>
             </div>
             <!--  -->
@@ -115,7 +109,7 @@ definePageMeta({
               </span>
 
               <div class="flex flex-col">
-                <h1 class="font-bold">Stage 0: Applied for Job </h1>
+                <h1 class="font-bold">Stage 3: Push to Client </h1>
                 <p class="text-xs">
                   You profile has been sent to the Microsoft team
                 </p>

@@ -155,7 +155,7 @@ definePageMeta({
 
       <!-- cards -->
       <div class="py-8 gap-4 space-y-4">
-        <div class="bg-white rounded-10 w-full">
+        <div class="bg-white rounded-10 w-full border-2 border-westside-300 shadow">
           <div class="flex items-center justify-between border-b-2 p-3">
             <div class="flex items-center space-x-4">
               <img
@@ -176,8 +176,8 @@ definePageMeta({
                 class="px-3 py-1 rounded-10 text-xs font-bold text-success-600"
                 >80% match</span
               >
-              <button
-                ><svg
+              <button>
+                <svg
                   width="28"
                   height="24"
                   viewBox="0 0 28 24"
@@ -298,9 +298,9 @@ definePageMeta({
               </div>
             </div>
 
-            <div class="flex flex-col justify-end relative right-5 top-12 w-32">
-              <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
-                Track Application
+            <div class="flex flex-col justify-end relative right-5 top-12 w-[99px]">
+              <button class="py-3 border text-primary-1 border-primary-1 rounded-10 text-xs">
+                More details
               </button>
             </div>
           </div>
@@ -325,8 +325,8 @@ definePageMeta({
                 class="px-3 py-1 rounded-10 text-xs font-bold text-success-600"
                 >80% match</span
               >
-              <button
-                ><svg
+              <button>
+                <svg
                   width="28"
                   height="24"
                   viewBox="0 0 28 24"
@@ -447,9 +447,9 @@ definePageMeta({
               </div>
             </div>
 
-            <div class="flex flex-col justify-end relative right-5 top-12 w-32">
-              <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
-                Track Application
+            <div class="flex flex-col justify-end relative right-5 top-12 w-[99px]">
+              <button class="py-3 border text-primary-1 border-primary-1 rounded-10 text-xs">
+                More details
               </button>
             </div>
           </div>
@@ -476,8 +476,8 @@ definePageMeta({
                 class="px-3 py-1 rounded-10 text-xs font-bold text-success-600"
                 >80% match</span
               >
-              <button
-                ><svg
+              <button>
+                <svg
                   width="28"
                   height="24"
                   viewBox="0 0 28 24"
@@ -598,9 +598,9 @@ definePageMeta({
               </div>
             </div>
 
-            <div class="flex flex-col justify-end relative right-5 top-12 w-32">
-              <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
-                Track Application
+            <div class="flex flex-col justify-end relative right-5 top-12 w-[99px]">
+              <button class="py-3 border text-primary-1 border-primary-1 rounded-10 text-xs">
+                More details
               </button>
             </div>
           </div>
@@ -627,8 +627,8 @@ definePageMeta({
                 class="px-3 py-1 rounded-10 text-xs font-bold text-success-600"
                 >80% match</span
               >
-              <button
-                ><svg
+              <button>
+                <svg
                   width="28"
                   height="24"
                   viewBox="0 0 28 24"
@@ -749,9 +749,9 @@ definePageMeta({
               </div>
             </div>
 
-            <div class="flex flex-col justify-end relative right-5 top-12 w-32">
-              <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
-                Track Application
+            <div class="flex flex-col justify-end relative right-5 top-12 w-[99px]">
+              <button class="py-3 border text-primary-1 border-primary-1 rounded-10 text-xs">
+                More details
               </button>
             </div>
           </div>
@@ -776,8 +776,8 @@ definePageMeta({
                 class="px-3 py-1 rounded-10 text-xs font-bold text-success-600"
                 >80% match</span
               >
-              <button
-                ><svg
+              <button>
+                <svg
                   width="28"
                   height="24"
                   viewBox="0 0 28 24"
@@ -898,9 +898,9 @@ definePageMeta({
               </div>
             </div>
 
-            <div class="flex flex-col justify-end relative right-5 top-12 w-32">
-              <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
-                Track Application
+            <div class="flex flex-col justify-end relative right-5 top-12 w-[99px]">
+              <button class="py-3 border text-primary-1 border-primary-1 rounded-10 text-xs">
+                More details
               </button>
             </div>
           </div>
@@ -945,9 +945,23 @@ definePageMeta({
             <h1 class="font-bold text-sm">4 years</h1>
           </div>
 
-          <div>
+          <div class="flex items-center space-x-2">
             <button class="bg-primary-1 px-4 py-3 text-xs rounded-8 text-white">
               Apply Now
+            </button>
+            <button class="border-primary-1 px-4 border py-3 rounded-8">
+              <svg
+                width="12"
+                height="17"
+                viewBox="0 0 12 17"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M10.375 0.5H1.625C1.29348 0.5 0.975537 0.631696 0.741116 0.866116C0.506696 1.10054 0.375 1.41848 0.375 1.75V15.5C0.375055 15.6115 0.404959 15.721 0.461608 15.8171C0.518256 15.9132 0.599586 15.9924 0.697156 16.0464C0.794726 16.1005 0.904983 16.1274 1.01648 16.1245C1.12798 16.1215 1.23666 16.0888 1.33125 16.0297L6 13.1117L10.6695 16.0297C10.7641 16.0886 10.8727 16.1212 10.9841 16.124C11.0955 16.1268 11.2056 16.0998 11.303 16.0458C11.4005 15.9918 11.4817 15.9127 11.5383 15.8167C11.5949 15.7208 11.6249 15.6114 11.625 15.5V1.75C11.625 1.41848 11.4933 1.10054 11.2589 0.866116C11.0245 0.631696 10.7065 0.5 10.375 0.5ZM10.375 14.3727L6.33047 11.8453C6.23114 11.7832 6.11636 11.7503 5.99922 11.7503C5.88208 11.7503 5.7673 11.7832 5.66797 11.8453L1.625 14.3727V1.75H10.375V14.3727Z"
+                  fill="#FE8900"
+                />
+              </svg>
             </button>
           </div>
         </div>
@@ -958,7 +972,7 @@ definePageMeta({
         <div class="px-6 space-y-2">
           <h1 class="font-bold">Description</h1>
           <div class="px-4">
-            <ul class="list-disc text-xs">
+            <ul class="space-y-3 list-disc text-xs">
               <li class="">
                 In this role, you’ll work underneath a Marketing Manager to
                 optimize our paid advertising channels.
@@ -980,7 +994,7 @@ definePageMeta({
         <div class="px-6 space-y-2">
           <h1 class="font-bold">Key Responsibilities</h1>
           <div class="px-4">
-            <ul class="list-disc text-xs">
+            <ul class="space-y-3 list-disc text-xs">
               <li class="">
                 Develop and execute paid advertising campaigns across various
                 digital platforms.
@@ -1019,7 +1033,7 @@ definePageMeta({
         <div class="px-6 space-y-2">
           <h1 class="font-bold">Qualification</h1>
           <div class="px-4">
-            <ul class="list-disc text-xs">
+            <ul class="space-y-3 list-disc text-xs">
               <li class="">
                 1-2 years of experience in managing paid advertising campaigns.
               </li>
@@ -1052,7 +1066,7 @@ definePageMeta({
         <div class="px-6 space-y-2">
           <h1 class="font-bold">How to apply</h1>
           <div class="px-4">
-            <ul class="list-disc text-xs">
+            <ul class="space-y-3 list-disc text-xs">
               <li>
                 Please submit your resume + video highlighting your experience
                 in paid advertising and your proficiency with Paid Channels,
@@ -1065,6 +1079,13 @@ definePageMeta({
                 to understand and track attribution cross-platform.
               </li>
             </ul>
+          </div>
+
+          <div class="flex space-x-4 py-3">
+            <button class="bg-primary-1 px-6 py-3 rounded-10 text-white">Apply Now</button>
+            <button class="border-primary-1 border px-6 py-3 text-primary-1 rounded-10">
+              More Details
+            </button>
           </div>
         </div>
       </div>

@@ -127,11 +127,13 @@
           </div>
         </div>
 
-        <div class="flex flex-col justify-end relative right-5 top-12 w-32">
-          <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
-            Track Application
-          </button>
-        </div>
+        <nuxt-link to="/dashboard/jobseeker/my-applications/track-app">
+          <div class="flex flex-col justify-end relative right-5 top-12 w-32">
+            <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
+              Track Application
+            </button>
+          </div>
+        </nuxt-link>
       </div>
     </div>
     <!--  -->
@@ -262,11 +264,13 @@
           </div>
         </div>
 
-        <div class="flex flex-col justify-end relative right-5 top-12 w-32">
-          <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
-            Track Application
-          </button>
-        </div>
+        <nuxt-link to="/dashboard/jobseeker/my-applications/track-app">
+          <div class="flex flex-col justify-end relative right-5 top-12 w-32">
+            <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
+              Track Application
+            </button>
+          </div>
+        </nuxt-link>
       </div>
     </div>
     <!--  -->
@@ -395,11 +399,13 @@
           </div>
         </div>
 
-        <div class="flex flex-col justify-end relative right-5 top-12 w-32">
-          <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
-            Track Application
-          </button>
-        </div>
+        <nuxt-link to="/dashboard/jobseeker/my-applications/track-app">
+          <div class="flex flex-col justify-end relative right-5 top-12 w-32">
+            <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
+              Track Application
+            </button>
+          </div>
+        </nuxt-link>
       </div>
     </div>
     <!--  -->
@@ -530,11 +536,13 @@
           </div>
         </div>
 
-        <div class="flex flex-col justify-end relative right-5 top-12 w-32">
-          <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
-            Track Application
-          </button>
-        </div>
+        <nuxt-link to="/dashboard/jobseeker/my-applications/track-app">
+          <div class="flex flex-col justify-end relative right-5 top-12 w-32">
+            <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
+              Track Application
+            </button>
+          </div>
+        </nuxt-link>
       </div>
     </div>
 
@@ -668,11 +676,13 @@
           </div>
         </div>
 
-        <div class="flex flex-col justify-end relative right-5 top-12 w-32">
-          <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
-            Track Application
-          </button>
-        </div>
+        <nuxt-link to="/dashboard/jobseeker/my-applications/track-app">
+          <div class="flex flex-col justify-end relative right-5 top-12 w-32">
+            <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
+              Track Application
+            </button>
+          </div>
+        </nuxt-link>
       </div>
     </div>
 
@@ -801,11 +811,13 @@
           </div>
         </div>
 
-        <div class="flex flex-col justify-end relative right-5 top-12 w-32">
-          <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
-            Track Application
-          </button>
-        </div>
+        <nuxt-link to="/dashboard/jobseeker/my-applications/track-app">
+          <div class="flex flex-col justify-end relative right-5 top-12 w-32">
+            <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
+              Track Application
+            </button>
+          </div>
+        </nuxt-link>
       </div>
     </div>
     <!--  -->
@@ -934,11 +946,13 @@
           </div>
         </div>
 
-        <div class="flex flex-col justify-end relative right-5 top-12 w-32">
-          <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
-            Track Application
-          </button>
-        </div>
+        <nuxt-link to="/dashboard/jobseeker/my-applications/track-app">
+          <div class="flex flex-col justify-end relative right-5 top-12 w-32">
+            <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
+              Track Application
+            </button>
+          </div>
+        </nuxt-link>
       </div>
     </div>
     <!--  -->
@@ -1069,11 +1083,13 @@
           </div>
         </div>
 
-        <div class="flex flex-col justify-end relative right-5 top-12 w-32">
-          <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
-            Track Application
-          </button>
-        </div>
+        <nuxt-link to="/dashboard/jobseeker/my-applications/track-app">
+          <div class="flex flex-col justify-end relative right-5 top-12 w-32">
+            <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
+              Track Application
+            </button>
+          </div>
+        </nuxt-link>
       </div>
     </div>
   </div>
