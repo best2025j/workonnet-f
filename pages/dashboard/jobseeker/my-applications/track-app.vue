@@ -180,7 +180,7 @@ definePageMeta({
     </div>
 
     <!--second div  -->
-    <div class="bg-white w-full rounded-10 mr-8">
+    <div class="bg-white w-full rounded-10">
       <div class="flex items-center flex-col space-y-3 py-4 border-b-2">
         <img src="/ms.png" alt="" />
         <h1 class="text base font-bold">Social Media Assistant</h1>

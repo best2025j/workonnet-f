@@ -8,7 +8,7 @@ definePageMeta({
 </script>
 
 <template>
-  <div class="pt-4 pr-4 text-black-900 w-full">
+  <div class="pt-4 text-black-900 w-full">
     <!-- Dashboard content goes here -->
     <h2 class="text-2xl font-bold">Good Morning, Stanley</h2>
     <p class="text-sm">

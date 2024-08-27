@@ -1,7 +1,7 @@
 <script lang="ts"></script>
 
 <template>
-  <div class="py-8 gap-4 grid grid-cols-2 mr-8">
+  <div class="py-8 gap-4 grid grid-cols-2">
     <div class="bg-white rounded-10 w-full">
       <div class="flex items-center justify-between border-b-2 p-3">
         <div class="flex items-center space-x-4">

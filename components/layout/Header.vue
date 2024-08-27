@@ -11,7 +11,7 @@
       <nav>
         <NuxtLink
           to="/"
-          class="text-black-900 hover:underline flex items-center gap-4"
+          class="text-black-900 hover:underline flex items-center gap-4 flex-row-reverse"
         >
           <img src="/Ellipse 12.png" alt="Profile Picture" />
           <!-- Use the bellIcon component correctly -->

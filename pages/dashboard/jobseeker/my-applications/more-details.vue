@@ -120,9 +120,9 @@ definePageMeta({
           </p>
         </div>
         <!--  -->
-        <div class="py-4">
+        <div class="pt-4">
           <h1 class="font-bold text-sm">Job Description</h1>
-          <ul class="space-y-1 list-disc pl-6 py-4" >
+          <ul class="space-y-1 list-disc pl-6 py-4">
             <li>
               Develop and execute paid advertising campaigns across various
               digital platforms.
@@ -149,6 +149,48 @@ definePageMeta({
             <li>
               Help the team get landing page tests over the line that you'll run
               conversion tests on.
+            </li>
+          </ul>
+        </div>
+        <!--  -->
+        <div class="pt-4">
+          <h1 class="font-bold text-sm">Qualification</h1>
+          <ul class="space-y-1 list-disc pl-6 py-4">
+            <li>
+              1-2 years of experience in managing paid advertising campaigns.
+            </li>
+            <li>
+              Proficient in Google Analytics and Google Tag Manager for tracking
+              and data management.
+            </li>
+            <li>
+              Ability to create visually appealing ad creatives and write
+              effective ad copy.
+            </li>
+            <li>
+              Skilled in analyzing, tracking, and reporting on campaign metrics.
+            </li>
+            <li>Proficient in using formulas in Google Sheets.</li>
+            <li>Knowledgable in a CRM (pref HubSpot)</li>
+            <li>
+              Strong communication skills and the ability to work effectively in
+              a remote environment.
+            </li>
+            <li>
+              Speak quickly. Everyone on our team is a fast-talker. This matters
+              to us ;)
+            </li>
+          </ul>
+        </div>
+        <!--  -->
+        <div class="pt-4">
+          <h1 class="font-bold text-sm">How to apply</h1>
+          <ul class="space-y-1 list-disc pl-6 py-4">
+            <li>
+              Please submit your resume + video highlighting your experience in
+              paid advertising and your proficiency with Paid Channels, Google
+              Analytics, Google Tag Manager and a CRM.Include relevant work
+              samples or any case studies showcasing your expertise.
             </li>
           </ul>
         </div>
