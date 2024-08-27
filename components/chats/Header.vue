@@ -2,7 +2,7 @@
   <div
     class="text-black-900 bg-white items-center justify-between w-full flex py-4 sticky top-0"
   >
-    <div class="flex items-center gap-2">
+    <div class="flex items-center space-x-3">
       <img src="/Ellipse 12.png" alt="no pix" />
       <div class="space-y-1">
         <h1><b>Jane Cooper</b> (Senior Recruiter)</h1>
