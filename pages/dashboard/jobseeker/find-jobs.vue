@@ -22,7 +22,7 @@ definePageMeta({
           you want.
         </p>
 
-        <div class="flex gap-2">
+        <div class="flex gap-2 pt-2">
           <div class="relative">
             <input
               type="text"
@@ -152,10 +152,44 @@ definePageMeta({
         </button>
         <button class="text-primary-1 font-bold text-xs">Remove Filters</button>
       </div>
+      <!-- btn 2 -->
+      <div class="flex justify-end space-x-3">
+        <button class="bg-black-100 p-1 rounded-8">
+          <svg
+            width="28"
+            height="22"
+            viewBox="0 0 28 22"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M27.5 11C27.5 11.2984 27.3815 11.5845 27.1705 11.7955C26.9595 12.0065 26.6734 12.125 26.375 12.125H1.625C1.32663 12.125 1.04048 12.0065 0.829505 11.7955C0.618527 11.5845 0.5 11.2984 0.5 11C0.5 10.7016 0.618527 10.4155 0.829505 10.2045C1.04048 9.99353 1.32663 9.875 1.625 9.875H26.375C26.6734 9.875 26.9595 9.99353 27.1705 10.2045C27.3815 10.4155 27.5 10.7016 27.5 11ZM1.625 3.125H26.375C26.6734 3.125 26.9595 3.00647 27.1705 2.79549C27.3815 2.58452 27.5 2.29837 27.5 2C27.5 1.70163 27.3815 1.41548 27.1705 1.20451C26.9595 0.993527 26.6734 0.875 26.375 0.875H1.625C1.32663 0.875 1.04048 0.993527 0.829505 1.20451C0.618527 1.41548 0.5 1.70163 0.5 2C0.5 2.29837 0.618527 2.58452 0.829505 2.79549C1.04048 3.00647 1.32663 3.125 1.625 3.125ZM26.375 18.875H1.625C1.32663 18.875 1.04048 18.9935 0.829505 19.2045C0.618527 19.4155 0.5 19.7016 0.5 20C0.5 20.2984 0.618527 20.5845 0.829505 20.7955C1.04048 21.0065 1.32663 21.125 1.625 21.125H26.375C26.6734 21.125 26.9595 21.0065 27.1705 20.7955C27.3815 20.5845 27.5 20.2984 27.5 20C27.5 19.7016 27.3815 19.4155 27.1705 19.2045C26.9595 18.9935 26.6734 18.875 26.375 18.875Z"
+              fill="#343330"
+            />
+          </svg>
+        </button>
+
+        <button class="bg-black-100 p-1 rounded-8">
+          <svg
+            width="26"
+            height="26"
+            viewBox="0 0 26 26"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M9.625 0.625H2.875C2.27826 0.625 1.70597 0.862053 1.28401 1.28401C0.862053 1.70597 0.625 2.27826 0.625 2.875V9.625C0.625 10.2217 0.862053 10.794 1.28401 11.216C1.70597 11.6379 2.27826 11.875 2.875 11.875H9.625C10.2217 11.875 10.794 11.6379 11.216 11.216C11.6379 10.794 11.875 10.2217 11.875 9.625V2.875C11.875 2.27826 11.6379 1.70597 11.216 1.28401C10.794 0.862053 10.2217 0.625 9.625 0.625ZM9.625 9.625H2.875V2.875H9.625V9.625ZM23.125 0.625H16.375C15.7783 0.625 15.206 0.862053 14.784 1.28401C14.3621 1.70597 14.125 2.27826 14.125 2.875V9.625C14.125 10.2217 14.3621 10.794 14.784 11.216C15.206 11.6379 15.7783 11.875 16.375 11.875H23.125C23.7217 11.875 24.294 11.6379 24.716 11.216C25.1379 10.794 25.375 10.2217 25.375 9.625V2.875C25.375 2.27826 25.1379 1.70597 24.716 1.28401C24.294 0.862053 23.7217 0.625 23.125 0.625ZM23.125 9.625H16.375V2.875H23.125V9.625ZM9.625 14.125H2.875C2.27826 14.125 1.70597 14.3621 1.28401 14.784C0.862053 15.206 0.625 15.7783 0.625 16.375V23.125C0.625 23.7217 0.862053 24.294 1.28401 24.716C1.70597 25.1379 2.27826 25.375 2.875 25.375H9.625C10.2217 25.375 10.794 25.1379 11.216 24.716C11.6379 24.294 11.875 23.7217 11.875 23.125V16.375C11.875 15.7783 11.6379 15.206 11.216 14.784C10.794 14.3621 10.2217 14.125 9.625 14.125ZM9.625 23.125H2.875V16.375H9.625V23.125ZM23.125 14.125H16.375C15.7783 14.125 15.206 14.3621 14.784 14.784C14.3621 15.206 14.125 15.7783 14.125 16.375V23.125C14.125 23.7217 14.3621 24.294 14.784 24.716C15.206 25.1379 15.7783 25.375 16.375 25.375H23.125C23.7217 25.375 24.294 25.1379 24.716 24.716C25.1379 24.294 25.375 23.7217 25.375 23.125V16.375C25.375 15.7783 25.1379 15.206 24.716 14.784C24.294 14.3621 23.7217 14.125 23.125 14.125ZM23.125 23.125H16.375V16.375H23.125V23.125Z"
+              fill="#343330"
+            />
+          </svg>
+        </button>
+      </div>
 
       <!-- cards -->
-      <div class="py-8 gap-4 space-y-4">
-        <div class="bg-white rounded-10 w-full border-2 border-westside-300 shadow">
+      <div class="py-4 gap-4 space-y-4">
+        <div
+          class="bg-white rounded-10 w-full border-2 border-westside-300 shadow"
+        >
           <div class="flex items-center justify-between border-b-2 p-3">
             <div class="flex items-center space-x-4">
               <img
@@ -297,12 +331,17 @@ definePageMeta({
                 </div>
               </div>
             </div>
-
-            <div class="flex flex-col justify-end relative right-5 top-12 w-[99px]">
-              <button class="py-3 border text-primary-1 border-primary-1 rounded-10 text-xs">
-                More details
-              </button>
-            </div>
+            <nuxt-link to="/dashboard/jobseeker/my-applications/more-details">
+              <div
+                class="flex flex-col justify-end relative right-5 top-12 w-[99px]"
+              >
+                <button
+                  class="py-3 border text-primary-1 border-primary-1 rounded-10 text-xs"
+                >
+                  More details
+                </button>
+              </div>
+            </nuxt-link>
           </div>
         </div>
         <!--  -->
@@ -446,12 +485,17 @@ definePageMeta({
                 </div>
               </div>
             </div>
-
-            <div class="flex flex-col justify-end relative right-5 top-12 w-[99px]">
-              <button class="py-3 border text-primary-1 border-primary-1 rounded-10 text-xs">
-                More details
-              </button>
-            </div>
+            <nuxt-link to="/dashboard/jobseeker/my-applications/more-details">
+              <div
+                class="flex flex-col justify-end relative right-5 top-12 w-[99px]"
+              >
+                <button
+                  class="py-3 border text-primary-1 border-primary-1 rounded-10 text-xs"
+                >
+                  More details
+                </button>
+              </div>
+            </nuxt-link>
           </div>
         </div>
         <!--  -->
@@ -597,12 +641,17 @@ definePageMeta({
                 </div>
               </div>
             </div>
-
-            <div class="flex flex-col justify-end relative right-5 top-12 w-[99px]">
-              <button class="py-3 border text-primary-1 border-primary-1 rounded-10 text-xs">
-                More details
-              </button>
-            </div>
+            <nuxt-link to="/dashboard/jobseeker/my-applications/more-details">
+              <div
+                class="flex flex-col justify-end relative right-5 top-12 w-[99px]"
+              >
+                <button
+                  class="py-3 border text-primary-1 border-primary-1 rounded-10 text-xs"
+                >
+                  More details
+                </button>
+              </div>
+            </nuxt-link>
           </div>
         </div>
         <!--  -->
@@ -748,12 +797,17 @@ definePageMeta({
                 </div>
               </div>
             </div>
-
-            <div class="flex flex-col justify-end relative right-5 top-12 w-[99px]">
-              <button class="py-3 border text-primary-1 border-primary-1 rounded-10 text-xs">
-                More details
-              </button>
-            </div>
+            <nuxt-link to="/dashboard/jobseeker/my-applications/more-details">
+              <div
+                class="flex flex-col justify-end relative right-5 top-12 w-[99px]"
+              >
+                <button
+                  class="py-3 border text-primary-1 border-primary-1 rounded-10 text-xs"
+                >
+                  More details
+                </button>
+              </div>
+            </nuxt-link>
           </div>
         </div>
         <!--  -->
@@ -897,12 +951,17 @@ definePageMeta({
                 </div>
               </div>
             </div>
-
-            <div class="flex flex-col justify-end relative right-5 top-12 w-[99px]">
-              <button class="py-3 border text-primary-1 border-primary-1 rounded-10 text-xs">
-                More details
-              </button>
-            </div>
+            <nuxt-link to="/dashboard/jobseeker/my-applications/more-details">
+              <div
+                class="flex flex-col justify-end relative right-5 top-12 w-[99px]"
+              >
+                <button
+                  class="py-3 border text-primary-1 border-primary-1 rounded-10 text-xs"
+                >
+                  More details
+                </button>
+              </div>
+            </nuxt-link>
           </div>
         </div>
       </div>
@@ -1082,8 +1141,12 @@ definePageMeta({
           </div>
 
           <div class="flex space-x-4 py-3">
-            <button class="bg-primary-1 px-6 py-3 rounded-10 text-white">Apply Now</button>
-            <button class="border-primary-1 border px-6 py-3 text-primary-1 rounded-10">
+            <button class="bg-primary-1 px-6 py-3 rounded-10 text-white">
+              Apply Now
+            </button>
+            <button
+              class="border-primary-1 border px-6 py-3 text-primary-1 rounded-10"
+            >
               More Details
             </button>
           </div>

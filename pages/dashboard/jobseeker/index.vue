@@ -46,7 +46,8 @@ definePageMeta({
                 >
                   12
                 </p>
-                <div class="pt-8"><IconsWhiteChatIcon class="" /></div>
+                <div class="pt-8"><IconsWhiteChatIcon class="" />
+                </div>
               </div>
             </div>
           </div>
