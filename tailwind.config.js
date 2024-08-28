@@ -100,8 +100,9 @@ module.exports = {
           950: "#461f04",
         },
       },
+      
       spacing: {
-        3.5: "10px",
+        3.5: "14px",
         4.5: "18px",
         13: "52px",
         22: "88px",
@@ -110,6 +111,7 @@ module.exports = {
       borderRadius: {
         none: "0",
         sm: "0.125rem",
+        5: "5px",
         8: "8px",
         10: "10px",
         20: "100px",

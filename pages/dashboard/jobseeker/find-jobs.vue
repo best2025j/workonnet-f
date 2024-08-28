@@ -14,7 +14,7 @@ definePageMeta({
       <div
         class="bg-info-100 text-black-700 p-4 rounded-10 w-[670px] space-y-2 h-[164px]"
       >
-        <h3 class="font-bold text-2xl">
+        <h3 class="font-black text-2xl">
           Discover your ideal career right here
         </h3>
         <p class="text-sm">
@@ -28,12 +28,12 @@ definePageMeta({
             <input
               type="text"
               placeholder="Search"
-              class="pl-10 pr-4 h-11 w-[278px] border border-gray-300 rounded-md"
+              class="pl-10 pr-4 h-11 placeholder:text-sm w-[278px] border border-gray-300 rounded-md"
             />
             <svg
               width="10"
               height="10"
-              class="absolute left-3 top-2.5 h-5 w-5 text-gray-400"
+              class="absolute left-3 top-3.5 h-4 w-4 text-gray-400"
               viewBox="0 0 18 18"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -49,12 +49,12 @@ definePageMeta({
             <input
               type="text"
               placeholder="Job location"
-              class="pl-10 pr-4 h-11 w-[278px] border border-gray-300 rounded-md"
+              class="pl-10 pr-4 h-11 placeholder:text-sm w-[278px] border border-gray-300 rounded-md"
             />
             <svg
               width="10"
               height="10"
-              class="absolute left-3 top-2.5 h-5 w-5 text-gray-400"
+              class="absolute left-3 top-3.5 h-4 w-4 text-gray-400"
               viewBox="0 0 14 18"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -85,7 +85,7 @@ definePageMeta({
       <!-- btn -->
       <div class="py-5 flex gap-x-[15px]">
         <button
-          class="bg-westside-200 text-primary-1 gap-2 flex items-center font-bold p-2 px-4 rounded-10 text-xs"
+          class="bg-westside-200 text-primary-1 gap-2 flex items-center font-black p-2 px-4 rounded-10 text-xs"
         >
           <svg
             width="14"
@@ -103,7 +103,7 @@ definePageMeta({
         </button>
         <button class="bg-white p-2 px-4 rounded-10 text-xs">Full-time</button>
         <button
-          class="bg-westside-200 text-primary-1 gap-2 flex items-center font-bold p-2 px-4 rounded-10 text-xs"
+          class="bg-westside-200 text-primary-1 gap-2 flex items-center font-black p-2 px-4 rounded-10 text-xs"
         >
           <svg
             width="14"
@@ -120,7 +120,7 @@ definePageMeta({
           Freelance
         </button>
         <button
-          class="bg-westside-200 text-primary-1 gap-2 flex items-center font-bold p-2 px-4 rounded-10 text-xs"
+          class="bg-westside-200 text-primary-1 gap-2 flex items-center font-black p-2 px-4 rounded-10 text-xs"
         >
           <svg
             width="14"
@@ -151,7 +151,9 @@ definePageMeta({
             />
           </svg>
         </button>
-        <button class="text-primary-1 font-bold text-xs">Remove Filters</button>
+        <button class="text-primary-1 font-black text-xs">
+          Remove Filters
+        </button>
       </div>
       <!-- btn 2 -->
       <div class="flex justify-end space-x-3">
@@ -194,12 +196,14 @@ definePageMeta({
           <div class="flex items-center justify-between border-b-2 p-3">
             <div class="flex items-center space-x-4">
               <img
-                src="/SocialMedia3.png"
+                src="/assets/images/SocialMedia3.png"
                 alt="Google"
                 class="w-10 h-10 rounded"
               />
               <div class="pl-4">
-                <span class="block text-base font-bold">Customer Care Rep</span>
+                <span class="block text-base font-black"
+                  >Customer Care Rep</span
+                >
                 <span class="text-xs font-semimedium text-gray-500"
                   >Catalog</span
                 >
@@ -208,7 +212,7 @@ definePageMeta({
 
             <div class="flex space-x-4 items-center relative right-5">
               <span
-                class="px-3 py-1 rounded-10 text-xs font-bold text-success-600"
+                class="px-3 py-1 rounded-10 text-xs font-black text-success-600"
                 >80% match</span
               >
               <button>
@@ -349,9 +353,9 @@ definePageMeta({
         <div class="bg-white rounded-10 w-full">
           <div class="flex items-center justify-between border-b-2 p-3">
             <div class="flex items-center space-x-4">
-              <img src="/ms.png" alt="Google" class="w-10 h-10 rounded" />
+              <img src="/assets/images/ms.png" alt="Google" class="w-10 h-10 rounded" />
               <div class="pl-4">
-                <span class="block text-base font-bold"
+                <span class="block text-base font-black"
                   >Social Media Assistant</span
                 >
                 <span class="text-xs font-semimedium text-gray-500"
@@ -362,7 +366,7 @@ definePageMeta({
 
             <div class="flex space-x-4 items-center relative right-5">
               <span
-                class="px-3 py-1 rounded-10 text-xs font-bold text-success-600"
+                class="px-3 py-1 rounded-10 text-xs font-black text-success-600"
                 >80% match</span
               >
               <button>
@@ -504,12 +508,12 @@ definePageMeta({
           <div class="flex items-center justify-between border-b-2 p-3">
             <div class="flex items-center space-x-4">
               <img
-                src="/SocialMedia.png"
+                src="/assets/images/SocialMedia.png"
                 alt="Google"
                 class="w-10 h-10 rounded"
               />
               <div class="pl-4">
-                <span class="block text-base font-bold">HR Manager</span>
+                <span class="block text-base font-black">HR Manager</span>
                 <span class="text-xs font-semimedium text-gray-500"
                   >Layers</span
                 >
@@ -518,7 +522,7 @@ definePageMeta({
 
             <div class="flex space-x-4 items-center relative right-5">
               <span
-                class="px-3 py-1 rounded-10 text-xs font-bold text-success-600"
+                class="px-3 py-1 rounded-10 text-xs font-black text-success-600"
                 >80% match</span
               >
               <button>
@@ -660,12 +664,12 @@ definePageMeta({
           <div class="flex items-center justify-between border-b-2 p-3">
             <div class="flex items-center space-x-4">
               <img
-                src="/SocialMedia2.png"
+                src="/assets/images/SocialMedia2.png"
                 alt="Google"
                 class="w-10 h-10 rounded"
               />
               <div class="pl-4">
-                <span class="block text-base font-bold">Admin Assistant </span>
+                <span class="block text-base font-black">Admin Assistant </span>
                 <span class="text-xs font-semimedium text-gray-500"
                   >Hour Glass
                 </span>
@@ -674,7 +678,7 @@ definePageMeta({
 
             <div class="flex space-x-4 items-center relative right-5">
               <span
-                class="px-3 py-1 rounded-10 text-xs font-bold text-success-600"
+                class="px-3 py-1 rounded-10 text-xs font-black text-success-600"
                 >80% match</span
               >
               <button>
@@ -815,9 +819,9 @@ definePageMeta({
         <div class="bg-white rounded-10 w-full">
           <div class="flex items-center justify-between border-b-2 p-3">
             <div class="flex items-center space-x-4">
-              <img src="/ms.png" alt="Google" class="w-10 h-10 rounded" />
+              <img src="/assets/images/ms.png" alt="Google" class="w-10 h-10 rounded" />
               <div class="pl-4">
-                <span class="block text-base font-bold"
+                <span class="block text-base font-black"
                   >Social Media Assistant
                 </span>
                 <span class="text-xs font-semimedium text-gray-500"
@@ -828,7 +832,7 @@ definePageMeta({
 
             <div class="flex space-x-4 items-center relative right-5">
               <span
-                class="px-3 py-1 rounded-10 text-xs font-bold text-success-600"
+                class="px-3 py-1 rounded-10 text-xs font-black text-success-600"
                 >80% match</span
               >
               <button>
@@ -969,10 +973,10 @@ definePageMeta({
     </div>
 
     <!--  second div-->
-    <div class="bg-white w-full rounded-10 ">
+    <div class="bg-white w-full rounded-10">
       <div class="flex items-center flex-col space-y-3 py-4 border-b-2">
-        <img src="/ms.png" alt="" />
-        <h1 class="text base font-bold">Social Media Assistant</h1>
+        <img src="/assets/images/ms.png" alt="" />
+        <h1 class="text base font-black">Social Media Assistant</h1>
         <p class="text-xs">Microsoft</p>
       </div>
       <!--  -->
@@ -980,29 +984,29 @@ definePageMeta({
         <div class="space-y-4">
           <div class="space-y-2">
             <h1 class="text-xs">Job Type</h1>
-            <h1 class="font-bold text-sm">Full-time</h1>
+            <h1 class="font-black text-sm">Full-time</h1>
           </div>
 
           <div class="space-y-2">
             <h1 class="text-xs">Location</h1>
-            <h1 class="font-bold text-sm">Paris, France</h1>
+            <h1 class="font-black text-sm">Paris, France</h1>
           </div>
 
           <div class="space-y-2">
             <h1 class="text-xs">Salary</h1>
-            <h1 class="font-bold text-sm">$4,000 to $5,000/month</h1>
+            <h1 class="font-black text-sm">$4,000 to $5,000/month</h1>
           </div>
         </div>
         <!--  -->
         <div class="space-y-4">
           <div class="space-y-2">
             <h1 class="text-xs">Work Type</h1>
-            <h1 class="font-bold text-sm">Hybrid</h1>
+            <h1 class="font-black text-sm">Hybrid</h1>
           </div>
 
           <div class="space-y-2">
             <h1 class="text-xs">Experience</h1>
-            <h1 class="font-bold text-sm">4 years</h1>
+            <h1 class="font-black text-sm">4 years</h1>
           </div>
 
           <div class="flex items-center space-x-2">
@@ -1030,7 +1034,7 @@ definePageMeta({
       <!--  -->
       <div class="space-y-4 py-4">
         <div class="px-6 space-y-2">
-          <h1 class="font-bold">Description</h1>
+          <h1 class="font-black">Description</h1>
           <div class="px-4">
             <ul class="space-y-3 list-disc text-xs">
               <li class="">
@@ -1052,7 +1056,7 @@ definePageMeta({
         </div>
         <!--  -->
         <div class="px-6 space-y-2">
-          <h1 class="font-bold">Key Responsibilities</h1>
+          <h1 class="font-black">Key Responsibilities</h1>
           <div class="px-4">
             <ul class="space-y-3 list-disc text-xs">
               <li class="">
@@ -1091,7 +1095,7 @@ definePageMeta({
         </div>
         <!--  -->
         <div class="px-6 space-y-2">
-          <h1 class="font-bold">Qualification</h1>
+          <h1 class="font-black">Qualification</h1>
           <div class="px-4">
             <ul class="space-y-3 list-disc text-xs">
               <li class="">
@@ -1124,7 +1128,7 @@ definePageMeta({
         </div>
         <!--  -->
         <div class="px-6 space-y-2">
-          <h1 class="font-bold">How to apply</h1>
+          <h1 class="font-black">How to apply</h1>
           <div class="px-4">
             <ul class="space-y-3 list-disc text-xs">
               <li>

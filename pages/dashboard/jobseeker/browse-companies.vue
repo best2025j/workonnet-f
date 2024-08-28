@@ -10,7 +10,7 @@ definePageMeta({
   <div class="text-black-900">
     <div class="flex gap-x-4 justify-between items-center">
       <div class="space y-1">
-        <h3 class="text-2xl font-bold">Recommended Companies</h3>
+        <h3 class="text-2xl font-black">Recommended Companies</h3>
         <h1 class="text-14">
           Based on your profile, company preferences and recent activities
         </h1>
@@ -21,12 +21,12 @@ definePageMeta({
           <input
             type="text"
             placeholder="Search"
-            class="pl-10 pr-4 h-11 w-[298px] border border-gray-300 rounded-md"
+            class="pl-10 placeholder:text-sm pr-4 h-11 w-[298px] outline-none border border-gray-300 rounded-md"
           />
           <svg
             width="10"
             height="10"
-            class="absolute left-3 top-2.5 h-5 w-5 text-gray-400"
+            class="absolute left-3 top-3.5 h-4 w-4 text-gray-400"
             viewBox="0 0 18 18"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -42,12 +42,12 @@ definePageMeta({
           <input
             type="text"
             placeholder="Job location"
-            class="pl-10 pr-4 h-11 w-[298px] border border-gray-300 rounded-md"
+            class="pl-10 pr-4 h-11 w-[298px] outline-none placeholder:text-sm border border-gray-300 rounded-md"
           />
           <svg
             width="10"
             height="10"
-            class="absolute left-3 top-2.5 h-5 w-5 text-gray-400"
+            class="absolute left-3 top-3.5 h-4 w-4 text-gray-400"
             viewBox="0 0 14 18"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -80,8 +80,8 @@ definePageMeta({
       <div class="bg-white h-full p-4 rounded-10 space-y-4">
         <div class="flex justify-between items-start">
           <div class="space-y-2">
-            <img src="/ms.png" alt="no pix" />
-            <h1 class="text-sm font-bold">Social Media Assistant</h1>
+            <img src="/assets/images/ms.png" alt="no pix" />
+            <h1 class="text-sm font-black">Social Media Assistant</h1>
             <h1 class="text-xs">Microsoft</h1>
           </div>
           <button
@@ -107,8 +107,8 @@ definePageMeta({
       <div class="bg-white h-full p-4 rounded-10 space-y-4">
         <div class="flex justify-between items-start">
           <div class="space-y-2">
-            <img src="/ms.png" alt="no pix" />
-            <h1 class="text-sm font-bold">Social Media Assistant</h1>
+            <img src="/assets/images/ms.png" alt="no pix" />
+            <h1 class="text-sm font-black">Social Media Assistant</h1>
             <h1 class="text-xs">Microsoft</h1>
           </div>
           <button
@@ -134,8 +134,8 @@ definePageMeta({
       <div class="bg-white h-full p-4 rounded-10 space-y-4">
         <div class="flex justify-between items-start">
           <div class="space-y-2">
-            <img src="/ms.png" alt="no pix" />
-            <h1 class="text-sm font-bold">Social Media Assistant</h1>
+            <img src="/assets/images/ms.png" alt="no pix" />
+            <h1 class="text-sm font-black">Social Media Assistant</h1>
             <h1 class="text-xs">Microsoft</h1>
           </div>
           <button
@@ -161,8 +161,8 @@ definePageMeta({
       <div class="bg-white h-full p-4 rounded-10 space-y-4">
         <div class="flex justify-between items-start">
           <div class="space-y-2">
-            <img src="/ms.png" alt="no pix" />
-            <h1 class="text-sm font-bold">Social Media Assistant</h1>
+            <img src="/assets/images/ms.png" alt="no pix" />
+            <h1 class="text-sm font-black">Social Media Assistant</h1>
             <h1 class="text-xs">Microsoft</h1>
           </div>
           <button
@@ -187,8 +187,8 @@ definePageMeta({
       <div class="bg-white h-full p-4 rounded-10 space-y-4">
         <div class="flex justify-between items-start">
           <div class="space-y-2">
-            <img src="/ms.png" alt="no pix" />
-            <h1 class="text-sm font-bold">Social Media Assistant</h1>
+            <img src="/assets/images/ms.png" alt="no pix" />
+            <h1 class="text-sm font-black">Social Media Assistant</h1>
             <h1 class="text-xs">Microsoft</h1>
           </div>
           <button
@@ -213,8 +213,8 @@ definePageMeta({
       <div class="bg-white h-full p-4 rounded-10 space-y-4">
         <div class="flex justify-between items-start">
           <div class="space-y-2">
-            <img src="/ms.png" alt="no pix" />
-            <h1 class="text-sm font-bold">Social Media Assistant</h1>
+            <img src="/assets/images/ms.png" alt="no pix" />
+            <h1 class="text-sm font-black">Social Media Assistant</h1>
             <h1 class="text-xs">Microsoft</h1>
           </div>
           <button
@@ -239,8 +239,8 @@ definePageMeta({
       <div class="bg-white h-full p-4 rounded-10 space-y-4">
         <div class="flex justify-between items-start">
           <div class="space-y-2">
-            <img src="/ms.png" alt="no pix" />
-            <h1 class="text-sm font-bold">Social Media Assistant</h1>
+            <img src="/assets/images/ms.png" alt="no pix" />
+            <h1 class="text-sm font-black">Social Media Assistant</h1>
             <h1 class="text-xs">Microsoft</h1>
           </div>
           <button
@@ -265,8 +265,8 @@ definePageMeta({
       <div class="bg-white h-full p-4 rounded-10 space-y-4">
         <div class="flex justify-between items-start">
           <div class="space-y-2">
-            <img src="/ms.png" alt="no pix" />
-            <h1 class="text-sm font-bold">Social Media Assistant</h1>
+            <img src="/assets/images/ms.png" alt="no pix" />
+            <h1 class="text-sm font-black">Social Media Assistant</h1>
             <h1 class="text-xs">Microsoft</h1>
           </div>
           <button
@@ -291,8 +291,8 @@ definePageMeta({
       <div class="bg-white h-full p-4 rounded-10 space-y-4">
         <div class="flex justify-between items-start">
           <div class="space-y-2">
-            <img src="/ms.png" alt="no pix" />
-            <h1 class="text-sm font-bold">Social Media Assistant</h1>
+            <img src="/assets/images/ms.png" alt="no pix" />
+            <h1 class="text-sm font-black">Social Media Assistant</h1>
             <h1 class="text-xs">Microsoft</h1>
           </div>
           <button

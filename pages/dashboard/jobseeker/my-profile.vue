@@ -1,7 +1,7 @@
 <script setup lang="ts">
 definePageMeta({
-  name: "My Profile",
-  title: "My Profile",
+  name: "input",
+  title: "profile input",
   pageName: "dashboard.my-profile",
   layout: "dashboard",
 });
@@ -11,15 +11,15 @@ definePageMeta({
     <!-- profile uploads -->
     <div class="p-4 bg-white rounded-10">
       <img
-        src="/components/images/bridge.png"
+        src="/assets/images/bridge.png"
         class="w-full"
         alt="no image yet..."
       />
       <div class="-mt-12 pl-6 space-y-2">
-        <img src="/components/images/man.png" alt="profile-image" />
+        <img src="/assets/images/man.png" alt="profile-image" />
         <div class="flex justify-between items-center">
           <div class="space-y-2">
-            <h1 class="font-bold text-base">Stanley Nwosu</h1>
+            <h1 class="font-black text-base">Stanley Nwosu</h1>
             <div class="flex items-start space-x-4">
               <div class="space-y-2">
                 <h1 class="text-xs">UI/UX Designer</h1>
@@ -134,33 +134,39 @@ definePageMeta({
             </div>
           </div>
           <!-- btn -->
-          <div class="">
+          <div class="space-y-3">
             <div class="flex justify-end">
-              <button class="text-info-600 font-bold text-xs">
+              <button class="text-info-600 font-black text-xs">
                 Premium user
               </button>
             </div>
-            <div class="space-x-2 flex items-center">
-              <svg
-                width="12"
-                height="19"
-                viewBox="0 0 12 19"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M7.875 8.875H6.625V3.875H7.25C7.91304 3.875 8.54893 4.13839 9.01777 4.60723C9.48661 5.07607 9.75 5.71196 9.75 6.375C9.75 6.54076 9.81585 6.69973 9.93306 6.81694C10.0503 6.93415 10.2092 7 10.375 7C10.5408 7 10.6997 6.93415 10.8169 6.81694C10.9342 6.69973 11 6.54076 11 6.375C10.999 5.38076 10.6035 4.42753 9.90051 3.72449C9.19747 3.02145 8.24424 2.62603 7.25 2.625H6.625V1.375C6.625 1.20924 6.55915 1.05027 6.44194 0.933058C6.32473 0.815848 6.16576 0.75 6 0.75C5.83424 0.75 5.67527 0.815848 5.55806 0.933058C5.44085 1.05027 5.375 1.20924 5.375 1.375V2.625H4.75C3.75544 2.625 2.80161 3.02009 2.09835 3.72335C1.39509 4.42661 1 5.38044 1 6.375C1 7.36956 1.39509 8.32339 2.09835 9.02665C2.80161 9.72991 3.75544 10.125 4.75 10.125H5.375V15.125H4.125C3.46196 15.125 2.82607 14.8616 2.35723 14.3928C1.88839 13.9239 1.625 13.288 1.625 12.625C1.625 12.4592 1.55915 12.3003 1.44194 12.1831C1.32473 12.0658 1.16576 12 1 12C0.83424 12 0.675269 12.0658 0.558058 12.1831C0.440848 12.3003 0.375 12.4592 0.375 12.625C0.376034 13.6192 0.771454 14.5725 1.47449 15.2755C2.17753 15.9785 3.13076 16.374 4.125 16.375H5.375V17.625C5.375 17.7908 5.44085 17.9497 5.55806 18.0669C5.67527 18.1842 5.83424 18.25 6 18.25C6.16576 18.25 6.32473 18.1842 6.44194 18.0669C6.55915 17.9497 6.625 17.7908 6.625 17.625V16.375H7.875C8.86956 16.375 9.82339 15.9799 10.5267 15.2767C11.2299 14.5734 11.625 13.6196 11.625 12.625C11.625 11.6304 11.2299 10.6766 10.5267 9.97335C9.82339 9.27009 8.86956 8.875 7.875 8.875ZM4.75 8.875C4.08696 8.875 3.45107 8.61161 2.98223 8.14277C2.51339 7.67393 2.25 7.03804 2.25 6.375C2.25 5.71196 2.51339 5.07607 2.98223 4.60723C3.45107 4.13839 4.08696 3.875 4.75 3.875H5.375V8.875H4.75ZM7.875 15.125H6.625V10.125H7.875C8.53804 10.125 9.17393 10.3884 9.64277 10.8572C10.1116 11.3261 10.375 11.962 10.375 12.625C10.375 13.288 10.1116 13.9239 9.64277 14.3928C9.17393 14.8616 8.53804 15.125 7.875 15.125Z"
-                  fill="#343330"
-                />
-              </svg>
-              <h1 class="text-lg font-bold">$5,000/month</h1>
-            </div>
-            <div class="flex justify-end">
-              <button
-                class="px-3 text-xs py-2 rounded-8 bg-primary-1 text-westside-100 font-bold"
-              >
-                Edit profile info
-              </button>
+
+            <div class="space-y-3">
+              <div class="space-x-2 flex items-center">
+                <svg
+                  width="12"
+                  height="19"
+                  viewBox="0 0 12 19"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M7.875 8.875H6.625V3.875H7.25C7.91304 3.875 8.54893 4.13839 9.01777 4.60723C9.48661 5.07607 9.75 5.71196 9.75 6.375C9.75 6.54076 9.81585 6.69973 9.93306 6.81694C10.0503 6.93415 10.2092 7 10.375 7C10.5408 7 10.6997 6.93415 10.8169 6.81694C10.9342 6.69973 11 6.54076 11 6.375C10.999 5.38076 10.6035 4.42753 9.90051 3.72449C9.19747 3.02145 8.24424 2.62603 7.25 2.625H6.625V1.375C6.625 1.20924 6.55915 1.05027 6.44194 0.933058C6.32473 0.815848 6.16576 0.75 6 0.75C5.83424 0.75 5.67527 0.815848 5.55806 0.933058C5.44085 1.05027 5.375 1.20924 5.375 1.375V2.625H4.75C3.75544 2.625 2.80161 3.02009 2.09835 3.72335C1.39509 4.42661 1 5.38044 1 6.375C1 7.36956 1.39509 8.32339 2.09835 9.02665C2.80161 9.72991 3.75544 10.125 4.75 10.125H5.375V15.125H4.125C3.46196 15.125 2.82607 14.8616 2.35723 14.3928C1.88839 13.9239 1.625 13.288 1.625 12.625C1.625 12.4592 1.55915 12.3003 1.44194 12.1831C1.32473 12.0658 1.16576 12 1 12C0.83424 12 0.675269 12.0658 0.558058 12.1831C0.440848 12.3003 0.375 12.4592 0.375 12.625C0.376034 13.6192 0.771454 14.5725 1.47449 15.2755C2.17753 15.9785 3.13076 16.374 4.125 16.375H5.375V17.625C5.375 17.7908 5.44085 17.9497 5.55806 18.0669C5.67527 18.1842 5.83424 18.25 6 18.25C6.16576 18.25 6.32473 18.1842 6.44194 18.0669C6.55915 17.9497 6.625 17.7908 6.625 17.625V16.375H7.875C8.86956 16.375 9.82339 15.9799 10.5267 15.2767C11.2299 14.5734 11.625 13.6196 11.625 12.625C11.625 11.6304 11.2299 10.6766 10.5267 9.97335C9.82339 9.27009 8.86956 8.875 7.875 8.875ZM4.75 8.875C4.08696 8.875 3.45107 8.61161 2.98223 8.14277C2.51339 7.67393 2.25 7.03804 2.25 6.375C2.25 5.71196 2.51339 5.07607 2.98223 4.60723C3.45107 4.13839 4.08696 3.875 4.75 3.875H5.375V8.875H4.75ZM7.875 15.125H6.625V10.125H7.875C8.53804 10.125 9.17393 10.3884 9.64277 10.8572C10.1116 11.3261 10.375 11.962 10.375 12.625C10.375 13.288 10.1116 13.9239 9.64277 14.3928C9.17393 14.8616 8.53804 15.125 7.875 15.125Z"
+                    fill="#343330"
+                  />
+                </svg>
+                <h1 class="text-lg font-black">$5,000/month</h1>
+              </div>
+
+              <nuxt-link to="/dashboard/jobseeker/my-applications/input">
+                <div class="flex justify-end">
+                  <button
+                    class="px-[14px] text-xs py-2 rounded-5 bg-primary-1 text-white"
+                  >
+                    Edit profile info
+                  </button>
+                </div>
+              </nuxt-link>
             </div>
           </div>
         </div>
@@ -171,7 +177,7 @@ definePageMeta({
       <!-- cards -->
       <div class="p-4 bg-white rounded-10 w-full my-4">
         <div class="space-y-4 pt-4">
-          <h1 class="text-xl font-bold">About me</h1>
+          <h1 class="text-xl font-black">About me</h1>
           <p class="text-xs tracking-wider">
             Lorem ipsum dolor sit amet consectetur. Dignissim aliquam vitae
             accumsan eget nisl felis magna rhoncus. Nisl duis netus id lobortis
@@ -185,14 +191,14 @@ definePageMeta({
           </p>
         </div>
         <div class="space-y-4 pt-10">
-          <h1 class="text-xl font-bold">Experience</h1>
+          <h1 class="text-xl font-black">Experience</h1>
           <div class="bg-westside-50 space-y-4 rounded-10 p-4">
-            <img src="/Logo2.png" alt="no image yet" />
-            <h1 class="text-info-600 font-bold text-sm">
+            <img src="/assets/images/Logo2.png" alt="no image yet" />
+            <h1 class="text-info-600 font-black text-sm">
               User Interface Designer at Workonnect
             </h1>
             <div class="flex gap-2">
-              <h1 class="text-xs font-bold">May - June 2020</h1>
+              <h1 class="text-xs font-black">May - June 2020</h1>
               <h1 class="text-xs">Lagos, Nigeria.</h1>
             </div>
             <p class="text-xs tracking-wider">
@@ -221,12 +227,12 @@ definePageMeta({
             </p>
           </div>
           <div class="bg-westside-50 space-y-4 rounded-10 p-4">
-            <img src="/ms.png" alt="no image yet" />
-            <h1 class="text-info-600 font-bold text-sm">
+            <img src="/assets/images/ms.png" alt="no image yet" />
+            <h1 class="text-info-600 font-black text-sm">
               User Interface Designer at Workonnect
             </h1>
             <div class="flex gap-2">
-              <h1 class="text-xs font-bold">May - June 2020</h1>
+              <h1 class="text-xs font-black">May - June 2020</h1>
               <h1 class="text-xs">Lagos, Nigeria.</h1>
             </div>
             <p class="text-xs tracking-wider">
@@ -255,12 +261,12 @@ definePageMeta({
             </p>
           </div>
           <div class="bg-westside-50 space-y-4 rounded-10 p-4">
-            <img src="/ms.png" alt="no image yet" />
-            <h1 class="text-info-600 font-bold text-sm">
+            <img src="/assets/images/ms.png" alt="no image yet" />
+            <h1 class="text-info-600 font-black text-sm">
               User Interface Designer at Workonnect
             </h1>
             <div class="flex gap-2">
-              <h1 class="text-xs font-bold">May - June 2020</h1>
+              <h1 class="text-xs font-black">May - June 2020</h1>
               <h1 class="text-xs">Lagos, Nigeria.</h1>
             </div>
             <p class="text-xs tracking-wider">
@@ -294,7 +300,7 @@ definePageMeta({
       <!--  -->
       <div class="p-4 bg-white rounded-10 my-4 w-[670px] h-full">
         <div class="space-y-6">
-          <h1 class="text-xl font-bold">Uploaded Documents</h1>
+          <h1 class="text-xl font-black">Uploaded Documents</h1>
           <div class="flex justify-between">
             <div class="flex items-start gap-x-2">
               <svg

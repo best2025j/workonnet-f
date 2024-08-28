@@ -7,7 +7,7 @@ const route = useRoute();
     class="min-h-screen bg-gray-100 flex flex-col items-center justify-center"
   >
     <header class="text-center mb-8">
-      <h1 class="text-4xl font-bold text-gray-900">Welcome to Workonnect</h1>
+      <h1 class="text-4xl font-black text-gray-900">Welcome to Workonnect</h1>
       <p class="text-lg text-gray-600 mt-2">
         Your go-to platform for connecting job seekers and recruiters.
       </p>

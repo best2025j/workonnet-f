@@ -9,10 +9,10 @@
     </div>
 
     <!-- Main Content Area -->
-    <div class="w-full h-full bg-black-50 ">
+    <div class="w-full h-full bg-black-50">
       <LayoutHeader class="px-4 h-full" />
 
-      <main class="px-4 pt-4 min-h-screen">
+      <main class="pl-4 pr-8 py-4">
         <slot />
       </main>
     </div>
