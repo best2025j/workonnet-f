@@ -5,7 +5,7 @@
     <div class="bg-white rounded-10 w-full">
       <div class="flex items-center justify-between border-b-2 p-3">
         <div class="flex items-center space-x-4">
-          <img src="/SocialMedia3.png" alt="Google" class="w-10 h-10 rounded" />
+          <img src="/assets/images/SocialMedia3.png" alt="Google" class="w-10 h-10 rounded" />
           <div class="pl-4">
             <span class="block text-base font-black">Customer Care Rep</span>
             <span class="text-xs font-semimedium text-gray-500">Catalog</span>
@@ -140,7 +140,7 @@
     <div class="bg-white rounded-10 w-full">
       <div class="flex items-center justify-between border-b-2 p-3">
         <div class="flex items-center space-x-4">
-          <img src="/ms.png" alt="Google" class="w-10 h-10 rounded" />
+          <img src="/assets/images/ms.png" alt="Google" class="w-10 h-10 rounded" />
           <div class="pl-4">
             <span class="block text-base font-black"
               >Social Media Assistant</span
@@ -277,7 +277,7 @@
     <div class="bg-white rounded-10 w-full">
       <div class="flex items-center justify-between border-b-2 p-3">
         <div class="flex items-center space-x-4">
-          <img src="/SocialMedia.png" alt="Google" class="w-10 h-10 rounded" />
+          <img src="/assets/images/SocialMedia.png" alt="Google" class="w-10 h-10 rounded" />
           <div class="pl-4">
             <span class="block text-base font-black">HR Manager</span>
             <span class="text-xs font-semimedium text-gray-500">Layers</span>
@@ -412,7 +412,7 @@
     <div class="bg-white rounded-10 w-full">
       <div class="flex items-center justify-between border-b-2 p-3">
         <div class="flex items-center space-x-4">
-          <img src="/SocialMedia2.png" alt="Google" class="w-10 h-10 rounded" />
+          <img src="/assets/images/SocialMedia2.png" alt="Google" class="w-10 h-10 rounded" />
           <div class="pl-4">
             <span class="block text-base font-black">Admin Assistant </span>
             <span class="text-xs font-semimedium text-gray-500"
@@ -550,7 +550,7 @@
     <div class="bg-white rounded-10 w-full">
       <div class="flex items-center justify-between border-b-2 p-3">
         <div class="flex items-center space-x-4">
-          <img src="/ms.png" alt="Google" class="w-10 h-10 rounded" />
+          <img src="/assets/images/ms.png" alt="Google" class="w-10 h-10 rounded" />
           <div class="pl-4">
             <span class="block text-base font-black"
               >Social Media Assistant
@@ -689,7 +689,7 @@
     <div class="bg-white rounded-10 w-full">
       <div class="flex items-center justify-between border-b-2 p-3">
         <div class="flex items-center space-x-4">
-          <img src="/SocialMedia3.png" alt="Google" class="w-10 h-10 rounded" />
+          <img src="/assets/images/SocialMedia3.png" alt="Google" class="w-10 h-10 rounded" />
           <div class="pl-4">
             <span class="block text-base font-black">Customer Care Rep</span>
             <span class="text-xs font-semimedium text-gray-500">Catalog</span>
@@ -824,7 +824,7 @@
     <div class="bg-white rounded-10 w-full">
       <div class="flex items-center justify-between border-b-2 p-3">
         <div class="flex items-center space-x-4">
-          <img src="/SocialMedia.png" alt="Google" class="w-10 h-10 rounded" />
+          <img src="/assets/images/SocialMedia.png" alt="Google" class="w-10 h-10 rounded" />
           <div class="pl-4">
             <span class="block text-base font-black">HR Manager </span>
             <span class="text-xs font-semimedium text-gray-500">Layers</span>
@@ -959,7 +959,7 @@
     <div class="bg-white rounded-10 w-full">
       <div class="flex items-center justify-between border-b-2 p-3">
         <div class="flex items-center space-x-4">
-          <img src="/SocialMedia2.png" alt="Google" class="w-10 h-10 rounded" />
+          <img src="/assets/images/SocialMedia2.png" alt="Google" class="w-10 h-10 rounded" />
           <div class="pl-4">
             <span class="block text-base font-black">Admin Assistant </span>
             <span class="text-xs font-semimedium text-gray-500">

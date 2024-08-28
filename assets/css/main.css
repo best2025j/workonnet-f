@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @font-face {
   font-family: "Nexa";
   src: url("~/assets/fonts/Nexa-ExtraLight.ttf");
@@ -15,17 +14,20 @@
   font-weight: 900;
 }
 
-html, body {
+html,
+body {
   font-family: "Nexa";
 }
 
 body {
   overflow: none !important;
+  background-color: #f6f6f6;
 }
 
 body::-webkit-scrollbar:horizontal {
   display: none !important;
 }
+
 
 /* scrollbar */
 
@@ -53,15 +55,13 @@ body::-webkit-scrollbar:horizontal {
 /* Handle */
 ::-webkit-scrollbar-thumb {
   /* background: #0A193F; */
-  background: #6D6D6D
-;
+  background: #6d6d6d;
   border-radius: 10px !important;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   /* background: #0A193F; */
-  background: #6D6D6D
-;
+  background: #6d6d6d;
   border-radius: 10px !important;
 }

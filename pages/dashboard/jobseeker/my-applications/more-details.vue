@@ -11,12 +11,12 @@ definePageMeta({
   <div class="w-full h-full text-black-600">
     <div class="p-4 bg-white rounded-10">
       <img
-        src="/components/images/team-image.png"
+        src="/assets/images/team-image.png"
         class="w-full"
         alt="no image yet..."
       />
       <div class="-mt-12 pl-6 space-y-2">
-        <img src="/components/images/sportify.png" alt="profile-image" />
+        <img src="/assets/images/sportify.png" alt="profile-image" />
         <div class="flex justify-between">
           <div class="space-y-2">
             <div class="flex items-center space-x-6">
@@ -219,7 +219,7 @@ definePageMeta({
             <div class="flex items-center justify-between border-b-2 p-3">
               <div class="flex items-center space-x-4">
                 <img
-                  src="/SocialMedia2.png"
+                  src="/assets/images/SocialMedia2.png"
                   alt="Google"
                   class="w-10 h-10 rounded"
                 />
@@ -360,7 +360,7 @@ definePageMeta({
             <div class="flex items-center justify-between border-b-2 p-3">
               <div class="flex items-center space-x-4">
                 <img
-                  src="/SocialMedia2.png"
+                  src="/assets/images/SocialMedia2.png"
                   alt="Google"
                   class="w-10 h-10 rounded"
                 />
@@ -501,7 +501,7 @@ definePageMeta({
             <div class="flex items-center justify-between border-b-2 p-3">
               <div class="flex items-center space-x-4">
                 <img
-                  src="/SocialMedia2.png"
+                  src="/assets/images/SocialMedia2.png"
                   alt="Google"
                   class="w-10 h-10 rounded"
                 />

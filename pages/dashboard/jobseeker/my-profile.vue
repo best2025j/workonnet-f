@@ -11,12 +11,12 @@ definePageMeta({
     <!-- profile uploads -->
     <div class="p-4 bg-white rounded-10">
       <img
-        src="/components/images/bridge.png"
+        src="/assets/images/bridge.png"
         class="w-full"
         alt="no image yet..."
       />
       <div class="-mt-12 pl-6 space-y-2">
-        <img src="/components/images/man.png" alt="profile-image" />
+        <img src="/assets/images/man.png" alt="profile-image" />
         <div class="flex justify-between items-center">
           <div class="space-y-2">
             <h1 class="font-black text-base">Stanley Nwosu</h1>
@@ -193,7 +193,7 @@ definePageMeta({
         <div class="space-y-4 pt-10">
           <h1 class="text-xl font-black">Experience</h1>
           <div class="bg-westside-50 space-y-4 rounded-10 p-4">
-            <img src="/Logo2.png" alt="no image yet" />
+            <img src="/assets/images/Logo2.png" alt="no image yet" />
             <h1 class="text-info-600 font-black text-sm">
               User Interface Designer at Workonnect
             </h1>
@@ -227,7 +227,7 @@ definePageMeta({
             </p>
           </div>
           <div class="bg-westside-50 space-y-4 rounded-10 p-4">
-            <img src="/ms.png" alt="no image yet" />
+            <img src="/assets/images/ms.png" alt="no image yet" />
             <h1 class="text-info-600 font-black text-sm">
               User Interface Designer at Workonnect
             </h1>
@@ -261,7 +261,7 @@ definePageMeta({
             </p>
           </div>
           <div class="bg-westside-50 space-y-4 rounded-10 p-4">
-            <img src="/ms.png" alt="no image yet" />
+            <img src="/assets/images/ms.png" alt="no image yet" />
             <h1 class="text-info-600 font-black text-sm">
               User Interface Designer at Workonnect
             </h1>

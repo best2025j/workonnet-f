@@ -28,12 +28,12 @@ definePageMeta({
             <input
               type="text"
               placeholder="Search"
-              class="pl-10 pr-4 h-11 w-[278px] border border-gray-300 rounded-md"
+              class="pl-10 pr-4 h-11 placeholder:text-sm w-[278px] border border-gray-300 rounded-md"
             />
             <svg
               width="10"
               height="10"
-              class="absolute left-3 top-2.5 h-5 w-5 text-gray-400"
+              class="absolute left-3 top-3.5 h-4 w-4 text-gray-400"
               viewBox="0 0 18 18"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -49,12 +49,12 @@ definePageMeta({
             <input
               type="text"
               placeholder="Job location"
-              class="pl-10 pr-4 h-11 w-[278px] border border-gray-300 rounded-md"
+              class="pl-10 pr-4 h-11 placeholder:text-sm w-[278px] border border-gray-300 rounded-md"
             />
             <svg
               width="10"
               height="10"
-              class="absolute left-3 top-2.5 h-5 w-5 text-gray-400"
+              class="absolute left-3 top-3.5 h-4 w-4 text-gray-400"
               viewBox="0 0 14 18"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -196,7 +196,7 @@ definePageMeta({
           <div class="flex items-center justify-between border-b-2 p-3">
             <div class="flex items-center space-x-4">
               <img
-                src="/SocialMedia3.png"
+                src="/assets/images/SocialMedia3.png"
                 alt="Google"
                 class="w-10 h-10 rounded"
               />
@@ -353,7 +353,7 @@ definePageMeta({
         <div class="bg-white rounded-10 w-full">
           <div class="flex items-center justify-between border-b-2 p-3">
             <div class="flex items-center space-x-4">
-              <img src="/ms.png" alt="Google" class="w-10 h-10 rounded" />
+              <img src="/assets/images/ms.png" alt="Google" class="w-10 h-10 rounded" />
               <div class="pl-4">
                 <span class="block text-base font-black"
                   >Social Media Assistant</span
@@ -508,7 +508,7 @@ definePageMeta({
           <div class="flex items-center justify-between border-b-2 p-3">
             <div class="flex items-center space-x-4">
               <img
-                src="/SocialMedia.png"
+                src="/assets/images/SocialMedia.png"
                 alt="Google"
                 class="w-10 h-10 rounded"
               />
@@ -664,7 +664,7 @@ definePageMeta({
           <div class="flex items-center justify-between border-b-2 p-3">
             <div class="flex items-center space-x-4">
               <img
-                src="/SocialMedia2.png"
+                src="/assets/images/SocialMedia2.png"
                 alt="Google"
                 class="w-10 h-10 rounded"
               />
@@ -819,7 +819,7 @@ definePageMeta({
         <div class="bg-white rounded-10 w-full">
           <div class="flex items-center justify-between border-b-2 p-3">
             <div class="flex items-center space-x-4">
-              <img src="/ms.png" alt="Google" class="w-10 h-10 rounded" />
+              <img src="/assets/images/ms.png" alt="Google" class="w-10 h-10 rounded" />
               <div class="pl-4">
                 <span class="block text-base font-black"
                   >Social Media Assistant
@@ -975,7 +975,7 @@ definePageMeta({
     <!--  second div-->
     <div class="bg-white w-full rounded-10">
       <div class="flex items-center flex-col space-y-3 py-4 border-b-2">
-        <img src="/ms.png" alt="" />
+        <img src="/assets/images/ms.png" alt="" />
         <h1 class="text base font-black">Social Media Assistant</h1>
         <p class="text-xs">Microsoft</p>
       </div>

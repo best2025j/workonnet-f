@@ -13,7 +13,7 @@
           to="/"
           class="text-black-900 hover:underline flex items-center gap-4 flex-row-reverse"
         >
-          <img src="/Ellipse 12.png" alt="Profile Picture" />
+          <img src="/assets/images/Ellipse12.png" alt="Profile Picture" />
           <!-- Use the bellIcon component correctly -->
           <IconsBellIcon class="h-6 w-6 inline-block" />
         </NuxtLink>

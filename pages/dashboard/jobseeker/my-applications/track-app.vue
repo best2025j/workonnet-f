@@ -11,7 +11,7 @@ definePageMeta({
   <div class="flex gap-4 text-black-600">
     <div class="">
       <div class="flex space-x-4 items-center">
-        <img src="/ms.png" alt="ms image" />
+        <img src="/assets/images/ms.png" alt="ms image" />
         <div>
           <h1 class="font-black">Social Media Assistant</h1>
           <h6>Microsoft</h6>
@@ -182,7 +182,7 @@ definePageMeta({
     <!--second div  -->
     <div class="bg-white w-full rounded-10">
       <div class="flex items-center flex-col space-y-3 py-4 border-b-2">
-        <img src="/ms.png" alt="" />
+        <img src="/assets/images//ms.png" alt="" />
         <h1 class="text base font-black">Social Media Assistant</h1>
         <p class="text-xs">Microsoft</p>
       </div>

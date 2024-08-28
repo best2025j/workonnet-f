@@ -8,7 +8,7 @@
             <td class="py-6 whitespace-nowrap pl-4">
               <div class="flex space-x-4">
                 <div class="flex flex-col">
-                  <img src="/ms.png" alt="Google" class="w-10 h-10 rounded" />
+                  <img src="/assets/images/ms.png" alt="Google" class="w-10 h-10 rounded" />
                 </div>
 
                 <div
@@ -66,7 +66,7 @@
               <div class="flex space-x-4">
                 <div class="flex flex-col">
                   <img
-                    src="/SocialMedia.png"
+                    src="/assets/images/SocialMedia.png"
                     alt="Google"
                     class="w-10 h-10 rounded"
                   />
@@ -125,7 +125,7 @@
               <div class="flex space-x-4">
                 <div class="flex flex-col">
                   <img
-                    src="/SocialMedia2.png"
+                    src="/assets/images/SocialMedia2.png"
                     alt="Google"
                     class="w-10 h-10 rounded"
                   />
@@ -184,7 +184,7 @@
               <div class="flex space-x-4">
                 <div class="flex flex-col">
                   <img
-                    src="/SocialMedia3.png"
+                    src="/assets/images/SocialMedia3.png"
                     alt="Google"
                     class="w-10 h-10 rounded"
                   />

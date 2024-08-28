@@ -150,7 +150,7 @@ definePageMeta({
               <div class="flex items-center space-x-4">
                 <img
                   class="w-10 h-10 rounded-10"
-                  src="/Ellipse 12.png"
+                  src="/assets/images/Ellipse12.png"
                   alt="Profile Image"
                 />
                 <div>

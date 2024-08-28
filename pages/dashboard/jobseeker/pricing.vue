@@ -37,7 +37,7 @@ definePageMeta({
           <input
             type="text"
             placeholder="Nigeria"
-            class="pl-10 pr-4 h-11 w-[357px] border border-gray-300 rounded-md"
+            class="pl-10 pr-4 h-11 w-[357px] placeholder:text-sm border border-gray-300 rounded-md"
           />
           <svg
             width="15"
@@ -60,7 +60,7 @@ definePageMeta({
       <div class="bg-white h-full p-4 rounded-10 space-y-4 w-full mt-4">
         <div class="flex justify-between items-start">
           <div class="space-y-2">
-            <img src="/Logo2.png" alt="no pix" />
+            <img src="/assets/images/Logo2.png" alt="no pix" />
             <h1 class="text-sm font-black">Free Plan</h1>
             <h1 class="text-xs">These are the benefits under the free plan</h1>
           </div>
@@ -189,7 +189,7 @@ definePageMeta({
       <div class="bg-white h-full p-4 rounded-10 space-y-4 w-full mt-4">
         <div class="flex justify-between items-start">
           <div class="space-y-2">
-            <img src="/Logo2.png" alt="no pix" />
+            <img src="/assets/images/Logo2.png" alt="no pix" />
             <h1 class="text-sm font-black">Basic Plan</h1>
             <h1 class="text-xs">These are the benefits under the free plan</h1>
           </div>
@@ -361,7 +361,7 @@ definePageMeta({
       <div class="bg-white h-full p-4 rounded-10 space-y-4 w-full mt-4">
         <div class="flex justify-between items-start">
           <div class="space-y-2">
-            <img src="/Logo2.png" alt="no pix" />
+            <img src="/assets/images/Logo2.png" alt="no pix" />
             <h1 class="text-sm font-black">Premium Plan</h1>
             <h1 class="text-xs">These are the benefits under the free plan</h1>
           </div>

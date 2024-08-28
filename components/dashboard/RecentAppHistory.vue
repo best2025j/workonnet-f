@@ -33,7 +33,7 @@
                     <div class="flex space-x-4">
                       <div class="flex flex-col">
                         <img
-                          src="/SocialMedia3.png"
+                          src="/assets/images/SocialMedia3.png"
                           alt="Google"
                           class="w-10 h-10 rounded"
                         />
@@ -81,7 +81,7 @@
                     <div class="flex space-x-4">
                       <div class="flex flex-col">
                         <img
-                          src="/SocialMedia3.png"
+                          src="/assets/images/SocialMedia3.png"
                           alt="Google"
                           class="w-10 h-10 rounded"
                         />
