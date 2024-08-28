@@ -3,7 +3,7 @@ import workLogo from '@/assets/images/workconnectlogo.png';
 </script>
 <template>
     <div>
-        <header class="w-full h-20 flex items-center justify-between mx-10" >
+        <header class="w-full h-20 flex items-center justify-between px-10" >
         <img :src="workLogo" alt="">
 <div>
   <nav class="">
