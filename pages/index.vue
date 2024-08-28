@@ -1,8 +1,6 @@
 <script setup lang="ts">
-const route = useRoute()
-
+const route = useRoute();
 </script>
-
 
 <template>
   <div
@@ -19,7 +17,7 @@ const route = useRoute()
       <!-- Link to Job Seeker Dashboard -->
       <NuxtLink
         to="/dashboard/jobseeker"
-        class="bg-blue-500 text-white py-2 px-6 rounded-lg shadow hover:bg-blue-600 transition duration-300"
+        class="bg-blue-500 text-white py-2 px-6 rounded-10 shadow hover:bg-blue-600 transition duration-300"
       >
         I'm a Job Seeker
       </NuxtLink>
@@ -27,7 +25,7 @@ const route = useRoute()
       <!-- Link to Recruiter Dashboard -->
       <NuxtLink
         to="/dashboard/recruiter"
-        class="bg-green-500 text-white py-2 px-6 rounded-lg shadow hover:bg-green-600 transition duration-300"
+        class="bg-green-500 text-white py-2 px-6 rounded-10 shadow hover:bg-green-600 transition duration-300"
       >
         I'm a Recruiter
       </NuxtLink>

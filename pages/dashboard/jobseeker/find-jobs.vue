@@ -1,6 +1,9 @@
 <script setup lang="ts">
 definePageMeta({
     name: 'Find Jobs',
+    title: 'Find Jobs',
+
+    pageName: 'dashboard.find-jobs',
   layout: 'dashboard'
 })
 </script>

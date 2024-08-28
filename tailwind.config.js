@@ -10,8 +10,11 @@ module.exports = {
   ],
   theme: {
     extend: {
+<<<<<<< HEAD
       backgroundImage: {
         'custom-gradient': 'linear-gradient(284.94deg, #B7680C 1.22%, #FE8900 100%)',
+=======
+>>>>>>> ee1662165be020b392b08f645a51bab014c4d5ba
       colors: {
         black: {
           50: '#f6f6f6',

@@ -3,33 +3,53 @@
 @tailwind utilities;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ======= 
 @font-face {
   font-family: "Nexa";
  src: url("~/assets/fonts/Nexa-ExtraLight.ttf"); 
+=======
+@font-face {
+  font-family: 'Nexa';
+  src: url('~/assets/fonts/Nexa-ExtraLight.ttf');
+>>>>>>> ee1662165be020b392b08f645a51bab014c4d5ba
   font-weight: normal;
 } 
 
 @font-face {
+<<<<<<< HEAD
   font-family: "Nexa";
   src: url("~/assets/fonts/Nexa-Heavy.ttf"); 
+=======
+  font-family: 'Nexa';
+  src: url('~/assets/fonts/Nexa-Heavy.ttf');
+>>>>>>> ee1662165be020b392b08f645a51bab014c4d5ba
   font-weight: 900;
 }
 
-html, body {
-  font-family: "Nexa";
+html,
+body {
+  font-family: 'Nexa';
+}
+
+body {
+  overflow: none !important;
+}
+
+body::-webkit-scrollbar:horizontal {
+  display: none !important;
 }
 
 /* scrollbar */
 
 /* width */
 ::-webkit-scrollbar {
-  width: 6px !important;
-  height: 26px !important;
+  width: 6px;
+  height: 20px;
 }
 
 .scrollbar-hide::-webkit-scrollbar {
-  display: none;
+  display: none !important;
 }
 
 /* For IE, Edge and Firefox */
@@ -46,15 +66,20 @@ html, body {
 /* Handle */
 ::-webkit-scrollbar-thumb {
   /* background: #0A193F; */
-  background: #6D6D6D
-;
+  background: #6d6d6d;
   border-radius: 10px !important;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   /* background: #0A193F; */
+<<<<<<< HEAD
   background: #6D6D6D;
   border-radius: 10px !important;
 }
 
+=======
+  background: #6d6d6d;
+  border-radius: 10px !important;
+}
+>>>>>>> ee1662165be020b392b08f645a51bab014c4d5ba
