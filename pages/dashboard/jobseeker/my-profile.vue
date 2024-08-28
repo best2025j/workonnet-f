@@ -7,7 +7,8 @@ definePageMeta({
 });
 </script>
 <template>
-  <div>
+  <div class="text-black-900">
+    <!-- profile uploads -->
     <div class="p-4 bg-white rounded-10">
       <img
         src="/components/images/bridge.png"
@@ -135,9 +136,7 @@ definePageMeta({
           <!-- btn -->
           <div class="">
             <div class="flex justify-end">
-              <button
-                class=" text-info-600 font-bold text-xs"
-              >
+              <button class="text-info-600 font-bold text-xs">
                 Premium user
               </button>
             </div>
@@ -157,11 +156,130 @@ definePageMeta({
               <h1 class="text-lg font-bold">$5,000/month</h1>
             </div>
             <div class="flex justify-end">
-              <button class="px-3 text-xs py-2 rounded-8 bg-primary-1 text-westside-100 font-bold">
+              <button
+                class="px-3 text-xs py-2 rounded-8 bg-primary-1 text-westside-100 font-bold"
+              >
                 Edit profile info
               </button>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- cards -->
+    <div class="p-4 bg-white rounded-10 w-[670px] my-4">
+      <div class="space-y-4 pt-4">
+        <h1 class="text-xl font-bold">About me</h1>
+        <p class="text-xs tracking-wider">
+          Lorem ipsum dolor sit amet consectetur. Dignissim aliquam vitae
+          accumsan eget nisl felis magna rhoncus. Nisl duis netus id lobortis
+          nec dui leo. Ornare scelerisque vivamus egestas adipiscing in amet
+          varius. Velit in nec dolor ultrices scelerisque. Ipsum facilisi nulla
+          sed sed proin pulvinar. Libero sed donec lorem blandit aliquam diam.
+          Egestas et amet elit a nulla rhoncus sagittis in sem. Lectus ut
+          vivamus id at vitae. Elit non ut eget massa id lorem tincidunt
+          porttitor. Viverra duis sit a dignissim molestie placerat. Tempus
+          velit interdum fames pellentesque.
+        </p>
+      </div>
+      <div class="space-y-4 pt-10">
+        <h1 class="text-xl font-bold">Experience</h1>
+        <div class="bg-westside-50 space-y-4 rounded-10 p-4">
+          <img src="/Logo2.png" alt="no image yet" />
+          <h1 class="text-info-600 font-bold text-sm">
+            User Interface Designer at Workonnect
+          </h1>
+          <div class="flex gap-2">
+            <h1 class="text-xs font-bold">May - June 2020</h1>
+            <h1 class="text-xs">Lagos, Nigeria.</h1>
+          </div>
+          <p class="text-xs tracking-wider">
+            Lorem ipsum dolor sit amet consectetur. Dignissim aliquam vitae
+            accumsan eget nisl felis magna rhoncus. Nisl duis netus id lobortis
+            nec dui leo. Ornare scelerisque vivamus egestas adipiscing in amet
+            varius. Velit in nec dolor ultrices scelerisque. Ipsum facilisi
+            nulla sed sed proin pulvinar. Libero sed donec lorem blandit aliquam
+            diam. Egestas et amet elit a nulla rhoncus sagittis in sem. Lectus
+            ut vivamus id at vitae. Elit non ut eget massa id lorem tincidunt
+            porttitor. Viverra duis sit a dignissim molestie placerat. Tempus
+            velit interdum fames pellentesque.
+          </p>
+          <p class="text-xs tracking-wider">
+            Lorem ipsum dolor sit amet consectetur. Dignissim aliquam vitae
+            accumsan eget nisl felis magna rhoncus. Nisl duis netus id lobortis
+            nec dui leo. Ornare scelerisque vivamus egestas adipiscing in amet
+            varius. Velit in nec dolor ultrices scelerisque. Ipsum facilisi
+            nulla sed sed proin pulvinar. Libero sed donec lorem blandit aliquam
+            diam. Egestas et amet elit a nulla rhoncus sagittis in sem. Lectus
+            ut vivamus id at vitae. Elit non ut eget massa id lorem tincidunt
+            porttitor. Viverra duis sit a dignissim molestie placerat. Tempus
+            velit interdum fames pellentesque.
+          </p>
+        </div>
+        <div class="bg-westside-50 space-y-4 rounded-10 p-4">
+          <img src="/ms.png" alt="no image yet" />
+          <h1 class="text-info-600 font-bold text-sm">
+            User Interface Designer at Workonnect
+          </h1>
+          <div class="flex gap-2">
+            <h1 class="text-xs font-bold">May - June 2020</h1>
+            <h1 class="text-xs">Lagos, Nigeria.</h1>
+          </div>
+          <p class="text-xs tracking-wider">
+            Lorem ipsum dolor sit amet consectetur. Dignissim aliquam vitae
+            accumsan eget nisl felis magna rhoncus. Nisl duis netus id lobortis
+            nec dui leo. Ornare scelerisque vivamus egestas adipiscing in amet
+            varius. Velit in nec dolor ultrices scelerisque. Ipsum facilisi
+            nulla sed sed proin pulvinar. Libero sed donec lorem blandit aliquam
+            diam. Egestas et amet elit a nulla rhoncus sagittis in sem. Lectus
+            ut vivamus id at vitae. Elit non ut eget massa id lorem tincidunt
+            porttitor. Viverra duis sit a dignissim molestie placerat. Tempus
+            velit interdum fames pellentesque.
+          </p>
+          <p class="text-xs tracking-wider">
+            Lorem ipsum dolor sit amet consectetur. Dignissim aliquam vitae
+            accumsan eget nisl felis magna rhoncus. Nisl duis netus id lobortis
+            nec dui leo. Ornare scelerisque vivamus egestas adipiscing in amet
+            varius. Velit in nec dolor ultrices scelerisque. Ipsum facilisi
+            nulla sed sed proin pulvinar. Libero sed donec lorem blandit aliquam
+            diam. Egestas et amet elit a nulla rhoncus sagittis in sem. Lectus
+            ut vivamus id at vitae. Elit non ut eget massa id lorem tincidunt
+            porttitor. Viverra duis sit a dignissim molestie placerat. Tempus
+            velit interdum fames pellentesque.
+          </p>
+        </div>
+        <div class="bg-westside-50 space-y-4 rounded-10 p-4">
+          <img src="/ms.png" alt="no image yet" />
+          <h1 class="text-info-600 font-bold text-sm">
+            User Interface Designer at Workonnect
+          </h1>
+          <div class="flex gap-2">
+            <h1 class="text-xs font-bold">May - June 2020</h1>
+            <h1 class="text-xs">Lagos, Nigeria.</h1>
+          </div>
+          <p class="text-xs tracking-wider">
+            Lorem ipsum dolor sit amet consectetur. Dignissim aliquam vitae
+            accumsan eget nisl felis magna rhoncus. Nisl duis netus id lobortis
+            nec dui leo. Ornare scelerisque vivamus egestas adipiscing in amet
+            varius. Velit in nec dolor ultrices scelerisque. Ipsum facilisi
+            nulla sed sed proin pulvinar. Libero sed donec lorem blandit aliquam
+            diam. Egestas et amet elit a nulla rhoncus sagittis in sem. Lectus
+            ut vivamus id at vitae. Elit non ut eget massa id lorem tincidunt
+            porttitor. Viverra duis sit a dignissim molestie placerat. Tempus
+            velit interdum fames pellentesque.
+          </p>
+          <p class="text-xs tracking-wider">
+            Lorem ipsum dolor sit amet consectetur. Dignissim aliquam vitae
+            accumsan eget nisl felis magna rhoncus. Nisl duis netus id lobortis
+            nec dui leo. Ornare scelerisque vivamus egestas adipiscing in amet
+            varius. Velit in nec dolor ultrices scelerisque. Ipsum facilisi
+            nulla sed sed proin pulvinar. Libero sed donec lorem blandit aliquam
+            diam. Egestas et amet elit a nulla rhoncus sagittis in sem. Lectus
+            ut vivamus id at vitae. Elit non ut eget massa id lorem tincidunt
+            porttitor. Viverra duis sit a dignissim molestie placerat. Tempus
+            velit interdum fames pellentesque.
+          </p>
         </div>
       </div>
     </div>
