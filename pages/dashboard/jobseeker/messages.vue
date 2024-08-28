@@ -117,7 +117,7 @@ definePageMeta({
 
           <div class="flex gap-4 absolute right-6">
             <button aria-label="Emoji">
-              <img src="/assets/svgs/Emoji.svg" alt="Emoji icon" />
+              <img src="/assets/svgs/Emojis.svg" alt="Emoji icon" />
             </button>
 
             <button aria-label="Send">
