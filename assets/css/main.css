@@ -19,16 +19,24 @@ html, body {
   font-family: "Nexa";
 }
 
+body {
+  overflow: none !important;
+}
+
+body::-webkit-scrollbar:horizontal {
+  display: none !important;
+}
+
 /* scrollbar */
 
 /* width */
 ::-webkit-scrollbar {
-  width: 6px !important;
-  height: 26px !important;
+  width: 6px;
+  height: 20px;
 }
 
 .scrollbar-hide::-webkit-scrollbar {
-  display: none;
+  display: none !important;
 }
 
 /* For IE, Edge and Firefox */
