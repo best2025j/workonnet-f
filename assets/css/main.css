@@ -2,28 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-======= 
-@font-face {
-  font-family: "Nexa";
- src: url("~/assets/fonts/Nexa-ExtraLight.ttf"); 
-=======
+
+
 @font-face {
   font-family: 'Nexa';
   src: url('~/assets/fonts/Nexa-ExtraLight.ttf');
->>>>>>> ee1662165be020b392b08f645a51bab014c4d5ba
   font-weight: normal;
 } 
 
 @font-face {
-<<<<<<< HEAD
-  font-family: "Nexa";
-  src: url("~/assets/fonts/Nexa-Heavy.ttf"); 
-=======
   font-family: 'Nexa';
   src: url('~/assets/fonts/Nexa-Heavy.ttf');
->>>>>>> ee1662165be020b392b08f645a51bab014c4d5ba
   font-weight: 900;
 }
 
@@ -73,13 +62,8 @@ body::-webkit-scrollbar:horizontal {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   /* background: #0A193F; */
-<<<<<<< HEAD
   background: #6D6D6D;
   border-radius: 10px !important;
 }
 
-=======
-  background: #6d6d6d;
-  border-radius: 10px !important;
-}
->>>>>>> ee1662165be020b392b08f645a51bab014c4d5ba
+
