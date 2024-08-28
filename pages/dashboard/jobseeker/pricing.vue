@@ -90,7 +90,7 @@ definePageMeta({
         </div>
 
         <!-- checks -->
-        <div class="space-y-4">
+        <div class="space-y-4 px-2">
           <div class="flex space-x-4 items-center">
             <svg
               width="20"
@@ -217,7 +217,7 @@ definePageMeta({
         </div>
 
         <!-- checks -->
-        <div class="space-y-4">
+        <div class="space-y-4 px-4">
           <div class="flex space-x-4 items-center">
             <svg
               width="20"
@@ -391,8 +391,8 @@ definePageMeta({
         </div>
 
         <!-- checks -->
-        <div class="space-y-4">
-          <div class="flex space-x-4 items-center">
+        <div class="space-y-4 px-2">
+          <div class="flex space-x-4 w-80 items-center">
             <svg
               width="20"
               height="20"
@@ -407,7 +407,7 @@ definePageMeta({
             </svg>
             <h1 class="text-xs">Enhanced Profile Visibility</h1>
           </div>
-          <div class="flex space-x-4 items-center">
+          <div class="flex space-x-4 w-80 items-center">
             <svg
               width="20"
               height="20"
@@ -422,7 +422,7 @@ definePageMeta({
             </svg>
             <h1 class="text-xs">Unlimited Job Applications</h1>
           </div>
-          <div class="flex space-x-4 items-center">
+          <div class="flex space-x-4 w-80 items-center">
             <svg
               width="20"
               height="20"
@@ -437,7 +437,7 @@ definePageMeta({
             </svg>
             <h1 class="text-xs">Video Pitch Feature</h1>
           </div>
-          <div class="flex space-x-4 items-center">
+          <div class="flex space-x-4 w-80 items-center">
             <svg
               width="20"
               height="20"
@@ -452,7 +452,7 @@ definePageMeta({
             </svg>
             <h1 class="text-xs">Advanced Analytics into recruiters ranking</h1>
           </div>
-          <div class="flex space-x-4 items-center">
+          <div class="flex space-x-4 w-80 items-center">
             <svg
               width="20"
               height="20"
@@ -467,7 +467,7 @@ definePageMeta({
             </svg>
             <h1 class="text-xs">Assessment & Screening Tools insight</h1>
           </div>
-          <div class="flex space-x-4 items-center">
+          <div class="flex space-x-4 w-80 items-center">
             <svg
               width="20"
               height="20"
@@ -482,7 +482,7 @@ definePageMeta({
             </svg>
             <h1 class="text-xs">Instant Job Notifications</h1>
           </div>
-          <div class="flex space-x-4 items-center">
+          <div class="flex space-x-4 w-80 items-center">
             <svg
               width="20"
               height="20"
@@ -500,7 +500,7 @@ definePageMeta({
               Builder Assistance
             </h1>
           </div>
-          <div class="flex space-x-4 items-center">
+          <div class="flex space-x-4 w-80 items-center">
             <svg
               width="20"
               height="20"
@@ -515,7 +515,7 @@ definePageMeta({
             </svg>
             <h1 class="text-xs">Gamified Certification Programs:</h1>
           </div>
-          <div class="flex space-x-4 items-center">
+          <div class="flex space-x-4 w-80 items-center">
             <svg
               width="20"
               height="20"
@@ -530,7 +530,7 @@ definePageMeta({
             </svg>
             <h1 class="text-xs">Psychometric test</h1>
           </div>
-          <div class="flex space-x-4 items-center">
+          <div class="flex space-x-4 w-80 items-center">
             <svg
               width="20"
               height="20"
