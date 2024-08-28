@@ -10,7 +10,7 @@ definePageMeta({
 <template>
   <div class="pt-4 text-black-900 w-full">
     <!-- Dashboard content goes here -->
-    <h2 class="text-2xl font-bold">Good Morning, Stanley</h2>
+    <h2 class="text-2xl font-black">Good Morning, Stanley</h2>
     <p class="text-sm">
       Here’s what’s happening with your job application since you joined us.
     </p>
@@ -21,12 +21,12 @@ definePageMeta({
         <div class="space-y-2">
           <div class="rounded-10 w-[210px] bg-white h-auto">
             <div class="px-4 space-y-2 pt-2">
-              <h3 class="text-base whitespace-nowrap font-bold">
+              <h3 class="text-base whitespace-nowrap font-black">
                 Total Jobs Applied
               </h3>
               <div class="flex items-center justify-between">
                 <p
-                  class="text-5xl pb-8 tracking-tighter font-[Georgia] font-bold"
+                  class="text-5xl pb-8 tracking-tighter font-[Georgia] font-black"
                 >
                   23
                 </p>
@@ -37,17 +37,16 @@ definePageMeta({
 
           <div class="rounded-10 w-[210px] bg-white h-auto">
             <div class="px-4 space-y-2 pt-2">
-              <h3 class="text-base whitespace-nowrap font-bold">
+              <h3 class="text-base whitespace-nowrap font-black">
                 Total Interviewed
               </h3>
               <div class="flex items-center justify-between">
                 <p
-                  class="text-5xl pb-8 tracking-tighter font-[Georgia] font-bold"
+                  class="text-5xl pb-8 tracking-tighter font-[Georgia] font-black"
                 >
                   12
                 </p>
-                <div class="pt-8"><IconsWhiteChatIcon class="" />
-                </div>
+                <div class="pt-8"><IconsWhiteChatIcon class="" /></div>
               </div>
             </div>
           </div>
@@ -55,7 +54,7 @@ definePageMeta({
 
         <!--  -->
         <div class="font-[Nexa] bg-[#FFFFFF] w-full rounded-10 px-4 py-4 h-72">
-          <h3 class="font-bold">Jobs Applied Status</h3>
+          <h3 class="font-black">Jobs Applied Status</h3>
           <div class="flex gap-4 items-center">
             <div class="flex flex-col items-center pt-6">
               <!-- chart -->
@@ -69,21 +68,21 @@ definePageMeta({
               <div class="flex items-center space-x-3">
                 <div class="bg-[#82410C] w-6 h-6 rounded" />
                 <div class="text-sm">
-                  <h6 class="font-bold">20%</h6>
+                  <h6 class="font-black">20%</h6>
                   <p>Unsuccessful</p>
                 </div>
               </div>
               <div class="flex items-center space-x-3">
                 <div class="bg-[#FE8900] w-6 h-6 rounded" />
                 <div class="text-sm">
-                  <h6 class="font-bold">32%</h6>
+                  <h6 class="font-black">32%</h6>
                   <p>Under Review</p>
                 </div>
               </div>
               <div class="flex items-center space-x-3">
                 <div class="bg-[#FFD76D] w-6 h-6 rounded" />
                 <div class="text-sm">
-                  <h6 class="font-bold">48%</h6>
+                  <h6 class="font-black">48%</h6>
                   <p>Interviewed</p>
                 </div>
               </div>
@@ -93,7 +92,7 @@ definePageMeta({
       </div>
 
       <div class="font-[Nexa] bg-[#FFFFFF] h-72 rounded-10 w-2/5">
-        <h3 class="font-bold border-b px-6 ml-2 py-4 text-base text-gray-800">
+        <h3 class="font-black border-b px-6 ml-2 py-4 text-base text-gray-800">
           Upcoming Interviews
         </h3>
 

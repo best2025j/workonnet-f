@@ -6,7 +6,7 @@
       <div class="flex gap-x-4 items-center">
         <img src="/SocialMedia3.png" alt="Google" class="w-10 h-10 rounded" />
         <div class="pl-4">
-          <span class="block text-base font-bold">Customer Care Rep</span>
+          <span class="block text-base font-black">Customer Care Rep</span>
           <span class="text-xs font-semimedium text-gray-500">Catalog</span>
         </div>
       </div>

@@ -10,7 +10,7 @@ definePageMeta({
   <div class="text-black-900 pt-6">
     <div class="flex justify-between items-center">
       <div class="space-y-2">
-        <h3 class="font-bold text-xl">Plan & Pricing</h3>
+        <h3 class="font-black text-xl">Plan & Pricing</h3>
         <h4 class="text-sm">Let’s find the top job that we have.</h4>
         <p class="text-sm">
           Simple Pricing No Hidden Fees. Advanced Features for you.
@@ -61,7 +61,7 @@ definePageMeta({
         <div class="flex justify-between items-start">
           <div class="space-y-2">
             <img src="/Logo2.png" alt="no pix" />
-            <h1 class="text-sm font-bold">Free Plan</h1>
+            <h1 class="text-sm font-black">Free Plan</h1>
             <h1 class="text-xs">These are the benefits under the free plan</h1>
           </div>
           <button
@@ -72,7 +72,7 @@ definePageMeta({
         </div>
 
         <div class="flex items-center">
-          <h1 class="text-sm font-bold">₦0.00</h1>
+          <h1 class="text-sm font-black">₦0.00</h1>
           <h6 class="text-xs">/month</h6>
         </div>
 
@@ -83,7 +83,7 @@ definePageMeta({
         </div>
         <div class="py-4">
           <button
-            class="bg-success-100 border font-bold py-3 rounded-10 text-xs w-full text-success-600"
+            class="bg-success-100 border font-black py-3 rounded-10 text-xs w-full text-success-600"
           >
             Active
           </button>
@@ -190,7 +190,7 @@ definePageMeta({
         <div class="flex justify-between items-start">
           <div class="space-y-2">
             <img src="/Logo2.png" alt="no pix" />
-            <h1 class="text-sm font-bold">Basic Plan</h1>
+            <h1 class="text-sm font-black">Basic Plan</h1>
             <h1 class="text-xs">These are the benefits under the free plan</h1>
           </div>
           <!-- <button class="py-2 px-3 border bg-info-100 text-info-600 rounded-10">
@@ -199,7 +199,7 @@ definePageMeta({
         </div>
 
         <div class="flex items-center">
-          <h1 class="text-sm font-bold">₦1,500</h1>
+          <h1 class="text-sm font-black">₦1,500</h1>
           <h6 class="text-xs">/month</h6>
         </div>
 
@@ -210,7 +210,7 @@ definePageMeta({
         </div>
         <div class="py-4">
           <button
-            class="border-primary-1 border bg-westside-100 font-bold py-3 rounded-10 text-xs w-full text-primary-1"
+            class="border-primary-1 border bg-westside-100 font-black py-3 rounded-10 text-xs w-full text-primary-1"
           >
             Get Started
           </button>
@@ -362,7 +362,7 @@ definePageMeta({
         <div class="flex justify-between items-start">
           <div class="space-y-2">
             <img src="/Logo2.png" alt="no pix" />
-            <h1 class="text-sm font-bold">Premium Plan</h1>
+            <h1 class="text-sm font-black">Premium Plan</h1>
             <h1 class="text-xs">These are the benefits under the free plan</h1>
           </div>
           <button
@@ -373,7 +373,7 @@ definePageMeta({
         </div>
 
         <div class="flex items-center">
-          <h1 class="text-sm font-bold">₦5,000</h1>
+          <h1 class="text-sm font-black">₦5,000</h1>
           <h6 class="text-xs">/month</h6>
         </div>
 
@@ -384,7 +384,7 @@ definePageMeta({
         </div>
         <div class="py-4">
           <button
-            class="border-primary-1 border bg-westside-100 font-bold py-3 rounded-10 text-xs w-full text-primary-1"
+            class="border-primary-1 border bg-westside-100 font-black py-3 rounded-10 text-xs w-full text-primary-1"
           >
             Get Started
           </button>

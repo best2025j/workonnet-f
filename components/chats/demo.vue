@@ -43,8 +43,6 @@ const sendMessage = () => {
 };
 </script>
 
-
-
 <template>
   <div class="flex h-screen">
     <!-- Side Navigation -->
@@ -68,7 +66,7 @@ const sendMessage = () => {
     <div class="flex-grow flex flex-col">
       <div class="flex-grow p-4 bg-gray-100 overflow-y-auto">
         <div v-if="selectedChat">
-          <h2 class="text-lg font-bold mb-4">{{ selectedChat.name }}</h2>
+          <h2 class="text-lg font-black mb-4">{{ selectedChat.name }}</h2>
           <div
             v-for="(message, index) in selectedChat.messages"
             :key="index"

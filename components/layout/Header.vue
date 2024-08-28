@@ -5,7 +5,7 @@
     class="text-black-900 bg-white items-center flex py-4 text-xs sticky top-0 z-10"
   >
     <div class="container mx-auto flex justify-between items-center">
-      <h1 class="text-3xl text-primary-1 font-bold">
+      <h1 class="text-3xl text-primary-1 font-black">
         {{ $route?.meta?.title }}
       </h1>
       <nav>

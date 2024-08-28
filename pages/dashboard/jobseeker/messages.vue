@@ -37,7 +37,7 @@ definePageMeta({
                 </svg>
 
                 <div class="">
-                  <h1 class="text-sm font-bold">NDA Document.pdf</h1>
+                  <h1 class="text-sm font-black">NDA Document.pdf</h1>
                   <h1 class="text-xs">2MB</h1>
                 </div>
               </div>
@@ -106,7 +106,7 @@ definePageMeta({
           <!--  -->
           <div class="flex items-center pt-2">
             <div class="flex-grow border-t-2 border-danger-300" />
-            <span class="mx-14 text-danger-600 font-bold">New message</span>
+            <span class="mx-14 text-danger-600 font-black">New message</span>
             <div class="flex-grow border-t-2 border-danger-300" />
           </div>
 

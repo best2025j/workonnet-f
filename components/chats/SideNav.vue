@@ -1,6 +1,6 @@
 <template>
   <aside class="bg-[#FFFFFF] text-black-800 min-h-screen fixed w-[296px]">
-    <h1 class="font-bold text-xl p-4">Messages</h1>
+    <h1 class="font-black text-xl p-4">Messages</h1>
     <div class="flex items-start justify-between p-4 border-b-2">
       <img src="/Ellipse 2.png" alt="no pix" />
       <div class="space-y-1">
@@ -22,8 +22,8 @@
     <div class="flex items-start justify-between p-4 border-b-2">
       <img src="/components/images/Ellipse 2 (4).png" alt="no pix" />
       <div class="space-y-1">
-        <h1 class="text-sm font-bold">Dianne Russell</h1>
-        <h1 class="text-sm font-bold">What’s the difference...</h1>
+        <h1 class="text-sm font-black">Dianne Russell</h1>
+        <h1 class="text-sm font-black">What’s the difference...</h1>
       </div>
 
       <div class="space-y-1">
@@ -41,8 +41,8 @@
     <div class="flex items-start justify-between p-4 border-b-2">
       <img src="/components/images/Ellipse 2 (5).png" alt="no pix" />
       <div class="space-y-1">
-        <h1 class="text-sm font-bold">Robert Fox</h1>
-        <h1 class="text-sm font-bold">What’s the difference...</h1>
+        <h1 class="text-sm font-black">Robert Fox</h1>
+        <h1 class="text-sm font-black">What’s the difference...</h1>
       </div>
 
       <div class="space-y-1">

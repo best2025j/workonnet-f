@@ -8,7 +8,7 @@ export default {};
       <div class="flex gap-x-4 items-center">
         <img src="/SocialMedia2.png" alt="Google" class="w-10 h-10 rounded" />
         <div class="pl-4">
-          <span class="block text-base font-bold">Admin Assistant</span>
+          <span class="block text-base font-black">Admin Assistant</span>
           <span class="text-xs font-semimedium text-gray-500">Hour Glass</span>
         </div>
       </div>

@@ -13,13 +13,13 @@ definePageMeta({
       <div class="flex space-x-4 items-center">
         <img src="/ms.png" alt="ms image" />
         <div>
-          <h1 class="font-bold">Social Media Assistant</h1>
+          <h1 class="font-black">Social Media Assistant</h1>
           <h6>Microsoft</h6>
         </div>
       </div>
       <!--  -->
       <div class="bg-white mt-4 rounded-10 py-8 px-8">
-        <h1 class="font-bold">Application Tracking</h1>
+        <h1 class="font-black">Application Tracking</h1>
         <!--  -->
         <div class="py-6">
           <div class="flex flex-col gap-y-8">
@@ -40,7 +40,7 @@ definePageMeta({
               </span>
 
               <div class="flex flex-col">
-                <h1 class="font-bold">Stage 0: Applied for Job </h1>
+                <h1 class="font-black">Stage 0: Applied for Job </h1>
                 <p class="text-xs">
                   You profile has been sent to the Microsoft team
                 </p>
@@ -65,7 +65,7 @@ definePageMeta({
               </span>
 
               <div class="flex flex-col">
-                <h1 class="font-bold">Stage 1: Profile Review </h1>
+                <h1 class="font-black">Stage 1: Profile Review </h1>
                 <p class="text-xs">Your profile is reviewed at this stage</p>
               </div>
             </div>
@@ -87,7 +87,7 @@ definePageMeta({
               </span>
 
               <div class="flex flex-col">
-                <h1 class="font-bold">Stage 2: Interview</h1>
+                <h1 class="font-black">Stage 2: Interview</h1>
                 <p class="text-xs">Get interviewed</p>
               </div>
             </div>
@@ -109,7 +109,7 @@ definePageMeta({
               </span>
 
               <div class="flex flex-col">
-                <h1 class="font-bold">Stage 3: Push to Client </h1>
+                <h1 class="font-black">Stage 3: Push to Client </h1>
                 <p class="text-xs">
                   You profile has been sent to the Microsoft team
                 </p>
@@ -134,7 +134,7 @@ definePageMeta({
               </span>
 
               <div class="flex flex-col">
-                <h1 class="font-bold">Stage 0: Applied for Job </h1>
+                <h1 class="font-black">Stage 0: Applied for Job </h1>
                 <p class="text-xs">
                   You profile has been sent to the Microsoft team
                 </p>
@@ -183,7 +183,7 @@ definePageMeta({
     <div class="bg-white w-full rounded-10">
       <div class="flex items-center flex-col space-y-3 py-4 border-b-2">
         <img src="/ms.png" alt="" />
-        <h1 class="text base font-bold">Social Media Assistant</h1>
+        <h1 class="text base font-black">Social Media Assistant</h1>
         <p class="text-xs">Microsoft</p>
       </div>
       <!--  -->
@@ -191,29 +191,29 @@ definePageMeta({
         <div class="space-y-4">
           <div class="space-y-2">
             <h1 class="text-xs">Job Type</h1>
-            <h1 class="font-bold text-sm">Full-time</h1>
+            <h1 class="font-black text-sm">Full-time</h1>
           </div>
 
           <div class="space-y-2">
             <h1 class="text-xs">Location</h1>
-            <h1 class="font-bold text-sm">Paris, France</h1>
+            <h1 class="font-black text-sm">Paris, France</h1>
           </div>
 
           <div class="space-y-2">
             <h1 class="text-xs">Salary</h1>
-            <h1 class="font-bold text-sm">$4,000 to $5,000/month</h1>
+            <h1 class="font-black text-sm">$4,000 to $5,000/month</h1>
           </div>
         </div>
         <!--  -->
         <div class="space-y-4">
           <div class="space-y-2">
             <h1 class="text-xs">Work Type</h1>
-            <h1 class="font-bold text-sm">Hybrid</h1>
+            <h1 class="font-black text-sm">Hybrid</h1>
           </div>
 
           <div class="space-y-2">
             <h1 class="text-xs">Experience</h1>
-            <h1 class="font-bold text-sm">4 years</h1>
+            <h1 class="font-black text-sm">4 years</h1>
           </div>
 
           <div>
@@ -227,7 +227,7 @@ definePageMeta({
       <!--  -->
       <div class="space-y-4 py-4">
         <div class="px-6 space-y-2">
-          <h1 class="font-bold">Description</h1>
+          <h1 class="font-black">Description</h1>
           <div class="px-4">
             <ul class="list-disc text-xs">
               <li class="">
@@ -249,7 +249,7 @@ definePageMeta({
         </div>
         <!--  -->
         <div class="px-6 space-y-2">
-          <h1 class="font-bold">Key Responsibilities</h1>
+          <h1 class="font-black">Key Responsibilities</h1>
           <div class="px-4">
             <ul class="list-disc text-xs">
               <li class="">
@@ -288,7 +288,7 @@ definePageMeta({
         </div>
         <!--  -->
         <div class="px-6 space-y-2">
-          <h1 class="font-bold">Qualification</h1>
+          <h1 class="font-black">Qualification</h1>
           <div class="px-4">
             <ul class="list-disc text-xs">
               <li class="">
@@ -321,7 +321,7 @@ definePageMeta({
         </div>
         <!--  -->
         <div class="px-6 space-y-2">
-          <h1 class="font-bold">How to apply</h1>
+          <h1 class="font-black">How to apply</h1>
           <div class="px-4">
             <ul class="list-disc text-xs">
               <li>

@@ -13,26 +13,39 @@ const links = [
     to: "/dashboard/jobseeker/my-applications?tab=applied",
     name: "Applied",
     disabled: false,
-        badge: 4,
-    tabId: TABS.APPLIED
+    badge: 4,
+    tabId: TABS.APPLIED,
   },
   {
     to: "/dashboard/jobseeker/my-applications?tab=in-review",
     name: "In Review",
     disabled: false,
-      badge: 1,
-      tabId: TABS.IN_REVIEW
+    badge: 1,
+    tabId: TABS.IN_REVIEW,
   },
-  { to: "/dashboard/jobseeker/my-applications?tab=interview", name: "Interview", disabled: false, tabId: TABS.INTERVIEW },
-  { to: "/dashboard/jobseeker/my-applications?tab=offered", name: "Offered", disabled: false, tabId: TABS.OFFERED },
-  { to: "/dashboard/jobseeker/my-applications?tab=rejected", name: "Rejected", disabled: false, tabId: TABS.REJECTED },
+  {
+    to: "/dashboard/jobseeker/my-applications?tab=interview",
+    name: "Interview",
+    disabled: false,
+    tabId: TABS.INTERVIEW,
+  },
+  {
+    to: "/dashboard/jobseeker/my-applications?tab=offered",
+    name: "Offered",
+    disabled: false,
+    tabId: TABS.OFFERED,
+  },
+  {
+    to: "/dashboard/jobseeker/my-applications?tab=rejected",
+    name: "Rejected",
+    disabled: false,
+    tabId: TABS.REJECTED,
+  },
 ];
 
 const isActive = (currentTab: TABS) => route?.query?.tab === currentTab;
 // const changeTab = (routeTo: TABS) => router.push(`/dashboard/jobseeker/my-applications?tab=${routeTo}`);
 </script>
-
-
 
 <template>
   <nav class="flex w-3/5 border-b-2">
@@ -44,7 +57,7 @@ const isActive = (currentTab: TABS) => route?.query?.tab === currentTab;
           :class="[
             'flex items-center',
             isActive(link.tabId)
-              ? 'text-primary-1 border-primary-1 p-2 font-bold rounded-t-10 border-b-4 '
+              ? 'text-primary-1 border-primary-1 p-2 font-black rounded-t-10 border-b-4 '
               : '',
           ]"
         >

@@ -10,7 +10,7 @@ definePageMeta({
   <div class="text-black-900">
     <div class="flex gap-x-4 justify-between items-center">
       <div class="space y-1">
-        <h3 class="text-2xl font-bold">Recommended Companies</h3>
+        <h3 class="text-2xl font-black">Recommended Companies</h3>
         <h1 class="text-14">
           Based on your profile, company preferences and recent activities
         </h1>
@@ -81,7 +81,7 @@ definePageMeta({
         <div class="flex justify-between items-start">
           <div class="space-y-2">
             <img src="/ms.png" alt="no pix" />
-            <h1 class="text-sm font-bold">Social Media Assistant</h1>
+            <h1 class="text-sm font-black">Social Media Assistant</h1>
             <h1 class="text-xs">Microsoft</h1>
           </div>
           <button
@@ -108,7 +108,7 @@ definePageMeta({
         <div class="flex justify-between items-start">
           <div class="space-y-2">
             <img src="/ms.png" alt="no pix" />
-            <h1 class="text-sm font-bold">Social Media Assistant</h1>
+            <h1 class="text-sm font-black">Social Media Assistant</h1>
             <h1 class="text-xs">Microsoft</h1>
           </div>
           <button
@@ -135,7 +135,7 @@ definePageMeta({
         <div class="flex justify-between items-start">
           <div class="space-y-2">
             <img src="/ms.png" alt="no pix" />
-            <h1 class="text-sm font-bold">Social Media Assistant</h1>
+            <h1 class="text-sm font-black">Social Media Assistant</h1>
             <h1 class="text-xs">Microsoft</h1>
           </div>
           <button
@@ -162,7 +162,7 @@ definePageMeta({
         <div class="flex justify-between items-start">
           <div class="space-y-2">
             <img src="/ms.png" alt="no pix" />
-            <h1 class="text-sm font-bold">Social Media Assistant</h1>
+            <h1 class="text-sm font-black">Social Media Assistant</h1>
             <h1 class="text-xs">Microsoft</h1>
           </div>
           <button
@@ -188,7 +188,7 @@ definePageMeta({
         <div class="flex justify-between items-start">
           <div class="space-y-2">
             <img src="/ms.png" alt="no pix" />
-            <h1 class="text-sm font-bold">Social Media Assistant</h1>
+            <h1 class="text-sm font-black">Social Media Assistant</h1>
             <h1 class="text-xs">Microsoft</h1>
           </div>
           <button
@@ -214,7 +214,7 @@ definePageMeta({
         <div class="flex justify-between items-start">
           <div class="space-y-2">
             <img src="/ms.png" alt="no pix" />
-            <h1 class="text-sm font-bold">Social Media Assistant</h1>
+            <h1 class="text-sm font-black">Social Media Assistant</h1>
             <h1 class="text-xs">Microsoft</h1>
           </div>
           <button
@@ -240,7 +240,7 @@ definePageMeta({
         <div class="flex justify-between items-start">
           <div class="space-y-2">
             <img src="/ms.png" alt="no pix" />
-            <h1 class="text-sm font-bold">Social Media Assistant</h1>
+            <h1 class="text-sm font-black">Social Media Assistant</h1>
             <h1 class="text-xs">Microsoft</h1>
           </div>
           <button
@@ -266,7 +266,7 @@ definePageMeta({
         <div class="flex justify-between items-start">
           <div class="space-y-2">
             <img src="/ms.png" alt="no pix" />
-            <h1 class="text-sm font-bold">Social Media Assistant</h1>
+            <h1 class="text-sm font-black">Social Media Assistant</h1>
             <h1 class="text-xs">Microsoft</h1>
           </div>
           <button
@@ -292,7 +292,7 @@ definePageMeta({
         <div class="flex justify-between items-start">
           <div class="space-y-2">
             <img src="/ms.png" alt="no pix" />
-            <h1 class="text-sm font-bold">Social Media Assistant</h1>
+            <h1 class="text-sm font-black">Social Media Assistant</h1>
             <h1 class="text-xs">Microsoft</h1>
           </div>
           <button
