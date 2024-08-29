@@ -172,7 +172,7 @@ definePageMeta({
         <!--  -->
         <div class="flex gap-4 items-start py-6">
           <div
-            class="flex flex-col items-center w-10 space-y-1 rounded-20 bg-westside-50 py-4"
+            class="flex flex-col items-center w-10 space-y-1 rounded-10 bg-westside-50 py-4"
           >
             <!-- active checkbox -->
             <svg
@@ -322,8 +322,8 @@ definePageMeta({
           <!--  text for the checks-->
           <div class="">
             <div class="flex flex-col gap-y-8">
-              <div class="flex space-x-4 items-start">
-                <div class="flex flex-col">
+              <div class="flex space-x-4 items-start pt-2.5">
+                <div class="flex flex-col space-y-1">
                   <h1 class="font-black">Stage 0: Applied for Job </h1>
                   <p class="text-xs">
                     You profile has been sent to the Microsoft team
@@ -332,22 +332,22 @@ definePageMeta({
                 </div>
               </div>
               <!--  -->
-              <div class="flex space-x-4 items-start py-7">
-                <div class="flex flex-col">
+              <div class="flex space-x-4 items-start py-4 ">
+                <div class="flex flex-col space-y-1">
                   <h1 class="font-black">Stage 1: Profile Review </h1>
                   <p class="text-xs">Your profile is reviewed at this stage</p>
                 </div>
               </div>
               <!--  -->
-              <div class="flex space-x-4 items-start py-3">
-                <div class="flex flex-col">
+              <div class="flex space-x-4 items-start py-3.5">
+                <div class="flex flex-col space-y-1">
                   <h1 class="font-black">Stage 2: Interview</h1>
                   <p class="text-xs">Get interviewed</p>
                 </div>
               </div>
               <!--  -->
-              <div class="flex space-x-4 items-start py-6">
-                <div class="flex flex-col">
+              <div class="flex space-x-4 items-start py-5">
+                <div class="flex flex-col space-y-1">
                   <h1 class="font-black">Stage 3: Push to Client </h1>
                   <p class="text-xs">
                     You profile has been sent to the Microsoft team
@@ -357,7 +357,7 @@ definePageMeta({
               </div>
               <!--  -->
               <div class="flex space-x-4 items-start">
-                <div class="flex flex-col">
+                <div class="flex flex-col space-y-1">
                   <h1 class="font-black">Stage 0: Applied for Job </h1>
                   <p class="text-xs">
                     You profile has been sent to the Microsoft team
