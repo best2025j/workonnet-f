@@ -40,10 +40,15 @@ definePageMeta({
           </div>
         </div>
 
-        <div class="flex flex-row-reverse items-start space-x-4 gap-4">
+        <div
+          class="flex flex-row-reverse items-start space-x-4 gap-4 text-right"
+        >
           <img src="/assets/images/Ellipse5.png" alt="no pix" />
-          <div class="space-y-2 justify-end">
-            <img src="" alt="text-image" />
+          <div class="space-y-2">
+            <div class="space-y-2">
+              <h1 class="text-xs bg-white p-3">hey</h1>
+              <h1 class="text-xs">Just now</h1>
+            </div>
 
             <h1 class="text-xs flex justify-end">21:45</h1>
           </div>
@@ -63,36 +68,19 @@ definePageMeta({
           </div>
         </div>
 
-        <div class="flex flex-row-reverse items-start space-x-4 gap-4">
-          <img src="/assets/images/Ellipse5.png" alt="no pix" />
-          <div class="space-y-2 justify-end">
-            <img src="" alt="text-image" />
+        <div
+          class="flex flex-row-reverse items-start space-x-4 gap-4 text-right"
+        >
+          <img src="/assets/images/Ellipse5.png" class="" alt="no pix" />
+          <div class="">
+           
 
-            <h1 class="text-xs flex justify-end">21:45</h1>
+            <h1 class="text-xs bg-white p-3">
+              Send a copy of your CV so it can help us review your qualification
+            </h1>
           </div>
         </div>
 
-        <div class="flex items-center">
-          <div class="flex-grow border-t-2 border-danger-300" />
-          <span class="mx-14 text-danger-600 font-black">New message</span>
-          <div class="flex-grow border-t-2 border-danger-300" />
-        </div>
-
-        <div class="flex items-start space-x-4">
-          <img src="/assets/images/Ellipse3.png" alt="no pix" />
-          <div class="space-y-2">
-            <h1 class="text-xs bg-white p-3">So far so good</h1>
-            <h1 class="text-xs">Just now</h1>
-          </div>
-        </div>
-
-        <div class="flex items-start space-x-4">
-          <img src="/assets/images/Ellipse3.png" alt="no pix" />
-          <div class="space-y-2">
-            <h1 class="text-xs bg-white p-3">So far so good</h1>
-            <h1 class="text-xs">Just now</h1>
-          </div>
-        </div>
         <div class="flex items-start space-x-4">
           <img src="/assets/images/Ellipse3.png" alt="no pix" />
           <div class="space-y-2">

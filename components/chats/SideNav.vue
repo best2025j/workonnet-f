@@ -3,7 +3,7 @@
     <div class="p-4">
       <h1 class="font-black text-xl">Messages</h1>
     </div>
-    <div class="overflow-y-auto h-[calc(100%-60px)] pb-6 scrollbar-hide">
+    <div class="overflow-y-auto h-[calc(100%-120px)] pb-6 scrollbar-hide">
       <div class="flex items-start justify-between p-4 border-b">
         <img src="/assets/images/Ellipse2.png" alt="no pix" />
         <div class="space-y-1">

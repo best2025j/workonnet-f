@@ -47,14 +47,18 @@ const isActive = (currentTab: TABS) => route?.query?.tab === currentTab;
 // const changeTab = (routeTo: TABS) => router.push(`/dashboard/jobseeker/my-applications?tab=${routeTo}`);
 </script>
 
-
 <template>
   <nav class="flex w-3/5 border-b-2">
     <ul class="flex gap-x-6 items-center">
-      <li v-for="(link, index) in links" :key="index" class="pl-12 relative">
+      <li v-for="(link, index) in links" :key="index" class="pl-12 ">
         <NuxtLink
           :to="link.to"
-          class="flex items-center pb-2"
+          :class="[
+            'flex items-center pb-2',
+            isActive(link.tabId)
+              ? 'text-primary-1 border-primary-1 font-black text-sm'
+              : 'text-sm',
+          ]"
         >
           {{ link.name }}
           <span
@@ -64,12 +68,13 @@ const isActive = (currentTab: TABS) => route?.query?.tab === currentTab;
             {{ link.badge }}
           </span>
         </NuxtLink>
-        <div v-if="isActive(link.tabId)" class="bg-primary-1 h-[5px] rounded-t-10"></div>
+        <div
+          v-if="isActive(link.tabId)"
+          class="bg-primary-1 font-bold h-[5px] rounded-t-10"
+        />
       </li>
     </ul>
   </nav>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
