@@ -37,7 +37,7 @@ definePageMeta({
           <input
             type="text"
             placeholder="Nigeria"
-            class="pl-10 pr-4 h-11 w-[357px] placeholder:text-sm border border-gray-300 rounded-md"
+            class="pl-10 pr-4 h-11 w-[357px] outline-none placeholder:text-sm border border-gray-300 rounded-md"
           />
           <svg
             width="15"

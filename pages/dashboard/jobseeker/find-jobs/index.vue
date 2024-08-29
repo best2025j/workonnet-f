@@ -2,7 +2,6 @@
 definePageMeta({
   name: "Find Jobs",
   title: "Find Jobs",
-
   pageName: "dashboard.find-jobs",
   layout: "dashboard",
 });
@@ -336,7 +335,7 @@ definePageMeta({
                 </div>
               </div>
             </div>
-            <nuxt-link to="/dashboard/jobseeker/my-applications/more-details">
+            <nuxt-link to="/dashboard/jobseeker/find-jobs/more-details">
               <div
                 class="flex flex-col justify-end relative right-5 top-12 w-[99px]"
               >
@@ -353,7 +352,11 @@ definePageMeta({
         <div class="bg-white rounded-10 w-full">
           <div class="flex items-center justify-between border-b-2 p-3">
             <div class="flex items-center space-x-4">
-              <img src="/assets/images/ms.png" alt="Google" class="w-10 h-10 rounded" />
+              <img
+                src="/assets/images/ms.png"
+                alt="Google"
+                class="w-10 h-10 rounded"
+              />
               <div class="pl-4">
                 <span class="block text-base font-black"
                   >Social Media Assistant</span
@@ -490,7 +493,7 @@ definePageMeta({
                 </div>
               </div>
             </div>
-            <nuxt-link to="/dashboard/jobseeker/my-applications/more-details">
+            <nuxt-link to="/dashboard/jobseeker/find-jobs/more-details">
               <div
                 class="flex flex-col justify-end relative right-5 top-12 w-[99px]"
               >
@@ -646,7 +649,7 @@ definePageMeta({
                 </div>
               </div>
             </div>
-            <nuxt-link to="/dashboard/jobseeker/my-applications/more-details">
+            <nuxt-link to="/dashboard/jobseeker/find-jobs/more-details">
               <div
                 class="flex flex-col justify-end relative right-5 top-12 w-[99px]"
               >
@@ -802,7 +805,7 @@ definePageMeta({
                 </div>
               </div>
             </div>
-            <nuxt-link to="/dashboard/jobseeker/my-applications/more-details">
+            <nuxt-link to="/dashboard/jobseeker/find-jobs/more-details">
               <div
                 class="flex flex-col justify-end relative right-5 top-12 w-[99px]"
               >
@@ -819,7 +822,11 @@ definePageMeta({
         <div class="bg-white rounded-10 w-full">
           <div class="flex items-center justify-between border-b-2 p-3">
             <div class="flex items-center space-x-4">
-              <img src="/assets/images/ms.png" alt="Google" class="w-10 h-10 rounded" />
+              <img
+                src="/assets/images/ms.png"
+                alt="Google"
+                class="w-10 h-10 rounded"
+              />
               <div class="pl-4">
                 <span class="block text-base font-black"
                   >Social Media Assistant
@@ -956,7 +963,7 @@ definePageMeta({
                 </div>
               </div>
             </div>
-            <nuxt-link to="/dashboard/jobseeker/my-applications/more-details">
+            <nuxt-link to="/dashboard/jobseeker/find-jobs/more-details">
               <div
                 class="flex flex-col justify-end relative right-5 top-12 w-[99px]"
               >

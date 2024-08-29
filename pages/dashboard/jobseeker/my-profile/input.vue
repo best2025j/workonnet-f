@@ -2,7 +2,7 @@
 definePageMeta({
   name: "Input",
   title: "My profile",
-  pageName: "dashboard.my-applications",
+  pageName: "dashboard.my-profile",
   layout: "dashboard",
 });
 </script>
@@ -305,7 +305,8 @@ definePageMeta({
             Write something about you that entice the recruiters......
           </p>
 
-          <div class="flex flex-col  space-y-4 pt-6">
+          <!--  -->
+          <div class="flex flex-col space-y-4 pt-6">
             <div class="flex flex-col w-full">
               <label for="first-name" class="text-sm mb-2">Section Title</label>
               <input
@@ -319,11 +320,74 @@ definePageMeta({
               <label for="first-name" class="text-sm mb-2">Description</label>
               <textarea
                 type="text"
+                rows="10"
                 placeholder="Write something about you that entice the recruiters......"
-                class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border border-gray-300 rounded-md"
+                class="p-2 border border-gray-300 rounded-lg w-full"
               />
             </div>
           </div>
+
+          <!-- about me -->
+        </div>
+
+        <!-- work experience -->
+        <div class="bg-white p-4 rounded-10 font-[Nexa]">
+          <div class="flex justify-between items-center">
+            <div class="py-4">
+              <h1 class="font-bold text-xl font-[Georgia] capitalize">
+                work experience
+              </h1>
+              <p class="text-xs">
+                Build trust with recruiters by verifying your social profiles
+              </p>
+            </div>
+
+            <div>
+              <button class="px-4 py-2 bg-primary-1 text-white rounded-5">
+                Edit experience
+              </button>
+            </div>
+          </div>
+
+          <ul class="list-disc pl-4 space-y-4">
+            <div>
+              <li class="text-info-600 font-black">
+                User Interface Designer at Workonnect
+              </li>
+              <div class="text-sm flex gap-3">
+                <h1 class="font-black">May - June 2020</h1>
+                <h1>Lagos, Nigeria.</h1>
+              </div>
+            </div>
+
+            <div>
+              <li class="text-info-600 font-black">Accountant at Workonnect</li>
+              <div class="text-sm flex gap-3">
+                <h1 class="font-black">May - June 2020</h1>
+                <h1>Lagos, Nigeria.</h1>
+              </div>
+            </div>
+
+            <div>
+              <li class="text-info-600 font-black">HR Manager at Workonnect</li>
+              <div class="text-sm flex gap-3">
+                <h1 class="font-black">May - June 2020</h1>
+                <h1>Lagos, Nigeria.</h1>
+              </div>
+            </div>
+
+            <div>
+              <li class="text-info-600 font-black">
+                Graphic Designer at Workonnect
+              </li>
+              <div class="text-sm flex gap-3">
+                <h1 class="font-black">May - June 2020</h1>
+                <h1>Lagos, Nigeria.</h1>
+              </div>
+            </div>
+          </ul>
+
+          <!--  -->
 
           <!-- about me -->
         </div>

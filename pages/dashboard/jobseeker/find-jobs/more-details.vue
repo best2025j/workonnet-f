@@ -2,7 +2,7 @@
 definePageMeta({
   name: "More Details",
   title: "Find Jobs",
-  pageName: "dashboard.my-applications",
+  pageName: "dashboard.find-jobs",
   layout: "dashboard",
 });
 </script>

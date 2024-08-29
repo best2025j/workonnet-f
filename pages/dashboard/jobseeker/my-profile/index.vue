@@ -158,7 +158,7 @@ definePageMeta({
                 <h1 class="text-lg font-black">$5,000/month</h1>
               </div>
 
-              <nuxt-link to="/dashboard/jobseeker/my-applications/input">
+              <nuxt-link to="/dashboard/jobseeker/my-profile/input">
                 <div class="flex justify-end">
                   <button
                     class="px-[14px] text-xs py-2 rounded-5 bg-primary-1 text-white"
@@ -356,5 +356,6 @@ definePageMeta({
         </div>
       </div>
     </div>
+
   </div>
 </template>
