@@ -8,7 +8,7 @@ definePageMeta({
 </script>
 
 <template>
-  <div class="w-full flex h-[670px]">
+  <div class="w-full flex max-sm: h-[670px]">
     <div class="h-full w-1/4">
       <ChatsSideNav />
     </div>
