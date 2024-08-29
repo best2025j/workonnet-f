@@ -79,6 +79,7 @@
                 </div>
               </div>
             </td>
+            
             <td class="py-4 whitespace-nowrap">
               <div class="text-left flex flex-col">
                 <span class="text-sm font-black">Location</span

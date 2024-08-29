@@ -11,7 +11,7 @@ definePageMeta({
   <div class="w-full h-full">
     <div class="text-black-700 flex gap-4 text-sm h-full w-full">
       <div class="w-1/2 rounded-10 font-[Georgia] h-full">
-        <div class="border bg-white border-b-2 p-6">
+        <div class="divide-y bg-white p-6 border-primary-1 border-l-4">
           <div class="space-x-3 flex items-center">
             <span
               ><svg
@@ -68,7 +68,7 @@ definePageMeta({
             <h1 class="font-bold text-sm text-black-600">About Me</h1>
           </div>
         </div>
-        <div class="border-b-2 bg-white p-6">
+        <div class="bg-white p-6">
           <div class="space-x-3 flex items-center">
             <span
               ><svg
@@ -89,7 +89,7 @@ definePageMeta({
         </div>
         <div class="text-right py-3">
           <button
-            class="text-xs py-2 text-white px-3.5 rounded-8 bg-success-600 font-[Nexa] font-[100]"
+            class="text-xs py-2 text-white px-3.5 rounded-5 bg-success-600 font-[Nexa] font-[100]"
           >
             Save changes
           </button>
@@ -98,7 +98,7 @@ definePageMeta({
 
       <!--  -->
       <div class="w-full h-full space-y-4">
-        <div class="bg-white w-full rounded-10 p-4 h-full space-y-3">
+        <div class="bg-white w-full rounded-10  p-4 h-full space-y-3">
           <h1 class="font-bold text-xl font-[Georgia]">Basic Information</h1>
           <div class="flex divide-x-2 gap-4">
             <div class="py-2">

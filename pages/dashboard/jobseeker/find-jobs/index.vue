@@ -27,7 +27,7 @@ definePageMeta({
             <input
               type="text"
               placeholder="Search"
-              class="pl-10 pr-4 h-11 placeholder:text-sm w-[278px] border border-gray-300 rounded-md"
+              class="pl-10 pr-4 outline-none h-11 placeholder:text-sm w-[278px] border border-gray-300 rounded-md"
             />
             <svg
               width="10"
@@ -48,7 +48,7 @@ definePageMeta({
             <input
               type="text"
               placeholder="Job location"
-              class="pl-10 pr-4 h-11 placeholder:text-sm w-[278px] border border-gray-300 rounded-md"
+              class="pl-10 pr-4 outline-none h-11 placeholder:text-sm w-[278px] border border-gray-300 rounded-md"
             />
             <svg
               width="10"
