@@ -13,7 +13,9 @@
         <span class="text-xs text-black-900">15min</span>
       </div>
       <!--  -->
-      <div class="flex items-start justify-between p-4 bg-black-50 border-black-100 border-b">
+      <div
+        class="flex items-start justify-between p-4 bg-black-50 border-black-100 border-b"
+      >
         <img src="/assets/images/Ellipse3.png" alt="no pix" />
         <div class="space-y-1">
           <h1 class="text-sm text-balck-950">Jane Cooper</h1>
@@ -45,7 +47,7 @@
         <img src="/assets/images/Ellipse5.png" alt="no pix" />
         <div class="space-y-1">
           <h1 class="text-sm font-black">Robert Fox</h1>
-          <h1 class="text-sm font-black">What’s the difference...</h1>
+          <h1 class="text-xs font-black">What’s the difference...</h1>
         </div>
 
         <div class="space-y-1">
