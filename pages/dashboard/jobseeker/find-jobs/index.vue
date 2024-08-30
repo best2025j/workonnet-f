@@ -23,12 +23,22 @@ definePageMeta({
 
         <!-- input search -->
         <div class="flex gap-2 pt-2">
-          <div class="relative">
+          <div class="relative dropdown dropdown-bottom">
             <input
               type="text"
               placeholder="Search"
               class="pl-10 pr-4 outline-none h-11 placeholder:text-sm w-[278px] border border-gray-300 rounded-md"
             />
+
+            <ul
+              tabindex="0"
+              class="dropdown-content menu bg-white absolute left-0 right-0 rounded-box z-10 p-2 shadow"
+            >
+              <li class="bg-gray-1"><a>UI designer</a></li>
+              <li><a>UI/UX designer</a></li>
+              <li><a>UI decorator</a></li>
+            </ul>
+
             <svg
               width="10"
               height="10"
@@ -44,12 +54,21 @@ definePageMeta({
             </svg>
           </div>
 
-          <div class="relative">
+          <div class="relative dropdown dropdown-bottom">
             <input
               type="text"
               placeholder="Job location"
               class="pl-10 pr-4 outline-none h-11 placeholder:text-sm w-[278px] border border-gray-300 rounded-md"
             />
+
+            <ul
+              tabindex="0"
+              class="dropdown-content menu bg-white absolute left-0 right-0 rounded-box z-10 p-2 shadow"
+            >
+              <li class="bg-gray-1"><a>Lagos, Nigeria</a></li>
+              <li><a>Lagos, Portugal</a></li>
+              <li><a>Lagum</a></li>
+            </ul>
             <svg
               width="10"
               height="10"
@@ -136,10 +155,15 @@ definePageMeta({
           Remote
         </button>
         <button class="bg-white p-2 px-4 rounded-10 text-xs">Hybrid</button>
-        <button class="rounded-10 text-xs">
+
+        <!-- dropdown button -->
+        <button class="rounded-10 text-xs dropdown dropdown-end">
           <svg
             width="17"
             height="10"
+            tabindex="0"
+            role="button"
+            class=""
             viewBox="0 0 17 10"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -149,7 +173,72 @@ definePageMeta({
               fill="#343330"
             />
           </svg>
+          <ul
+            tabindex="0"
+            class="dropdown-content menu bg-white rounded-box z-10 w-72 mt-4 space-y-2 py-3 shadow"
+          >
+            <li>
+              <div
+                class="flex justify-between text-xs font-black gap-3 bg-gray-1"
+              >
+                <a>Job Type:</a>
+              </div>
+            </li>
+
+            <li><a>Full Time</a></li>
+            <li><a>Part Time</a></li>
+
+            <li><a>Contract</a></li>
+            <li>
+              <div
+                class="flex justify-between text-xs gap-3 bg-gray-1 font-black text-primary-1"
+              >
+                <a>Freelance</a>
+                <span
+                  ><svg
+                    width="15"
+                    height="11"
+                    viewBox="0 0 15 11"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M14.1479 1.46054L5.14792 10.4605C5.09567 10.5128 5.03364 10.5543 4.96535 10.5826C4.89706 10.6109 4.82387 10.6255 4.74995 10.6255C4.67603 10.6255 4.60283 10.6109 4.53454 10.5826C4.46626 10.5543 4.40422 10.5128 4.35198 10.4605L0.414478 6.52304C0.30893 6.41749 0.249634 6.27434 0.249634 6.12507C0.249634 5.9758 0.30893 5.83265 0.414478 5.7271C0.520026 5.62155 0.663179 5.56226 0.812447 5.56226C0.961714 5.56226 1.10487 5.62155 1.21042 5.7271L4.74995 9.26733L13.352 0.6646C13.4575 0.559052 13.6007 0.499756 13.7499 0.499756C13.8992 0.499756 14.0424 0.559052 14.1479 0.6646C14.2535 0.770147 14.3128 0.913301 14.3128 1.06257C14.3128 1.21184 14.2535 1.35499 14.1479 1.46054Z"
+                      fill="#FE8900"
+                    />
+                  </svg>
+                </span>
+              </div>
+            </li>
+
+            <li><a>Work Type:</a></li>
+            <li>
+              <div
+                class="flex justify-between text-xs gap-3 bg-gray-1 font-black text-primary-1"
+              >
+                <a>Remote </a>
+                <span
+                  ><svg
+                    width="15"
+                    height="11"
+                    viewBox="0 0 15 11"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M14.1479 1.46054L5.14792 10.4605C5.09567 10.5128 5.03364 10.5543 4.96535 10.5826C4.89706 10.6109 4.82387 10.6255 4.74995 10.6255C4.67603 10.6255 4.60283 10.6109 4.53454 10.5826C4.46626 10.5543 4.40422 10.5128 4.35198 10.4605L0.414478 6.52304C0.30893 6.41749 0.249634 6.27434 0.249634 6.12507C0.249634 5.9758 0.30893 5.83265 0.414478 5.7271C0.520026 5.62155 0.663179 5.56226 0.812447 5.56226C0.961714 5.56226 1.10487 5.62155 1.21042 5.7271L4.74995 9.26733L13.352 0.6646C13.4575 0.559052 13.6007 0.499756 13.7499 0.499756C13.8992 0.499756 14.0424 0.559052 14.1479 0.6646C14.2535 0.770147 14.3128 0.913301 14.3128 1.06257C14.3128 1.21184 14.2535 1.35499 14.1479 1.46054Z"
+                      fill="#FE8900"
+                    />
+                  </svg>
+                </span>
+              </div>
+            </li>
+
+            <li><a>Hybrid</a></li>
+            <li><a>Onsite</a></li>
+          </ul>
         </button>
+
         <button class="text-primary-1 font-black text-xs">
           Remove Filters
         </button>
