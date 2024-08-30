@@ -9,8 +9,8 @@ definePageMeta({
 
 <template>
   <div class="text-black-700 flex gap-4 text-sm">
-    <div class="bg-white w-1/3 rounded-10">
-      <div class="border border-b-2 p-4">
+    <div class="bg-white w-1/3 h-full rounded-10">
+      <div class="border border-b-2 h-20 w-full items-center flex px-4">
         <div class="space-x-3 flex items-center">
           <span
             ><svg
@@ -29,7 +29,8 @@ definePageMeta({
           <h1 class="text-primary-1 font-bold">Preference & Notification</h1>
         </div>
       </div>
-      <div class="border-b-2 p-4">
+
+      <div class="border-b-2 h-20 w-full items-center flex px-4">
         <div class="space-x-3 flex items-center">
           <span
             ><svg
@@ -48,7 +49,7 @@ definePageMeta({
           <h1 class="font-bold text-sm text-black-600">Privacy</h1>
         </div>
       </div>
-      <div class="border-b-2 p-4">
+      <div class="border-b-2 h-20 w-full items-center flex px-4">
         <div class="space-x-3 flex items-center">
           <span
             ><svg
@@ -67,7 +68,7 @@ definePageMeta({
           <h1 class="font-bold text-sm text-black-600">Security</h1>
         </div>
       </div>
-      <div class="p-4">
+      <div class="h-20 w-full items-center flex px-4">
         <div class="space-x-3 flex items-center">
           <span
             ><svg
@@ -88,8 +89,8 @@ definePageMeta({
       </div>
     </div>
     <!--  -->
-    <div class="bg-white w-full rounded-10 p-4 font-[Nexa] h-full">
-      <div class="py-4 w-1/2">
+    <div class="bg-white w-2/3 rounded-10 p-4 font-[Nexa] h-full space-y-3">
+      <div class="py-4 space-y-2 w-[440px]">
         <h1 class="font-black">Preferences & Notifications</h1>
         <p class="text-xs">
           Change your preferences and decide what you want to be notified about,
@@ -97,274 +98,74 @@ definePageMeta({
         </p>
       </div>
 
-      <table>
-        <tbody class="divide-y">
-          <tr class="flex pl-8 space-x-10 text-left p-2">
-            <td class="font-black text-xs">Email address</td>
-            <td class="text-xs">example@example.com</td>
-            <td></td>
-          </tr>
+      <div class="space-y-3">
+        <div
+          class="flex items-center justify-between text-justify pl-8 space-x-10 w-full"
+        >
+          <div class="flex items-start w-full">
+            <h1 class="text-xs font-black">Email address</h1>
+            <p class="text-xs">example@example.com</p>
+          </div>
 
-          <tr class="flex pl-8 space-x-10 text-left p-2">
-            <td class="font-black text-xs">News and updates</td>
-            <td class="text-xs">News about products and feature updates.</td>
-            <td></td>
-          </tr>
+          <button class="text-xs px-4 py-2 border rounded-8 text-[#344054]">
+            Change
+          </button>
+        </div>
 
-          <tr class="flex pl-8 space-x-10 text-left p-2">
-            <td class="font-black text-xs">News and updates</td>
-            <td class="text-xs">News about products and feature updates.</td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
+        <div
+          class="flex items-center justify-between text-justify pl-8 space-x-10 w-full"
+        >
+          <div class="flex items-start w-full">
+            <h1 class="text-xs font-black">News and updates</h1>
+            <p class="text-xs">News about products and feature updates.</p>
+          </div>
 
-      <!-- <div class="space-y-3">
+          <div class="form-control">
+            <input
+              type="checkbox"
+              defaultChecked
+              class="toggle toggle-sm text-black-900 hover:text-black-300 bg-primary-1 hover:bg-primary-1"
+            />
+          </div>
+        </div>
+
         <div
           class="flex items-center justify-between text-justify pl-8 space-x-10 w-full"
         >
-          <h1 class="text-xs font-black">Email address</h1>
-          <p class="text-xs">example@example.com</p>
-          <div></div>
+          <div class="flex items-start w-full">
+            <h1 class="text-xs font-black">Tips and tutorials</h1>
+            <p class="text-xs">Tips on getting more out of Workonnect.</p>
+          </div>
+
+          <div class="form-control">
+            <input
+              type="checkbox"
+              defaultChecked
+              class="toggle toggle-sm text-black-900 hover:text-black-300 bg-primary-1 hover:bg-primary-1"
+            />
+          </div>
         </div>
+
         <div
           class="flex items-center justify-between text-justify pl-8 space-x-10 w-full"
         >
-          <h1 class="text-xs font-black">News and updates</h1>
-          <p class="text-xs">News about products and feature updates.</p>
-          <span
-            ><svg
-              width="36"
-              height="20"
-              viewBox="0 0 36 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g clip-path="url(#clip0_1150_5403)">
-                <rect width="36" height="20" rx="10" fill="#FE8900" />
-                <g filter="url(#filter0_dd_1150_5403)">
-                  <circle cx="26" cy="10" r="8" fill="white" />
-                </g>
-              </g>
-              <defs>
-                <filter
-                  id="filter0_dd_1150_5403"
-                  x="15"
-                  y="0"
-                  width="22"
-                  height="22"
-                  filterUnits="userSpaceOnUse"
-                  color-interpolation-filters="sRGB"
-                >
-                  <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                  <feColorMatrix
-                    in="SourceAlpha"
-                    type="matrix"
-                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                    result="hardAlpha"
-                  />
-                  <feOffset dy="1" />
-                  <feGaussianBlur stdDeviation="1" />
-                  <feColorMatrix
-                    type="matrix"
-                    values="0 0 0 0 0.0627451 0 0 0 0 0.0941176 0 0 0 0 0.156863 0 0 0 0.06 0"
-                  />
-                  <feBlend
-                    mode="normal"
-                    in2="BackgroundImageFix"
-                    result="effect1_dropShadow_1150_5403"
-                  />
-                  <feColorMatrix
-                    in="SourceAlpha"
-                    type="matrix"
-                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                    result="hardAlpha"
-                  />
-                  <feOffset dy="1" />
-                  <feGaussianBlur stdDeviation="1.5" />
-                  <feColorMatrix
-                    type="matrix"
-                    values="0 0 0 0 0.0627451 0 0 0 0 0.0941176 0 0 0 0 0.156863 0 0 0 0.1 0"
-                  />
-                  <feBlend
-                    mode="normal"
-                    in2="effect1_dropShadow_1150_5403"
-                    result="effect2_dropShadow_1150_5403"
-                  />
-                  <feBlend
-                    mode="normal"
-                    in="SourceGraphic"
-                    in2="effect2_dropShadow_1150_5403"
-                    result="shape"
-                  />
-                </filter>
-                <clipPath id="clip0_1150_5403">
-                  <rect width="36" height="20" rx="10" fill="white" />
-                </clipPath>
-              </defs>
-            </svg>
-          </span>
+          <div class="flex items-start w-full">
+            <h1 class="text-xs font-black">Reminders</h1>
+            <p class="text-xs w-1/3">
+              These are notifications to remind you updates about what you might
+              miss about Workonnect.
+            </p>
+          </div>
+
+          <div class="form-control">
+            <input
+              type="checkbox"
+              defaultChecked
+              class="toggle toggle-sm text-black-900 hover:text-black-300 bg-primary-1 hover:bg-primary-1"
+            />
+          </div>
         </div>
-        <div
-          class="flex items-center justify-between text-justify pl-8 space-x-10 w-full"
-        >
-          <h1 class="text-xs font-black">Tips and tutorials</h1>
-          <p class="text-xs">Tips on getting more out of Workonnect.</p>
-          <span
-            ><svg
-              width="36"
-              height="20"
-              viewBox="0 0 36 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g clip-path="url(#clip0_1150_5403)">
-                <rect width="36" height="20" rx="10" fill="#FE8900" />
-                <g filter="url(#filter0_dd_1150_5403)">
-                  <circle cx="26" cy="10" r="8" fill="white" />
-                </g>
-              </g>
-              <defs>
-                <filter
-                  id="filter0_dd_1150_5403"
-                  x="15"
-                  y="0"
-                  width="22"
-                  height="22"
-                  filterUnits="userSpaceOnUse"
-                  color-interpolation-filters="sRGB"
-                >
-                  <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                  <feColorMatrix
-                    in="SourceAlpha"
-                    type="matrix"
-                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                    result="hardAlpha"
-                  />
-                  <feOffset dy="1" />
-                  <feGaussianBlur stdDeviation="1" />
-                  <feColorMatrix
-                    type="matrix"
-                    values="0 0 0 0 0.0627451 0 0 0 0 0.0941176 0 0 0 0 0.156863 0 0 0 0.06 0"
-                  />
-                  <feBlend
-                    mode="normal"
-                    in2="BackgroundImageFix"
-                    result="effect1_dropShadow_1150_5403"
-                  />
-                  <feColorMatrix
-                    in="SourceAlpha"
-                    type="matrix"
-                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                    result="hardAlpha"
-                  />
-                  <feOffset dy="1" />
-                  <feGaussianBlur stdDeviation="1.5" />
-                  <feColorMatrix
-                    type="matrix"
-                    values="0 0 0 0 0.0627451 0 0 0 0 0.0941176 0 0 0 0 0.156863 0 0 0 0.1 0"
-                  />
-                  <feBlend
-                    mode="normal"
-                    in2="effect1_dropShadow_1150_5403"
-                    result="effect2_dropShadow_1150_5403"
-                  />
-                  <feBlend
-                    mode="normal"
-                    in="SourceGraphic"
-                    in2="effect2_dropShadow_1150_5403"
-                    result="shape"
-                  />
-                </filter>
-                <clipPath id="clip0_1150_5403">
-                  <rect width="36" height="20" rx="10" fill="white" />
-                </clipPath>
-              </defs>
-            </svg>
-          </span>
-        </div>
-        <div
-          class="flex items-center justify-between text-justify pl-8 space-x-10 w-full"
-        >
-          <h1 class="text-xs font-black">Reminders</h1>
-          <p class="text-xs w-1/3">
-            These are notifications to remind you updates about what you might
-            miss about Workonnect.
-          </p>
-          <span
-            ><svg
-              width="36"
-              height="20"
-              viewBox="0 0 36 20"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <g clip-path="url(#clip0_1150_5403)">
-                <rect width="36" height="20" rx="10" fill="#FE8900" />
-                <g filter="url(#filter0_dd_1150_5403)">
-                  <circle cx="26" cy="10" r="8" fill="white" />
-                </g>
-              </g>
-              <defs>
-                <filter
-                  id="filter0_dd_1150_5403"
-                  x="15"
-                  y="0"
-                  width="22"
-                  height="22"
-                  filterUnits="userSpaceOnUse"
-                  color-interpolation-filters="sRGB"
-                >
-                  <feFlood flood-opacity="0" result="BackgroundImageFix" />
-                  <feColorMatrix
-                    in="SourceAlpha"
-                    type="matrix"
-                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                    result="hardAlpha"
-                  />
-                  <feOffset dy="1" />
-                  <feGaussianBlur stdDeviation="1" />
-                  <feColorMatrix
-                    type="matrix"
-                    values="0 0 0 0 0.0627451 0 0 0 0 0.0941176 0 0 0 0 0.156863 0 0 0 0.06 0"
-                  />
-                  <feBlend
-                    mode="normal"
-                    in2="BackgroundImageFix"
-                    result="effect1_dropShadow_1150_5403"
-                  />
-                  <feColorMatrix
-                    in="SourceAlpha"
-                    type="matrix"
-                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                    result="hardAlpha"
-                  />
-                  <feOffset dy="1" />
-                  <feGaussianBlur stdDeviation="1.5" />
-                  <feColorMatrix
-                    type="matrix"
-                    values="0 0 0 0 0.0627451 0 0 0 0 0.0941176 0 0 0 0 0.156863 0 0 0 0.1 0"
-                  />
-                  <feBlend
-                    mode="normal"
-                    in2="effect1_dropShadow_1150_5403"
-                    result="effect2_dropShadow_1150_5403"
-                  />
-                  <feBlend
-                    mode="normal"
-                    in="SourceGraphic"
-                    in2="effect2_dropShadow_1150_5403"
-                    result="shape"
-                  />
-                </filter>
-                <clipPath id="clip0_1150_5403">
-                  <rect width="36" height="20" rx="10" fill="white" />
-                </clipPath>
-              </defs>
-            </svg>
-          </span>
-        </div>
-      </div> -->
+      </div>
     </div>
   </div>
 </template>
