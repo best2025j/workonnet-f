@@ -98,74 +98,86 @@ definePageMeta({
         </p>
       </div>
 
-      <div class="space-y-3">
-        <div
-          class="flex items-center justify-between text-justify pl-8 space-x-10 w-full"
-        >
-          <div class="flex items-start w-full">
+      <div class="space-y-4">
+        <div class="flex items-center justify-between w-full">
+          <div class="w-1/4">
             <h1 class="text-xs font-black">Email address</h1>
+          </div>
+          <div class="w-2/4">
             <p class="text-xs">example@example.com</p>
           </div>
-
-          <button class="text-xs px-4 py-2 border rounded-8 text-[#344054]">
-            Change
-          </button>
+          <div class="w-1/4 flex justify-end">
+            <button class="text-xs px-4 py-2 border rounded-8 text-[#344054]">
+              Change
+            </button>
+          </div>
         </div>
-
-        <div
-          class="flex items-center justify-between text-justify pl-8 space-x-10 w-full"
-        >
-          <div class="flex items-start w-full">
+        <!--  -->
+        <div class="flex items-center justify-between w-full">
+          <div class="w-1/4">
             <h1 class="text-xs font-black">News and updates</h1>
+          </div>
+          <div class="w-2/4">
             <p class="text-xs">News about products and feature updates.</p>
           </div>
-
-          <div class="form-control">
-            <input
-              type="checkbox"
-              defaultChecked
-              class="toggle toggle-sm text-black-900 hover:text-black-300 bg-primary-1 hover:bg-primary-1"
-            />
+          <div class="w-1/4 flex justify-end">
+            <div class="form-control">
+              <input
+                type="checkbox"
+                defaultChecked
+                class="toggle toggle-sm text-black-900 hover:text-black-300 bg-primary-1 hover:bg-primary-1"
+              />
+            </div>
           </div>
         </div>
-
-        <div
-          class="flex items-center justify-between text-justify pl-8 space-x-10 w-full"
-        >
-          <div class="flex items-start w-full">
+        <!--  -->
+        <div class="flex items-center justify-between w-full">
+          <div class="w-1/4">
             <h1 class="text-xs font-black">Tips and tutorials</h1>
+          </div>
+          <div class="w-2/4">
             <p class="text-xs">Tips on getting more out of Workonnect.</p>
           </div>
-
-          <div class="form-control">
-            <input
-              type="checkbox"
-              defaultChecked
-              class="toggle toggle-sm text-black-900 hover:text-black-300 bg-primary-1 hover:bg-primary-1"
-            />
+          <div class="w-1/4 flex justify-end">
+            <div class="form-control">
+              <input
+                type="checkbox"
+                defaultChecked
+                class="toggle toggle-sm text-black-900 hover:text-black-300 bg-primary-1 hover:bg-primary-1"
+              />
+            </div>
           </div>
         </div>
-
-        <div
-          class="flex items-center justify-between text-justify pl-8 space-x-10 w-full"
-        >
-          <div class="flex items-start w-full">
+        <!--  -->
+        <div class="flex items-center justify-between w-full">
+          <div class="w-1/4">
             <h1 class="text-xs font-black">Reminders</h1>
-            <p class="text-xs w-1/3">
+          </div>
+          <div class="w-2/4">
+            <p class="text-xs">
               These are notifications to remind you updates about what you might
               miss about Workonnect.
             </p>
           </div>
 
-          <div class="form-control">
-            <input
-              type="checkbox"
-              defaultChecked
-              class="toggle toggle-sm text-black-900 hover:text-black-300 bg-primary-1 hover:bg-primary-1"
-            />
+          <div class="justify-end w-1/4 flex">
+            <div class="form-control">
+              <input
+                type="checkbox"
+                defaultChecked
+                class="toggle toggle-sm text-black-900 hover:text-black-300 bg-primary-1 hover:bg-primary-1"
+              />
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<!-- 
+
+      
+
+
+ -->
