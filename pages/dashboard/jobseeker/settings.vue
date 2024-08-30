@@ -26,7 +26,9 @@ definePageMeta({
               />
             </svg>
           </span>
-          <h1 class="text-primary-1 font-bold">Preference & Notification</h1>
+          <NuxtLink :to="{ hash: '#preference_notification' }">
+            <h1 class="text-primary-1 font-bold">Preference & Notification</h1>
+          </NuxtLink>
         </div>
       </div>
 
@@ -46,9 +48,12 @@ definePageMeta({
               />
             </svg>
           </span>
-          <h1 class="font-bold text-sm text-black-600">Privacy</h1>
+          <NuxtLink :to="{ hash: '#privacy' }">
+            <h1 class="font-bold text-sm text-black-600">Privacy</h1>
+          </NuxtLink>
         </div>
       </div>
+
       <div class="border-b-2 h-20 w-full items-center flex px-4">
         <div class="space-x-3 flex items-center">
           <span
@@ -65,9 +70,12 @@ definePageMeta({
               />
             </svg>
           </span>
-          <h1 class="font-bold text-sm text-black-600">Security</h1>
+          <NuxtLink :to="{ hash: '#security' }">
+            <h1 class="font-bold text-sm text-black-600">Security</h1>
+          </NuxtLink>
         </div>
       </div>
+
       <div class="h-20 w-full items-center flex px-4">
         <div class="space-x-3 flex items-center">
           <span
@@ -90,7 +98,10 @@ definePageMeta({
     </div>
     <!--  -->
     <div class="w-2/3 h-full space-y-3">
-      <div class="bg-white rounded-10 p-4 font-[Nexa] h-full space-y-3">
+      <div
+        id="preferences_notifications"
+        class="bg-white rounded-10 p-4 font-[Nexa] h-full space-y-3"
+      >
         <div class="py-4 space-y-2 w-[440px]">
           <h1 class="font-black">Preferences & Notifications</h1>
           <p class="text-xs">
@@ -130,7 +141,7 @@ definePageMeta({
                 <input
                   type="checkbox"
                   defaultChecked
-                  class="toggle toggle-sm text-black-900 hover:text-black-300 bg-primary-1 hover:bg-primary-1"
+                  class="toggle toggle-sm checked:bg-white checked:border-primary-1 border-primary-1 bg-black-300 [--tglbg:#FE8900] hover:bg-none"
                 />
               </div>
             </div>
@@ -150,7 +161,7 @@ definePageMeta({
                 <input
                   type="checkbox"
                   defaultChecked
-                  class="toggle toggle-sm text-black-900 hover:text-black-300 bg-primary-1 hover:bg-primary-1"
+                  class="toggle toggle-sm checked:bg-white checked:border-primary-1 border-primary-1 bg-black-300 [--tglbg:#FE8900] hover:bg-none"
                 />
               </div>
             </div>
@@ -174,7 +185,7 @@ definePageMeta({
                 <input
                   type="checkbox"
                   defaultChecked
-                  class="toggle toggle-sm text-primary-1 hover:bg-primary-1 bg-primary-1 hover:text-primary-1"
+                  class="toggle toggle-sm checked:bg-white checked:border-primary-1 border-primary-1 bg-black-300 [--tglbg:#FE8900] hover:bg-none"
                 />
               </div>
             </div>
@@ -183,9 +194,12 @@ definePageMeta({
       </div>
 
       <!--  -->
-      <div class="bg-white rounded-10 p-4 font-[Nexa] h-full space-y-3">
+      <div
+        id="privacy"
+        class="bg-white rounded-10 p-4 font-[Nexa] h-full space-y-3"
+      >
         <div class="py-4 space-y-2 w-[440px]">
-          <h1 class="font-black">Preferences & Notifications</h1>
+          <h1 class="font-black">Privacy</h1>
           <p class="text-xs">
             Exercise your privacy rights and control how your data is used.
           </p>
@@ -195,7 +209,7 @@ definePageMeta({
           class="flex items-center justify-between w-full py-6 border-t-2 px-4"
         >
           <div class="w-1/4">
-            <h1 class="text-xs font-black">Privacy settings</h1>
+            <h1 class="text-xs font-black">Privacy</h1>
           </div>
           <div class="w-2/4">
             <p class="text-xs">example@example.com</p>
@@ -213,7 +227,10 @@ definePageMeta({
       </div>
 
       <!--  -->
-      <div class="bg-white rounded-10 p-4 font-[Nexa] h-full space-y-3">
+      <div
+        id="security"
+        class="bg-white rounded-10 p-4 font-[Nexa] h-full space-y-3"
+      >
         <div class="py-4 space-y-2 w-[440px]">
           <h1 class="font-black">Security</h1>
           <p class="text-xs">
