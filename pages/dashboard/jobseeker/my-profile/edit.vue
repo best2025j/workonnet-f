@@ -9,7 +9,7 @@ definePageMeta({
 <template>
   <div class="w-full h-full">
     <div class="text-black-700 flex gap-4 text-sm h-full w-full">
-      <div class="w-1/2 rounded-10 font-[Georgia] h-full">
+      <div class="w-1/4 fixed rounded-10 font-[Georgia] h-full">
         <div class="divide-y bg-white p-6 border-primary-1 border-l-4">
           <div class="space-x-3 flex items-center">
             <span
@@ -26,7 +26,11 @@ definePageMeta({
                 />
               </svg>
             </span>
-            <h1 class="text-primary-1 font-bold">Basic Information</h1>
+            <NuxtLink :to="{ hash: '#basic_information' }">
+              <h1 class="text-primary-1 font-bold">
+                Basic Information
+              </h1></NuxtLink
+            >
           </div>
         </div>
         <div class="border-b-2 bg-white p-6">
@@ -45,7 +49,9 @@ definePageMeta({
                 />
               </svg>
             </span>
-            <h1 class="font-bold text-sm text-black-600">links</h1>
+            <NuxtLink :to="{ hash: '#links' }">
+              <h1 class="font-bold text-sm text-black-600">links</h1></NuxtLink
+            >
           </div>
         </div>
         <div class="border-b-2 bg-white p-6">
@@ -64,7 +70,12 @@ definePageMeta({
                 />
               </svg>
             </span>
-            <h1 class="font-bold text-sm text-black-600">About Me</h1>
+
+            <NuxtLink :to="{ hash: '#about_me' }">
+              <h1 class="font-bold text-sm text-black-600">
+                About Me
+              </h1></NuxtLink
+            >
           </div>
         </div>
         <div class="bg-white p-6">
@@ -83,7 +94,11 @@ definePageMeta({
                 />
               </svg>
             </span>
-            <h1 class="font-bold text-sm text-black-600">Work Experience</h1>
+            <NuxtLink :to="{ hash: '#work_experience' }">
+              <h1 class="font-bold text-sm text-black-600">
+                Work Experience
+              </h1></NuxtLink
+            >
           </div>
         </div>
         <div class="text-right py-3">
@@ -96,8 +111,11 @@ definePageMeta({
       </div>
 
       <!--  -->
-      <div class="w-full h-full space-y-4">
-        <div class="bg-white w-full rounded-10  p-4 h-full space-y-3">
+      <div class="ml-[33%] h-full space-y-4 w-3/4">
+        <div
+          id="basic_information"
+          class="bg-white w-full rounded-10 p-4 h-full space-y-3"
+        >
           <h1 class="font-bold text-xl font-[Georgia]">Basic Information</h1>
           <div class="flex divide-x-2 gap-4">
             <div class="py-2">
@@ -254,7 +272,7 @@ definePageMeta({
         </div>
 
         <!-- social media links-->
-        <div class="bg-white p-4 rounded-10 font-[Nexa]">
+        <div id="links" class="bg-white p-4 rounded-10 font-[Nexa]">
           <h1 class="font-bold text-xl font-[Georgia]">Links</h1>
           <p class="text-xs">
             Build trust with recruiters by verifying your social profiles
@@ -298,7 +316,7 @@ definePageMeta({
         </div>
 
         <!-- about -->
-        <div class="bg-white p-4 rounded-10 font-[Nexa]">
+        <div id="about_me" class="bg-white p-4 rounded-10 font-[Nexa]">
           <h1 class="font-bold text-xl font-[Georgia]">About me</h1>
           <p class="text-xs">
             Write something about you that entice the recruiters......
@@ -330,7 +348,7 @@ definePageMeta({
         </div>
 
         <!-- work experience -->
-        <div class="bg-white p-4 rounded-10 font-[Nexa]">
+        <div id="work_experience" class="bg-white p-4 rounded-10 font-[Nexa]">
           <div class="flex justify-between items-center">
             <div class="py-4">
               <h1 class="font-bold text-xl font-[Georgia] capitalize">

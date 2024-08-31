@@ -115,7 +115,7 @@ enum LOGGED_USER {
 }
 
 // switch for jobseekers and recruiter manually
-const currentUser = ref(LOGGED_USER.RECRUITER);
+const currentUser = ref(LOGGED_USER.JOBSEEKER);
 
 const isActive = (pageName: string) => route.meta?.pageName === pageName;
 </script>

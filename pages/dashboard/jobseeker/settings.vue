@@ -9,7 +9,7 @@ definePageMeta({
 <template>
   <div class="text-black-700 flex gap-4 text-sm pb-4 relative">
     <!-- Fixed position left sidebar -->
-    <div class="bg-white w-1/3 rounded-10 fixed">
+    <div class="bg-white w-1/4 rounded-10 fixed">
       <div class="border border-b-2 h-20 w-full items-center flex px-4">
         <div class="space-x-3 flex items-center">
           <span
@@ -97,7 +97,7 @@ definePageMeta({
       </div>
     </div>
     <!--  -->
-    <div class="w-2/3 h-full space-y-3 ml-[43%]">
+    <div class="w-3/4 h-full space-y-3 ml-[33%]">
       <div
         id="preferences_notifications"
         class="bg-white rounded-10 p-4 font-[Nexa] h-full space-y-3"
