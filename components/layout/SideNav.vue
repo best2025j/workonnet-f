@@ -74,7 +74,7 @@ const recruiterLinks = [
     to: "/dashboard/recruiter/jobs-openings",
     icon: JobIcon,
     name: "Jobs Opening",
-    pageName: "dashboard.recruiter.jobs-opening",
+    pageName: "dashboard.recruiter.jobs-opening.index",
   },
   {
     to: "/dashboard/recruiter/candidates",

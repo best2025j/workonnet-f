@@ -7,7 +7,7 @@ definePageMeta({
 </script>
 
 <template>
-  <div class="font-[Nexa] bg-white p-2 rounded-10 w-full h-full">
+  <div class="font-[Nexa] scrollbar-hide bg-white p-2 rounded-10 w-full h-full">
     <div class="flex justify-between items-center p-2">
       <div>
         <h1 class="font-[Georgia] font-black text-2xl">Job details</h1>
@@ -37,7 +37,7 @@ definePageMeta({
         <!-- for modal triggring -->
         <button
           onclick="my_modal_1.showModal()"
-          class="bg-primary-1 text-white px-4  py-2 rounded-5 text-xs"
+          class="bg-primary-1 text-white px-4 py-2 rounded-5 text-xs"
         >
           Publish
 
