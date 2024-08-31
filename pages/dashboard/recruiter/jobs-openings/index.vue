@@ -19,7 +19,7 @@ definePageMeta({
         <!-- content for in review -->
 
         <div v-if="$route?.query?.tab === JOB_OPENING_TABS.IN_ACTIVE">
-          <OpenJobsInActive />
+          <OpenJobsInactive />
         </div>
 
         <!-- content for interview -->
@@ -31,5 +31,7 @@ definePageMeta({
         <!--  -->
       </div>
     </div>
+
+ 
   </div>
 </template>
