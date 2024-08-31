@@ -1,9 +1,3 @@
-<script>
-export default {
-  name: "WhiteChatIcon",
-};
-</script>
-
 <template lang="">
   <div>
     <svg

@@ -1,10 +1,4 @@
-<script>
-export default {
-  name: "LogoutIcon",
-};
-</script>
-
-<template lang="">
+><template lang="">
   <div>
     <svg
       width="18"

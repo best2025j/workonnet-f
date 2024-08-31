@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ApplicationIcon from '../icons/ApplicationIcon.vue';
+import ApplicationIcon from "../icons/ApplicationIcon.vue";
 import CompanyIcon from "../icons/CompanyIcon.vue";
 import DashBoardIcon from "../icons/DashboardIcon.vue";
 import MessageIcon from "../icons/MessageIcon.vue";
@@ -10,31 +10,112 @@ import SettingIcon from "../icons/SettingIcon.vue";
 
 const route = useRoute();
 
-const links = [
-  { to: "/dashboard/jobseeker", icon: DashBoardIcon, name: "Dashboard", pageName: 'dashboard.index' },
+const jobSeekerLinks = [
+  {
+    to: "/dashboard/jobseeker",
+    icon: DashBoardIcon,
+    name: "Dashboard",
+    pageName: "dashboard.jobseeker.index",
+  },
   {
     to: "/dashboard/jobseeker/my-applications?tab=applied",
     icon: ApplicationIcon,
     name: "My Applications",
-    pageName: 'dashboard.my-applications'
+    pageName: "dashboard.jobseeker.my-applications.index",
   },
-  { to: "/dashboard/jobseeker/find-jobs", icon: SearchIcon, name: "Find Jobs", pageName: 'dashboard.find-jobs' },
-  { to: "/dashboard/jobseeker/messages", icon: MessageIcon, name: "Messages", pageName: 'dashboard.messages' },
+  {
+    to: "/dashboard/jobseeker/find-jobs",
+    icon: SearchIcon,
+    name: "Find Jobs",
+    pageName: "dashboard.jobseeker.find-jobs.index",
+  },
+  {
+    to: "/dashboard/jobseeker/messages",
+    icon: MessageIcon,
+    name: "Messages",
+    pageName: "dashboard.jobseeker.messages",
+  },
   {
     to: "/dashboard/jobseeker/browse-companies",
     icon: CompanyIcon,
     name: "Browse Companies (AI)",
-    pageName: 'dashboard.browse-companies'
+    pageName: "dashboard.jobseeker.browse-companies",
   },
-  { to: "/dashboard/jobseeker/pricing", icon: NairaIcon, name: "Pricing", pageName: 'dashboard.pricing' },
+  {
+    to: "/dashboard/jobseeker/pricing",
+    icon: NairaIcon,
+    name: "Pricing",
+    pageName: "dashboard.jobseeker.pricing",
+  },
   {
     to: "/dashboard/jobseeker/my-profile",
     icon: ProfileIcon,
     name: "My Public Profile",
-    pageName: 'dashboard.my-profile'
+    pageName: "dashboard.jobseeker.my-profile.index",
   },
-  { to: "/dashboard/jobseeker/settings", icon: SettingIcon, name: "Settings", pageName: 'dashboard.settings' },
+  {
+    to: "/dashboard/jobseeker/settings",
+    icon: SettingIcon,
+    name: "Settings",
+    pageName: "dashboard.jobseeker.settings",
+  },
 ];
+
+const recruiterLinks = [
+  {
+    to: "/dashboard/recruiter",
+    icon: DashBoardIcon,
+    name: "Dashboard",
+    pageName: "dashboard.recruiter.index",
+  },
+  {
+    to: "/dashboard/recruiter/job-openings",
+    icon: ApplicationIcon,
+    name: "Job Opening",
+    pageName: "dashboard.recruiter.jobs-openings",
+  },
+  {
+    to: "/dashboard/recruiter/candidates",
+    icon: NairaIcon,
+    name: "Candidates",
+    pageName: "dashboard.recruiter.candidates",
+  },
+
+  {
+    to: "/dashboard/recruiter/messages",
+    icon: MessageIcon,
+    name: "Messages",
+    pageName: "dashboard.recruiter.messages",
+  },
+
+  {
+    to: "/dashboard/recruiter/pricing",
+    icon: CompanyIcon,
+    name: "Pricing",
+    pageName: "dashboard.recruiter.pricing",
+  },
+
+  {
+    to: "/dashboard/recruiter/company-profile",
+    icon: ProfileIcon,
+    name: "Company Profile",
+    pageName: "dashboard.recruiter.company-profile",
+  },
+  {
+    to: "/dashboard/recruiter/settings",
+    icon: SettingIcon,
+    name: "Settings",
+    pageName: "dashboard.recruiter.settings",
+  },
+];
+
+enum LOGGED_USER {
+  RECRUITER = "recruiter",
+  JOBSEEKER = "jobseeker",
+}
+
+// switch for jobseekers and recruiter manually
+const currentUser = ref(LOGGED_USER.RECRUITER);
 
 const isActive = (pageName: string) => route.meta?.pageName === pageName;
 </script>
@@ -48,12 +129,36 @@ const isActive = (pageName: string) => route.meta?.pageName === pageName;
 
     <!-- side nav -->
     <nav class="">
-      <ul class="w-full">
-        <li v-for="(link, index) in links" :key="index">
+      <ul class="w-full" v-show="currentUser === LOGGED_USER.JOBSEEKER">
+        <li v-for="(link, index) in jobSeekerLinks" :key="index">
           <NuxtLink
             :to="link.to"
             :class="[
-              isActive(link.pageName) ? 'bg-westside-100 text-primary-1 border-primary-1 border-l-4 !pl-11 font-[900]' : 'pl-12',
+              isActive(link.pageName)
+                ? 'bg-westside-100 text-primary-1 border-primary-1 border-l-4 !pl-11 font-[900]'
+                : 'pl-12',
+              'flex items-center py-4 text-xs',
+            ]"
+          >
+            <!-- Render Icon -->
+            <component
+              :is="link.icon"
+              class="inline-block mr-2"
+              :isActive="isActive(link.pageName)"
+            />
+            {{ link.name }}
+          </NuxtLink>
+        </li>
+      </ul>
+
+      <ul class="w-full" v-show="currentUser === LOGGED_USER.RECRUITER">
+        <li v-for="(link, index) in recruiterLinks" :key="index">
+          <NuxtLink
+            :to="link.to"
+            :class="[
+              isActive(link.pageName)
+                ? 'bg-westside-100 text-primary-1 border-primary-1 border-l-4 !pl-11 font-[900]'
+                : 'pl-12',
               'flex items-center py-4 text-xs',
             ]"
           >

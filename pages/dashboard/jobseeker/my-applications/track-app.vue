@@ -1,8 +1,7 @@
 <script setup lang="ts">
 definePageMeta({
-  name: "Track Application",
   title: "My Applications",
-  pageName: "dashboard.my-applications",
+  pageName: "dashboard.jobseeker.my-applications.track-app",
   layout: "dashboard",
 });
 </script>

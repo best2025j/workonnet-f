@@ -1,9 +1,3 @@
-<script>
-export default {
-  name: "WhiteFileIcon",
-};
-</script>
-
 <template lang="">
   <div>
     <svg

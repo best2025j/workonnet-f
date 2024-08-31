@@ -1,4 +1,4 @@
-<template lang="">
+<template>
   <svg
     width="18"
     height="18"
@@ -13,8 +13,3 @@
   </svg>
 </template>
 
-<script>
-export default {
-  name: "ArrowRight",
-};
-</script>
