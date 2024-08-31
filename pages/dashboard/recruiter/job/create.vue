@@ -33,8 +33,79 @@ definePageMeta({
         <button class="bg-info-400 text-white px-4 py-2 rounded-5 text-xs">
           Save
         </button>
-        <button class="bg-primary-1 text-white px-4 py-2 rounded-5 text-xs">
+
+        <!-- for modal triggring -->
+        <button
+          onclick="my_modal_1.showModal()"
+          class="bg-primary-1 text-white px-4  py-2 rounded-5 text-xs"
+        >
           Publish
+
+          <!-- Open the modal using ID.showModal() method -->
+
+          <dialog id="my_modal_1" class="modal text-black-950">
+            <div class="modal-box flex-col flex items-center space-y-3">
+              <div class="flex items-center justify-between w-full">
+                <div class="text-white">hello.</div>
+                <h3 class="text-lg font-bold">Hello!</h3>
+
+                <form method="dialog">
+                  <button class="btn">
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 14 14"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M0.726027 0.724657C0.970105 0.480579 1.36583 0.480579 1.60991 0.724657L13.2758 12.3905C13.5199 12.6346 13.5199 13.0303 13.2758 13.2744C13.0317 13.5185 12.636 13.5185 12.3919 13.2744L0.726027 1.60854C0.481949 1.36446 0.481949 0.968734 0.726027 0.724657Z"
+                        fill="#57575B"
+                      />
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M13.274 0.724657C13.5181 0.968734 13.5181 1.36446 13.274 1.60854L1.60809 13.2744C1.36401 13.5185 0.968285 13.5185 0.724208 13.2744C0.48013 13.0303 0.480131 12.6346 0.724208 12.3905L12.3901 0.724657C12.6342 0.480579 13.0299 0.480579 13.274 0.724657Z"
+                        fill="#57575B"
+                      />
+                    </svg>
+                  </button>
+                </form>
+              </div>
+              <span
+                ><svg
+                  width="82"
+                  height="82"
+                  viewBox="0 0 82 82"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M41 0.375C32.9652 0.375 25.1107 2.75761 18.43 7.22155C11.7492 11.6855 6.54222 18.0302 3.46741 25.4535C0.392602 32.8767 -0.411908 41.0451 1.15562 48.9255C2.72314 56.806 6.5923 64.0447 12.2738 69.7262C17.9553 75.4077 25.194 79.2769 33.0745 80.8444C40.955 82.4119 49.1233 81.6074 56.5465 78.5326C63.9698 75.4578 70.3145 70.2508 74.7785 63.57C79.2424 56.8893 81.625 49.0349 81.625 41C81.6136 30.2291 77.3299 19.9025 69.7137 12.2863C62.0975 4.67015 51.7709 0.386374 41 0.375ZM58.836 33.8359L36.961 55.7109C36.6707 56.0015 36.3261 56.232 35.9467 56.3893C35.5673 56.5465 35.1607 56.6275 34.75 56.6275C34.3393 56.6275 33.9327 56.5465 33.5533 56.3893C33.174 56.232 32.8293 56.0015 32.5391 55.7109L23.1641 46.3359C22.5777 45.7496 22.2483 44.9543 22.2483 44.125C22.2483 43.2957 22.5777 42.5004 23.1641 41.9141C23.7505 41.3277 24.5458 40.9983 25.375 40.9983C26.2043 40.9983 26.9996 41.3277 27.586 41.9141L34.75 49.082L54.4141 29.4141C54.7044 29.1237 55.0491 28.8934 55.4285 28.7363C55.8078 28.5791 56.2144 28.4983 56.625 28.4983C57.0356 28.4983 57.4422 28.5791 57.8216 28.7363C58.2009 28.8934 58.5456 29.1237 58.836 29.4141C59.1263 29.7044 59.3566 30.0491 59.5137 30.4284C59.6709 30.8078 59.7518 31.2144 59.7518 31.625C59.7518 32.0356 59.6709 32.4422 59.5137 32.8216C59.3566 33.2009 59.1263 33.5456 58.836 33.8359Z"
+                    fill="#0FA968"
+                  />
+                </svg>
+              </span>
+              <p class="py-4">
+                You job listing has been posted and it’s online now.
+              </p>
+              <div class="space-x-4">
+                <!-- if there is a button in form, it will close the modal -->
+                <button
+                  class="px-4 py-2 border border-danger-600 text-danger-600 text-xs rounded-10"
+                >
+                  Return to dashboard
+                </button>
+                <button
+                  class="rounded-10 px-4 py-2 text-white text-xs bg-primary-1"
+                >
+                  View posted job
+                </button>
+              </div>
+            </div>
+          </dialog>
         </button>
       </div>
     </div>
