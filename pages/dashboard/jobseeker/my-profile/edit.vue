@@ -157,6 +157,8 @@ definePageMeta({
                 </button>
               </div>
             </div>
+
+            
             <!-- input for full name -->
             <div class="p-4 font-[Nexa] w-full space-y-4">
               <div class="flex gap-2">

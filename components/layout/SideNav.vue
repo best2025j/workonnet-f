@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import ApplicationIcon from "../icons/ApplicationIcon.vue";
+import CandidatesIcon from "../icons/CandidatesIcon.vue";
 import CompanyIcon from "../icons/CompanyIcon.vue";
 import DashBoardIcon from "../icons/DashboardIcon.vue";
+import JobIcon from "../icons/JobIcon.vue";
 import MessageIcon from "../icons/MessageIcon.vue";
 import NairaIcon from "../icons/NairaIcon.vue";
 import ProfileIcon from "../icons/ProfileIcon.vue";
@@ -63,20 +65,20 @@ const jobSeekerLinks = [
 
 const recruiterLinks = [
   {
-    to: "/dashboard/recruiter",
+    to: "/dashboard/recruiter/job",
     icon: DashBoardIcon,
     name: "Dashboard",
-    pageName: "dashboard.recruiter.index",
+    pageName: "dashboard.recruiter.job.index",
   },
   {
-    to: "/dashboard/recruiter/job-openings",
-    icon: ApplicationIcon,
-    name: "Job Opening",
-    pageName: "dashboard.recruiter.jobs-openings",
+    to: "/dashboard/recruiter/jobs-openings",
+    icon: JobIcon,
+    name: "Jobs Opening",
+    pageName: "dashboard.recruiter.jobs-opening",
   },
   {
     to: "/dashboard/recruiter/candidates",
-    icon: NairaIcon,
+    icon: CandidatesIcon,
     name: "Candidates",
     pageName: "dashboard.recruiter.candidates",
   },
@@ -90,14 +92,14 @@ const recruiterLinks = [
 
   {
     to: "/dashboard/recruiter/pricing",
-    icon: CompanyIcon,
+    icon: NairaIcon,
     name: "Pricing",
     pageName: "dashboard.recruiter.pricing",
   },
 
   {
     to: "/dashboard/recruiter/company-profile",
-    icon: ProfileIcon,
+    icon: CompanyIcon,
     name: "Company Profile",
     pageName: "dashboard.recruiter.company-profile",
   },
@@ -115,7 +117,7 @@ enum LOGGED_USER {
 }
 
 // switch for jobseekers and recruiter manually
-const currentUser = ref(LOGGED_USER.JOBSEEKER);
+const currentUser = ref(LOGGED_USER.RECRUITER);
 
 const isActive = (pageName: string) => route.meta?.pageName === pageName;
 </script>
@@ -172,6 +174,11 @@ const isActive = (pageName: string) => route.meta?.pageName === pageName;
           </NuxtLink>
         </li>
       </ul>
+
+      <!--  -->
+      <div class="flex justify-center items-center py-4">
+        <img src="/assets/images/discover.png" alt="no image yet" />
+      </div>
 
       <!--  Logout Button -->
       <div class="absolute bottom-0 left-0 right-0 w-full">

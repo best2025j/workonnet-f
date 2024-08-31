@@ -1,11 +1,11 @@
 <script setup lang="ts">
 definePageMeta({
-  title: "Job Openings",
-  pageName: "dashboard.recruiter.job-opeaning",
+  title: "Jobs Openings",
+  pageName: "dashboard.recruiter.jobs-opening",
   layout: "dashboard",
 });
 </script>
 <template>
-  <div>job-opening</div>
+  <div>jobs-opening</div>
 </template>
 
