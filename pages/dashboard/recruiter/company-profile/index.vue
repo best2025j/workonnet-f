@@ -59,12 +59,13 @@ definePageMeta({
 
           <div>
             <div class="flex justify-end">
-              <
-              <button
-                class="px-4 py-2 rounded-8 text-xs text-white bg-primary-1"
-              >
-                Edit company profile info
-              </button>
+              <NuxtLink to="/dashboard/recruiter/company-profile/edit">
+                <button
+                  class="px-4 py-2 rounded-8 text-xs text-white bg-primary-1"
+                >
+                  Edit company profile info
+                </button>
+              </NuxtLink>
             </div>
           </div>
         </div>
