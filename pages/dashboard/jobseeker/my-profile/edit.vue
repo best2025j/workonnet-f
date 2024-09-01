@@ -33,7 +33,7 @@ definePageMeta({
             >
           </div>
         </div>
-        <div class="border-b-2 bg-white p-6">
+        <div class="border-t-2 bg-white p-6">
           <div class="space-x-3 flex items-center">
             <span
               ><svg
@@ -54,7 +54,7 @@ definePageMeta({
             >
           </div>
         </div>
-        <div class="border-b-2 bg-white p-6">
+        <div class="border-t-2 bg-white p-6">
           <div class="space-x-3 flex items-center">
             <span
               ><svg
@@ -78,7 +78,7 @@ definePageMeta({
             >
           </div>
         </div>
-        <div class="bg-white p-6">
+        <div class="bg-white p-6 border-t-2">
           <div class="space-x-3 flex items-center">
             <span
               ><svg
@@ -158,7 +158,6 @@ definePageMeta({
               </div>
             </div>
 
-            
             <!-- input for full name -->
             <div class="p-4 font-[Nexa] w-full space-y-4">
               <div class="flex gap-2">
