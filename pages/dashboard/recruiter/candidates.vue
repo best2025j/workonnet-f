@@ -202,7 +202,7 @@ definePageMeta({
           </button>
         </nav>
         <!--  -->
-        <div class="px-2">
+        <div class="px-2 mt-4">
           <table class="w-full text-sm">
             <tr class="bg-black-50 h-10 rounded-10">
               <td class="pl-2">Candidates Name</td>
@@ -2005,6 +2005,56 @@ definePageMeta({
             </tr>
           </table>
         </div>
+
+        <!-- button for pagenations -->
+    <div class="flex gap-2 justify-center items- py-4 text-sm">
+      <button class="py-2 px-4 rounded-10 border bg-black-400">
+        <svg
+          width="9"
+          height="12"
+          viewBox="0 0 9 12"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M8.16 1.41L3.58 6L8.16 10.59L6.75 12L0.750004 6L6.75 0L8.16 1.41Z"
+            fill="#C4CDD5"
+          />
+        </svg>
+      </button>
+      <button class="py-2 px-4 rounded-10 border border-primary-1">1</button>
+      <button class="py-2 px-4 rounded-10 border border-black-300">2</button>
+      <button class="rounded-10 px-4 py-2 border border-black-300">
+        <svg
+          width="8"
+          height="2"
+          viewBox="0 0 8 2"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M1.0338 1.084C0.903138 1.084 0.791138 1.042 0.697805 0.958C0.604471 0.864667 0.557805 0.752667 0.557805 0.622C0.557805 0.482 0.604471 0.37 0.697805 0.286C0.791138 0.192667 0.903138 0.146 1.0338 0.146C1.1738 0.146 1.2858 0.192667 1.3698 0.286C1.46314 0.37 1.5098 0.482 1.5098 0.622C1.5098 0.752667 1.46314 0.864667 1.3698 0.958C1.2858 1.042 1.1738 1.084 1.0338 1.084ZM4.0006 1.084C3.86993 1.084 3.75793 1.042 3.6646 0.958C3.57127 0.864667 3.5246 0.752667 3.5246 0.622C3.5246 0.482 3.57127 0.37 3.6646 0.286C3.75793 0.192667 3.86993 0.146 4.0006 0.146C4.1406 0.146 4.2526 0.192667 4.3366 0.286C4.42993 0.37 4.4766 0.482 4.4766 0.622C4.4766 0.752667 4.42993 0.864667 4.3366 0.958C4.2526 1.042 4.1406 1.084 4.0006 1.084ZM6.9674 1.084C6.83673 1.084 6.72473 1.042 6.6314 0.958C6.53807 0.864667 6.4914 0.752667 6.4914 0.622C6.4914 0.482 6.53807 0.37 6.6314 0.286C6.72473 0.192667 6.83673 0.146 6.9674 0.146C7.1074 0.146 7.2194 0.192667 7.3034 0.286C7.39673 0.37 7.4434 0.482 7.4434 0.622C7.4434 0.752667 7.39673 0.864667 7.3034 0.958C7.2194 1.042 7.1074 1.084 6.9674 1.084Z"
+            fill="#3D3D3D"
+          />
+        </svg>
+      </button>
+      <button class="py-2 px-4 rounded-10 border border-black-300">9</button>
+      <button class="py-2 px-4 rounded-10 border border-black-300">10</button>
+      <button class="py-2 px-4 rounded-10 border border-black-300">
+        <svg
+          width="9"
+          height="12"
+          viewBox="0 0 9 12"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0.839996 1.41L5.42 6L0.839996 10.59L2.25 12L8.25 6L2.25 0L0.839996 1.41Z"
+            fill="#C4CDD5"
+          />
+        </svg>
+      </button>
+    </div>
       </div>
     </div>
   </div>
