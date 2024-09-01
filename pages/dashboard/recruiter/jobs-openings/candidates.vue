@@ -272,9 +272,9 @@ definePageMeta({
 
               <h1 class="text-xs">3 files</h1>
             </div>
+              <!-- white svg toggle menu-->
 
             <div>
-              <!-- white svg -->
               <div
                 class="text-black-950 dropdown dropdown-bottom dropdown-end px-4 py-2 flex gap-2 text-sm items-center rounded-8"
               >
