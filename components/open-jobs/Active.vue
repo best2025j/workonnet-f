@@ -10,7 +10,7 @@
             <h1 class="text-xs">Posted 2 days ago</h1>
           </div>
         </div>
-        <!-- white svg -->
+        <!-- white svg  button-->
         <div
           class="text-black-950 dropdown dropdown-bottom dropdown-end px-4 py-2 flex gap-2 text-sm items-center rounded-8"
         >
