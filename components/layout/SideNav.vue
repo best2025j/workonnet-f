@@ -101,7 +101,7 @@ const recruiterLinks = [
     to: "/dashboard/recruiter/company-profile",
     icon: CompanyIcon,
     name: "Company Profile",
-    pageName: "dashboard.recruiter.company-profile",
+    pageName: "dashboard.recruiter.company-profile.index",
   },
   {
     to: "/dashboard/recruiter/settings",

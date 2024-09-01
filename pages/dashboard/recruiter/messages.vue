@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import Messages from "../jobseeker/messages.vue";
+
 definePageMeta({
   title: "Messages",
   pageName: "dashboard.recruiter.messages",
@@ -6,5 +8,5 @@ definePageMeta({
 });
 </script>
 <template>
-  <div>messages page</div>
+  <Messages />
 </template>

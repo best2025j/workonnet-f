@@ -24,7 +24,7 @@ const route = useRoute();
 
       <!-- Link to Recruiter Dashboard -->
       <NuxtLink
-        to="/dashboard/recruiter"
+        to="/dashboard/recruiter/job"
         class="bg-green-500 text-white py-2 px-6 rounded-10 shadow hover:bg-green-600 transition duration-300"
       >
         I'm a Recruiter

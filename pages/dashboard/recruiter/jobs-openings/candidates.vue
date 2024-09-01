@@ -67,7 +67,7 @@ definePageMeta({
         </div>
       </div>
     </div>
-  </div>
+  </div>    
 
   <!-- levels -->
   <div class="py-4 flex items-center justify-center w-full space-x-4">

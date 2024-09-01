@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import Pricing from "../jobseeker/pricing.vue";
+
 definePageMeta({
   title: "Pricing",
   pageName: "dashboard.recruiter.pricing",
@@ -6,5 +8,5 @@ definePageMeta({
 });
 </script>
 <template>
-  <div>pricing page</div>
+  <Pricing />
 </template>
