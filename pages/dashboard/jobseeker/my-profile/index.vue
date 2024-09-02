@@ -1,10 +1,11 @@
 <script setup lang="ts">
-definePageMeta({
+({
   title: "profile input",
   pageName: "dashboard.jobseeker.my-profile.index",
   layout: "dashboard",
 });
 </script>
+
 <template>
   <div class="text-black-900">
     <!-- profile uploads -->
@@ -355,6 +356,5 @@ definePageMeta({
         </div>
       </div>
     </div>
-
   </div>
 </template>
