@@ -74,7 +74,7 @@ definePageMeta({
       <p class="text-xs">Showcase your previous roles and experiences</p>
 
       <div class="border rounded-10 p-4 mt-4">
-        <!--  -->
+        <!-- form -->
         <form action="" class="">
           <div class="w-3/5 p-2 space-y-2">
             <div class="flex gap-x-2">
@@ -141,7 +141,7 @@ definePageMeta({
             </div>
 
             <div
-              class="py-4 divide-black-600 grid grid-cols-4 items-center p-2 w-full space-x-2"
+              class="py-4 divide-black-600 grid grid-cols-4 items-center w-full space-x-2"
             >
               <div class="flex flex-col w-full">
                 <label for="first-name" class="text-sm mb-2"
@@ -194,7 +194,7 @@ definePageMeta({
             </div>
           </div>
 
-          <div class="flex space-x-2 text-xs">
+          <div class="flex space-x-2 text-xs pl-2">
             <button
               class="px-3.5 border rounded-8 py-2 bg-success-600 text-white"
             >
@@ -203,11 +203,166 @@ definePageMeta({
             <button class="px-3.5 border text-black-600 rounded-8 py-2">
               Cancel
             </button>
-            <button class="px-3.5  text-info-600 py-2">
+            <button class="px-3.5 text-info-600 py-2">
               Delete this work experience
             </button>
           </div>
+
+          <!--  list -->
+
+          <div class="space-y-3 w-full h-full">
+            <div
+              class="flex justify-between p-4 mt-4 bg-black-50 items-center rounded-10"
+            >
+              <ul class="space-y-2 pl-4">
+                <li class="text-sm font-black text-info-600 list-disc">
+                  Accountant at Workonnect
+                </li>
+                <div>
+                  <h1 class="font-black text-xs">May - June 2020</h1>
+                  <h1 class="font-blacl text-xs">Lagos, Nigeria.</h1>
+                </div>
+              </ul>
+              <span>
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M21.3103 6.87817L17.1216 2.68848C16.9823 2.54916 16.8169 2.43864 16.6349 2.36324C16.4529 2.28783 16.2578 2.24902 16.0608 2.24902C15.8638 2.24902 15.6687 2.28783 15.4867 2.36324C15.3047 2.43864 15.1393 2.54916 15 2.68848L3.43969 14.2497C3.2998 14.3885 3.18889 14.5537 3.11341 14.7358C3.03792 14.9178 2.99938 15.113 3.00001 15.31V19.4997C3.00001 19.8976 3.15804 20.2791 3.43935 20.5604C3.72065 20.8417 4.10218 20.9997 4.50001 20.9997H8.6897C8.88675 21.0004 9.08197 20.9618 9.26399 20.8863C9.44602 20.8109 9.61122 20.6999 9.75001 20.56L21.3103 8.99973C21.4496 8.86044 21.5602 8.69507 21.6356 8.51306C21.711 8.33105 21.7498 8.13596 21.7498 7.93895C21.7498 7.74194 21.711 7.54686 21.6356 7.36485C21.5602 7.18284 21.4496 7.01747 21.3103 6.87817ZM8.6897 19.4997H4.50001V15.31L12.75 7.06005L16.9397 11.2497L8.6897 19.4997ZM18 10.1885L13.8103 5.99973L16.0603 3.74973L20.25 7.93848L18 10.1885Z"
+                    fill="#343330"
+                  />
+                </svg>
+              </span>
+            </div>
+          </div>
+
+          <div class="space-y-3 w-full h-full">
+            <div
+              class="flex justify-between p-4 mt-4 bg-black-50 items-center rounded-10"
+            >
+              <ul class="space-y-2 pl-4">
+                <li class="text-sm font-black text-info-600 list-disc">
+                  Accountant at Workonnect
+                </li>
+                <div>
+                  <h1 class="font-black text-xs">May - June 2020</h1>
+                  <h1 class="font-blacl text-xs">Lagos, Nigeria.</h1>
+                </div>
+              </ul>
+              <span>
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M21.3103 6.87817L17.1216 2.68848C16.9823 2.54916 16.8169 2.43864 16.6349 2.36324C16.4529 2.28783 16.2578 2.24902 16.0608 2.24902C15.8638 2.24902 15.6687 2.28783 15.4867 2.36324C15.3047 2.43864 15.1393 2.54916 15 2.68848L3.43969 14.2497C3.2998 14.3885 3.18889 14.5537 3.11341 14.7358C3.03792 14.9178 2.99938 15.113 3.00001 15.31V19.4997C3.00001 19.8976 3.15804 20.2791 3.43935 20.5604C3.72065 20.8417 4.10218 20.9997 4.50001 20.9997H8.6897C8.88675 21.0004 9.08197 20.9618 9.26399 20.8863C9.44602 20.8109 9.61122 20.6999 9.75001 20.56L21.3103 8.99973C21.4496 8.86044 21.5602 8.69507 21.6356 8.51306C21.711 8.33105 21.7498 8.13596 21.7498 7.93895C21.7498 7.74194 21.711 7.54686 21.6356 7.36485C21.5602 7.18284 21.4496 7.01747 21.3103 6.87817ZM8.6897 19.4997H4.50001V15.31L12.75 7.06005L16.9397 11.2497L8.6897 19.4997ZM18 10.1885L13.8103 5.99973L16.0603 3.74973L20.25 7.93848L18 10.1885Z"
+                    fill="#343330"
+                  />
+                </svg>
+              </span>
+            </div>
+          </div>
+
+          <div class="space-y-3 w-full h-full">
+            <div
+              class="flex justify-between p-4 mt-4 bg-black-50 items-center rounded-10"
+            >
+              <ul class="space-y-2 pl-4">
+                <li class="text-sm font-black text-info-600 list-disc">
+                  Accountant at Workonnect
+                </li>
+                <div>
+                  <h1 class="font-black text-xs">May - June 2020</h1>
+                  <h1 class="font-blacl text-xs">Lagos, Nigeria.</h1>
+                </div>
+              </ul>
+              <span>
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M21.3103 6.87817L17.1216 2.68848C16.9823 2.54916 16.8169 2.43864 16.6349 2.36324C16.4529 2.28783 16.2578 2.24902 16.0608 2.24902C15.8638 2.24902 15.6687 2.28783 15.4867 2.36324C15.3047 2.43864 15.1393 2.54916 15 2.68848L3.43969 14.2497C3.2998 14.3885 3.18889 14.5537 3.11341 14.7358C3.03792 14.9178 2.99938 15.113 3.00001 15.31V19.4997C3.00001 19.8976 3.15804 20.2791 3.43935 20.5604C3.72065 20.8417 4.10218 20.9997 4.50001 20.9997H8.6897C8.88675 21.0004 9.08197 20.9618 9.26399 20.8863C9.44602 20.8109 9.61122 20.6999 9.75001 20.56L21.3103 8.99973C21.4496 8.86044 21.5602 8.69507 21.6356 8.51306C21.711 8.33105 21.7498 8.13596 21.7498 7.93895C21.7498 7.74194 21.711 7.54686 21.6356 7.36485C21.5602 7.18284 21.4496 7.01747 21.3103 6.87817ZM8.6897 19.4997H4.50001V15.31L12.75 7.06005L16.9397 11.2497L8.6897 19.4997ZM18 10.1885L13.8103 5.99973L16.0603 3.74973L20.25 7.93848L18 10.1885Z"
+                    fill="#343330"
+                  />
+                </svg>
+              </span>
+            </div>
+          </div>
+
+          <div class="space-y-3 w-full h-full">
+            <div
+              class="flex justify-between p-4 mt-4 bg-black-50 items-center rounded-10"
+            >
+              <ul class="space-y-2 pl-4">
+                <li class="text-sm font-black text-info-600 list-disc">
+                  Accountant at Workonnect
+                </li>
+                <div>
+                  <h1 class="font-black text-xs">May - June 2020</h1>
+                  <h1 class="font-blacl text-xs">Lagos, Nigeria.</h1>
+                </div>
+              </ul>
+              <span>
+                <svg
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M21.3103 6.87817L17.1216 2.68848C16.9823 2.54916 16.8169 2.43864 16.6349 2.36324C16.4529 2.28783 16.2578 2.24902 16.0608 2.24902C15.8638 2.24902 15.6687 2.28783 15.4867 2.36324C15.3047 2.43864 15.1393 2.54916 15 2.68848L3.43969 14.2497C3.2998 14.3885 3.18889 14.5537 3.11341 14.7358C3.03792 14.9178 2.99938 15.113 3.00001 15.31V19.4997C3.00001 19.8976 3.15804 20.2791 3.43935 20.5604C3.72065 20.8417 4.10218 20.9997 4.50001 20.9997H8.6897C8.88675 21.0004 9.08197 20.9618 9.26399 20.8863C9.44602 20.8109 9.61122 20.6999 9.75001 20.56L21.3103 8.99973C21.4496 8.86044 21.5602 8.69507 21.6356 8.51306C21.711 8.33105 21.7498 8.13596 21.7498 7.93895C21.7498 7.74194 21.711 7.54686 21.6356 7.36485C21.5602 7.18284 21.4496 7.01747 21.3103 6.87817ZM8.6897 19.4997H4.50001V15.31L12.75 7.06005L16.9397 11.2497L8.6897 19.4997ZM18 10.1885L13.8103 5.99973L16.0603 3.74973L20.25 7.93848L18 10.1885Z"
+                    fill="#343330"
+                  />
+                </svg>
+              </span>
+            </div>
+          </div>
         </form>
+      </div>
+    </div>
+    <!-- education -->
+    <div class="bg-white mt-4 rounded-10 space-y-3 w-2/3 h-full p-5">
+      <h1 class="text xl font-black font-[Georgia]">Education</h1>
+      <div class="space-y-3">
+        <div
+          class="flex justify-between p-4 mt-4 bg-black-50 items-center rounded-10"
+        >
+          <ul class="space-y-2 pl-4">
+            <li class="text-sm font-black text-info-600 list-disc">
+              Accountant at Workonnect
+            </li>
+            <div>
+              <h1 class="font-black text-xs">May - June 2020</h1>
+              <h1 class="font-blacl text-xs">Lagos, Nigeria.</h1>
+            </div>
+          </ul>
+          <span>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M21.3103 6.87817L17.1216 2.68848C16.9823 2.54916 16.8169 2.43864 16.6349 2.36324C16.4529 2.28783 16.2578 2.24902 16.0608 2.24902C15.8638 2.24902 15.6687 2.28783 15.4867 2.36324C15.3047 2.43864 15.1393 2.54916 15 2.68848L3.43969 14.2497C3.2998 14.3885 3.18889 14.5537 3.11341 14.7358C3.03792 14.9178 2.99938 15.113 3.00001 15.31V19.4997C3.00001 19.8976 3.15804 20.2791 3.43935 20.5604C3.72065 20.8417 4.10218 20.9997 4.50001 20.9997H8.6897C8.88675 21.0004 9.08197 20.9618 9.26399 20.8863C9.44602 20.8109 9.61122 20.6999 9.75001 20.56L21.3103 8.99973C21.4496 8.86044 21.5602 8.69507 21.6356 8.51306C21.711 8.33105 21.7498 8.13596 21.7498 7.93895C21.7498 7.74194 21.711 7.54686 21.6356 7.36485C21.5602 7.18284 21.4496 7.01747 21.3103 6.87817ZM8.6897 19.4997H4.50001V15.31L12.75 7.06005L16.9397 11.2497L8.6897 19.4997ZM18 10.1885L13.8103 5.99973L16.0603 3.74973L20.25 7.93848L18 10.1885Z"
+                fill="#343330"
+              />
+            </svg>
+          </span>
+        </div>
       </div>
     </div>
   </div>
