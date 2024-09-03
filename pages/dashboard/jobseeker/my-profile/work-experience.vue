@@ -526,7 +526,7 @@ definePageMeta({
           ><button
             class="text-xs flex items-center justify-center px-2 rounded-5 py-2 border gap-x-2"
           >
-            Branding Des
+            Design System
             <span>
               <svg
                 width="20"
@@ -544,7 +544,7 @@ definePageMeta({
           ><button
             class="text-xs flex items-center justify-center px-2 rounded-5 py-2 border gap-x-2"
           >
-            Branding Des
+            Figma
             <span>
               <svg
                 width="20"
@@ -562,7 +562,7 @@ definePageMeta({
           ><button
             class="text-xs flex items-center justify-center px-2 rounded-5 py-2 border gap-x-2"
           >
-            Branding Des
+            Graphic Design
             <span>
               <svg
                 width="20"
@@ -580,7 +580,7 @@ definePageMeta({
           ><button
             class="text-xs flex items-center justify-center px-2 rounded-5 py-2 border gap-x-2"
           >
-            Branding Des
+            Illustration
             <span>
               <svg
                 width="20"
@@ -598,7 +598,7 @@ definePageMeta({
           ><button
             class="text-xs flex items-center justify-center px-2 rounded-5 py-2 border gap-x-2"
           >
-            Branding Des
+            Microsoft
             <span>
               <svg
                 width="20"
@@ -616,7 +616,7 @@ definePageMeta({
           ><button
             class="text-xs flex items-center justify-center px-2 rounded-5 py-2 border gap-x-2"
           >
-            Branding Des
+            Mobile Design
             <span>
               <svg
                 width="20"
@@ -634,7 +634,7 @@ definePageMeta({
           ><button
             class="text-xs flex items-center justify-center px-2 rounded-5 py-2 border gap-x-2"
           >
-            Branding Des
+            Notion
             <span>
               <svg
                 width="20"
@@ -652,7 +652,7 @@ definePageMeta({
           ><button
             class="text-xs flex items-center justify-center px-2 rounded-5 py-2 border gap-x-2"
           >
-            Branding Des
+            Product Design
             <span>
               <svg
                 width="20"
@@ -670,7 +670,7 @@ definePageMeta({
           ><button
             class="text-xs flex items-center justify-center px-2 rounded-5 py-2 border gap-x-2"
           >
-            Branding Des
+            Internet Savvy
             <span>
               <svg
                 width="20"
@@ -688,7 +688,7 @@ definePageMeta({
           ><button
             class="text-xs flex items-center justify-center px-2 rounded-5 py-2 border gap-x-2"
           >
-            Branding Des
+            UI/UX Design
             <span>
               <svg
                 width="20"
@@ -706,7 +706,7 @@ definePageMeta({
           ><button
             class="text-xs flex items-center justify-center px-2 rounded-5 py-2 border gap-x-2"
           >
-            Branding Des
+            Web Design
             <span>
               <svg
                 width="20"
@@ -724,7 +724,7 @@ definePageMeta({
           ><button
             class="text-xs flex items-center justify-center px-2 rounded-5 py-2 border gap-x-2"
           >
-            Branding Des
+            Web Savvy
             <span>
               <svg
                 width="20"
@@ -742,7 +742,7 @@ definePageMeta({
           ><button
             class="text-xs flex items-center justify-center px-2 rounded-5 py-2 border gap-x-2"
           >
-            Branding Des
+            Webflow
             <span>
               <svg
                 width="20"
