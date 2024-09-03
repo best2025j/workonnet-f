@@ -1,7 +1,7 @@
 <script setup lang="ts">
 definePageMeta({
   title: "My profile",
-  pageName: "dashboard.jobsseeker.my-profile.work-experience",
+  pageName: "dashboard.jobseeker.my-profile.work-experience",
   layout: "dashboard",
 });
 </script>

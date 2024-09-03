@@ -11,3 +11,9 @@ export enum JOB_OPENING_TABS {
   IN_ACTIVE = "inactive",
   DRAFT = "draft",
 }
+
+
+export enum LOGGED_USER {
+  RECRUITER = 'recruiter',
+  JOBSEEKER = 'jobseeker',
+}

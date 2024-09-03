@@ -1,4 +1,7 @@
-<script></script>
+<script setup lang="ts">
+const localStore = useLocalStore()
+
+</script>
 
 <template>
   <header
@@ -9,7 +12,7 @@
         {{ $route?.meta?.title }}
       </h1>
 
-      <div class="relative">
+      <div v-show="localStore.$state.currentUserType === LOGGED_USER.RECRUITER" class="relative">
         <input
           type="text"
           placeholder="Search for jobs, candidates & more..."
