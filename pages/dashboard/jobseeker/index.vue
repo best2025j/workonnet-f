@@ -1,8 +1,7 @@
 <script setup lang="ts">
 definePageMeta({
-  name: "Dashboard",
   title: "Dashboard",
-  pageName: "dashboard.index",
+  pageName: "dashboard.jobseeker.index",
   layout: "dashboard",
 });
 </script>
@@ -155,7 +154,7 @@ definePageMeta({
                 />
                 <div>
                   <h6 class="font-semibold text-gray-800">Juliet Spincer</h6>
-                  <p class="text-sm text-gray-500">HR Manager at Microsoft</p>
+                  <p class="text-xs text-gray-500">HR Manager at Microsoft</p>
                 </div>
               </div>
             </div>

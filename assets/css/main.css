@@ -20,48 +20,47 @@ body {
 }
 
 body {
-  overflow: none !important;
+  overflow: scroll !important; /* or overflow: hidden; if you want to disable scrolling */
   background-color: #f6f6f6;
 }
 
+/* Hide horizontal scrollbar */
 body::-webkit-scrollbar:horizontal {
   display: none !important;
 }
 
+/* Custom Scrollbar Styles */
 
-/* scrollbar */
-
-/* width */
+/* Scrollbar width */
 ::-webkit-scrollbar {
   width: 6px;
   height: 20px;
 }
 
+/* Hide scrollbar completely when using .scrollbar-hide */
 .scrollbar-hide::-webkit-scrollbar {
   display: none !important;
 }
 
-/* For IE, Edge and Firefox */
+/* For IE, Edge, and Firefox */
 .scrollbar-hide {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
 
-/* Track */
+/* Scrollbar Track */
 ::-webkit-scrollbar-track {
   background: #f1f1f1 !important;
 }
 
-/* Handle */
+/* Scrollbar Handle */
 ::-webkit-scrollbar-thumb {
-  /* background: #0A193F; */
   background: #6d6d6d;
   border-radius: 10px !important;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  /* background: #0A193F; */
-  background: #6d6d6d;
+  background: #5a5a5a; /* slightly darker on hover */
   border-radius: 10px !important;
 }

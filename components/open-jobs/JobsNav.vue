@@ -4,53 +4,42 @@ const router = useRouter();
 
 onMounted(() => {
   if (!route?.query?.tab) {
-    router.replace("/dashboard/jobseeker/my-applications?tab=applied");
+    router.replace("/dashboard/recruiter/jobs-openings?tab=applied");
   }
 });
 
 const links = [
   {
-    to: "/dashboard/jobseeker/my-applications?tab=applied",
-    name: "Applied",
+    to: "/dashboard/recruiter/jobs-openings?tab=active",
+    name: "Active",
     disabled: false,
     badge: 4,
-    tabId: TABS.APPLIED,
+    tabId: JOB_OPENING_TABS.ACTIVE,
   },
   {
-    to: "/dashboard/jobseeker/my-applications?tab=in-review",
-    name: "In Review",
+    to: "/dashboard/recruiter/jobs-openings?tab=inactive",
+    name: "Inactive",
     disabled: false,
     badge: 1,
-    tabId: TABS.IN_REVIEW,
+    tabId: JOB_OPENING_TABS.IN_ACTIVE,
   },
   {
-    to: "/dashboard/jobseeker/my-applications?tab=interview",
-    name: "Interview",
+    to: "/dashboard/recruiter/jobs-openings?tab=draft",
+    name: "Draft",
     disabled: false,
-    tabId: TABS.INTERVIEW,
-  },
-  {
-    to: "/dashboard/jobseeker/my-applications?tab=offered",
-    name: "Offered",
-    disabled: false,
-    tabId: TABS.OFFERED,
-  },
-  {
-    to: "/dashboard/jobseeker/my-applications?tab=rejected",
-    name: "Rejected",
-    disabled: false,
-    tabId: TABS.REJECTED,
+    tabId: JOB_OPENING_TABS.DRAFT,
   },
 ];
 
-const isActive = (currentTab: TABS) => route?.query?.tab === currentTab;
-// const changeTab = (routeTo: TABS) => router.push(`/dashboard/jobseeker/my-applications?tab=${routeTo}`);
+const isActive = (currentTab: JOB_OPENING_TABS) =>
+  route?.query?.tab === currentTab;
+// const changeTab = (routeTo: TABS) => router.push(`/dashboard/recruiter/jobs-openings?tab=${routeTo}`);
 </script>
 
 <template>
-  <nav class="flex w-3/5 border-b-2">
+  <nav class="flex w-1/3 border-b-2">
     <ul class="flex gap-x-6 items-center">
-      <li v-for="(link, index) in links" :key="index" class="pl-12 ">
+      <li v-for="(link, index) in links" :key="index" class="pl-12">
         <NuxtLink
           :to="link.to"
           :class="[
@@ -68,7 +57,7 @@ const isActive = (currentTab: TABS) => route?.query?.tab === currentTab;
             {{ link.badge }}
           </span>
         </NuxtLink>
-        
+
         <div
           v-if="isActive(link.tabId)"
           class="bg-primary-1 font-bold h-[5px] rounded-t-10"

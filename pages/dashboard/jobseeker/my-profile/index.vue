@@ -1,11 +1,11 @@
 <script setup lang="ts">
 definePageMeta({
-  name: "input",
-  title: "profile input",
-  pageName: "dashboard.my-profile",
+  title: "My Profile",
+  pageName: "dashboard.jobseeker.my-profile.index",
   layout: "dashboard",
 });
 </script>
+
 <template>
   <div class="text-black-900">
     <!-- profile uploads -->
@@ -158,7 +158,7 @@ definePageMeta({
                 <h1 class="text-lg font-black">$5,000/month</h1>
               </div>
 
-              <nuxt-link to="/dashboard/jobseeker/my-applications/input">
+              <nuxt-link to="/dashboard/jobseeker/my-profile/edit">
                 <div class="flex justify-end">
                   <button
                     class="px-[14px] text-xs py-2 rounded-5 bg-primary-1 text-white"

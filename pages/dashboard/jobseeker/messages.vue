@@ -1,8 +1,7 @@
 <script setup lang="ts">
 definePageMeta({
-  name: "Messages",
   title: "Messages",
-  pageName: "dashboard.messages",
+  pageName: "dashboard.jobseeker.messages",
   layout: "dashboard",
 });
 </script>

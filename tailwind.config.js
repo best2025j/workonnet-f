@@ -8,9 +8,17 @@ module.exports = {
     "./app.vue",
     "./error.vue",
   ],
+
+  daisyui: {
+    themes: ["light"],
+  },
+
   theme: {
     extend: {
       colors: {
+        gray: {
+          1: "#F9F5FF",
+        },
         black: {
           50: "#f6f6f6",
           100: "#e7e7e7",
@@ -100,7 +108,7 @@ module.exports = {
           950: "#461f04",
         },
       },
-      
+
       spacing: {
         3.5: "14px",
         4.5: "18px",
@@ -124,5 +132,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
 };
