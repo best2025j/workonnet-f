@@ -67,4 +67,3 @@ const isActive = (currentTab: JOB_OPENING_TABS) =>
   </nav>
 </template>
 
-<style scoped></style>

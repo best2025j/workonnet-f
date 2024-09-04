@@ -146,7 +146,11 @@ const admin = [
   },
 ];
 
-const isActive = (pageName: string) => route.meta?.pageName === pageName;
+// const isActive = (pageName: string) => route.meta?.pageName === pageName;
+
+const  isActive = (pageName: string) => {
+  return route.meta?.pageName === pageName;
+};
 </script>
 
 <template>

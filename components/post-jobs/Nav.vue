@@ -1,15 +1,10 @@
 <script setup lang="ts">
-definePageMeta({
-  title: "Jobs",
-  pageName: "admin.dashboard.jobs",
-  layout: "dashboard",
-});
-
 const route = useRoute();
 const router = useRouter();
+
 onMounted(() => {
   if (!route?.query?.tab) {
-    router.replace("/admin/dashboard/jobs/?tab=applied");
+    router.replace("/admin/dashboard/home/posted-jobs?tab=applied");
   }
   console.log(router.replace);
 });
@@ -43,6 +38,8 @@ const links = [
     tabId: POST_JOBS_TABS.DRAFTS,
   },
 ];
+
+// 
 
 const isActive = (currentTab: POST_JOBS_TABS) =>
   route?.query?.tab === currentTab;
