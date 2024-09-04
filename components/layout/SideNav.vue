@@ -11,7 +11,7 @@ import SearchIcon from "../icons/SearchIcon.vue";
 import SettingIcon from "../icons/SettingIcon.vue";
 
 const route = useRoute();
-const localStore = useLocalStore()
+const localStore = useLocalStore();
 
 const jobSeekerLinks = [
   {
@@ -112,6 +112,40 @@ const recruiterLinks = [
   },
 ];
 
+// admin
+const admin = [
+  {
+    to: "/admin/dashboard/",
+    icon: DashBoardIcon,
+    name: "Dashboard",
+    pageName: "admin.dashboard.index",
+  },
+  {
+    to: "/admin/dashboard/jobs",
+    icon: DashBoardIcon,
+    name: "Dashboard",
+    pageName: "admin.dashboard.jobs",
+  },
+  {
+    to: "/admin/dashboard/recruiters",
+    icon: DashBoardIcon,
+    name: "Dashboard",
+    pageName: "admin.dashboard.recruiters",
+  },
+  {
+    to: "/admin/dashboard/jobseekers",
+    icon: DashBoardIcon,
+    name: "Dashboard",
+    pageName: "admin.dashboard.jobseekers",
+  },
+  {
+    to: "/admin/dashboard/subscriptions",
+    icon: DashBoardIcon,
+    name: "Dashboard",
+    pageName: "admin.dashboard.subscriptions",
+  },
+];
+
 const isActive = (pageName: string) => route.meta?.pageName === pageName;
 </script>
 
@@ -124,7 +158,10 @@ const isActive = (pageName: string) => route.meta?.pageName === pageName;
 
     <!-- side nav -->
     <nav class="">
-      <ul class="w-full" v-show="localStore.$state.currentUserType === LOGGED_USER.JOBSEEKER">
+      <ul
+        class="w-full"
+        v-show="localStore.$state.currentUserType === LOGGED_USER.JOBSEEKER"
+      >
         <li v-for="(link, index) in jobSeekerLinks" :key="index">
           <NuxtLink
             :to="link.to"
@@ -146,7 +183,10 @@ const isActive = (pageName: string) => route.meta?.pageName === pageName;
         </li>
       </ul>
 
-      <ul class="w-full" v-show="localStore.$state.currentUserType === LOGGED_USER.RECRUITER">
+      <ul
+        class="w-full"
+        v-show="localStore.$state.currentUserType === LOGGED_USER.RECRUITER"
+      >
         <li v-for="(link, index) in recruiterLinks" :key="index">
           <NuxtLink
             :to="link.to"
@@ -170,7 +210,7 @@ const isActive = (pageName: string) => route.meta?.pageName === pageName;
 
       <!--  -->
       <div
-      v-show="localStore.$state.currentUserType === LOGGED_USER.RECRUITER"
+        v-show="localStore.$state.currentUserType === LOGGED_USER.RECRUITER"
         class="flex justify-center items-center mt-4 py-4 w-[218px] bg-westside-100 flex-col mx-auto rounded-10 space-y-4"
       >
         <span
