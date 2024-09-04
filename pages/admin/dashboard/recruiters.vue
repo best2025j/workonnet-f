@@ -1,6 +1,6 @@
 <script setup lang="ts">
 definePageMeta({
-  title: "Dashboard",
+  title: "Recruiters",
   pageName: "admin.dashboard.recruiters",
   layout: "dashboard",
 });

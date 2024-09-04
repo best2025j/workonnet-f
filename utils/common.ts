@@ -16,4 +16,5 @@ export enum JOB_OPENING_TABS {
 export enum LOGGED_USER {
   RECRUITER = 'recruiter',
   JOBSEEKER = 'jobseeker',
+  ADMIN = 'admin',
 }

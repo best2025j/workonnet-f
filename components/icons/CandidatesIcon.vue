@@ -3,6 +3,7 @@ defineProps<{
   isActive: boolean;
 }>();
 </script>
+
 <template>
   <!-- icon not active -->
   <svg
@@ -33,3 +34,5 @@ defineProps<{
     />
   </svg>
 </template>
+
+

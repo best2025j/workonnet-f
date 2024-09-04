@@ -9,6 +9,7 @@ import NairaIcon from "../icons/NairaIcon.vue";
 import ProfileIcon from "../icons/ProfileIcon.vue";
 import SearchIcon from "../icons/SearchIcon.vue";
 import SettingIcon from "../icons/SettingIcon.vue";
+import SpeekerIcon from "../icons/SpeekerIcon.vue";
 
 const route = useRoute();
 const localStore = useLocalStore();
@@ -112,7 +113,6 @@ const recruiterLinks = [
   },
 ];
 
-// admin
 const admin = [
   {
     to: "/admin/dashboard/",
@@ -122,26 +122,26 @@ const admin = [
   },
   {
     to: "/admin/dashboard/jobs",
-    icon: DashBoardIcon,
-    name: "Dashboard",
+    icon: ApplicationIcon,
+    name: "Jobs",
     pageName: "admin.dashboard.jobs",
   },
   {
     to: "/admin/dashboard/recruiters",
-    icon: DashBoardIcon,
-    name: "Dashboard",
+    icon: SpeekerIcon,
+    name: "Recruiters",
     pageName: "admin.dashboard.recruiters",
   },
   {
     to: "/admin/dashboard/jobseekers",
-    icon: DashBoardIcon,
-    name: "Dashboard",
+    icon: CandidatesIcon,
+    name: "Jobseekers",
     pageName: "admin.dashboard.jobseekers",
   },
   {
     to: "/admin/dashboard/subscriptions",
-    icon: DashBoardIcon,
-    name: "Dashboard",
+    icon: NairaIcon,
+    name: "Subscriptions",
     pageName: "admin.dashboard.subscriptions",
   },
 ];
@@ -158,6 +158,8 @@ const isActive = (pageName: string) => route.meta?.pageName === pageName;
 
     <!-- side nav -->
     <nav class="">
+      ' '
+      <!-- jobseekers sidenav -->
       <ul
         class="w-full"
         v-show="localStore.$state.currentUserType === LOGGED_USER.JOBSEEKER"
@@ -183,11 +185,38 @@ const isActive = (pageName: string) => route.meta?.pageName === pageName;
         </li>
       </ul>
 
+      <!-- recruiters sidenav -->
       <ul
         class="w-full"
         v-show="localStore.$state.currentUserType === LOGGED_USER.RECRUITER"
       >
         <li v-for="(link, index) in recruiterLinks" :key="index">
+          <NuxtLink
+            :to="link.to"
+            :class="[
+              isActive(link.pageName)
+                ? 'bg-westside-100 text-primary-1 border-primary-1 border-l-4 !pl-11 font-[900]'
+                : 'pl-12',
+              'flex items-center py-4 text-xs',
+            ]"
+          >
+            <!-- Render Icon -->
+            <component
+              :is="link.icon"
+              class="inline-block mr-2"
+              :isActive="isActive(link.pageName)"
+            />
+            {{ link.name }}
+          </NuxtLink>
+        </li>
+      </ul>
+
+      <!-- admin -->
+      <ul
+        class="w-full"
+        v-show="localStore.$state.currentUserType === LOGGED_USER.ADMIN"
+      >
+        <li v-for="(link, index) in admin" :key="index">
           <NuxtLink
             :to="link.to"
             :class="[
