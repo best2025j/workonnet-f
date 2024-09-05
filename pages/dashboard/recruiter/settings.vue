@@ -388,7 +388,6 @@ definePageMeta({
                 </div>
               </dialog>
             </button>
-            <!-- for modal triggring -->
           </div>
         </div>
       </div>
