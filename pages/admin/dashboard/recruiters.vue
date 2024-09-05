@@ -5036,7 +5036,7 @@ definePageMeta({
       </div>
       <!--  pagenation-->
       <div
-        class="flex justify-between bg-white p-2 min-w-[1230px] fixed bottom-0 shadow-md shadow-black-400"
+      class="flex justify-between bg-white p-2 min-w-[1220px] z-10 fixed bottom-0 shadow-md shadow-black-400"
       >
         <div class="text-xs w-32 flex space-x-2 items-center">
           <h1>Page</h1>
