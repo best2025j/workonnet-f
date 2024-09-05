@@ -9,9 +9,10 @@ import NairaIcon from "../icons/NairaIcon.vue";
 import ProfileIcon from "../icons/ProfileIcon.vue";
 import SearchIcon from "../icons/SearchIcon.vue";
 import SettingIcon from "../icons/SettingIcon.vue";
+import SpeekerIcon from "../icons/SpeekerIcon.vue";
 
 const route = useRoute();
-const localStore = useLocalStore()
+const localStore = useLocalStore();
 
 const jobSeekerLinks = [
   {
@@ -112,7 +113,44 @@ const recruiterLinks = [
   },
 ];
 
-const isActive = (pageName: string) => route.meta?.pageName === pageName;
+const admin = [
+  {
+    to: "/admin/dashboard/",
+    icon: DashBoardIcon,
+    name: "Dashboard",
+    pageName: "admin.dashboard.index",
+  },
+  {
+    to: "/admin/dashboard/jobs",
+    icon: ApplicationIcon,
+    name: "Jobs",
+    pageName: "admin.dashboard.jobs",
+  },
+  {
+    to: "/admin/dashboard/recruiters",
+    icon: SpeekerIcon,
+    name: "Recruiters",
+    pageName: "admin.dashboard.recruiters",
+  },
+  {
+    to: "/admin/dashboard/jobseekers",
+    icon: CandidatesIcon,
+    name: "Jobseekers",
+    pageName: "admin.dashboard.jobseekers",
+  },
+  {
+    to: "/admin/dashboard/subscriptions",
+    icon: NairaIcon,
+    name: "Subscriptions",
+    pageName: "admin.dashboard.subscriptions",
+  },
+];
+
+// const isActive = (pageName: string) => route.meta?.pageName === pageName;
+
+const  isActive = (pageName: string) => {
+  return route.meta?.pageName === pageName;
+};
 </script>
 
 <template>
@@ -124,7 +162,12 @@ const isActive = (pageName: string) => route.meta?.pageName === pageName;
 
     <!-- side nav -->
     <nav class="">
-      <ul class="w-full" v-show="localStore.$state.currentUserType === LOGGED_USER.JOBSEEKER">
+      ' '
+      <!-- jobseekers sidenav -->
+      <ul
+        class="w-full"
+        v-show="localStore.$state.currentUserType === LOGGED_USER.JOBSEEKER"
+      >
         <li v-for="(link, index) in jobSeekerLinks" :key="index">
           <NuxtLink
             :to="link.to"
@@ -146,8 +189,38 @@ const isActive = (pageName: string) => route.meta?.pageName === pageName;
         </li>
       </ul>
 
-      <ul class="w-full" v-show="localStore.$state.currentUserType === LOGGED_USER.RECRUITER">
+      <!-- recruiters sidenav -->
+      <ul
+        class="w-full"
+        v-show="localStore.$state.currentUserType === LOGGED_USER.RECRUITER"
+      >
         <li v-for="(link, index) in recruiterLinks" :key="index">
+          <NuxtLink
+            :to="link.to"
+            :class="[
+              isActive(link.pageName)
+                ? 'bg-westside-100 text-primary-1 border-primary-1 border-l-4 !pl-11 font-[900]'
+                : 'pl-12',
+              'flex items-center py-4 text-xs',
+            ]"
+          >
+            <!-- Render Icon -->
+            <component
+              :is="link.icon"
+              class="inline-block mr-2"
+              :isActive="isActive(link.pageName)"
+            />
+            {{ link.name }}
+          </NuxtLink>
+        </li>
+      </ul>
+
+      <!-- admin -->
+      <ul
+        class="w-full"
+        v-show="localStore.$state.currentUserType === LOGGED_USER.ADMIN"
+      >
+        <li v-for="(link, index) in admin" :key="index">
           <NuxtLink
             :to="link.to"
             :class="[
@@ -170,7 +243,7 @@ const isActive = (pageName: string) => route.meta?.pageName === pageName;
 
       <!--  -->
       <div
-      v-show="localStore.$state.currentUserType === LOGGED_USER.RECRUITER"
+        v-show="localStore.$state.currentUserType === LOGGED_USER.RECRUITER"
         class="flex justify-center items-center mt-4 py-4 w-[218px] bg-westside-100 flex-col mx-auto rounded-10 space-y-4"
       >
         <span

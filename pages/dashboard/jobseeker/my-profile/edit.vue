@@ -33,6 +33,7 @@ definePageMeta({
             >
           </div>
         </div>
+
         <div class="border-t-2 bg-white p-6">
           <div class="space-x-3 flex items-center">
             <span
@@ -361,9 +362,11 @@ definePageMeta({
             </div>
 
             <div>
-              <button class="px-4 py-2 bg-primary-1 text-white rounded-5">
-                Edit experience
-              </button>
+              <NuxtLink to="/dashboard/jobseeker/my-profile/work-experience">
+                <button class="px-4 py-2 bg-primary-1 text-white rounded-5">
+                  Edit experience
+                </button>
+              </NuxtLink>
             </div>
           </div>
 

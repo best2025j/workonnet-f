@@ -4,34 +4,44 @@ const router = useRouter();
 
 onMounted(() => {
   if (!route?.query?.tab) {
-    router.replace("/dashboard/recruiter/jobs-openings?tab=applied");
+    router.replace("/admin/dashboard/home/posted-jobs?tab=applied");
   }
+  console.log(router.replace);
 });
 
 const links = [
   {
-    to: "/dashboard/recruiter/jobs-openings?tab=active",
+    to: "/admin/dashboard/home/posted-jobs?tab=under-review",
+    name: "Under-Review",
+    disabled: false,
+    badge: 9,
+    tabId: POST_JOBS_TABS.UNDER_REVEIW,
+  },
+  {
+    to: "/admin/dashboard/home/posted-jobs?tab=active",
     name: "Active",
     disabled: false,
     badge: 4,
-    tabId: JOB_OPENING_TABS.ACTIVE,
+    tabId: POST_JOBS_TABS.ACTIVE,
   },
   {
-    to: "/dashboard/recruiter/jobs-openings?tab=inactive",
-    name: "Inactive",
+    to: "/admin/dashboard/home/posted-jobs?tab=removed",
+    name: "Removed",
     disabled: false,
     badge: 1,
-    tabId: JOB_OPENING_TABS.IN_ACTIVE,
+    tabId: POST_JOBS_TABS.REMOVED,
   },
   {
-    to: "/dashboard/recruiter/jobs-openings?tab=draft",
-    name: "Draft",
+    to: "/admin/dashboard/home/posted-jobs?tab=drafts",
+    name: "Drafts",
     disabled: false,
-    tabId: JOB_OPENING_TABS.DRAFT,
+    tabId: POST_JOBS_TABS.DRAFTS,
   },
 ];
 
-const isActive = (currentTab: JOB_OPENING_TABS) =>
+// 
+
+const isActive = (currentTab: POST_JOBS_TABS) =>
   route?.query?.tab === currentTab;
 // const changeTab = (routeTo: TABS) => router.push(`/dashboard/recruiter/jobs-openings?tab=${routeTo}`);
 </script>
@@ -39,14 +49,14 @@ const isActive = (currentTab: JOB_OPENING_TABS) =>
 <template>
   <nav class="flex w-1/3 border-b-2">
     <ul class="flex gap-x-6 items-center">
-      <li v-for="(link, index) in links" :key="index" class="pl-12">
+      <li v-for="(link, index) in links" :key="index" class="">
         <NuxtLink
           :to="link.to"
           :class="[
             'flex items-center pb-2',
             isActive(link.tabId)
-              ? 'text-primary-1 border-primary-1 font-black text-sm'
-              : 'text-sm',
+              ? 'text-primary-1 border-primary-1 font-black text-xs'
+              : 'text-xs',
           ]"
         >
           {{ link.name }}
@@ -66,4 +76,3 @@ const isActive = (currentTab: JOB_OPENING_TABS) =>
     </ul>
   </nav>
 </template>
-

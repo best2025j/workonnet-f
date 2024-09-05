@@ -10,10 +10,20 @@ export enum JOB_OPENING_TABS {
   ACTIVE = "active",
   IN_ACTIVE = "inactive",
   DRAFT = "draft",
+  
+}
+
+export enum POST_JOBS_TABS {
+  UNDER_REVEIW = "under-review",
+  ACTIVE = "active",
+  REMOVED = "removed",
+  DRAFTS = "drafts",
+  
 }
 
 
 export enum LOGGED_USER {
   RECRUITER = 'recruiter',
   JOBSEEKER = 'jobseeker',
+  ADMIN = 'admin',
 }
