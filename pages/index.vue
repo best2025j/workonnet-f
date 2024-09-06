@@ -10,6 +10,38 @@ const setUserType = (userType: LOGGED_USER, routePath: string) => {
 </script>
 
 <template>
+  <div class="relative min-h-screen w-full">
+    <!-- Background Image -->
+    <img
+      src="/assets/images/my-lady.png"
+      class="absolute top-0 left-0 w-full h-full object-cover z-0"
+      alt="a lady with book"
+    />
+
+    <div class="relative z-50">
+      <!-- Navbar -->
+      <LandingPageNavbar class="" />
+
+      <!-- Main Content -->
+      <main>
+        <LandingPageHero />
+      </main>
+    </div>
+  </div>
+</template>
+
+<!-- <script setup lang="ts">
+const route = useRoute();
+
+const localStore = useLocalStore();
+
+const setUserType = (userType: LOGGED_USER, routePath: string) => {
+  localStore.setCurrentUserType(userType);
+  useRouter().replace(routePath);
+};
+</script>
+
+<template>
   <div
     class="min-h-screen bg-gray-100 flex flex-col items-center justify-center"
   >
@@ -21,7 +53,6 @@ const setUserType = (userType: LOGGED_USER, routePath: string) => {
     </header>
 
     <section class="flex space-x-4">
-      <!-- Link to Job Seeker Dashboard -->
       <button
         @click="setUserType(LOGGED_USER.JOBSEEKER, '/dashboard/jobseeker')"
         class="bg-blue-500 text-white py-2 px-6 rounded-10 shadow hover:bg-blue-600 transition duration-300"
@@ -29,7 +60,6 @@ const setUserType = (userType: LOGGED_USER, routePath: string) => {
         I'm a Job Seeker
       </button>
 
-      <!-- Link to Recruiter Dashboard -->
       <button
         @click="setUserType(LOGGED_USER.RECRUITER, '/dashboard/recruiter')"
         class="bg-green-500 text-white py-2 px-6 rounded-10 shadow hover:bg-green-600 transition duration-300"
@@ -37,13 +67,12 @@ const setUserType = (userType: LOGGED_USER, routePath: string) => {
         I'm a Recruiter
       </button>
 
-      <!-- link to admin -->
       <button
         @click="setUserType(LOGGED_USER.ADMIN, '/admin/dashboard')"
         class="bg-westside-500 text-white py-2 px-6 rounded-10 shadow hover:bg-green-600 transition duration-300"
       >
-        I'm  Admin
+        I'm Admin
       </button>
     </section>
   </div>
-</template>
+</template> -->

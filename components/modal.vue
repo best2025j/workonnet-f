@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 // Create a ref to manage modal visibility
 const showModal = ref(false);
 
@@ -30,7 +29,7 @@ const closeModal = () => {
         >
           <div class="flex items-center justify-between border-b-2 pb-4">
             <div class="text-gray-500">no text.</div>
-            <h3 class="text-lg font-bold">Information!</h3>
+            <h3 class="text-lg font-bold">Delete job post!</h3>
 
             <!-- Close button -->
             <button
@@ -61,24 +60,21 @@ const closeModal = () => {
           </div>
 
           <!-- Modal content -->
-          <p class="py-2 w-2/3 text-sm text-center">
-            Are you sure you want to remove this job post from the list?
-          </p>
-          <p class="py-2">This cannot be undone</p>
+
+          <div class="flex flex-col">
+            <label for="">The recruiter will be notified while there post was removed</label>
+            <textarea name="" role="6" placeholder="Add notes and reasons" id=""></textarea>
+          </div>
 
           <!-- Buttons -->
           <div class="space-x-2">
             <button
               @click="closeModal"
-              class="px-4 py-2 border border-danger-600 text-danger-600 text-xs rounded-10"
-            >
-              Cancel
-            </button>
-            <button
               class="rounded-10 px-4 py-2 text-white text-xs bg-primary-1"
             >
-              Proceed
+              SEND
             </button>
+           
           </div>
         </div>
       </div>
