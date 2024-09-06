@@ -26,4 +26,5 @@ export enum LOGGED_USER {
   RECRUITER = 'recruiter',
   JOBSEEKER = 'jobseeker',
   ADMIN = 'admin',
+  HOME = '/',
 }

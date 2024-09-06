@@ -1,7 +1,7 @@
 <template>
   <!-- Navbar -->
   <nav
-    class="flex justify-between w-full items-center backdrop-blur-sm shadow-md px-6 h-16 text-xs fixed"
+    class="flex justify-between bg-inherit w-full items-center backdrop-blur-sm shadow-md px-6 h-16 text-xs fixed"
   >
     <div>
       <img src="/assets/images/logo3.png" alt="Logo" class="" />
@@ -15,7 +15,7 @@
     </ul>
 
     <div class="space-x-4">
-      <button class="text-white py-2 px-4 rounded-8 bg-primary-1">
+      <button class="text-white py-2 px-4 rounded-8 shadow shadow-black-900 bg-primary-1">
         Register
       </button>
       <button

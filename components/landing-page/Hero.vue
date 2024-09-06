@@ -3,6 +3,7 @@
     class="text-white h-full w-full py-20 px-4 space-y-4 flex justify-between"
   >
     <!--  -->
+
     <div class="relative top-72">
       <h1 class="font-black text-xl">The Future of Work Powered by AI</h1>
       <div class="py-4 max-w-[864px] text-black-50">
@@ -24,7 +25,9 @@
       </div>
     </div>
     <!--  -->
-    <div class="border w-[440px] rounded-10 p-6 space-y-4 h-full backdrop-blur-sm">
+    <div
+      class="border w-[440px] rounded-10 p-6 space-y-4 h-full backdrop-blur-sm"
+    >
       <div class="flex items-center justify-between">
         <div>
           <h1 class="text-2xl">Find Your Jobs</h1>
