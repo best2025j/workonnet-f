@@ -371,12 +371,12 @@ definePageMeta({
                         <h1 onclick="my_modal_1.showModal()">View</h1>
 
                         <!--  -->
-                        <dialog id="my_modal_1" class="modal text-black-950">
+                        <dialog id="my_modal_1" class="modal text-black-950 backdrop-blur-sm backdrop-filter">
                           <div
-                            class="modal-box flex-col flex items-center space-y-3"
+                            class="modal-box flex-col max-w-md flex items-center space-y-3"
                           >
                             <div
-                              class="flex items-center justify-around w-full pb-4 border-b-2"
+                              class="flex items-center justify-between w-full pb-4 border-b-2"
                             >
                               <div class="text-white">no text.</div>
                               <h3 class="text-lg font-bold">Information!</h3>
@@ -426,7 +426,7 @@ definePageMeta({
                             </p>
                             <p class="py-2">This cannot be undone</p>
 
-                            <div class="space-x-2">
+                            <div class="space-x-4">
                               <!-- if there is a button in form, it will close the modal -->
                               <button
                                 class="px-4 py-2 border border-danger-600 text-danger-600 text-xs rounded-10"
@@ -434,7 +434,7 @@ definePageMeta({
                                 Cancel
                               </button>
                               <button
-                                class="rounded-10 px-4 py-2 text-white text-xs bg-primary-1"
+                                class="rounded-10 px-4 py-2.5 text-white text-xs bg-primary-1"
                               >
                                 Proceed
                               </button>

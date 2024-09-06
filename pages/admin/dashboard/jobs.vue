@@ -9,7 +9,7 @@ const route = useRoute();
 const router = useRouter();
 onMounted(() => {
   if (!route?.query?.tab) {
-    router.replace("/admin/dashboard/jobs/?tab=applied");
+    router.replace("/admin/dashboard/home/posted-jobs?tab=under-review");
   }
   console.log(router.replace);
 });
