@@ -1,32 +1,3 @@
-<!-- <script setup lang="ts">
-const route = useRoute();
-
-const localStore = useLocalStore();
-
-const setUserType = (userType: LOGGED_USER, routePath: string) => {
-  localStore.setCurrentUserType(userType);
-  useRouter().replace(routePath);
-};
-</script>
-
-<template>
-  <div class="relative min-h-screen w-full">
-    <img
-      src="/assets/images/my-lady.png"
-      class="absolute top-0 left-0 w-full h-full object-cover z-0"
-      alt="a lady with book"
-    />
-
-    <div class="relative z-50">
-      <LandingPageNavbar class="" />
-
-      <main>
-        <LandingPageHero />
-      </main>
-    </div>
-  </div>
-</template> -->
-
 <script setup lang="ts">
 const route = useRoute();
 const isDashboard = ref(false);
@@ -37,13 +8,9 @@ const setUserType = (userType: LOGGED_USER, routePath: string) => {
   useRouter().replace(routePath);
 };
 </script>
-
-// Watch for route changes to determine if it's the dashboard or landing page
-watchEffect(() => { isDashboard.value = route.path.includes('/dashboard'); });
-
 <template>
-  <div>
-    <div class="relative min-h-screen w-full">
+  <!-- <div> -->
+    <!-- <div class="relative min-h-screen w-full">
       <img
         src="/assets/images/my-lady.png"
         class="absolute top-0 left-0 w-full h-screen object-cover z-0"
@@ -56,10 +23,9 @@ watchEffect(() => { isDashboard.value = route.path.includes('/dashboard'); });
     </div>
     <main>
       <LandingPageSections />
-    </main>
+    </main> -->
     <!-- admin -->
     <div
-      v-if="isDashboard"
       class="min-h-screen bg-gray-100 flex flex-col items-center justify-center"
     >
       <header class="text-center mb-8">
@@ -92,5 +58,5 @@ watchEffect(() => { isDashboard.value = route.path.includes('/dashboard'); });
         </button>
       </section>
     </div>
-  </div>
+  <!-- </div> -->
 </template>
