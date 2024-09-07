@@ -6,9 +6,9 @@ export default {};
   <div class="bg-white rounded-10 w-2/4 my-8">
     <div class="flex items-center justify-between border-b-2 p-3">
       <div class="flex gap-x-4 items-center">
-        <img src="/SocialMedia2.png" alt="Google" class="w-10 h-10 rounded" />
+        <img src="/assets/images/SocialMedia2.png" alt="Google" class="w-10 h-10 rounded" />
         <div class="pl-4">
-          <span class="block text-base font-bold">Admin Assistant</span>
+          <span class="block text-base font-black">Admin Assistant</span>
           <span class="text-xs font-semimedium text-gray-500">Hour Glass</span>
         </div>
       </div>

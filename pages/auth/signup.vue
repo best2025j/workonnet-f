@@ -1,28 +1,28 @@
 <script setup>
-import googleLogo from '@/assets/images/googlelogo.png';
-import linkedinlogo from '@/assets/images/linkedin.png';
-import asterix from '@/assets/images/”.png';
-import jobseeker from '@/assets/images/Frame 1618869200.png';
-import arrowleft from '@/assets/images/arrowright.png';
-import arrowright from '@/assets/images/arrowleft.png';
-import { ref } from 'vue';
+import googleLogo from "@/assets/images/googlelogo.png";
+import linkedinlogo from "@/assets/images/linkedin.png";
+import asterix from "@/assets/images/”.png";
+import jobseeker from "@/assets/images/Frame 1618869200.png";
+import arrowleft from "@/assets/images/arrowright.png";
+import arrowright from "@/assets/images/arrowleft.png";
+import { ref } from "vue";
 
 const testimonials = [
   {
-    name: 'John Doe',
+    name: "John Doe",
     message:
-      'Searching and finding your dream job is now easier than ever. Get AI recommended Job Match, Apply and Get Accepted',
-    occupation: 'UI/UX Designer',
+      "Searching and finding your dream job is now easier than ever. Get AI recommended Job Match, Apply and Get Accepted",
+    occupation: "UI/UX Designer",
   },
   {
-    name: 'Jane Smith',
-    message: 'I absolutely love it!',
-    occupation: 'UI/UX Designer',
+    name: "Jane Smith",
+    message: "I absolutely love it!",
+    occupation: "UI/UX Designer",
   },
   {
-    name: 'Alice Johnson',
-    message: 'Highly recommend to everyone!',
-    occupation: 'UI/UX Designer',
+    name: "Alice Johnson",
+    message: "Highly recommend to everyone!",
+    occupation: "UI/UX Designer",
   },
   // Add more testimonials as needed
 ];
@@ -42,7 +42,7 @@ const prevSlide = () => {
 <template>
   <section>
     <div class="flex items-center justify-center gap-4 mb-32 mt-14 mx-2">
-      <div class="flex flex-col w-full">
+      <div class="flex flex-col -mt-20 w-full">
         <h2 class="text-center text-3xl mb-10 font-['Georgia'] font-normal">
           Create Account
         </h2>
@@ -83,29 +83,29 @@ const prevSlide = () => {
             >Create Password
           </label>
           <input
-            placeholder="......"
-            class="placeholder-custom outline-none w-full font-thin placehoder:font-thin placehoder:text-[#958D8D] rounded-md px-3 py-2 border-2 border-black-200 border-solid"
+            type="password"
+            class="placeholder-custom outline-none w-full px-3 font-thin placehoder:font-thin placehoder:text-[#d9d9d9] rounded-md py-2 border-2 border-black-200 border-solid"
           />
 
           <button
-            class="h-12 bg-[#FE8900] font-black text-white mt-20 text-sm w-[375px]  rounded-md"
+            class="h-12 bg-[#FE8900] font-black text-white mt-20 text-sm w-[375px] rounded-md"
           >
             <NuxtLink to="/auth/activation-code"> Create Account</NuxtLink>
           </button>
         </form>
-        <p class="text-center mt-10 mb-5 text-sm font-thin ">
+        <p class="text-center mt-10 mb-5 text-sm font-thin">
           Already have an account?
-          <NuxtLink
-            to="/auth/signin"
-            class="font-thin  text-[#007AFF]"
+          <NuxtLink to="/auth/signin" class="font-thin text-[#007AFF]"
             >Sign In</NuxtLink
           >
         </p>
       </div>
 
-      <div class="bg-custom-gradient w-[65%] mr-24 rounded-xl">
+      <div class="bg-custom-gradient w-[75%] mr-24 rounded-xl">
         <div class="flex items-center justify-center gap-10 mx-3 mt-10">
-          <h1 class="text-[34.33px] font-['Georgia'] font-normal text-white mx-6">
+          <h1
+            class="text-[34.33px] font-['Georgia'] font-normal text-white mx-6"
+          >
             What Our Jobseekers Said.
           </h1>
           <img :src="asterix" alt="" />
@@ -125,7 +125,9 @@ const prevSlide = () => {
                 <p class="text-sm text-white mb-6 font-thin">
                   "{{ testimonial.message }} "
                 </p>
-                <p class="mt-2 text-sm font-black text-white">{{ testimonial.name }}</p>
+                <p class="mt-2 text-sm font-black text-white">
+                  {{ testimonial.name }}
+                </p>
                 <p class="text-white font-thin">{{ testimonial.occupation }}</p>
               </div>
             </div>
@@ -160,7 +162,7 @@ const prevSlide = () => {
 }
 
 .placeholder-custom::placeholder {
-  font-size: 3rem;
-  color:  #d9d9d9;
+  font-size: 2rem;
+  color: #d9d9d9;
 }
 </style>

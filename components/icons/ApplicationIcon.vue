@@ -3,6 +3,7 @@ defineProps<{
   isActive: boolean;
 }>();
 </script>
+
 <template>
   <svg
     v-if="!isActive"

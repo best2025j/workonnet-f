@@ -437,7 +437,7 @@ export default {};
       </div>
       <h1 class="text-xs">Nothing to see here.</h1>
       <div>
-        <button class="bg-primary-1 px-4 py-[10px] rounded-10">
+        <button class="bg-primary-1 text-white text-xs px-4 py-[10px] rounded-10">
           Start searching
         </button>
       </div>

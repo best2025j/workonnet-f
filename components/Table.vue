@@ -8,13 +8,17 @@
             <td class="py-6 whitespace-nowrap pl-4">
               <div class="flex space-x-4">
                 <div class="flex flex-col">
-                  <img src="/ms.png" alt="Google" class="w-10 h-10 rounded" />
+                  <img
+                    src="/assets/images/ms.png"
+                    alt="Google"
+                    class="w-10 h-10 rounded"
+                  />
                 </div>
 
                 <div
                   class="text-left flex flex-col w-[104px] whitespace-break-spaces"
                 >
-                  <span class="text-sm font-bold">Social Media Assistant</span>
+                  <span class="text-sm font-black">Social Media Assistant</span>
                   <span class="text-sm font-semimedium">Microsoft</span>
                 </div>
               </div>
@@ -22,14 +26,14 @@
 
             <td class="py-4 whitespace-nowrap">
               <div class="text-left flex flex-col">
-                <span class="text-sm font-bold">Location</span
+                <span class="text-sm font-black">Location</span
                 ><span class="text-sm font-semimedium">Paris, France.</span>
               </div>
             </td>
 
             <td class="py-4 whitespace-nowrap">
               <div class="text-left flex flex-col">
-                <span class="text-sm font-bold">Date Applied</span
+                <span class="text-sm font-black">Date Applied</span
                 ><span class="text-sm font-semimedium">14th July, 2024</span>
               </div>
             </td>
@@ -37,7 +41,7 @@
             <td class="py-4 whitespace-nowrap">
               <div class="font-normal flex text-left">
                 <span
-                  class="px-6 py-2 rounded-10 font-bold bg-westside-100 text-xs text-primary-1"
+                  class="px-6 py-2 rounded-10 font-black bg-westside-100 text-xs text-primary-1"
                   >In Review</span
                 >
               </div>
@@ -66,7 +70,7 @@
               <div class="flex space-x-4">
                 <div class="flex flex-col">
                   <img
-                    src="/SocialMedia.png"
+                    src="/assets/images/SocialMedia.png"
                     alt="Google"
                     class="w-10 h-10 rounded"
                   />
@@ -74,21 +78,22 @@
                 <div
                   class="text-left w-[104px] flex whitespace-break-spaces flex-col"
                 >
-                  <span class="text-sm font-bold">Social Media Assistant</span
+                  <span class="text-sm font-black">Social Media Assistant</span
                   ><span class="text-sm font-semimedium">Microsoft</span>
                 </div>
               </div>
             </td>
+
             <td class="py-4 whitespace-nowrap">
               <div class="text-left flex flex-col">
-                <span class="text-sm font-bold">Location</span
+                <span class="text-sm font-black">Location</span
                 ><span class="text-sm font-semimedium">Paris, France.</span>
               </div>
             </td>
 
             <td class="py-4 whitespace-nowrap">
               <div class="text-left flex flex-col">
-                <span class="text-sm font-bold">Date Applied</span
+                <span class="text-sm font-black">Date Applied</span
                 ><span class="text-sm font-semimedium">14th July, 2024</span>
               </div>
             </td>
@@ -96,7 +101,7 @@
             <td class="py-4 whitespace-nowrap">
               <div class="font-normal flex text-left">
                 <span
-                  class="px-6 py-2 rounded-10 font-bold bg-[#FFDEE0] text-xs text-[#F60C17]"
+                  class="px-6 py-2 rounded-10 font-black bg-[#FFDEE0] text-xs text-[#F60C17]"
                   >Not selected</span
                 >
               </div>
@@ -125,7 +130,7 @@
               <div class="flex space-x-4">
                 <div class="flex flex-col">
                   <img
-                    src="/SocialMedia2.png"
+                    src="/assets/images/SocialMedia2.png"
                     alt="Google"
                     class="w-10 h-10 rounded"
                   />
@@ -133,21 +138,21 @@
                 <div
                   class="text-left w-[104px] flex whitespace-break-spaces flex-col"
                 >
-                  <span class="text-sm font-bold">Social Media Assistant</span
+                  <span class="text-sm font-black">Social Media Assistant</span
                   ><span class="text-sm font-semimedium">Microsoft</span>
                 </div>
               </div>
             </td>
             <td class="py-4 whitespace-nowrap">
               <div class="text-left flex flex-col">
-                <span class="text-sm font-bold">Location</span
+                <span class="text-sm font-black">Location</span
                 ><span class="text-sm font-semimedium">Paris, France.</span>
               </div>
             </td>
 
             <td class="py-4 whitespace-nowrap">
               <div class="text-left flex flex-col">
-                <span class="text-sm font-bold">Date Applied</span
+                <span class="text-sm font-black">Date Applied</span
                 ><span class="text-sm font-semimedium">14th July, 2024</span>
               </div>
             </td>
@@ -155,7 +160,7 @@
             <td class="py-4 whitespace-nowrap">
               <div class="font-normal flex text-left">
                 <span
-                  class="px-6 py-2 rounded-10 font-bold bg-[#D1EFFF] text-xs text-[#006EFF]"
+                  class="px-6 py-2 rounded-10 font-black bg-[#D1EFFF] text-xs text-[#006EFF]"
                   >Pending</span
                 >
               </div>
@@ -184,7 +189,7 @@
               <div class="flex space-x-4">
                 <div class="flex flex-col">
                   <img
-                    src="/SocialMedia3.png"
+                    src="/assets/images/SocialMedia3.png"
                     alt="Google"
                     class="w-10 h-10 rounded"
                   />
@@ -192,21 +197,21 @@
                 <div
                   class="text-left w-[104px] flex whitespace-break-spaces flex-col"
                 >
-                  <span class="text-sm font-bold">Social Media Assistant</span
+                  <span class="text-sm font-black">Social Media Assistant</span
                   ><span class="text-sm font-semimedium">Microsoft</span>
                 </div>
               </div>
             </td>
             <td class="py-4 whitespace-nowrap">
               <div class="text-left flex flex-col">
-                <span class="text-sm font-bold">Location</span
+                <span class="text-sm font-black">Location</span
                 ><span class="text-sm font-semimedium">Paris, France.</span>
               </div>
             </td>
 
             <td class="py-4 whitespace-nowrap">
               <div class="text-left flex flex-col">
-                <span class="text-sm font-bold">Date Applied</span
+                <span class="text-sm font-black">Date Applied</span
                 ><span class="text-sm font-semimedium">14th July, 2024</span>
               </div>
             </td>
@@ -214,7 +219,7 @@
             <td class="py-4 whitespace-nowrap">
               <div class="font-normal flex text-left">
                 <span
-                  class="px-6 py-2 rounded-10 font-bold bg-success-100 text-xs text-success-600"
+                  class="px-6 py-2 rounded-10 font-black bg-success-100 text-xs text-success-600"
                   >Selected</span
                 >
               </div>

@@ -17,7 +17,7 @@ import workLogo from '@/assets/images/workconnectlogo.png';
         <NuxtLink class="py-1"> Pricing</NuxtLink>
         </li>
       <li>
-        <NuxtLink class="py-1">For Recruiters</NuxtLink>
+        <NuxtLink to="/recruiterauth/recruitersignin" class="py-1" >For Recruiters</NuxtLink>
         </li>
       <li>
         <NuxtLink to="/auth/signin" class="py-1" >Job Seekers</NuxtLink>

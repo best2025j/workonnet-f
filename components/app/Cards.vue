@@ -5,15 +5,15 @@
     <div class="bg-white rounded-10 w-full">
       <div class="flex items-center justify-between border-b-2 p-3">
         <div class="flex items-center space-x-4">
-          <img src="/SocialMedia3.png" alt="Google" class="w-10 h-10 rounded" />
+          <img src="/assets/images/SocialMedia3.png" alt="Google" class="w-10 h-10 rounded" />
           <div class="pl-4">
-            <span class="block text-base font-bold">Customer Care Rep</span>
+            <span class="block text-base font-black">Customer Care Rep</span>
             <span class="text-xs font-semimedium text-gray-500">Catalog</span>
           </div>
         </div>
 
         <div class="flex space-x-4 items-center relative right-5">
-          <span class="px-3 py-1 rounded-10 text-xs font-bold text-success-600"
+          <span class="px-3 py-1 rounded-10 text-xs font-black text-success-600"
             >80% match</span
           >
           <span class="px-3 py-2 rounded-10 bg-gray-100 text-xs text-gray-500"
@@ -127,20 +127,22 @@
           </div>
         </div>
 
-        <div class="flex flex-col justify-end relative right-5 top-12 w-32">
-          <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
-            Track Application
-          </button>
-        </div>
+        <nuxt-link to="/dashboard/jobseeker/my-applications/track-app">
+          <div class="flex flex-col justify-end relative right-5 top-12 w-32">
+            <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
+              Track Application
+            </button>
+          </div>
+        </nuxt-link>
       </div>
     </div>
     <!--  -->
     <div class="bg-white rounded-10 w-full">
       <div class="flex items-center justify-between border-b-2 p-3">
         <div class="flex items-center space-x-4">
-          <img src="/ms.png" alt="Google" class="w-10 h-10 rounded" />
+          <img src="/assets/images/ms.png" alt="Google" class="w-10 h-10 rounded" />
           <div class="pl-4">
-            <span class="block text-base font-bold"
+            <span class="block text-base font-black"
               >Social Media Assistant</span
             >
             <span class="text-xs font-semimedium text-gray-500">Microsoft</span>
@@ -148,7 +150,7 @@
         </div>
 
         <div class="flex space-x-4 items-center relative right-5">
-          <span class="px-3 py-1 rounded-10 text-xs font-bold text-success-600"
+          <span class="px-3 py-1 rounded-10 text-xs font-black text-success-600"
             >80% match</span
           >
           <span class="px-3 py-2 rounded-10 bg-gray-100 text-xs text-gray-500"
@@ -262,26 +264,28 @@
           </div>
         </div>
 
-        <div class="flex flex-col justify-end relative right-5 top-12 w-32">
-          <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
-            Track Application
-          </button>
-        </div>
+        <nuxt-link to="/dashboard/jobseeker/my-applications/track-app">
+          <div class="flex flex-col justify-end relative right-5 top-12 w-32">
+            <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
+              Track Application
+            </button>
+          </div>
+        </nuxt-link>
       </div>
     </div>
     <!--  -->
     <div class="bg-white rounded-10 w-full">
       <div class="flex items-center justify-between border-b-2 p-3">
         <div class="flex items-center space-x-4">
-          <img src="/SocialMedia.png" alt="Google" class="w-10 h-10 rounded" />
+          <img src="/assets/images/SocialMedia.png" alt="Google" class="w-10 h-10 rounded" />
           <div class="pl-4">
-            <span class="block text-base font-bold">HR Manager</span>
+            <span class="block text-base font-black">HR Manager</span>
             <span class="text-xs font-semimedium text-gray-500">Layers</span>
           </div>
         </div>
 
         <div class="flex space-x-4 items-center relative right-5">
-          <span class="px-3 py-1 rounded-10 text-xs font-bold text-success-600"
+          <span class="px-3 py-1 rounded-10 text-xs font-black text-success-600"
             >80% match</span
           >
           <span class="px-3 py-2 rounded-10 bg-gray-100 text-xs text-gray-500"
@@ -395,20 +399,22 @@
           </div>
         </div>
 
-        <div class="flex flex-col justify-end relative right-5 top-12 w-32">
-          <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
-            Track Application
-          </button>
-        </div>
+        <nuxt-link to="/dashboard/jobseeker/my-applications/track-app">
+          <div class="flex flex-col justify-end relative right-5 top-12 w-32">
+            <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
+              Track Application
+            </button>
+          </div>
+        </nuxt-link>
       </div>
     </div>
     <!--  -->
     <div class="bg-white rounded-10 w-full">
       <div class="flex items-center justify-between border-b-2 p-3">
         <div class="flex items-center space-x-4">
-          <img src="/SocialMedia2.png" alt="Google" class="w-10 h-10 rounded" />
+          <img src="/assets/images/SocialMedia2.png" alt="Google" class="w-10 h-10 rounded" />
           <div class="pl-4">
-            <span class="block text-base font-bold">Admin Assistant </span>
+            <span class="block text-base font-black">Admin Assistant </span>
             <span class="text-xs font-semimedium text-gray-500"
               >Hour Glass
             </span>
@@ -416,7 +422,7 @@
         </div>
 
         <div class="flex space-x-4 items-center relative right-5">
-          <span class="px-3 py-1 rounded-10 text-xs font-bold text-success-600"
+          <span class="px-3 py-1 rounded-10 text-xs font-black text-success-600"
             >80% match</span
           >
           <span class="px-3 py-2 rounded-10 bg-gray-100 text-xs text-gray-500"
@@ -530,11 +536,13 @@
           </div>
         </div>
 
-        <div class="flex flex-col justify-end relative right-5 top-12 w-32">
-          <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
-            Track Application
-          </button>
-        </div>
+        <nuxt-link to="/dashboard/jobseeker/my-applications/track-app">
+          <div class="flex flex-col justify-end relative right-5 top-12 w-32">
+            <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
+              Track Application
+            </button>
+          </div>
+        </nuxt-link>
       </div>
     </div>
 
@@ -542,9 +550,9 @@
     <div class="bg-white rounded-10 w-full">
       <div class="flex items-center justify-between border-b-2 p-3">
         <div class="flex items-center space-x-4">
-          <img src="/ms.png" alt="Google" class="w-10 h-10 rounded" />
+          <img src="/assets/images/ms.png" alt="Google" class="w-10 h-10 rounded" />
           <div class="pl-4">
-            <span class="block text-base font-bold"
+            <span class="block text-base font-black"
               >Social Media Assistant
             </span>
             <span class="text-xs font-semimedium text-gray-500"
@@ -554,7 +562,7 @@
         </div>
 
         <div class="flex space-x-4 items-center relative right-5">
-          <span class="px-3 py-1 rounded-10 text-xs font-bold text-success-600"
+          <span class="px-3 py-1 rounded-10 text-xs font-black text-success-600"
             >80% match</span
           >
           <span class="px-3 py-2 rounded-10 bg-gray-100 text-xs text-gray-500"
@@ -668,26 +676,28 @@
           </div>
         </div>
 
-        <div class="flex flex-col justify-end relative right-5 top-12 w-32">
-          <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
-            Track Application
-          </button>
-        </div>
+        <nuxt-link to="/dashboard/jobseeker/my-applications/track-app">
+          <div class="flex flex-col justify-end relative right-5 top-12 w-32">
+            <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
+              Track Application
+            </button>
+          </div>
+        </nuxt-link>
       </div>
     </div>
 
     <div class="bg-white rounded-10 w-full">
       <div class="flex items-center justify-between border-b-2 p-3">
         <div class="flex items-center space-x-4">
-          <img src="/SocialMedia3.png" alt="Google" class="w-10 h-10 rounded" />
+          <img src="/assets/images/SocialMedia3.png" alt="Google" class="w-10 h-10 rounded" />
           <div class="pl-4">
-            <span class="block text-base font-bold">Customer Care Rep</span>
+            <span class="block text-base font-black">Customer Care Rep</span>
             <span class="text-xs font-semimedium text-gray-500">Catalog</span>
           </div>
         </div>
 
         <div class="flex space-x-4 items-center relative right-5">
-          <span class="px-3 py-1 rounded-10 text-xs font-bold text-success-600"
+          <span class="px-3 py-1 rounded-10 text-xs font-black text-success-600"
             >80% match</span
           >
           <span class="px-3 py-2 rounded-10 bg-gray-100 text-xs text-gray-500"
@@ -801,26 +811,28 @@
           </div>
         </div>
 
-        <div class="flex flex-col justify-end relative right-5 top-12 w-32">
-          <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
-            Track Application
-          </button>
-        </div>
+        <nuxt-link to="/dashboard/jobseeker/my-applications/track-app">
+          <div class="flex flex-col justify-end relative right-5 top-12 w-32">
+            <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
+              Track Application
+            </button>
+          </div>
+        </nuxt-link>
       </div>
     </div>
     <!--  -->
     <div class="bg-white rounded-10 w-full">
       <div class="flex items-center justify-between border-b-2 p-3">
         <div class="flex items-center space-x-4">
-          <img src="/SocialMedia.png" alt="Google" class="w-10 h-10 rounded" />
+          <img src="/assets/images/SocialMedia.png" alt="Google" class="w-10 h-10 rounded" />
           <div class="pl-4">
-            <span class="block text-base font-bold">HR Manager </span>
+            <span class="block text-base font-black">HR Manager </span>
             <span class="text-xs font-semimedium text-gray-500">Layers</span>
           </div>
         </div>
 
         <div class="flex space-x-4 items-center relative right-5">
-          <span class="px-3 py-1 rounded-10 text-xs font-bold text-success-600"
+          <span class="px-3 py-1 rounded-10 text-xs font-black text-success-600"
             >80% match</span
           >
           <span class="px-3 py-2 rounded-10 bg-gray-100 text-xs text-gray-500"
@@ -934,20 +946,22 @@
           </div>
         </div>
 
-        <div class="flex flex-col justify-end relative right-5 top-12 w-32">
-          <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
-            Track Application
-          </button>
-        </div>
+        <nuxt-link to="/dashboard/jobseeker/my-applications/track-app">
+          <div class="flex flex-col justify-end relative right-5 top-12 w-32">
+            <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
+              Track Application
+            </button>
+          </div>
+        </nuxt-link>
       </div>
     </div>
     <!--  -->
     <div class="bg-white rounded-10 w-full">
       <div class="flex items-center justify-between border-b-2 p-3">
         <div class="flex items-center space-x-4">
-          <img src="/SocialMedia2.png" alt="Google" class="w-10 h-10 rounded" />
+          <img src="/assets/images/SocialMedia2.png" alt="Google" class="w-10 h-10 rounded" />
           <div class="pl-4">
-            <span class="block text-base font-bold">Admin Assistant </span>
+            <span class="block text-base font-black">Admin Assistant </span>
             <span class="text-xs font-semimedium text-gray-500">
               Hour Glass
             </span>
@@ -955,7 +969,7 @@
         </div>
 
         <div class="flex space-x-4 items-center relative right-5">
-          <span class="px-3 py-1 rounded-10 text-xs font-bold text-success-600"
+          <span class="px-3 py-1 rounded-10 text-xs font-black text-success-600"
             >80% match</span
           >
           <span class="px-3 py-2 rounded-10 bg-gray-100 text-xs text-gray-500"
@@ -1069,11 +1083,13 @@
           </div>
         </div>
 
-        <div class="flex flex-col justify-end relative right-5 top-12 w-32">
-          <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
-            Track Application
-          </button>
-        </div>
+        <nuxt-link to="/dashboard/jobseeker/my-applications/track-app">
+          <div class="flex flex-col justify-end relative right-5 top-12 w-32">
+            <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
+              Track Application
+            </button>
+          </div>
+        </nuxt-link>
       </div>
     </div>
   </div>
