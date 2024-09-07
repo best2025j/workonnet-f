@@ -14,11 +14,10 @@ export enum JOB_OPENING_TABS {
 }
 
 export enum POST_JOBS_TABS {
-  UNDER_REVEIW = "under-review",
-  ACTIVE = "active",
-  REMOVED = "removed",
-  DRAFTS = "drafts",
-  
+  UNDER_REVIEW = 'under-review',
+  ACTIVE = 'active',
+  REMOVED = 'removed',
+  DRAFTS = 'drafts',
 }
 
 

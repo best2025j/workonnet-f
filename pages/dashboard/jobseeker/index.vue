@@ -9,17 +9,19 @@ definePageMeta({
 <template>
   <div class="pt-4 text-black-900 w-full">
     <!-- Dashboard content goes here -->
-    <h2 class="text-2xl font-black">Good Morning, Stanley</h2>
+    <div class="space-y-1 pb-2">
+      <h2 class="text-2xl font-black">Good Morning, Stanley</h2>
     <p class="text-sm">
       Here’s what’s happening with your job application since you joined us.
     </p>
+    </div>
 
     <!-- card -->
     <div class="flex space-x-4 w-full mt-2">
       <div class="flex space-x-4 w-3/5 items-center">
         <div class="space-y-2">
           <div class="rounded-10 w-[210px] bg-white h-auto">
-            <div class="px-4 space-y-2 pt-2">
+            <div class="px-4 space-y-1 pt-4">
               <h3 class="text-base whitespace-nowrap font-black">
                 Total Jobs Applied
               </h3>

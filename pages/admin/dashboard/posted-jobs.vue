@@ -13,7 +13,7 @@ definePageMeta({
       <!--  -->
       <div class="w-full">
         <!-- content for applied -->
-        <div v-if="$route?.query?.tab === POST_JOBS_TABS.UNDER_REVEIW">
+        <div v-if="$route?.query?.tab === POST_JOBS_TABS.UNDER_REVIEW">
           <PostJobsUnderReview />
         </div>
         <!-- content for in review -->
