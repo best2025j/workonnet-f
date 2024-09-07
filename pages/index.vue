@@ -43,19 +43,11 @@ watchEffect(() => { isDashboard.value = route.path.includes('/dashboard'); });
 
 <template>
   <div>
-    <div class="relative min-h-screen w-full">
-      <img
-        src="/assets/images/my-lady.png"
-        class="absolute top-0 left-0 w-full h-screen object-cover z-0"
-        alt="a lady with book"
-      />
-    </div>
     <div class="absolute top-0 left-0 right-0 z-50">
       <LandingPageNavbar class="" />
-      <LandingPageHero />
     </div>
     <main>
-      <LandingPageSections />
+      <LandingPageHero />
     </main>
     <!-- admin -->
     <div
