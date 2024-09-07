@@ -10,8 +10,8 @@ definePageMeta({
   <div class="h-full w-full">
     <div class="">
       <h1 class="text-2xl font-bold border-b-2 py-4">Job seekers</h1>
-      <div class="flex justify-between my-6">
-        <div class="flex items-center space-x-1">
+      <div class="flex justify-between items-center border-b my-6">
+        <div class="flex items-center space-x-1 my-6">
           <hi class="text-sm">Total registered recruiters: 106</hi>
           <!-- input search -->
           <div class="relative">
@@ -103,40 +103,43 @@ definePageMeta({
             </ul>
           </button>
         </div>
-        <button
-          class="text-xs items-center flex gap-x-3 px-4 py-2 rounded-8 text-primary-1 border-primary-1 border"
-        >
-          <svg
-            width="20"
-            height="21"
-            viewBox="0 0 20 21"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+
+        <div>
+          <button
+            class="text-xs items-center flex gap-x-3 px-4 py-2 rounded-8 text-primary-1 border-primary-1 border"
           >
-            <path
-              d="M17.5 13.1528V16.4862C17.5 16.9282 17.3244 17.3521 17.0118 17.6647C16.6993 17.9772 16.2754 18.1528 15.8333 18.1528H4.16667C3.72464 18.1528 3.30072 17.9772 2.98816 17.6647C2.67559 17.3521 2.5 16.9282 2.5 16.4862V13.1528"
-              stroke="#FE8900"
-              stroke-width="1.25"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M14.1673 7.3195L10.0007 3.15283L5.83398 7.3195"
-              stroke="#FE8900"
-              stroke-width="1.25"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M10 3.15283V13.1528"
-              stroke="#FE8900"
-              stroke-width="1.25"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-          Export
-        </button>
+            <svg
+              width="20"
+              height="21"
+              viewBox="0 0 20 21"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M17.5 13.1528V16.4862C17.5 16.9282 17.3244 17.3521 17.0118 17.6647C16.6993 17.9772 16.2754 18.1528 15.8333 18.1528H4.16667C3.72464 18.1528 3.30072 17.9772 2.98816 17.6647C2.67559 17.3521 2.5 16.9282 2.5 16.4862V13.1528"
+                stroke="#FE8900"
+                stroke-width="1.25"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M14.1673 7.3195L10.0007 3.15283L5.83398 7.3195"
+                stroke="#FE8900"
+                stroke-width="1.25"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M10 3.15283V13.1528"
+                stroke="#FE8900"
+                stroke-width="1.25"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            Export
+          </button>
+        </div>
       </div>
 
       <!--  -->
