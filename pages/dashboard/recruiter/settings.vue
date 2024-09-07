@@ -322,10 +322,15 @@ definePageMeta({
               Delete account
               <!-- Open the modal using ID.showModal() method -->
 
-              <dialog id="my_modal_1" class="modal text-black-950">
+              <dialog
+                id="my_modal_1"
+                class="modal text-black-950 backdrop-blur-sm backdrop-filter"
+              >
                 <div class="modal-box flex-col flex items-center space-y-3">
-                  <div class="flex items-center justify-around w-full pb-4 border-b-2">
-                    <div class="text-white ">no text.</div>
+                  <div
+                    class="flex items-center justify-around w-full pb-4 border-b-2"
+                  >
+                    <div class="text-white">no text.</div>
                     <h3 class="text-lg font-bold">Information!</h3>
 
                     <form method="dialog">
@@ -388,7 +393,6 @@ definePageMeta({
                 </div>
               </dialog>
             </button>
-            <!-- for modal triggring -->
           </div>
         </div>
       </div>

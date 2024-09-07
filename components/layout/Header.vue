@@ -11,6 +11,8 @@ const localStore = useLocalStore();
         {{ $route?.meta?.title }}
       </h1>
 
+
+      <!-- search input -->
       <div
         v-show="localStore.$state.currentUserType === LOGGED_USER.RECRUITER"
         class="relative"
