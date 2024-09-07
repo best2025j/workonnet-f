@@ -4,35 +4,35 @@ const router = useRouter();
 
 onMounted(() => {
   if (!route?.query?.tab) {
-    router.replace("/admin/dashboard/home/posted-jobs?tab=applied");
+    router.replace("/admin/dashboard/posted-jobs?tab=under-review");
   }
   console.log(router.replace);
 });
 
 const links = [
   {
-    to: "/admin/dashboard/home/posted-jobs?tab=under-review",
+    to: "/admin/dashboard/posted-jobs?tab=under-review",
     name: "Under-Review",
     disabled: false,
     badge: 9,
-    tabId: POST_JOBS_TABS.UNDER_REVEIW,
+    tabId: POST_JOBS_TABS.UNDER_REVIEW,
   },
   {
-    to: "/admin/dashboard/home/posted-jobs?tab=active",
+    to: "/admin/dashboard/posted-jobs?tab=active",
     name: "Active",
     disabled: false,
     badge: 4,
     tabId: POST_JOBS_TABS.ACTIVE,
   },
   {
-    to: "/admin/dashboard/home/posted-jobs?tab=removed",
+    to: "/admin/dashboard/posted-jobs?tab=removed",
     name: "Removed",
     disabled: false,
     badge: 1,
     tabId: POST_JOBS_TABS.REMOVED,
   },
   {
-    to: "/admin/dashboard/home/posted-jobs?tab=drafts",
+    to: "/admin/dashboard/posted-jobs?tab=drafts",
     name: "Drafts",
     disabled: false,
     tabId: POST_JOBS_TABS.DRAFTS,
