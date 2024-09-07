@@ -121,7 +121,7 @@ const admin = [
     pageName: "admin.dashboard.index",
   },
   {
-    to: "/admin/dashboard/posted-jobs",
+    to: "/admin/dashboard/posted-jobs?tab=under-review",
     icon: ApplicationIcon,
     name: "Jobs",
     pageName: "admin.dashboard.posted-jobs",
