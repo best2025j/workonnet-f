@@ -202,7 +202,7 @@ definePageMeta({
         <div class="flex justify-between items-center">
           <h1 class="text-sm font-black">Recruiters</h1>
           <button class="text-xs text-primary-1 flex gap-x-2 items-center">
-            View all (163)
+            View all <b>(163)</b>
             <svg
               width="24"
               height="24"
@@ -288,9 +288,7 @@ definePageMeta({
                   class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                 >
                   <li>
-                    <NuxtLink
-                      to="/admin/dashboard/home/revenue"
-                    >
+                    <NuxtLink to="/admin/dashboard/home/revenue">
                       <div class="flex text-xs gap-x-3">
                         <span
                           ><svg
@@ -452,9 +450,7 @@ definePageMeta({
                   class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                 >
                   <li>
-                    <NuxtLink
-                      to="/admin/dashboard/home/revenue"
-                    >
+                    <NuxtLink to="/admin/dashboard/home/revenue">
                       <div class="flex text-xs gap-x-3">
                         <span
                           ><svg
@@ -616,9 +612,7 @@ definePageMeta({
                   class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                 >
                   <li>
-                    <NuxtLink
-                      to="/admin/dashboard/home/revenue"
-                    >
+                    <NuxtLink to="/admin/dashboard/home/revenue">
                       <div class="flex text-xs gap-x-3">
                         <span
                           ><svg
@@ -780,9 +774,7 @@ definePageMeta({
                   class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                 >
                   <li>
-                    <NuxtLink
-                      to="/admin/dashboard/home/revenue"
-                    >
+                    <NuxtLink to="/admin/dashboard/home/revenue">
                       <div class="flex text-xs gap-x-3">
                         <span
                           ><svg
@@ -944,9 +936,7 @@ definePageMeta({
                   class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                 >
                   <li>
-                    <NuxtLink
-                      to="/admin/dashboard/home/revenue"
-                    >
+                    <NuxtLink to="/admin/dashboard/home/revenue">
                       <div class="flex text-xs gap-x-3">
                         <span
                           ><svg
@@ -1110,9 +1100,7 @@ definePageMeta({
                   class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                 >
                   <li>
-                    <NuxtLink
-                      to="/admin/dashboard/home/revenue"
-                    >
+                    <NuxtLink to="/admin/dashboard/home/revenue">
                       <div class="flex text-xs gap-x-3">
                         <span
                           ><svg
@@ -1274,9 +1262,7 @@ definePageMeta({
                   class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                 >
                   <li>
-                    <NuxtLink
-                      to="/admin/dashboard/home/revenue"
-                    >
+                    <NuxtLink to="/admin/dashboard/home/revenue">
                       <div class="flex text-xs gap-x-3">
                         <span
                           ><svg
@@ -1440,9 +1426,7 @@ definePageMeta({
                   class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                 >
                   <li>
-                    <NuxtLink
-                      to="/admin/dashboard/home/revenue"
-                    >
+                    <NuxtLink to="/admin/dashboard/home/revenue">
                       <div class="flex text-xs gap-x-3">
                         <span
                           ><svg
@@ -1604,9 +1588,7 @@ definePageMeta({
                   class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                 >
                   <li>
-                    <NuxtLink
-                      to="/admin/dashboard/home/revenue"
-                    >
+                    <NuxtLink to="/admin/dashboard/home/revenue">
                       <div class="flex text-sm gap-x-3">
                         <span
                           ><svg
@@ -1770,9 +1752,7 @@ definePageMeta({
                   class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                 >
                   <li>
-                    <NuxtLink
-                      to="/admin/dashboard/home/revenue"
-                    >
+                    <NuxtLink to="/admin/dashboard/home/revenue">
                       <div class="flex text-xs gap-x-3">
                         <span
                           ><svg
@@ -1878,9 +1858,9 @@ definePageMeta({
       <!-- second div -->
       <div class="bg-white rounded-10 h-full w-2/5 p-4">
         <div class="flex justify-between items-center">
-          <h1 class="text-sm font-black">Recruiters</h1>
+          <h1 class="text-sm font-black">Job seekers</h1>
           <button class="text-xs text-primary-1 flex gap-x-2 items-center">
-            View all (163)
+            View all <b> (1007)</b>
             <svg
               width="24"
               height="24"
@@ -1962,9 +1942,7 @@ definePageMeta({
                   class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                 >
                   <li>
-                    <NuxtLink
-                      to="/admin/dashboard/home/revenue"
-                    >
+                    <NuxtLink to="/admin/dashboard/home/revenue">
                       <div class="flex text-xs gap-x-3">
                         <span
                           ><svg
@@ -2122,9 +2100,7 @@ definePageMeta({
                   class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                 >
                   <li>
-                    <NuxtLink
-                      to="/admin/dashboard/home/revenue"
-                    >
+                    <NuxtLink to="/admin/dashboard/home/revenue">
                       <div class="flex text-xs gap-x-3">
                         <span
                           ><svg
@@ -2282,9 +2258,7 @@ definePageMeta({
                   class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                 >
                   <li>
-                    <NuxtLink
-                      to="/admin/dashboard/home/revenue"
-                    >
+                    <NuxtLink to="/admin/dashboard/home/revenue">
                       <div class="flex text-xs gap-x-3">
                         <span
                           ><svg
@@ -2442,9 +2416,7 @@ definePageMeta({
                   class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                 >
                   <li>
-                    <NuxtLink
-                      to="/admin/dashboard/home/revenue"
-                    >
+                    <NuxtLink to="/admin/dashboard/home/revenue">
                       <div class="flex text-xs gap-x-3">
                         <span
                           ><svg
@@ -2602,9 +2574,7 @@ definePageMeta({
                   class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                 >
                   <li>
-                    <NuxtLink
-                      to="/admin/dashboard/home/revenue"
-                    >
+                    <NuxtLink to="/admin/dashboard/home/revenue">
                       <div class="flex text-xs gap-x-3">
                         <span
                           ><svg
@@ -2764,9 +2734,7 @@ definePageMeta({
                   class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                 >
                   <li>
-                    <NuxtLink
-                      to="/admin/dashboard/home/revenue"
-                    >
+                    <NuxtLink to="/admin/dashboard/home/revenue">
                       <div class="flex text-xs gap-x-3">
                         <span
                           ><svg
@@ -2924,9 +2892,7 @@ definePageMeta({
                   class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                 >
                   <li>
-                    <NuxtLink
-                      to="/admin/dashboard/home/revenue"
-                    >
+                    <NuxtLink to="/admin/dashboard/home/revenue">
                       <div class="flex text-xs gap-x-3">
                         <span
                           ><svg
@@ -3086,9 +3052,7 @@ definePageMeta({
                   class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                 >
                   <li>
-                    <NuxtLink
-                      to="/admin/dashboard/home/revenue"
-                    >
+                    <NuxtLink to="/admin/dashboard/home/revenue">
                       <div class="flex text-xs gap-x-3">
                         <span
                           ><svg
@@ -3246,9 +3210,7 @@ definePageMeta({
                   class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                 >
                   <li>
-                    <NuxtLink
-                      to="/admin/dashboard/home/revenue"
-                    >
+                    <NuxtLink to="/admin/dashboard/home/revenue">
                       <div class="flex text-sm gap-x-3">
                         <span
                           ><svg
@@ -3408,9 +3370,7 @@ definePageMeta({
                   class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                 >
                   <li>
-                    <NuxtLink
-                      to="/admin/dashboard/home/revenue"
-                    >
+                    <NuxtLink to="/admin/dashboard/home/revenue">
                       <div class="flex text-xs gap-x-3">
                         <span
                           ><svg

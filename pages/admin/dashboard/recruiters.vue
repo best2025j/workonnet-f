@@ -10,8 +10,8 @@ definePageMeta({
   <div class="h-full w-full">
     <div class="">
       <h1 class="text-2xl font-bold border-b-2 py-4">Recruiters</h1>
-      <div class="flex justify-between my-6">
-        <div class="flex items-center space-x-1">
+      <div class="flex justify-between items-center border-b my-6">
+        <div class="flex items-center space-x-1 my-6">
           <hi class="text-sm">Total registered recruiters: 106</hi>
           <!-- input search -->
           <div class="relative">
@@ -36,7 +36,7 @@ definePageMeta({
           </div>
 
           <button
-            class="text-xs flex gap-x-3 items-center py-2 px-3 border bg-white rounded-8"
+            class="text-xs flex gap-x-3 dropdown items-center py-2 px-3 border bg-white rounded-8"
           >
             <svg
               width="20"
@@ -54,42 +54,92 @@ definePageMeta({
               />
             </svg>
             Filter
+            <ul
+              tabindex="0"
+              class="dropdown-content menu bg-white rounded-box !top-[60%] !left-0 z-10 w-52 mt-4 space-y-2 py-3 shadow"
+            >
+              <li>
+                <div class="flex text-xs items-center gap-x-3">
+                  <input
+                    type="checkbox"
+                    defaultChecked
+                    class="checkbox [--chkbg:theme(colors.primary.1)] h-4 w-4 rounded-5 [--chkfg:white]"
+                    isChecked="true"
+                  />
+                  <h1>Active</h1>
+                </div>
+              </li>
+
+              <li>
+                <div class="flex text-xs items-center gap-x-3">
+                  <input
+                    type="checkbox"
+                    class="checkbox [--chkbg:theme(colors.primary.1)] h-4 w-4 rounded-5 [--chkfg:white]"
+                    isChecked="true"
+                  />
+                  <h1>Inactive</h1>
+                </div>
+              </li>
+              <li>
+                <div class="flex text-xs items-center gap-x-3">
+                  <input
+                    type="checkbox"
+                    class="checkbox [--chkbg:theme(colors.primary.1)] h-4 w-4 rounded-5 [--chkfg:white]"
+                    isChecked="true"
+                  />
+                  <h1>Status</h1>
+                </div>
+              </li>
+              <li>
+                <div class="flex text-xs items-center gap-x-3">
+                  <input
+                    type="checkbox"
+                    class="checkbox [--chkbg:theme(colors.primary.1)] h-4 w-4 rounded-5 [--chkfg:white]"
+                    isChecked="true"
+                  />
+                  <h1>Country</h1>
+                </div>
+              </li>
+            </ul>
           </button>
         </div>
-        <button
-          class="text-xs items-center flex gap-x-3 px-4 py-2 rounded-8 text-primary-1 border-primary-1 border"
-        >
-          <svg
-            width="20"
-            height="21"
-            viewBox="0 0 20 21"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+
+        <div>
+          <button
+            class="text-xs items-center flex gap-x-3 px-4 py-2 rounded-8 text-primary-1 border-primary-1 border"
           >
-            <path
-              d="M17.5 13.1528V16.4862C17.5 16.9282 17.3244 17.3521 17.0118 17.6647C16.6993 17.9772 16.2754 18.1528 15.8333 18.1528H4.16667C3.72464 18.1528 3.30072 17.9772 2.98816 17.6647C2.67559 17.3521 2.5 16.9282 2.5 16.4862V13.1528"
-              stroke="#FE8900"
-              stroke-width="1.25"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M14.1673 7.3195L10.0007 3.15283L5.83398 7.3195"
-              stroke="#FE8900"
-              stroke-width="1.25"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M10 3.15283V13.1528"
-              stroke="#FE8900"
-              stroke-width="1.25"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-          Export
-        </button>
+            <svg
+              width="20"
+              height="21"
+              viewBox="0 0 20 21"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M17.5 13.1528V16.4862C17.5 16.9282 17.3244 17.3521 17.0118 17.6647C16.6993 17.9772 16.2754 18.1528 15.8333 18.1528H4.16667C3.72464 18.1528 3.30072 17.9772 2.98816 17.6647C2.67559 17.3521 2.5 16.9282 2.5 16.4862V13.1528"
+                stroke="#FE8900"
+                stroke-width="1.25"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M14.1673 7.3195L10.0007 3.15283L5.83398 7.3195"
+                stroke="#FE8900"
+                stroke-width="1.25"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M10 3.15283V13.1528"
+                stroke="#FE8900"
+                stroke-width="1.25"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            Export
+          </button>
+        </div>
       </div>
 
       <!--  -->
@@ -401,7 +451,7 @@ definePageMeta({
               </td>
             </tr>
             <!--  -->
-            <tr class="h-10 bg-westside-100">
+            <tr class="h-10 bg-westside-50">
               <td class="text-xs pl-4">jsue7224jj3j3u2</td>
               <td class="text-xs pl-10 flex items-center pt-2 gap-x-1">
                 <svg
@@ -842,7 +892,7 @@ definePageMeta({
               </td>
             </tr>
             <!--  -->
-            <tr class="h-10 bg-westside-100">
+            <tr class="h-10 bg-westside-50">
               <td class="text-xs pl-4">jsue7224jj3j3u2</td>
               <td class="text-xs pl-10 flex items-center pt-2 gap-x-1">
                 <svg
@@ -1282,7 +1332,7 @@ definePageMeta({
               </td>
             </tr>
             <!--  -->
-            <tr class="h-10 bg-westside-100">
+            <tr class="h-10 bg-westside-50">
               <td class="text-xs pl-4">jsue7224jj3j3u2</td>
               <td class="text-xs pl-10 flex items-center pt-2 gap-x-1">
                 <svg
@@ -1722,7 +1772,7 @@ definePageMeta({
               </td>
             </tr>
             <!--  -->
-            <tr class="h-10 bg-westside-100">
+            <tr class="h-10 bg-westside-50">
               <td class="text-xs pl-4">jsue7224jj3j3u2</td>
               <td class="text-xs pl-10 flex items-center pt-2 gap-x-1">
                 <svg
@@ -2162,7 +2212,7 @@ definePageMeta({
               </td>
             </tr>
             <!--  -->
-            <tr class="h-10 bg-westside-100">
+            <tr class="h-10 bg-westside-50">
               <td class="text-xs pl-4">jsue7224jj3j3u2</td>
               <td class="text-xs pl-10 flex items-center pt-2 gap-x-1">
                 <svg
@@ -2602,7 +2652,7 @@ definePageMeta({
               </td>
             </tr>
             <!--  -->
-            <tr class="h-10 bg-westside-100">
+            <tr class="h-10 bg-westside-50">
               <td class="text-xs pl-4">jsue7224jj3j3u2</td>
               <td class="text-xs pl-10 flex items-center pt-2 gap-x-1">
                 <svg
@@ -3042,7 +3092,7 @@ definePageMeta({
               </td>
             </tr>
             <!--  -->
-            <tr class="h-10 bg-westside-100">
+            <tr class="h-10 bg-westside-50">
               <td class="text-xs pl-4">jsue7224jj3j3u2</td>
               <td class="text-xs pl-10 flex items-center pt-2 gap-x-1">
                 <svg
@@ -3482,7 +3532,7 @@ definePageMeta({
               </td>
             </tr>
             <!--  -->
-            <tr class="h-10 bg-westside-100">
+            <tr class="h-10 bg-westside-50">
               <td class="text-xs pl-4">jsue7224jj3j3u2</td>
               <td class="text-xs pl-10 flex items-center pt-2 gap-x-1">
                 <svg
@@ -3922,7 +3972,7 @@ definePageMeta({
               </td>
             </tr>
             <!--  -->
-            <tr class="h-10 bg-westside-100">
+            <tr class="h-10 bg-westside-50">
               <td class="text-xs pl-4">jsue7224jj3j3u2</td>
               <td class="text-xs pl-10 flex items-center pt-2 gap-x-1">
                 <svg
@@ -4362,7 +4412,7 @@ definePageMeta({
               </td>
             </tr>
             <!--  -->
-            <tr class="h-10 bg-westside-100">
+            <tr class="h-10 bg-westside-50">
               <td class="text-xs pl-4">jsue7224jj3j3u2</td>
               <td class="text-xs pl-10 flex items-center pt-2 gap-x-1">
                 <svg
@@ -4802,7 +4852,7 @@ definePageMeta({
               </td>
             </tr>
             <!--  -->
-            <tr class="h-10 bg-westside-100">
+            <tr class="h-10 bg-westside-50">
               <td class="text-xs pl-4">jsue7224jj3j3u2</td>
               <td class="text-xs pl-10 flex items-center pt-2 gap-x-1">
                 <svg
@@ -5036,7 +5086,7 @@ definePageMeta({
       </div>
       <!--  pagenation-->
       <div
-      class="flex justify-between bg-white p-2 min-w-[1220px] z-10 fixed bottom-0 shadow-md shadow-black-400"
+        class="flex justify-between bg-white p-2 min-w-[1220px] z-10 fixed bottom-0 shadow-md shadow-black-400"
       >
         <div class="text-xs w-32 flex space-x-2 items-center">
           <h1>Page</h1>
