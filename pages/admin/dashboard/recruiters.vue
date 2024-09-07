@@ -36,7 +36,7 @@ definePageMeta({
           </div>
 
           <button
-            class="text-xs flex gap-x-3 items-center py-2 px-3 border bg-white rounded-8"
+            class="text-xs flex gap-x-3 dropdown items-center py-2 px-3 border bg-white rounded-8"
           >
             <svg
               width="20"
@@ -54,6 +54,52 @@ definePageMeta({
               />
             </svg>
             Filter
+            <ul
+              tabindex="0"
+              class="dropdown-content menu bg-white rounded-box !top-[60%] !left-0 z-10 w-52 mt-4 space-y-2 py-3 shadow"
+            >
+              <li>
+                <div class="flex text-xs items-center gap-x-3">
+                  <input
+                    type="checkbox" defaultChecked
+                    class="checkbox  [--chkbg:theme(colors.primary.1)] h-4 w-4 rounded-5 [--chkfg:white]"
+                    isChecked="true"
+                  />
+                  <h1>Active</h1>
+                </div>
+              </li>
+
+              <li>
+                <div class="flex text-xs items-center gap-x-3">
+                  <input
+                    type="checkbox"
+                    class="checkbox [--chkbg:theme(colors.primary.1)] h-4 w-4 rounded-5 [--chkfg:white]"
+                    isChecked="true"
+                  />
+                  <h1>Inactive</h1>
+                </div>
+              </li>
+              <li>
+                <div class="flex text-xs items-center gap-x-3">
+                  <input
+                    type="checkbox"
+                    class="checkbox [--chkbg:theme(colors.primary.1)] h-4 w-4 rounded-5 [--chkfg:white]"
+                    isChecked="true"
+                  />
+                  <h1>Status</h1>
+                </div>
+              </li>
+              <li>
+                <div class="flex text-xs items-center gap-x-3">
+                  <input
+                    type="checkbox"
+                    class="checkbox [--chkbg:theme(colors.primary.1)] h-4 w-4 rounded-5 [--chkfg:white]"
+                    isChecked="true"
+                  />
+                  <h1>Country</h1>
+                </div>
+              </li>
+            </ul>
           </button>
         </div>
         <button
@@ -401,7 +447,7 @@ definePageMeta({
               </td>
             </tr>
             <!--  -->
-            <tr class="h-10 bg-westside-100">
+            <tr class="h-10 bg-westside-50">
               <td class="text-xs pl-4">jsue7224jj3j3u2</td>
               <td class="text-xs pl-10 flex items-center pt-2 gap-x-1">
                 <svg
@@ -842,7 +888,7 @@ definePageMeta({
               </td>
             </tr>
             <!--  -->
-            <tr class="h-10 bg-westside-100">
+            <tr class="h-10 bg-westside-50">
               <td class="text-xs pl-4">jsue7224jj3j3u2</td>
               <td class="text-xs pl-10 flex items-center pt-2 gap-x-1">
                 <svg
@@ -1282,7 +1328,7 @@ definePageMeta({
               </td>
             </tr>
             <!--  -->
-            <tr class="h-10 bg-westside-100">
+            <tr class="h-10 bg-westside-50">
               <td class="text-xs pl-4">jsue7224jj3j3u2</td>
               <td class="text-xs pl-10 flex items-center pt-2 gap-x-1">
                 <svg
@@ -1722,7 +1768,7 @@ definePageMeta({
               </td>
             </tr>
             <!--  -->
-            <tr class="h-10 bg-westside-100">
+            <tr class="h-10 bg-westside-50">
               <td class="text-xs pl-4">jsue7224jj3j3u2</td>
               <td class="text-xs pl-10 flex items-center pt-2 gap-x-1">
                 <svg
@@ -2162,7 +2208,7 @@ definePageMeta({
               </td>
             </tr>
             <!--  -->
-            <tr class="h-10 bg-westside-100">
+            <tr class="h-10 bg-westside-50">
               <td class="text-xs pl-4">jsue7224jj3j3u2</td>
               <td class="text-xs pl-10 flex items-center pt-2 gap-x-1">
                 <svg
@@ -2602,7 +2648,7 @@ definePageMeta({
               </td>
             </tr>
             <!--  -->
-            <tr class="h-10 bg-westside-100">
+            <tr class="h-10 bg-westside-50">
               <td class="text-xs pl-4">jsue7224jj3j3u2</td>
               <td class="text-xs pl-10 flex items-center pt-2 gap-x-1">
                 <svg
@@ -3042,7 +3088,7 @@ definePageMeta({
               </td>
             </tr>
             <!--  -->
-            <tr class="h-10 bg-westside-100">
+            <tr class="h-10 bg-westside-50">
               <td class="text-xs pl-4">jsue7224jj3j3u2</td>
               <td class="text-xs pl-10 flex items-center pt-2 gap-x-1">
                 <svg
@@ -3482,7 +3528,7 @@ definePageMeta({
               </td>
             </tr>
             <!--  -->
-            <tr class="h-10 bg-westside-100">
+            <tr class="h-10 bg-westside-50">
               <td class="text-xs pl-4">jsue7224jj3j3u2</td>
               <td class="text-xs pl-10 flex items-center pt-2 gap-x-1">
                 <svg
@@ -3922,7 +3968,7 @@ definePageMeta({
               </td>
             </tr>
             <!--  -->
-            <tr class="h-10 bg-westside-100">
+            <tr class="h-10 bg-westside-50">
               <td class="text-xs pl-4">jsue7224jj3j3u2</td>
               <td class="text-xs pl-10 flex items-center pt-2 gap-x-1">
                 <svg
@@ -4362,7 +4408,7 @@ definePageMeta({
               </td>
             </tr>
             <!--  -->
-            <tr class="h-10 bg-westside-100">
+            <tr class="h-10 bg-westside-50">
               <td class="text-xs pl-4">jsue7224jj3j3u2</td>
               <td class="text-xs pl-10 flex items-center pt-2 gap-x-1">
                 <svg
@@ -4802,7 +4848,7 @@ definePageMeta({
               </td>
             </tr>
             <!--  -->
-            <tr class="h-10 bg-westside-100">
+            <tr class="h-10 bg-westside-50">
               <td class="text-xs pl-4">jsue7224jj3j3u2</td>
               <td class="text-xs pl-10 flex items-center pt-2 gap-x-1">
                 <svg
@@ -5036,7 +5082,7 @@ definePageMeta({
       </div>
       <!--  pagenation-->
       <div
-      class="flex justify-between bg-white p-2 min-w-[1220px] z-10 fixed bottom-0 shadow-md shadow-black-400"
+        class="flex justify-between bg-white p-2 min-w-[1220px] z-10 fixed bottom-0 shadow-md shadow-black-400"
       >
         <div class="text-xs w-32 flex space-x-2 items-center">
           <h1>Page</h1>

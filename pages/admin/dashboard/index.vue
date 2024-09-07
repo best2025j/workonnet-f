@@ -202,7 +202,7 @@ definePageMeta({
         <div class="flex justify-between items-center">
           <h1 class="text-sm font-black">Recruiters</h1>
           <button class="text-xs text-primary-1 flex gap-x-2 items-center">
-            View all (163)
+            View all <b>(163)</b>
             <svg
               width="24"
               height="24"
@@ -1860,7 +1860,7 @@ definePageMeta({
         <div class="flex justify-between items-center">
           <h1 class="text-sm font-black">Job seekers</h1>
           <button class="text-xs text-primary-1 flex gap-x-2 items-center">
-            View all (1007)
+            View all <b> (1007)</b>
             <svg
               width="24"
               height="24"

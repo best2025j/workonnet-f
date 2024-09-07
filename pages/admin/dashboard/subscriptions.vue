@@ -34,26 +34,72 @@ definePageMeta({
           </svg>
         </div>
 
-        <button
-          class="text-xs flex gap-x-3 items-center py-2 px-3 border bg-white rounded-8"
-        >
-          <svg
-            width="20"
-            height="21"
-            viewBox="0 0 20 21"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+         <button
+            class="text-xs flex gap-x-3 dropdown items-center py-2 px-3 border bg-white rounded-8"
           >
-            <path
-              d="M5 10.5H15M2.5 5.5H17.5M7.5 15.5H12.5"
-              stroke="#3D3D3D"
-              stroke-width="1.25"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-          Filter
-        </button>
+            <svg
+              width="20"
+              height="21"
+              viewBox="0 0 20 21"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M5 10.5H15M2.5 5.5H17.5M7.5 15.5H12.5"
+                stroke="#3D3D3D"
+                stroke-width="1.25"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+            Filter
+            <ul
+              tabindex="0"
+              class="dropdown-content menu bg-white rounded-box !top-[60%] !left-0 z-10 w-52 mt-4 space-y-2 py-3 shadow"
+            >
+              <li>
+                <div class="flex text-xs items-center gap-x-3">
+                  <input
+                    type="checkbox" defaultChecked
+                    class="checkbox  [--chkbg:theme(colors.primary.1)] h-4 w-4 rounded-5 [--chkfg:white]"
+                    isChecked="true"
+                  />
+                  <h1>Active</h1>
+                </div>
+              </li>
+
+              <li>
+                <div class="flex text-xs items-center gap-x-3">
+                  <input
+                    type="checkbox"
+                    class="checkbox [--chkbg:theme(colors.primary.1)] h-4 w-4 rounded-5 [--chkfg:white]"
+                    isChecked="true"
+                  />
+                  <h1>Inactive</h1>
+                </div>
+              </li>
+              <li>
+                <div class="flex text-xs items-center gap-x-3">
+                  <input
+                    type="checkbox"
+                    class="checkbox [--chkbg:theme(colors.primary.1)] h-4 w-4 rounded-5 [--chkfg:white]"
+                    isChecked="true"
+                  />
+                  <h1>Status</h1>
+                </div>
+              </li>
+              <li>
+                <div class="flex text-xs items-center gap-x-3">
+                  <input
+                    type="checkbox"
+                    class="checkbox [--chkbg:theme(colors.primary.1)] h-4 w-4 rounded-5 [--chkfg:white]"
+                    isChecked="true"
+                  />
+                  <h1>Country</h1>
+                </div>
+              </li>
+            </ul>
+          </button>
       </div>
       <button
         class="text-xs items-center flex gap-x-3 px-4 py-2 rounded-8 text-primary-1 border-primary-1 border"
