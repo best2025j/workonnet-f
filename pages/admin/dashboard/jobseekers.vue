@@ -322,7 +322,7 @@ definePageMeta({
                     class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                   >
                     <li>
-                      <NuxtLink to="">
+                      <NuxtLink to="/admin/dashboard/home/posted-job">
                         <div class="flex text-xs gap-x-3">
                           <span
                             ><svg
@@ -531,7 +531,7 @@ definePageMeta({
                     class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                   >
                     <li>
-                      <NuxtLink to="">
+                      <NuxtLink to="/admin/dashboard/home/posted-job">
                         <div class="flex text-xs gap-x-3">
                           <span
                             ><svg
@@ -716,7 +716,7 @@ definePageMeta({
                     class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                   >
                     <li>
-                      <NuxtLink to="">
+                      <NuxtLink to="/admin/dashboard/home/posted-job">
                         <div class="flex text-xs gap-x-3">
                           <span
                             ><svg
@@ -925,7 +925,7 @@ definePageMeta({
                     class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                   >
                     <li>
-                      <NuxtLink to="">
+                      <NuxtLink to="/admin/dashboard/home/posted-job">
                         <div class="flex text-xs gap-x-3">
                           <span
                             ><svg
@@ -1110,7 +1110,7 @@ definePageMeta({
                     class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                   >
                     <li>
-                      <NuxtLink to="">
+                      <NuxtLink to="/admin/dashboard/home/posted-job">
                         <div class="flex text-xs gap-x-3">
                           <span
                             ><svg
@@ -1319,7 +1319,7 @@ definePageMeta({
                     class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                   >
                     <li>
-                      <NuxtLink to="">
+                      <NuxtLink to="/admin/dashboard/home/posted-job">
                         <div class="flex text-xs gap-x-3">
                           <span
                             ><svg
@@ -1504,7 +1504,7 @@ definePageMeta({
                     class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                   >
                     <li>
-                      <NuxtLink to="">
+                      <NuxtLink to="/admin/dashboard/home/posted-job">
                         <div class="flex text-xs gap-x-3">
                           <span
                             ><svg
@@ -1713,7 +1713,7 @@ definePageMeta({
                     class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                   >
                     <li>
-                      <NuxtLink to="">
+                      <NuxtLink to="/admin/dashboard/home/posted-job">
                         <div class="flex text-xs gap-x-3">
                           <span
                             ><svg
@@ -1898,7 +1898,7 @@ definePageMeta({
                     class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                   >
                     <li>
-                      <NuxtLink to="">
+                      <NuxtLink to="/admin/dashboard/home/posted-job">
                         <div class="flex text-xs gap-x-3">
                           <span
                             ><svg
@@ -2107,7 +2107,7 @@ definePageMeta({
                     class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                   >
                     <li>
-                      <NuxtLink to="">
+                      <NuxtLink to="/admin/dashboard/home/posted-job">
                         <div class="flex text-xs gap-x-3">
                           <span
                             ><svg
@@ -2292,7 +2292,7 @@ definePageMeta({
                     class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                   >
                     <li>
-                      <NuxtLink to="">
+                      <NuxtLink to="/admin/dashboard/home/posted-job">
                         <div class="flex text-xs gap-x-3">
                           <span
                             ><svg
@@ -2501,7 +2501,7 @@ definePageMeta({
                     class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                   >
                     <li>
-                      <NuxtLink to="">
+                      <NuxtLink to="/admin/dashboard/home/posted-job">
                         <div class="flex text-xs gap-x-3">
                           <span
                             ><svg
@@ -2686,7 +2686,7 @@ definePageMeta({
                     class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                   >
                     <li>
-                      <NuxtLink to="">
+                      <NuxtLink to="/admin/dashboard/home/posted-job">
                         <div class="flex text-xs gap-x-3">
                           <span
                             ><svg
@@ -2895,7 +2895,7 @@ definePageMeta({
                     class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                   >
                     <li>
-                      <NuxtLink to="">
+                      <NuxtLink to="/admin/dashboard/home/posted-job">
                         <div class="flex text-xs gap-x-3">
                           <span
                             ><svg
@@ -3080,7 +3080,7 @@ definePageMeta({
                     class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                   >
                     <li>
-                      <NuxtLink to="">
+                      <NuxtLink to="/admin/dashboard/home/posted-job">
                         <div class="flex text-xs gap-x-3">
                           <span
                             ><svg
@@ -3289,7 +3289,7 @@ definePageMeta({
                     class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                   >
                     <li>
-                      <NuxtLink to="">
+                      <NuxtLink to="/admin/dashboard/home/posted-job">
                         <div class="flex text-xs gap-x-3">
                           <span
                             ><svg
@@ -3474,7 +3474,7 @@ definePageMeta({
                     class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                   >
                     <li>
-                      <NuxtLink to="">
+                      <NuxtLink to="/admin/dashboard/home/posted-job">
                         <div class="flex text-xs gap-x-3">
                           <span
                             ><svg
@@ -3683,7 +3683,7 @@ definePageMeta({
                     class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                   >
                     <li>
-                      <NuxtLink to="">
+                      <NuxtLink to="/admin/dashboard/home/posted-job">
                         <div class="flex text-xs gap-x-3">
                           <span
                             ><svg
@@ -3868,7 +3868,7 @@ definePageMeta({
                     class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                   >
                     <li>
-                      <NuxtLink to="">
+                      <NuxtLink to="/admin/dashboard/home/posted-job">
                         <div class="flex text-xs gap-x-3">
                           <span
                             ><svg
@@ -4077,7 +4077,7 @@ definePageMeta({
                     class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
                   >
                     <li>
-                      <NuxtLink to="">
+                      <NuxtLink to="/admin/dashboard/home/posted-job">
                         <div class="flex text-xs gap-x-3">
                           <span
                             ><svg
