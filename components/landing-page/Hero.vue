@@ -176,7 +176,7 @@
 
           <!--  -->
           <div
-            class="bg-white w-60 h-[120px] absolute bottom-60 -left-4 rounded-8"
+            class="bg-white w-60 h-[120px] hover:bg-westside-500 hover:text-white absolute bottom-60 -left-4 rounded-8"
           >
             <div class="flex justify-between items-center border-b-2">
               <div class="flex flex-col px-4 py-3 space-y-2">
@@ -196,7 +196,7 @@
           </div>
 
           <div
-            class="bg-white w-64 h-20 absolute bottom-24 flex flex-col right-6 rounded-8"
+            class="bg-white w-64 h-20 hover:bg-westside-500 hover:text-white absolute bottom-24 flex flex-col right-6 rounded-8"
           >
             <div class="flex items-center">
               <div class="pl-3">
