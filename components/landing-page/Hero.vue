@@ -1,11 +1,12 @@
 <template>
-  <div class="carousel w-full">
-    <div class="text-white h-full carousel-item w-full">
-      <div class="relative h-full w-full">
-        <div class="min-h-screen w-full">
+  <div class="pb-10">
+    <!-- slide -->
+    <div class="text-white carousel-item w-full h-screen">
+      <div class="relative w-full">
+        <div class="h-full w-full">
           <img
             src="/assets/images/my-lady.png"
-            class="absolute top-0 left-0 w-full h-screen object-cover z-0"
+            class="absolute -top-2 left-0 w-full h-screen object-cover z-0"
             alt="a lady with book"
           />
         </div>
@@ -130,7 +131,7 @@
         </div>
       </div>
     </div>
-
+    <!-- slide 2 -->
     <div class="bg-primary-1 text-white h-screen carousel-item w-full">
       <div class="flex h-full w-full justify-between items-center px-6">
         <div class="">

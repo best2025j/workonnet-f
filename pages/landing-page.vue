@@ -1,12 +1,11 @@
 <script setup lang="ts"></script>
 <template>
-  <div>
-    <div class="absolute top-0 left-0 right-0 z-50">
+  <div class="h-full w-full">
+    <div class="relative z-50">
       <LandingPageNavbar class="" />
     </div>
-    <main>
-      <LandingPageHero />
-    </main>
+    <LandingPageHero class="-mt-10" />
+
     <LandingPageSections />
   </div>
 </template>
