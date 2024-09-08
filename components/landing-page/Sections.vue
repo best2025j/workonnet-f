@@ -1,14 +1,14 @@
 <template>
   <div class="h-full w-full px-6">
     <!-- grid divider vertical using daisy ui -->
-    <div class="grid grid-cols-3 w-full text-xs">
+    <div class="grid grid-cols-3 w-full text-sm">
       <div class="divider divider-start">Why choose us?</div>
       <div class="divider">Workonnect</div>
       <div class="divider divider-end">©2024</div>
     </div>
 
     <!--  -->
-    <div class="flex w-full pt-10">
+    <div class="flex w-full py-20">
       <div class="w-1/2">
         <h1 class="font-black text-[32px] w-[284px]">
           Empowering Job Seekers, One Success at a Time
@@ -216,25 +216,25 @@
 
             <!--  text for the checks-->
             <div class="">
-              <div class="flex flex-col space-y-[5.7rem]">
+              <div class="flex flex-col space-y-[5.5rem]">
                 <div class="pt-">
-                  <h1 class="text-xs">10,000+ Registered Users</h1>
+                  <h1 class="text-sm">10,000+ Registered Users</h1>
                 </div>
                 <!--  -->
                 <div class="">
-                  <h1 class="text-xs">7,500+ Job Placements</h1>
+                  <h1 class="text-sm">7,500+ Job Placements</h1>
                 </div>
                 <!--  -->
                 <div class=" ">
-                  <h1 class="text-xs">10,000+ Registered Users</h1>
+                  <h1 class="text-sm">10,000+ Registered Users</h1>
                 </div>
                 <!--  -->
                 <div class="">
-                  <h1 class="text-xs">800M+ Candidates Reached</h1>
+                  <h1 class="text-sm">800M+ Candidates Reached</h1>
                 </div>
                 <!--  -->
                 <div class="">
-                  <h1 class="text-xs">200K+ Recruiters Trust Us</h1>
+                  <h1 class="text-sm">200K+ Recruiters Trust Us</h1>
                 </div>
                 <!--  -->
                 <div class="">

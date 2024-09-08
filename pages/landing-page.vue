@@ -5,7 +5,9 @@
       <LandingPageNavbar class="" />
     </div>
     <LandingPageHero class="-mt-10" />
-
     <LandingPageSections />
+    <LandingPageRecruitment />
+    <LandingPageHiring />
+    <LandingPageTestimony />
   </div>
 </template>
