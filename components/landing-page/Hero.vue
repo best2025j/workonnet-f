@@ -130,14 +130,14 @@
         </div>
       </div>
     </div>
-    
-    <div class="bg-primary-1 text-white h-screen carousel-item">
+
+    <div class="bg-primary-1 text-white h-screen carousel-item w-full">
       <div class="flex h-full w-full justify-between items-center px-6">
         <div class="">
           <h1 class="font-black text-xl">
             Get Matched with Candidates Under 24hrs
           </h1>
-          <div class="py-4 max-w-[864px] text-black-50">
+          <div class="py-4 max-w-[890px] text-black-50">
             <h1 class="font-black text-[80px]">
               Recruit The Team You Need In Minutes.
             </h1>
@@ -165,18 +165,21 @@
         </div>
 
         <div class="h-full text-black-900 relative">
+          <div class="relative top-24 right-10">
+            <img src="/assets/images/frame.png" class="w-full h-full" alt="" />
+          </div>
           <img
             src="/assets/images/3group.png"
-            class="h-full w-full object-cover"
+            class="h-full w-full object-cover absolute top-0"
             alt=""
           />
 
           <!--  -->
           <div
-            class="bg-white w-64 h-[126px] absolute bottom-60 -left-14 rounded-8"
+            class="bg-white w-60 h-[120px] absolute bottom-60 -left-4 rounded-8"
           >
             <div class="flex justify-between items-center border-b-2">
-              <div class="flex flex-col px-4 py-4 space-y-2">
+              <div class="flex flex-col px-4 py-3 space-y-2">
                 <h1 class="text-sm">IOS Mobile Developer</h1>
                 <h1 class="text-xs">Experience: 6 years</h1>
               </div>
@@ -186,7 +189,7 @@
               </div>
             </div>
 
-            <div class="flex justify-between px-4 pt-4">
+            <div class="flex justify-between px-4 pt-3">
               <h1 class="text-xs">Status: Hired</h1>
               <h1 class="text-xs">Time to hire: 15 days</h1>
             </div>
