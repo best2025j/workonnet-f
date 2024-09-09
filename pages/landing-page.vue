@@ -9,5 +9,7 @@
     <LandingPageRecruitment />
     <LandingPageHiring />
     <LandingPageTestimony />
+    <LandingPageConnect />
+    <LandingPageFooter />
   </div>
 </template>

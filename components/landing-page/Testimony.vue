@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen w-full px-6">
+  <div class="h-screen w-full px-6 my-10">
     <!-- grid divider vertical using daisy ui -->
     <div class="grid grid-cols-3 w-full text-sm">
       <div class="divider divider-start">Testimonials</div>
@@ -49,7 +49,7 @@
             </svg>
           </span>
 
-          <h1>
+          <h1 class="text-sm">
             <i
               >“Since implementing workonnect, our business has been significant
               growth”</i
@@ -94,7 +94,7 @@
             </svg>
           </span>
 
-          <h1>
+          <h1 class="text-sm">
             <i
               >“Since implementing workonnect, our business has been significant
               growth”</i
@@ -139,7 +139,7 @@
             </svg>
           </span>
 
-          <h1>
+          <h1 class="text-sm">
             <i
               >“Since implementing workonnect, our business has been significant
               growth”</i
@@ -184,7 +184,7 @@
             </svg>
           </span>
 
-          <h1>
+          <h1 class="text-sm">
             <i
               >“Since implementing workonnect, our business has been significant
               growth”</i
@@ -229,7 +229,7 @@
             </svg>
           </span>
 
-          <h1>
+          <h1 class="text-sm">
             <i
               >“Since implementing workonnect, our business has been significant
               growth”</i
