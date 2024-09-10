@@ -24,7 +24,6 @@ const inputValue4 = ref("");
           type="text"
           maxlength="1"
           v-model="inputValue"
-          placeholder="0"
           :class="{
             'focus:outline-none  border-2 border-solid shadow-lg': inputValue,
             'border-2 border-solid  ': !inputValue,
@@ -36,7 +35,6 @@ const inputValue4 = ref("");
           type="text"
           maxlength="1"
           v-model="inputValue2"
-          placeholder="0"
           :class="{
             ' focus:outline-none  border-2 border-solid shadow-lg': inputValue2,
             'border-2 border-solid  ': !inputValue2,
@@ -48,7 +46,6 @@ const inputValue4 = ref("");
           type="text"
           maxlength="1"
           v-model="inputValue3"
-          placeholder="0"
           :class="{
             'focus:outline-none  border-2 border-solid shadow-lg': inputValue3,
             'border-2 border-solid  ': !inputValue3,
@@ -60,7 +57,6 @@ const inputValue4 = ref("");
           type="text"
           maxlength="1"
           v-model="inputValue4"
-          placeholder="0"
           :class="{
             'focus:outline-none  border-2 border-solid shadow-lg': inputValue4,
             'border-2 border-solid  ': !inputValue4,

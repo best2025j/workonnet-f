@@ -2,7 +2,7 @@
 import googleLogo from "@/assets/images/googlelogo.png";
 import linkedinlogo from "@/assets/images/linkedin.png";
 import asterix from "@/assets/images/”.png";
-import jobseeker from "@/assets/images/Frame 1618869200.png";
+import jobseeker from "@/assets/images/Frame 1618869200.svg";
 import arrowleft from "@/assets/images/arrowright.png";
 import arrowright from "@/assets/images/arrowleft.png";
 import { ref } from "vue";
@@ -41,12 +41,12 @@ const prevSlide = () => {
 
 <template>
   <section>
-    <div class="flex items-center justify-center gap-4 mb-32 mt-14 mx-2">
-      <div class="flex flex-col w-full">
-        <h2 class="text-center text-3xl mb-10 font-['Georgia'] font-normal">
+    <div class="flex items-center justify-center gap-4 mb-2 mt-14 mx-2">
+      <div class="flex flex-col w-full mb-20 -mt-16">
+        <h2 class="text-center text-3xl mb-6  font-['Georgia'] font-normal">
           Continue to account
         </h2>
-        <div class="flex flex-col items-center justify-center gap-5">
+        <div class="flex flex-col items-center justify-center gap-4">
           <button
             class="flex gap-4 items-center justify-center text-[12px] font-thin border-2 border-[#D0D5DD] border-solid w-[374px] h-10 text-[#344054] rounded-md"
           >
@@ -101,7 +101,7 @@ const prevSlide = () => {
         </p>
       </div>
 
-      <div class="bg-custom-gradient w-[75%] mr-24 rounded-xl">
+      <div class="bg-custom-gradient w-[75%] mr-16 rounded-xl">
         <div class="flex items-center justify-center gap-10 mx-3 mt-10">
           <h1
             class="text-[34.33px] font-['Georgia'] font-normal text-white mx-6"
@@ -122,7 +122,7 @@ const prevSlide = () => {
                 :key="index"
                 class="flex-none w-full mt-10 mb-6 p-4 pl-10"
               >
-                <p class="text-sm text-white mb-6 font-thin">
+                <p class="text-lg text-white mb-6 font-thin ">
                   "{{ testimonial.message }} "
                 </p>
                 <p class="mt-2 text-sm font-black text-white">
@@ -135,13 +135,13 @@ const prevSlide = () => {
           <div class="mx-10">
             <button
               @click="prevSlide"
-              class="btn transform mr-5 -translate-y-1/2 p-2 text-white bg-white"
+              class="btn transform rounded-md mr-5 -translate-y-1/2 p-2 text-white bg-white"
             >
               <img :src="arrowleft" alt="" class="absolute left-3 top-4" />
             </button>
             <button
               @click="nextSlide"
-              class="btn transform -translate-y-1/2 p-2 text-white bg-[#B7680C]"
+              class="btn transform rounded-md -translate-y-1/2 p-2 text-white bg-[#B7680C]"
             >
               <img :src="arrowright" alt="" class="absolute left-3 top-4" />
             </button>

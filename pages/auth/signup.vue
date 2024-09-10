@@ -2,7 +2,7 @@
 import googleLogo from "@/assets/images/googlelogo.png";
 import linkedinlogo from "@/assets/images/linkedin.png";
 import asterix from "@/assets/images/”.png";
-import jobseeker from "@/assets/images/Frame 1618869200.png";
+import jobseeker from "@/assets/images/Frame 1618869200.svg";
 import arrowleft from "@/assets/images/arrowright.png";
 import arrowright from "@/assets/images/arrowleft.png";
 import { ref } from "vue";
@@ -101,7 +101,7 @@ const prevSlide = () => {
         </p>
       </div>
 
-      <div class="bg-custom-gradient w-[75%] mr-24 rounded-xl">
+      <div class="bg-custom-gradient w-[75%] mr-16 rounded-xl">
         <div class="flex items-center justify-center gap-10 mx-3 mt-10">
           <h1
             class="text-[34.33px] font-['Georgia'] font-normal text-white mx-6"
@@ -122,10 +122,10 @@ const prevSlide = () => {
                 :key="index"
                 class="flex-none w-full mt-10 mb-6 p-4 pl-10"
               >
-                <p class="text-sm text-white mb-6 font-thin">
+                <p class="text-lg text-white mb-6 font-thin">
                   "{{ testimonial.message }} "
                 </p>
-                <p class="mt-2 text-sm font-black text-white">
+                <p class="mt-2 font-black text-white">
                   {{ testimonial.name }}
                 </p>
                 <p class="text-white font-thin">{{ testimonial.occupation }}</p>

@@ -2,7 +2,7 @@
 import googleLogo from "@/assets/images/googlelogo.png";
 import linkedinlogo from "@/assets/images/linkedin.png";
 import asterix from "@/assets/images/”.png";
-import jobseeker from "@/assets/images/Frame 1618869200.png";
+import jobseeker from "@/assets/images/Frame 1618869200.svg";
 import arrowleft from "@/assets/images/arrowright.png";
 import arrowright from "@/assets/images/arrowleft.png";
 import { ref } from "vue";
@@ -38,13 +38,13 @@ const prevSlide = () => {
 
 <template>
   <section>
-    <div class="flex items-center justify-center gap-4 mb-32 mt-14 mx-2">
-      <div class="flex flex-col w-full mb-20">
-        <h2 class="text-center text-3xl mb-10 font-['Georgia'] font-normal">
+    <div class="flex items-center justify-center gap-4 mb-2 mt-14 mx-2">
+      <div class="flex flex-col w-full mb-20 -mt-16">
+        <h2 class="text-center text-3xl mb-6 font-['Georgia'] font-normal">
           Create Account
         </h2>
         <div
-          class="flex flex-col items-center justify-center gap-8 text-[12px]"
+          class="flex flex-col items-center justify-center gap-4 text-[12px]"
         >
           <button
             class="flex gap-4 items-center justify-center border-2 font-light font-['Nexa'] border-[#D0D5DD] border-solid px-5 py-2 w-1/2 text-[#344054] rounded-md"
@@ -101,7 +101,7 @@ const prevSlide = () => {
         </p>
       </div>
 
-      <div class="bg-custom-gradient w-[65%] rounded-xl mr-24">
+      <div class="bg-custom-gradient w-[75%] rounded-xl mr-16">
         <div class="flex items-center justify-center gap-10 mx-4 mt-10">
           <h1
             class="text-[34.33px] font-['Georgia'] font-normal text-white mx-6"
@@ -133,13 +133,13 @@ const prevSlide = () => {
           <div class="mx-10">
             <button
               @click="prevSlide"
-              class="btn transform mr-5 -translate-y-1/2 p-2 text-white bg-white"
+              class="btn transform rounded-md mr-2 -translate-y-1/2 p-2 text-white bg-white"
             >
               <img :src="arrowleft" alt="" class="absolute left-3 top-4" />
             </button>
             <button
               @click="nextSlide"
-              class="btn transform -translate-y-1/2 p-2 text-white bg-[#B7680C]"
+              class="btn transform rounded-md -translate-y-1/2 p-2 text-white bg-[#B7680C]"
             >
               <img :src="arrowright" alt="" class="absolute left-3 top-4" />
             </button>
