@@ -11,14 +11,10 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@heroicons/vue": "^2.1.5",
-    "@pinia/nuxt": "^0.5.4",
-    "daisyui": "^4.12.10",
-    "nuxt": "^3.13.0",
+    "nuxt": "^3.12.4",
     "vue": "latest"
   },
   "devDependencies": {
-    "@pinia-plugin-persistedstate/nuxt": "^1.2.1",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.41",
     "tailwindcss": "^3.4.10"
