@@ -191,7 +191,7 @@ definePageMeta({
       <div
         class="flex h-full w-full items-center justify-center font-black text-2xl mx-auto"
       >
-        chat analysis
+        <ChartsLine />
       </div>
     </div>
 
