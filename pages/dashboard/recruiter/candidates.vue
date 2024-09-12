@@ -204,7 +204,8 @@ definePageMeta({
         <!--  -->
         <div class="px-2 mt-4">
           <table class="w-full text-sm">
-            <tr class="bg-black-50 h-10 rounded-10">
+            <thead>
+              <tr class="bg-black-50 h-10 rounded-10">
               <td class="pl-2">Candidates Name</td>
               <td class="text-left">Rating</td>
               <td class="text-left">Stages</td>
@@ -213,8 +214,10 @@ definePageMeta({
               <td class="text-left">Attachments</td>
             </tr>
 
+            </thead>
             <!--  -->
-            <tr class="h-14">
+            <tbody>
+              <tr class="h-14">
               <td>
                 <div class="flex items-center space-x-2">
                   <img
@@ -2002,7 +2005,8 @@ definePageMeta({
                   </ul>
                 </div>
               </td>
-            </tr>
+            </tr>j
+            </tbody>
           </table>
         </div>
 

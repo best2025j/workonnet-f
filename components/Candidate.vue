@@ -141,6 +141,7 @@
       <!--  -->
       <div class="px-4">
         <table class="w-full">
+         <thead>
           <tr class="bg-black-50 h-10 rounded-10">
             <td class="text-left">Candidates Name</td>
             <td class="text-left">Rating</td>
@@ -149,9 +150,11 @@
             <td class="text-left">Application Date</td>
             <td class="text-left">Attachments</td>
           </tr>
+         </thead>
 
-          <!--  -->
-          <tr class="h-14">
+         <tbody>
+           <!--  -->
+           <tr class="h-14">
             <td>
               <div class="flex items-center space-x-2">
                 <img src="/assets/images/Ellipse5.png" alt="microsoft image" />
@@ -444,6 +447,7 @@
               </div>
             </td>
           </tr>
+         </tbody>
         </table>
       </div>
     </div>
