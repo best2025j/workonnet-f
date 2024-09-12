@@ -9,7 +9,7 @@
     <!--  -->
     <div class="flex gap-x-2 h-full w-full py-14">
       <div class="flex flex-col w-3/6 justify-between h-auto">
-        <h1 class="text-[32px] font-black max-w-[18rem]">
+        <h1 class="text-[32px] font-black max-w-[18rem] line">
           Connect Talent with Opportunity
         </h1>
 
@@ -41,3 +41,7 @@
     </div>
   </div>
 </template>
+<style scoped>
+.line {
+  line-height: 35px;
+}</style>
