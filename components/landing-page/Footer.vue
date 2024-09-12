@@ -68,19 +68,19 @@
           </thead>
           <tbody>
             <tr>
-              <td class="pl-24 pt-4">About</td>
-              <td class="pl-24 pt-4">Customer Support</td>
-              <td class="pl-24 pt-4">Press Kitl</td>
+              <td class="pl-24 pt-5">About</td>
+              <td class="pl-24 pt-5">Customer Support</td>
+              <td class="pl-24 pt-5">Press Kitl</td>
             </tr>
             <tr>
-              <td class="pl-24 pt-4">Contact</td>
-              <td class="pl-24 pt-4">Terms & Conditions</td>
-              <td class="pl-24 pt-4">How to - Blog</td>
+              <td class="pl-24 pt-5">Contact</td>
+              <td class="pl-24 pt-5">Terms & Conditions</td>
+              <td class="pl-24 pt-5">How to - Blog</td>
             </tr>
             <tr>
-              <td class="pl-24 pt-4">Services</td>
-              <td class="pl-24 pt-4">Privacy Policy</td>
-              <td class="pl-24 pt-4">Youtube Playlist</td>
+              <td class="pl-24 pt-5">Services</td>
+              <td class="pl-24 pt-5">Privacy Policy</td>
+              <td class="pl-24 pt-5">Youtube Playlist</td>
             </tr>
           </tbody>
         </table>
@@ -120,8 +120,12 @@
       </div>
     </div>
 
-    <div class="text-center justify-center max-w-[1130px] space-y-3 w-full items-center flex flex-col mx-auto">
-      <h1 class="text-[100px] line-1 border-b-2 w-full border-[#EAE8EE]">Workonnect</h1>
+    <div
+      class="text-center justify-center max-w-[1130px] space-y-3 w-full items-center flex flex-col mx-auto"
+    >
+      <h1 class="text-[100px] line-1 border-b-2 w-full border-[#EAE8EE]">
+        Workonnect
+      </h1>
       <h1 class="text-xs">COPYRIGHT © 2024. WORKONNECT. ALL RIGHTS RESERVED</h1>
     </div>
   </footer>

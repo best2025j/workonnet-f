@@ -148,7 +148,7 @@ const admin = [
 
 // const isActive = (pageName: string) => route.meta?.pageName === pageName;
 
-const  isActive = (pageName: string) => {
+const isActive = (pageName: string) => {
   return route.meta?.pageName === pageName;
 };
 </script>
@@ -162,7 +162,6 @@ const  isActive = (pageName: string) => {
 
     <!-- side nav -->
     <nav class="">
-      ' '
       <!-- jobseekers sidenav -->
       <ul
         class="w-full"
