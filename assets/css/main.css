@@ -22,6 +22,8 @@ body {
 body {
   overflow: scroll !important; /* or overflow: hidden; if you want to disable scrolling */
   background-color: #f6f6f6;
+
+  
 }
 
 /* Hide horizontal scrollbar */

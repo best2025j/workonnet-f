@@ -122,6 +122,7 @@ module.exports = {
         5: "5px",
         8: "8px",
         10: "10px",
+        12: "12px",
         20: "100px",
       },
       transformOrigin: {
