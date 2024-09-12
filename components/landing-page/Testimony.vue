@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen w-full px-6 my-10">
+  <div class="h-full w-full px-6 my-20">
     <!-- grid divider vertical using daisy ui -->
     <div class="grid grid-cols-3 w-full text-sm">
       <div class="divider divider-start">Testimonials</div>
@@ -8,7 +8,7 @@
     </div>
 
     <!-- cards with shadows -->
-    <div class="flex justify-center flex-col h-screen items-center mx-auto">
+    <div class="flex justify-center flex-col h-full items-center mx-auto">
       <!--  -->
       <div class="flex justify-center items-center py-10">
         <h1 class="text-[32px] font-black">Testimonials</h1>

@@ -14,4 +14,9 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+  plugins: [{ src: '~/plugins/scroll-behavior.client.ts', mode: 'client' }],
+  modules: ['@pinia/nuxt', '@pinia-plugin-persistedstate/nuxt'],
+  pinia: {
+    storesDirs: ['./store/**'],
+  },
 });

@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen w-full px-6">
+  <div class="h-full w-full px-6">
     <!-- grid divider vertical using daisy ui -->
     <div class="grid grid-cols-3 w-full text-sm">
       <div class="divider divider-start">The Process</div>
@@ -7,7 +7,7 @@
       <div class="divider divider-end">©2024</div>
     </div>
     <!--  -->
-    <div class="flex justify-center flex-col h-screen items-center mx-auto">
+    <div class="flex justify-center flex-col h-[900px] items-center mx-auto">
       <div
         class="mx-auto text-center justify-center items-center flex flex-col space-y-4"
       >
