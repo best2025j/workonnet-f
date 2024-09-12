@@ -1,6 +1,6 @@
 <script setup lang="ts"></script>
 <template>
-  <div class="h-full w-full">
+  <div class="h-full w-full bg-white border">
     <div class="relative z-50">
       <LandingPageNavbar class="" />
     </div>
@@ -13,3 +13,4 @@
     <LandingPageFooter />
   </div>
 </template>
+

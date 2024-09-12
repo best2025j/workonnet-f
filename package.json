@@ -20,6 +20,7 @@
     "vue-chart-3": "^3.1.8"
   },
   "devDependencies": {
+    "@pinia-plugin-persistedstate/nuxt": "^1.2.1",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.41",
     "tailwindcss": "^3.4.10"

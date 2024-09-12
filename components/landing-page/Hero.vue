@@ -1,12 +1,12 @@
 <template>
-  <div class="pb-10">
+  <div class="pb-10 carousel w-full h-full">
     <!-- slide -->
-    <div class="text-white carousel-item w-full h-screen">
+    <div class="text-white carousel-item w-full h-[1080px]">
       <div class="relative w-full">
         <div class="h-full w-full">
           <img
             src="/assets/images/my-lady.png"
-            class="absolute -top-2 left-0 w-full h-screen object-cover z-0"
+            class="absolute -top-2 left-0 w-full h-auto object-cover z-0"
             alt="a lady with book"
           />
         </div>
@@ -132,7 +132,7 @@
       </div>
     </div>
     <!-- slide 2 -->
-    <div class="bg-primary-1 text-white h-screen carousel-item w-full">
+    <div class="bg-primary-1 text-white h-[1180px] carousel-item w-full">
       <div class="flex h-full w-full justify-between items-center px-6">
         <div class="">
           <h1 class="font-black text-xl">
@@ -165,7 +165,7 @@
           </div>
         </div>
 
-        <div class="h-full text-black-900 relative">
+        <div class="h-full w-auto text-black-900 relative">
           <div class="relative top-24 right-10">
             <img src="/assets/images/frame.png" class="w-full h-full" alt="" />
           </div>

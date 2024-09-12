@@ -2,7 +2,7 @@
   <!-- Navbar -->
   <div class="pb-4">
     <nav
-      class="flex justify-between bg-inherit w-full items-center backdrop-blur-sm shadow-md px-6 h-16 text-xs fixed"
+      class="flex justify-between bg-[#00000066] w-full left-0 items-center backdrop-blur-sm shadow-md px-6 h-16 text-xs fixed"
     >
       <div>
         <img src="/assets/images/logo3.png" alt="Logo" class="" />
