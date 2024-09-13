@@ -1,6 +1,5 @@
 <script setup lang="ts">
-const localStore = useLocalStore()
-
+const localStore = useLocalStore();
 </script>
 
 <template>
@@ -12,7 +11,11 @@ const localStore = useLocalStore()
         {{ $route?.meta?.title }}
       </h1>
 
-      <div v-show="localStore.$state.currentUserType === LOGGED_USER.RECRUITER" class="relative">
+      <!-- search input -->
+      <div
+        v-show="localStore.$state.currentUserType === LOGGED_USER.RECRUITER"
+        class="relative"
+      >
         <input
           type="text"
           placeholder="Search for jobs, candidates & more..."
@@ -38,7 +41,11 @@ const localStore = useLocalStore()
           to="/"
           class="text-black-900 hover:underline flex items-center gap-4 flex-row-reverse"
         >
-          <img src="/assets/images/Ellipse12.png" alt="Profile Picture" />
+          <img
+            src="/assets/images/Ellipse12.png"
+            alt="Profile Picture"
+            v-if="localStore.$state.currentUserType !== LOGGED_USER.ADMIN"
+          />
           <!-- Use the bellIcon component correctly -->
           <IconsBellIcon class="h-6 w-6 inline-block" />
         </NuxtLink>

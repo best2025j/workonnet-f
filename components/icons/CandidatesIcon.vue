@@ -18,7 +18,7 @@ defineProps<{
       fill="#454545"
     />
   </svg>
-<!-- active linkicon -->
+  <!-- active linkicon -->
   <svg
     v-else
     width="18"

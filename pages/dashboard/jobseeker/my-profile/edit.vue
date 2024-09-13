@@ -1,8 +1,8 @@
 <script setup lang="ts">
 definePageMeta({
-  title: "My profile",
-  pageName: "dashboard.jobseeker.my-profile.edit",
-  layout: "dashboard",
+  title: 'My profile',
+  pageName: 'dashboard.jobseeker.my-profile.edit',
+  layout: 'dashboard',
 });
 </script>
 
@@ -361,9 +361,11 @@ definePageMeta({
             </div>
 
             <div>
-              <button class="px-4 py-2 bg-primary-1 text-white rounded-5">
-                Edit experience
-              </button>
+              <NuxtLink to="/dashboard/jobseeker/my-profile/work-experience">
+                <button class="px-4 py-2 bg-primary-1 text-white rounded-5">
+                  Edit experience
+                </button>
+              </NuxtLink>
             </div>
           </div>
 

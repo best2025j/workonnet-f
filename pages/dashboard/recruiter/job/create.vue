@@ -1,8 +1,8 @@
 <script setup lang="ts">
 definePageMeta({
-  title: "Create job opening",
-  pageName: "dashboard.recruiter.job.create",
-  layout: "dashboard",
+  title: 'Create job opening',
+  pageName: 'dashboard.recruiter.job.create',
+  layout: 'dashboard',
 });
 </script>
 
@@ -43,7 +43,10 @@ definePageMeta({
 
           <!-- Open the modal using ID.showModal() method -->
 
-          <dialog id="my_modal_1" class="modal text-black-950">
+          <dialog
+            id="my_modal_1"
+            class="modal text-black-950 backdrop-blur-sm backdrop-filter"
+          >
             <div class="modal-box flex-col flex items-center space-y-3">
               <div class="flex items-center justify-between w-full">
                 <div class="text-white">hello.</div>

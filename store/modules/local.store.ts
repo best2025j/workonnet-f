@@ -3,8 +3,9 @@ export const LocalStore = defineStore('local-store', {
     isExpandedNav: false,
     isMobileMenuOpened: false,
     errorData: null,
-    currentUserType: LOGGED_USER.JOBSEEKER,
+    currentUserType: LOGGED_USER.ADMIN,
   }),
+
   getters: {
     expandedNav: (state) => state.isExpandedNav,
     openedMobileMenu: (state) => state.isMobileMenuOpened,
