@@ -48,7 +48,7 @@
               <img src="/assets/images/Logo2.png" alt="" />
             </div>
             <!-- input -->
-            <div class="py-4 space-y-2">
+            <form class="py-4 space-y-2">
               <div class="flex flex-col w-full">
                 <label for="first-name" class="text-sm mb-2">Search job</label>
                 <div class="relative">
@@ -73,6 +73,7 @@
                   </svg>
                 </div>
               </div>
+              
               <div class="flex gap-x-2 py-2">
                 <div class="flex flex-col w-full">
                   <label for="first-name" class="text-sm mb-2">Location</label>
@@ -122,7 +123,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </form>
             <!-- btn -->
             <button class="w-full p-3 bg-primary-1 rounded-8 text-xs">
               Search job

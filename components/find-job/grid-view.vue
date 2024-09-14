@@ -4,7 +4,7 @@
 <template>
   <div class="py-4">
     <div class="grid grid-cols-3 gap-4">
-      <div class="bg-white rounded-10 border border-westside-300">
+    <div class="bg-white rounded-10 border border-westside-300">
         <div class="border-b-2 p-4 space-y-2">
           <div class="flex items-start space-x-4">
             <img
@@ -110,7 +110,7 @@
         <!-- <nuxt-link to="/dashboard/jobseeker/find-jobs/more-details"> -->
       </div>
       <!--  -->
-      <div class="bg-white rounded-10 border border-westside-300">
+      <div class="bg-white rounded-10">
         <div class="border-b-2 p-4 space-y-2">
           <div class="flex items-start space-x-4">
             <img
@@ -214,7 +214,7 @@
         <!-- <nuxt-link to="/dashboard/jobseeker/find-jobs/more-details"> -->
       </div>
       <!--  -->
-      <div class="bg-white rounded-10 border border-westside-300">
+      <div class="bg-white rounded-10">
         <div class="border-b-2 p-4 space-y-2">
           <div class="flex items-start space-x-4">
             <img
@@ -318,7 +318,7 @@
         <!-- <nuxt-link to="/dashboard/jobseeker/find-jobs/more-details"> -->
       </div>
       <!--  -->
-      <div class="bg-white rounded-10 border border-westside-300">
+      <div class="bg-white rounded-10">
         <div class="border-b-2 p-4 space-y-2">
           <div class="flex items-start space-x-4">
             <img
@@ -422,7 +422,7 @@
         <!-- <nuxt-link to="/dashboard/jobseeker/find-jobs/more-details"> -->
       </div>
       <!--  -->
-      <div class="bg-white rounded-10 border border-westside-300">
+      <div class="bg-white rounded-10">
         <div class="border-b-2 p-4 space-y-2">
           <div class="flex items-start space-x-4">
             <img
@@ -528,7 +528,7 @@
         <!-- <nuxt-link to="/dashboard/jobseeker/find-jobs/more-details"> -->
       </div>
       <!--  -->
-      <div class="bg-white rounded-10 border border-westside-300">
+      <div class="bg-white rounded-10">
         <div class="border-b-2 p-4 space-y-2">
           <div class="flex items-start space-x-4">
             <img
@@ -632,7 +632,7 @@
         <!-- <nuxt-link to="/dashboard/jobseeker/find-jobs/more-details"> -->
       </div>
       <!--  -->
-      <div class="bg-white rounded-10 border border-westside-300">
+      <div class="bg-white rounded-10">
         <div class="border-b-2 p-4 space-y-2">
           <div class="flex items-start space-x-4">
             <img
@@ -736,7 +736,7 @@
         <!-- <nuxt-link to="/dashboard/jobseeker/find-jobs/more-details"> -->
       </div>
       <!--  -->
-      <div class="bg-white rounded-10 border border-westside-300">
+      <div class="bg-white rounded-10">
         <div class="border-b-2 p-4 space-y-2">
           <div class="flex items-start space-x-4">
             <img
@@ -840,7 +840,7 @@
         <!-- <nuxt-link to="/dashboard/jobseeker/find-jobs/more-details"> -->
       </div>
       <!--  -->
-      <div class="bg-white rounded-10 border border-westside-300">
+      <div class="bg-white rounded-10">
         <div class="border-b-2 p-4 space-y-2">
           <div class="flex items-start space-x-4">
             <img
@@ -947,7 +947,7 @@
       </div>
 
       <!--  -->
-      <div class="bg-white rounded-10 border border-westside-300">
+      <div class="bg-white rounded-10">
         <div class="border-b-2 p-4 space-y-2">
           <div class="flex items-start space-x-4">
             <img
@@ -1051,7 +1051,7 @@
         <!-- <nuxt-link to="/dashboard/jobseeker/find-jobs/more-details"> -->
       </div>
       <!--  -->
-      <div class="bg-white rounded-10 border border-westside-300">
+      <div class="bg-white rounded-10">
         <div class="border-b-2 p-4 space-y-2">
           <div class="flex items-start space-x-4">
             <img
@@ -1155,7 +1155,7 @@
         <!-- <nuxt-link to="/dashboard/jobseeker/find-jobs/more-details"> -->
       </div>
       <!--  -->
-      <div class="bg-white rounded-10 border border-westside-300">
+      <div class="bg-white rounded-10">
         <div class="border-b-2 p-4 space-y-2">
           <div class="flex items-start space-x-4">
             <img

@@ -4,6 +4,7 @@ definePageMeta({
   pageName: "dashboard.recruiter.job.create",
   layout: "dashboard",
 });
+
 </script>
 
 <template>
@@ -11,7 +12,7 @@ definePageMeta({
     <div class="flex justify-between items-center p-2">
       <div>
         <h1 class="font-[Georgia] font-black text-2xl">Job details</h1>
-        <div class="flex space-x-2 items-center space-y-1">
+        <div class="flex space-x-2 items-center py-3">
           <svg
             width="16"
             height="16"
@@ -113,9 +114,8 @@ definePageMeta({
       </div>
     </div>
 
-    <!-- form -->
-    <!-- input for full name -->
-    <div class="p-4 font-[Nexa] space-y-4 w-3/4">
+    <!-- form input with dropdown  -->
+    <form class="p-4 font-[Nexa] space-y-4 w-3/4">
       <!-- ocupation -->
       <div class="flex flex-col w-full">
         <label for="first-name" class="text-sm mb-2">Job Title</label>
@@ -125,60 +125,114 @@ definePageMeta({
           class="pl-2 placeholder:text-xs pr-4 h-11 outline-none border border-gray-300 rounded-md"
         />
       </div>
-      <!--  -->
+
+      <!-- input with drop down  -->
       <div class="flex gap-2">
         <div class="flex flex-col w-full relative">
           <label for="first-name" class="text-sm mb-2">Department</label>
-          <input
-            type="text"
-            placeholder="Design"
-            class="pl-2 placeholder:text-xs pr-4 h-11 outline-none border border-gray-300 rounded-md"
-          />
-          <svg
-            width="18"
-            height="10"
-            class="absolute right-4 top-11 h-4 w-4 text-gray-400"
-            viewBox="0 0 18 10"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M17.031 1.53055L9.53104 9.03055C9.46139 9.10029 9.37867 9.15561 9.28762 9.19335C9.19657 9.23109 9.09898 9.25052 9.00042 9.25052C8.90186 9.25052 8.80426 9.23109 8.71321 9.19335C8.62216 9.15561 8.53945 9.10029 8.46979 9.03055L0.969792 1.53055C0.829062 1.38982 0.75 1.19895 0.75 0.999929C0.75 0.800906 0.829062 0.610034 0.969792 0.469303C1.11052 0.328573 1.30139 0.249512 1.50042 0.249512C1.69944 0.249512 1.89031 0.328573 2.03104 0.469303L9.00042 7.43962L15.9698 0.469303C16.0395 0.399621 16.1222 0.344345 16.2132 0.306633C16.3043 0.268921 16.4019 0.249512 16.5004 0.249512C16.599 0.249512 16.6965 0.268921 16.7876 0.306633C16.8786 0.344345 16.9614 0.399621 17.031 0.469303C17.1007 0.538986 17.156 0.621712 17.1937 0.712756C17.2314 0.803801 17.2508 0.901383 17.2508 0.999929C17.2508 1.09847 17.2314 1.19606 17.1937 1.2871C17.156 1.37815 17.1007 1.46087 17.031 1.53055Z"
-              fill="#888888"
+
+          <div class="relative dropdown dropdown-bottom flex flex-col w-full">
+            <input
+              type="text"
+              placeholder="Design"
+              class="pl-2 placeholder:text-xs pr-4 h-11 outline-none border bg-white text-xs border-gray-300 rounded-md"
             />
-          </svg>
+            <!-- list -->
+            <ul
+              tabindex="0"
+              class="dropdown-content menu bg-white absolute left-0 right-0 rounded-box z-10 p-2 shadow"
+            >
+              <li class="bg-gray-1"><a>Design</a></li>
+              <li><a>Human Resourse</a></li>
+              <li><a>Health</a></li>
+            </ul>
+
+            <svg
+              width="18"
+              height="10"
+              class="absolute right-4 top-4 h-4 w-4 text-gray-400"
+              viewBox="0 0 18 10"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M17.031 1.53055L9.53104 9.03055C9.46139 9.10029 9.37867 9.15561 9.28762 9.19335C9.19657 9.23109 9.09898 9.25052 9.00042 9.25052C8.90186 9.25052 8.80426 9.23109 8.71321 9.19335C8.62216 9.15561 8.53945 9.10029 8.46979 9.03055L0.969792 1.53055C0.829062 1.38982 0.75 1.19895 0.75 0.999929C0.75 0.800906 0.829062 0.610034 0.969792 0.469303C1.11052 0.328573 1.30139 0.249512 1.50042 0.249512C1.69944 0.249512 1.89031 0.328573 2.03104 0.469303L9.00042 7.43962L15.9698 0.469303C16.0395 0.399621 16.1222 0.344345 16.2132 0.306633C16.3043 0.268921 16.4019 0.249512 16.5004 0.249512C16.599 0.249512 16.6965 0.268921 16.7876 0.306633C16.8786 0.344345 16.9614 0.399621 17.031 0.469303C17.1007 0.538986 17.156 0.621712 17.1937 0.712756C17.2314 0.803801 17.2508 0.901383 17.2508 0.999929C17.2508 1.09847 17.2314 1.19606 17.1937 1.2871C17.156 1.37815 17.1007 1.46087 17.031 1.53055Z"
+                fill="#888888"
+              />
+            </svg>
+          </div>
         </div>
         <div class="flex flex-col w-full relative">
           <label for="first-name" class="text-sm mb-2">Job Type</label>
-          <input
-            type="text"
-            placeholder="Full Time"
-            class="pl-2 placeholder:text-xs pr-4 h-11 outline-none border border-gray-300 rounded-md"
-          />
-          <svg
-            width="18"
-            height="10"
-            class="absolute right-4 top-11 h-4 w-4 text-gray-400"
-            viewBox="0 0 18 10"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M17.031 1.53055L9.53104 9.03055C9.46139 9.10029 9.37867 9.15561 9.28762 9.19335C9.19657 9.23109 9.09898 9.25052 9.00042 9.25052C8.90186 9.25052 8.80426 9.23109 8.71321 9.19335C8.62216 9.15561 8.53945 9.10029 8.46979 9.03055L0.969792 1.53055C0.829062 1.38982 0.75 1.19895 0.75 0.999929C0.75 0.800906 0.829062 0.610034 0.969792 0.469303C1.11052 0.328573 1.30139 0.249512 1.50042 0.249512C1.69944 0.249512 1.89031 0.328573 2.03104 0.469303L9.00042 7.43962L15.9698 0.469303C16.0395 0.399621 16.1222 0.344345 16.2132 0.306633C16.3043 0.268921 16.4019 0.249512 16.5004 0.249512C16.599 0.249512 16.6965 0.268921 16.7876 0.306633C16.8786 0.344345 16.9614 0.399621 17.031 0.469303C17.1007 0.538986 17.156 0.621712 17.1937 0.712756C17.2314 0.803801 17.2508 0.901383 17.2508 0.999929C17.2508 1.09847 17.2314 1.19606 17.1937 1.2871C17.156 1.37815 17.1007 1.46087 17.031 1.53055Z"
-              fill="#888888"
+          <div class="relative dropdown dropdown-bottom flex flex-col w-full">
+            <input
+              type="text"
+              placeholder="Full Time"
+              class="pl-2 placeholder:text-xs pr-4 h-11 outline-none border bg-white text-xs border-gray-300 rounded-md"
             />
-          </svg>
+            <!-- list -->
+            <ul
+              tabindex="0"
+              class="dropdown-content menu bg-white absolute left-0 right-0 rounded-box z-10 p-2 shadow"
+            >
+              <li class="bg-gray-1"><a>Full Time</a></li>
+              <li><a>Remote</a></li>
+              <li><a>Contract</a></li>
+              <li><a>Hybrid</a></li>
+            </ul>
+
+            <svg
+              width="18"
+              height="10"
+              class="absolute right-4 top-4 h-4 w-4 text-gray-400"
+              viewBox="0 0 18 10"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M17.031 1.53055L9.53104 9.03055C9.46139 9.10029 9.37867 9.15561 9.28762 9.19335C9.19657 9.23109 9.09898 9.25052 9.00042 9.25052C8.90186 9.25052 8.80426 9.23109 8.71321 9.19335C8.62216 9.15561 8.53945 9.10029 8.46979 9.03055L0.969792 1.53055C0.829062 1.38982 0.75 1.19895 0.75 0.999929C0.75 0.800906 0.829062 0.610034 0.969792 0.469303C1.11052 0.328573 1.30139 0.249512 1.50042 0.249512C1.69944 0.249512 1.89031 0.328573 2.03104 0.469303L9.00042 7.43962L15.9698 0.469303C16.0395 0.399621 16.1222 0.344345 16.2132 0.306633C16.3043 0.268921 16.4019 0.249512 16.5004 0.249512C16.599 0.249512 16.6965 0.268921 16.7876 0.306633C16.8786 0.344345 16.9614 0.399621 17.031 0.469303C17.1007 0.538986 17.156 0.621712 17.1937 0.712756C17.2314 0.803801 17.2508 0.901383 17.2508 0.999929C17.2508 1.09847 17.2314 1.19606 17.1937 1.2871C17.156 1.37815 17.1007 1.46087 17.031 1.53055Z"
+                fill="#888888"
+              />
+            </svg>
+          </div>
         </div>
       </div>
+
       <!--  -->
       <div class="flex gap-2">
         <div class="flex flex-col w-full relative">
           <label for="first-name" class="text-sm mb-2">Recruitment Quota</label>
-          <input
-            type="text"
-            placeholder="Design"
-            class="pl-2 placeholder:text-xs pr-4 h-11 outline-none border border-gray-300 rounded-md"
-          />
+          <div class="relative dropdown dropdown-bottom flex flex-col w-full">
+            <input
+              type="text"
+              placeholder="Full Time"
+              class="pl-2 placeholder:text-xs pr-4 h-11 outline-none border bg-white text-xs border-gray-300 rounded-md"
+            />
+            <!-- list -->
+            <ul
+              tabindex="0"
+              class="dropdown-content menu bg-white absolute left-0 right-0 rounded-box z-10 p-2 shadow"
+            >
+              <li class="bg-gray-1"><a>Full Time</a></li>
+              <li><a>Remote</a></li>
+              <li><a>Contract</a></li>
+              <li><a>Hybrid</a></li>
+            </ul>
+
+            <svg
+              width="18"
+              height="10"
+              class="absolute right-4 top-4 h-4 w-4 text-gray-400"
+              viewBox="0 0 18 10"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M17.031 1.53055L9.53104 9.03055C9.46139 9.10029 9.37867 9.15561 9.28762 9.19335C9.19657 9.23109 9.09898 9.25052 9.00042 9.25052C8.90186 9.25052 8.80426 9.23109 8.71321 9.19335C8.62216 9.15561 8.53945 9.10029 8.46979 9.03055L0.969792 1.53055C0.829062 1.38982 0.75 1.19895 0.75 0.999929C0.75 0.800906 0.829062 0.610034 0.969792 0.469303C1.11052 0.328573 1.30139 0.249512 1.50042 0.249512C1.69944 0.249512 1.89031 0.328573 2.03104 0.469303L9.00042 7.43962L15.9698 0.469303C16.0395 0.399621 16.1222 0.344345 16.2132 0.306633C16.3043 0.268921 16.4019 0.249512 16.5004 0.249512C16.599 0.249512 16.6965 0.268921 16.7876 0.306633C16.8786 0.344345 16.9614 0.399621 17.031 0.469303C17.1007 0.538986 17.156 0.621712 17.1937 0.712756C17.2314 0.803801 17.2508 0.901383 17.2508 0.999929C17.2508 1.09847 17.2314 1.19606 17.1937 1.2871C17.156 1.37815 17.1007 1.46087 17.031 1.53055Z"
+                fill="#888888"
+              />
+            </svg>
+          </div>
           <svg
             width="18"
             height="10"
@@ -197,26 +251,40 @@ definePageMeta({
           <label for="first-name" class="text-sm mb-2"
             >Recruitment Period</label
           >
-          <input
-            type="text"
-            placeholder="Select Date"
-            class="pl-2 placeholder:text-xs pr-4 h-11 outline-none border border-gray-300 rounded-md"
-          />
-          <svg
-            width="18"
-            height="10"
-            class="absolute right-4 top-11 h-4 w-4 text-gray-400"
-            viewBox="0 0 18 10"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M17.031 1.53055L9.53104 9.03055C9.46139 9.10029 9.37867 9.15561 9.28762 9.19335C9.19657 9.23109 9.09898 9.25052 9.00042 9.25052C8.90186 9.25052 8.80426 9.23109 8.71321 9.19335C8.62216 9.15561 8.53945 9.10029 8.46979 9.03055L0.969792 1.53055C0.829062 1.38982 0.75 1.19895 0.75 0.999929C0.75 0.800906 0.829062 0.610034 0.969792 0.469303C1.11052 0.328573 1.30139 0.249512 1.50042 0.249512C1.69944 0.249512 1.89031 0.328573 2.03104 0.469303L9.00042 7.43962L15.9698 0.469303C16.0395 0.399621 16.1222 0.344345 16.2132 0.306633C16.3043 0.268921 16.4019 0.249512 16.5004 0.249512C16.599 0.249512 16.6965 0.268921 16.7876 0.306633C16.8786 0.344345 16.9614 0.399621 17.031 0.469303C17.1007 0.538986 17.156 0.621712 17.1937 0.712756C17.2314 0.803801 17.2508 0.901383 17.2508 0.999929C17.2508 1.09847 17.2314 1.19606 17.1937 1.2871C17.156 1.37815 17.1007 1.46087 17.031 1.53055Z"
-              fill="#888888"
+          <div class="relative dropdown dropdown-bottom flex flex-col w-full">
+            <input
+              type="text"
+              placeholder="Full Time"
+              class="pl-2 placeholder:text-xs pr-4 h-11 outline-none border bg-white text-xs border-gray-300 rounded-md"
             />
-          </svg>
+            <!-- list -->
+            <ul
+              tabindex="0"
+              class="dropdown-content menu bg-white absolute left-0 right-0 rounded-box z-10 p-2 shadow"
+            >
+              <li class="bg-gray-1"><a>Full Time</a></li>
+              <li><a>Remote</a></li>
+              <li><a>Contract</a></li>
+              <li><a>Hybrid</a></li>
+            </ul>
+
+            <svg
+              width="18"
+              height="10"
+              class="absolute right-4 top-4 h-4 w-4 text-gray-400"
+              viewBox="0 0 18 10"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M17.031 1.53055L9.53104 9.03055C9.46139 9.10029 9.37867 9.15561 9.28762 9.19335C9.19657 9.23109 9.09898 9.25052 9.00042 9.25052C8.90186 9.25052 8.80426 9.23109 8.71321 9.19335C8.62216 9.15561 8.53945 9.10029 8.46979 9.03055L0.969792 1.53055C0.829062 1.38982 0.75 1.19895 0.75 0.999929C0.75 0.800906 0.829062 0.610034 0.969792 0.469303C1.11052 0.328573 1.30139 0.249512 1.50042 0.249512C1.69944 0.249512 1.89031 0.328573 2.03104 0.469303L9.00042 7.43962L15.9698 0.469303C16.0395 0.399621 16.1222 0.344345 16.2132 0.306633C16.3043 0.268921 16.4019 0.249512 16.5004 0.249512C16.599 0.249512 16.6965 0.268921 16.7876 0.306633C16.8786 0.344345 16.9614 0.399621 17.031 0.469303C17.1007 0.538986 17.156 0.621712 17.1937 0.712756C17.2314 0.803801 17.2508 0.901383 17.2508 0.999929C17.2508 1.09847 17.2314 1.19606 17.1937 1.2871C17.156 1.37815 17.1007 1.46087 17.031 1.53055Z"
+                fill="#888888"
+              />
+            </svg>
+          </div>
         </div>
       </div>
+
       <!--  -->
       <div class="flex gap-2">
         <div class="flex flex-col w-full relative">
@@ -300,24 +368,37 @@ definePageMeta({
           <label for="first-name" class="text-sm mb-2"
             >Hiring Managers (Optional)</label
           >
-          <input
-            type="text"
-            placeholder="Design"
-            class="pl-2 placeholder:text-xs pr-4 h-11 outline-none border border-gray-300 rounded-md"
-          />
-          <svg
-            width="18"
-            height="10"
-            class="absolute right-4 top-11 h-4 w-4 text-gray-400"
-            viewBox="0 0 18 10"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M17.031 1.53055L9.53104 9.03055C9.46139 9.10029 9.37867 9.15561 9.28762 9.19335C9.19657 9.23109 9.09898 9.25052 9.00042 9.25052C8.90186 9.25052 8.80426 9.23109 8.71321 9.19335C8.62216 9.15561 8.53945 9.10029 8.46979 9.03055L0.969792 1.53055C0.829062 1.38982 0.75 1.19895 0.75 0.999929C0.75 0.800906 0.829062 0.610034 0.969792 0.469303C1.11052 0.328573 1.30139 0.249512 1.50042 0.249512C1.69944 0.249512 1.89031 0.328573 2.03104 0.469303L9.00042 7.43962L15.9698 0.469303C16.0395 0.399621 16.1222 0.344345 16.2132 0.306633C16.3043 0.268921 16.4019 0.249512 16.5004 0.249512C16.599 0.249512 16.6965 0.268921 16.7876 0.306633C16.8786 0.344345 16.9614 0.399621 17.031 0.469303C17.1007 0.538986 17.156 0.621712 17.1937 0.712756C17.2314 0.803801 17.2508 0.901383 17.2508 0.999929C17.2508 1.09847 17.2314 1.19606 17.1937 1.2871C17.156 1.37815 17.1007 1.46087 17.031 1.53055Z"
-              fill="#888888"
+          <div class="relative dropdown dropdown-bottom flex flex-col w-full">
+            <input
+              type="text"
+              placeholder="Full Time"
+              class="pl-2 placeholder:text-xs pr-4 h-11 outline-none border bg-white text-xs border-gray-300 rounded-md"
             />
-          </svg>
+            <!-- list -->
+            <ul
+              tabindex="0"
+              class="dropdown-content menu bg-white absolute left-0 right-0 rounded-box z-10 p-2 shadow"
+            >
+              <li class="bg-gray-1"><a>Full Time</a></li>
+              <li><a>Remote</a></li>
+              <li><a>Contract</a></li>
+              <li><a>Hybrid</a></li>
+            </ul>
+
+            <svg
+              width="18"
+              height="10"
+              class="absolute right-4 top-4 h-4 w-4 text-gray-400"
+              viewBox="0 0 18 10"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M17.031 1.53055L9.53104 9.03055C9.46139 9.10029 9.37867 9.15561 9.28762 9.19335C9.19657 9.23109 9.09898 9.25052 9.00042 9.25052C8.90186 9.25052 8.80426 9.23109 8.71321 9.19335C8.62216 9.15561 8.53945 9.10029 8.46979 9.03055L0.969792 1.53055C0.829062 1.38982 0.75 1.19895 0.75 0.999929C0.75 0.800906 0.829062 0.610034 0.969792 0.469303C1.11052 0.328573 1.30139 0.249512 1.50042 0.249512C1.69944 0.249512 1.89031 0.328573 2.03104 0.469303L9.00042 7.43962L15.9698 0.469303C16.0395 0.399621 16.1222 0.344345 16.2132 0.306633C16.3043 0.268921 16.4019 0.249512 16.5004 0.249512C16.599 0.249512 16.6965 0.268921 16.7876 0.306633C16.8786 0.344345 16.9614 0.399621 17.031 0.469303C17.1007 0.538986 17.156 0.621712 17.1937 0.712756C17.2314 0.803801 17.2508 0.901383 17.2508 0.999929C17.2508 1.09847 17.2314 1.19606 17.1937 1.2871C17.156 1.37815 17.1007 1.46087 17.031 1.53055Z"
+                fill="#888888"
+              />
+            </svg>
+          </div>
         </div>
       </div>
 
@@ -350,9 +431,9 @@ definePageMeta({
           type="text"
           rows="10"
           placeholder="Lagos, Nigeria......"
-          class="p-2 border border-gray-300 rounded-lg w-full"
+          class="p-2 border border-gray-300 rounded-lg w-full outline-none"
         />
       </div>
-    </div>
+    </form>
   </div>
 </template>

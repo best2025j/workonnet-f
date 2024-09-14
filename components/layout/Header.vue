@@ -13,7 +13,7 @@ const localStore = useLocalStore();
 
 
       <!-- search input -->
-      <div
+      <form
         v-show="localStore.$state.currentUserType === LOGGED_USER.RECRUITER"
         class="relative"
       >
@@ -35,7 +35,7 @@ const localStore = useLocalStore();
             fill="#343330"
           />
         </svg>
-      </div>
+      </form>
 
       <nav>
         <NuxtLink
