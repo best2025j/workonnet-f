@@ -5,6 +5,19 @@ definePageMeta({
   layout: "dashboard",
 });
 
+// Reactive variables
+const showSkillInput = ref(false);
+const skills = ref<string[]>([]); // Array to store selected skills
+const newSkill = ref(""); // The current value of the new skill input
+
+// Function to handle adding new skills
+const addSkill = (): void => {
+  if (newSkill.value && !skills.value.includes(newSkill.value)) {
+    skills.value.push(newSkill.value); // Add the new skill
+  }
+  newSkill.value = ""; // Clear the input field
+  showSkillInput.value = false; // Hide the input field after adding the skill
+};
 </script>
 
 <template>
@@ -405,7 +418,11 @@ definePageMeta({
       <!--  -->
       <div class="py-4 space-y-2">
         <h1 class="font-black text-base">Skill Sets</h1>
-        <div class="flex items-center gap-2">
+        <button
+          type="button"
+          class="flex items-center gap-2"
+          @click="showSkillInput = true"
+        >
           <span
             ><svg
               width="18"
@@ -421,7 +438,39 @@ definePageMeta({
             </svg>
           </span>
           <h1 class="text-success-600 text-xs">Add New Skills</h1>
+        </button>
+
+        <!-- Input form to add new skills -->
+        <div v-if="showSkillInput" class="mt-4 flex flex-col">
+          <input
+            type="text"
+            v-model="newSkill"
+            class="border border-gray-300 rounded-md py-3 px-2 text-sm w-1/2 outline-none"
+            @keyup.enter="addSkill"
+          />
+
+          <div class="w-20 pt-2">
+            <button
+              class="bg-primary-1 py-3 rounded-8 w-full text-white font-black text-xs px-4"
+            >
+              Save
+            </button>
+          </div>
         </div>
+
+        <!-- Display selected skills with orange background -->
+        <!-- <div v-if="skills.length" class="mt-4 space-y-2">
+          <h2 class="font-bold text-base">Selected Skills:</h2>
+          <div class="flex flex-wrap gap-2">
+            <span
+              v-for="(skill, index) in skills"
+              :key="index"
+              class="bg-orange-500 text-white px-3 py-1 rounded-md text-xs"
+            >
+              {{ skill }}
+            </span>
+          </div>
+        </div> -->
       </div>
 
       <!-- company -->
