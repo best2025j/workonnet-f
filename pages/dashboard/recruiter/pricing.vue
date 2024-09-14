@@ -59,7 +59,7 @@ definePageMeta({
     </div>
 
     <div class="grid grid-cols-3 gap-4 py-4">
-      <div class="bg-white h-full p-4 rounded-10 space-y-4 w-full mt-4">
+      <div class="bg-white h-[481px] p-4 rounded-10 space-y-4 w-full mt-4">
         <div class="flex justify-between items-start">
           <div class="space-y-2">
             <img src="/assets/images/Logo2.png" alt="no pix" />
@@ -101,7 +101,7 @@ definePageMeta({
                 fill="#0FA968"
               />
             </svg>
-            <h1 class="text-xs">Profile Creation</h1>
+            <h1 class="text-xs">1 Job posting</h1>
           </div>
           <div class="flex space-x-4 items-center">
             <svg
@@ -116,7 +116,7 @@ definePageMeta({
                 fill="#0FA968"
               />
             </svg>
-            <h1 class="text-xs">Limited Job Applications: 5 applications</h1>
+            <h1 class="text-xs">5-star candidates</h1>
           </div>
           <div class="flex space-x-4 items-center">
             <svg
@@ -131,17 +131,17 @@ definePageMeta({
                 fill="#0FA968"
               />
             </svg>
-            <h1 class="text-xs">Basic Visibility</h1>
+            <h1 class="text-xs">Company’s page branding</h1>
           </div>
         </div>
       </div>
       <!--  -->
-      <div class="bg-white h-full p-4 rounded-10 space-y-4 w-full mt-4">
+      <div class="bg-white h-[481px] p-4 rounded-10 space-y-4 w-full mt-4">
         <div class="flex justify-between items-start">
           <div class="space-y-2">
             <img src="/assets/images/Logo2.png" alt="no pix" />
             <h1 class="text-sm font-black">Basic Plan</h1>
-            <h1 class="text-xs">These are the benefits under the free plan</h1>
+            <h1 class="text-xs">Best for small teams (Below 50 staffs)</h1>
           </div>
           <!-- <button class="py-2 px-3 border bg-info-100 text-info-600 rounded-10">
             Custom
@@ -176,7 +176,7 @@ definePageMeta({
                 fill="#0FA968"
               />
             </svg>
-            <h1 class="text-xs">Enhanced Profile Visibility</h1>
+            <h1 class="text-xs">2 Job postings</h1>
           </div>
           <div class="flex space-x-4 items-center">
             <svg
@@ -191,7 +191,7 @@ definePageMeta({
                 fill="#0FA968"
               />
             </svg>
-            <h1 class="text-xs">10 Job Applications</h1>
+            <h1 class="text-xs">Unlimited star candidates</h1>
           </div>
           <div class="flex space-x-4 items-center">
             <svg
@@ -206,17 +206,17 @@ definePageMeta({
                 fill="#0FA968"
               />
             </svg>
-            <h1 class="text-xs">Video Pitch Feature (Limited)</h1>
+            <h1 class="text-xs">Company’s page branding</h1>
           </div>
         </div>
       </div>
       <!--  -->
-      <div class="bg-white h-full p-4 rounded-10 space-y-4 w-full mt-4">
+      <div class="bg-white h-[481px] p-4 rounded-10 space-y-4 w-full mt-4">
         <div class="flex justify-between items-start">
           <div class="space-y-2">
             <img src="/assets/images/Logo2.png" alt="no pix" />
-            <h1 class="text-sm font-black">Premium Plan</h1>
-            <h1 class="text-xs">These are the benefits under the free plan</h1>
+            <h1 class="text-sm font-black">Silver Plan</h1>
+            <h1 class="text-xs">Best for medium-sized teams (200+ staff)</h1>
           </div>
           <button
             class="py-2 text-xs px-3 border bg-info-100 text-info-600 rounded-8 flex gap-x-1 items-center"
@@ -266,7 +266,7 @@ definePageMeta({
                 fill="#0FA968"
               />
             </svg>
-            <h1 class="text-xs">Enhanced Profile Visibility</h1>
+            <h1 class="text-xs">5 job posting</h1>
           </div>
           <div class="flex space-x-4 w-80 items-center">
             <svg
@@ -281,7 +281,7 @@ definePageMeta({
                 fill="#0FA968"
               />
             </svg>
-            <h1 class="text-xs">Unlimited Job Applications</h1>
+            <h1 class="text-xs">Unlimited star candidates</h1>
           </div>
           <div class="flex space-x-4 w-80 items-center">
             <svg
@@ -296,7 +296,7 @@ definePageMeta({
                 fill="#0FA968"
               />
             </svg>
-            <h1 class="text-xs">Video Pitch Feature</h1>
+            <h1 class="text-xs">Company’s page branding</h1>
           </div>
           <div class="flex space-x-4 w-80 items-center">
             <svg
@@ -311,7 +311,7 @@ definePageMeta({
                 fill="#0FA968"
               />
             </svg>
-            <h1 class="text-xs">Advanced Analytics into recruiters ranking</h1>
+            <h1 class="text-xs">Employer data analytics</h1>
           </div>
           <div class="flex space-x-4 w-80 items-center">
             <svg
@@ -326,12 +326,12 @@ definePageMeta({
                 fill="#0FA968"
               />
             </svg>
-            <h1 class="text-xs">Assessment & Screening Tools insight</h1>
+            <h1 class="text-xs">Assessment & Screening</h1>
           </div>
         </div>
       </div>
       <!--  -->
-      <div class="bg-white h-full p-4 rounded-10 space-y-4 w-full mt-4">
+      <div class="bg-white h-[481px] p-4 rounded-10 space-y-4 w-full mt-4">
         <div class="flex justify-between items-start">
           <div class="space-y-2">
             <img src="/assets/images/Logo2.png" alt="no pix" />
@@ -368,7 +368,7 @@ definePageMeta({
                 fill="#0FA968"
               />
             </svg>
-            <h1 class="text-xs">Enhanced Profile Visibility</h1>
+            <h1 class="text-xs">10 job posting</h1>
           </div>
           <div class="flex space-x-4 w-80 items-center">
             <svg
@@ -398,7 +398,7 @@ definePageMeta({
                 fill="#0FA968"
               />
             </svg>
-            <h1 class="text-xs">Video Pitch Feature</h1>
+            <h1 class="text-xs">Company’s page branding</h1>
           </div>
           <div class="flex space-x-4 w-80 items-center">
             <svg
@@ -413,7 +413,7 @@ definePageMeta({
                 fill="#0FA968"
               />
             </svg>
-            <h1 class="text-xs">Advanced Analytics into recruiters ranking</h1>
+            <h1 class="text-xs">Employer data analytics</h1>
           </div>
           <div class="flex space-x-4 w-80 items-center">
             <svg
@@ -428,7 +428,7 @@ definePageMeta({
                 fill="#0FA968"
               />
             </svg>
-            <h1 class="text-xs">Assessment & Screening Tools insight</h1>
+            <h1 class="text-xs">Assessment & Screening</h1>
           </div>
         </div>
       </div>
