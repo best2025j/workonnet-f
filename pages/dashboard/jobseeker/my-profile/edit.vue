@@ -1,8 +1,8 @@
 <script setup lang="ts">
 definePageMeta({
-  title: "My profile",
-  pageName: "dashboard.jobseeker.my-profile.edit",
-  layout: "dashboard",
+  title: 'My profile',
+  pageName: 'dashboard.jobseeker.my-profile.edit',
+  layout: 'dashboard',
 });
 </script>
 
@@ -33,7 +33,6 @@ definePageMeta({
             >
           </div>
         </div>
-
         <div class="border-t-2 bg-white p-6">
           <div class="space-x-3 flex items-center">
             <span

@@ -6,15 +6,15 @@ definePageMeta({
 });
 
 enum CARD_LAYOUT {
-  LIST = 'list',
-  GRID = 'grid'
+  LIST = "list",
+  GRID = "grid",
 }
 
-const currentLayout = ref<CARD_LAYOUT>(CARD_LAYOUT.LIST)
+const currentLayout = ref<CARD_LAYOUT>(CARD_LAYOUT.LIST);
 
 const handleLayoutChange = (newLayout: CARD_LAYOUT) => {
-    currentLayout.value = newLayout
-}
+  currentLayout.value = newLayout;
+};
 </script>
 
 <template>
@@ -32,7 +32,7 @@ const handleLayoutChange = (newLayout: CARD_LAYOUT) => {
         </p>
 
         <!-- input search -->
-        <div class="flex gap-2 w-full pt-2">
+        <form class="flex gap-2 w-full pt-2">
           <div class="relative dropdown dropdown-bottom flex flex-col w-full">
             <input
               type="text"
@@ -108,7 +108,7 @@ const handleLayoutChange = (newLayout: CARD_LAYOUT) => {
               />
             </svg>
           </button>
-        </div>
+        </form>
       </div>
 
       <!-- btn -->
@@ -256,7 +256,11 @@ const handleLayoutChange = (newLayout: CARD_LAYOUT) => {
       </div>
       <!-- btn 2 -->
       <div class="flex justify-end space-x-3">
-        <button v-show="currentLayout.toString() === CARD_LAYOUT.GRID.toString()" @click="handleLayoutChange(CARD_LAYOUT.LIST)" class="bg-black-100 p-1 rounded-8">
+        <button
+          v-show="currentLayout.toString() === CARD_LAYOUT.GRID.toString()"
+          @click="handleLayoutChange(CARD_LAYOUT.LIST)"
+          class="bg-black-100 p-1 rounded-8"
+        >
           <svg
             width="28"
             height="22"
@@ -271,7 +275,11 @@ const handleLayoutChange = (newLayout: CARD_LAYOUT) => {
           </svg>
         </button>
 
-        <button v-show="currentLayout.toString() === CARD_LAYOUT.LIST.toString()" @click="handleLayoutChange(CARD_LAYOUT.GRID)" class="bg-black-100 p-1 rounded-8">
+        <button
+          v-show="currentLayout.toString() === CARD_LAYOUT.LIST.toString()"
+          @click="handleLayoutChange(CARD_LAYOUT.GRID)"
+          class="bg-black-100 p-1 rounded-8"
+        >
           <svg
             width="26"
             height="26"
@@ -288,8 +296,12 @@ const handleLayoutChange = (newLayout: CARD_LAYOUT) => {
       </div>
 
       <!-- cards -->
-      <FindJobGridView v-if="currentLayout.toString() === CARD_LAYOUT.GRID.toString()" />
-      <FindJobListView v-if="currentLayout.toString() === CARD_LAYOUT.LIST.toString()" />
+      <FindJobGridView
+        v-if="currentLayout.toString() === CARD_LAYOUT.GRID.toString()"
+      />
+      <FindJobListView
+        v-if="currentLayout.toString() === CARD_LAYOUT.LIST.toString()"
+      />
     </div>
 
     <!--  second div-->

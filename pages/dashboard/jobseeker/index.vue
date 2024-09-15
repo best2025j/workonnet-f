@@ -1,8 +1,8 @@
 <script setup lang="ts">
 definePageMeta({
-  title: "Dashboard",
-  pageName: "dashboard.jobseeker.index",
-  layout: "dashboard",
+  title: 'Dashboard',
+  pageName: 'dashboard.jobseeker.index',
+  layout: 'dashboard',
 });
 </script>
 
@@ -11,9 +11,9 @@ definePageMeta({
     <!-- Dashboard content goes here -->
     <div class="space-y-1 pb-2">
       <h2 class="text-2xl font-black">Good Morning, Stanley</h2>
-    <p class="text-sm">
-      Here’s what’s happening with your job application since you joined us.
-    </p>
+      <p class="text-sm">
+        Here’s what’s happening with your job application since you joined us.
+      </p>
     </div>
 
     <!-- card -->

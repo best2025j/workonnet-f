@@ -4,28 +4,28 @@ const router = useRouter();
 
 onMounted(() => {
   if (!route?.query?.tab) {
-    router.replace("/dashboard/recruiter/jobs-openings?tab=applied");
+    router.replace('/dashboard/recruiter/jobs-openings?tab=applied');
   }
 });
 
 const links = [
   {
-    to: "/dashboard/recruiter/jobs-openings?tab=active",
-    name: "Active",
+    to: '/dashboard/recruiter/jobs-openings?tab=active',
+    name: 'Active',
     disabled: false,
     badge: 4,
     tabId: JOB_OPENING_TABS.ACTIVE,
   },
   {
-    to: "/dashboard/recruiter/jobs-openings?tab=inactive",
-    name: "Inactive",
+    to: '/dashboard/recruiter/jobs-openings?tab=inactive',
+    name: 'Inactive',
     disabled: false,
     badge: 1,
     tabId: JOB_OPENING_TABS.IN_ACTIVE,
   },
   {
-    to: "/dashboard/recruiter/jobs-openings?tab=draft",
-    name: "Draft",
+    to: '/dashboard/recruiter/jobs-openings?tab=draft',
+    name: 'Draft',
     disabled: false,
     tabId: JOB_OPENING_TABS.DRAFT,
   },
@@ -66,4 +66,3 @@ const isActive = (currentTab: JOB_OPENING_TABS) =>
     </ul>
   </nav>
 </template>
-

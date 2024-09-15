@@ -3,7 +3,7 @@
     <div
       class="h-3/4 relative top-16 w-1/2 py-4 flex items-center justify-center mx-auto"
     >
-      <div class="flex flex-col space-y-3 w-1/2">
+      <div class="flex flex-col space-y-3 w-[375px]">
         <div class="text-center flex-col flex items-center space-y-3">
           <img src="/assets/images/Logo2.png" alt="logo" />
           <h1 class="text-[32px] font-[400] font-[Georgia]">Sign in</h1>
@@ -18,11 +18,12 @@
               class="pl-2 placeholder:text-sm pr-4 h-10 outline-none border border-gray-300 rounded-md"
             />
           </div>
-          <div class="flex flex-col w-full">
+
+          <div class="flex flex-col">
             <label for="first-name" class="text-sm mb-2">Password</label>
             <input
               type="password"
-              placeholder="********"
+              placeholder="Enter password"
               pattern=".{8,}"
               title="Password should be at least 8 characters"
               class="pl-2 placeholder:text-md pr-4 h-10 outline-none border border-gray-300 rounded-md"
@@ -31,7 +32,7 @@
         </div>
         <button class="underline text-right text-xs">Forgot password?</button>
 
-        <div class="space-y-3 py-4">
+        <div class="space-y-3 pt-6">
           <button
             class="bg-primary-1 p-4 w-full rounded-8 text-white text-sm font-black"
           >

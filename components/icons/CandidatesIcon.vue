@@ -3,7 +3,6 @@ defineProps<{
   isActive: boolean;
 }>();
 </script>
-
 <template>
   <!-- icon not active -->
   <svg
@@ -19,7 +18,7 @@ defineProps<{
       fill="#454545"
     />
   </svg>
-<!-- active linkicon -->
+  <!-- active linkicon -->
   <svg
     v-else
     width="18"
@@ -34,5 +33,3 @@ defineProps<{
     />
   </svg>
 </template>
-
-

@@ -5,6 +5,7 @@ definePageMeta({
   layout: "dashboard",
 });
 </script>
+
 <template>
   <div class="text-black-900 pt-6">
     <div class="flex justify-between items-center">

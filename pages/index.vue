@@ -1,6 +1,4 @@
 <script setup lang="ts">
-const route = useRoute();
-const isDashboard = ref(false);
 const localStore = useLocalStore();
 
 const setUserType = (userType: LOGGED_USER, routePath: string) => {
@@ -45,3 +43,5 @@ const setUserType = (userType: LOGGED_USER, routePath: string) => {
   </div>
   <!-- </div> -->
 </template>
+
+<style></style>

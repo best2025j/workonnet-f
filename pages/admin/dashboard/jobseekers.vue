@@ -177,7 +177,7 @@ definePageMeta({
               </svg>
             </li>
 
-            <li class="text-xs font-black flex gap-x-2 pl-16 items-center">
+            <li class="text-xs font-black flex gap-x-2 pl-28 items-center">
               Email Address
               <svg
                 width="18"

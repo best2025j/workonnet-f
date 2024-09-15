@@ -1,8 +1,8 @@
 <script setup lang="ts">
 definePageMeta({
-  title: "Jobs Openings",
-  pageName: "dashboard.recruiter.jobs-openings/candidates",
-  layout: "dashboard",
+  title: 'Jobs Openings',
+  pageName: 'dashboard.recruiter.jobs-openings/candidates',
+  layout: 'dashboard',
 });
 </script>
 

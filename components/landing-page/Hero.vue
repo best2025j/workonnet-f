@@ -1,12 +1,12 @@
 <template>
-  <div class="pb-10 carousel w-full h-full">
+  <div class="carousel w-full h-screen">
     <!-- slide -->
-    <div class="text-white carousel-item w-full h-[1080px]">
+    <div class="text-white carousel-item w-full h-screen">
       <div class="relative w-full">
         <div class="h-full w-full">
           <img
             src="/assets/images/my-lady.png"
-            class="absolute -top-2 left-0 w-full h-auto object-cover z-0"
+            class="w-full h-screen object-cover z-0"
             alt="a lady with book"
           />
         </div>
@@ -48,7 +48,7 @@
               <img src="/assets/images/Logo2.png" alt="" />
             </div>
             <!-- input -->
-            <div class="py-4 space-y-2">
+            <form class="py-4 space-y-2">
               <div class="flex flex-col w-full">
                 <label for="first-name" class="text-sm mb-2">Search job</label>
                 <div class="relative">
@@ -73,6 +73,7 @@
                   </svg>
                 </div>
               </div>
+              
               <div class="flex gap-x-2 py-2">
                 <div class="flex flex-col w-full">
                   <label for="first-name" class="text-sm mb-2">Location</label>
@@ -122,7 +123,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </form>
             <!-- btn -->
             <button class="w-full p-3 bg-primary-1 rounded-8 text-xs">
               Search job
@@ -132,18 +133,18 @@
       </div>
     </div>
     <!-- slide 2 -->
-    <div class="bg-primary-1 text-white h-[1180px] carousel-item w-full">
+    <div class="bg-primary-1 text-white h-screen carousel-item w-full">
       <div class="flex h-full w-full justify-between items-center px-6">
-        <div class="">
-          <h1 class="font-black text-xl">
+        <div class="w-1/2 h-auto space-y-4">
+          <h1 class="font-black text-xl ">
             Get Matched with Candidates Under 24hrs
           </h1>
           <div class="py-4 max-w-[890px] text-black-50">
-            <h1 class="font-black text-[80px]">
+            <h1 class="font-black text-[80px] line">
               Recruit The Team You Need In Minutes.
             </h1>
 
-            <p class="text-xs max-w-[669px]">
+            <p class="text-xs max-w-[669px] py-2">
               Our recruitment platform bridges the gap between talented job
               seekers and forward-thinking recruiters. We offer Job seekers an
               intuitive search experience that matches them with the right
@@ -165,19 +166,22 @@
           </div>
         </div>
 
-        <div class="h-full w-auto text-black-900 relative">
-          <div class="relative top-24 right-10">
+        <div class="h-full w-1/2 text-black-900 relative">
+          <div class="relative top-24 right-10 left-0">
             <img src="/assets/images/frame.png" class="w-full h-full" alt="" />
           </div>
-          <img
-            src="/assets/images/3group.png"
-            class="h-full w-full object-cover absolute top-0"
-            alt=""
-          />
+
+          <div class="absolute h-full top-0 right-0">
+            <img
+              src="/assets/images/3group.png"
+              class="h-full w-auto object-cover"
+              alt=""
+            />
+          </div>
 
           <!--  -->
           <div
-            class="bg-white w-60 h-[120px] hover:bg-westside-500 hover:text-white absolute bottom-60 -left-4 rounded-8"
+            class="bg-white w-64 h-[120px] hover:bg-westside-500 hover:text-white absolute bottom-60 -left-4 rounded-8"
           >
             <div class="flex justify-between items-center border-b-2">
               <div class="flex flex-col px-4 py-3 space-y-2">
@@ -215,3 +219,9 @@
     </div>
   </div>
 </template>
+
+<style scoped>
+.line {
+  line-height: 88px;
+}
+</style>

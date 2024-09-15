@@ -1,148 +1,148 @@
 <script setup lang="ts">
-import ApplicationIcon from "../icons/ApplicationIcon.vue";
-import CandidatesIcon from "../icons/CandidatesIcon.vue";
-import CompanyIcon from "../icons/CompanyIcon.vue";
-import DashBoardIcon from "../icons/DashboardIcon.vue";
-import JobIcon from "../icons/JobIcon.vue";
-import MessageIcon from "../icons/MessageIcon.vue";
-import NairaIcon from "../icons/NairaIcon.vue";
-import ProfileIcon from "../icons/ProfileIcon.vue";
-import SearchIcon from "../icons/SearchIcon.vue";
-import SettingIcon from "../icons/SettingIcon.vue";
-import SpeekerIcon from "../icons/SpeekerIcon.vue";
+import ApplicationIcon from '../icons/ApplicationIcon.vue';
+import CandidatesIcon from '../icons/CandidatesIcon.vue';
+import CompanyIcon from '../icons/CompanyIcon.vue';
+import DashBoardIcon from '../icons/DashboardIcon.vue';
+import JobIcon from '../icons/JobIcon.vue';
+import MessageIcon from '../icons/MessageIcon.vue';
+import NairaIcon from '../icons/NairaIcon.vue';
+import ProfileIcon from '../icons/ProfileIcon.vue';
+import SearchIcon from '../icons/SearchIcon.vue';
+import SettingIcon from '../icons/SettingIcon.vue';
+import SpeekerIcon from '../icons/SpeekerIcon.vue';
 
 const route = useRoute();
 const localStore = useLocalStore();
 
 const jobSeekerLinks = [
   {
-    to: "/dashboard/jobseeker",
+    to: '/dashboard/jobseeker',
     icon: DashBoardIcon,
-    name: "Dashboard",
-    pageName: "dashboard.jobseeker.index",
+    name: 'Dashboard',
+    pageName: 'dashboard.jobseeker.index',
   },
   {
-    to: "/dashboard/jobseeker/my-applications?tab=applied",
+    to: '/dashboard/jobseeker/my-applications?tab=applied',
     icon: ApplicationIcon,
-    name: "My Applications",
-    pageName: "dashboard.jobseeker.my-applications.index",
+    name: 'My Applications',
+    pageName: 'dashboard.jobseeker.my-applications.index',
   },
   {
-    to: "/dashboard/jobseeker/find-jobs",
+    to: '/dashboard/jobseeker/find-jobs',
     icon: SearchIcon,
-    name: "Find Jobs",
-    pageName: "dashboard.jobseeker.find-jobs.index",
+    name: 'Find Jobs',
+    pageName: 'dashboard.jobseeker.find-jobs.index',
   },
   {
-    to: "/dashboard/jobseeker/messages",
+    to: '/dashboard/jobseeker/messages',
     icon: MessageIcon,
-    name: "Messages",
-    pageName: "dashboard.jobseeker.messages",
+    name: 'Messages',
+    pageName: 'dashboard.jobseeker.messages',
   },
   {
-    to: "/dashboard/jobseeker/browse-companies",
+    to: '/dashboard/jobseeker/browse-companies',
     icon: CompanyIcon,
-    name: "Browse Companies (AI)",
-    pageName: "dashboard.jobseeker.browse-companies",
+    name: 'Browse Companies (AI)',
+    pageName: 'dashboard.jobseeker.browse-companies',
   },
   {
-    to: "/dashboard/jobseeker/pricing",
+    to: '/dashboard/jobseeker/pricing',
     icon: NairaIcon,
-    name: "Pricing",
-    pageName: "dashboard.jobseeker.pricing",
+    name: 'Pricing',
+    pageName: 'dashboard.jobseeker.pricing',
   },
   {
-    to: "/dashboard/jobseeker/my-profile",
+    to: '/dashboard/jobseeker/my-profile',
     icon: ProfileIcon,
-    name: "My Public Profile",
-    pageName: "dashboard.jobseeker.my-profile.index",
+    name: 'My Public Profile',
+    pageName: 'dashboard.jobseeker.my-profile.index',
   },
   {
-    to: "/dashboard/jobseeker/settings",
+    to: '/dashboard/jobseeker/settings',
     icon: SettingIcon,
-    name: "Settings",
-    pageName: "dashboard.jobseeker.settings",
+    name: 'Settings',
+    pageName: 'dashboard.jobseeker.settings',
   },
 ];
 
 const recruiterLinks = [
   {
-    to: "/dashboard/recruiter",
+    to: '/dashboard/recruiter',
     icon: DashBoardIcon,
-    name: "Dashboard",
-    pageName: "dashboard.recruiter.job.index",
+    name: 'Dashboard',
+    pageName: 'dashboard.recruiter.job.index',
   },
   {
-    to: "/dashboard/recruiter/jobs-openings?tab=active",
+    to: '/dashboard/recruiter/jobs-openings?tab=active',
     icon: JobIcon,
-    name: "Jobs Opening",
-    pageName: "dashboard.recruiter.jobs-opening.index",
+    name: 'Jobs Opening',
+    pageName: 'dashboard.recruiter.jobs-opening.index',
   },
   {
-    to: "/dashboard/recruiter/candidates",
+    to: '/dashboard/recruiter/candidates',
     icon: CandidatesIcon,
-    name: "Candidates",
-    pageName: "dashboard.recruiter.candidates",
+    name: 'Candidates',
+    pageName: 'dashboard.recruiter.candidates',
   },
 
   {
-    to: "/dashboard/recruiter/messages",
+    to: '/dashboard/recruiter/messages',
     icon: MessageIcon,
-    name: "Messages",
-    pageName: "dashboard.recruiter.messages",
+    name: 'Messages',
+    pageName: 'dashboard.recruiter.messages',
   },
 
   {
-    to: "/dashboard/recruiter/pricing",
+    to: '/dashboard/recruiter/pricing',
     icon: NairaIcon,
-    name: "Pricing",
-    pageName: "dashboard.recruiter.pricing",
+    name: 'Pricing',
+    pageName: 'dashboard.recruiter.pricing',
   },
 
   {
-    to: "/dashboard/recruiter/company-profile",
+    to: '/dashboard/recruiter/company-profile',
     icon: CompanyIcon,
-    name: "Company Profile",
-    pageName: "dashboard.recruiter.company-profile.index",
+    name: 'Company Profile',
+    pageName: 'dashboard.recruiter.company-profile.index',
   },
   {
-    to: "/dashboard/recruiter/settings",
+    to: '/dashboard/recruiter/settings',
     icon: SettingIcon,
-    name: "Settings",
-    pageName: "dashboard.recruiter.settings",
+    name: 'Settings',
+    pageName: 'dashboard.recruiter.settings',
   },
 ];
 
 const admin = [
   {
-    to: "/admin/dashboard/",
+    to: '/admin/dashboard/',
     icon: DashBoardIcon,
-    name: "Dashboard",
-    pageName: "admin.dashboard.index",
+    name: 'Dashboard',
+    pageName: 'admin.dashboard.index',
   },
   {
-    to: "/admin/dashboard/posted-jobs?tab=under-review",
+    to: '/admin/dashboard/posted-jobs?tab=under-review',
     icon: ApplicationIcon,
-    name: "Jobs",
-    pageName: "admin.dashboard.posted-jobs",
+    name: 'Jobs',
+    pageName: 'admin.dashboard.posted-jobs',
   },
   {
-    to: "/admin/dashboard/recruiters",
+    to: '/admin/dashboard/recruiters',
     icon: SpeekerIcon,
-    name: "Recruiters",
-    pageName: "admin.dashboard.recruiters",
+    name: 'Recruiters',
+    pageName: 'admin.dashboard.recruiters',
   },
   {
-    to: "/admin/dashboard/jobseekers",
+    to: '/admin/dashboard/jobseekers',
     icon: CandidatesIcon,
-    name: "Jobseekers",
-    pageName: "admin.dashboard.jobseekers",
+    name: 'Jobseekers',
+    pageName: 'admin.dashboard.jobseekers',
   },
   {
-    to: "/admin/dashboard/subscriptions",
+    to: '/admin/dashboard/subscriptions',
     icon: NairaIcon,
-    name: "Subscriptions",
-    pageName: "admin.dashboard.subscriptions",
+    name: 'Subscriptions',
+    pageName: 'admin.dashboard.subscriptions',
   },
 ];
 
