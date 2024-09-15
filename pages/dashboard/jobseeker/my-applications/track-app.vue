@@ -1,8 +1,8 @@
 <script setup lang="ts">
 definePageMeta({
-  title: "My Applications",
-  pageName: "dashboard.jobseeker.my-applications.track-app",
-  layout: "dashboard",
+  title: 'My Applications',
+  pageName: 'dashboard.jobseeker.my-applications.track-app',
+  layout: 'dashboard',
 });
 </script>
 
@@ -331,7 +331,7 @@ definePageMeta({
                 </div>
               </div>
               <!--  -->
-              <div class="flex space-x-4 items-start py-4 ">
+              <div class="flex space-x-4 items-start py-4">
                 <div class="flex flex-col space-y-1">
                   <h1 class="font-black">Stage 1: Profile Review </h1>
                   <p class="text-xs">Your profile is reviewed at this stage</p>

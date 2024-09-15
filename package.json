@@ -1,8 +1,8 @@
 {
-  "name": "nuxt-app",
-  "private": true,
+  "name": "workonnect-frontend",
+  "private": false,
   "type": "module",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",

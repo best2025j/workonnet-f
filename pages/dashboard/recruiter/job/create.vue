@@ -1,8 +1,8 @@
 <script setup lang="ts">
 definePageMeta({
-  title: "Create job opening",
-  pageName: "dashboard.recruiter.job.create",
-  layout: "dashboard",
+  title: 'Create job opening',
+  pageName: 'dashboard.recruiter.job.create',
+  layout: 'dashboard',
 });
 
 // Reactive variables

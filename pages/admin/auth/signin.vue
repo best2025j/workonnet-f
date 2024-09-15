@@ -23,7 +23,7 @@
             <label for="first-name" class="text-sm mb-2">Password</label>
             <input
               type="password"
-              placeholder="********"
+              placeholder="Enter password"
               pattern=".{8,}"
               title="Password should be at least 8 characters"
               class="pl-2 placeholder:text-md pr-4 h-10 outline-none border border-gray-300 rounded-md"
