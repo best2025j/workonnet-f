@@ -1,7 +1,6 @@
 <script setup>
 import { ref, computed } from "vue";
 import Codepop from "~/components/codepop.vue";
-import passwordicon from "@/assets/images/passwordicion.png";
 </script>
 
 <template>
