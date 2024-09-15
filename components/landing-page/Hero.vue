@@ -1,5 +1,5 @@
 <template>
-  <div class="carousel w-full h-screen">
+  <div class="carousel w-full h-full">
     <!-- slide -->
     <div class="text-white carousel-item w-full h-screen">
       <div class="relative w-full">
@@ -14,7 +14,7 @@
         <div
           class="text-white absolute top-0 h-full w-full py-20 px-4 space-y-4 flex justify-between"
         >
-          <div class="relative top-72">
+          <div class=" mt-72">
             <h1 class="font-black text-xl">The Future of Work Powered by AI</h1>
             <div class="py-4 max-w-[864px] text-black-50">
               <h1 class="font-black text-[80px]">
