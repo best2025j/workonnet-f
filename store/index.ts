@@ -1,3 +1,6 @@
 import { LocalStore as useLocalStore } from './modules/local.store';
 
-export { useLocalStore };
+
+import { AuthStore as useAuthStore } from './modules/auth.store';
+
+export { useLocalStore, useAuthStore };

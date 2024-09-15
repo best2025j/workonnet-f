@@ -12,7 +12,7 @@ export default defineNuxtConfig({
     },
   },
   plugins: [{ src: '~/plugins/scroll-behavior.client.ts', mode: 'client' }],
-  modules: ['@pinia/nuxt', '@pinia-plugin-persistedstate/nuxt'],
+  modules: ['@pinia/nuxt', '@pinia-plugin-persistedstate/nuxt', '@vueuse/nuxt'],
   pinia: {
     storesDirs: ['./store/**'],
   },
