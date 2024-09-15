@@ -1,7 +1,9 @@
 <script setup lang="ts">
 definePageMeta({
   layout: 'auth',
-  title: "jobseeker.signup"
+  title: "jobseeker.signup",
+  pageName: 'jobseeker.signin'
+  // middleware: ['no-auth']
 });
 </script>
 <template>

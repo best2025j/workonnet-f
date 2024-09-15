@@ -3,6 +3,7 @@ definePageMeta({
   title: 'My profile',
   pageName: 'dashboard.jobseeker.my-profile.work-experience',
   layout: 'dashboard',
+  middleware: ['auth']
 });
 </script>
 

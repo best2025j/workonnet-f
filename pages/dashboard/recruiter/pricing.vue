@@ -5,6 +5,7 @@ definePageMeta({
   title: "Pricing",
   pageName: "dashboard.recruiter.pricing",
   layout: "dashboard",
+  middleware: ['auth']
 });
 </script>
 

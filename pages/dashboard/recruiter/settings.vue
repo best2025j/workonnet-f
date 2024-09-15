@@ -3,6 +3,7 @@ definePageMeta({
   title: 'Settings',
   pageName: 'dashboard.recruiter.settings',
   layout: 'dashboard',
+  middleware: ['auth']
 });
 </script>
 

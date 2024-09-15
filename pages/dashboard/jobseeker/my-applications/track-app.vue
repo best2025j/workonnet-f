@@ -3,6 +3,7 @@ definePageMeta({
   title: 'My Applications',
   pageName: 'dashboard.jobseeker.my-applications.track-app',
   layout: 'dashboard',
+  middleware: ['auth']
 });
 </script>
 

@@ -1,7 +1,9 @@
 <script setup lang="ts">
 definePageMeta({
   layout: 'auth',
-  title: "recruiter.signin"
+  title: "recruiter.signin",
+  pageName: 'recruiter.signin'
+  // middleware: ['no-auth']
 });
 </script>
 
@@ -86,14 +88,14 @@ definePageMeta({
           <input
             type="email"
             placeholder="Enter email address here"
-            class="outline-none w-full text-xs font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-md px-3 py-2 border border-black-200 border-solid"
+            class="outline-none w-full text-xs  placeholder:text-[#958D8D] rounded-md px-3 py-2.5 border border-black-200 border-solid"
           />
 
           <label class="text-sm font-thin mb-2 text-left mt-4">Password</label>
           <input
             type="password"
             placeholder="Enter password"
-           class="placeholder-custom outline-none text-xs leading-5 w-full p-4 border border-solid border-black-200 rounded-lg px-3 py-2"
+           class="placeholder-custom outline-none text-xs w-full p-4 border border-solid border-black-200 rounded-lg px-3 py-2.5"
           />
 
           <div class="flex justify-end w-full mt-2">

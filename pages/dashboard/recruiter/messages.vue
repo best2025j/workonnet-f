@@ -5,6 +5,7 @@ definePageMeta({
   title: "Messages",
   pageName: "dashboard.recruiter.messages",
   layout: "dashboard",
+  middleware: ['auth']
 });
 </script>
 <template>

@@ -7,18 +7,17 @@ export default defineNuxtRouteMiddleware((to, from) => {
   if (import.meta.server) return;
 
   if (!authStore.isAuthenticated) {
-    return navigateTo('/auth/signin');
+    return navigateTo('/');
   }
 
-  if (to.path === '/') return navigateTo('/home');
-
-  if (to.path === '/wallet') return navigateTo('/home');
-
-  if (to.path === '/creator/wallet') return navigateTo('/creator/challenges');
+  if (to.path === '/') {
+    if ((authStore.currentUserType as LOGGED_USER) === LOGGED_USER.JOBSEEKER)
+      return navigateTo('/dashboard/jobseeker');
+    if ((authStore.currentUserType as LOGGED_USER) === LOGGED_USER.RECRUITER)
+      return navigateTo('/dashboard/recruiter');
+    if ((authStore.currentUserType as LOGGED_USER) === LOGGED_USER.ADMIN)
+      return navigateTo('/admin/dashboard');
+  }
 
   return;
-  // if (isHydrated.value) return handleAuth(to);
-  // onHydrated(() => handleAuth(to));
 });
-
-// function handleAuth(to: RouteLocationNormalized) {}

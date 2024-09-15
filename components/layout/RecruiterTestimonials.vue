@@ -53,7 +53,7 @@ const prevSlide = () => {
       <div class="mx-10">
         <button
           @click="prevSlide"
-          class="btn transform rounded-[3.4px] mr-2 -translate-y-1/2 p-3 text-white bg-white"
+          class="transform rounded-[3.4px] mr-2 -translate-y-1/2 p-3 text-white bg-white"
         >
           <span>
             <svg
@@ -72,7 +72,7 @@ const prevSlide = () => {
         </button>
         <button
           @click="nextSlide"
-          class="btn transform rounded-[3.4px] -translate-y-1/2 p-3 text-white bg-[#B7680C]"
+          class="transform rounded-[3.4px] -translate-y-1/2 p-3 text-white bg-[#B7680C]"
         >
           <svg
             width="16"

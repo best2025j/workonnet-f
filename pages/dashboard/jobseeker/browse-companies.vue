@@ -3,6 +3,7 @@ definePageMeta({
   title: "Browse Companies (Ai)",
   pageName: "dashboard.jobseeker.browse-companies",
   layout: "dashboard",
+  middleware: ['auth']
 });
 </script>
 

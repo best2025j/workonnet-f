@@ -5,7 +5,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
 
   if (import.meta.server) return;
 
-  if (authStore.isAuthenticated === true && authStore.userToken != 'no-auth') {
+  if (authStore.isAuthenticated === true && authStore.userToken !== 'no-auth') {
     if (to.path !== '/') {
       return navigateTo('/');
     }

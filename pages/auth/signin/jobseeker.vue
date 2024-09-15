@@ -1,7 +1,9 @@
 <script setup lang="ts">
 definePageMeta({
   layout: 'auth',
-  title: "jobseeker.signin"
+  title: "jobseeker.signin",
+  pageName: 'jobseeker.signin'
+  // middleware: ['no-auth']
 });
 </script>
 <template>
@@ -86,7 +88,7 @@ definePageMeta({
           <input
             type="email"
             placeholder="Enter email address here"
-            class="outline-none text-xs w-full font-thin rounded-lg px-3 py-2 border border-black-200 border-solid"
+            class="outline-none text-xs w-full font-thin rounded-lg px-3 py-2.5 border border-black-200 border-solid"
           />
 
           <label class="text-sm font-thin mb-2 text-left mt-4">Password</label>
@@ -94,7 +96,7 @@ definePageMeta({
             type="password"
             placeholder="Enter password"
             pattern=".{8,}"
-            class="outline-none text-xs leading-5 w-full p-4 border border-solid border-black-200 rounded-lg px-3 py-2"
+            class="outline-none text-xs w-full border border-solid border-black-200 rounded-lg px-3 py-2.5"
           />
           <div class="flex justify-end mt-2">
             <NuxtLink

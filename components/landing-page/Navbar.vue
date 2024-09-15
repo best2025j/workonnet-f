@@ -1,18 +1,19 @@
+
 <template>
   <!-- Navbar -->
   <div class="pb-4">
     <nav
-      class="flex justify-between bg-[#00000066] w-full left-0 items-center backdrop-blur-sm shadow-md px-6 h-16 text-xs fixed"
+      class="flex justify-between w-full left-0 items-center px-6 h-16 text-xs fixed"
+      :class="[
+       $route.path === '/' ? 'bg-[#00000066] backdrop-blur-sm shadow-md' : 'text-black-300'
+      ]"
     >
       <div>
         <img src="/assets/images/logo3.png" alt="Logo" class="" />
       </div>
 
       <ul class="flex space-x-8 text-black-50">
-        <li class="hover:text-primary-1 cursor-pointer">Home</li>
-        <li class="hover:text-primary-1 cursor-pointer">Pricing</li>
-        <li class="hover:text-primary-1 cursor-pointer">For Recruiters</li>
-        <li class="hover:text-primary-1 cursor-pointer">For Job Seekers</li>
+        <LandingPageNavbarLinks />
       </ul>
 
       <div class="space-x-4">

@@ -3,6 +3,7 @@ definePageMeta({
   title: 'Create job opening',
   pageName: 'dashboard.recruiter.job.create',
   layout: 'dashboard',
+  middleware: ['auth']
 });
 
 // Reactive variables
