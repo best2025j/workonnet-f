@@ -1,12 +1,12 @@
 <template>
-  <div class="carousel w-full h-full">
+  <div class="carousel w-full h-screen">
     <!-- slide -->
     <div class="text-white carousel-item w-full h-screen">
       <div class="relative w-full">
         <div class="h-full w-full">
           <img
             src="/assets/images/my-lady.png"
-            class="absolute -top-2 left-0 w-full h-auto object-cover z-0"
+            class="w-full h-screen object-cover z-0"
             alt="a lady with book"
           />
         </div>
