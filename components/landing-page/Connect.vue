@@ -36,17 +36,15 @@
       </div>
 
       <div class="h-full w-full relative">
-        <img src="/assets/images/mate2.png" class="w-full object-cover h-full" alt="mate image" />
-
+          <img src="/assets/images/mate2.png" class="h-full w-full" alt="mate image" />
         <!-- input -->
         <div
-          class="text-white absolute h-full w-full top-0 pt-[165px] px-4 space-y-4 flex justify-end"
+          class="text-white absolute h-full w-full top-0 pt-[189px] px-4 space-y-4 flex justify-end pr-18"
         >
           <!--  -->
           <div
             class="border w-[440px] bg-[#62696FCC] rounded-10 p-6 space-y-4 h-[290px]"
           >
-          
             <!-- input -->
             <form class="py-2 space-y-2">
               <div class="flex flex-col w-full">
@@ -125,7 +123,9 @@
               </div>
             </form>
             <!-- btn -->
-            <button class="w-full p-3 bg-primary-1 rounded-8 text-xs font-black">
+            <button
+              class="w-full p-3 bg-primary-1 rounded-8 text-xs font-black"
+            >
               Search job
             </button>
           </div>
