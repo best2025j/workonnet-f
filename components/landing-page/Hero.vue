@@ -35,9 +35,11 @@
               </p>
             </div>
           </div>
+         
+          
           <!--  -->
           <div
-            class="border w-[440px] rounded-10 p-6 space-y-4 h-[23rem] backdrop-blur-sm"
+            class="border w-[440px] bg-[#62696FCC] rounded-10 p-6 space-y-4 h-[23rem]"
           >
             <div class="flex items-center justify-between">
               <div>
@@ -73,7 +75,7 @@
                   </svg>
                 </div>
               </div>
-              
+
               <div class="flex gap-x-2 py-2">
                 <div class="flex flex-col w-full">
                   <label for="first-name" class="text-sm mb-2">Location</label>
@@ -125,7 +127,7 @@
               </div>
             </form>
             <!-- btn -->
-            <button class="w-full p-3 bg-primary-1 rounded-8 text-xs">
+            <button class="w-full p-3 bg-primary-1 rounded-8 text-xs font-black">
               Search job
             </button>
           </div>
