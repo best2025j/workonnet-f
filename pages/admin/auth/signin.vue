@@ -1,3 +1,93 @@
+<script setup lang="ts">
+import { POSITION, useToast } from 'vue-toastification';
+import { required, helpers } from '@vuelidate/validators';
+import { useVuelidate } from '@vuelidate/core';
+import type { ApiErrorResponse, ApiSuccessResponse } from '~/types';
+
+const router  = useRouter()
+const toast = useToast();
+const isLoading = ref<boolean>(false);
+const authStore = useAuthStore();
+
+const formData = reactive({
+  email: '',
+  password: '',
+});
+
+const rules = computed(() => {
+  return {
+    email: {
+      required: helpers.withMessage('Please enter valid email', required),
+    },
+    password: {
+      required: helpers.withMessage('Please enter a password', required),
+    },
+  };
+});
+
+const v$ = useVuelidate(rules, formData);
+
+const loginAdmin = async () => {
+  isLoading.value = true;
+  const isValidForm = await v$.value.$validate();
+  if (!isValidForm) {
+    toast.error('Please enter a valid email or password', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+    return;
+  }
+
+  try {
+    const response = await $fetch('/api/auth/admin/authenticate', {
+      method: 'POST',
+      body: formData,
+    });
+
+    toast.success('Signin successful', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    const responseData = response as ApiSuccessResponse;
+
+    authStore.setCurrentUserType(LOGGED_USER.ADMIN);
+    authStore.setUserAuthData({
+      accountType: LOGGED_USER.ADMIN,
+      adminId: responseData.data.adminId,
+    });
+
+    authStore.setUserToken(responseData.data.accessToken)
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 1000);
+
+   return router.push('/admin/dashboard/');
+  } catch (error: any) {
+    const errorData = error.data as ApiErrorResponse;
+
+    if (errorData.data?.errorCode === 'CI0001') {
+      toast.error(errorData.data.message, {
+        timeout: 3000,
+        position: POSITION.TOP_RIGHT,
+      });
+    } else {
+      toast.error('An error occurred try again', {
+        timeout: 3000,
+        position: POSITION.TOP_RIGHT,
+      });
+    }
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+  }
+};
+</script>
 <template>
   <div class="h-screen w-full">
     <div
@@ -15,6 +105,9 @@
             <input
               type="text"
               placeholder="Enter your email address here"
+              v-model="formData.email"
+              :disabled="isLoading"
+              @change="v$.email.$touch"
               class="pl-2 placeholder:text-sm pr-4 h-10 outline-none border border-gray-300 rounded-md"
             />
           </div>
@@ -25,6 +118,9 @@
               type="password"
               placeholder="Enter password"
               pattern=".{8,}"
+              v-model="formData.password"
+              :disabled="isLoading"
+              @change="v$.password.$touch"
               title="Password should be at least 8 characters"
               class="pl-2 placeholder:text-md pr-4 h-10 outline-none border border-gray-300 rounded-md"
             />
@@ -33,17 +129,15 @@
         <button class="underline text-right text-xs">Forgot password?</button>
 
         <div class="space-y-3 pt-6">
-          <button
-            class="bg-primary-1 p-4 w-full rounded-8 text-white text-sm font-black"
+          <BtnPrimary
+            @click="loginAdmin()"
+            :isLoading="isLoading"
+            :disabled="isLoading || v$.$invalid"
           >
-            Sign in
-          </button>
-          <button class="w-full">
-            Don’t have an account?
-            <NuxtLink class="text-info-500 text-sm font-black"
-              >Sign up</NuxtLink
-            >
-          </button>
+            <template #text>
+              {{ !isLoading ? 'Sign in' : 'Please wait...' }}
+            </template>
+          </BtnPrimary>
         </div>
       </div>
     </div>

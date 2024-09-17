@@ -3,7 +3,6 @@ export const LocalStore = defineStore('local-store', {
     isExpandedNav: false,
     isMobileMenuOpened: false,
     errorData: null,
-    currentUserType: LOGGED_USER.GUEST,
   }),
 
   getters: {
@@ -17,9 +16,6 @@ export const LocalStore = defineStore('local-store', {
     },
     toggleMobileMenu() {
       this.isMobileMenuOpened = !this.isMobileMenuOpened;
-    },
-    setCurrentUserType(userType: LOGGED_USER) {
-      this.currentUserType = userType;
     },
     setError(errorData: any) {
       this.errorData = errorData;

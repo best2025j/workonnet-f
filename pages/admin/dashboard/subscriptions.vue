@@ -3,6 +3,7 @@ definePageMeta({
   title: "Subscriptions",
   pageName: "admin.dashboard.subscriptions",
   layout: "dashboard",
+  middleware: ['auth', 'is-admin']
 });
 </script>
 

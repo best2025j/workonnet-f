@@ -5,9 +5,21 @@ export default defineNuxtRouteMiddleware((to, from) => {
 
   if (import.meta.server) return;
 
-  if (authStore.isAuthenticated === true && authStore.userToken !== 'no-auth') {
-    if (to.path !== '/') {
-      return navigateTo('/');
+  if (authStore.isAuthenticated && authStore.userToken !== 'no-auth') {
+    if (authStore.currentUserType === LOGGED_USER.ADMIN) {
+      return navigateTo('/admin/dashboard');
     }
+
+    if (authStore.currentUserType === LOGGED_USER.JOBSEEKER) {
+      return navigateTo('/dashboard/jobseeker');
+    }
+
+    if (authStore.currentUserType === LOGGED_USER.RECRUITER) {
+      return navigateTo('/dashboard/recruiter');
+    }
+
+    return;
   }
+
+  return;
 });

@@ -1,8 +1,6 @@
 import {
-  STORAGE_AUTHENTICATED,
   STORAGE_CURRENT_PHONE,
   STORAGE_USER_TOKEN,
-  STORAGE_TOKEN_KEY,
   STORAGE_LOGGED_IN_USER_KEY,
   LOGGED_USER,
 } from '~/utils/common';
@@ -42,7 +40,7 @@ export const AuthStore = defineStore('auth-store', () => {
     useLocalStorage(STORAGE_USER_TOKEN, null, storageSerializer)
   );
 
-  function changeUserType(userType: string) {
+  function setCurrentUserType(userType: LOGGED_USER) {
     currentUserType.value = userType;
   }
 
@@ -98,7 +96,7 @@ export const AuthStore = defineStore('auth-store', () => {
     isAuthenticated: skipHydrate(isAuthenticated),
     currentAuthPhone: skipHydrate(currentAuthPhone),
     userToken: skipHydrate(userToken),
-    changeUserType,
+    setCurrentUserType,
     setUserToken,
     setUserAuthData,
     logoutUser,

@@ -10,6 +10,6 @@ export default defineNuxtRouteMiddleware((to, from) => {
     (authStore.currentUserType as any as IUserAuthData).accountType !==
     LOGGED_USER.ADMIN
   ) {
-    return navigateTo('/admin/dashboard');
+    return navigateTo('/');
   }
 });

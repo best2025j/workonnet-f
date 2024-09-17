@@ -3,6 +3,7 @@ definePageMeta({
   title: "Subscriptions",
   pageName: "admin.dashboard.home.posted-job",
   layout: "dashboard",
+  middleware: ['auth', 'is-admin']
 });
 </script>
 

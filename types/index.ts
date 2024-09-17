@@ -48,7 +48,9 @@ export interface TelInputData {
 
 export interface IUserAuthData {
   accountType: string;
-  userId: string;
+  userId?: string;
+  adminId?: string;
+  recruiterId?: string;
 }
 
 export interface ITimer {
@@ -58,4 +60,29 @@ export interface ITimer {
   minutes?: string;
   seconds?: string;
   fullTimer?: string;
+}
+
+export type ApiDataResponse = {
+  response: Record<string, any>;
+};
+
+export interface ValidationError {
+  message: string;
+  errors: Record<string, string[]>;
+}
+
+export interface ApiErrorResponse {
+  message: string;
+  stack: string;
+  statusCode: number;
+  data: {
+    message: string;
+    status: string;
+    errorCode?: string;
+  };
+}
+
+export interface ApiSuccessResponse {
+  status: number;
+  data: any;
 }
