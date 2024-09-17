@@ -85,10 +85,10 @@ const inputValue4 = ref("");
         >
       </p>
       <button
-        class="font-black text-white w-full  py-3.5 rounded-lg text-sm bg-[#FE8900]"
+        class="font-black text-white w-full py-3.5 rounded-lg text-sm bg-[#FE8900]"
       >
         <NuxtLink to="/auth/set-new-password">Continue</NuxtLink>
       </button>
     </div>
-   </div>
+  </div>
 </template>

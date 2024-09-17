@@ -1,14 +1,14 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: 'auth',
+  layout: "auth",
   title: "jobseeker.signin",
-  pageName: 'jobseeker.signin'
+  pageName: "jobseeker.signin",
   // middleware: ['no-auth']
 });
 </script>
 <template>
   <div class="flex justify-center items-center w-full">
-  <div class="w-[23.375rem] flex flex-col">
+    <div class="w-[23.375rem] flex flex-col">
       <h2 class="text-center text-[32px] mb-6 font-['Georgia'] font-normal">
         Continue to account
       </h2>
@@ -100,10 +100,10 @@ definePageMeta({
           />
           <div class="flex justify-end mt-2">
             <NuxtLink
-              class="text-sm  text-black underline cursor-pointer"
+              class="text-sm text-black underline cursor-pointer"
               to="/auth/password-forgotten"
             >
-            Forgot password?
+              Forgot password?
             </NuxtLink>
           </div>
         </div>

@@ -1,20 +1,18 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: 'auth',
+  layout: "auth",
   title: "jobseeker.signup",
-  pageName: 'jobseeker.signin'
+  pageName: "jobseeker.signin",
   // middleware: ['no-auth']
 });
 </script>
 <template>
-    <div class="flex justify-center items-center w-full">
-        <div  class="w-[23.375rem] flex flex-col">
-
-        
-        <h2 class="text-center text-[32px] mb-10 font-['Georgia'] font-normal">
-          Create Account
-        </h2>
-        <div class="flex flex-col items-center justify-center gap-4 text-[12px]">
+  <div class="flex justify-center items-center w-full">
+    <div class="w-[23.375rem] flex flex-col">
+      <h2 class="text-center text-[32px] mb-10 font-['Georgia'] font-normal">
+        Create Account
+      </h2>
+      <div class="flex flex-col items-center justify-center gap-4 text-[12px]">
         <button
           class="w-full flex gap-4 items-center justify-center border font-light border-[#D0D5DD] border-solid px-5 py-2 text-[#344054] rounded-lg"
         >
@@ -82,47 +80,44 @@ definePageMeta({
           Continue with LinkedIn
         </button>
       </div>
-        <form
-          class="flex flex-col mt-6 mx-auto items-start justify-center text-left w-full max-w-md"
+      <form
+        class="flex flex-col mt-6 mx-auto items-start justify-center text-left w-full max-w-md"
+      >
+        <label class="text-sm font-thin mb-2 text-left mt-4">Full Name </label>
+        <input
+          type="email"
+          placeholder="Enter full name here"
+          class="outline-none w-full text-xs placehoder:text-[#958D8D] rounded-md px-3 py-2 border border-black-200 border-solid"
+        />
+
+        <label class="text-sm font-thin mb-2 text-left mt-4">Email </label>
+        <input
+          type="email"
+          placeholder="Enter email address here"
+          class="outline-none w-full text-xs rounded-md px-3 py-2 border border-black-200 border-solid"
+        />
+
+        <label class="text-sm font-thin mb-2 text-left mt-4"
+          >Create Password
+        </label>
+        <input
+          type="password"
+          placeholder="Create new password"
+          pattern=".{8,}"
+          class="outline-none text-xs leading-5 w-full p border border-solid border-black-200 rounded-lg px-3 py-2"
+        />
+        <button
+          class="bg-[#FE8900] font-black text-white mt-20 py-3.5 text-sm w-full rounded-lg"
         >
-          <label class="text-sm font-thin mb-2 text-left mt-4"
-            >Full Name
-          </label>
-          <input
-            type="email"
-            placeholder="Enter full name here"
-            class="outline-none w-full text-xs  placehoder:text-[#958D8D] rounded-md px-3 py-2 border border-black-200 border-solid"
-          />
-
-          <label class="text-sm font-thin mb-2 text-left mt-4">Email </label>
-          <input
-            type="email"
-            placeholder="Enter email address here"
-            class="outline-none w-full text-xs rounded-md px-3 py-2 border border-black-200 border-solid"
-          />
-
-          <label class="text-sm font-thin mb-2 text-left mt-4"
-            >Create Password
-          </label>
-          <input
-            type="password"
-            placeholder="Create new password"
-            pattern=".{8,}"
-            class="outline-none text-xs leading-5 w-full p border border-solid border-black-200 rounded-lg  px-3 py-2"
-          />
-          <button
-            class="bg-[#FE8900] font-black text-white mt-20 py-3.5 text-sm w-full rounded-lg"
-          >
-            <NuxtLink to="/auth/activation-code"> Create Account</NuxtLink>
-          </button>
-        </form>
-        <p class="text-center mt-10 mb-5 text-sm font-thin">
-          Already have an account?
-          <NuxtLink to="/auth/signin/jobseeker" class="font-thin text-[#007AFF]"
-            >Sign In</NuxtLink
-          >
-        </p>
-      </div>
-</div>
-
+          <NuxtLink to="/auth/activation-code"> Create Account</NuxtLink>
+        </button>
+      </form>
+      <p class="text-center mt-10 mb-5 text-sm font-thin">
+        Already have an account?
+        <NuxtLink to="/auth/signin/jobseeker" class="font-thin text-[#007AFF]"
+          >Sign In</NuxtLink
+        >
+      </p>
+    </div>
+  </div>
 </template>
