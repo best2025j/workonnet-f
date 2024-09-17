@@ -3,14 +3,16 @@ definePageMeta({
   layout: "auth",
   title: "recruiter.signin",
   pageName: "recruiter.signin",
-  // middleware: ['no-auth']
+  middleware: ["no-auth"],
 });
 </script>
 
 <template>
   <div class="flex justify-center items-center w-full">
     <div class="w-[23.375rem] flex flex-col">
-      <h2 class="text-center text-2xl md:text-[32px] mb-6 font-[Georgia] font-normal">
+      <h2
+        class="text-center text-2xl md:text-[32px] mb-6 font-[Georgia] font-normal"
+      >
         Continue to account
       </h2>
       <div class="flex flex-col items-center justify-center gap-4 text-[12px]">

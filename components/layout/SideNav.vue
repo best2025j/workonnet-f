@@ -12,7 +12,9 @@ import SettingIcon from '../icons/SettingIcon.vue';
 import SpeekerIcon from '../icons/SpeekerIcon.vue';
 
 const route = useRoute();
-const localStore = useLocalStore();
+const router = useRouter();
+
+const authStore = useAuthStore();
 
 const jobSeekerLinks = [
   {
@@ -148,6 +150,11 @@ const admin = [
 
 // const isActive = (pageName: string) => route.meta?.pageName === pageName;
 
+const logoutUser = () => {
+  authStore.logoutUser();
+  router.push('/')
+};
+
 const isActive = (pageName: string) => {
   return route.meta?.pageName === pageName;
 };
@@ -165,7 +172,7 @@ const isActive = (pageName: string) => {
       <!-- jobseekers sidenav -->
       <ul
         class="w-full"
-        v-show="localStore.$state.currentUserType === LOGGED_USER.JOBSEEKER"
+        v-show="authStore.$state.currentUserType === LOGGED_USER.JOBSEEKER"
       >
         <li v-for="(link, index) in jobSeekerLinks" :key="index">
           <NuxtLink
@@ -191,7 +198,7 @@ const isActive = (pageName: string) => {
       <!-- recruiters sidenav -->
       <ul
         class="w-full"
-        v-show="localStore.$state.currentUserType === LOGGED_USER.RECRUITER"
+        v-show="authStore.$state.currentUserType === LOGGED_USER.RECRUITER"
       >
         <li v-for="(link, index) in recruiterLinks" :key="index">
           <NuxtLink
@@ -217,7 +224,7 @@ const isActive = (pageName: string) => {
       <!-- admin -->
       <ul
         class="w-full"
-        v-show="localStore.$state.currentUserType === LOGGED_USER.ADMIN"
+        v-show="authStore.$state.currentUserType === LOGGED_USER.ADMIN"
       >
         <li v-for="(link, index) in admin" :key="index">
           <NuxtLink
@@ -242,7 +249,7 @@ const isActive = (pageName: string) => {
 
       <!--  -->
       <div
-        v-show="localStore.$state.currentUserType === LOGGED_USER.RECRUITER"
+        v-show="authStore.$state.currentUserType === LOGGED_USER.RECRUITER"
         class="flex justify-center items-center mt-4 py-4 w-[218px] bg-westside-100 flex-col mx-auto rounded-10 space-y-4"
       >
         <span
@@ -268,7 +275,8 @@ const isActive = (pageName: string) => {
       <!--  Logout Button -->
       <div class="absolute bottom-0 left-0 right-0 w-full">
         <button
-          class="flex py-6 w-full gap-2 pl-12 justify-start rounded hover:text-primary-1"
+          @click="logoutUser()"
+          class="flex py-6 w-full gap-2 pl-12 justify-start rounded"
         >
           <IconsLogoutIcon />
           Logout

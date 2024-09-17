@@ -1,4 +1,3 @@
-import { type IUserAuthData } from '~/types';
 import { useAuthStore } from '~/store/index';
 
 export default defineNuxtRouteMiddleware((to, from) => {
@@ -6,10 +5,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
 
   if (import.meta.server) return;
 
-  if (
-    (authStore.currentUserType as any as IUserAuthData).accountType !==
-    LOGGED_USER.ADMIN
-  ) {
-    return navigateTo('/admin/dashboard');
+  if (authStore.currentUserType !== LOGGED_USER.ADMIN) {
+    return navigateTo('/');
   }
 });

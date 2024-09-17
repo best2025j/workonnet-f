@@ -3,6 +3,7 @@ definePageMeta({
   title: "Recruiters",
   pageName: "admin.dashboard.recruiters",
   layout: "dashboard",
+  middleware: ['auth', 'is-admin']
 });
 </script>
 

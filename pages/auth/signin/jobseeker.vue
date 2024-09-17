@@ -3,7 +3,7 @@ definePageMeta({
   layout: "auth",
   title: "jobseeker.signin",
   pageName: "jobseeker.signin",
-  // middleware: ['no-auth']
+  middleware: ["no-auth"],
 });
 </script>
 <template>

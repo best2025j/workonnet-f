@@ -9,8 +9,20 @@ const isSideNavOpen = ref(false);
 const toggleSideNav = () => {
   isSideNavOpen.value = !isSideNavOpen.value;
 };
-</script>
 
+const authStore = useAuthStore();
+const router = useRouter();
+
+const handleNavigation = () => {
+  if (authStore.currentUserType === LOGGED_USER.ADMIN) {
+    router.push("/admin/dashboard");
+  } else if (authStore.currentUserType === LOGGED_USER.JOBSEEKER) {
+    router.push("/dashboard/jobseeker");
+  } else if (authStore.currentUserType === LOGGED_USER.RECRUITER) {
+    router.push("/dashboard/recruiter");
+  }
+};
+</script>
 <template>
   <!-- Navbar -->
   <div class="pb-4">
@@ -50,11 +62,20 @@ const toggleSideNav = () => {
       <!-- Desktop Buttons (Register/Login) -->
       <div class="space-x-4 md:block hidden">
         <button
+          v-if="authStore.$state.isAuthenticated"
+          @click="handleNavigation()"
+          class="text-white py-2 px-4 rounded-8 shadow shadow-black-900 bg-primary-1"
+        >
+          Dashboard
+        </button>
+        <button
+          v-if="!authStore.$state.isAuthenticated"
           class="text-white py-2 px-4 rounded-8 shadow shadow-black-900 bg-primary-1"
         >
           Register
         </button>
         <button
+          v-if="!authStore.$state.isAuthenticated"
           class="bg-gray-200 text-primary-1 py-2 px-4 rounded-8 hover:bg-gray-300"
         >
           Login
