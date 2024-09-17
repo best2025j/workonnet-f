@@ -2,8 +2,8 @@
 definePageMeta({
   layout: 'auth',
   title: "jobseeker.signin",
-  pageName: 'jobseeker.signin'
-  // middleware: ['no-auth']
+  pageName: 'jobseeker.signin',
+  middleware: ['no-auth']
 });
 </script>
 <template>

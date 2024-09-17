@@ -1,6 +1,3 @@
-<script setup lang="ts">
-const route = useRoute()
-</script>
 <template>
   <div class="bg-custom-gradient w-[75%] rounded-lg">
     <div class="flex items-center justify-center gap-10 mx-4 mt-10">

@@ -4,6 +4,12 @@ import { required, helpers } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
 import type { ApiErrorResponse, ApiSuccessResponse } from '~/types';
 
+definePageMeta({
+  title: "admin.signin",
+  pageName: 'admin.signin',
+  middleware: ['no-auth']
+})
+
 const router  = useRouter()
 const toast = useToast();
 const isLoading = ref<boolean>(false);
@@ -66,7 +72,7 @@ const loginAdmin = async () => {
       isLoading.value = false;
     }, 1000);
 
-   return router.push('/admin/dashboard/');
+   return router.push('/admin/dashboard');
   } catch (error: any) {
     const errorData = error.data as ApiErrorResponse;
 

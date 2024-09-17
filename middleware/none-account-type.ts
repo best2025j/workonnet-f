@@ -1,4 +1,3 @@
-import { type IUserAuthData } from '~/types';
 import { useAuthStore } from '~/store/index';
 
 export default defineNuxtRouteMiddleware((to, from) => {
@@ -6,9 +5,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
 
   if (import.meta.server) return;
 
-  if (
-    (authStore.loggedInUser as IUserAuthData)?.accountType != LOGGED_USER.GUEST
-  ) {
+  if (authStore.currentUserType !== LOGGED_USER.GUEST) {
     return navigateTo('/');
   }
 });
