@@ -115,7 +115,7 @@ definePageMeta({
           <NuxtLink to="/auth/activation-code"> Create Account</NuxtLink>
         </button>
       </form>
-      <p class="text-center mt-5 text-sm mb-5 text-sm font-thin">
+      <p class="text-center mt-5 text-sm mb-5 font-thin">
         Already have an account?
         <NuxtLink to="/auth/signin/jobseeker" class="font-thin text-[#007AFF]"
           >Sign In</NuxtLink
