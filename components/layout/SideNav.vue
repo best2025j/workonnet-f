@@ -12,6 +12,8 @@ import SettingIcon from '../icons/SettingIcon.vue';
 import SpeekerIcon from '../icons/SpeekerIcon.vue';
 
 const route = useRoute();
+const router = useRouter();
+
 const authStore = useAuthStore();
 
 const jobSeekerLinks = [
@@ -148,6 +150,11 @@ const admin = [
 
 // const isActive = (pageName: string) => route.meta?.pageName === pageName;
 
+const logoutUser = () => {
+  authStore.logoutUser();
+  router.push('/')
+};
+
 const isActive = (pageName: string) => {
   return route.meta?.pageName === pageName;
 };
@@ -268,7 +275,8 @@ const isActive = (pageName: string) => {
       <!--  Logout Button -->
       <div class="absolute bottom-0 left-0 right-0 w-full">
         <button
-          class="flex py-6 w-full gap-2 pl-12 justify-start rounded hover:text-primary-1"
+          @click="logoutUser()"
+          class="flex py-6 w-full gap-2 pl-12 justify-start rounded"
         >
           <IconsLogoutIcon />
           Logout
