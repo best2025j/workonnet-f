@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import "animate.css";
 
 // State to track whether the mobile side nav is open
 const isSideNavOpen = ref(false);
@@ -65,7 +66,7 @@ const toggleSideNav = () => {
   <!-- Mobile Side Nav -->
   <div
     v-if="isSideNavOpen"
-    class="fixed inset-0 md:hidden shadow-md shadow-black-950 z-40 flex w-52 rounded-r-[20px] flex-col pt-20 space-y-10 px-6 h-full justify-start"
+    class="fixed inset-0 bg-white md:hidden animate__animated animate__fadeInLeft shadow-md shadow-black-950 z-40 flex w-52 rounded-r-[20px] flex-col pt-20 space-y-10 px-6 h-full justify-start"
   >
     <!-- <button
       @click="toggleSideNav"
@@ -75,7 +76,7 @@ const toggleSideNav = () => {
     </button> -->
 
     <!-- Nav Links for Mobile -->
-    <ul class="flex flex-col space-y-4 text-black-50">
+    <ul class="flex flex-col space-y-4 text-black-50 justify-between">
       <LandingPageNavbarLinks />
       <!-- side nav buttons -->
       <button
