@@ -1,9 +1,9 @@
 <script setup>
 definePageMeta({
-  layout: 'auth',
-  title: 'recruiter.signup',
-  pageName: 'recruiter.signin',
-  middleware: ['no-auth']
+  layout: "auth",
+  title: "recruiter.signup",
+  pageName: "recruiter.signin",
+  middleware: ["no-auth"],
 });
 </script>
 
@@ -93,66 +93,70 @@ definePageMeta({
           class="outline-none w-full text-[12px] font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
         />
         <!--Company Size -->
-       <div class="w-full">
-        <label class="text-sm font-thin mb-2 text-left mt-4"
-          >Company Size
-          <select
-            class="outline-none mt-2 bg-white w-full text-sm font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
-          >
-            Company Size
-            <option value="" disabled selected>Select company size</option>
-            <option value="">0-10</option>
-            <option value="">11-50</option>
-            <option value="">51-100</option>
-            <option value="">101-500</option>
-            <option value="">500+</option>
-          </select>
-        </label>
-       </div>
+        <div class="w-full">
+          <label class="text-sm font-thin mb-2 text-left mt-4"
+            >Company Size
+            <select
+              class="outline-none mt-2 bg-white w-full text-sm font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
+            >
+              Company Size
+              <option value="" disabled selected>Select company size</option>
+              <option value="">0-10</option>
+              <option value="">11-50</option>
+              <option value="">51-100</option>
+              <option value="">101-500</option>
+              <option value="">500+</option>
+            </select>
+          </label>
+        </div>
         <!--Industry -->
 
-       <div class="w-full">
-        <label class="text-sm font-thin mb-2 text-left mt-4">
-          Industry
-          <select
-            class="outline-none mt-2 bg-white w-full text-sm font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
-          >
-            <option value="" disabled selected>Select Industry</option>
-            <option value="Accounting & Finance">Accounting & Finance</option>
-            <option value="Administration & Office Support">
-              Administration & Office Support
-            </option>
-            <option value="Advertising & Marketing">
-              Advertising & Marketing
-            </option>
-            <option value="Agriculture & Farming">Agriculture & Farming</option>
-            <option value="Arts & Entertainment">Arts & Entertainment</option>
-            <option value="Construction & Engineering">
-              Construction & Engineering
-            </option>
-            <option value="Education & Training">Education & Training</option>
-            <option value="Healthcare & Medical">Healthcare & Medical</option>
-            <option value="Hospitality & Tourism">Hospitality & Tourism</option>
-            <option value="Human Resources">Human Resources</option>
-            <option value="Information Technology">
-              Information Technology
-            </option>
-            <option value="Legal">Legal</option>
-            <option value="Manufacturing & Production">
-              Manufacturing & Production
-            </option>
-            <option value="Retail">Retail</option>
-            <option value="Science & Research">Science & Research</option>
-            <option value="Transportation & Logistics">
-              Transportation & Logistics
-            </option>
-            <option value="Telecommunications">Telecommunications</option>
-            <option value="Utilities & Energy">Utilities & Energy</option>
-            <option value="Real Estate">Real Estate</option>
-            <option value="Nonprofit & Charity">Nonprofit & Charity</option>
-          </select>
-        </label>
-       </div>
+        <div class="w-full">
+          <label class="text-sm font-thin mb-2 text-left mt-4">
+            Industry
+            <select
+              class="outline-none mt-2 bg-white w-full text-sm font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
+            >
+              <option value="" disabled selected>Select Industry</option>
+              <option value="Accounting & Finance">Accounting & Finance</option>
+              <option value="Administration & Office Support">
+                Administration & Office Support
+              </option>
+              <option value="Advertising & Marketing">
+                Advertising & Marketing
+              </option>
+              <option value="Agriculture & Farming">
+                Agriculture & Farming
+              </option>
+              <option value="Arts & Entertainment">Arts & Entertainment</option>
+              <option value="Construction & Engineering">
+                Construction & Engineering
+              </option>
+              <option value="Education & Training">Education & Training</option>
+              <option value="Healthcare & Medical">Healthcare & Medical</option>
+              <option value="Hospitality & Tourism">
+                Hospitality & Tourism
+              </option>
+              <option value="Human Resources">Human Resources</option>
+              <option value="Information Technology">
+                Information Technology
+              </option>
+              <option value="Legal">Legal</option>
+              <option value="Manufacturing & Production">
+                Manufacturing & Production
+              </option>
+              <option value="Retail">Retail</option>
+              <option value="Science & Research">Science & Research</option>
+              <option value="Transportation & Logistics">
+                Transportation & Logistics
+              </option>
+              <option value="Telecommunications">Telecommunications</option>
+              <option value="Utilities & Energy">Utilities & Energy</option>
+              <option value="Real Estate">Real Estate</option>
+              <option value="Nonprofit & Charity">Nonprofit & Charity</option>
+            </select>
+          </label>
+        </div>
 
         <label class="text-sm font-thin mb-2 text-left mt-4"
           >Company Website</label
@@ -165,7 +169,7 @@ definePageMeta({
 
         <div class="mt-10 w-full flex space-x-2">
           <button
-          @click="$router.back()"
+            @click="$router.back()"
             class="w-1/3 items-center font-light border-[#D0D5DD] border-solid px-5 py-2 text-[#344054] border rounded-lg"
           >
             Back

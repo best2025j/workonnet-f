@@ -81,6 +81,7 @@ definePageMeta({
           Continue with LinkedIn
         </button>
       </div>
+      
       <form
           class="flex flex-col mt-6 mx-auto items-start justify-center text-left w-full max-w-md"
         >

@@ -6,11 +6,11 @@ const inputValue = ref("");
 </script>
 
 <template>
-    <div class="w-1/2 mx-auto h-full">
+  <div class="w-1/2 mx-auto h-full">
     <div
       class="flex flex-col items-center justify-center w-[23.375rem] mx-auto mt-10"
     >
-    <span class="mt-5">
+      <span class="mt-5">
         <svg
           width="72"
           height="72"
@@ -26,31 +26,31 @@ const inputValue = ref("");
           />
         </svg>
       </span>
-        <h2 class="mt-3 text-xl font-normal font-['Nexa']">Forgot password?</h2>
-        <p class="mb-6 font-thin text-sm">Enter your email for instructions</p>
+      <h2 class="mt-3 text-xl font-normal font-['Nexa']">Forgot password?</h2>
+      <p class="mb-6 font-thin text-sm">Enter your email for instructions</p>
 
-        <form class="flex flex-col mb-14">
-          <label class="mb-3 text-sm">Email address</label>
-          <input
-            v-model="inputValue"
-            :class="{
-              'focus:outline-none border-black-200 border-2 border-solid shadow-lg':
-                inputValue,
-              'border-2 border-solid  ': !inputValue,
-            }"
-            type="text"
-            class="outline-none w-[375px] border-black-200 border-2 border-solid px-3 py-2 rounded-md"
-            placeholder="example@exapmle.com"
-          />
-        </form>
+      <form class="flex flex-col mb-14">
+        <label class="mb-3 text-sm">Email address</label>
+        <input
+          v-model="inputValue"
+          :class="{
+            'focus:outline-none border-black-200 border-2 border-solid shadow-lg':
+              inputValue,
+            'border-2 border-solid  ': !inputValue,
+          }"
+          type="text"
+          class="outline-none w-[375px] border-black-200 border-2 border-solid px-3 py-2 rounded-md"
+          placeholder="example@exapmle.com"
+        />
+      </form>
 
-        <button
-          class="font-black text-white w-[375px] h-12 rounded-xl text-sm bg-[#FE8900]"
+      <button
+        class="font-black text-white w-[375px] h-12 rounded-xl text-sm bg-[#FE8900]"
+      >
+        <NuxtLink to="/auth/forgotten-password-activation-code"
+          >Send 4-digits</NuxtLink
         >
-          <NuxtLink to="/auth/forgotten-password-activation-code"
-            >Send 4-digits</NuxtLink
-          >
-        </button>
-      </div>
+      </button>
     </div>
+  </div>
 </template>

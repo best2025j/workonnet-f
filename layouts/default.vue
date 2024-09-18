@@ -3,8 +3,8 @@
 </script>
 <template>
   <div class="w-full h-screen">
-    <LandingPageNavbar />
-    <div class="w-full px-16 pt-8">
+    <LandingPageNavbar class=""/>
+    <div class="w-full md:px-16 px-8 pt-8">
       <slot />
     </div>
   </div>

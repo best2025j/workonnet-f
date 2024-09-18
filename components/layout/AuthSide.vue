@@ -2,7 +2,11 @@
   <div class="bg-custom-gradient w-[75%] rounded-lg">
     <div class="flex items-center justify-center gap-10 mx-4 mt-10">
       <h1 class="text-[34.33px] font-['Georgia'] font-normal text-white mx-6">
-       {{ $route.meta.title.includes('recruiter') ? 'Recruiting Executive Talents' : 'What Our Jobseekers Said.' }}
+        {{
+          $route.meta.title.includes("recruiter")
+            ? "Recruiting Executive Talents"
+            : "What Our Jobseekers Said."
+        }}
       </h1>
       <span>
         <svg
@@ -20,8 +24,12 @@
         </svg>
       </span>
     </div>
-  <LayoutRecruiterTestimonials v-if="$route.meta.title.includes('recruiter')"/>
-  <LayoutJobSeekerTestimonials v-if="$route.meta.title.includes('jobseeker')" />
+    <LayoutRecruiterTestimonials
+      v-if="$route.meta.title.includes('recruiter')"
+    />
+    <LayoutJobSeekerTestimonials
+      v-if="$route.meta.title.includes('jobseeker')"
+    />
     <div class="w-[85%] mt-10 mx-10 mb-5 rounded-tr-15%]">
       <img src="../../assets/images/Frame1618869200.svg" alt="" />
     </div>

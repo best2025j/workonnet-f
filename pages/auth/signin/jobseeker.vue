@@ -1,15 +1,15 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: 'auth',
+  layout: "auth",
   title: "jobseeker.signin",
-  pageName: 'jobseeker.signin',
-  middleware: ['no-auth']
+  pageName: "jobseeker.signin",
+  middleware: ["no-auth"],
 });
 </script>
 <template>
   <div class="flex justify-center items-center w-full">
-  <div class="w-[23.375rem] flex flex-col">
-      <h2 class="text-center text-[32px] mb-6 font-['Georgia'] font-normal">
+    <div class="md:w-[23.375rem] w-full flex flex-col">
+      <h2 class="text-center md:text-[32px] mb-6 font-[Georgia] font-normal">
         Continue to account
       </h2>
       <div class="flex flex-col items-center justify-center gap-4 text-[12px]">
@@ -100,20 +100,21 @@ definePageMeta({
           />
           <div class="flex justify-end mt-2">
             <NuxtLink
-              class="text-sm  text-black underline cursor-pointer"
+              class="text-sm text-black underline cursor-pointer"
               to="/auth/password-forgotten"
             >
-            Forgot password?
+              Forgot password?
             </NuxtLink>
           </div>
         </div>
+
         <button
-          class="w-full bg-[#FE8900] font-black text-white mt-20 text-sm py-3.5 rounded-md"
+          class="w-full bg-[#FE8900] font-black text-white mt-10 md:mt-20 text-sm py-3.5 rounded-md"
         >
           <NuxtLink to="/auth/activation-code">Sign In</NuxtLink>
         </button>
       </form>
-      <p class="text-center mt-10 mb-5 text-sm font-thin">
+      <p class="text-center md:mt-10 pt-4 md:mb-5 text-xs md:text-sm font-thin">
         Don't have an account?
         <NuxtLink to="/auth/signup/jobseeker" class="font-light text-[#007AFF]"
           >Sign up</NuxtLink

@@ -1,19 +1,21 @@
 <script setup lang="ts">
 definePageMeta({
-  layout: 'auth',
+  layout: "auth",
   title: "recruiter.signin",
-  pageName: 'recruiter.signin',
-  middleware: ['no-auth']
+  pageName: "recruiter.signin",
+  middleware: ["no-auth"],
 });
 </script>
 
 <template>
-    <div class="flex justify-center items-center w-full">
-      <div class="w-[23.375rem] flex flex-col">
-        <h2 class="text-center text-[32px] mb-6 font-['Georgia'] font-normal">
-          Continue to account
-        </h2>
-        <div class="flex flex-col items-center justify-center gap-4 text-[12px]">
+  <div class="flex justify-center items-center w-full">
+    <div class="w-[23.375rem] flex flex-col">
+      <h2
+        class="text-center text-2xl md:text-[32px] mb-6 font-[Georgia] font-normal"
+      >
+        Continue to account
+      </h2>
+      <div class="flex flex-col items-center justify-center gap-4 text-[12px]">
         <button
           class="w-full flex gap-4 items-center justify-center border font-light border-[#D0D5DD] border-solid px-5 py-2 text-[#344054] rounded-lg"
         >
@@ -81,46 +83,44 @@ definePageMeta({
           Continue with LinkedIn
         </button>
       </div>
-        <form
-          class="flex flex-col mt-6 mx-auto items-start justify-center text-left w-full max-w-md"
-        >
-          <label class="text-sm font-thin mb-2 text-left mt-4">Email</label>
-          <input
-            type="email"
-            placeholder="Enter email address here"
-            class="outline-none w-full text-xs  placeholder:text-[#958D8D] rounded-md px-3 py-2.5 border border-black-200 border-solid"
-          />
+      <form
+        class="flex flex-col mt-6 mx-auto items-start justify-center text-left w-full max-w-md"
+      >
+        <label class="text-sm font-thin mb-2 text-left mt-4">Email</label>
+        <input
+          type="email"
+          placeholder="Enter email address here"
+          class="outline-none w-full text-xs placeholder:text-[#958D8D] rounded-md px-3 py-2.5 border border-black-200 border-solid"
+        />
 
-          <label class="text-sm font-thin mb-2 text-left mt-4">Password</label>
-          <input
-            type="password"
-            placeholder="Enter password"
-           class="placeholder-custom outline-none text-xs w-full p-4 border border-solid border-black-200 rounded-lg px-3 py-2.5"
-          />
+        <label class="text-sm font-thin mb-2 text-left mt-4">Password</label>
+        <input
+          type="password"
+          placeholder="Enter password"
+          class="placeholder-custom outline-none text-xs w-full p-4 border border-solid border-black-200 rounded-lg px-3 py-2.5"
+        />
 
-          <div class="flex justify-end w-full mt-2">
-              <NuxtLink class="text-sm text-black underline cursor-pointer" to="/auth/password-forgotten"
-                >Forgot password?</NuxtLink
-              >
-          </div>
-
-          <button
-            class="bg-[#FE8900] font-black text-white mt-20 py-3.5 text-sm w-full rounded-lg"
-          >
-            <NuxtLink to="/auth/activation-code">Sign in</NuxtLink>
-          </button>
-        </form>
-
-        <p class="text-center mt-10 mb-5 text-sm font-thin">
-          Don't have an account?
+        <div class="flex justify-end w-full mt-2">
           <NuxtLink
-            to="/auth/signup/recruiter"
-            class="font-thin text-[#007AFF]"
-            >Sign up</NuxtLink
+            class="text-sm text-black underline cursor-pointer"
+            to="/auth/password-forgotten"
+            >Forgot password?</NuxtLink
           >
-        </p>
-      </div>
-</div>
-     
-</template>
+        </div>
 
+        <button
+          class="bg-[#FE8900] font-black text-white mt-20 py-3.5 text-sm w-full rounded-lg"
+        >
+          <NuxtLink to="/auth/activation-code">Sign in</NuxtLink>
+        </button>
+      </form>
+
+      <p class="text-center mt-10 mb-5 text-sm font-thin">
+        Don't have an account?
+        <NuxtLink to="/auth/signup/recruiter" class="font-thin text-[#007AFF]"
+          >Sign up</NuxtLink
+        >
+      </p>
+    </div>
+  </div>
+</template>
