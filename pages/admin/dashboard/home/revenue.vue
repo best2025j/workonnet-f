@@ -3,13 +3,15 @@ definePageMeta({
   title: "Dashboard",
   pageName: "admin.dashboard.revenue",
   layout: "dashboard",
-  middleware: ['auth', 'is-admin']
+  middleware: ["auth", "is-admin"],
 });
 </script>
 
 <template>
   <div class="h-full w-full">
-    <h1 class="capitalize text-2xl font-black font-[Georgia] py-2">posted-job</h1>
+    <h1 class="capitalize text-2xl font-black font-[Georgia] py-2">
+      posted-job
+    </h1>
     <div class="h-[437px] w-full rounded-10 p-4 bg-white">
       <div
         class="flex justify-center items-center text-2xl font-black mx-auto h-full w-full"
@@ -2642,7 +2644,7 @@ definePageMeta({
 
     <!--  pagenation-->
     <div
-      class="flex justify-between bg-white p-2 min-w-[1230px] fixed bottom-0 shadow-md shadow-black-400 "
+      class="flex justify-between bg-white p-2 min-w-[1220px] z-10 mt-10 shadow-md shadow-black-400"
     >
       <div class="text-xs w-32 flex space-x-2 items-center">
         <h1>Page</h1>

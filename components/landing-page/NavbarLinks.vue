@@ -47,7 +47,7 @@ const isActive = (pageName: string) => {
       :class="[
         isActive(link.pageName)
           ? 'text-primary-1 font-black text-xs'
-          : 'text-xs text-white',
+          : 'text-xs text-[#1D2939]',
       ]"
     >
       {{ link.name }}
@@ -67,7 +67,7 @@ const isActive = (pageName: string) => {
         isActive(link.pageName)
           ? 'text-primary-1 font-black text-sm border-primary-1 border-l-4 rounded-[5px] h-6'
           : 'text-sm text-[#1D2939]',
-        'flex items-center py-4 text-sm',
+        'flex items-center py-2 text-sm',
       ]"
     >
       <component

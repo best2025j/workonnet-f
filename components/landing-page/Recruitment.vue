@@ -99,7 +99,7 @@
         </div>
       </div>
       <!--  -->
-      <div class="h-full bg-primary-1 my-40 w-full rounded-10">
+      <div class="h-full bg-primary-1 my-40 w-full">
         <div
           class="flex max-w-[1240px] text-center justify-center mx-auto h-full items-center"
         >

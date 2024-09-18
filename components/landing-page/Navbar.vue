@@ -28,7 +28,7 @@ const handleNavigation = () => {
   <!-- Navbar -->
   <div class="pb-4">
     <nav
-      class="flex justify-between w-full left-0 items-center md:px-[75px] px-6 h-16 text-xs fixed top-0 z-50 text-black"
+      class="flex justify-between w-full left-0 items-center md:px-[75px] px-6 h-16 text-xs fixed top-0 z-50"
       :class="[
         $route.path === '/'
           ? 'bg-[#00000066] backdrop-blur-sm shadow-md'
@@ -65,13 +65,13 @@ const handleNavigation = () => {
         <button
           v-if="authStore.$state.isAuthenticated"
           @click="handleNavigation()"
-          class="text-white py-2 px-4 rounded-8 shadow shadow-black-900 bg-primary-1"
+          class="text-white py-2 px-4 rounded-8 bg-primary-1"
         >
           Dashboard
         </button>
         <button
           v-if="!authStore.$state.isAuthenticated"
-          class="text-white py-2 px-4 rounded-8 shadow shadow-black-900 bg-primary-1"
+          class="text-white py-2 px-4 rounded-8 bg-primary-1"
         >
           Register
         </button>
@@ -91,11 +91,11 @@ const handleNavigation = () => {
     class="fixed inset-0 backdrop-blur-md bg-[#00000066] z-50"
   >
     <div
-      class="fixed inset-0 bg-black-50 w-56 shadow-[#E7E7E7] md:hidden animate__animated animate__fadeInLeft shadow-md z-40 flex rounded-r-[20px] flex-col pt-10 space-y-10 h-full justify-start"
+      class="fixed inset-0 bg-black-50 w-56 -[#E7E7E7] md:hidden animate__animated animate__fadeInLeft shadow-md z-40 flex rounded-r-[20px] flex-col pt-10 space-y-10 h-[70%] justify-start"
     >
       <div class="flex justify-between items-center w-full px-4 top-3 absolute">
         <img src="/assets/images/logo3.png" alt="" />
-        <button @click="toggleSideNav" class="self-end top-0 rounded-full shadow-[#E7E7E7] bg-black-200 w-10 h-10 text-center flex items-center justify-center">
+        <button @click="toggleSideNav" class="self-end top-0 rounded-full shadow-[#E7E7E7] bg-black-50 shadow w-10 h-10 text-center flex items-center justify-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -125,7 +125,7 @@ const handleNavigation = () => {
             Register
           </button>
           <button
-            class="bg-gray-200 text-primary-1 py-2  px-3.5 rounded-8 hover:bg-gray-300"
+            class="bg-gray-200 text-primary-1 py-2 px-3.5 rounded-8 hover:bg-gray-300"
           >
             Login
           </button>

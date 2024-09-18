@@ -1,27 +1,30 @@
 <template>
   <div class="carousel w-full h-full">
     <!-- slide -->
-    <div class="text-white carousel-item w-full h-screen">
+    <div class="text-white carousel-item w-full md:h-screen h-[887px]">
       <div class="relative w-full">
         <div class="h-full w-full">
           <img
             src="/assets/images/my-lady.png"
-            class="w-full h-screen object-cover z-0"
+            class="w-full h-[515px] md:h-screen md:object-cover z-0"
             alt="a lady with book"
           />
         </div>
 
         <div
-          class="text-white absolute top-0 h-full w-full py-20 px-8 space-y-4 flex justify-between"
+          class="text-white absolute top-0 h-full w-full py-24 px-8 space-y-4 md:flex justify-between"
         >
-          <div class=" mt-72">
-            <h1 class="font-black text-xl">The Future of Work Powered by AI</h1>
-            <div class="py-4 max-w-[864px] text-black-50">
-              <h1 class="font-black text-[80px] leading-[88px]">
+          <div class=" md:mt-72 justify-center md:block flex flex-col items-center">
+            <h1 class="font-black md:text-xl text-base">
+              The Future of Work Powered by AI
+            </h1>
+
+            <div class="py-4 md:max-w-[864px] text-black-50 md:block flex flex-col justify-center items-center space-y-4">
+              <h1 class="font-black md:text-[80px] text-2xl md:leading-[88px] leading-6 text-center md:text-start w-60 md:w-full">
                 Get Matched With Jobs Under 24hrs
               </h1>
 
-              <p class="text-xs max-w-[669px]">
+              <p class="text-xs md:max-w-[669px] md:block hidden">
                 Our recruitment platform bridges the gap between talented job
                 seekers and forward-thinking recruiters. We offer Job seekers an
                 intuitive search experience that matches them with the right
@@ -33,24 +36,31 @@
                 build your team, our platform empowers both job seekers and
                 recruiters to connect and succeed.
               </p>
+
+              <!-- mobile text-->
+              <p class="text-xs md:hidden flex pt-4 text-center">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum
+                cumque praesentium ut earum tempore veniam, magnam voluptas
+                distinctio corrupti atque consectetur modi animi necessitatibus?
+                Accusantium ex expedita provident explicabo laborum!
+              </p>
             </div>
           </div>
-         
-          
+
           <!--  -->
           <div
-            class="border w-[440px] bg-[#62696FCC] rounded-10 p-6 space-y-4 h-[23rem]"
+            class="border md:w-[440px] bg-[#62696FCC] rounded-10 p-6 space-y-4 md:h-[23rem] h-auto"
           >
             <div class="flex items-center justify-between">
               <div>
-                <h1 class="text-2xl">Find Your Jobs</h1>
+                <h1 class="md:text-2xl text-base font-black">Find Your Jobs</h1>
                 <p class="text-xs">Find the job that best suits you</p>
               </div>
 
               <img src="/assets/images/Logo2.png" alt="" />
             </div>
             <!-- input -->
-            <form class="py-4 space-y-2">
+            <form class="md:py-4 space-y-2">
               <div class="flex flex-col w-full">
                 <label for="first-name" class="text-sm mb-2">Search job</label>
                 <div class="relative">
@@ -76,7 +86,7 @@
                 </div>
               </div>
 
-              <div class="flex gap-x-2 py-2">
+              <div class="md:flex md:gap-x-2 py-2 space-y-2 md:space-y-0">
                 <div class="flex flex-col w-full">
                   <label for="first-name" class="text-sm mb-2">Location</label>
                   <div class="relative">
@@ -127,7 +137,9 @@
               </div>
             </form>
             <!-- btn -->
-            <button class="w-full p-3 bg-primary-1 rounded-8 text-xs font-black">
+            <button
+              class="w-full p-3 bg-primary-1 rounded-8 text-xs font-black"
+            >
               Search job
             </button>
           </div>
@@ -135,18 +147,18 @@
       </div>
     </div>
     <!-- slide 2 -->
-    <div class="bg-primary-1 text-white h-screen carousel-item w-full">
-      <div class="flex h-full w-full justify-between items-center px-6">
-        <div class="w-1/2 h-auto space-y-4">
-          <h1 class="font-black text-xl ">
+    <div class="bg-primary-1 text-white md:h-screen h-[887px] carousel-item w-full">
+      <div class="md:flex md:pt-0 pt-28 h-full w-full justify-between items-center px-6">
+        <div class="md:w-1/2 h-auto md:space-y-4 text-center md:text-start">
+          <h1 class="font-black md:text-xl text-sm">
             Get Matched with Candidates Under 24hrs
           </h1>
-          <div class="py-4 max-w-[890px] text-black-50">
-            <h1 class="font-black text-[80px] line">
+          <div class="py-4 max-w-[890px] text-black-50 space-y-3 md:space-y-0">
+            <h1 class="font-black md:text-[80px] md:line">
               Recruit The Team You Need In Minutes.
             </h1>
 
-            <p class="text-xs max-w-[669px] py-2">
+            <p class="text-xs md:max-w-[669px] py-2">
               Our recruitment platform bridges the gap between talented job
               seekers and forward-thinking recruiters. We offer Job seekers an
               intuitive search experience that matches them with the right
@@ -160,7 +172,7 @@
             </p>
             <div class="py-4">
               <button
-                class="h-[50px] w-[221px] bg-white text-xs text-black-800 font-black rounded-10"
+                class="h-[50px] w-full md:w-[221px] bg-white text-xs text-black-800 font-black rounded-10"
               >
                 Get Started
               </button>
@@ -168,7 +180,7 @@
           </div>
         </div>
 
-        <div class="h-full w-1/2 text-black-900 relative">
+        <div class="h-full md:w-1/2 text-black-900 relative">
           <div class="relative top-24 right-10 left-0">
             <img src="/assets/images/frame.png" class="w-full h-full" alt="" />
           </div>
@@ -176,14 +188,14 @@
           <div class="absolute h-full top-0 right-0">
             <img
               src="/assets/images/3group.png"
-              class="h-full w-auto object-cover"
+              class="md:h-full w-auto md:object-cover"
               alt=""
             />
           </div>
 
           <!--  -->
           <div
-            class="bg-white w-64 h-[120px] hover:bg-westside-500 hover:text-white absolute bottom-60 -left-4 rounded-8"
+            class="bg-white w-64 h-[120px] hover:bg-westside-500  shadow md:shadow-none hover:text-white absolute md:bottom-60 -left-4 rounded-8"
           >
             <div class="flex justify-between items-center border-b-2">
               <div class="flex flex-co8 px-4 py-3 space-y-2">
@@ -203,7 +215,7 @@
           </div>
 
           <div
-            class="bg-white w-64 h-20 hover:bg-westside-500 hover:text-white absolute bottom-24 flex flex-col right-6 rounded-8"
+            class="bg-white w-64 h-20  shadow md:shadow-none hover:bg-westside-500 hover:text-white absolute md:bottom-24 bottom-80 flex flex-col right-6 rounded-8"
           >
             <div class="flex items-center">
               <div class="pl-3">
