@@ -25,10 +25,10 @@ const formData = reactive({
 const rules = computed(() => {
   return {
     firstName: {
-      required: helpers.withMessage('Please enter a password', required),
+      required: helpers.withMessage('Firstname is required', required),
     },
     lastName: {
-      required: helpers.withMessage('Please enter a password', required),
+      required: helpers.withMessage('Lastname is required', required),
     },
     email: {
       required: helpers.withMessage('Email is required', required),
@@ -58,7 +58,7 @@ const handleSignup = async () => {
   }
 
   try {
-    
+
      await $fetch('/api/auth/jobseeker/register', {
      method: 'POST',
       body: formData,

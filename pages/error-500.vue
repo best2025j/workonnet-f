@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 const route = useRoute();
+
+const handleError = () => {
+  clearError({
+    redirect: '/',
+  });
+};
 </script>
 <template>
      <div class="w-full">
@@ -25,9 +31,9 @@ const route = useRoute();
         </div>
 
         <div class="w-1/4">
-          <BtnPrimary  class="!px-22 ">
+          <BtnPrimary @click="handleError()">
             <template #text>
-                Go to Home Page
+                Go to Home
             </template>
           </BtnPrimary>
         </div>

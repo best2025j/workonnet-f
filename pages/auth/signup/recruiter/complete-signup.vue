@@ -1,10 +1,87 @@
-<script setup>
+<script setup lang="ts">
+import { required, helpers, email, url } from '@vuelidate/validators';
+import { useVuelidate } from '@vuelidate/core';
+
 definePageMeta({
-  layout: "auth",
-  title: "recruiter.signup",
-  pageName: "recruiter.signin",
-  middleware: ["no-auth"],
+  layout: 'auth',
+  title: 'recruiter.signup',
+  pageName: 'recruiter.signin',
+  middleware: [
+    function (to, from) {
+      const authStore = useAuthStore();
+      if (import.meta.server) return;
+
+      if (authStore.stepOneRecruiterForm !== null) return;
+
+      return navigateTo('/');
+    },
+  ],
 });
+
+const router = useRouter();
+const authStore = useAuthStore();
+const isLoading = ref<boolean>(false);
+
+const formData = reactive({
+  fullName: authStore.stepOneRecruiterForm.fullName,
+  email: authStore.stepOneRecruiterForm.email,
+  password: authStore.stepOneRecruiterForm.password,
+  companyName: authStore.stepOneRecruiterForm?.companyName ? authStore.stepOneRecruiterForm?.companyName : '',
+  companySize: authStore.stepOneRecruiterForm?.companySize ? authStore.stepOneRecruiterForm?.companySize : '',
+  industry: authStore.stepOneRecruiterForm?.industry ? authStore.stepOneRecruiterForm?.industry : '',
+  websiteUrl: authStore.stepOneRecruiterForm?.websiteUrl ? authStore.stepOneRecruiterForm?.websiteUrl : '',
+});
+
+const rules = computed(() => {
+  return {
+    fullName: {
+      required: helpers.withMessage('Full names is required', required),
+    },
+    email: {
+      required: helpers.withMessage('Email is required', required),
+      email: helpers.withMessage('Enter a valid email', email),
+    },
+    password: {
+      required: helpers.withMessage('Please enter a password', required),
+    },
+    companyName: {
+      required: helpers.withMessage('Company name is required', required),
+    },
+    companySize: {
+      required: helpers.withMessage('Company size is required', required),
+    },
+    industry: {
+      required: helpers.withMessage('Industry is required', required),
+    },
+    websiteUrl: {
+      required: helpers.withMessage('Website url is required', required),
+      url: helpers.withMessage('Must be a valid url', url),
+    },
+  };
+});
+
+const v$ = useVuelidate(rules, formData);
+
+const handleGoBack = () =>  {
+  authStore.setStepOneFormData(formData)
+  router.back()
+}
+
+const handleSignup = async () => {
+  isLoading.value = true;
+  const isValidForm = await v$.value.$validate();
+  if (!isValidForm) {
+    toast.error('Please fill all fields correctly', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+    return;
+  }
+};
 </script>
 
 <template>
@@ -90,22 +167,28 @@ definePageMeta({
         <input
           type="text"
           placeholder="Enter company name here"
-          class="outline-none w-full text-[12px] font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
+          v-model="formData.companyName"
+          :disabled="isLoading"
+          @change="v$.companyName.$touch"
+          class="outline-none w-full text-xs font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
         />
         <!--Company Size -->
         <div class="w-full">
           <label class="text-sm font-thin mb-2 text-left mt-4"
             >Company Size
             <select
+              v-model="formData.companySize"
+              :disabled="isLoading"
+              @change="v$.companySize.$touch"
               class="outline-none mt-2 bg-white w-full text-sm font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
             >
               Company Size
               <option value="" disabled selected>Select company size</option>
-              <option value="">0-10</option>
-              <option value="">11-50</option>
-              <option value="">51-100</option>
-              <option value="">101-500</option>
-              <option value="">500+</option>
+              <option value="0-10">0-10</option>
+              <option value=">11-50">11-50</option>
+              <option value="51-100">51-100</option>
+              <option value="101-500">101-500</option>
+              <option value="500+">500+</option>
             </select>
           </label>
         </div>
@@ -115,6 +198,9 @@ definePageMeta({
           <label class="text-sm font-thin mb-2 text-left mt-4">
             Industry
             <select
+              v-model="formData.industry"
+              :disabled="isLoading"
+              @change="v$.industry.$touch"
               class="outline-none mt-2 bg-white w-full text-sm font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
             >
               <option value="" disabled selected>Select Industry</option>
@@ -164,22 +250,28 @@ definePageMeta({
         <input
           type="url"
           placeholder="Website url"
+          v-model="formData.websiteUrl"
+          :disabled="isLoading"
+          @change="v$.websiteUrl.$touch"
           class="outline-none w-full text-[12px] font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
         />
 
         <div class="mt-10 w-full flex space-x-2">
           <button
-            @click="$router.back()"
+            @click="handleGoBack()"
             class="w-1/3 items-center font-light border-[#D0D5DD] border-solid px-5 py-2 text-[#344054] border rounded-lg"
           >
             Back
           </button>
 
-          <button
-            class="bg-[#FE8900] font-black text-white py-3.5 text-sm w-full rounded-lg"
+          <div class="pt-10"></div>
+          <BtnPrimary
+            @click="handleSignup()"
+            :isLoading="isLoading"
+            :disabled="isLoading || v$.$invalid"
           >
-            <NuxtLink to="/auth/activation-code">Complete Signup</NuxtLink>
-          </button>
+            <template #text> Complete Signup </template>
+          </BtnPrimary>
         </div>
       </form>
 

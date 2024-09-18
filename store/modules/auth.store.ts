@@ -7,13 +7,22 @@ import {
 import { type IPhoneNumberField, type IUserAuthData } from '~/types';
 import { skipHydrate } from 'pinia';
 import { storageSerializer } from '~/composables';
-import { useAxiosInstance } from '~~/http/http.request';
 
 interface IAuthState {
   userType: LOGGED_IN_USER;
   loggedInUser: IUserAuthData | null;
   isAuthenticated: boolean;
   userToken: string | null;
+}
+
+interface IStepOneRecruiterForm {
+  email: string;
+  fullName: string;
+  password: string;
+  companySize: string;
+  companyName: string;
+  industry: string;
+  websiteUrl: string;
 }
 // const getIsAuthenticated = getItem(STORAGE_TOKEN_KEY) != null ? true : false;
 // const userToken = getItem(STORAGE_TOKEN_KEY);
@@ -41,6 +50,14 @@ export const AuthStore = defineStore('auth-store', () => {
   const publicToken = ref(
     useLocalStorage(STORAGE_USER_PUBLIC_TOKEN, null, storageSerializer)
   );
+
+  const stepOneRecruiterForm = ref(
+    useLocalStorage('regData', null, storageSerializer)
+  );
+
+  function setStepOneFormData(data: IStepOneRecruiterForm | null) {
+    stepOneRecruiterForm.value = data;
+  }
 
   function setCurrentUserType(userType: LOGGED_IN_USER) {
     currentUserType.value = userType;
@@ -73,11 +90,13 @@ export const AuthStore = defineStore('auth-store', () => {
     isAuthenticated: skipHydrate(isAuthenticated),
     userToken: skipHydrate(userToken),
     publicToken: skipHydrate(publicToken),
+    stepOneRecruiterForm: skipHydrate(stepOneRecruiterForm),
     setCurrentUserType,
     setUserToken,
     setUserAuthData,
     logoutUser,
     setLoginSecret,
+    setStepOneFormData,
     // $api: { loginOrSignupUser, verifyAuthCode },
   };
 });
