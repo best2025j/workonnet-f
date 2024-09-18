@@ -1,10 +1,109 @@
 <script setup lang="ts">
+import { POSITION, useToast } from 'vue-toastification';
+import { required, helpers, email } from '@vuelidate/validators';
+import { useVuelidate } from '@vuelidate/core';
+import type { ApiErrorResponse, ApiSuccessResponse } from '~/types';
+
 definePageMeta({
-  layout: "auth",
-  title: "jobseeker.signup",
-  pageName: "jobseeker.signin",
-  middleware: ["no-auth"],
+  layout: 'auth',
+  title: 'jobseeker.signup',
+  pageName: 'jobseeker.signin',
+  middleware: ['no-auth'],
 });
+
+const router = useRouter();
+const toast = useToast();
+const isLoading = ref<boolean>(false);
+
+const formData = reactive({
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+});
+
+const rules = computed(() => {
+  return {
+    firstName: {
+      required: helpers.withMessage('Please enter a password', required),
+    },
+    lastName: {
+      required: helpers.withMessage('Please enter a password', required),
+    },
+    email: {
+      required: helpers.withMessage('Email is required', required),
+      email: helpers.withMessage('Enter a valid email', email),
+    },
+    password: {
+      required: helpers.withMessage('Please enter a password', required),
+    },
+  };
+});
+
+const v$ = useVuelidate(rules, formData);
+
+const handleSignup = async () => {
+  isLoading.value = true;
+  const isValidForm = await v$.value.$validate();
+  if (!isValidForm) {
+    toast.error('Please enter a valid email or password', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+    return;
+  }
+
+  try {
+    
+     await $fetch('/api/auth/jobseeker/register', {
+     method: 'POST',
+      body: formData,
+    });
+
+    toast.success('Signup successful, Please login', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 500);
+
+    return router.push({
+      path: '/auth/signin/jobseeker',
+      query: {
+        email: formData.email
+      }
+    });
+  } catch (error: any) {
+    const errorData = error.data as ApiErrorResponse;
+
+    if (errorData.data?.errorCode === 'E11000') {
+      toast.error('Email already in use', {
+        timeout: 3000,
+        position: POSITION.TOP_RIGHT,
+      });
+    } else if (errorData.data?.errorCode === '100001') {
+      toast.error('Password must be 8 characters long', {
+        timeout: 3000,
+        position: POSITION.TOP_RIGHT,
+      });
+    } else {
+      toast.error('An error occurred try again', {
+        timeout: 3000,
+        position: POSITION.TOP_RIGHT,
+      });
+    }
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+  }
+};
 </script>
 <template>
   <div class="flex justify-center items-center w-full">
@@ -89,33 +188,61 @@ definePageMeta({
       <form
         class="flex flex-col mt-6 mx-auto space-y-2 items-start justify-center text-left w-full max-w-md"
       >
-        <label class="text-sm font-thin text-left">Full Name </label>
-        <input
-          type="email"
-          placeholder="Enter full name here"
-          class="outline-none w-full text-xs placehoder:text-[#958D8D] rounded-md px-3 py-2 border border-black-200 border-solid"
-        />
-
+        <div class="flex items-start justify-between space-x-2">
+          <div>
+            <label class="text-sm font-thin text-left">First Name </label>
+            <input
+              type="text"
+              placeholder="Enter firstname here"
+              v-model="formData.firstName"
+              :disabled="isLoading"
+              @change="v$.firstName.$touch"
+              class="outline-none w-full text-xs placehoder:text-[#958D8D] rounded-md px-3 py-2 border border-black-200 border-solid"
+            />
+          </div>
+          <div>
+            <label class="text-sm font-thin text-left">Last Name </label>
+            <input
+              type="text"
+              placeholder="Enter lastname here"
+              v-model="formData.lastName"
+              :disabled="isLoading"
+              @change="v$.lastName.$touch"
+              class="outline-none w-full text-xs rounded-md px-3 py-2 border border-black-200 border-solid"
+            />
+          </div>
+        </div>
         <label class="text-sm font-thin text-left">Email </label>
         <input
           type="email"
           placeholder="Enter email address here"
+          v-model="formData.email"
+          :disabled="isLoading"
+          @change="v$.email.$touch"
           class="outline-none w-full text-xs rounded-md px-3 py-2 border border-black-200 border-solid"
         />
 
         <label class="text-sm font-thin text-left">Create Password </label>
         <input
           type="password"
-          placeholder="***********"
+          placeholder="Enter new password"
           pattern=".{8,}"
+          v-model="formData.password"
+          :disabled="isLoading"
+          @change="v$.password.$touch"
           class="outline-none text-xs leading-5 w-full p border border-solid border-black-200 rounded-lg px-3 py-2"
         />
 
-        <button
-          class="bg-[#FE8900] font-black text-white py-3.5 text-sm w-full rounded-lg"
+        <div class="pt-5"></div>
+        <BtnPrimary
+          @click="handleSignup()"
+          :isLoading="isLoading"
+          :disabled="isLoading || v$.$invalid"
         >
-          <NuxtLink to="/auth/activation-code"> Create Account</NuxtLink>
-        </button>
+          <template #text>
+            {{ !isLoading ? 'Signup' : 'Please wait...' }}
+          </template>
+        </BtnPrimary>
       </form>
       <p class="text-center mt-5 text-sm mb-5 font-thin">
         Already have an account?
