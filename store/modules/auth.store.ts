@@ -2,7 +2,7 @@ import {
   STORAGE_CURRENT_PHONE,
   STORAGE_USER_TOKEN,
   STORAGE_LOGGED_IN_USER_KEY,
-  LOGGED_USER,
+  LOGGED_IN_USER,
 } from '~/utils/common';
 import { type IPhoneNumberField, type IUserAuthData } from '~/types';
 import { skipHydrate } from 'pinia';
@@ -10,7 +10,7 @@ import { storageSerializer } from '~/composables';
 import { useAxiosInstance } from '~~/http/http.request';
 
 interface IAuthState {
-  userType: LOGGED_USER;
+  userType: LOGGED_IN_USER;
   loggedInUser: IUserAuthData | null;
   isAuthenticated: boolean;
   userToken: string | null;
@@ -23,7 +23,7 @@ export const AuthStore = defineStore('auth-store', () => {
   const currentUserType = ref(
     useLocalStorage(
       STORAGE_CURRENT_USER_TYPE,
-      LOGGED_USER.GUEST,
+      LOGGED_IN_USER.GUEST,
       storageSerializer
     )
   );
@@ -33,14 +33,16 @@ export const AuthStore = defineStore('auth-store', () => {
   const isAuthenticated = ref(
     useLocalStorage(STORAGE_CURRENT_PHONE, false, storageSerializer)
   );
-  const currentAuthPhone = ref(
-    useLocalStorage(STORAGE_CURRENT_PHONE, null, storageSerializer)
-  );
+
   const userToken = ref(
     useLocalStorage(STORAGE_USER_TOKEN, null, storageSerializer)
   );
 
-  function setCurrentUserType(userType: LOGGED_USER) {
+  const publicToken = ref(
+    useLocalStorage(STORAGE_USER_PUBLIC_TOKEN, null, storageSerializer)
+  );
+
+  function setCurrentUserType(userType: LOGGED_IN_USER) {
     currentUserType.value = userType;
   }
 
@@ -49,57 +51,33 @@ export const AuthStore = defineStore('auth-store', () => {
     isAuthenticated.value = true;
   }
 
+  function setLoginSecret(token: string | null) {
+    publicToken.value = token;
+  }
+
   function setUserAuthData(authData: IUserAuthData) {
     loggedInUser.value = authData;
   }
 
   function logoutUser() {
-    currentUserType.value = LOGGED_USER.GUEST;
+    currentUserType.value = LOGGED_IN_USER.GUEST;
     loggedInUser.value = null;
     isAuthenticated.value = null;
-    currentAuthPhone.value = null;
     userToken.value = null;
-
-    // localStorage.clear();
-  }
-
-  async function loginOrSignupUser(
-    phoneNumber: IPhoneNumberField,
-    username?: string | null
-  ) {
-    try {
-      const response = await useAxiosInstance().post('auth/user/get-code', {
-        phoneNumber,
-        username,
-      });
-      return await Promise.resolve(response);
-    } catch (error) {
-      return await Promise.reject(error);
-    }
-  }
-
-  async function verifyAuthCode(phoneNumber: string, code: number | string) {
-    try {
-      const response = await useAxiosInstance().post('auth/user/verify-code', {
-        phoneNumber,
-        code,
-      });
-      return await Promise.resolve(response);
-    } catch (error) {
-      return await Promise.reject(error);
-    }
+    publicToken.value = null;
   }
 
   return {
     currentUserType: skipHydrate(currentUserType),
     loggedInUser: skipHydrate(loggedInUser),
     isAuthenticated: skipHydrate(isAuthenticated),
-    currentAuthPhone: skipHydrate(currentAuthPhone),
     userToken: skipHydrate(userToken),
+    publicToken: skipHydrate(publicToken),
     setCurrentUserType,
     setUserToken,
     setUserAuthData,
     logoutUser,
-    $api: { loginOrSignupUser, verifyAuthCode },
+    setLoginSecret,
+    // $api: { loginOrSignupUser, verifyAuthCode },
   };
 });

@@ -3,7 +3,7 @@ definePageMeta({
   title: "Settings",
   pageName: "dashboard.jobseeker.settings",
   layout: "dashboard",
-  middleware: ['auth']
+  middleware: ['auth', 'is-jobseeker']
 });
 </script>
 

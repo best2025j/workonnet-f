@@ -3,7 +3,7 @@ definePageMeta({
   title: "Messages",
   pageName: "dashboard.jobseeker.messages",
   layout: "dashboard",
-  middleware: ['auth']
+  middleware: ['auth', 'is-jobseeker']
 });
 </script>
 

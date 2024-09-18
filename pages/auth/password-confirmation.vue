@@ -1,4 +1,9 @@
-<script setup></script>
+<script setup lang="ts">
+definePageMeta({
+  title: 'Password Confirmation',
+  pageName: 'auth.password.confirmation',
+})
+</script>
 
 <template>
   <div class="flex flex-col items-center justify-center w-1/2 h-full mx-auto">
