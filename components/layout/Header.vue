@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const localStore = useLocalStore();
+const authStore = useAuthStore();
 </script>
 
 <template>
@@ -13,7 +13,7 @@ const localStore = useLocalStore();
 
       <!-- search input -->
       <form
-        v-show="localStore.$state.currentUserType === LOGGED_IN_USER.RECRUITER"
+        v-show="authStore.$state.currentUserType === LOGGED_IN_USER.RECRUITER"
         class="relative"
       >
         <input
@@ -44,7 +44,7 @@ const localStore = useLocalStore();
           <img
             src="/assets/images/Ellipse12.png"
             alt="Profile Picture"
-            v-if="localStore.$state.currentUserType !== LOGGED_IN_USER.ADMIN"
+            v-if="authStore.$state.currentUserType !== LOGGED_IN_USER.ADMIN"
           />
           <!-- Use the bellIcon component correctly -->
           <IconsBellIcon class="h-6 w-6 inline-block" />

@@ -4,7 +4,7 @@ definePageMeta({
   title: "Dashboard",
   pageName: "dashboard.recruiter.job.index",
   layout: "dashboard",
-  middleware: ['auth']
+  middleware: ['auth', 'is-recruiter']
 });
 </script>
 

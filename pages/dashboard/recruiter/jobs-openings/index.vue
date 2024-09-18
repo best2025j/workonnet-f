@@ -3,7 +3,7 @@ definePageMeta({
   title: "Jobs Openings",
   pageName: "dashboard.recruiter.jobs-opening.index",
   layout: "dashboard",
-  middleware: ['auth']
+  middleware: ['auth', 'is-recruiter']
 });
 </script>
 
