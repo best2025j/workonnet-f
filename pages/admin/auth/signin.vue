@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { POSITION, useToast } from 'vue-toastification';
-import { required, helpers } from '@vuelidate/validators';
+import { required, helpers, email } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
 import type { ApiErrorResponse, ApiSuccessResponse } from '~/types';
 
@@ -23,7 +23,8 @@ const formData = reactive({
 const rules = computed(() => {
   return {
     email: {
-      required: helpers.withMessage('Please enter valid email', required),
+      required: helpers.withMessage('Email is required', required),
+      email: helpers.withMessage('Enter a valid email', email),
     },
     password: {
       required: helpers.withMessage('Please enter a password', required),

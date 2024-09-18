@@ -276,10 +276,10 @@ const isActive = (pageName: string) => {
       <div class="absolute bottom-0 left-0 right-0 w-full">
         <button
           @click="logoutUser()"
-          class="flex py-6 w-full gap-2 pl-12 justify-start rounded"
+          class="flex items-center py-6 w-full gap-2 pl-12 justify-start rounded"
         >
           <IconsLogoutIcon />
-          Logout
+          <span>Logout</span>
         </button>
       </div>
     </nav>

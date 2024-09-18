@@ -4,6 +4,8 @@ import { required, helpers, maxLength } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
 import { useToast, POSITION } from 'vue-toastification';
 import VOtpInput from "vue3-otp-input";
+import type { ApiErrorResponse, ApiSuccessResponse } from '~/types';
+
 
 definePageMeta({
   title: 'Auth Code',
@@ -75,6 +77,7 @@ const verifyCode = async () => {
       method: 'POST',
       body: { ...formData, email: route.query.email },
     });
+
     showPopup.value = true
 
     toast.success('Login successful....', {
@@ -94,9 +97,12 @@ const verifyCode = async () => {
     setTimeout(() => {
       isLoading.value = false;
       showPopup.value = false
-    }, 1000);
+    }, 2000);
     authStore.setLoginSecret(null);
-    router.push('/dashboard/jobseeker');
+   
+    setTimeout(() => {
+      router.push('/dashboard/jobseeker');
+    }, 3000);
   } catch (error: any) {
     const errorData = error.data as ApiErrorResponse;
 

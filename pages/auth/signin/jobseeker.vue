@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { POSITION, useToast } from 'vue-toastification';
-import { required, helpers } from '@vuelidate/validators';
+import { required, helpers, email } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
 import type { ApiErrorResponse, ApiSuccessResponse } from '~/types';
 
@@ -12,19 +12,21 @@ definePageMeta({
 });
 
 const router = useRouter();
+const route = useRoute();
 const toast = useToast();
 const isLoading = ref<boolean>(false);
 const authStore = useAuthStore();
 
 const formData = reactive({
-  email: '',
+  email: route.query?.email ? route.query?.email : '',
   password: '',
 });
 
 const rules = computed(() => {
   return {
     email: {
-      required: helpers.withMessage('Please enter valid email', required),
+      required: helpers.withMessage('Email is required', required),
+      email: helpers.withMessage('Enter a valid email', email),
     },
     password: {
       required: helpers.withMessage('Please enter a password', required),
@@ -45,7 +47,7 @@ const handleLogin = async () => {
 
     setTimeout(() => {
       isLoading.value = false;
-    }, 2000);
+    }, 1000);
     return;
   }
 
@@ -64,7 +66,7 @@ const handleLogin = async () => {
     authStore.setLoginSecret(responseData.data.accessToken);
     setTimeout(() => {
       isLoading.value = false;
-    }, 500);
+    }, 1000);
 
     return router.push({
       path: '/auth/activation-code',
