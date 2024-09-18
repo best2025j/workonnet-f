@@ -11,7 +11,7 @@ const links = [
     pageName: 'home',
   },
   {
-    to: '/pricing',
+    to: '/#pricing',
     name: 'Pricing',
     pageName: 'pricing',
   },
