@@ -51,8 +51,12 @@ setTimeout(() => {
           </p>
         </div>
 
-        <div>
-          <button :btn-text="'Go to Home Page'" class="!px-22"></button>
+        <div class="w-1/4">
+          <BtnPrimary @click="handleError()">
+            <template #text>
+                Go to Home
+            </template>
+          </BtnPrimary>
         </div>
       </div>
       <!--  -->
