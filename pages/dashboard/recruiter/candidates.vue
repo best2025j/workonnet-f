@@ -3,7 +3,7 @@ definePageMeta({
   title: 'Candidates',
   pageName: 'dashboard.recruiter.candidates',
   layout: 'dashboard',
-  middleware: ['auth']
+  middleware: ['auth', 'is-recruiter']
 });
 </script>
 

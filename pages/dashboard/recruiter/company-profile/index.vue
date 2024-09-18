@@ -3,7 +3,7 @@ definePageMeta({
   title: "Company Profile",
   pageName: "dashboard.recruiter.company-profile.index",
   layout: "dashboard",
-  middleware: ['auth']
+  middleware: ['auth', 'is-recruiter']
 });
 </script>
 

@@ -1,10 +1,99 @@
 <script setup lang="ts">
+import { POSITION, useToast } from 'vue-toastification';
+import { required, helpers } from '@vuelidate/validators';
+import { useVuelidate } from '@vuelidate/core';
+import type { ApiErrorResponse, ApiSuccessResponse } from '~/types';
+
 definePageMeta({
-  layout: "auth",
-  title: "recruiter.signin",
-  pageName: "recruiter.signin",
-  middleware: ["no-auth"],
+  layout: 'auth',
+  title: 'recruiter.signin',
+  pageName: 'recruiter.signin',
+  middleware: ['no-auth'],
 });
+
+const router = useRouter();
+const toast = useToast();
+const isLoading = ref<boolean>(false);
+const authStore = useAuthStore();
+
+const formData = reactive({
+  email: '',
+  password: '',
+});
+
+const rules = computed(() => {
+  return {
+    email: {
+      required: helpers.withMessage('Please enter valid email', required),
+    },
+    password: {
+      required: helpers.withMessage('Please enter a password', required),
+    },
+  };
+});
+
+const v$ = useVuelidate(rules, formData);
+
+const loginRecruiter = async () => {
+  isLoading.value = true;
+  const isValidForm = await v$.value.$validate();
+  if (!isValidForm) {
+    toast.error('Please enter a valid email or password', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+    return;
+  }
+
+  try {
+    const response = await $fetch('/api/auth/recruiter/authenticate', {
+      method: 'POST',
+      body: formData,
+    });
+
+    toast.success('Signin successful', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    const responseData = response as ApiSuccessResponse;
+
+    authStore.setCurrentUserType(LOGGED_IN_USER.RECRUITER);
+    authStore.setUserAuthData({
+      accountType: LOGGED_IN_USER.RECRUITER,
+      recruiterId: responseData.data.recruiterId,
+    });
+
+    authStore.setUserToken(responseData.data.accessToken);
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 1000);
+
+    return router.push('/dashboard/recruiter');
+  } catch (error: any) {
+    const errorData = error.data as ApiErrorResponse;
+
+    if (errorData.data?.errorCode === 'CI0001') {
+      toast.error(errorData.data.message, {
+        timeout: 3000,
+        position: POSITION.TOP_RIGHT,
+      });
+    } else {
+      toast.error('An error occurred try again', {
+        timeout: 3000,
+        position: POSITION.TOP_RIGHT,
+      });
+    }
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+  }
+};
 </script>
 
 <template>
@@ -90,6 +179,9 @@ definePageMeta({
         <input
           type="email"
           placeholder="Enter email address here"
+          v-model="formData.email"
+          :disabled="isLoading"
+          @change="v$.email.$touch"
           class="outline-none w-full text-xs placeholder:text-[#958D8D] rounded-md px-3 py-2.5 border border-black-200 border-solid"
         />
 
@@ -97,6 +189,9 @@ definePageMeta({
         <input
           type="password"
           placeholder="Enter password"
+          v-model="formData.password"
+          :disabled="isLoading"
+          @change="v$.password.$touch"
           class="placeholder-custom outline-none text-xs w-full p-4 border border-solid border-black-200 rounded-lg px-3 py-2.5"
         />
 
@@ -107,12 +202,18 @@ definePageMeta({
             >Forgot password?</NuxtLink
           >
         </div>
+        <div class="mt-10">
 
-        <button
-          class="bg-[#FE8900] font-black text-white mt-20 py-3.5 text-sm w-full rounded-lg"
+        </div>
+        <BtnPrimary
+          @click="loginRecruiter()"
+          :isLoading="isLoading"
+          :disabled="isLoading || v$.$invalid"
         >
-          <NuxtLink to="/auth/activation-code">Sign in</NuxtLink>
-        </button>
+          <template #text>
+            {{ !isLoading ? 'Sign in' : 'Please wait...' }}
+          </template>
+        </BtnPrimary>
       </form>
 
       <p class="text-center mt-10 mb-5 text-sm font-thin">

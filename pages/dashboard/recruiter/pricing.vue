@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import Pricing from "../jobseeker/pricing.vue";
-
 definePageMeta({
   title: "Pricing",
   pageName: "dashboard.recruiter.pricing",
   layout: "dashboard",
-  middleware: ['auth']
+  middleware: ['auth', 'is-recruiter']
 });
 </script>
 
