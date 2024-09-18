@@ -13,7 +13,7 @@ const localStore = useLocalStore();
 
       <!-- search input -->
       <form
-        v-show="localStore.$state.currentUserType === LOGGED_USER.RECRUITER"
+        v-show="localStore.$state.currentUserType === LOGGED_IN_USER.RECRUITER"
         class="relative"
       >
         <input
@@ -44,7 +44,7 @@ const localStore = useLocalStore();
           <img
             src="/assets/images/Ellipse12.png"
             alt="Profile Picture"
-            v-if="localStore.$state.currentUserType !== LOGGED_USER.ADMIN"
+            v-if="localStore.$state.currentUserType !== LOGGED_IN_USER.ADMIN"
           />
           <!-- Use the bellIcon component correctly -->
           <IconsBellIcon class="h-6 w-6 inline-block" />

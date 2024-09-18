@@ -14,11 +14,12 @@ const authStore = useAuthStore();
 const router = useRouter();
 
 const handleNavigation = () => {
-  if (authStore.currentUserType === LOGGED_USER.ADMIN) {
+  console.log(authStore.currentUserType)
+  if (authStore.currentUserType === LOGGED_IN_USER.ADMIN) {
     router.push("/admin/dashboard");
-  } else if (authStore.currentUserType === LOGGED_USER.JOBSEEKER) {
+  } else if (authStore.currentUserType === LOGGED_IN_USER.JOBSEEKER) {
     router.push("/dashboard/jobseeker");
-  } else if (authStore.currentUserType === LOGGED_USER.RECRUITER) {
+  } else if (authStore.currentUserType === LOGGED_IN_USER.RECRUITER) {
     router.push("/dashboard/recruiter");
   }
 };

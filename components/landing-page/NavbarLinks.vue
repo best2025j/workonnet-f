@@ -55,7 +55,7 @@ const isActive = (pageName: string) => {
 
     <div
       v-if="isActive(link.pageName)"
-      class="bg-primary-1 font-bold md:h-[5px] rounded-t-10"
+      class="bg-primary-1 font-bold md:h-[4px] rounded-t-10"
     />
   </li>
 

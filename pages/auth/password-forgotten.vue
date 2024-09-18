@@ -1,6 +1,8 @@
-<script setup>
-import { ref } from "vue";
-import passwordicon from "@/assets/images/password.png";
+<script setup lang="ts">
+definePageMeta({
+  title: 'Forgotten Password',
+  pageName: 'auth.forgotten.password',
+})
 
 const inputValue = ref("");
 </script>
@@ -34,13 +36,13 @@ const inputValue = ref("");
         <input
           v-model="inputValue"
           :class="{
-            'focus:outline-none border-black-200 border-2 border-solid shadow-lg':
+            'focus:outline-none border-black-200 border border-solid':
               inputValue,
-            'border-2 border-solid  ': !inputValue,
+            'border border-solid  ': !inputValue,
           }"
           type="text"
           class="outline-none w-[375px] border-black-200 border-2 border-solid px-3 py-2 rounded-md"
-          placeholder="example@exapmle.com"
+          placeholder="Enter email"
         />
       </form>
 
@@ -48,7 +50,7 @@ const inputValue = ref("");
         class="font-black text-white w-[375px] h-12 rounded-xl text-sm bg-[#FE8900]"
       >
         <NuxtLink to="/auth/forgotten-password-activation-code"
-          >Send 4-digits</NuxtLink
+          >Send 5-digits</NuxtLink
         >
       </button>
     </div>

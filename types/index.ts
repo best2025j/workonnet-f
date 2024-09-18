@@ -1,4 +1,4 @@
-import { LOGGED_USER } from '../utils/common';
+import { LOGGED_IN_USER } from '../utils/common';
 
 export interface ICountryData {
   name: string;
@@ -22,7 +22,7 @@ export interface IMediaFile {
 export interface IUserDetails {
   username: string;
   status: string;
-  accountType: LOGGED_USER;
+  accountType: LOGGED_IN_USER;
   phoneNumber: IPhoneNumberField;
   email?: string;
   photo?: IMediaFile;

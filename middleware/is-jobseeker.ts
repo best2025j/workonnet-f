@@ -5,7 +5,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
 
   if (import.meta.server) return;
 
-  if (authStore.currentUserType !== LOGGED_USER.JOBSEEKER) {
+  if (authStore.currentUserType !== LOGGED_IN_USER.JOBSEEKER) {
     return navigateTo('/');
   }
 });

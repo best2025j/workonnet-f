@@ -3,7 +3,7 @@ definePageMeta({
   title: "Browse Companies (Ai)",
   pageName: "dashboard.jobseeker.browse-companies",
   layout: "dashboard",
-  middleware: ['auth']
+  middleware: ['auth', 'is-jobseeker']
 });
 </script>
 
@@ -86,7 +86,7 @@ definePageMeta({
             <h1 class="text-xs">Microsoft</h1>
           </div>
           <button
-            class="py-2 px-3 border bg-westside-100 text-primary-1 rounded-10"
+            class="py-2 px-3 rounded-10"
           >
             3 jobs
           </button>
@@ -113,7 +113,7 @@ definePageMeta({
             <h1 class="text-xs">Microsoft</h1>
           </div>
           <button
-            class="py-2 px-3 border bg-westside-100 text-primary-1 rounded-10"
+           class="py-2 px-3 rounded-10"
           >
             3 jobs
           </button>
@@ -140,7 +140,7 @@ definePageMeta({
             <h1 class="text-xs">Microsoft</h1>
           </div>
           <button
-            class="py-2 px-3 border bg-westside-100 text-primary-1 rounded-10"
+            class="py-2 px-3 rounded-10"
           >
             3 jobs
           </button>
@@ -167,7 +167,7 @@ definePageMeta({
             <h1 class="text-xs">Microsoft</h1>
           </div>
           <button
-            class="py-2 px-3 border bg-westside-100 text-primary-1 rounded-10"
+            class="py-2 px-3 rounded-10"
           >
             3 jobs
           </button>
@@ -316,7 +316,7 @@ definePageMeta({
         </div>
       </div>
     </div>
-    <!-- button for pagenations -->
+    <!-- button for pagination -->
     <div class="flex gap-2 justify-center items- py-4">
       <button class="py-2 px-4 rounded-10 border bg-black-400">
         <svg

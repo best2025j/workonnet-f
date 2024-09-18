@@ -1,5 +1,9 @@
-<script setup>
-import messageicon from "@/assets/images/messageicon.png";
+<script setup lang="ts">
+
+definePageMeta({
+  title: 'Password Auth Code',
+  pageName: 'auth.forgotten.password.code',
+})
 
 const inputValue = ref("");
 const inputValue2 = ref("");

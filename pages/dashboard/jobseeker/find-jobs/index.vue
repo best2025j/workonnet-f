@@ -3,7 +3,7 @@ definePageMeta({
   title: "Find Jobs",
   pageName: "dashboard.jobseeker.find-jobs.index",
   layout: "dashboard",
-  middleware: ['auth']
+  middleware: ['auth', 'is-jobseeker']
 });
 
 enum CARD_LAYOUT {

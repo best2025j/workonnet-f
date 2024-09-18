@@ -172,7 +172,7 @@ const isActive = (pageName: string) => {
       <!-- jobseekers sidenav -->
       <ul
         class="w-full"
-        v-show="authStore.$state.currentUserType === LOGGED_USER.JOBSEEKER"
+        v-show="authStore.$state.currentUserType === LOGGED_IN_USER.JOBSEEKER"
       >
         <li v-for="(link, index) in jobSeekerLinks" :key="index">
           <NuxtLink
@@ -198,7 +198,7 @@ const isActive = (pageName: string) => {
       <!-- recruiters sidenav -->
       <ul
         class="w-full"
-        v-show="authStore.$state.currentUserType === LOGGED_USER.RECRUITER"
+        v-show="authStore.$state.currentUserType === LOGGED_IN_USER.RECRUITER"
       >
         <li v-for="(link, index) in recruiterLinks" :key="index">
           <NuxtLink
@@ -224,7 +224,7 @@ const isActive = (pageName: string) => {
       <!-- admin -->
       <ul
         class="w-full"
-        v-show="authStore.$state.currentUserType === LOGGED_USER.ADMIN"
+        v-show="authStore.$state.currentUserType === LOGGED_IN_USER.ADMIN"
       >
         <li v-for="(link, index) in admin" :key="index">
           <NuxtLink
@@ -249,7 +249,7 @@ const isActive = (pageName: string) => {
 
       <!--  -->
       <div
-        v-show="authStore.$state.currentUserType === LOGGED_USER.RECRUITER"
+        v-show="authStore.$state.currentUserType === LOGGED_IN_USER.RECRUITER"
         class="flex justify-center items-center mt-4 py-4 w-[218px] bg-westside-100 flex-col mx-auto rounded-10 space-y-4"
       >
         <span

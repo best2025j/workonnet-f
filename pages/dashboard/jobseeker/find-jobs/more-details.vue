@@ -3,7 +3,7 @@ definePageMeta({
   title: 'Find Jobs',
   pageName: 'dashboard.jobseeker.find-jobs.more-details',
   layout: 'dashboard',
-  middleware: ['auth']
+  middleware: ['auth', 'is-jobseeker']
 });
 </script>
 

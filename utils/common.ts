@@ -19,7 +19,7 @@ export enum POST_JOBS_TABS {
   DRAFTS = 'drafts',
 }
 
-export enum LOGGED_USER {
+export enum LOGGED_IN_USER {
   RECRUITER = 'recruiter',
   JOBSEEKER = 'jobseeker',
   ADMIN = 'admin',
@@ -33,6 +33,7 @@ export const STORAGE_AUTHENTICATED: string = '_us-aa';
 export const STORAGE_CURRENT_USER_TYPE: string = '_us-ut';
 export const STORAGE_USER_TOKEN: string = '_us-tke';
 export const STORAGE_CURRENT_PHONE: string = '_us-p';
+export const STORAGE_USER_PUBLIC_TOKEN: string = '_usc';
 
 // CONSTANTS
 export const PASSPHRASE = 'asdja3932sd';

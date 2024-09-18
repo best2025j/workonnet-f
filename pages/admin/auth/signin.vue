@@ -10,7 +10,7 @@ definePageMeta({
   middleware: ['no-auth']
 })
 
-const router  = useRouter()
+const router  = useRouter();
 const toast = useToast();
 const isLoading = ref<boolean>(false);
 const authStore = useAuthStore();
@@ -61,9 +61,9 @@ const loginAdmin = async () => {
 
     const responseData = response as ApiSuccessResponse;
 
-    authStore.setCurrentUserType(LOGGED_USER.ADMIN);
+    authStore.setCurrentUserType(LOGGED_IN_USER.ADMIN);
     authStore.setUserAuthData({
-      accountType: LOGGED_USER.ADMIN,
+      accountType: LOGGED_IN_USER.ADMIN,
       adminId: responseData.data.adminId,
     });
 
