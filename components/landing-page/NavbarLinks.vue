@@ -40,14 +40,14 @@ const isActive = (pageName: string) => {
   <li
     v-for="(link, index) in links"
     :key="index"
-    class="hover:text-primary-1 cursor-pointer hidden md:block"
+    class="hover:text-primary-1 cursor-pointer hidden md:block text-[#1D2939]"
   >
     <NuxtLink
       :to="link.to"
       :class="[
         isActive(link.pageName)
-          ? 'text-primary-1 font-black text-sm '
-          : 'text-sm text-[#1D2939]',
+          ? 'text-primary-1 font-black text-xs'
+          : 'text-xs text-white',
       ]"
     >
       {{ link.name }}
@@ -65,7 +65,7 @@ const isActive = (pageName: string) => {
       :to="link.to"
       :class="[
         isActive(link.pageName)
-          ? 'text-primary-1 font-black text-sm border-primary-1 border-l-4 rounded-[5px]'
+          ? 'text-primary-1 font-black text-sm border-primary-1 border-l-4 rounded-[5px] h-6'
           : 'text-sm text-[#1D2939]',
         'flex items-center py-4 text-sm',
       ]"

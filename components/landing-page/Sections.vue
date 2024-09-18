@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full w-full px-6 py-20">
+  <div class="h-full w-full px-8 py-20">
     <!-- grid divider vertical using daisy ui -->
     <div class="grid grid-cols-3 w-full text-sm">
       <div class="divider divider-start">Why choose us?</div>
@@ -9,8 +9,8 @@
 
     <!--  -->
     <div class="flex w-full py-20">
-      <div class="w-1/2">
-        <h1 class="font-black text-[32px] w-[284px]">
+      <div class="w-1/2 space-y-4">
+        <h1 class="font-black text-[32px] w-[284px] leading-8">
           Empowering Job Seekers, One Success at a Time
         </h1>
         <img src="/assets/images//sec.png" alt="a lady picture" />
@@ -246,6 +246,5 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>

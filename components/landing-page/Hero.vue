@@ -12,12 +12,12 @@
         </div>
 
         <div
-          class="text-white absolute top-0 h-full w-full py-20 px-4 space-y-4 flex justify-between"
+          class="text-white absolute top-0 h-full w-full py-20 px-8 space-y-4 flex justify-between"
         >
           <div class=" mt-72">
             <h1 class="font-black text-xl">The Future of Work Powered by AI</h1>
             <div class="py-4 max-w-[864px] text-black-50">
-              <h1 class="font-black text-[80px]">
+              <h1 class="font-black text-[80px] leading-[88px]">
                 Get Matched With Jobs Under 24hrs
               </h1>
 
@@ -186,7 +186,7 @@
             class="bg-white w-64 h-[120px] hover:bg-westside-500 hover:text-white absolute bottom-60 -left-4 rounded-8"
           >
             <div class="flex justify-between items-center border-b-2">
-              <div class="flex flex-col px-4 py-3 space-y-2">
+              <div class="flex flex-co8 px-4 py-3 space-y-2">
                 <h1 class="text-sm">IOS Mobile Developer</h1>
                 <h1 class="text-xs">Experience: 6 years</h1>
               </div>

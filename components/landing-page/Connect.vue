@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full w-full px-6">
+  <div class="h-full w-full px-8">
     <!-- grid divider vertical using daisy ui -->
     <div class="grid grid-cols-3 w-full text-sm">
       <div class="divider divider-start">Testimonials</div>
