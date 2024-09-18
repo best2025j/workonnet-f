@@ -1,7 +1,7 @@
 <template>
-  <div class="py-10 px-6 h-full w-full">
+  <div class="py-10 h-full w-full">
     <!-- grid divider vertical using daisy ui -->
-    <div class="grid grid-cols-3 w-full text-sm">
+    <div class="grid grid-cols-3 w-full text-sm px-8">
       <div class="divider divider-start">Recruitment Process</div>
       <div class="divider">Workonnect</div>
       <div class="divider divider-end">©2024</div>
@@ -9,7 +9,7 @@
     <!--  -->
     <div class="flex flex-col pt-12">
       <div
-        class="mx-auto text-center p-4 justify-center items-center flex flex-col space-y-3"
+        class="mx-auto text-center p-4 justify-center items-center flex flex-col space-y-3 px-8"
       >
         <h1 class="text-[32px] font-black">End-to-End Recruitment Process</h1>
         <p class="text-xs max-w-md">
@@ -18,7 +18,7 @@
         </p>
       </div>
       <!--  -->
-      <div class="grid grid-cols-3 gap-x-10 w-full my-10">
+      <div class="grid grid-cols-3 gap-x-10 w-full my-10 px-8">
         <div
           class="border shadow-md rounded-10 space-y-4 py-4 text-center flex flex-col justify-center items-center"
         >
@@ -99,7 +99,7 @@
         </div>
       </div>
       <!--  -->
-      <div class="h-full bg-primary-1 my-40 rounded-10">
+      <div class="h-full bg-primary-1 my-40 w-full">
         <div
           class="flex max-w-[1240px] text-center justify-center mx-auto h-full items-center"
         >
@@ -108,7 +108,7 @@
           </div>
           <div class="w-1/2">
             <div class="max-w-md text-start space-y-4">
-              <h1 class="text-black-900 text-[40px] font-black">
+              <h1 class="text-black-900 text-[40px] font-black leading-10">
                 We think about hiring more than anyone else on the planet
               </h1>
               <p class="text-xs text-white">

@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full w-full px-6">
+  <div class="h-full w-full px-8">
     <!-- grid divider vertical using daisy ui -->
     <div class="grid grid-cols-3 w-full text-sm">
       <div class="divider divider-start">Testimonials</div>
@@ -7,7 +7,7 @@
       <div class="divider divider-end">©2024</div>
     </div>
     <!--  -->
-    <div class="flex gap-x-2 h-full w-full py-14">
+    <div class="flex space-x-6 h-full w-full py-14">
       <div class="flex flex-col w-3/6 justify-between h-auto">
         <h1 class="text-[32px] font-black max-w-[18rem] line">
           Connect Talent with Opportunity
@@ -39,27 +39,27 @@
           <img src="/assets/images/mate2.png" class="h-full w-full" alt="mate image" />
         <!-- input -->
         <div
-          class="text-white absolute h-full w-full top-0 pt-[189px] px-4 space-y-4 flex justify-end pr-18"
+          class="text-white absolute w-full h-full top-0 pt-[280px] px-6 space-y-4 flex justify-end pr-20"
         >
           <!--  -->
           <div
-            class="border w-[440px] bg-[#62696FCC] rounded-10 p-6 space-y-4 h-[290px]"
-          >
+            class="border bg-[#62696FCC] rounded-10 p-6 space-y-4 h-[340px] w-[580px]"
+          > 
             <!-- input -->
-            <form class="py-2 space-y-2">
+            <form class="py-4 space-y-2">
               <div class="flex flex-col w-full">
-                <label for="first-name" class="text-sm mb-2">Search job</label>
+                <label for="first-name" class="text-sm mb-3">Search job</label>
                 <div class="relative">
                   <input
                     type="text"
                     placeholder="Search here..."
-                    class="pl-10 placeholder:text-sm pr-4 h-10 w-full outline-none border bg-transparent border-gray-300 rounded-md"
+                    class="pl-10 placeholder:text-sm pr-4 h-12 w-full outline-none border bg-transparent border-gray-300 rounded-md"
                   />
 
                   <svg
                     width="16"
                     height="16"
-                    class="absolute left-3 top-3 h-4 w-4 text-white"
+                    class="absolute left-3 top-4 w-4 text-white"
                     viewBox="0 0 16 16"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -72,19 +72,19 @@
                 </div>
               </div>
 
-              <div class="flex gap-x-2 py-2">
+              <div class="flex gap-x-2">
                 <div class="flex flex-col w-full">
-                  <label for="first-name" class="text-sm mb-2">Location</label>
+                  <label for="first-name" class="text-sm mb-3">Location</label>
                   <div class="relative">
                     <input
                       type="text"
                       placeholder="Type location here..."
-                      class="pl-10 placeholder:text-sm pr-4 h-10 w-full outline-none border bg-transparent border-gray-300 rounded-md"
+                      class="pl-10 placeholder:text-sm pr-4 h-12 w-full outline-none border bg-transparent border-gray-300 rounded-md"
                     />
                     <svg
                       width="18"
                       height="18"
-                      class="absolute left-3 top-3 h-4 w-4 text-white"
+                      class="absolute left-3 top-4 h-4 w-4 text-white"
                       viewBox="0 0 18 18"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
@@ -97,18 +97,18 @@
                   </div>
                 </div>
                 <div class="flex flex-col w-full">
-                  <label for="first-name" class="text-sm mb-2">Work Type</label>
+                  <label for="first-name" class="text-sm mb-3">Work Type</label>
                   <div class="relative">
                     <input
                       type="text"
                       placeholder="Work type..."
-                      class="pl-10 placeholder:text-sm pr-4 h-10 w-full outline-none border bg-transparent border-gray-300 rounded-md"
+                      class="pl-10 placeholder:text-sm pr-4 h-12 w-full outline-none border bg-transparent border-gray-300 rounded-md"
                     />
 
                     <svg
                       width="18"
                       height="18"
-                      class="absolute left-3 top-3 h-4 w-4 text-white"
+                      class="absolute left-3 top-4 h-4 w-4 text-white"
                       viewBox="0 0 18 18"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
@@ -124,7 +124,7 @@
             </form>
             <!-- btn -->
             <button
-              class="w-full p-3 bg-primary-1 rounded-8 text-xs font-black"
+              class="w-full h-[50px] bg-primary-1 rounded-8 text-xs font-black"
             >
               Search job
             </button>

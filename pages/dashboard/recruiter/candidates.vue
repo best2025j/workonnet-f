@@ -87,6 +87,7 @@ definePageMeta({
         </span>
       </div>
     </div>
+    
     <div class="bg-white w-full rounded-10">
       <div class="my-4">
         <nav

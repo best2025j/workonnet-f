@@ -13,10 +13,10 @@ definePageMeta({
     <LandingPageHero />
     <LandingPageSections />
     <LandingPageRecruitment />
-    <LandingPageHiring />
-    <LandingPageTestimony />
-    <LandingPageConnect />
-    <LandingPageFooter />
+    <!-- <LandingPageHiring /> -->
+    <!-- <LandingPageTestimony /> -->
+    <!-- <LandingPageConnect /> -->
+    <!-- <LandingPageFooter /> -->
   </div>
 </template>
 
