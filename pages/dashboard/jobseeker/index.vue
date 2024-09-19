@@ -1,9 +1,9 @@
 <script setup lang="ts">
 definePageMeta({
-  title: 'Dashboard',
-  pageName: 'dashboard.jobseeker.index',
-  layout: 'dashboard',
-  middleware: ['auth', 'is-jobseeker']
+  title: "Dashboard",
+  pageName: "dashboard.jobseeker.index",
+  layout: "dashboard",
+  middleware: ["auth", "is-jobseeker"],
 });
 </script>
 
@@ -18,37 +18,44 @@ definePageMeta({
     </div>
 
     <!-- card -->
-    <div class="flex space-x-4 w-full mt-2">
-      <div class="flex space-x-4 w-3/5 items-center">
-        <div class="space-y-2">
-          <div class="rounded-10 w-[210px] bg-white h-auto">
-            <div class="px-4 space-y-1 pt-4">
+    <div class="md:flex md:space-x-4 w-full mt-3">
+      <div
+        class="flex flex-col md:flex-row space-y-4 md:space-x-4 md:w-3/5 items-center"
+      >
+        <div class="space-y-4 w-full md:w-auto">
+          <div class="rounded-10 md:w-[210px] w-full bg-white h-auto">
+            <div
+              class="px-4 flex md:block items-center space-y-2 space-x-8 md:space-x-0 md:space-y-0 md:pt-4"
+            >
               <h3 class="text-base whitespace-nowrap font-black">
                 Total Jobs Applied
               </h3>
-              <div class="flex items-center justify-between">
+
+              <div class="flex items-center justify-between w-full">
                 <p
-                  class="text-5xl pb-8 tracking-tighter font-[Georgia] font-black"
+                  class="md:text-5xl md:pb-8 md:tracking-tighter font-[Georgia] font-black"
                 >
                   23
                 </p>
-                <div class="pt-8"><IconsWhiteFileIcon class="" /></div>
+                <div class="md:pt-8"><IconsWhiteFileIcon class="" /></div>
               </div>
             </div>
           </div>
 
-          <div class="rounded-10 w-[210px] bg-white h-auto">
-            <div class="px-4 space-y-2 pt-2">
+          <div class="rounded-10 md:w-[210px] w-full bg-white h-auto">
+            <div
+              class="px-4 flex md:block items-center space-y-2 space-x-8 md:space-x-0 md:space-y-0 md:pt-4"
+            >
               <h3 class="text-base whitespace-nowrap font-black">
                 Total Interviewed
               </h3>
-              <div class="flex items-center justify-between">
+              <div class="flex items-center justify-between w-full">
                 <p
-                  class="text-5xl pb-8 tracking-tighter font-[Georgia] font-black"
+                  class="md:text-5xl md:pb-8 md:tracking-tighter font-[Georgia] font-black"
                 >
                   12
                 </p>
-                <div class="pt-8"><IconsWhiteChatIcon class="" /></div>
+                <div class="md:pt-8"><IconsWhiteChatIcon class="" /></div>
               </div>
             </div>
           </div>
@@ -93,7 +100,7 @@ definePageMeta({
         </div>
       </div>
 
-      <div class="font-[Nexa] bg-[#FFFFFF] h-72 rounded-10 w-2/5">
+      <div class="font-[Nexa] md:mt-4 mt-4 w-full bg-[#FFFFFF] h-72 rounded-10 md:w-2/5">
         <h3 class="font-black border-b px-6 ml-2 py-4 text-base text-gray-800">
           Upcoming Interviews
         </h3>
@@ -184,6 +191,6 @@ definePageMeta({
       </div>
     </div>
     <!--  -->
-    <DashboardRecentAppHistory />
+    <DashboardRecentAppHistory class="hidden md:inline-flex" />
   </div>
 </template>

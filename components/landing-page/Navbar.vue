@@ -14,7 +14,7 @@ const authStore = useAuthStore();
 const router = useRouter();
 
 const handleNavigation = () => {
-  console.log(authStore.currentUserType)
+  console.log(authStore.currentUserType);
   if (authStore.currentUserType === LOGGED_IN_USER.ADMIN) {
     router.push("/admin/dashboard");
   } else if (authStore.currentUserType === LOGGED_IN_USER.JOBSEEKER) {
@@ -28,7 +28,7 @@ const handleNavigation = () => {
   <!-- Navbar -->
   <div class="pb-4">
     <nav
-      class="flex justify-between w-full left-0 items-center md:px-[75px] px-6 h-16 text-xs fixed top-0 z-50"
+      class="flex flex-row-reverse md:flex-rowP justify-between w-full left-0 items-center md:px-[75px] px-6 h-16 text-xs fixed top-0 z-50"
       :class="[
         $route.path === '/'
           ? 'bg-[#00000066] backdrop-blur-sm shadow-md'
@@ -95,7 +95,10 @@ const handleNavigation = () => {
     >
       <div class="flex justify-between items-center w-full px-4 top-3 absolute">
         <img src="/assets/images/logo3.png" alt="" />
-        <button @click="toggleSideNav" class="self-end top-0 rounded-full shadow-[#E7E7E7] bg-black-50 shadow w-10 h-10 text-center flex items-center justify-center">
+        <button
+          @click="toggleSideNav"
+          class="self-end top-0 rounded-full shadow-[#E7E7E7] bg-black-50 shadow w-10 h-10 text-center flex items-center justify-center"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -119,13 +122,33 @@ const handleNavigation = () => {
         <div
           class="absolute bottom-0 font-black text-xs left-0 right-0 w-full flex flex-col px-4 space-y-2 py-3"
         >
-          <button
+          <!-- <button
             class="text-white py-2 px-3.4 rounded-8 bg-primary-1"
           >
             Register
           </button>
           <button
             class="bg-gray-200 text-primary-1 py-2 px-3.5 rounded-8 hover:bg-gray-300"
+          >
+            Login
+          </button> -->
+
+          <button
+            v-if="authStore.$state.isAuthenticated"
+            @click="handleNavigation()"
+            class="text-white py-2 px-4 rounded-8 bg-primary-1"
+          >
+            Dashboard
+          </button>
+          <button
+            v-if="!authStore.$state.isAuthenticated"
+            class="text-white py-2 px-4 rounded-8 bg-primary-1"
+          >
+            Register
+          </button>
+          <button
+            v-if="!authStore.$state.isAuthenticated"
+            class="bg-gray-200 text-primary-1 py-2 px-4 rounded-8 hover:bg-gray-300"
           >
             Login
           </button>
