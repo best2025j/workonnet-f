@@ -1,7 +1,7 @@
 <template>
   <div class="h-full w-full md:px-8">
     <!-- grid divider vertical using daisy ui -->
-    <div class="grid grid-cols-3 w-full text-sm">
+    <div class="grid grid-cols-3 w-full text-sm px-4">
       <div class="divider divider-start">Testimonials</div>
       <div class="divider">Workonnect</div>
       <div class="divider divider-end">©2024</div>
@@ -50,7 +50,7 @@
         >
           <!--  -->
           <div
-            class="border bg-[#62696FCC] rounded-10 md:p-6 md:space-y-4 p-4 h-[340px] w-[580px]"
+            class="border bg-[#62696FCC] rounded-10 md:p-6 md:space-y-4 p-4 h-[360px] w-[580px]"
           >
             <!-- input -->
             <form class="md:py-4 space-y-2">

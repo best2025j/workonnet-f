@@ -1,28 +1,28 @@
 <script setup lang="ts">
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute, useRouter } from "vue-router";
 const route = useRoute();
 const router = useRouter();
 
 const links = [
   {
-    to: '/',
-    name: 'Home',
-    pageName: 'home',
+    to: "/",
+    name: "Home",
+    pageName: "home",
   },
   {
-    to: '/#pricing',
-    name: 'Pricing',
-    pageName: 'pricing',
+    to: "/#pricing",
+    name: "Pricing",
+    pageName: "pricing",
   },
   {
-    to: '/auth/signin/recruiter',
-    name: 'For Recruiters',
-    pageName: 'recruiter.signin',
+    to: "/auth/signin/recruiter",
+    name: "For Recruiters",
+    pageName: "recruiter.signin",
   },
   {
-    to: '/auth/signin/jobseeker',
-    name: 'For Job Seekers',
-    pageName: 'jobseeker.signin',
+    to: "/auth/signin/jobseeker",
+    name: "For Job Seekers",
+    pageName: "jobseeker.signin",
   },
 ];
 
@@ -59,20 +59,22 @@ const isActive = (pageName: string) => {
     />
   </li>
 
+  
+
   <!-- for mobile side nav -->
   <li v-for="(link, index) in links" :key="index" class="md:hidden block">
     <NuxtLink
       :to="link.to"
       :class="[
         isActive(link.pageName)
-          ? 'text-primary-1 font-black text-sm border-primary-1 border-l-4 rounded-[5px] h-6'
+          ? 'text-primary-1 font-black text-sm'
           : 'text-sm text-[#1D2939]',
         'flex items-center py-2 text-sm',
       ]"
     >
-      <component
-        class="inline-block mr-2 md:mr-0 md:block"
-        :isActive="isActive(link.pageName)"
+      <div
+        class="inline-block mr-2 md:block border-primary-1 border-r-4 rounded-r-[5px] h-6"
+        v-if="isActive(link.pageName)"
       />
       {{ link.name }}
     </NuxtLink>

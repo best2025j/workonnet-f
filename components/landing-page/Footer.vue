@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-[#F8F7F9] h-full py-20">
+  <footer class="bg-[#F8F7F9] h-full mt-32 md:py-20">
     <div class="md:flex w-full justify-between p-6 items-start">
       <div class="flex w-28 space-y-3 flex-col">
         <h1 class="text-base font-black">Workonnect</h1>
@@ -88,7 +88,7 @@
           <button
             class="h-[50px] w-full flex items-center gap-x-3 justify-center bg-primary-1 text-white text-xs font-black rounded-8"
           >
-            Get Started
+            Join our waitlist
             <svg
               width="19"
               height="18"
@@ -117,10 +117,14 @@
     <div
       class="text-center justify-center max-w-[1130px] space-y-3 w-full items-center flex flex-col mx-auto"
     >
-      <h1 class="md:text-[100px] md:line-1 border-b-2 w-full border-[#EAE8EE]">
+      <h1
+        class="md:text-[100px] text-[46px] md:line-1 border-b-2 w-full border-[#EAE8EE]"
+      >
         Workonnect
       </h1>
-      <h1 class="text-xs">COPYRIGHT © 2024. WORKONNECT. ALL RIGHTS RESERVED</h1>
+      <h1 class="text-xs text-center w-64 md:w-full py-6 md:py-0">
+        COPYRIGHT © 2024. WORKONNECT. ALL RIGHTS RESERVED
+      </h1>
     </div>
   </footer>
 </template>
