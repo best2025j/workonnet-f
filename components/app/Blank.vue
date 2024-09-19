@@ -4,7 +4,7 @@ export default {};
 
 <template>
   <div
-    class="flex flex-col items-center text-center h-[500px] mx-auto w-full justify-center"
+    class="flex flex-col items-center text-center h-[500px] mt-8 mx-auto w-full justify-center"
   >
     <div class="space-y-4">
       <div>

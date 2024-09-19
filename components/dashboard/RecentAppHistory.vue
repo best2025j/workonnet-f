@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="flex flex-col md:flex-row space-y-4 md:space-x-4 w-full py-4">
+  <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 w-full py-4">
     <div
       class="text-black-900 bg-white h-full divide-y rounded-10 w-full md:w-3/5"
     >
