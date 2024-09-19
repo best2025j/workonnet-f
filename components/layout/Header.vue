@@ -1,5 +1,13 @@
 <script setup lang="ts">
 const authStore = useAuthStore();
+
+// State to track whether the mobile side nav is open
+const isSideNavOpen = ref(false);
+
+// Function to toggle the side nav
+const toggleSideNav = () => {
+  isSideNavOpen.value = !isSideNavOpen.value;
+};
 </script>
 
 <template>
@@ -8,7 +16,7 @@ const authStore = useAuthStore();
   >
     <div class="container mx-auto flex justify-between items-center">
       <!-- Mobile Side Nav Toggle Button (Hamburger Icon) -->
-      <button class="block md:hidden">
+      <button @click="toggleSideNav" class="block md:hidden">
         <svg
           width="32"
           height="32"
@@ -22,6 +30,7 @@ const authStore = useAuthStore();
           />
         </svg>
       </button>
+
       <h1 class="text-3xl text-primary-1 font-black font-[Georgia]">
         {{ $route?.meta?.title }}
       </h1>
@@ -65,6 +74,15 @@ const authStore = useAuthStore();
           <IconsBellIcon class="h-6 w-6 inline-block" />
         </NuxtLink>
       </nav>
+    </div>
+
+    <div v-if="isSideNavOpen">
+      <div
+        @click="toggleSideNav"
+        class="fixed inset-0 opacity-50 bg-transparent backdrop-blur-sm w-full md:hidden animate__animated animate__fadeInLeft shadow-md z-40 flex items-center rounded-r-[20px] space-y-10 h-full justify-between"
+      >
+        <LayoutSideNav class="h-full" />
+      </div>
     </div>
   </header>
 </template>
