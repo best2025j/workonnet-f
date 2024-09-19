@@ -18,7 +18,7 @@
         </p>
       </div>
       <!--  -->
-      <div class="grid md:grid-cols-3 md:gap-x-10 gap-6 w-full my-10 px-8">
+      <div class="grid md:grid-cols-3 grid-cols-1 md:gap-x-10 gap-6 w-full my-10 px-8">
         <div
           class="border shadow-md rounded-10 space-y-4 py-4 text-center flex flex-col justify-center items-center"
         >
@@ -103,14 +103,14 @@
       <!--  -->
       <div class="h-full bg-primary-1 my-10 md:my-40 w-full ">
         <div
-          class="flex flex-col-reverse md:max-w-[1240px] text-center justify-center mx-auto items-center"
+          class="flex md:flex-row flex-col-reverse md:max-w-[1240px] text-center justify-center mx-auto items-center"
         >
           <div class="md:w-1/2">
             <img src="/assets/images/white-lady.png" alt="no pix avaliable" />
           </div>
 
 
-          <div class="w-1/2 flex justify-center items-center mx-auto py-8">
+          <div class="md:w-1/2 px-8 md:px-0 flex justify-center items-center mx-auto py-8">
             <div class="max-w-md md:text-start space-y-4">
               <h1 class="text-black-900 md:text-[40px] font-black md:leading-10">
                 We think about hiring more than anyone else on the planet

@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full w-full px-6">
+  <div class="h-full w-full px-4 md:px-8">
     <!-- grid divider vertical using daisy ui -->
     <div class="grid grid-cols-3 w-full text-sm">
       <div class="divider divider-start">The Process</div>
@@ -7,16 +7,20 @@
       <div class="divider divider-end">©2024</div>
     </div>
     <!--  -->
-    <div class="flex justify-center flex-col h-[900px] items-center mx-auto">
+    <div class="flex justify-center flex-col h-[900px] items-center mx-auto pt-6">
       <div
         class="mx-auto text-center justify-center items-center flex flex-col space-y-4"
       >
-        <h1 class="max-w-3xl text-[32px] font-black py-4">
+        <h1 class="max-w-3xl text-2xl md:text-[32px] font-black py-4 ">
           We shorten the hiring process from months to weeks or even days.
         </h1>
+        <p class="md:hidden text-sm">
+          Candidates shortlisting and interview process has been redefined for a
+          better talent addition to your organisation
+        </p>
         <!--  -->
         <div
-          class="grid grid-cols-3 gap-x-10 max-w-5xl justify-center items-center mx-auto h-full py-10"
+          class="grid md:grid-cols-3 md:gap-x-10 gap-y-6 px-4 w-full grid-cols-1 md:max-w-5xl justify-center items-center mx-auto h-full py-10"
         >
           <div
             class="border shadow-md rounded-10 space-y-4 py-4 text-center flex flex-col justify-center items-center"

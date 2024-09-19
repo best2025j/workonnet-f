@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full w-full px-8">
+  <div class="h-full w-full md:px-8">
     <!-- grid divider vertical using daisy ui -->
     <div class="grid grid-cols-3 w-full text-sm">
       <div class="divider divider-start">Testimonials</div>
@@ -7,8 +7,10 @@
       <div class="divider divider-end">©2024</div>
     </div>
     <!--  -->
-    <div class="flex space-x-6 h-full w-full py-14">
-      <div class="flex flex-col w-3/6 justify-between h-auto">
+    <div
+      class="flex flex-col md:flex-row md:space-x-6 space-y-8 h-full w-full py-14"
+    >
+      <div class="flex flex-col md:w-3/6 space-y-4 justify-between h-auto px-4">
         <h1 class="text-[32px] font-black max-w-[18rem] line">
           Connect Talent with Opportunity
         </h1>
@@ -36,17 +38,22 @@
       </div>
 
       <div class="h-full w-full relative">
-          <img src="/assets/images/mate2.png" class="h-full w-full" alt="mate image" />
+        <img
+          src="/assets/images/mate2.png"
+          class="md:flex hidden h-full w-full"
+          alt="mate image"
+        />
+        <img src="/assets/images/crop.png" class="w-full md:hidden" alt="" />
         <!-- input -->
         <div
-          class="text-white absolute w-full h-full top-0 pt-[280px] px-6 space-y-4 flex justify-end pr-20"
+          class="text-white absolute w-full h-full top-0 pt-[370px] md:pt-[280px] px-6 space-y-4 flex justify-end md:pr-20"
         >
           <!--  -->
           <div
-            class="border bg-[#62696FCC] rounded-10 p-6 space-y-4 h-[340px] w-[580px]"
-          > 
+            class="border bg-[#62696FCC] rounded-10 md:p-6 md:space-y-4 p-4 h-[340px] w-[580px]"
+          >
             <!-- input -->
-            <form class="py-4 space-y-2">
+            <form class="md:py-4 space-y-2">
               <div class="flex flex-col w-full">
                 <label for="first-name" class="text-sm mb-3">Search job</label>
                 <div class="relative">
@@ -72,7 +79,7 @@
                 </div>
               </div>
 
-              <div class="flex gap-x-2">
+              <div class="flex flex-col md:flex-row md:gap-x-2">
                 <div class="flex flex-col w-full">
                   <label for="first-name" class="text-sm mb-3">Location</label>
                   <div class="relative">
@@ -124,7 +131,7 @@
             </form>
             <!-- btn -->
             <button
-              class="w-full h-[50px] bg-primary-1 rounded-8 text-xs font-black"
+              class="w-full h-[50px] bg-primary-1 rounded-8 text-xs font-black mt-4 md:mt-0"
             >
               Search job
             </button>
