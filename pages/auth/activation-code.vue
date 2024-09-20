@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import { required, helpers, maxLength } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
 import { useToast, POSITION } from 'vue-toastification';
@@ -79,9 +78,8 @@ const verifyCode = async () => {
     });
 
     showPopup.value = true
-
     toast.success('Login successful....', {
-      timeout: 3000,
+      timeout: 2000,
       position: POSITION.TOP_RIGHT,
     });
 
@@ -97,7 +95,7 @@ const verifyCode = async () => {
     setTimeout(() => {
       isLoading.value = false;
       showPopup.value = false
-    }, 2000);
+    }, 1000);
     authStore.setLoginSecret(null);
    
     setTimeout(() => {

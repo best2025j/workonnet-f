@@ -12,12 +12,13 @@ definePageMeta({
 });
 
 const router = useRouter();
+const route = useRoute();
 const toast = useToast();
 const isLoading = ref<boolean>(false);
 const authStore = useAuthStore();
 
 const formData = reactive({
-  email: '',
+  email: route.query?.email ? route.query?.email : '',
   password: '',
 });
 
@@ -199,7 +200,7 @@ const loginRecruiter = async () => {
         <div class="flex justify-end w-full mt-2">
           <NuxtLink
             class="text-sm text-black underline cursor-pointer"
-            to="/auth/password-forgotten"
+            to="/auth/password-forgotten?reqId=recruiter"
             >Forgot password?</NuxtLink
           >
         </div>

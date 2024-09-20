@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { POSITION, useToast } from 'vue-toastification';
-import { required, helpers, email } from '@vuelidate/validators';
+import { required, helpers, email, minLength } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
 import type { ApiErrorResponse, ApiSuccessResponse } from '~/types';
 
@@ -36,6 +36,7 @@ const rules = computed(() => {
     },
     password: {
       required: helpers.withMessage('Please enter a password', required),
+      minLength: helpers.withMessage('Password cannot be less than 8 characters', minLength(8)),
     },
   };
 });

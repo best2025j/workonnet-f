@@ -197,7 +197,7 @@ const handleLogin = async () => {
           <div class="flex justify-end mt-2">
             <NuxtLink
               class="text-sm text-black underline cursor-pointer"
-              to="/auth/password-forgotten"
+              to="/auth/password-forgotten?reqId=jobseeker"
             >
               Forgot password?
             </NuxtLink>

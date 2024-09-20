@@ -51,9 +51,7 @@ export const AuthStore = defineStore('auth-store', () => {
     useLocalStorage(STORAGE_USER_PUBLIC_TOKEN, null, storageSerializer)
   );
 
-  const stepOneRecruiterForm = ref(
-    useLocalStorage('regData', null, storageSerializer)
-  );
+  const stepOneRecruiterForm = ref<IStepOneRecruiterForm | null>(null);
 
   function setStepOneFormData(data: IStepOneRecruiterForm | null) {
     stepOneRecruiterForm.value = data;
