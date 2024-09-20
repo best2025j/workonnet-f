@@ -67,7 +67,7 @@ definePageMeta({
 
             <div class="flex justify-end">
               <button
-                class="md:px-4 w-full mt-4 py-2 rounded-8 text-[10px] md:text-base text-white bg-primary-1"
+                class="md:px-4 w-full mt-4 py-3 rounded-8 text-[10px] md:text-base text-white bg-primary-1"
               >
                 Apply Now
               </button>

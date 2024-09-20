@@ -1,5 +1,5 @@
 <template>
-  <aside class="bg-[#FFFFFF] text-black-800 h-full">
+  <aside class="bg-[#FFFFFF] text-black-800 h-full md:block hidden">
     <div class="p-4">
       <h1 class="font-black text-xl">Messages</h1>
     </div>
