@@ -9,8 +9,8 @@ definePageMeta({
 
 <template>
   <div class="w-full h-full">
-    <div class="text-black-700 flex gap-4 text-sm h-full w-full">
-      <div class="w-1/4 fixed rounded-10 font-[Georgia] h-full">
+    <div class="text-black-700 flex flex-col md:flex-row gap-4 text-sm h-full w-full">
+      <div class="md:w-1/4 w-full hidden md:block fixed rounded-10 font-[Georgia] h-full">
         <div class="divide-y bg-white p-6 border-primary-1 border-l-4">
           <div class="space-x-3 flex items-center">
             <span
@@ -112,13 +112,13 @@ definePageMeta({
       </div>
 
       <!--  -->
-      <div class="ml-[33%] h-full space-y-4 w-3/4">
+      <div class="md:ml-[33%] w-full h-full space-y-4 md:w-3/4">
         <div
           id="basic_information"
           class="bg-white w-full rounded-10 p-4 h-full space-y-3"
         >
           <h1 class="font-bold text-xl font-[Georgia]">Basic Information</h1>
-          <div class="flex divide-x-2 gap-4">
+          <div class="flex flex-col md:flex-row md:divide-x-2 gap-4">
             <div class="py-2">
               <div class="px-2 pb-6 space-y-4">
                 <img src="/assets/images/man.png" alt="" />
@@ -130,7 +130,7 @@ definePageMeta({
               </div>
 
               <!--  -->
-              <div class="bg-black-50 w-44 space-y-2 p-3 rounded-10">
+              <div class="bg-black-50 md:w-44 space-y-2 p-3 rounded-10">
                 <div class="flex items-start gap-x-2">
                   <span
                     ><svg
@@ -146,9 +146,10 @@ definePageMeta({
                       />
                     </svg>
                   </span>
+
                   <div>
-                    <h1 class="text-xs">Choose banner photo</h1>
-                    <h1 class="text-xs text-info-600">Document Name.pdf</h1>
+                    <h1 class="md:text-xs text-sm">Choose banner photo</h1>
+                    <h1 class="md:text-xs text-sm text-info-600">Document Name.pdf</h1>
                   </div>
                 </div>
                 <button
@@ -160,8 +161,8 @@ definePageMeta({
             </div>
 
             <!-- input for full name -->
-            <div class="p-4 font-[Nexa] w-full space-y-4">
-              <div class="flex gap-2">
+            <div class="md:p-4 font-[Nexa] w-full space-y-4">
+              <div class="flex flex-col md:flex-row gap-2">
                 <div class="flex flex-col w-full">
                   <label for="first-name" class="text-sm mb-2"
                     >First Name</label
@@ -200,7 +201,7 @@ definePageMeta({
                 />
               </div>
               <!-- location -->
-              <div class="flex flex-col w-1/2">
+              <div class="flex flex-col md:w-1/2">
                 <label for="first-name" class="text-sm mb-2">Location</label>
                 <input
                   type="text"
@@ -210,7 +211,7 @@ definePageMeta({
               </div>
 
               <!-- city -->
-              <div class="flex flex-col w-1/2">
+              <div class="flex flex-col md:w-1/2">
                 <label for="first-name" class="text-sm mb-2">City</label>
                 <input
                   type="text"
@@ -220,7 +221,7 @@ definePageMeta({
               </div>
 
               <!-- portfolio -->
-              <div class="flex flex-col w-1/2">
+              <div class="flex flex-col md:w-1/2">
                 <label for="first-name" class="text-sm mb-2"
                   >Portfolio URL</label
                 >
@@ -232,7 +233,7 @@ definePageMeta({
               </div>
 
               <!--  -->
-              <div class="flex gap-2">
+              <div class="flex flex-col md:flex-row gap-2">
                 <div class="flex flex-col w-full">
                   <label for="first-name" class="text-sm mb-2"
                     >Salary Expectation</label
@@ -279,7 +280,7 @@ definePageMeta({
           <p class="text-xs">
             Build trust with recruiters by verifying your social profiles
           </p>
-          <div class="flex flex-col w-2/3 space-y-4 pt-6">
+          <div class="flex flex-col md:w-2/3 space-y-4 pt-6">
             <div class="flex flex-col w-full">
               <label for="first-name" class="text-sm mb-2">Facebook URL</label>
               <input
@@ -351,7 +352,7 @@ definePageMeta({
 
         <!-- work experience -->
         <div id="work_experience" class="bg-white p-4 rounded-10 font-[Nexa]">
-          <div class="flex justify-between items-center">
+          <div class="flex flex-col md:flex-row justify-between md:items-center">
             <div class="py-4">
               <h1 class="font-bold text-xl font-[Georgia] capitalize">
                 work experience
@@ -361,16 +362,16 @@ definePageMeta({
               </p>
             </div>
 
-            <div>
+            <div class="w-full md:w-auto">
               <NuxtLink to="/dashboard/jobseeker/my-profile/work-experience">
-                <button class="px-4 py-2 bg-primary-1 text-white rounded-5">
+                <button class="md:px-4 w-full py-2 bg-primary-1 text-white rounded-5">
                   Edit experience
                 </button>
               </NuxtLink>
             </div>
           </div>
 
-          <ul class="list-disc pl-4 space-y-4">
+          <ul class="list-disc pl-4 space-y-4 pt-6">
             <div>
               <li class="text-info-600 font-black">
                 User Interface Designer at Workonnect

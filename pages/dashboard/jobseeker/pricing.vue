@@ -3,23 +3,24 @@ definePageMeta({
   title: "Pricing",
   pageName: "dashboard.jobseeker.pricing",
   layout: "dashboard",
-  middleware: ['auth', 'is-jobseeker']
+  middleware: ["auth", "is-jobseeker"],
 });
 </script>
 
 <template>
   <div class="text-black-900 pt-6">
-    <div class="flex justify-between items-center">
-      <div class="space-y-2">
-        <h3 class="font-black text-xl">Plan & Pricing</h3>
-        <h4 class="text-sm">Let’s find the top job that we have.</h4>
-        <p class="text-sm">
+    <div class="flex flex-col md:flex-row justify-between md:items-center w-full space-y-4">
+      <div class="space-y-2 pt-3">
+        <h1 class="font-black text-xl">Plan & Pricing</h1>
+
+        <h1 class="md:text-sm text-xs">Let’s find the top job that we have.</h1>
+        <p class="md:text-sm text-xs">
           Simple Pricing No Hidden Fees. Advanced Features for you.
         </p>
       </div>
 
-      <div>
-        <h1 class="text-sm">Choose the country for your job recommendations</h1>
+      <div class="py-2 space-y-2">
+        <h1 class="text-xs md:text-sm">Choose the country for your job recommendations</h1>
         <div class="relative flex items-center">
           <svg
             width="19"
@@ -38,7 +39,7 @@ definePageMeta({
           <input
             type="text"
             placeholder="Nigeria"
-            class="pl-10 pr-4 h-11 w-[357px] outline-none placeholder:text-sm border border-gray-300 rounded-md"
+            class="pl-10 pr-4 h-11 w-full md:w-[357px] outline-none placeholder:text-sm border border-gray-300 rounded-md"
           />
           <svg
             width="15"
@@ -57,7 +58,7 @@ definePageMeta({
       </div>
     </div>
 
-    <div class="grid grid-cols-3 gap-x-4">
+    <div class="grid md:grid-cols-3 md:gap-x-4 gap-y-4 my-10">
       <div class="bg-white h-full p-4 rounded-10 space-y-4 w-full mt-4">
         <div class="flex justify-between items-start">
           <div class="space-y-2">
