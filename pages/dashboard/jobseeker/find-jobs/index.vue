@@ -117,7 +117,7 @@ const handleLayoutChange = (newLayout: CARD_LAYOUT) => {
       </div>
 
       <!-- btn -->
-      <div class="py-5 flex flex-wrap space-y-2 justify-between w-full">
+      <div class="py-5 flex flex-wrap gap-y-3 justify-between w-full">
         <button
           class="bg-westside-200 text-primary-1 gap-x-2 flex items-center font-black md:p-2 px-4 rounded-10 md:text-xs text-[10px]"
         >
@@ -176,7 +176,7 @@ const handleLayoutChange = (newLayout: CARD_LAYOUT) => {
         <button class="bg-white p-2 px-4 rounded-10 md:text-xs text-[10px]">Hybrid</button>
 
         <!-- dropdown button -->
-        <button class="rounded-10 text-xs dropdown dropdown-end">
+        <button class="rounded-10 text-xs dropdown dropdown-bottom dropdown-end pl-44 md:pl-0">
           <svg
             width="17"
             height="10"
@@ -488,11 +488,11 @@ const handleLayoutChange = (newLayout: CARD_LAYOUT) => {
           </div>
 
           <div class="flex space-x-4 py-3">
-            <button class="bg-primary-1 md:px-6 py-3 w-full  rounded-10 text-white text-xs font-black">
+            <button class="bg-primary-1 md:px-6 py-3 w-full md:w-auto rounded-10 text-white text-xs font-black">
               Apply Now
             </button>
             <button
-              class="border-primary-1 border md:px-6 py-3 w-full  text-primary-1 rounded-10 text-xs font-black"
+              class="border-primary-1 border md:px-6 py-3 w-full md:w-auto  text-primary-1 rounded-10 text-xs font-black"
             >
               More Details
             </button>
