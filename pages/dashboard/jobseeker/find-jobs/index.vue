@@ -313,7 +313,7 @@ const handleLayoutChange = (newLayout: CARD_LAYOUT) => {
     </div>
 
     <!--  second div-->
-    <div class="bg-white w-[35%] h-full rounded-10">
+    <div class="bg-white md:w-[35%] w-full h-full rounded-10">
       <div class="flex items-center flex-col space-y-3 py-4 border-b-2">
         <img src="/assets/images/ms.png" alt="" />
         <h1 class="text base font-black">Social Media Assistant</h1>
@@ -352,10 +352,10 @@ const handleLayoutChange = (newLayout: CARD_LAYOUT) => {
           </div>
 
           <div class="flex items-center space-x-2">
-            <button class="bg-primary-1 px-4 py-3 text-xs rounded-8 text-white">
+            <button class="bg-primary-1 px-4 py-3 md:text-xs text-[8px] rounded-8 text-white">
               Apply Now
             </button>
-            <button class="border-primary-1 px-4 border py-3 rounded-8">
+            <button class="border-primary-1 px-4 border md:py-3 py-2 rounded-8">
               <svg
                 width="12"
                 height="17"
@@ -488,11 +488,11 @@ const handleLayoutChange = (newLayout: CARD_LAYOUT) => {
           </div>
 
           <div class="flex space-x-4 py-3">
-            <button class="bg-primary-1 px-6 py-3 rounded-10 text-white">
+            <button class="bg-primary-1 md:px-6 py-3 w-full  rounded-10 text-white text-xs font-black">
               Apply Now
             </button>
             <button
-              class="border-primary-1 border px-6 py-3 text-primary-1 rounded-10"
+              class="border-primary-1 border md:px-6 py-3 w-full  text-primary-1 rounded-10 text-xs font-black"
             >
               More Details
             </button>
