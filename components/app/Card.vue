@@ -1,24 +1,37 @@
 <script lang="ts"></script>
 
 <template>
-  <div class="bg-white rounded-10 w-2/4 my-8">
+  <div class="bg-white rounded-10 w-full mt-8 md:w-2/4">
     <div class="flex items-center justify-between border-b-2 p-3">
-      <div class="flex gap-x-4 items-center">
-        <img src="/assets/images/SocialMedia3.png" alt="Google" class="w-10 h-10 rounded" />
-        <div class="pl-4">
-          <span class="block text-base font-black">Customer Care Rep</span>
-          <span class="text-xs font-semimedium text-gray-500">Catalog</span>
+      <div class="flex items-center space-x-4">
+        <img
+          src="/assets/images/SocialMedia3.png"
+          alt="Google"
+          class="md:w-10 md:h-10 h-8 w-8 rounded"
+        />
+        <div class="md:pl-4 pl-2">
+          <span class="block md:text-base text-xs font-black"
+            >Customer Care Rep</span
+          >
+          <span class="md:text-xs text-[10px] font-semimedium text-gray-500"
+            >Catalog</span
+          >
         </div>
       </div>
 
-      <div class="flex space-x-4 relative right-5">
-        <span class="px-3 py-2 rounded-10 bg-gray-100 text-xs text-gray-500"
+      <div class="flex space-x-4 items-center relative right-5">
+        <span
+          class="px-3 py-1 rounded-10 md:text-xs text-[10px] font-black text-success-600"
+          >80% match</span
+        >
+        <span
+          class="px-3 py-2 rounded-10 bg-gray-100 md:text-xs text-[8px] text-gray-500"
           >Applied</span
         >
       </div>
     </div>
 
-    <div class="flex justify-between items-center px-4 py-4 bg-white-100">
+    <div class="md:flex justify-between items-center px-4 py-4 bg-white-100">
       <div class="flex items-center space-x-6">
         <div class="">
           <div class="flex space-x-2 items-center mt-2 p-2">
@@ -124,7 +137,9 @@
       </div>
 
       <nuxt-link to="/dashboard/jobseeker/my-applications/track-app">
-        <div class="flex flex-col justify-end relative right-5 top-12 w-32">
+        <div
+          class="flex flex-col justify-end relative py-4 md:py-0 md:right-5 md:top-12 md:w-32"
+        >
           <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
             Track Application
           </button>

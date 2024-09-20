@@ -1,18 +1,20 @@
 <template>
   <div class="carousel w-full h-full">
     <!-- slide -->
-    <div class="text-white carousel-item w-full md:h-screen h-[887px]">
-      <div class="relative w-full">
+    <div class="text-white carousel-item w-full h-screen">
+      <div class="relative w-full h-full">
         <div class="h-full w-full">
           <img
             src="/assets/images/my-lady.png"
-            class="w-full h-[515px] md:h-screen md:object-cover z-0"
+            class="w-full md:h-screen md:object-cover hidden md:flex z-0"
             alt="a lady with book"
           />
+          <!-- mobile image -->
+          <img src="/assets/images/croplady.png" class="md:hidden w-full" alt="">
         </div>
 
         <div
-          class="text-white absolute top-0 h-full w-full py-24 px-8 space-y-4 md:flex justify-between"
+          class="text-white absolute top-0 h-full w-full pt-44 md:pt-24 px-8 space-y-4 md:flex justify-between"
         >
           <div class=" md:mt-72 justify-center md:block flex flex-col items-center">
             <h1 class="font-black md:text-xl text-base">
@@ -49,7 +51,7 @@
 
           <!--  -->
           <div
-            class="border md:w-[440px] bg-[#62696FCC] rounded-10 p-6 space-y-4 md:h-[23rem] h-auto"
+            class="border md:w-[440px] bg-[#62696FCC] rounded-10 p-6 space-y-4 md:h-[23rem]"
           >
             <div class="flex items-center justify-between">
               <div>
@@ -147,7 +149,7 @@
       </div>
     </div>
     <!-- slide 2 -->
-    <div class="bg-primary-1 text-white md:h-screen h-[887px] carousel-item w-full">
+    <div class="bg-primary-1 text-white md:h-screen hidden md:block carousel-item w-full">
       <div class="md:flex md:pt-0 pt-28 h-full w-full justify-between items-center px-6">
         <div class="md:w-1/2 h-auto md:space-y-4 text-center md:text-start">
           <h1 class="font-black md:text-xl text-sm">

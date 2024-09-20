@@ -48,22 +48,22 @@ const isActive = (currentTab: TABS) => route?.query?.tab === currentTab;
 </script>
 
 <template>
-  <nav class="flex w-3/5 border-b-2">
+  <nav class="flex md:w-3/5 w-full border-b-2">
     <ul class="flex gap-x-6 items-center">
-      <li v-for="(link, index) in links" :key="index" class="pl-12 ">
+      <li v-for="(link, index) in links" :key="index" class="md:pl-12 pl-1">
         <NuxtLink
           :to="link.to"
           :class="[
             'flex items-center pb-2',
             isActive(link.tabId)
-              ? 'text-primary-1 border-primary-1 font-black text-sm'
-              : 'text-sm',
+              ? 'text-primary-1 border-primary-1 font-black md:text-sm text-[10px]'
+              : 'md:text-sm text-[10px]',
           ]"
         >
           {{ link.name }}
           <span
             v-if="link.badge"
-            class="ml-1 text-xs bg-primary-1 text-white rounded-full px-2 py-0.5"
+            class="ml-1 md:text-xs text-[10px] bg-primary-1 text-white rounded-full px-2 py-0.5"
           >
             {{ link.badge }}
           </span>

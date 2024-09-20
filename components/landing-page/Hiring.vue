@@ -7,7 +7,7 @@
       <div class="divider divider-end">©2024</div>
     </div>
     <!--  -->
-    <div class="flex justify-center flex-col h-[900px] items-center mx-auto pt-6">
+    <div class="flex justify-center flex-col h-[900px] items-center mx-auto mt-14 md:mt-0">
       <div
         class="mx-auto text-center justify-center items-center flex flex-col space-y-4"
       >

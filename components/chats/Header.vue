@@ -1,16 +1,16 @@
 <template>
   <div
-    class="text-black-900 bg-white items-center justify-between w-full flex py-3.5"
+    class="text-black-900 bg-white items-center justify-between w-full flex py-3.5 text-xs"
   >
     <div class="flex items-center space-x-3">
       <img src="/assets/images/Ellipse3.png" class="" alt="no pix" />
       <div class="space-y-1">
-        <h1><b>Jane Cooper</b> (Senior Recruiter)</h1>
+        <h1 class="text-sm"><b>Jane Cooper</b> (Senior Recruiter)</h1>
         <h1>Microsoft Inc.</h1>
       </div>
     </div>
     <!-- btn -->
-    <div class="flex space-x-8 items-center">
+    <div class="flex md:space-x-8 space-x-4 items-center">
       <button>
         <span
           ><svg
