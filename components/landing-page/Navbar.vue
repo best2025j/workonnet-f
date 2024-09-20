@@ -88,13 +88,14 @@ const handleNavigation = () => {
   <!-- Mobile Side Nav -->
   <div
     v-if="isSideNavOpen"
+    @click="toggleSideNav"
     class="fixed inset-0 backdrop-blur-md bg-[#00000066] z-50"
   >
     <div
       @click="toggleSideNav"
       class="fixed inset-0 bg-black-50 w-56 -[#E7E7E7] md:hidden animate__animated animate__fadeInLeft shadow-md z-40 flex rounded-r-[20px] flex-col pt-10 space-y-10 h-[70%] justify-start"
     >
-      <img src="/assets/images/logo3.png" alt="" />
+      <img src="/assets/images/logo3.png" class="w-32 h-auto pl-3" alt="" />
       <!-- Nav Links for Mobile -->
       <ul class="flex flex-col space-y-4 px-4 text-black-50 justify-between">
         <LandingPageNavbarLinks />

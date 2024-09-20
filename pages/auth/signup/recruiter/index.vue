@@ -94,11 +94,12 @@ onMounted(() => {
 
 <template>
   <div class="flex justify-center items-center w-full">
-    <div class="w-[23.375rem] flex flex-col">
+    <div class="md:w-[23.375rem] w-full flex flex-col">
       <h2 class="text-center text-[32px] mb-6 font-['Georgia'] font-normal">
         Signup to account
       </h2>
-      <div class="flex flex-col items-center justify-center gap-4 text-[12px]">
+
+      <div class="flex flex-col items-center justify-center gap-4 text-[12px] w-full">
         <button
           class="w-full flex gap-4 items-center justify-center border font-light border-[#D0D5DD] border-solid px-5 py-2 text-[#344054] rounded-lg"
         >
