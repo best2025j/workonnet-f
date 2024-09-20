@@ -1,26 +1,29 @@
 <script setup lang="ts">
 definePageMeta({
-  title: 'Jobs Openings',
-  pageName: 'dashboard.recruiter.jobs-openings/candidates',
-  layout: 'dashboard',
-  middleware: ['auth', 'is-recruiter']
+  title: "Jobs Openings",
+  pageName: "dashboard.recruiter.jobs-openings/candidates",
+  layout: "dashboard",
+  middleware: ["auth", "is-recruiter"],
 });
 </script>
 
 <template>
   <div class="w-full h-full">
     <div class="p-4 bg-white rounded-10">
-      <img
-        src="/assets/images/team-image.png"
-        class="w-full"
-        alt="no image yet..."
-      />
-      <div class="-mt-12 pl-6 space-y-2">
+      <div class="bg-black-400 h-32">
+        <img src="" class="w-full h-32 md:h-auto" alt=" upload an image..." />
+      </div>
+
+      <div class="md:-mt-12 md:pl-6 space-y-2">
         <img src="/assets/images/sportify.png" alt="profile-image" />
-        <div class="flex justify-between">
+
+        <div class="flex flex-col md:flex-row justify-between">
           <div class="space-y-2">
             <div class="flex items-center space-x-6">
-              <h1 class="font-black text-base">Full-Time UI/UX Designer</h1>
+              <h1 class="font-black text-xs md:text-base">
+                Full-Time UI/UX Designer
+              </h1>
+
               <div class="space-x-2 flex items-center">
                 <svg
                   width="20"
@@ -37,6 +40,7 @@ definePageMeta({
                 <h1 class="text-xs">Posted 3 days ago</h1>
               </div>
             </div>
+
             <div class="flex items-start space-x-4">
               <div class="space-y-2">
                 <h1 class="text-xs">Spotify Technologies</h1>
@@ -46,23 +50,13 @@ definePageMeta({
           </div>
 
           <div>
-            <div class="space-x-2 flex items-center">
-              <svg
-                width="12"
-                height="19"
-                viewBox="0 0 12 19"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M7.875 8.875H6.625V3.875H7.25C7.91304 3.875 8.54893 4.13839 9.01777 4.60723C9.48661 5.07607 9.75 5.71196 9.75 6.375C9.75 6.54076 9.81585 6.69973 9.93306 6.81694C10.0503 6.93415 10.2092 7 10.375 7C10.5408 7 10.6997 6.93415 10.8169 6.81694C10.9342 6.69973 11 6.54076 11 6.375C10.999 5.38076 10.6035 4.42753 9.90051 3.72449C9.19747 3.02145 8.24424 2.62603 7.25 2.625H6.625V1.375C6.625 1.20924 6.55915 1.05027 6.44194 0.933058C6.32473 0.815848 6.16576 0.75 6 0.75C5.83424 0.75 5.67527 0.815848 5.55806 0.933058C5.44085 1.05027 5.375 1.20924 5.375 1.375V2.625H4.75C3.75544 2.625 2.80161 3.02009 2.09835 3.72335C1.39509 4.42661 1 5.38044 1 6.375C1 7.36956 1.39509 8.32339 2.09835 9.02665C2.80161 9.72991 3.75544 10.125 4.75 10.125H5.375V15.125H4.125C3.46196 15.125 2.82607 14.8616 2.35723 14.3928C1.88839 13.9239 1.625 13.288 1.625 12.625C1.625 12.4592 1.55915 12.3003 1.44194 12.1831C1.32473 12.0658 1.16576 12 1 12C0.83424 12 0.675269 12.0658 0.558058 12.1831C0.440848 12.3003 0.375 12.4592 0.375 12.625C0.376034 13.6192 0.771454 14.5725 1.47449 15.2755C2.17753 15.9785 3.13076 16.374 4.125 16.375H5.375V17.625C5.375 17.7908 5.44085 17.9497 5.55806 18.0669C5.67527 18.1842 5.83424 18.25 6 18.25C6.16576 18.25 6.32473 18.1842 6.44194 18.0669C6.55915 17.9497 6.625 17.7908 6.625 17.625V16.375H7.875C8.86956 16.375 9.82339 15.9799 10.5267 15.2767C11.2299 14.5734 11.625 13.6196 11.625 12.625C11.625 11.6304 11.2299 10.6766 10.5267 9.97335C9.82339 9.27009 8.86956 8.875 7.875 8.875ZM4.75 8.875C4.08696 8.875 3.45107 8.61161 2.98223 8.14277C2.51339 7.67393 2.25 7.03804 2.25 6.375C2.25 5.71196 2.51339 5.07607 2.98223 4.60723C3.45107 4.13839 4.08696 3.875 4.75 3.875H5.375V8.875H4.75ZM7.875 15.125H6.625V10.125H7.875C8.53804 10.125 9.17393 10.3884 9.64277 10.8572C10.1116 11.3261 10.375 11.962 10.375 12.625C10.375 13.288 10.1116 13.9239 9.64277 14.3928C9.17393 14.8616 8.53804 15.125 7.875 15.125Z"
-                  fill="#343330"
-                />
-              </svg>
-              <h1 class="text-lg font-black">$5,000/month</h1>
+            <div class="space-x-2">
+              <h1 class="md:text-lg text-xs font-black">$5,000/month</h1>
             </div>
-            <div class="flex justify-end">
-              <button class="px-4 py-2 rounded-8 text-white bg-primary-1">
+            <div class="flex justify-end w-full pt-4">
+              <button
+                class="md:px-4 w-full text-xs font-black md:text-sm py-3 rounded-8 text-white bg-primary-1"
+              >
                 Apply Now
               </button>
             </div>
@@ -72,42 +66,42 @@ definePageMeta({
     </div>
 
     <!-- levels -->
-    <div class="py-4 flex items-center justify-center w-full space-x-4">
+    <div class="py-4 flex flex-col md:flex-row space-y-3 md:space-y-0 space-x-0 items-center justify-center w-full md:space-x-4">
       <div
-        class="p-2 h-20 mx-auto justify-center flex-col flex bg-white rounded-10 w-full text-center"
+        class="p-2 md:h-20 mx-auto justify-center flex-col flex bg-white rounded-10 w-full text-center"
       >
         <h1 class="text-xs">Experience Level</h1>
-        <p class="font-black text-base">Intermediate</p>
+        <p class="font-black md:text-base text-xs">Intermediate</p>
       </div>
       <div
-        class="p-2 h-20 mx-auto justify-center flex-col flex bg-white rounded-10 w-full text-center"
+        class="p-2 md:h-20 mx-auto justify-center flex-col flex bg-white rounded-10 w-full text-center"
       >
         <h1 class="text-xs">Job Type</h1>
-        <p class="font-black text-base">Contract</p>
+        <p class="font-black md:text-base text-xs">Contract</p>
       </div>
       <div
-        class="p-2 h-20 mx-auto justify-center flex-col flex bg-white rounded-10 w-full text-center"
+        class="p-2 md:h-20 mx-auto justify-center flex-col flex bg-white rounded-10 w-full text-center"
       >
         <h1 class="text-xs">Work Type</h1>
-        <p class="font-black text-base">Remote</p>
+        <p class="font-black md:text-base text-xs">Remote</p>
       </div>
       <div
-        class="p-2 h-20 mx-auto justify-center flex-col flex bg-white rounded-10 w-full text-center"
+        class="p-2 md:h-20 mx-auto justify-center flex-col flex bg-white rounded-10 w-full text-center"
       >
         <h1 class="text-xs">Salary</h1>
-        <p class="font-black text-base">$5,000/month</p>
+        <p class="font-black md:text-base text-xs">$5,000/month</p>
       </div>
       <div
-        class="p-2 h-20 mx-auto justify-center flex-col flex bg-white rounded-10 w-full text-center"
+        class="p-2 md:h-20 mx-auto justify-center flex-col flex bg-white rounded-10 w-full text-center"
       >
         <h1 class="text-xs">Location</h1>
-        <p class="font-black text-base">London, UK</p>
+        <p class="font-black md:text-base text-xs">London, UK</p>
       </div>
     </div>
 
     <!-- about the company -->
-    <div class="gap-x-4 flex">
-      <div class="bg-white p-4 rounded-10 h-full w-2/3">
+    <div class="gap-x-4 flex flex-col md:flex-row w-fill">
+      <div class="bg-white p-4 rounded-10 h-full md:w-2/3">
         <div class="space-y-2 py-2">
           <h1 class="font-black">About the company</h1>
           <p class="text-sm tracking-wider">
@@ -199,7 +193,7 @@ definePageMeta({
       </div>
 
       <!-- second div -->
-      <div class="bg-white px-4 py-4 w-1/3 rounded-10">
+      <div class="bg-white px-4 py-4 w-full md:w-1/3 rounded-10">
         <div class="flex items-center justify-between py-2">
           <h1 class="text-sm font-black">Candidates</h1>
           <button class="text-xs text-primary-1 flex gap-x-2 items-center">

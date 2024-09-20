@@ -37,9 +37,9 @@ const isActive = (currentTab: JOB_OPENING_TABS) =>
 </script>
 
 <template>
-  <nav class="flex w-1/3 border-b-2">
+  <nav class="flex md:w-1/3 border-b-2">
     <ul class="flex gap-x-6 items-center">
-      <li v-for="(link, index) in links" :key="index" class="pl-12">
+      <li v-for="(link, index) in links" :key="index" class="md:pl-12">
         <NuxtLink
           :to="link.to"
           :class="[

@@ -37,7 +37,7 @@ const toggleSideNav = () => {
       <!-- search input -->
       <form
         v-show="authStore.$state.currentUserType === LOGGED_IN_USER.RECRUITER"
-        class="relative"
+        class="relative hidden md:flex"
       >
         <input
           type="text"
