@@ -1,6 +1,6 @@
 <template>
   <div
-    class="text-black-900 bg-white items-center justify-between w-full flex py-3.5 text-xs"
+    class="text-black-900 bg-white items-center justify-between w-full flex py-3.5 text-xs fixed left-0 px-4 top-[72px] md:static"
   >
     <div class="flex items-center space-x-3">
       <img src="/assets/images/Ellipse3.png" class="" alt="no pix" />

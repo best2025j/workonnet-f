@@ -10,17 +10,17 @@ definePageMeta({
 <template>
   <div class="w-full flex md:h-[670px]">
     <div class="h-full md:w-1/4">
-      <ChatsSideNav />
+      <ChatsSideNav class="absolute left-0 md:relative" />
     </div>
     <!-- Main Content Section -->
-    <main class="md:w-3/4 h-full flex flex-col">
+    <main class="md:w-3/4 h-full md:flex flex-col w-full hidden">
       <!-- Fixed Header -->
       <div class="w-full bg-white px-4">
-        <ChatsHeader />
+        <ChatsHeader class="" />
       </div>
 
       <div
-        class="overflow-y-auto md:h-[calc(100%-120px)] h-screen scrollbar-hide px-4 pt-4 pb-6 space-y-4"
+        class="overflow-y-auto md:h-[calc(100%-120px)] h-screen scrollbar-hide md:px-8 md:pt-4 pt-20 pb-6 space-y-4"
       >
         <div class="flex items-start space-x-4">
           <img src="/assets/images/Ellipse3.png" alt="no pix" />
@@ -34,7 +34,7 @@ definePageMeta({
               </div>
             </div>
 
-            <h1 class="text-xs bg-white p-3">
+            <h1 class="text-xs bg-white p-3 rounded-8">
               Send a copy of your CV so it can help us review your qualification
             </h1>
           </div>
@@ -46,7 +46,7 @@ definePageMeta({
           <img src="/assets/images/Ellipse5.png" alt="no pix" />
           <div class="space-y-2 max-w-sm">
             <div class="space-y-2">
-              <h1 class="text-xs bg-white p-3">hey</h1>
+              <h1 class="text-xs bg-white p-3 rounded-8">hey</h1>
               <h1 class="text-xs">Just now</h1>
             </div>
 
@@ -63,7 +63,7 @@ definePageMeta({
         <div class="flex items-start space-x-4">
           <img src="/assets/images/Ellipse3.png" alt="no pix" />
           <div class="space-y-2">
-            <h1 class="text-xs bg-white p-3">Drop your details</h1>
+            <h1 class="text-xs bg-white p-3 rounded-8">Drop your details</h1>
             <h1 class="text-xs">Just now</h1>
           </div>
         </div>
@@ -73,7 +73,7 @@ definePageMeta({
         >
           <img src="/assets/images/Ellipse5.png" class="" alt="no pix" />
           <div class="">
-            <h1 class="text-xs bg-white p-3">
+            <h1 class="text-xs bg-white p-3 rounded-8">
               Send a copy of your CV so it can help us review your qualification
             </h1>
           </div>
@@ -82,23 +82,23 @@ definePageMeta({
         <div class="flex items-start space-x-4">
           <img src="/assets/images/Ellipse3.png" alt="no pix" />
           <div class="space-y-2">
-            <h1 class="text-xs bg-white p-3">So far so good</h1>
+            <h1 class="text-xs bg-white p-3 rounded-8">So far so good</h1>
             <h1 class="text-xs">Just now</h1>
           </div>
         </div>
       </div>
 
       <!-- input -->
-      <div class="bottom-2 w-full left-0 md:pl-4 md:relative fixed">
-        <div class="flex items-center space-x-4 md:space-x-0">
-          <button class="absolute left-8" aria-label="Edit">
+      <div class="bottom-2 w-full md:pl-4 md:relative fixed right-0 left-0">
+        <div class="flex items-center">
+          <button class="absolute md:left-8 left-4" aria-label="Edit">
             <img src="/assets/svgs/Edit.svg" alt="Edit icon" />
           </button>
 
           <input
             type="text"
             placeholder="Write your message here..."
-            class="pl-10 pr-4 h-14 w-full outline-none rounded-md placeholder:text-sm"
+            class="md:pl-10 pl-12 pr-4 h-14 w-full outline-none rounded-md placeholder:text-sm"
           />
 
           <div class="flex gap-4 absolute right-6">
