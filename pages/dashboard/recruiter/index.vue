@@ -168,9 +168,9 @@ definePageMeta({
                   </div>
                 </div>
 
-                <div class="flex justify-between w-full items-center">
+                <div class="flex justify-between h-full w-full items-center">
                   <div>
-                    <h1 class="text-sm w-5/6">
+                    <h1 class="md:text-sm text-xs md:flex hidden md:w-5/6 w-full">
                       Lorem ipsum dolor sit amet consectetur. Gravida volutpat
                       lobortis scelerisque nunc eget scelerisque lectus ante
                       augue. Quis eros lacus sed quisque in sagittis tempus mus

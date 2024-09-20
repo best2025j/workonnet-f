@@ -100,11 +100,11 @@ definePageMeta({
     </div>
 
     <!-- about the company -->
-    <div class="gap-x-4 flex flex-col md:flex-row w-fill">
+    <div class="gap-x-4 flex flex-col md:flex-row w-fill space-y-4">
       <div class="bg-white p-4 rounded-10 h-full md:w-2/3">
         <div class="space-y-2 py-2">
           <h1 class="font-black">About the company</h1>
-          <p class="text-sm tracking-wider">
+          <p class="md:text-sm  text-xs tracking-wider">
             Headquartered in Stockholm, Sweden,
             <b class="text-info-600">Spotify</b> is a technology company focused
             on developing innovative solutions in the music and entertainment
@@ -118,7 +118,7 @@ definePageMeta({
         <!--  -->
         <div class="pt-4">
           <h1 class="font-black text-sm">Job Description</h1>
-          <ul class="space-y-1 list-disc pl-6 py-4">
+          <ul class="space-y-1 list-disc pl-6 py-4 text-xs md:text-base">
             <li>
               Develop and execute paid advertising campaigns across various
               digital platforms.
@@ -151,7 +151,7 @@ definePageMeta({
         <!--  -->
         <div class="pt-4">
           <h1 class="font-black text-sm">Qualification</h1>
-          <ul class="space-y-1 list-disc pl-6 py-4">
+          <ul class="space-y-1 list-disc pl-6 py-4 text-xs md:text-base">
             <li>
               1-2 years of experience in managing paid advertising campaigns.
             </li>
@@ -181,7 +181,7 @@ definePageMeta({
         <!--  -->
         <div class="pt-4">
           <h1 class="font-black text-sm">How to apply</h1>
-          <ul class="space-y-1 list-disc pl-6 py-4">
+          <ul class="space-y-1 list-disc pl-6 py-4 text-xs md:text-base">
             <li>
               Please submit your resume + video highlighting your experience in
               paid advertising and your proficiency with Paid Channels, Google
