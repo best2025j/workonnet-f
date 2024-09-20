@@ -1,8 +1,111 @@
-<script setup>
+<script setup lang="ts">
+import { required, helpers, minLength, sameAs } from '@vuelidate/validators';
+import { useVuelidate } from '@vuelidate/core';
+import { useToast, POSITION } from 'vue-toastification';
+import VOtpInput from 'vue3-otp-input';
+import type { ApiErrorResponse, ApiSuccessResponse } from '~/types';
+
 definePageMeta({
   title: 'Set New Password',
   pageName: 'auth.set-new.password',
-})
+});
+
+const route = useRoute();
+const router = useRouter();
+const toast = useToast();
+const isLoading = ref<boolean>(false);
+
+const formData = reactive({
+  password: '',
+  confirmPassword: '',
+  token: route.query.tke,
+});
+
+const rules = computed(() => {
+  return {
+    password: {
+      required: helpers.withMessage('Please enter a password', required),
+      minLength: helpers.withMessage(
+        'Password cannot be less than 8 characters',
+        minLength(8)
+      ),
+    },
+    confirmPassword: {
+      required: helpers.withMessage('Please enter a password', required),
+      sameAs: helpers.withMessage(
+        'Password does not match',
+        sameAs(formData.password)
+      ),
+    },
+  };
+});
+
+const v$ = useVuelidate(rules, formData);
+//
+
+const handleSetNewPassword = async () => {
+  isLoading.value = true;
+  const isValidForm = await v$.value.$validate();
+  if (!isValidForm) {
+    toast.error('Passwords does not match', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+    return;
+  }
+
+  try {
+    await $fetch('/api/auth/create-new-password', {
+      method: 'POST',
+      body: { password: formData.password, token: formData.token },
+    });
+
+    toast.success(
+      'New password successfully created, please proceed to login.',
+      {
+        timeout: 3000,
+        position: POSITION.TOP_RIGHT,
+      }
+    );
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 500);
+
+    return router.push({
+      path: '/auth/password-confirmation',
+      query: {
+        email: route.query.email,
+        reqId: route.query.reqId,
+      },
+    });
+  } catch (error: any) {
+    const errorData = error.data as ApiErrorResponse;
+      toast.error('An error occurred try again', {
+        timeout: 3000,
+        position: POSITION.TOP_RIGHT,
+      });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+  }
+};
+
+onMounted(() => {
+  if (
+    !route.query ||
+    !route.query.tke ||
+    !route.query.email ||
+    !route.query.reqId
+  ) {
+    return router.replace('/');
+  }
+});
 </script>
 
 <template>
@@ -31,35 +134,33 @@ definePageMeta({
       </h2>
       <p class="mb-6 text-[12px] font-thin">Must be at least 8 characters</p>
 
-      <form class="flex flex-col gap-4">
-        <label class="text-sm fotn-thin">New Password</label>
+      <form class="flex flex-col gap-4 w-full">
+        <label class="text-sm font-thin">New Password</label>
         <input
           type="password"
-          placeholder="......"
-          class="placeholder-custom outline-none w-[375px] px-3 h-12 border-2 border-solid border-black-200 rounded-md"
+          placeholder="Enter password"
+          pattern=".{8,}"
+          v-model="formData.password"
+          :disabled="isLoading"
+          @change="v$.password.$touch"
+          class="outline-none text-xs w-full border border-solid border-black-200 rounded-lg px-3 py-2.5"
         />
-        <label class="text-md fotn-thin">Confirm Password</label>
-
-        <input
-          type="password"
-          placeholder="......"
-          class="placeholder-custom outline-none w-[375px] px-3 h-12 border-2 border-solid border-black-200 rounded-md"
-        />
+        <label class="text-sm font-thin">Confirm Password</label>
+        <input type="password" placeholder="Confirm password" pattern=".{8,}"
+        v-model="formData.confirmPassword" :disabled="isLoading"
+        @change="v$.confirmPassword.$touch" class="outline-none text-xs w-full
+        border border-solid border-black-200 rounded-lg px-3 py-2.5" />
       </form>
-
-      <button
-        class="font-black text-white w-[375px] h-12 rounded-xl m-10 text-sm bg-[#FE8900]"
+      <div class="pt-5"></div>
+      <BtnPrimary
+        @click="handleSetNewPassword()"
+        :isLoading="isLoading"
+        :disabled="isLoading || v$.$invalid"
       >
-        <NuxtLink to="/auth/password-confirmation">Set new password</NuxtLink>
-      </button>
+        <template #text>
+          {{ !isLoading ? 'Create new Password' : 'Please wait...' }}
+        </template>
+      </BtnPrimary>
     </div>
-
-    <Codepop :isVisible="showPopup" @update:isVisible="showPopup = $event" />
   </div>
 </template>
-<style scoped>
-.placeholder-custom::placeholder {
-  font-size: 3rem;
-  color: #d9d9d9;
-}
-</style>

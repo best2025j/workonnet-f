@@ -3,10 +3,24 @@ definePageMeta({
   title: 'Password Confirmation',
   pageName: 'auth.password.confirmation',
 })
+
+const route = useRoute();
+
+onMounted(() => {
+  if (
+    !route.query ||
+    !route.query.email ||
+    !route.query.reqId
+  ) {
+    return router.replace('/');
+  }
+});
+
 </script>
 
 <template>
-  <div class="flex flex-col items-center justify-center w-1/2 h-full mx-auto">
+  <div class="w-1/2 mx-auto h-full">
+    <div class="flex flex-col items-center justify-center h-full w-[23.375rem] mx-auto mt-10">
     <span class="mt-8">
       <svg
         width="72"
@@ -25,11 +39,8 @@ definePageMeta({
     </span>
     <h2 class="mt-3 text-xl font-normal font-['Georgia']">All done!!!</h2>
     <p class="mb-20 font-['Nexa']">Your password has been reset.</p>
-
-    <button
-      class="font-black text-white w-[375px] h-12 rounded-xl text-sm bg-[#FE8900]"
-    >
-      <NuxtLink to="/auth/signin">Go to Login</NuxtLink>
-    </button>
+      <NuxtLink :to="`/auth/signin/${route.query.reqId}?email=${route.query.email}`" class="font-black text-white w-full py-3.5 rounded-xl text-sm bg-[#FE8900] items-center text-center">Go to Login</NuxtLink>
   </div>
+  </div>
+
 </template>

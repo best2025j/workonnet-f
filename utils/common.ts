@@ -26,6 +26,11 @@ export enum LOGGED_IN_USER {
   GUEST = 'guest',
 }
 
+export enum FORGOT_PASSWORD_USER_TYPE {
+  RECRUITER = 'RECRUITER',
+  JOBSEEKER = 'JOBSEEKER',
+}
+
 export const STORAGE_TOKEN_KEY: string = '_us-res';
 export const STORAGE_LOGGED_IN_USER_KEY: string = '_us-da';
 export const STORAGE_LOGGED_IN_USER_DETAILS_KEY: string = '_us-dsa';

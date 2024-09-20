@@ -133,7 +133,6 @@ const loginAdmin = async () => {
             />
           </div>
         </div>
-        <button class="underline text-right text-xs">Forgot password?</button>
 
         <div class="space-y-3 pt-6">
           <BtnPrimary

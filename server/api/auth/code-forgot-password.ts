@@ -6,7 +6,10 @@ export default defineEventHandler(async (event) => {
   const data = await readBody(event);
 
   try {
-    const response = await axios.post(`${BACKEND_URL}recruiters`, data);
+    const response = await axios.post(`${BACKEND_URL}auth/verify-code`, {
+      code: data.code,
+      token: data.token,
+    });
     return { status: 200, data: response.data.data };
   } catch (e: any) {
     if (axios.isAxiosError<ValidationError, Record<string, unknown>>(e)) {

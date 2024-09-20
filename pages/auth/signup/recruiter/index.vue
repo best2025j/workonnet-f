@@ -1,26 +1,28 @@
 <script setup lang="ts">
-import { required, helpers, email } from '@vuelidate/validators';
+import { POSITION, useToast } from 'vue-toastification';
+import { required, helpers, email, minLength } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
 
 definePageMeta({
   layout: 'auth',
-  title: 'recruiter.signup',
-  pageName: 'recruiter.signin',
-  middleware: ['no-auth'],
+  title: 'recruiter.signup.index',
+  pageName: 'recruiter.signup',
+  // middleware: ['no-auth'],
 });
 
+const toast = useToast();
 const router = useRouter();
 const authStore = useAuthStore();
 const isLoading = ref<boolean>(false);
 
 const formData = reactive({
-  fullName: authStore.stepOneRecruiterForm?.fullName ? authStore.stepOneRecruiterForm.fullName : '',
-  email: authStore.stepOneRecruiterForm?.email ? authStore.stepOneRecruiterForm?.email : '',
-  password: authStore.stepOneRecruiterForm?.password ? authStore.stepOneRecruiterForm?.password : '',
-  companyName: authStore.stepOneRecruiterForm?.companyName ? authStore.stepOneRecruiterForm?.companyName : '',
-  companySize: authStore.stepOneRecruiterForm?.companySize ? authStore.stepOneRecruiterForm?.companySize : '',
-  industry: authStore.stepOneRecruiterForm?.industry ? authStore.stepOneRecruiterForm?.industry : '',
-  websiteUrl: authStore.stepOneRecruiterForm?.websiteUrl ? authStore.stepOneRecruiterForm?.websiteUrl : '',
+  fullName: '',
+  email: '',
+  password: '',
+  companyName: '',
+  companySize: '',
+  industry: '',
+  websiteUrl: '',
 });
 
 const rules = computed(() => {
@@ -34,6 +36,7 @@ const rules = computed(() => {
     },
     password: {
       required: helpers.withMessage('Please enter a password', required),
+      minLength: helpers.withMessage('Password cannot be less than 8 characters', minLength(8)),
     },
   };
 });
@@ -57,10 +60,36 @@ const handleNextStep = async () => {
   }
 
   // store step one data -
-  authStore.setStepOneFormData(formData)
+  authStore.setStepOneFormData(formData);
   // navigate to step two
   router.push('/auth/signup/recruiter/complete-signup');
 };
+
+onMounted(() => {
+  if (authStore.stepOneRecruiterForm != null) {
+    if (authStore.stepOneRecruiterForm?.fullName !== null) {
+      formData.fullName = authStore.stepOneRecruiterForm.fullName;
+    }
+    if (authStore.stepOneRecruiterForm?.email !== null) {
+      formData.email = authStore.stepOneRecruiterForm?.email;
+    }
+    if (authStore.stepOneRecruiterForm.password !== null) {
+      formData.password = authStore.stepOneRecruiterForm?.password;
+    }
+    if (authStore.stepOneRecruiterForm.companyName !== null) {
+      formData.companyName = authStore.stepOneRecruiterForm.companyName;
+    }
+    if (authStore.stepOneRecruiterForm.companySize !== null) {
+      formData.companySize = authStore.stepOneRecruiterForm.companySize;
+    }
+    if (authStore.stepOneRecruiterForm.industry !== null) {
+      formData.industry = authStore.stepOneRecruiterForm.industry;
+    }
+    if (authStore.stepOneRecruiterForm.websiteUrl !== null) {
+      formData.websiteUrl = authStore.stepOneRecruiterForm.websiteUrl;
+    }      
+  }
+});
 </script>
 
 <template>

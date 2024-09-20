@@ -6,7 +6,10 @@ export default defineEventHandler(async (event) => {
   const data = await readBody(event);
 
   try {
-    const response = await axios.post(`${BACKEND_URL}recruiters`, data);
+    const response = await axios.post(
+      `${BACKEND_URL}auth/forgot-password?userType=${data.reqId}`,
+      { email: data.email }
+    );
     return { status: 200, data: response.data.data };
   } catch (e: any) {
     if (axios.isAxiosError<ValidationError, Record<string, unknown>>(e)) {

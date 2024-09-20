@@ -1,35 +1,43 @@
 <script setup lang="ts">
-import { required, helpers, email, url } from '@vuelidate/validators';
+import { POSITION, useToast } from 'vue-toastification';
+import {
+  required,
+  helpers,
+  email,
+  url,
+  minLength,
+} from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
+import type { ApiErrorResponse, ApiSuccessResponse } from '~/types';
 
 definePageMeta({
   layout: 'auth',
-  title: 'recruiter.signup',
-  pageName: 'recruiter.signin',
+  title: 'recruiter.signup.complete',
+  pageName: 'recruiter.signup',
   middleware: [
     function (to, from) {
       const authStore = useAuthStore();
       if (import.meta.server) return;
-
       if (authStore.stepOneRecruiterForm !== null) return;
-
       return navigateTo('/');
     },
   ],
 });
 
+const toast = useToast();
 const router = useRouter();
 const authStore = useAuthStore();
 const isLoading = ref<boolean>(false);
+const isSubmitted = ref<boolean>(false);
 
 const formData = reactive({
-  fullName: authStore.stepOneRecruiterForm.fullName,
-  email: authStore.stepOneRecruiterForm.email,
-  password: authStore.stepOneRecruiterForm.password,
-  companyName: authStore.stepOneRecruiterForm?.companyName ? authStore.stepOneRecruiterForm?.companyName : '',
-  companySize: authStore.stepOneRecruiterForm?.companySize ? authStore.stepOneRecruiterForm?.companySize : '',
-  industry: authStore.stepOneRecruiterForm?.industry ? authStore.stepOneRecruiterForm?.industry : '',
-  websiteUrl: authStore.stepOneRecruiterForm?.websiteUrl ? authStore.stepOneRecruiterForm?.websiteUrl : '',
+  fullName: '',
+  email: '',
+  password: '',
+  companyName: '',
+  companySize: '',
+  industry: '',
+  websiteUrl: '',
 });
 
 const rules = computed(() => {
@@ -43,6 +51,10 @@ const rules = computed(() => {
     },
     password: {
       required: helpers.withMessage('Please enter a password', required),
+      minLength: helpers.withMessage(
+        'Password cannot be less than 8 characters',
+        minLength(8)
+      ),
     },
     companyName: {
       required: helpers.withMessage('Company name is required', required),
@@ -62,11 +74,6 @@ const rules = computed(() => {
 
 const v$ = useVuelidate(rules, formData);
 
-const handleGoBack = () =>  {
-  authStore.setStepOneFormData(formData)
-  router.back()
-}
-
 const handleSignup = async () => {
   isLoading.value = true;
   const isValidForm = await v$.value.$validate();
@@ -81,7 +88,99 @@ const handleSignup = async () => {
     }, 2000);
     return;
   }
+
+  try {
+    await $fetch('/api/auth/recruiter/register', {
+      method: 'POST',
+      body: formData,
+    });
+
+    toast.success('Signup successful, Please login', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 500);
+
+    isSubmitted.value = true
+    return router.push({
+      path: '/auth/signin/recruiter',
+      query: {
+        email: formData.email,
+      },
+    });
+  } catch (error: any) {
+    const errorData = error.data as ApiErrorResponse;
+
+    if (errorData.data?.errorCode === 'E11000') {
+      toast.error('Email already in use', {
+        timeout: 3000,
+        position: POSITION.TOP_RIGHT,
+      });
+    } else if (errorData.data?.errorCode === '100001') {
+      toast.error('Password must be 8 characters long', {
+        timeout: 3000,
+        position: POSITION.TOP_RIGHT,
+      });
+    } else {
+      toast.error('An error occurred try again', {
+        timeout: 3000,
+        position: POSITION.TOP_RIGHT,
+      });
+    }
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+  }
 };
+
+const resetForm = () => {
+  formData.fullName = '';
+  formData.email = '';
+  formData.password = '';
+  formData.companyName = '';
+  formData.companySize = '';
+  formData.industry = '';
+  formData.websiteUrl = '';
+};
+
+onMounted(() => {
+  if (authStore.stepOneRecruiterForm != null) {
+    if (authStore.stepOneRecruiterForm?.fullName !== null) {
+      formData.fullName = authStore.stepOneRecruiterForm.fullName;
+    }
+    if (authStore.stepOneRecruiterForm?.email !== null) {
+      formData.email = authStore.stepOneRecruiterForm?.email;
+    }
+    if (authStore.stepOneRecruiterForm.password !== null) {
+      formData.password = authStore.stepOneRecruiterForm?.password;
+    }
+    if (authStore.stepOneRecruiterForm.companyName !== null) {
+      formData.companyName = authStore.stepOneRecruiterForm.companyName;
+    }
+    if (authStore.stepOneRecruiterForm.companySize !== null) {
+      formData.companySize = authStore.stepOneRecruiterForm.companySize;
+    }
+    if (authStore.stepOneRecruiterForm.websiteUrl !== null) {
+      formData.websiteUrl = authStore.stepOneRecruiterForm.websiteUrl;
+    }
+    if (authStore.stepOneRecruiterForm.industry !== null) {
+      formData.industry = authStore.stepOneRecruiterForm.industry;
+    }
+  }
+});
+
+onBeforeRouteLeave(() => {
+  if(isSubmitted.value === true){
+    authStore.setStepOneFormData(null);
+  } else {
+    authStore.setStepOneFormData(formData);
+  }
+  
+});
 </script>
 
 <template>
@@ -185,7 +284,7 @@ const handleSignup = async () => {
               Company Size
               <option value="" disabled selected>Select company size</option>
               <option value="0-10">0-10</option>
-              <option value=">11-50">11-50</option>
+              <option value="11-50">11-50</option>
               <option value="51-100">51-100</option>
               <option value="101-500">101-500</option>
               <option value="500+">500+</option>
@@ -257,12 +356,12 @@ const handleSignup = async () => {
         />
 
         <div class="mt-10 w-full flex space-x-2">
-          <button
-            @click="handleGoBack()"
-            class="w-1/3 items-center font-light border-[#D0D5DD] border-solid px-5 py-2 text-[#344054] border rounded-lg"
+          <NuxtLink
+            to="/auth/signup/recruiter"
+            class="w-1/3 items-center font-light border-[#D0D5DD] text-center border-solid px-5 py-2 text-[#344054] border rounded-lg"
           >
             Back
-          </button>
+          </NuxtLink>
 
           <div class="pt-10"></div>
           <BtnPrimary
