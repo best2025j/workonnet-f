@@ -250,7 +250,7 @@ const isActive = (pageName: string) => {
       <!--  -->
       <div
         v-show="authStore.$state.currentUserType === LOGGED_IN_USER.RECRUITER"
-        class="flex justify-center items-center mt-4 py-4 w-[218px] bg-westside-100 flex-col mx-auto rounded-10 space-y-4"
+        class="flex justify-center items-center md:mt-4 py-4 md:w-[218px] bg-westside-100 flex-col mx-auto rounded-10 space-y-4"
       >
         <span
           ><svg
@@ -266,8 +266,9 @@ const isActive = (pageName: string) => {
             />
           </svg>
         </span>
-        <div class="w-[173px] text-center space-y-4 pb-2">
-          <h1 class="font-black text-base">Discover our advanced feature</h1>
+
+        <div class="md:w-[173px] w-44 text-center space-y-4 pb-2">
+          <h1 class="font-black text-xs md:text-base">Discover our advanced feature</h1>
           <p class="text-xs">Subscribe to get more out of workonnect</p>
         </div>
       </div>

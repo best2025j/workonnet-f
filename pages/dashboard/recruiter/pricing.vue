@@ -3,22 +3,22 @@ definePageMeta({
   title: "Pricing",
   pageName: "dashboard.recruiter.pricing",
   layout: "dashboard",
-  middleware: ['auth', 'is-recruiter']
+  middleware: ["auth", "is-recruiter"],
 });
 </script>
 
 <template>
   <div class="text-black-900 pt-6">
-    <div class="flex justify-between items-center">
+    <div class="flex flex-col md:flex-row justify-between items-center">
       <div class="space-y-2">
-        <h3 class="font-black text-xl">Plan & Pricing</h3>
-        <h4 class="text-sm">Let’s find the top job that we have.</h4>
+        <h1 class="font-black text-xl">Plan & Pricing</h1>
+        <h1 class="text-sm">Let’s find the top job that we have.</h1>
         <p class="text-sm">
           Simple Pricing No Hidden Fees. Advanced Features for you.
         </p>
       </div>
 
-      <div>
+      <div class="py-3 space-y-2">
         <h1 class="text-sm">Choose the country for your job recommendations</h1>
         <div class="relative flex items-center">
           <svg
@@ -57,8 +57,10 @@ definePageMeta({
       </div>
     </div>
 
-    <div class="grid grid-cols-3 gap-4 py-4">
-      <div class="bg-white h-[481px] p-4 rounded-10 space-y-4 w-full mt-4">
+    <div class="grid md:grid-cols-3 gap-4 py-4">
+      <div
+        class="bg-white md:h-[481px] py-6 p-2 rounded-10 space-y-4 w-full mt-4"
+      >
         <div class="flex justify-between items-start">
           <div class="space-y-2">
             <img src="/assets/images/Logo2.png" alt="no pix" />
@@ -135,7 +137,9 @@ definePageMeta({
         </div>
       </div>
       <!--  -->
-      <div class="bg-white h-[481px] p-4 rounded-10 space-y-4 w-full mt-4">
+      <div
+        class="bg-white md:h-[481px] py-6 p-2 rounded-10 space-y-4 w-full mt-4"
+      >
         <div class="flex justify-between items-start">
           <div class="space-y-2">
             <img src="/assets/images/Logo2.png" alt="no pix" />
@@ -210,7 +214,9 @@ definePageMeta({
         </div>
       </div>
       <!--  -->
-      <div class="bg-white h-[481px] p-4 rounded-10 space-y-4 w-full mt-4">
+      <div
+        class="bg-white md:h-[481px] py-6 p-2 rounded-10 space-y-4 w-full mt-4"
+      >
         <div class="flex justify-between items-start">
           <div class="space-y-2">
             <img src="/assets/images/Logo2.png" alt="no pix" />
@@ -330,7 +336,9 @@ definePageMeta({
         </div>
       </div>
       <!--  -->
-      <div class="bg-white h-[481px] p-4 rounded-10 space-y-4 w-full mt-4">
+      <div
+        class="bg-white md:h-[481px] py-6 p-2 rounded-10 space-y-4 w-full mt-4"
+      >
         <div class="flex justify-between items-start">
           <div class="space-y-2">
             <img src="/assets/images/Logo2.png" alt="no pix" />
