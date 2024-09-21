@@ -196,19 +196,19 @@ onMounted(() => {
 
 <style>
 .otp-input {
-  width: 64px;
-  height: 64px;
+  width: 52px;
+  height: 52px;
   padding: 8px;
   margin: 0 4px;
   font-weight: 500;
-  border-radius: 8px;
+  border-radius: 6px;
   border: 1px solid #d0d5dd;
   text-align: center;
   color: #7f56d9;
   background-color: #fff;
-  font-size: 48px;
-  line-height: 60px;
-  font-family: 'Inter';
+  font-size: 32px;
+  line-height: 40px;
+  font-family: "Inter";
 }
 
 @media (min-width: 640px) {
@@ -225,7 +225,13 @@ onMounted(() => {
     background-color: #fff;
     font-size: 48px;
     line-height: 60px;
-    font-family: 'Inter';
+    font-family: "Inter";
+  }
+
+  input.otp-input::placeholder {
+    font-size: 48px !important;
+    text-align: center;
+    font-weight: 500;
   }
 }
 
@@ -242,7 +248,7 @@ onMounted(() => {
 }
 
 input.otp-input::placeholder {
-  font-size: 48px;
+  font-size: 32px;
   text-align: center;
   font-weight: 500;
 }

@@ -236,7 +236,7 @@ onMounted(() => {
   }
 
   input.otp-input::placeholder {
-    font-size: 48px;
+    font-size: 48px !important;
     text-align: center;
     font-weight: 500;
   }
