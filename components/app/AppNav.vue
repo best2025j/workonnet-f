@@ -20,7 +20,7 @@ const links = [
     to: "/dashboard/jobseeker/my-applications?tab=in-review",
     name: "In Review",
     disabled: false,
-    badge: 1,
+    badge: 2,
     tabId: TABS.IN_REVIEW,
   },
   {
@@ -49,8 +49,8 @@ const isActive = (currentTab: TABS) => route?.query?.tab === currentTab;
 
 <template>
   <nav class="flex md:w-3/5 w-full border-b-2">
-    <ul class="flex gap-x-6 items-center">
-      <li v-for="(link, index) in links" :key="index" class="md:pl-12 pl-1">
+    <ul class="flex md:gap-x-6 gap-4 items-center">
+      <li v-for="(link, index) in links" :key="index" class="md:pl-12">
         <NuxtLink
           :to="link.to"
           :class="[
@@ -63,7 +63,7 @@ const isActive = (currentTab: TABS) => route?.query?.tab === currentTab;
           {{ link.name }}
           <span
             v-if="link.badge"
-            class="ml-1 md:text-xs text-[10px] bg-primary-1 text-white rounded-full px-2 py-0.5"
+            class="ml-1 md:text-xs text-[10px] bg-primary-1 text-white rounded-full px-1 md:px-2 md:py-0.5"
           >
             {{ link.badge }}
           </span>

@@ -3,7 +3,7 @@ definePageMeta({
   title: "Subscriptions",
   pageName: "admin.dashboard.subscriptions",
   layout: "dashboard",
-  middleware: ['auth', 'is-admin']
+  middleware: ["auth", "is-admin"],
 });
 </script>
 
@@ -150,7 +150,7 @@ definePageMeta({
       </div>
     </div>
     <!-- grid -->
-    <div class="grid w-full grid-cols-4 gap-x-4">
+    <div class="grid w-full md:grid-cols-4 gap-x-4">
       <div class="bg-white rounded-10 p-4">
         <div class="flex items-center justify-between">
           <div class="space-y-4">
@@ -329,7 +329,7 @@ definePageMeta({
       </div>
     </div>
     <!--  -->
-    <div class="bg-white rounded-10 h-full w-full my-4">
+    <div class="bg-white rounded-10 h-full w-full my-4 overflow-scroll">
       <!-- table custom -->
       <nav
         class="mt-4 h-10 flex items-center px-2 bg-westside-100 rounded-t-8 w-full"
@@ -4347,7 +4347,7 @@ definePageMeta({
     </div>
     <!--  pagenation-->
     <div
-      class="flex justify-between bg-white p-2 min-w-[1220px] z-10 fixed bottom-0 shadow-md shadow-black-400"
+      class="flex justify-between bg-white p-2 md:min-w-[1220px] z-10 mt-10 shadow-md shadow-black-400"
     >
       <div class="text-xs w-32 flex space-x-2 items-center">
         <h1>Page</h1>
