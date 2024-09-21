@@ -38,7 +38,7 @@
       </div>
 
       <div
-        class="flex flex-col md:flex-row justify-between items-center md:px-4 py-6 bg-white w-full"
+        class="flex flex-col rounded-10 md:flex-row justify-between items-center md:px-4 py-6 bg-white w-full"
       >
         <div class="flex items-center space-x-6">
           <div class="">
@@ -193,7 +193,7 @@
       </div>
 
       <div
-        class="flex flex-col md:flex-row justify-between items-center md:px-4 py-6 bg-white w-full"
+        class="flex flex-col rounded-10 md:flex-row justify-between items-center md:px-4 py-6 bg-white w-full"
       >
         <div class="flex items-center space-x-6">
           <div class="">
@@ -346,7 +346,7 @@
       </div>
 
       <div
-        class="flex flex-col md:flex-row justify-between items-center md:px-4 py-6 bg-white w-full"
+        class="flex flex-col rounded-10 md:flex-row justify-between items-center md:px-4 py-6 bg-white w-full"
       >
         <div class="flex items-center space-x-6">
           <div class="">
@@ -501,7 +501,7 @@
       </div>
 
       <div
-        class="flex flex-col md:flex-row justify-between items-center md:px-4 py-6 bg-white w-full"
+        class="flex flex-col rounded-10 md:flex-row justify-between items-center md:px-4 py-6 bg-white w-full"
       >
         <div class="flex items-center space-x-6">
           <div class="">
@@ -658,7 +658,7 @@
       </div>
 
       <div
-        class="flex flex-col md:flex-row justify-between items-center md:px-4 py-6 bg-white w-full"
+        class="flex flex-col rounded-10 md:flex-row justify-between items-center md:px-4 py-6 bg-white w-full"
       >
         <div class="flex items-center space-x-6">
           <div class="">
