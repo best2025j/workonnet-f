@@ -179,8 +179,8 @@ const isActive = (pageName: string) => {
             :to="link.to"
             :class="[
               isActive(link.pageName)
-                ? 'bg-westside-100 text-primary-1 border-primary-1 border-l-4 !pl-11 font-[900]'
-                : 'pl-12',
+                ? 'bg-westside-100 text-primary-1 border-primary-1 border-l-4 pl-6 md:!pl-11 font-[900]'
+                : 'md:pl-12 pl-6',
               'flex items-center py-4 text-xs',
             ]"
           >
@@ -205,8 +205,8 @@ const isActive = (pageName: string) => {
             :to="link.to"
             :class="[
               isActive(link.pageName)
-                ? 'bg-westside-100 text-primary-1 border-primary-1 border-l-4 !pl-11 font-[900]'
-                : 'pl-12',
+              ? 'bg-westside-100 text-primary-1 border-primary-1 border-l-4 pl-6 md:!pl-11 font-[900]'
+              : 'md:pl-12 pl-6',
               'flex items-center py-4 text-xs',
             ]"
           >
@@ -250,7 +250,7 @@ const isActive = (pageName: string) => {
       <!--  -->
       <div
         v-show="authStore.$state.currentUserType === LOGGED_IN_USER.RECRUITER"
-        class="flex justify-center items-center md:mt-4 py-4 md:w-[218px] bg-westside-100 flex-col mx-auto rounded-10 space-y-4"
+        class="flex justify-center items-center md:mt-4 mt-3 py-2 md:py-4 w-[218px] bg-westside-100 flex-col mx-auto rounded-10 space-y-4"
       >
         <span
           ><svg
@@ -277,7 +277,7 @@ const isActive = (pageName: string) => {
       <div class="absolute bottom-0 left-0 right-0 w-full">
         <button
           @click="logoutUser()"
-          class="flex items-center py-6 w-full gap-2 pl-12 justify-start rounded"
+          class="flex items-center py-6 w-full gap-2 md:pl-12 pl-6 justify-start rounded"
         >
           <IconsLogoutIcon />
           <span>Logout</span>

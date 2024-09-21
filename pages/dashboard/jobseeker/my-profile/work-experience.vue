@@ -1,23 +1,23 @@
 <script setup lang="ts">
 definePageMeta({
-  title: 'My profile',
-  pageName: 'dashboard.jobseeker.my-profile.work-experience',
-  layout: 'dashboard',
-  middleware: ['auth', 'is-jobseeker']
+  title: "My profile",
+  pageName: "dashboard.jobseeker.my-profile.work-experience",
+  layout: "dashboard",
+  middleware: ["auth", "is-jobseeker"],
 });
 </script>
 
 <template>
   <div class="text-black-600 w-full h-full">
-    <div class="flex gap-x-4">
-      <div class="w-2/3 h-full">
+    <div class="flex flex-col md:flex-row gap-x-4">
+      <div class="md:w-2/3 h-full">
         <!-- social media links-->
         <div class="bg-white p-4 rounded-10 font-[Nexa]">
           <h1 class="font-bold text-xl font-[Georgia]">Basic Information</h1>
           <p class="text-xs">
             Build trust with recruiters by verifying your social profiles
           </p>
-          <div class="flex flex-col w-2/3 space-y-4 pt-6">
+          <div class="flex flex-col md:w-2/3 space-y-4 pt-6">
             <div class="flex flex-col w-full">
               <label for="first-name" class="text-sm mb-2">Full Name</label>
               <input
@@ -36,7 +36,7 @@ definePageMeta({
                 class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border border-gray-300 rounded-md"
               />
             </div>
-            <div class="flex flex-col w-1/2">
+            <div class="flex flex-col md:w-1/2">
               <label for="first-name" class="text-sm mb-2">Location</label>
               <div class="relative w-full">
                 <input
@@ -59,7 +59,7 @@ definePageMeta({
                 </svg>
               </div>
             </div>
-            <div class="flex flex-col w-1/2">
+            <div class="flex flex-col md:w-1/2">
               <label for="first-name" class="text-sm mb-2">City</label>
               <input
                 type="text"
@@ -79,8 +79,8 @@ definePageMeta({
           <!-- form -->
           <div class="border rounded-10 p-4 mt-4">
             <form action="" class="">
-              <div class="w-3/5 p-2 space-y-2">
-                <div class="flex gap-x-2">
+              <div class="md:w-3/5 p-2 space-y-2">
+                <div class="flex flex-col md:flex-row gap-x-2">
                   <div class="flex flex-col w-full">
                     <label for="first-name" class="text-sm mb-2"
                       >Company / Organization</label
@@ -101,7 +101,7 @@ definePageMeta({
                   </div>
                 </div>
 
-                <div class="flex flex-col w-1/2">
+                <div class="flex flex-col md:w-1/2">
                   <label for="first-name" class="text-sm mb-2">Location</label>
                   <div class="relative w-full">
                     <input
@@ -111,7 +111,7 @@ definePageMeta({
                     />
                   </div>
                 </div>
-                <div class="flex flex-col w-1/2">
+                <div class="flex flex-col md:w-1/2">
                   <label for="first-name" class="text-sm mb-2">City</label>
                   <input
                     type="text"
@@ -123,7 +123,7 @@ definePageMeta({
 
               <div class="border-b-2 py-4 w-full" />
 
-              <div class="py-4 divide-black-600 w-2/3 p-2 space-y-2">
+              <div class="py-4 divide-black-600 md:w-2/3 p-2 space-y-2">
                 <div class="flex flex-col w-full">
                   <label for="first-name" class="text-sm mb-2">Position</label>
                   <div class="relative w-full">
@@ -134,7 +134,8 @@ definePageMeta({
                     />
                   </div>
                 </div>
-                <div class="flex flex-col w-1/2">
+
+                <div class="flex flex-col md:w-1/2">
                   <label for="first-name" class="text-sm mb-2">City</label>
                   <input
                     type="text"
@@ -144,7 +145,7 @@ definePageMeta({
                 </div>
 
                 <div
-                  class="py-4 divide-black-600 grid grid-cols-4 items-center w-full space-x-2"
+                  class="py-4 divide-black-600 grid md:grid-cols-4 items-center w-full space-x-2"
                 >
                   <div class="flex flex-col w-full">
                     <label for="first-name" class="text-sm mb-2"
@@ -203,7 +204,9 @@ definePageMeta({
                 </div>
               </div>
 
-              <div class="flex space-x-2 text-xs pl-2">
+              <div
+                class="flex flex-col md:flex-row space-y-3 md:space-x-2 text-xs pl-2"
+              >
                 <button
                   class="px-3.5 border rounded-8 py-2 bg-success-600 text-white"
                 >
@@ -232,7 +235,7 @@ definePageMeta({
                       <h1 class="font-blacl text-xs">Lagos, Nigeria.</h1>
                     </div>
                   </ul>
-                  <span>
+                  <button>
                     <svg
                       width="24"
                       height="24"
@@ -245,7 +248,7 @@ definePageMeta({
                         fill="#343330"
                       />
                     </svg>
-                  </span>
+                  </button>
                 </div>
               </div>
 
@@ -262,7 +265,7 @@ definePageMeta({
                       <h1 class="font-blacl text-xs">Lagos, Nigeria.</h1>
                     </div>
                   </ul>
-                  <span>
+                  <button>
                     <svg
                       width="24"
                       height="24"
@@ -275,7 +278,7 @@ definePageMeta({
                         fill="#343330"
                       />
                     </svg>
-                  </span>
+                  </button>
                 </div>
               </div>
 
@@ -292,7 +295,7 @@ definePageMeta({
                       <h1 class="font-blacl text-xs">Lagos, Nigeria.</h1>
                     </div>
                   </ul>
-                  <span>
+                  <button>
                     <svg
                       width="24"
                       height="24"
@@ -305,7 +308,7 @@ definePageMeta({
                         fill="#343330"
                       />
                     </svg>
-                  </span>
+                  </button>
                 </div>
               </div>
 
@@ -322,7 +325,7 @@ definePageMeta({
                       <h1 class="font-blacl text-xs">Lagos, Nigeria.</h1>
                     </div>
                   </ul>
-                  <span>
+                  <button>
                     <svg
                       width="24"
                       height="24"
@@ -335,7 +338,7 @@ definePageMeta({
                         fill="#343330"
                       />
                     </svg>
-                  </span>
+                  </button>
                 </div>
               </div>
 
@@ -352,7 +355,7 @@ definePageMeta({
                       <h1 class="font-blacl text-xs">Lagos, Nigeria.</h1>
                     </div>
                   </ul>
-                  <span>
+                  <button>
                     <svg
                       width="24"
                       height="24"
@@ -365,7 +368,7 @@ definePageMeta({
                         fill="#343330"
                       />
                     </svg>
-                  </span>
+                  </button>
                 </div>
               </div>
               <button
@@ -409,7 +412,7 @@ definePageMeta({
                   <h1 class="font-blacl text-xs">Lagos, Nigeria.</h1>
                 </div>
               </ul>
-              <span>
+              <button>
                 <svg
                   width="24"
                   height="24"
@@ -422,7 +425,7 @@ definePageMeta({
                     fill="#343330"
                   />
                 </svg>
-              </span>
+              </button>
             </div>
           </div>
           <!-- button cross -->
@@ -453,7 +456,7 @@ definePageMeta({
               class="flex justify-between p-4 mt-4 bg-black-50 items-center rounded-10"
             >
               <h1 class="text-sm font-black">ENGLISH</h1>
-              <span>
+              <button>
                 <svg
                   width="24"
                   height="24"
@@ -466,7 +469,7 @@ definePageMeta({
                     fill="#343330"
                   />
                 </svg>
-              </span>
+              </button>
             </div>
           </div>
           <div class="space-y-3">
@@ -474,7 +477,7 @@ definePageMeta({
               class="flex justify-between p-4 mt-4 bg-black-50 items-center rounded-10"
             >
               <h1 class="text-sm font-black">YORUBA</h1>
-              <span>
+              <button>
                 <svg
                   width="24"
                   height="24"
@@ -487,7 +490,7 @@ definePageMeta({
                     fill="#343330"
                   />
                 </svg>
-              </span>
+              </button>
             </div>
           </div>
           <!-- button cross -->
@@ -516,15 +519,15 @@ definePageMeta({
           <h1 class="text-xs pt-3">Details</h1>
           <!-- grid button -->
           <div class="border p-4">
-            <div class="py-3 grid grid-cols-5 gap-2 w-full">
+            <div class="py-3 grid grid-cols-2 md:grid-cols-4 gap-2 w-full">
               <!-- Repeat this button element 14 times -->
-              <button
-                class="text-xs flex items-center justify-center px-2 rounded-5 py-2 border gap-x-2"
+              <div
+                class="text-xs flex items-center justify-between px-2 rounded-5 py-2 border gap-x-2"
               >
                 Branding Des
-                <span>
+                <button>
                   <svg
-                    width="20"
+                    width="15"
                     height="20"
                     viewBox="0 0 20 20"
                     fill="none"
@@ -535,14 +538,15 @@ definePageMeta({
                       fill="#3D3D3D"
                     />
                   </svg>
-                </span></button
-              ><button
-                class="text-xs flex items-center justify-center px-2 rounded-5 py-2 border gap-x-2"
+                </button>
+              </div>
+              <div
+                class="text-xs flex items-center justify-between px-2 rounded-5 py-2 border gap-x-2"
               >
                 Design System
-                <span>
+                <button>
                   <svg
-                    width="20"
+                    width="15"
                     height="20"
                     viewBox="0 0 20 20"
                     fill="none"
@@ -553,14 +557,15 @@ definePageMeta({
                       fill="#3D3D3D"
                     />
                   </svg>
-                </span></button
-              ><button
-                class="text-xs flex items-center justify-center px-2 rounded-5 py-2 border gap-x-2"
+                </button>
+              </div>
+              <div
+                class="text-xs flex items-center justify-between px-2 rounded-5 py-2 border gap-x-2"
               >
                 Figma
-                <span>
+                <button>
                   <svg
-                    width="20"
+                    width="15"
                     height="20"
                     viewBox="0 0 20 20"
                     fill="none"
@@ -571,14 +576,15 @@ definePageMeta({
                       fill="#3D3D3D"
                     />
                   </svg>
-                </span></button
-              ><button
-                class="text-xs flex items-center justify-center px-2 rounded-5 py-2 border gap-x-2"
+                </button>
+              </div>
+              <div
+                class="text-xs flex items-center justify-between px-2 rounded-5 py-2 border gap-x-2"
               >
                 Graphic Design
-                <span>
+                <button>
                   <svg
-                    width="20"
+                    width="15"
                     height="20"
                     viewBox="0 0 20 20"
                     fill="none"
@@ -589,14 +595,15 @@ definePageMeta({
                       fill="#3D3D3D"
                     />
                   </svg>
-                </span></button
-              ><button
-                class="text-xs flex items-center justify-center px-2 rounded-5 py-2 border gap-x-2"
+                </button>
+              </div>
+              <div
+                class="text-xs flex items-center justify-between px-2 rounded-5 py-2 border gap-x-2"
               >
                 Illustration
-                <span>
+                <button>
                   <svg
-                    width="20"
+                    width="15"
                     height="20"
                     viewBox="0 0 20 20"
                     fill="none"
@@ -607,14 +614,15 @@ definePageMeta({
                       fill="#3D3D3D"
                     />
                   </svg>
-                </span></button
-              ><button
-                class="text-xs flex items-center justify-center px-2 rounded-5 py-2 border gap-x-2"
+                </button>
+              </div>
+              <div
+                class="text-xs flex items-center justify-between px-2 rounded-5 py-2 border gap-x-2"
               >
                 Microsoft
-                <span>
+                <button>
                   <svg
-                    width="20"
+                    width="15"
                     height="20"
                     viewBox="0 0 20 20"
                     fill="none"
@@ -625,14 +633,15 @@ definePageMeta({
                       fill="#3D3D3D"
                     />
                   </svg>
-                </span></button
-              ><button
-                class="text-xs flex items-center justify-center px-2 rounded-5 py-2 border gap-x-2"
+                </button>
+              </div>
+              <div
+                class="text-xs flex items-center justify-between px-2 rounded-5 py-2 border gap-x-2"
               >
                 Mobile Design
-                <span>
+                <button>
                   <svg
-                    width="20"
+                    width="15"
                     height="20"
                     viewBox="0 0 20 20"
                     fill="none"
@@ -643,14 +652,15 @@ definePageMeta({
                       fill="#3D3D3D"
                     />
                   </svg>
-                </span></button
-              ><button
-                class="text-xs flex items-center justify-center px-2 rounded-5 py-2 border gap-x-2"
+                </button>
+              </div>
+              <div
+                class="text-xs flex items-center justify-between px-2 rounded-5 py-2 border gap-x-2"
               >
                 Notion
-                <span>
+                <button>
                   <svg
-                    width="20"
+                    width="15"
                     height="20"
                     viewBox="0 0 20 20"
                     fill="none"
@@ -661,14 +671,15 @@ definePageMeta({
                       fill="#3D3D3D"
                     />
                   </svg>
-                </span></button
-              ><button
-                class="text-xs flex items-center justify-center px-2 rounded-5 py-2 border gap-x-2"
+                </button>
+              </div>
+              <div
+                class="text-xs flex items-center justify-between px-2 rounded-5 py-2 border gap-x-2"
               >
                 Product Design
-                <span>
+                <button>
                   <svg
-                    width="20"
+                    width="15"
                     height="20"
                     viewBox="0 0 20 20"
                     fill="none"
@@ -679,14 +690,15 @@ definePageMeta({
                       fill="#3D3D3D"
                     />
                   </svg>
-                </span></button
-              ><button
-                class="text-xs flex items-center justify-center px-2 rounded-5 py-2 border gap-x-2"
+                </button>
+              </div>
+              <div
+                class="text-xs flex items-center justify-between px-2 rounded-5 py-2 border gap-x-2"
               >
                 Internet Savvy
-                <span>
+                <button>
                   <svg
-                    width="20"
+                    width="15"
                     height="20"
                     viewBox="0 0 20 20"
                     fill="none"
@@ -697,14 +709,15 @@ definePageMeta({
                       fill="#3D3D3D"
                     />
                   </svg>
-                </span></button
-              ><button
-                class="text-xs flex items-center justify-center px-2 rounded-5 py-2 border gap-x-2"
+                </button>
+              </div>
+              <div
+                class="text-xs flex items-center justify-between px-2 rounded-5 py-2 border gap-x-2"
               >
                 UI/UX Design
-                <span>
+                <button>
                   <svg
-                    width="20"
+                    width="15"
                     height="20"
                     viewBox="0 0 20 20"
                     fill="none"
@@ -715,14 +728,15 @@ definePageMeta({
                       fill="#3D3D3D"
                     />
                   </svg>
-                </span></button
-              ><button
-                class="text-xs flex items-center justify-center px-2 rounded-5 py-2 border gap-x-2"
+                </button>
+              </div>
+              <div
+                class="text-xs flex items-center justify-between px-2 rounded-5 py-2 border gap-x-2"
               >
                 Web Design
-                <span>
+                <button>
                   <svg
-                    width="20"
+                    width="15"
                     height="20"
                     viewBox="0 0 20 20"
                     fill="none"
@@ -733,14 +747,15 @@ definePageMeta({
                       fill="#3D3D3D"
                     />
                   </svg>
-                </span></button
-              ><button
-                class="text-xs flex items-center justify-center px-2 rounded-5 py-2 border gap-x-2"
+                </button>
+              </div>
+              <div
+                class="text-xs flex items-center justify-between px-2 rounded-5 py-2 border gap-x-2"
               >
                 Web Savvy
-                <span>
+                <button>
                   <svg
-                    width="20"
+                    width="15"
                     height="20"
                     viewBox="0 0 20 20"
                     fill="none"
@@ -751,14 +766,15 @@ definePageMeta({
                       fill="#3D3D3D"
                     />
                   </svg>
-                </span></button
-              ><button
-                class="text-xs flex items-center justify-center px-2 rounded-5 py-2 border gap-x-2"
+                </button>
+              </div>
+              <div
+                class="text-xs flex items-center justify-between px-2 rounded-5 py-2 border gap-x-2"
               >
                 Webflow
-                <span>
+                <button>
                   <svg
-                    width="20"
+                    width="15"
                     height="20"
                     viewBox="0 0 20 20"
                     fill="none"
@@ -769,18 +785,18 @@ definePageMeta({
                       fill="#3D3D3D"
                     />
                   </svg>
-                </span>
-              </button>
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
       <!--  -->
       <div
-        class="bg-white w-1/3 rounded-lg p-4 h-full flex items-center space-x-2"
+        class="bg-white md:w-1/3 rounded-lg p-3 h-full flex flex-col md:flex-row items-center md:space-x-2"
       >
         <div
-          class="bg-black-50 flex space-x-2 p-2 w-full items-center justify-center rounded-8"
+          class="bg-black-50 flex space-x-2 p-2 w-full items-center md:justify-center justify-between rounded-8"
         >
           <span>
             <svg
@@ -802,7 +818,7 @@ definePageMeta({
             </svg>
           </span>
           <h1 class="text-xs">Import linkedin profile</h1>
-          <span
+          <button
             ><svg
               width="24"
               height="24"
@@ -815,16 +831,16 @@ definePageMeta({
                 fill="#343330"
               />
             </svg>
-          </span>
+          </button>
         </div>
         <!--  -->
-        <div class="bg-black-200 w-px text-white">2</div>
+        <div class="bg-black-200 w-px hidden md:flex text-white">2</div>
         <!--  -->
         <div
-          class="bg-black-50 flex space-x-2 p-2 w-full items-center rounded-8"
+          class="bg-black-50 flex space-x-2 p-2 w-full items-center rounded-8 mt-2 md:mt-2 justify-between"
         >
           <h1 class="text-xs">Import from resume</h1>
-          <span
+          <button
             ><svg
               width="24"
               height="24"
@@ -837,7 +853,7 @@ definePageMeta({
                 fill="#343330"
               />
             </svg>
-          </span>
+          </button>
         </div>
       </div>
     </div>
