@@ -115,7 +115,7 @@ const loginAdmin = async () => {
               v-model="formData.email"
               :disabled="isLoading"
               @change="v$.email.$touch"
-              class="pl-2 placeholder:text-sm pr-4 h-10 outline-none border border-gray-300 rounded-md"
+              class="pl-2 placeholder:text-sm py-3.5 outline-none border border-gray-300 rounded-md"
             />
           </div>
 
@@ -129,7 +129,7 @@ const loginAdmin = async () => {
               :disabled="isLoading"
               @change="v$.password.$touch"
               title="Password should be at least 8 characters"
-              class="pl-2 placeholder:text-md pr-4 h-10 outline-none border border-gray-300 rounded-md"
+              class="pl-2 placeholder:text-md pr-4 py-3.5 outline-none border border-gray-300 rounded-md"
             />
           </div>
         </div>

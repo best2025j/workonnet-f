@@ -177,24 +177,24 @@ const loginRecruiter = async () => {
       <form
         class="flex flex-col mt-6 mx-auto items-start justify-center text-left w-full max-w-md"
       >
-        <label class="text-sm font-thin mb-2 text-left mt-4">Email</label>
+        <label class="text-base font-thin mb-2 text-left mt-4">Email</label>
         <input
           type="email"
           placeholder="Enter email address here"
           v-model="formData.email"
           :disabled="isLoading"
           @change="v$.email.$touch"
-          class="outline-none w-full text-xs placeholder:text-[#958D8D] rounded-md px-3 py-2.5 border border-black-200 border-solid"
+          class="outline-none w-full text-base placeholder:text-[#958D8D] rounded-md px-3 py-2.5 border border-black-200 border-solid"
         />
 
-        <label class="text-sm font-thin mb-2 text-left mt-4">Password</label>
+        <label class="text-base font-thin mb-2 text-left mt-4">Password</label>
         <input
           type="password"
           placeholder="Enter password"
           v-model="formData.password"
           :disabled="isLoading"
           @change="v$.password.$touch"
-          class="placeholder-custom outline-none text-xs w-full p-4 border border-solid border-black-200 rounded-lg px-3 py-2.5"
+          class="placeholder-custom text-base outline-none w-full p-4 border border-solid border-black-200 rounded-lg px-3 py-2.5"
         />
 
         <div class="flex justify-end w-full mt-2">

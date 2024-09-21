@@ -125,7 +125,7 @@ onMounted(() => {
         v-model="formData.email"
             :disabled="isLoading"
             @change="v$.email.$touch"
-         class="outline-none text-xs w-full font-thin rounded-lg px-3 py-2.5 border border-black-200 border-solid"
+         class="outline-none text-base w-full font-thin rounded-lg px-3 py-2.5 border border-black-200 border-solid"
           type="text"
           placeholder="Enter email"
         />

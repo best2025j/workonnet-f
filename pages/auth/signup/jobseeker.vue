@@ -202,7 +202,7 @@ const handleSignup = async () => {
               v-model="formData.firstName"
               :disabled="isLoading"
               @change="v$.firstName.$touch"
-              class="outline-none w-full text-xs rounded-md px-3 py-2 border border-black-200 border-solid"
+              class="outline-none w-full text-base rounded-md px-3 py-2 border border-black-200 border-solid"
             />
             <div
               class="input-errors"
@@ -220,7 +220,7 @@ const handleSignup = async () => {
               v-model="formData.lastName"
               :disabled="isLoading"
               @change="v$.lastName.$touch"
-              class="outline-none w-full text-xs rounded-md px-3 py-2 border border-black-200 border-solid"
+              class="outline-none w-full text-base rounded-md px-3 py-2 border border-black-200 border-solid"
             />
 
             <div
@@ -240,7 +240,7 @@ const handleSignup = async () => {
           v-model="formData.email"
           :disabled="isLoading"
           @change="v$.email.$touch"
-          class="outline-none w-full text-xs rounded-md px-3 py-2 border border-black-200 border-solid"
+          class="outline-none w-full text-base rounded-md px-3 py-2 border border-black-200 border-solid"
         />
 
         <div
@@ -252,7 +252,7 @@ const handleSignup = async () => {
             </div>
         </div>
        <div class="w-full">
-        <label class="text-sm font-thin text-left">Create Password </label>
+        <label class="text-base font-thin text-left">Create Password </label>
         <input
           type="password"
           placeholder="Enter new password"
@@ -260,7 +260,7 @@ const handleSignup = async () => {
           v-model="formData.password"
           :disabled="isLoading"
           @change="v$.password.$touch"
-          class="outline-none text-xs leading-5 w-full p border border-solid border-black-200 rounded-lg px-3 py-2"
+          class="outline-none text-base leading-5 w-full p border border-solid border-black-200 rounded-lg px-3 py-2"
         />
 
         <div

@@ -174,17 +174,17 @@ const handleLogin = async () => {
         class="flex flex-col mt-6 mx-auto items-start justify-center text-left w-full max-w-md"
       >
         <div class="flex flex-col w-full">
-          <label class="text-sm font-thin mb-2 text-left mt-4">Email </label>
+          <label class="text-basefont-thin mb-2 text-left mt-4">Email </label>
           <input
             type="email"
             placeholder="Enter email address here"
             v-model="formData.email"
             :disabled="isLoading"
             @change="v$.email.$touch"
-            class="outline-none text-xs w-full font-thin rounded-lg px-3 py-2.5 border border-black-200 border-solid"
+            class="outline-none text-base w-full font-thin rounded-lg px-3 py-2.5 border border-black-200 border-solid"
           />
 
-          <label class="text-sm font-thin mb-2 text-left mt-4">Password</label>
+          <label class="text-base font-thin mb-2 text-left mt-4">Password</label>
           <input
             type="password"
             placeholder="Enter password"
@@ -192,7 +192,7 @@ const handleLogin = async () => {
             v-model="formData.password"
             :disabled="isLoading"
             @change="v$.password.$touch"
-            class="outline-none text-xs w-full border border-solid border-black-200 rounded-lg px-3 py-2.5"
+            class="outline-none text-base w-full border border-solid border-black-200 rounded-lg px-3 py-2.5"
           />
           <div class="flex justify-end mt-2">
             <NuxtLink

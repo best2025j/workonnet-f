@@ -261,7 +261,7 @@ onBeforeRouteLeave(() => {
         class="flex flex-col mt-6 mx-auto items-start justify-center text-left w-full max-w-md space-y-2"
       >
        <div class="w-full">
-        <label class="text-sm font-thin mb-2 text-left mt-4"
+        <label class="text-base font-thin mb-2 text-left mt-4"
           >Company Name</label
         >
         <input
@@ -270,7 +270,7 @@ onBeforeRouteLeave(() => {
           v-model="formData.companyName"
           :disabled="isLoading"
           @change="v$.companyName.$touch"
-          class="outline-none w-full text-xs font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
+          class="outline-none w-full text-base font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
         />
 
         <div
@@ -283,13 +283,13 @@ onBeforeRouteLeave(() => {
        </div>
         <!--Company Size -->
         <div class="w-full">
-          <label class="text-sm font-thin mb-2 text-left mt-4"
+          <label class="text-base font-thin mb-2 text-left mt-4"
             >Company Size
             <select
               v-model="formData.companySize"
               :disabled="isLoading"
               @change="v$.companySize.$touch"
-              class="outline-none mt-2 bg-white w-full text-sm font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
+              class="outline-none mt-2 bg-white w-full text-base font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
             >
               Company Size
               <option value="" disabled selected>Select company size</option>
@@ -312,13 +312,13 @@ onBeforeRouteLeave(() => {
         <!--Industry -->
 
         <div class="w-full">
-          <label class="text-sm font-thin mb-2 text-left mt-4">
+          <label class="text-base font-thin mb-2 text-left mt-4">
             Industry
             <select
               v-model="formData.industry"
               :disabled="isLoading"
               @change="v$.industry.$touch"
-              class="outline-none mt-2 bg-white w-full text-sm font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
+              class="outline-none mt-2 bg-white w-full text-base font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
             >
               <option value="" disabled selected>Select Industry</option>
               <option value="Accounting & Finance">Accounting & Finance</option>
@@ -370,7 +370,7 @@ onBeforeRouteLeave(() => {
         </div>
 
         <div class="w-full">
-          <label class="text-sm font-thin mb-2 text-left mt-4"
+          <label class="text-base font-thin mb-2 text-left mt-4"
           >Company Website</label
         >
         <input
@@ -379,7 +379,7 @@ onBeforeRouteLeave(() => {
           v-model="formData.websiteUrl"
           :disabled="isLoading"
           @change="v$.websiteUrl.$touch"
-          class="outline-none w-full text-[12px] font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
+          class="outline-none w-full text-basefont-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
         />
 
           <div
@@ -391,7 +391,7 @@ onBeforeRouteLeave(() => {
             </div>
         </div>
         <div class="pt-5"></div>
-        <div class=" w-full flex space-x-2">
+        <div class="w-full flex space-x-2">
           <NuxtLink
             to="/auth/signup/recruiter"
             class="w-1/3 items-center font-light border-[#D0D5DD] text-center border-solid px-5 py-2 text-[#344054] border rounded-lg"
