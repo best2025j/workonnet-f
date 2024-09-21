@@ -9,7 +9,7 @@ definePageMeta({
 
 <template>
   <div class="h-full w-full">
-    <div class="grid w-full grid-cols-4 gap-x-4">
+    <div class="grid w-full md:grid-cols-4 gap-4">
       <div class="bg-white rounded-10 p-4">
         <div class="flex items-center justify-between">
           <div class="space-y-4">
@@ -188,18 +188,18 @@ definePageMeta({
       </div>
     </div>
     <!-- chat-->
-    <div class="h-[437px] w-full bg-white rounded-10 p-4 my-4">
+    <div class="md:h-[437px] w-full bg-white rounded-10 p-4 my-4">
       <div
-        class="flex h-full w-full items-center justify-center font-black text-2xl mx-auto"
+        class="flex h-full w-full items-center justify-center font-black md:text-2xl mx-auto"
       >
         <ChartsLine />
       </div>
     </div>
 
     <!--  list table-->
-    <div class="flex gap-x-2 h-full w-full">
+    <div class="flex flex-col md:flex-row gap-2 h-full w-full">
       <!-- first div -->
-      <div class="bg-white rounded-10 h-full w-3/5 p-4">
+      <div class="bg-white rounded-10 h-full md:w-3/5 p-4">
         <div class="flex justify-between items-center">
           <h1 class="text-sm font-black">Recruiters</h1>
           <button class="text-xs text-primary-1 flex gap-x-2 items-center">
@@ -235,7 +235,7 @@ definePageMeta({
             <div class="flex items-center space-x-3">
               <img src="/assets/images/Ellipse5.png" alt="microsoft image" />
               <div class="">
-                <h1 class="text-sm">Esther Howard</h1>
+                <h1 class="text-xs">Esther Howard</h1>
                 <h1 class="text-xs">Applied 2 days ago</h1>
               </div>
             </div>
@@ -254,15 +254,15 @@ definePageMeta({
                 />
               </svg>
 
-              <h1 class="text-sm">4.1</h1>
+              <h1 class="text-xs">4.1</h1>
             </div>
 
             <div class="">
-              <h1 class="text-sm text-success-600 font-black">Premium user</h1>
+              <h1 class="text-xs text-success-600 font-black">Premium user</h1>
             </div>
 
             <div class="">
-              <h1 class="text-sm">06 jobs posted</h1>
+              <h1 class="text-xs">06 jobs posted</h1>
             </div>
 
             <div>
@@ -397,7 +397,7 @@ definePageMeta({
             <div class="flex items-center space-x-3">
               <img src="/assets/images/Ellipse3.png" alt="microsoft image" />
               <div class="">
-                <h1 class="text-sm">Robert Fox</h1>
+                <h1 class="text-xs">Robert Fox</h1>
                 <h1 class="text-xs">Applied 2 days ago</h1>
               </div>
             </div>
@@ -416,15 +416,15 @@ definePageMeta({
                 />
               </svg>
 
-              <h1 class="text-sm">4.1</h1>
+              <h1 class="text-xs">4.1</h1>
             </div>
 
             <div class="">
-              <h1 class="text-sm text-info-600 font-black">Free plan user</h1>
+              <h1 class="text-xs text-info-600 font-black">Free plan user</h1>
             </div>
 
             <div class="">
-              <h1 class="text-sm">27 jobs posted</h1>
+              <h1 class="text-xs">27 jobs posted</h1>
             </div>
 
             <div>
@@ -559,7 +559,7 @@ definePageMeta({
             <div class="flex items-center space-x-3">
               <img src="/assets/images/Ellipse5.png" alt="microsoft image" />
               <div class="">
-                <h1 class="text-sm">Jacob Jones</h1>
+                <h1 class="text-xs">Jacob Jones</h1>
                 <h1 class="text-xs">Applied 2 days ago</h1>
               </div>
             </div>
@@ -1856,8 +1856,9 @@ definePageMeta({
           </div>
         </div>
       </div>
+
       <!-- second div -->
-      <div class="bg-white rounded-10 h-full w-2/5 p-4">
+      <div class="bg-white rounded-10 h-full md:w-2/5 p-4">
         <div class="flex justify-between items-center">
           <h1 class="text-sm font-black">Job seekers</h1>
           <button class="text-xs text-primary-1 flex gap-x-2 items-center">

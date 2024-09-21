@@ -138,7 +138,7 @@ definePageMeta({
               <div
                 class="w-32 h-32 rounded-full border-8 border-black/20"
               ></div>
-              <BtnBlueRight />
+              <BtnBlueRight class="text-xs md:text-sm" />
             </div>
 
             <div class="space-y-4">
@@ -225,7 +225,7 @@ definePageMeta({
           <!-- Profile Section -->
           <div class="flex justify-between items-center px-4">
             <h6 class="text-gray-700 font-light whitespace-nowrap">10:00 AM</h6>
-            <div class="w-full rounded-10 p-2 bg-gray-100 mx-4">
+            <div class="w-full rounded-10 p-2 bg-gray-100 md:mx-4 mx-2">
               <div class="flex items-center space-x-4">
                 <img
                   class="w-10 h-10 rounded-10"
@@ -234,7 +234,7 @@ definePageMeta({
                 />
                 <div>
                   <h6 class="font-semibold text-gray-800">Juliet Spincer</h6>
-                  <p class="text-xs text-gray-500">HR Manager at Microsoft</p>
+                  <p class="md:text-xs text-[9px] text-gray-500">HR Manager at Microsoft</p>
                 </div>
               </div>
             </div>

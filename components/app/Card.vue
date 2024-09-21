@@ -3,7 +3,7 @@
 <template>
   <div class="bg-white rounded-10 w-full mt-8 md:w-2/4">
     <div class="flex items-center justify-between border-b-2 p-3">
-      <div class="flex items-center space-x-4">
+      <div class="flex items-center space-x-2 md:space-x-4">
         <img
           src="/assets/images/SocialMedia3.png"
           alt="Google"
@@ -19,7 +19,7 @@
         </div>
       </div>
 
-      <div class="flex space-x-4 items-center relative right-5">
+      <div class="flex space-x-4 items-center relative md:right-5">
         <span
           class="px-3 py-1 rounded-10 md:text-xs text-[10px] font-black text-success-600"
           >80% match</span
@@ -32,7 +32,7 @@
     </div>
 
     <div class="md:flex justify-between items-center px-4 py-4 bg-white-100">
-      <div class="flex items-center space-x-6">
+      <div class="flex items-center md:space-x-6">
         <div class="">
           <div class="flex space-x-2 items-center mt-2 p-2">
             <svg

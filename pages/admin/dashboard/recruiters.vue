@@ -11,8 +11,8 @@ definePageMeta({
   <div class="h-full w-full">
     <div class="">
       <h1 class="text-2xl font-bold border-b-2 py-4">Recruiters</h1>
-      <div class="flex justify-between items-center border-b my-6">
-        <div class="flex items-center space-x-1 my-6">
+      <div class="flex flex-col md:flex-row justify-between items-center border-b my-6">
+        <div class="flex items-center flex-col md:flex-row space-x-1 my-6">
           <hi class="text-sm">Total registered recruiters: 106</hi>
           <!-- input search -->
           <div class="relative">
@@ -144,7 +144,7 @@ definePageMeta({
       </div>
 
       <!--  -->
-      <div class="bg-white rounded-10 h-full w-full my-4">
+      <div class="bg-white rounded-10 h-full w-full my-4 overflow-scroll">
         <!-- table custom -->
         <nav
           class="mt-4 h-10 flex items-center px-2 bg-westside-100 rounded-t-8"

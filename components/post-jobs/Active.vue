@@ -1,6 +1,6 @@
 <template>
   <div class="h-screen w-full">
-    <div class="bg-white py-4 px-4 rounded-10 space-y-4 mt-4 h-auto w-1/3">
+    <div class="bg-white py-4 px-4 rounded-10 space-y-4 mt-4 h-auto md:w-1/3">
       <div class="flex space-x-4 items-start">
         <img src="/assets/images/ms.png" alt="no pix" />
         <div class="">

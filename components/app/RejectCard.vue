@@ -5,7 +5,7 @@ export default {};
 <template>
   <div class="bg-white rounded-10 w-full md:w-2/4 my-8">
     <div class="flex items-center justify-between border-b-2 p-3">
-      <div class="flex items-center space-x-4">
+      <div class="flex items-center md:space-x-4">
         <img
           src="/assets/images/SocialMedia2.png"
           alt="Google"
@@ -29,7 +29,7 @@ export default {};
     </div>
 
     <div class="md:flex justify-between items-center px-4 py-4 bg-white-100">
-      <div class="flex items-center space-x-6">
+      <div class="flex items-center md:space-x-6">
         <div class="">
           <div class="flex space-x-2 items-center mt-2 p-2">
             <svg
