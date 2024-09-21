@@ -4,6 +4,7 @@ import "animate.css";
 
 // State to track whether the mobile side nav is open
 const isSideNavOpen = ref(false);
+const route = useRoute();
 
 // Function to toggle the side nav
 const toggleSideNav = () => {
@@ -30,7 +31,7 @@ const handleNavigation = () => {
     <nav
       class="flex flex-row-reverse md:flex-row justify-between w-full left-0 items-center md:px-[75px] px-6 h-16 text-xs fixed top-0 z-50"
       :class="[
-        $route.path === '/'
+        route.path === '/'
           ? 'bg-[#00000066] backdrop-blur-sm shadow-md'
           : 'text-black-300',
       ]"
@@ -46,7 +47,7 @@ const handleNavigation = () => {
 
       <!-- Mobile Side Nav Toggle Button (Hamburger Icon) -->
       <button @click="toggleSideNav" class="block md:hidden">
-        <svg class=""
+        <svg v-if="route.meta.pageName !==  'home'" class=""
           width="32"
           height="32"
           viewBox="0 0 32 32"
@@ -59,6 +60,7 @@ const handleNavigation = () => {
           />
         </svg>
         <svg
+        v-else
           width="32"
           height="32"
           viewBox="0 0 32 32"
