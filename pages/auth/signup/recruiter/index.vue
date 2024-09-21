@@ -169,8 +169,9 @@ onMounted(() => {
       </div>
 
       <form
-        class="flex flex-col mt-6 mx-auto items-start justify-center text-left w-full max-w-md"
+        class="flex flex-col mt-6 mx-auto items-start space-y-2 justify-center text-left w-full max-w-md"
       >
+       <div class="w-full">
         <label class="text-sm font-thin mb-2 text-left mt-4">Full Name</label>
         <input
           type="text"
@@ -180,6 +181,18 @@ onMounted(() => {
           @change="v$.lastName.$touch"
           class="outline-none w-full text-[12px] font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
         />
+
+
+        <div
+              class="input-errors"
+              v-for="error of v$.fullName.$errors"
+              :key="error.$uid"
+            >
+              <div class="text-xs text-danger-500">* {{ error.$message }}</div>
+            </div>
+       </div>
+       
+       <div class="w-full">
         <label class="text-sm font-thin mb-2 text-left mt-4">Email</label>
         <input
           type="email"
@@ -190,6 +203,16 @@ onMounted(() => {
           class="outline-none w-full text-[12px] font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
         />
 
+        <div
+              class="input-errors"
+              v-for="error of v$.email.$errors"
+              :key="error.$uid"
+            >
+              <div class="text-xs text-danger-500">* {{ error.$message }}</div>
+            </div>
+       </div>
+
+       <div class="w-full">
         <label class="text-sm font-thin mb-2 text-left mt-4">Password</label>
         <input
           type="password"
@@ -200,6 +223,16 @@ onMounted(() => {
           @change="v$.password.$touch"
           class="outline-none text-xs leading-5 w-full p border border-solid border-black-200 rounded-lg px-3 py-2"
         />
+
+        <div
+              class="input-errors"
+              v-for="error of v$.password.$errors"
+              :key="error.$uid"
+            >
+              <div class="text-xs text-danger-500">* {{ error.$message }}</div>
+            </div>
+       </div>
+       
         <div class="pt-10"></div>
         <BtnPrimary
           @click="handleNextStep()"

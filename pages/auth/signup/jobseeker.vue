@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { POSITION, useToast } from 'vue-toastification';
-import { required, helpers, email, minLength } from '@vuelidate/validators';
+import { required, helpers, email, minLength, alpha } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
 import type { ApiErrorResponse, ApiSuccessResponse } from '~/types';
 
@@ -26,9 +26,11 @@ const rules = computed(() => {
   return {
     firstName: {
       required: helpers.withMessage('Firstname is required', required),
+      alpha: helpers.withMessage('Firstname can only contain letters', alpha)
     },
     lastName: {
       required: helpers.withMessage('Lastname is required', required),
+      alpha: helpers.withMessage('Lastname can only contain letters', alpha)
     },
     email: {
       required: helpers.withMessage('Email is required', required),
@@ -36,7 +38,10 @@ const rules = computed(() => {
     },
     password: {
       required: helpers.withMessage('Please enter a password', required),
-      minLength: helpers.withMessage('Password cannot be less than 8 characters', minLength(8)),
+      minLength: helpers.withMessage(
+        'Password cannot be less than 8 characters',
+        minLength(8)
+      ),
     },
   };
 });
@@ -59,9 +64,8 @@ const handleSignup = async () => {
   }
 
   try {
-
-     await $fetch('/api/auth/jobseeker/register', {
-     method: 'POST',
+    await $fetch('/api/auth/jobseeker/register', {
+      method: 'POST',
       body: formData,
     });
 
@@ -77,8 +81,8 @@ const handleSignup = async () => {
     return router.push({
       path: '/auth/signin/jobseeker',
       query: {
-        email: formData.email
-      }
+        email: formData.email,
+      },
     });
   } catch (error: any) {
     const errorData = error.data as ApiErrorResponse;
@@ -198,8 +202,15 @@ const handleSignup = async () => {
               v-model="formData.firstName"
               :disabled="isLoading"
               @change="v$.firstName.$touch"
-              class="outline-none w-full text-xs placehoder:text-[#958D8D] rounded-md px-3 py-2 border border-black-200 border-solid"
+              class="outline-none w-full text-xs rounded-md px-3 py-2 border border-black-200 border-solid"
             />
+            <div
+              class="input-errors"
+              v-for="error of v$.firstName.$errors"
+              :key="error.$uid"
+            >
+              <div class="text-xs text-danger-500">* {{ error.$message }}</div>
+            </div>
           </div>
           <div>
             <label class="text-sm font-thin text-left">Last Name </label>
@@ -211,9 +222,18 @@ const handleSignup = async () => {
               @change="v$.lastName.$touch"
               class="outline-none w-full text-xs rounded-md px-3 py-2 border border-black-200 border-solid"
             />
+
+            <div
+              class="input-errors"
+              v-for="error of v$.lastName.$errors"
+              :key="error.$uid"
+            >
+              <div class="text-xs text-danger-500">* {{ error.$message }}</div>
+            </div>
           </div>
         </div>
-        <label class="text-sm font-thin text-left">Email </label>
+        <div class="w-full">
+          <label class="text-sm font-thin text-left">Email </label>
         <input
           type="email"
           placeholder="Enter email address here"
@@ -223,6 +243,15 @@ const handleSignup = async () => {
           class="outline-none w-full text-xs rounded-md px-3 py-2 border border-black-200 border-solid"
         />
 
+        <div
+              class="input-errors"
+              v-for="error of v$.email.$errors"
+              :key="error.$uid"
+            >
+              <div class="text-xs text-danger-500">* {{ error.$message }}</div>
+            </div>
+        </div>
+       <div class="w-full">
         <label class="text-sm font-thin text-left">Create Password </label>
         <input
           type="password"
@@ -234,6 +263,15 @@ const handleSignup = async () => {
           class="outline-none text-xs leading-5 w-full p border border-solid border-black-200 rounded-lg px-3 py-2"
         />
 
+        <div
+              class="input-errors"
+              v-for="error of v$.password.$errors"
+              :key="error.$uid"
+            >
+              <div class="text-xs text-danger-500">* {{ error.$message }}</div>
+            </div>
+        </div>
+      
         <div class="pt-5"></div>
         <BtnPrimary
           @click="handleSignup()"
