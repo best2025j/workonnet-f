@@ -30,11 +30,6 @@ const isActive = (pageName: string) => {
   return route.meta?.pageName === pageName;
 };
 </script>
-
-<!-- <template>
- 
-</template> -->
-
 <template>
   <!-- for big screen -->
   <li

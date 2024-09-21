@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const authStore = useAuthStore();
+const route = useRoute();
 
 // State to track whether the mobile side nav is open
 const isSideNavOpen = ref(false);
@@ -32,7 +33,7 @@ const toggleSideNav = () => {
     
     <div class="container mx-auto flex justify-between items-center pl-2 md:pl-0">
       <h1 class="md:text-3xl text-xl text-primary-1 font-black font-[Georgia]">
-        {{ $route?.meta?.title }}
+        {{ route?.meta?.title }}
       </h1>
 
       <!-- search input -->
