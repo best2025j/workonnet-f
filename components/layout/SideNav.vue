@@ -231,8 +231,8 @@ const isActive = (pageName: string) => {
             :to="link.to"
             :class="[
               isActive(link.pageName)
-                ? 'bg-westside-100 text-primary-1 border-primary-1 border-l-4 !pl-11 font-[900]'
-                : 'pl-12',
+                ? 'bg-westside-100 text-primary-1 border-primary-1 border-l-4 md:!pl-11 pl-5 font-[900]'
+                : 'md:pl-12 pl-6',
               'flex items-center py-4 text-xs',
             ]"
           >
