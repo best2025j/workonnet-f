@@ -12,14 +12,12 @@ definePageMeta({
   <div class="pt-4 text-black-900 w-full">
     <!-- Dashboard content goes here -->
     <div class="flex flex-col md:flex-row justify-between items-center md:pb-6">
-      <div class="space-y-3">
-        <h2 class="md:text-2xl text-sm font-black font-[Georgia]">
-          Good Morning, Stanley
-        </h2>
-        <p class="text-sm">
-          Here’s what’s happening with your Recruitment processes.
-        </p>
-      </div>
+      <div class="space-y-1 pb-2">
+      <h2 class="text-2xl font-black">Good Morning, Stanley</h2>
+      <p class="text-sm">
+        Here’s what’s happening with your job application since you joined us.
+      </p>
+    </div>
 
       <div class="w-full md:w-auto py-3">
         <nuxt-link to="/dashboard/recruiter/job/create">

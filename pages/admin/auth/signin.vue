@@ -98,7 +98,7 @@ const loginAdmin = async () => {
 <template>
   <div class="h-screen w-full">
     <div
-      class="h-3/4 relative top-16 w-1/2 py-4 flex items-center justify-center mx-auto"
+      class="md:h-3/4 relative top-16 md:w-1/2 py-4 flex items-center justify-center mx-auto"
     >
       <div class="flex flex-col space-y-3 w-[375px]">
         <div class="text-center flex-col flex items-center space-y-3">
@@ -107,7 +107,7 @@ const loginAdmin = async () => {
         </div>
 
         <div class="space-y-3">
-          <div class="flex flex-col">
+          <div class="flex flex-col w-full">
             <label for="first-name" class="text-sm mb-2">Email</label>
             <input
               type="text"

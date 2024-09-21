@@ -238,7 +238,7 @@
                 </div>
                 <!--  -->
                 <div class="">
-                  <h1 class="text-xs">25+ Awards and Recognition</h1>
+                  <h1 class="text-sm">25+ Awards and Recognition</h1>
                 </div>
               </div>
             </div>
