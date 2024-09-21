@@ -47,7 +47,8 @@ const isActive = (pageName: string) => {
       :class="[
         isActive(link.pageName)
           ? 'text-primary-1 font-black text-xs'
-          : 'text-xs text-[#1D2939]',
+          : 'text-xs',
+          route.meta.pageName === 'home' ? 'text-black-50' : 'text-[#1D2939]'
       ]"
     >
       {{ link.name }}

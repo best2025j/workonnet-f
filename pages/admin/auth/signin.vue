@@ -7,7 +7,7 @@ import type { ApiErrorResponse, ApiSuccessResponse } from '~/types';
 definePageMeta({
   title: "admin.signin",
   pageName: 'admin.signin',
-  middleware: ['no-auth']
+  middleware: ['no-auth'],
 })
 
 const router  = useRouter();
