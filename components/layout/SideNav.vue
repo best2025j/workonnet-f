@@ -163,7 +163,7 @@ const isActive = (pageName: string) => {
 <template>
   <aside class="bg-[#FFFFFF] text-black-800 min-h-screen fixed">
     <!-- logo -->
-    <div>
+    <div class="relative right-6 md:rght-0 md:left-0" >
       <img src="/assets/images/logo.png" class="w-full h-auto" alt="logo" />
     </div>
 

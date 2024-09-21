@@ -29,6 +29,7 @@ const toggleSideNav = () => {
         />
       </svg>
     </button>
+    
     <div class="container mx-auto flex justify-between items-center pl-2 md:pl-0">
       <h1 class="md:text-3xl text-xl text-primary-1 font-black font-[Georgia]">
         {{ $route?.meta?.title }}
