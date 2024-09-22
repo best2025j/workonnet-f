@@ -67,7 +67,7 @@ definePageMeta({
         </div>
         
         <!-- for mobile view -->
-        <div class="block md:hidden w-96 min-w-[210px] space-y-4">
+        <div class="block md:hidden w-full min-w-[210px] space-y-4">
           <div class="rounded-10 bg-white h-full py-3 ">
             <div
               class="px-4 flex md:block items-center space-y-2 space-x-8 md:space-x-0 md:space-y-0 md:pt-4"

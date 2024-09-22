@@ -9,10 +9,10 @@ definePageMeta({
 
 <template>
   <div class="text-black-600 w-full h-full">
-    <div class="flex flex-col md:flex-row gap-x-4">
-      <div class="md:w-2/3 h-full">
+    <div class="flex flex-col md:flex-row md:gap-x-4">
+      <div class="md:w-2/3 w-full h-full">
         <!-- social media links-->
-        <div class="bg-white p-4 rounded-10 font-[Nexa]">
+        <div class="bg-white p-4 rounded-10 font-[Nexa] md:block hidden">
           <h1 class="font-bold text-xl font-[Georgia]">Basic Information</h1>
           <p class="text-xs">
             Build trust with recruiters by verifying your social profiles
@@ -72,14 +72,80 @@ definePageMeta({
           <!-- about me -->
         </div>
         <!-- work experience -->
+
+        <div
+        class="bg-white md:w-1/3 rounded-lg p-3 h-full flex flex-col md:flex-row items-center md:space-x-2 md:hidden"
+      >
+        <div
+          class="bg-black-50 flex space-x-2 p-2 w-full items-center md:justify-center justify-between rounded-8"
+        >
+          <span>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect width="24" height="24" rx="4.8" fill="#0A66C2" />
+              <path
+                d="M5.10034 6.08908C5.10034 5.54346 5.55712 5.10059 6.1202 5.10059H17.8799C18.4432 5.10059 18.8998 5.54346 18.8998 6.08908V17.9117C18.8998 18.4574 18.4432 18.9 17.8799 18.9H6.1202C5.55718 18.9 5.10034 18.4575 5.10034 17.9118V6.08892V6.08908Z"
+                fill="white"
+              />
+              <path
+                d="M9.29385 16.6487V10.4362H7.22889V16.6487H9.29406H9.29385ZM8.2618 9.58813C8.98174 9.58813 9.42995 9.11108 9.42995 8.5149C9.41648 7.90514 8.98174 7.44141 8.27549 7.44141C7.56876 7.44141 7.10718 7.90514 7.10718 8.51485C7.10718 9.11103 7.55523 9.58808 8.24827 9.58808H8.26164L8.2618 9.58813ZM10.4368 16.6487H12.5016V13.1798C12.5016 12.9943 12.5151 12.8084 12.5696 12.676C12.7189 12.3048 13.0586 11.9207 13.6292 11.9207C14.3762 11.9207 14.6752 12.4903 14.6752 13.3256V16.6487H16.7399V13.0867C16.7399 11.1785 15.7214 10.2906 14.3628 10.2906C13.249 10.2906 12.7598 10.9131 12.488 11.3371H12.5018V10.4364H10.4369C10.4639 11.0192 10.4368 16.649 10.4368 16.649L10.4368 16.6487Z"
+                fill="#0A66C2"
+              />
+            </svg>
+          </span>
+          <h1 class="text-xs">Import linkedin profile</h1>
+          <button>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M22.5 12.75V18.75C22.5 19.1478 22.342 19.5294 22.0607 19.8107C21.7794 20.092 21.3978 20.25 21 20.25H3C2.60218 20.25 2.22064 20.092 1.93934 19.8107C1.65804 19.5294 1.5 19.1478 1.5 18.75V12.75C1.5 12.3522 1.65804 11.9706 1.93934 11.6893C2.22064 11.408 2.60218 11.25 3 11.25H6.75C6.94891 11.25 7.13968 11.329 7.28033 11.4697C7.42098 11.6103 7.5 11.8011 7.5 12C7.5 12.1989 7.42098 12.3897 7.28033 12.5303C7.13968 12.671 6.94891 12.75 6.75 12.75H3V18.75H21V12.75H17.25C17.0511 12.75 16.8603 12.671 16.7197 12.5303C16.579 12.3897 16.5 12.1989 16.5 12C16.5 11.8011 16.579 11.6103 16.7197 11.4697C16.8603 11.329 17.0511 11.25 17.25 11.25H21C21.3978 11.25 21.7794 11.408 22.0607 11.6893C22.342 11.9706 22.5 12.3522 22.5 12.75ZM11.4694 12.5306C11.539 12.6004 11.6217 12.6557 11.7128 12.6934C11.8038 12.7312 11.9014 12.7506 12 12.7506C12.0986 12.7506 12.1962 12.7312 12.2872 12.6934C12.3783 12.6557 12.461 12.6004 12.5306 12.5306L17.0306 8.03063C17.1714 7.88989 17.2504 7.69902 17.2504 7.5C17.2504 7.30098 17.1714 7.11011 17.0306 6.96937C16.8899 6.82864 16.699 6.74958 16.5 6.74958C16.301 6.74958 16.1101 6.82864 15.9694 6.96937L12.75 10.1897V2.25C12.75 2.05109 12.671 1.86032 12.5303 1.71967C12.3897 1.57902 12.1989 1.5 12 1.5C11.8011 1.5 11.6103 1.57902 11.4697 1.71967C11.329 1.86032 11.25 2.05109 11.25 2.25V10.1897L8.03063 6.96937C7.88989 6.82864 7.69902 6.74958 7.5 6.74958C7.30098 6.74958 7.11011 6.82864 6.96938 6.96938C6.82864 7.11011 6.74958 7.30098 6.74958 7.5C6.74958 7.69902 6.82864 7.88989 6.96937 8.03063L11.4694 12.5306ZM18.75 15.75C18.75 15.5275 18.684 15.31 18.5604 15.125C18.4368 14.94 18.2611 14.7958 18.0555 14.7106C17.85 14.6255 17.6238 14.6032 17.4055 14.6466C17.1873 14.69 16.9868 14.7972 16.8295 14.9545C16.6722 15.1118 16.565 15.3123 16.5216 15.5305C16.4782 15.7488 16.5005 15.975 16.5856 16.1805C16.6708 16.3861 16.815 16.5618 17 16.6854C17.185 16.809 17.4025 16.875 17.625 16.875C17.9234 16.875 18.2095 16.7565 18.4205 16.5455C18.6315 16.3345 18.75 16.0484 18.75 15.75Z"
+                fill="#343330"
+              />
+            </svg>
+          </button>
+        </div>
+        <!--  -->
+        <div class="bg-black-200 w-px hidden md:flex text-white">2</div>
+        <!--  -->
+        <div
+          class="bg-black-50 flex space-x-2 p-2 w-full items-center rounded-8 mt-2 md:mt-2 justify-between"
+        >
+          <h1 class="text-xs">Import from resume</h1>
+          <button>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M22.5 12.75V18.75C22.5 19.1478 22.342 19.5294 22.0607 19.8107C21.7794 20.092 21.3978 20.25 21 20.25H3C2.60218 20.25 2.22064 20.092 1.93934 19.8107C1.65804 19.5294 1.5 19.1478 1.5 18.75V12.75C1.5 12.3522 1.65804 11.9706 1.93934 11.6893C2.22064 11.408 2.60218 11.25 3 11.25H6.75C6.94891 11.25 7.13968 11.329 7.28033 11.4697C7.42098 11.6103 7.5 11.8011 7.5 12C7.5 12.1989 7.42098 12.3897 7.28033 12.5303C7.13968 12.671 6.94891 12.75 6.75 12.75H3V18.75H21V12.75H17.25C17.0511 12.75 16.8603 12.671 16.7197 12.5303C16.579 12.3897 16.5 12.1989 16.5 12C16.5 11.8011 16.579 11.6103 16.7197 11.4697C16.8603 11.329 17.0511 11.25 17.25 11.25H21C21.3978 11.25 21.7794 11.408 22.0607 11.6893C22.342 11.9706 22.5 12.3522 22.5 12.75ZM11.4694 12.5306C11.539 12.6004 11.6217 12.6557 11.7128 12.6934C11.8038 12.7312 11.9014 12.7506 12 12.7506C12.0986 12.7506 12.1962 12.7312 12.2872 12.6934C12.3783 12.6557 12.461 12.6004 12.5306 12.5306L17.0306 8.03063C17.1714 7.88989 17.2504 7.69902 17.2504 7.5C17.2504 7.30098 17.1714 7.11011 17.0306 6.96937C16.8899 6.82864 16.699 6.74958 16.5 6.74958C16.301 6.74958 16.1101 6.82864 15.9694 6.96937L12.75 10.1897V2.25C12.75 2.05109 12.671 1.86032 12.5303 1.71967C12.3897 1.57902 12.1989 1.5 12 1.5C11.8011 1.5 11.6103 1.57902 11.4697 1.71967C11.329 1.86032 11.25 2.05109 11.25 2.25V10.1897L8.03063 6.96937C7.88989 6.82864 7.69902 6.74958 7.5 6.74958C7.30098 6.74958 7.11011 6.82864 6.96938 6.96938C6.82864 7.11011 6.74958 7.30098 6.74958 7.5C6.74958 7.69902 6.82864 7.88989 6.96937 8.03063L11.4694 12.5306ZM18.75 15.75C18.75 15.5275 18.684 15.31 18.5604 15.125C18.4368 14.94 18.2611 14.7958 18.0555 14.7106C17.85 14.6255 17.6238 14.6032 17.4055 14.6466C17.1873 14.69 16.9868 14.7972 16.8295 14.9545C16.6722 15.1118 16.565 15.3123 16.5216 15.5305C16.4782 15.7488 16.5005 15.975 16.5856 16.1805C16.6708 16.3861 16.815 16.5618 17 16.6854C17.185 16.809 17.4025 16.875 17.625 16.875C17.9234 16.875 18.2095 16.7565 18.4205 16.5455C18.6315 16.3345 18.75 16.0484 18.75 15.75Z"
+                fill="#343330"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <!--  -->
         <div class="bg-white p-4 rounded-10 font-[Nexa] mt-6">
           <h1 class="text-xl font-black">Work Experience</h1>
           <p class="text-xs">Showcase your previous roles and experiences</p>
 
           <!-- form -->
-          <div class="border rounded-10 p-4 mt-4">
+          <div class="md:border rounded-10 md:p-4 mt-4">
             <form action="" class="">
-              <div class="md:w-3/5 p-2 space-y-2">
+              <div class="md:w-3/5 md:p-2 space-y-2">
                 <div class="flex flex-col md:flex-row gap-x-2">
                   <div class="flex flex-col w-full">
                     <label for="first-name" class="text-sm mb-2"
@@ -123,7 +189,7 @@ definePageMeta({
 
               <div class="border-b-2 py-4 w-full" />
 
-              <div class="py-4 divide-black-600 md:w-2/3 p-2 space-y-2">
+              <div class="py-4 divide-black-600 md:w-2/3 md:p-2 space-y-2">
                 <div class="flex flex-col w-full">
                   <label for="first-name" class="text-sm mb-2">Position</label>
                   <div class="relative w-full">
@@ -145,7 +211,7 @@ definePageMeta({
                 </div>
 
                 <div
-                  class="py-4 divide-black-600 grid md:grid-cols-4 items-center w-full space-x-2"
+                  class="py-4 divide-black-600 grid md:grid-cols-4 items-center w-full md:space-x-2"
                 >
                   <div class="flex flex-col w-full">
                     <label for="first-name" class="text-sm mb-2"
@@ -205,17 +271,19 @@ definePageMeta({
               </div>
 
               <div
-                class="flex flex-col md:flex-row space-y-3 md:space-x-2 text-xs pl-2"
+                class="flex flex-col w-full md:w-auto items-center md:flex-row md:space-y-0 space-x-0 space-y-3 md:space-x-3 text-xs md:pl-2"
               >
                 <button
-                  class="px-3.5 border rounded-8 py-2 bg-success-600 text-white"
+                  class="md:px-3.5 w-full md:w-auto border rounded-8 py-3 bg-success-600 text-white"
                 >
                   save
                 </button>
-                <button class="px-3.5 border text-black-600 rounded-8 py-2">
+
+                <button class="md:px-3.5 w-full md:w-auto border text-black-600 rounded-8 py-3">
                   Cancel
                 </button>
-                <button class="px-3.5 text-info-600 py-2">
+
+                <button class="md:px-3.5 w-full md:w-auto text-info-600 py-3">
                   Delete this work experience
                 </button>
               </div>
@@ -400,7 +468,7 @@ definePageMeta({
             <div
               class="flex justify-between p-4 mt-4 bg-black-50 items-center rounded-10"
             >
-              <ul class="space-y-2 pl-4">
+              <ul class="space-y-2 md:pl-4">
                 <li class="text-sm font-black text-info-600">
                   Univerisity of Lagos
                 </li>
@@ -518,7 +586,7 @@ definePageMeta({
           <h1 class="text xl font-black font-[Georgia]">Skills</h1>
           <h1 class="text-xs pt-3">Details</h1>
           <!-- grid button -->
-          <div class="border p-4">
+          <div class="md:border md:p-4">
             <div class="py-3 grid grid-cols-2 md:grid-cols-4 gap-2 w-full">
               <!-- Repeat this button element 14 times -->
               <div
@@ -791,9 +859,11 @@ definePageMeta({
           </div>
         </div>
       </div>
+
+
       <!--  -->
       <div
-        class="bg-white md:w-1/3 rounded-lg p-3 h-full flex flex-col md:flex-row items-center md:space-x-2"
+        class="bg-white md:w-1/3 rounded-lg p-3 h-full md:flex flex-col md:flex-row items-center md:space-x-2 hidden"
       >
         <div
           class="bg-black-50 flex space-x-2 p-2 w-full items-center md:justify-center justify-between rounded-8"
@@ -818,8 +888,8 @@ definePageMeta({
             </svg>
           </span>
           <h1 class="text-xs">Import linkedin profile</h1>
-          <button
-            ><svg
+          <button>
+            <svg
               width="24"
               height="24"
               viewBox="0 0 24 24"
@@ -840,8 +910,8 @@ definePageMeta({
           class="bg-black-50 flex space-x-2 p-2 w-full items-center rounded-8 mt-2 md:mt-2 justify-between"
         >
           <h1 class="text-xs">Import from resume</h1>
-          <button
-            ><svg
+          <button>
+            <svg
               width="24"
               height="24"
               viewBox="0 0 24 24"

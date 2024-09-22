@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-[#F8F7F9] h-full mt-32 md:py-20">
+  <footer class="bg-[#F8F7F9] h-full mt-32 md:px-8 md:py-20">
     <div class="md:flex w-full justify-between p-6 items-start">
       <div class="flex w-28 space-y-3 flex-col">
         <h1 class="text-base font-black">Workonnect</h1>

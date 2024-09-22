@@ -84,32 +84,32 @@ definePageMeta({
       <div
         class="p-2 h-20 mx-auto justify-center flex-col flex bg-white rounded-10 w-full text-center"
       >
-        <h1 class="text-[10px] md:text-sm">Experience Level</h1>
-        <p class="font-black text-[10px] md:text-base">Intermediate</p>
+        <h1 class="text-sm">Experience Level</h1>
+        <p class="font-black text-base">Intermediate</p>
       </div>
       <div
         class="p-2 h-20 mx-auto justify-center flex-col flex bg-white rounded-10 w-full text-center"
       >
-        <h1 class="text-[10px] md:text-sm">Job Type</h1>
-        <p class="font-black text-[10px] md:text-base">Contract</p>
+        <h1 class="text-sm">Job Type</h1>
+        <p class="font-black text-base">Contract</p>
       </div>
       <div
         class="p-2 h-20 mx-auto justify-center flex-col flex bg-white rounded-10 w-full text-center"
       >
-        <h1 class="text-[10px] md:text-sm">Work Type</h1>
-        <p class="font-black text-[10px] md:text-base">Remote</p>
+        <h1 class="text-sm">Work Type</h1>
+        <p class="font-black text-base">Remote</p>
       </div>
       <div
         class="p-2 h-20 mx-auto justify-center flex-col flex bg-white rounded-10 w-full text-center"
       >
-        <h1 class="text-[10px] md:text-sm">Salary</h1>
-        <p class="font-black text-[10px] md:text-base">$5,000/month</p>
+        <h1 class="text-sm">Salary</h1>
+        <p class="font-black text-base">$5,000/month</p>
       </div>
       <div
         class="p-2 h-20 mx-auto justify-center flex-col flex bg-white rounded-10 w-full text-center"
       >
-        <h1 class="text-[10px] md:text-sm">Location</h1>
-        <p class="font-black text-[10px] md:text-base">London, UK</p>
+        <h1 class="text-sm">Location</h1>
+        <p class="font-black text-base">London, UK</p>
       </div>
     </div>
 
@@ -229,7 +229,7 @@ definePageMeta({
         <div class="py-4 space-y-4">
           <div class="bg-white rounded-10 w-full">
             <div class="flex items-center justify-between border-b-2 p-3">
-              <div class="flex items-center space-x-4">
+              <div class="flex items-center md:space-x-4">
                 <img
                   src="/assets/images/SocialMedia.png"
                   alt="Google"
@@ -245,7 +245,7 @@ definePageMeta({
                 </div>
               </div>
 
-              <div class="flex space-x-4 items-center relative right-5">
+              <div class="flex md:space-x-4 items-center relative md:right-5">
                 <span
                   class="px-3 py-1 rounded-10 text-xs font-black text-success-600"
                   >80% match</span
@@ -370,7 +370,7 @@ definePageMeta({
 
           <div class="bg-white rounded-10 w-full">
             <div class="flex items-center justify-between border-b-2 p-3">
-              <div class="flex items-center space-x-4">
+              <div class="flex items-center md:space-x-4">
                 <img
                   src="/assets/images/SocialMedia3.png"
                   alt="Google"
@@ -386,7 +386,7 @@ definePageMeta({
                 </div>
               </div>
 
-              <div class="flex space-x-4 items-center relative right-5">
+              <div class="flex md:space-x-4 items-center relative md:right-5">
                 <span
                   class="px-3 py-1 rounded-10 text-xs font-black text-success-600"
                   >80% match</span
@@ -511,7 +511,7 @@ definePageMeta({
 
           <div class="bg-white rounded-10 w-full">
             <div class="flex items-center justify-between border-b-2 p-3">
-              <div class="flex items-center space-x-4">
+              <div class="flex items-center md:space-x-4">
                 <img
                   src="/assets/images/SocialMedia2.png"
                   alt="Google"
@@ -527,7 +527,7 @@ definePageMeta({
                 </div>
               </div>
 
-              <div class="flex space-x-4 items-center relative right-5">
+              <div class="flex md:space-x-4 items-center relative md:right-5">
                 <span
                   class="px-3 py-1 rounded-10 text-xs font-black text-success-600"
                   >80% match</span

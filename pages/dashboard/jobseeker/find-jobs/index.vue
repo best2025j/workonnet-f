@@ -313,7 +313,7 @@ const handleLayoutChange = (newLayout: CARD_LAYOUT) => {
     </div>
 
     <!--  second div-->
-    <div class="bg-white md:w-[35%] w-full h-full rounded-10">
+    <div class="bg-white md:w-[35%] w-full h-full hidden md:block rounded-10">
       <div class="flex items-center flex-col space-y-3 py-4 border-b-2">
         <img src="/assets/images/ms.png" alt="" />
         <h1 class="text base font-black">Social Media Assistant</h1>

@@ -133,8 +133,6 @@ const isActive = (currentTab: TABS) => route?.query?.tab === currentTab;
         class="bg-white rounded-8 px-4 flex h-full w-full md:hidden justify-between items-center"
       >
         <div class="flex space-x-4 items-center">
-          <h1 class="text-sm">Total Candidates</h1>
-
           <span class=""
             ><svg
               width="32"
@@ -149,6 +147,7 @@ const isActive = (currentTab: TABS) => route?.query?.tab === currentTab;
               />
             </svg>
           </span>
+          <h1 class="text-sm">Total Candidates</h1>
         </div>
         <p class="text-sm font-black font-[Georgia]">72</p>
       </div>
@@ -157,8 +156,6 @@ const isActive = (currentTab: TABS) => route?.query?.tab === currentTab;
         class="bg-white rounded-8 px-4 flex h-full w-full md:hidden justify-between items-center"
       >
         <div class="flex space-x-4 items-center">
-          <h1 class="text-sm">Total Hired Candidates</h1>
-
           <span class=""
             ><svg
               width="32"
@@ -173,6 +170,7 @@ const isActive = (currentTab: TABS) => route?.query?.tab === currentTab;
               />
             </svg>
           </span>
+          <h1 class="text-sm">Total Hired Candidates</h1>
         </div>
         <p class="text-sm font-black font-[Georgia]">12</p>
       </div>
@@ -181,8 +179,6 @@ const isActive = (currentTab: TABS) => route?.query?.tab === currentTab;
         class="bg-white rounded-8 px-4 flex h-full w-full md:hidden justify-between items-center"
       >
         <div class="flex space-x-4 items-center">
-          <h1 class="text-sm">Rejected Candidates</h1>
-
           <span class=""
             ><svg
               width="32"
@@ -197,6 +193,7 @@ const isActive = (currentTab: TABS) => route?.query?.tab === currentTab;
               />
             </svg>
           </span>
+          <h1 class="text-sm">Rejected Candidates</h1>
         </div>
         <p class="text-sm font-black font-[Georgia]">45</p>
       </div>
@@ -205,8 +202,6 @@ const isActive = (currentTab: TABS) => route?.query?.tab === currentTab;
         class="bg-white rounded-8 px-4 flex h-full w-full md:hidden justify-between items-center"
       >
         <div class="flex space-x-4 items-center">
-          <h1 class="text-sm">Interviewed Candidates</h1>
-
           <span class=""
             ><svg
               width="32"
@@ -221,6 +216,7 @@ const isActive = (currentTab: TABS) => route?.query?.tab === currentTab;
               />
             </svg>
           </span>
+          <h1 class="text-sm">Interviewed Candidates</h1>
         </div>
         <p class="text-sm font-black font-[Georgia]">64</p>
       </div>
@@ -245,7 +241,7 @@ const isActive = (currentTab: TABS) => route?.query?.tab === currentTab;
                 {{ link.name }}
                 <span
                   v-if="link.badge"
-                  class="ml-1 md:text-xs text-[9px] bg-primary-1 text-white rounded-full px-1.5 md:px-2 md:py-0.5"
+                  class="ml-1 md:text-xs text-[9px] bg-primary-1 text-white rounded-full px-1 md:px-2 md:py-0.5"
                 >
                   {{ link.badge }}
                 </span>
@@ -260,7 +256,7 @@ const isActive = (currentTab: TABS) => route?.query?.tab === currentTab;
 
           <!-- white svg -->
           <button
-            class="text-black-950 border-2 dropdown dropdown-bottom dropdown-end md:px-4 px-2 py-2 flex gap-2  items-center border-black-100 rounded-8"
+            class="text-black-950 border-2 dropdown dropdown-bottom dropdown-end md:px-4 px-2 py-2 flex gap-2 items-center border-black-100 rounded-8"
           >
             <h1 class="text-[10px] md:text-sm">Filter by</h1>
             <span tabindex="0" role="button" class="bg-white">
@@ -1039,7 +1035,9 @@ const isActive = (currentTab: TABS) => route?.query?.tab === currentTab;
         </div>
 
         <!-- button for pagenations -->
-        <div class="flex gap-2 justify-center items- py-4 md:text-sm text-[10px]">
+        <div
+          class="flex gap-2 justify-center items- py-4 md:text-sm text-[10px]"
+        >
           <button class="py-2 px-4 rounded-10 border bg-black-400">
             <svg
               width="9"

@@ -9,20 +9,22 @@ definePageMeta({
 </script>
 
 <template>
-  <div class="pt-4 text-black-900 w-full">
+  <div class="md:pt-4 text-black-900 w-full">
     <!-- Dashboard content goes here -->
-    <div class="flex flex-col md:flex-row justify-between items-center md:pb-6">
+    <div
+      class="flex flex-col-reverse md:flex-row justify-between items-center md:pb-6"
+    >
       <div class="space-y-1 pb-2">
-      <h2 class="text-2xl font-black">Good Morning, Stanley</h2>
-      <p class="text-sm">
-        Here’s what’s happening with your job application since you joined us.
-      </p>
-    </div>
+        <h2 class="text-2xl font-black">Good Morning, Stanley</h2>
+        <p class="text-sm">
+          Here’s what’s happening with your job application since you joined us.
+        </p>
+      </div>
 
-      <div class="w-full md:w-auto py-3">
+      <div class="self-end pb-4">
         <nuxt-link to="/dashboard/recruiter/job/create">
           <button
-            class="md:px-4 w-full p-3 text-xs flex bg-primary-1 gap-x-2 rounded-8 text-white items-center justify-center"
+            class="px-4 py-3 text-xs flex bg-primary-1 gap-x-2 rounded-8 text-white items-center justify-center"
           >
             <svg
               width="16"
@@ -48,7 +50,7 @@ definePageMeta({
       <div class="flex flex-col md:flex-row md:space-x-4 md:w-3/5 items-center">
         <!-- destop -->
         <div class="space-y-2 hidden md:block">
-          <div class="rounded-10 w-full md:w-[210px] bg-white h-auto">
+          <div class="rounded-10 w-full md:w-[310px] bg-white h-auto">
             <div class="px-4 space-y-2 pt-2">
               <h3 class="text-base whitespace-nowrap font-black">
                 Total Jobs Created
@@ -64,7 +66,7 @@ definePageMeta({
             </div>
           </div>
 
-          <div class="rounded-10 w-full md:w-[210px] bg-white h-auto">
+          <div class="rounded-10 w-full md:w-[310px] bg-white h-auto">
             <div class="px-4 space-y-2 pt-2">
               <h3 class="text-base whitespace-nowrap font-black">
                 Total Interviewed
@@ -80,9 +82,10 @@ definePageMeta({
             </div>
           </div>
         </div>
+
         <!-- for mobile view -->
         <div
-          class="flex flex-col md:hidden w-96 min-w-[210px] space-y-4 px-4 py-3"
+          class="flex flex-col md:hidden w-full min-w-[210px] space-y-4 py-3"
         >
           <div class="rounded-10 bg-white h-full py-3">
             <div
@@ -148,14 +151,18 @@ definePageMeta({
         </div>
 
         <!--  -->
-        <div class="font-[Nexa] bg-[#FFFFFF] w-full rounded-10 px-4 py-4 h-full md:h-72">
+        <div
+          class="font-[Nexa] bg-[#FFFFFF] w-full rounded-10 px-4 py-4 h-full md:h-72"
+        >
           <h3 class="font-black">Latest Job Posting</h3>
           <div class="flex gap-4 items-center">
             <div class="flex flex-col items-center pt-6 space-y-2">
               <div class="space-y-4">
                 <img src="/assets/images/ms.png" alt="" />
 
-                <div class="flex justify-between items-start">
+                <div
+                  class="flex flex-col md:flex-row justify-between items-start"
+                >
                   <div>
                     <h1 class="text-base font-black">Press Secretary</h1>
                     <hw class="text-xs">2 hours ago</hw>
@@ -168,7 +175,9 @@ definePageMeta({
 
                 <div class="flex justify-between h-full w-full items-center">
                   <div>
-                    <h1 class="md:text-sm text-xs md:flex hidden md:w-5/6 w-full">
+                    <h1
+                      class="md:text-sm text-xs md:w-5/6 w-full"
+                    >
                       Lorem ipsum dolor sit amet consectetur. Gravida volutpat
                       lobortis scelerisque nunc eget scelerisque lectus ante
                       augue. Quis eros lacus sed quisque in sagittis tempus mus
@@ -176,7 +185,7 @@ definePageMeta({
                     </h1>
                   </div>
                   <!--clip  icon -->
-                  <div class="md:pt-6 relative top-10 md:top-0">
+                  <div class="md:pt-6 relative top-3 md:top-0">
                     <h1><IconsClipboardIcon /></h1>
                   </div>
                 </div>

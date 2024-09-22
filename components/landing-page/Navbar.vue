@@ -29,15 +29,37 @@ const handleNavigation = () => {
   <!-- Navbar -->
   <div class="pb-4">
     <nav
-      class="flex flex-row-reverse md:flex-row justify-between w-full left-0 items-center md:px-[75px] px-6 h-16 text-xs fixed top-0 z-50"
+      class="flex flex-row-reverse md:flex-row justify-between w-full left-0 items-center md:px-8 px-6 h-16 text-xs fixed top-0 z-50"
       :class="[
         route.path === '/'
           ? 'bg-[#00000066] backdrop-blur-sm shadow-md'
           : 'text-black-300',
       ]"
     >
-      <div>
+      <div class="md:flex hidden">
         <img src="/assets/images/logo3.png" alt="Logo" class="" />
+      </div>
+
+      <div class="space-x-3 md:hidden">
+        <button
+          v-if="authStore.$state.isAuthenticated"
+          @click="handleNavigation()"
+          class="text-white py-2 px-4 rounded-8 bg-primary-1"
+        >
+          Dashboard
+        </button>
+        <button
+          v-if="!authStore.$state.isAuthenticated"
+          class="text-white py-2 px-4 rounded-8 bg-primary-1"
+        >
+          Register
+        </button>
+        <button
+          v-if="!authStore.$state.isAuthenticated"
+          class="bg-gray-200 text-primary-1 py-2 px-4 rounded-8 hover:bg-gray-300"
+        >
+          Login
+        </button>
       </div>
 
       <!-- Desktop Nav Links -->
@@ -47,7 +69,9 @@ const handleNavigation = () => {
 
       <!-- Mobile Side Nav Toggle Button (Hamburger Icon) -->
       <button @click="toggleSideNav" class="block md:hidden">
-        <svg v-if="route.meta.pageName !==  'home'" class=""
+        <svg
+          v-if="route.meta.pageName !== 'home'"
+          class=""
           width="32"
           height="32"
           viewBox="0 0 32 32"
@@ -60,7 +84,7 @@ const handleNavigation = () => {
           />
         </svg>
         <svg
-        v-else
+          v-else
           width="32"
           height="32"
           viewBox="0 0 32 32"
@@ -109,7 +133,7 @@ const handleNavigation = () => {
       @click="toggleSideNav"
       class="fixed inset-0 bg-black-50 w-56 -[#E7E7E7] md:hidden animate__animated animate__fadeInLeft shadow-md z-40 flex rounded-r-[20px] flex-col pt-10 space-y-10 h-[70%] justify-start"
     >
-      <img src="/assets/images/logo3.png" class="w-32 h-auto pl-3" alt="" />
+      <!-- <img src="/assets/images/logo3.png" class="w-32 h-auto pl-3" alt="" /> -->
       <!-- Nav Links for Mobile -->
       <ul class="flex flex-col space-y-4 px-4 text-black-50 justify-between">
         <LandingPageNavbarLinks />
@@ -127,26 +151,6 @@ const handleNavigation = () => {
           >
             Login
           </button> -->
-
-          <button
-            v-if="authStore.$state.isAuthenticated"
-            @click="handleNavigation()"
-            class="text-white py-2 px-4 rounded-8 bg-primary-1"
-          >
-            Dashboard
-          </button>
-          <button
-            v-if="!authStore.$state.isAuthenticated"
-            class="text-white py-2 px-4 rounded-8 bg-primary-1"
-          >
-            Register
-          </button>
-          <button
-            v-if="!authStore.$state.isAuthenticated"
-            class="bg-gray-200 text-primary-1 py-2 px-4 rounded-8 hover:bg-gray-300"
-          >
-            Login
-          </button>
         </div>
       </ul>
     </div>

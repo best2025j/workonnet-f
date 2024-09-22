@@ -1,3 +1,10 @@
+<script setup lang="ts">
+// const backgroundStyle = {
+//   backgroundImage: `url(${require("@/assets/images//mate2.png")})`,
+//   height: "400px",
+// };
+</script>
+
 <template>
   <div class="h-full w-full md:px-8">
     <!-- grid divider vertical using daisy ui -->
@@ -46,7 +53,7 @@
         <img src="/assets/images/crop.png" class="w-full md:hidden" alt="" />
         <!-- input -->
         <div
-          class="text-white absolute w-full h-full top-0 pt-[370px] md:pt-[280px] px-6 space-y-4 flex justify-end md:pr-20"
+          class="text-white absolute w-full h-full top-0 pt-[370px] md:pt-[230px] px-6 space-y-4 flex justify-end md:pr-20"
         >
           <!--  -->
           <div
@@ -139,6 +146,7 @@
         </div>
       </div>
     </div>
+    <!--  -->
   </div>
 </template>
 

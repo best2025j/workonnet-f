@@ -1,11 +1,11 @@
 <template>
-  <div class="bg-[#FFFFFF] text-black-800 h-full w-screen md:w-auto">
+  <div class="bg-[#FFFFFF] text-black-800 h-full w-full md:w-auto">
     <div class="p-4 top-16 w-full fixed bg-white left-0 md:static z-auto">
       <h1 class="font-black text-xl">Messages</h1>
     </div>
 
     <div
-      class="overflow-y-auto w-full mt-10 md:mt-0 md:h-[calc(100%-120px)] h-screen pb-6 scrollbar-hide"
+      class="overflow-y-auto w-full mt-10 md:mt-0 md:h-[calc(100%-120px)] pb-6"
     >
       <div class="flex items-start justify-between p-4 border w-full">
         <div class="space-x-3 flex">

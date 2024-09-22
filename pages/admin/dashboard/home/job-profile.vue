@@ -3,7 +3,7 @@ definePageMeta({
   title: "Jobs",
   pageName: "admin.dashboard.job-profile",
   layout: "dashboard",
-  middleware: ['auth', 'is-admin']
+  middleware: ["auth", "is-admin"],
 });
 </script>
 
@@ -15,11 +15,11 @@ definePageMeta({
         class="w-full"
         alt="no image yet..."
       />
-      <div class="-mt-12 pl-6 space-y-2">
+      <div class="md-mt-12 md:pl-6 space-y-2">
         <img src="/assets/images/sportify.png" alt="profile-image" />
-        <div class="flex justify-between">
+        <div class="flex flex-col md:flex-row justify-between">
           <div class="space-y-2">
-            <div class="flex items-center space-x-6">
+            <div class="flex flex-col md:flex-row items-center md:space-x-6">
               <h1 class="font-black text-base">Full-Time UI/UX Designer</h1>
               <div class="space-x-2 flex items-center">
                 <svg
@@ -62,7 +62,7 @@ definePageMeta({
               <h1 class="text-lg font-black">$5,000/month</h1>
             </div>
 
-            <div class="flex justify-end space-x-4">
+            <div class="flex flex-col md:flex-row justify-end space-x-4">
               <button
                 class="px-4 py-2 flex gap-x-2 items-center rounded-8 border-info-600 border text-info-600 text-xs"
               >
@@ -124,7 +124,9 @@ definePageMeta({
     </div>
 
     <!-- levels -->
-    <div class="py-4 flex items-center justify-center w-full space-x-4">
+    <div
+      class="py-4 flex flex-col md:flex-row items-center justify-center w-full space-x-4"
+    >
       <div
         class="p-2 h-20 mx-auto justify-center flex-col flex bg-white rounded-10 w-full text-center"
       >
@@ -158,8 +160,8 @@ definePageMeta({
     </div>
 
     <!-- about the company -->
-    <div class="gap-x-4 flex">
-      <div class="bg-white p-4 rounded-10 h-full w-2/3">
+    <div class="gap-x-4 flex md:flex-row flex-col">
+      <div class="bg-white p-4 rounded-10 h-full md:w-2/3">
         <div class="space-y-2 py-2">
           <h1 class="font-black">About the company</h1>
           <p class="text-sm tracking-wider">
@@ -251,7 +253,7 @@ definePageMeta({
       </div>
 
       <!-- second div -->
-      <div class="bg-white px-4 py-4 w-1/3 rounded-10">
+      <div class="bg-white px-4 py-4 md:w-1/3 rounded-10">
         <div class="flex items-center justify-between py-2">
           <h1 class="text-sm font-black">Candidates</h1>
           <button class="text-xs text-primary-1 flex gap-x-2 items-center">
@@ -369,7 +371,9 @@ definePageMeta({
                             />
                           </svg>
                         </span>
-                        <button class="" onclick="my_modal_1.showModal()">View</button>
+                        <button class="" onclick="my_modal_1.showModal()">
+                          View
+                        </button>
 
                         <!--  -->
                         <dialog
@@ -1810,4 +1814,4 @@ definePageMeta({
       </div>
     </div>
   </div>
-</template>   
+</template>

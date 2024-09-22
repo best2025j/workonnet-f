@@ -14,7 +14,7 @@
         </div>
 
         <div
-          class="text-white absolute top-0 h-full w-full pt-44 md:pt-24 px-8 space-y-4 md:flex justify-between"
+          class="text-white absolute top-0 h-full w-full pt-44 md:pt-24 md:px-8 px-6 space-y-4 md:flex justify-between"
         >
           <div class=" md:mt-72 justify-center md:block flex flex-col items-center">
             <h1 class="font-black md:text-xl text-base">
@@ -61,6 +61,8 @@
 
               <img src="/assets/images/Logo2.png" alt="" />
             </div>
+
+            
             <!-- input -->
             <form class="md:py-4 space-y-2">
               <div class="flex flex-col w-full">
