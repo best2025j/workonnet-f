@@ -283,23 +283,28 @@ onBeforeRouteLeave(() => {
        </div>
         <!--Company Size -->
         <div class="w-full">
-          <label class="text-base font-thin mb-2 text-left mt-4"
-            >Company Size
-            <select
-              v-model="formData.companySize"
-              :disabled="isLoading"
-              @change="v$.companySize.$touch"
-              class="outline-none mt-2 bg-white w-full text-base font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
-            >
-              Company Size
-              <option value="" disabled selected>Select company size</option>
-              <option value="0-10">0-10</option>
-              <option value="11-50">11-50</option>
-              <option value="51-100">51-100</option>
-              <option value="101-500">101-500</option>
-              <option value="500+">500+</option>
-            </select>
-          </label>
+          
+          <div class="relative mt-2">
+            <label>Comapny Size</label>
+    <select 
+      v-model="formData.companySize"
+      :disabled="isLoading"
+      @change="v$.companySize.$touch"
+      class="outline-none bg-white w-full text-base font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid pr-8"
+    >
+      <option value="" disabled selected>Select company size</option>
+      <option value="0-10">0-10</option>
+      <option value="11-50">11-50</option>
+      <option value="51-100">51-100</option>
+      <option value="101-500">101-500</option>
+      <option value="500+">500+</option>
+    </select>
+    <div class="absolute right-3 top-12 transform -translate-y-1/2  pointer-events-none">
+      <svg width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M13.6925 1.94219L7.44254 8.19219C7.38449 8.2503 7.31556 8.2964 7.23969 8.32785C7.16381 8.3593 7.08248 8.37549 7.00035 8.37549C6.91821 8.37549 6.83688 8.3593 6.76101 8.32785C6.68514 8.2964 6.61621 8.2503 6.55816 8.19219L0.30816 1.94219C0.190885 1.82491 0.125 1.66585 0.125 1.5C0.125 1.33415 0.190885 1.17509 0.30816 1.05781C0.425435 0.940537 0.584495 0.874653 0.750347 0.874653C0.9162 0.874653 1.07526 0.940537 1.19253 1.05781L7.00035 6.86641L12.8082 1.05781C12.8662 0.999744 12.9352 0.953681 13.011 0.922254C13.0869 0.890828 13.1682 0.874653 13.2503 0.874653C13.3325 0.874653 13.4138 0.890828 13.4897 0.922254C13.5655 0.953681 13.6345 0.999744 13.6925 1.05781C13.7506 1.11588 13.7967 1.18482 13.8281 1.26069C13.8595 1.33656 13.8757 1.41788 13.8757 1.5C13.8757 1.58212 13.8595 1.66344 13.8281 1.73931C13.7967 1.81518 13.7506 1.88412 13.6925 1.94219Z" fill="#343330"/>
+</svg>
+    </div>
+  </div>
 
           <div
               class="input-errors"
@@ -312,6 +317,7 @@ onBeforeRouteLeave(() => {
         <!--Industry -->
 
         <div class="w-full">
+          <div class="relative mt-2">
           <label class="text-base font-thin mb-2 text-left mt-4">
             Industry
             <select
@@ -358,7 +364,14 @@ onBeforeRouteLeave(() => {
               <option value="Real Estate">Real Estate</option>
               <option value="Nonprofit & Charity">Nonprofit & Charity</option>
             </select>
+            <div class="absolute right-3 top-[3.3rem] transform -translate-y-1/2  pointer-events-none">
+      <svg width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M13.6925 1.94219L7.44254 8.19219C7.38449 8.2503 7.31556 8.2964 7.23969 8.32785C7.16381 8.3593 7.08248 8.37549 7.00035 8.37549C6.91821 8.37549 6.83688 8.3593 6.76101 8.32785C6.68514 8.2964 6.61621 8.2503 6.55816 8.19219L0.30816 1.94219C0.190885 1.82491 0.125 1.66585 0.125 1.5C0.125 1.33415 0.190885 1.17509 0.30816 1.05781C0.425435 0.940537 0.584495 0.874653 0.750347 0.874653C0.9162 0.874653 1.07526 0.940537 1.19253 1.05781L7.00035 6.86641L12.8082 1.05781C12.8662 0.999744 12.9352 0.953681 13.011 0.922254C13.0869 0.890828 13.1682 0.874653 13.2503 0.874653C13.3325 0.874653 13.4138 0.890828 13.4897 0.922254C13.5655 0.953681 13.6345 0.999744 13.6925 1.05781C13.7506 1.11588 13.7967 1.18482 13.8281 1.26069C13.8595 1.33656 13.8757 1.41788 13.8757 1.5C13.8757 1.58212 13.8595 1.66344 13.8281 1.73931C13.7967 1.81518 13.7506 1.88412 13.6925 1.94219Z" fill="#343330"/>
+</svg>
+    </div>
           </label>
+          </div>
+
 
           <div
               class="input-errors"
