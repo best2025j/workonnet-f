@@ -29,7 +29,7 @@ const handleNavigation = () => {
   <!-- Navbar -->
   <div class="pb-4">
     <nav
-      class="flex flex-row-reverse md:flex-row justify-between w-full left-0 items-center md:px-8 px-6 h-16 text-xs fixed top-0 z-50"
+      class="flex flex-row-reverse md:flex-row justify-between w-full left-0 items-center md:px-12 px-6 h-16 text-xs fixed top-0 z-50"
       :class="[
         route.path === '/'
           ? 'bg-[#00000066] backdrop-blur-sm shadow-md'
