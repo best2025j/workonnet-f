@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import { POSITION, useToast } from 'vue-toastification';
-import { required, helpers, email, minLength, alpha } from '@vuelidate/validators';
+import {
+  required,
+  helpers,
+  email,
+  minLength,
+  alpha,
+} from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
 import type { ApiErrorResponse, ApiSuccessResponse } from '~/types';
 
@@ -14,6 +20,7 @@ definePageMeta({
 const router = useRouter();
 const toast = useToast();
 const isLoading = ref<boolean>(false);
+const authStore = useAuthStore();
 
 const formData = reactive({
   firstName: '',
@@ -26,11 +33,11 @@ const rules = computed(() => {
   return {
     firstName: {
       required: helpers.withMessage('Firstname is required', required),
-      alpha: helpers.withMessage('Firstname can only contain letters', alpha)
+      alpha: helpers.withMessage('Firstname can only contain letters', alpha),
     },
     lastName: {
       required: helpers.withMessage('Lastname is required', required),
-      alpha: helpers.withMessage('Lastname can only contain letters', alpha)
+      alpha: helpers.withMessage('Lastname can only contain letters', alpha),
     },
     email: {
       required: helpers.withMessage('Email is required', required),
@@ -69,18 +76,22 @@ const handleSignup = async () => {
       body: formData,
     });
 
-    toast.success('Signup successful, Please login', {
-      timeout: 3000,
-      position: POSITION.TOP_RIGHT,
+    const loginResponse = await $fetch('/api/auth/jobseeker/authenticate', {
+      method: 'POST',
+      body: { password: formData.password, email: formData.email },
     });
+
+    const responseData = loginResponse as ApiSuccessResponse;
+    authStore.setLoginSecret(responseData.data.accessToken);
 
     setTimeout(() => {
       isLoading.value = false;
-    }, 500);
+    }, 1000);
 
     return router.push({
-      path: '/auth/signin/jobseeker',
+      path: '/auth/activation-code',
       query: {
+        tk: responseData.data.accessToken,
         email: formData.email,
       },
     });
@@ -234,44 +245,44 @@ const handleSignup = async () => {
         </div>
         <div class="w-full">
           <label class="text-sm font-thin text-left">Email </label>
-        <input
-          type="email"
-          placeholder="Enter email address here"
-          v-model="formData.email"
-          :disabled="isLoading"
-          @change="v$.email.$touch"
-          class="outline-none w-full text-base rounded-md px-3 py-2 border border-black-200 border-solid"
-        />
+          <input
+            type="email"
+            placeholder="Enter email address here"
+            v-model="formData.email"
+            :disabled="isLoading"
+            @change="v$.email.$touch"
+            class="outline-none w-full text-base rounded-md px-3 py-2 border border-black-200 border-solid"
+          />
 
-        <div
-              class="input-errors"
-              v-for="error of v$.email.$errors"
-              :key="error.$uid"
-            >
-              <div class="text-xs text-danger-500">* {{ error.$message }}</div>
-            </div>
+          <div
+            class="input-errors"
+            v-for="error of v$.email.$errors"
+            :key="error.$uid"
+          >
+            <div class="text-xs text-danger-500">* {{ error.$message }}</div>
+          </div>
         </div>
-       <div class="w-full">
-        <label class="text-base font-thin text-left">Create Password </label>
-        <input
-          type="password"
-          placeholder="Enter new password"
-          pattern=".{8,}"
-          v-model="formData.password"
-          :disabled="isLoading"
-          @change="v$.password.$touch"
-          class="outline-none text-base leading-5 w-full p border border-solid border-black-200 rounded-lg px-3 py-2"
-        />
+        <div class="w-full">
+          <label class="text-base font-thin text-left">Create Password </label>
+          <input
+            type="password"
+            placeholder="Enter new password"
+            pattern=".{8,}"
+            v-model="formData.password"
+            :disabled="isLoading"
+            @change="v$.password.$touch"
+            class="outline-none text-base leading-5 w-full p border border-solid border-black-200 rounded-lg px-3 py-2"
+          />
 
-        <div
-              class="input-errors"
-              v-for="error of v$.password.$errors"
-              :key="error.$uid"
-            >
-              <div class="text-xs text-danger-500">* {{ error.$message }}</div>
-            </div>
+          <div
+            class="input-errors"
+            v-for="error of v$.password.$errors"
+            :key="error.$uid"
+          >
+            <div class="text-xs text-danger-500">* {{ error.$message }}</div>
+          </div>
         </div>
-      
+
         <div class="pt-5"></div>
         <BtnPrimary
           @click="handleSignup()"
