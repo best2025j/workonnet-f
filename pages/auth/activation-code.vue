@@ -21,6 +21,7 @@ const route = useRoute();
 const router = useRouter();
 
 const authStore = useAuthStore();
+const userStore = useUserStore();
 
 const handleOnComplete = (value: string) => {
   formData.code = value;
@@ -52,6 +53,16 @@ const rules = computed(() => {
 });
 
 const v$ = useVuelidate(rules, formData);
+
+const getUserProfile = async (token: string) => {
+  try {
+    const resp = await userStore.$api.refreshAuthUserProfile(token);
+    const responseData = resp as ApiSuccessResponse;
+    userStore.setUserDetails(responseData)
+  } catch (e) {
+    console.log(e);
+  }
+};
 
 const verifyCode = async () => {
   isLoading.value = true;
@@ -94,6 +105,7 @@ const verifyCode = async () => {
     }, 1000);
     authStore.setLoginSecret(null);
 
+    await getUserProfile(responseData.data.accessToken)
     setTimeout(() => {
       router.push("/dashboard/jobseeker");
     }, 3000);

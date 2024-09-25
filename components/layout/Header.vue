@@ -1,5 +1,7 @@
 <script setup lang="ts">
 const authStore = useAuthStore();
+const useStore = useUserStore();
+
 const route = useRoute();
 
 // State to track whether the mobile side nav is open
@@ -66,11 +68,13 @@ const toggleSideNav = () => {
           to="/"
           class="text-black-900 hover:underline flex items-center gap-4 flex-row-reverse"
         >
+         <div class="rounded-full border p-1">
           <img
-            src="/assets/images/Ellipse12.png"
+            src="/assets/svgs/avatar-user.svg"
             alt="Profile Picture"
-            v-if="authStore.$state.currentUserType !== LOGGED_IN_USER.ADMIN"
+            class="h-8 w-8"
           />
+         </div>
           <!-- Use the bellIcon component correctly -->
           <IconsBellIcon class="h-6 w-6 inline-block" />
         </NuxtLink>

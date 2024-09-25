@@ -15,7 +15,6 @@ const authStore = useAuthStore();
 const router = useRouter();
 
 const handleNavigation = () => {
-  console.log(authStore.currentUserType);
   if (authStore.currentUserType === LOGGED_IN_USER.ADMIN) {
     router.push("/admin/dashboard");
   } else if (authStore.currentUserType === LOGGED_IN_USER.JOBSEEKER) {
@@ -33,7 +32,7 @@ const handleNavigation = () => {
       :class="[
         route.path === '/'
           ? 'bg-[#00000066] backdrop-blur-sm shadow-md'
-          : 'text-black-300',
+          : 'text-black-300 bg-white',
       ]"
     >
       <div class="md:flex hidden">

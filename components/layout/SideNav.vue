@@ -9,12 +9,13 @@ import NairaIcon from '../icons/NairaIcon.vue';
 import ProfileIcon from '../icons/ProfileIcon.vue';
 import SearchIcon from '../icons/SearchIcon.vue';
 import SettingIcon from '../icons/SettingIcon.vue';
-import SpeekerIcon from '../icons/SpeekerIcon.vue';
 
 const route = useRoute();
 const router = useRouter();
 
 const authStore = useAuthStore();
+const userStore = useUserStore();
+
 
 const jobSeekerLinks = [
   {
@@ -119,6 +120,7 @@ const recruiterLinks = [
 
 const logoutUser = () => {
   authStore.logoutUser();
+  userStore.clearUserStore();
   router.push('/')
 };
 

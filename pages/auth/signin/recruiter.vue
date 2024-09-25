@@ -16,6 +16,7 @@ const route = useRoute();
 const toast = useToast();
 const isLoading = ref<boolean>(false);
 const authStore = useAuthStore();
+const userStore = useUserStore();
 
 const formData = reactive({
   email: route.query?.email ? route.query?.email : '',
@@ -35,6 +36,16 @@ const rules = computed(() => {
 });
 
 const v$ = useVuelidate(rules, formData);
+
+const getRecruiterProfile = async (token: string) => {
+  try {
+    const resp = await userStore.$api.refreshAuthRecruiterProfile(token);
+    const responseData = resp as ApiSuccessResponse;
+    userStore.setUserDetails(responseData)
+  } catch (e) {
+    console.log(e);
+  }
+};
 
 const loginRecruiter = async () => {
   isLoading.value = true;
@@ -71,6 +82,9 @@ const loginRecruiter = async () => {
     });
 
     authStore.setUserToken(responseData.data.accessToken);
+
+
+   await getRecruiterProfile(responseData.data.accessToken)
     setTimeout(() => {
       isLoading.value = false;
     }, 1000);

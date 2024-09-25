@@ -1,15 +1,13 @@
 import { STORAGE_LOGGED_IN_USER_DETAILS_KEY } from '~/utils/common';
 import { skipHydrate } from 'pinia';
-import { storageSerializer } from '~~/composables';
-import type { IUserDetails } from '~/types';
-import { useAxiosInstance } from '~~/http/http.request';
+import { storageSerializer } from '~/composables';
 
 export const UserStore = defineStore('user-store', () => {
   const loggedInUserDetails = ref(
     useLocalStorage(STORAGE_LOGGED_IN_USER_DETAILS_KEY, null, storageSerializer)
   );
 
-  function setUserDetails(userDetails: IUserDetails) {
+  function setUserDetails(userDetails: any) {
     loggedInUserDetails.value = userDetails;
   }
 
@@ -19,7 +17,7 @@ export const UserStore = defineStore('user-store', () => {
 
   async function refreshAuthUserProfile(token: string) {
     try {
-      const response = await useAxiosInstance().get('users/my-profile', {
+      const response = await $fetch('/api/jobseeker/my-profile', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -30,35 +28,13 @@ export const UserStore = defineStore('user-store', () => {
     }
   }
 
-  async function setUserAccountType(data: Record<string, any>, token: string) {
+  async function refreshAuthRecruiterProfile(token: string) {
     try {
-      const response = await useAxiosInstance().post(
-        'users/set-account-type',
-        data,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      return await Promise.resolve(response);
-    } catch (error) {
-      return await Promise.reject(error);
-    }
-  }
-
-  async function updateUserProfile(data: FormData, token: string) {
-    try {
-      const response = await useAxiosInstance().put(
-        'users/update-profile',
-        data,
-        {
-          headers: {
-            // 'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await $fetch('/api/recruiter/my-profile', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       return await Promise.resolve(response);
     } catch (error) {
       return await Promise.reject(error);
@@ -69,6 +45,6 @@ export const UserStore = defineStore('user-store', () => {
     loggedInUserDetails: skipHydrate(loggedInUserDetails),
     setUserDetails,
     clearUserStore,
-    $api: { refreshAuthUserProfile, setUserAccountType, updateUserProfile },
+    $api: { refreshAuthUserProfile, refreshAuthRecruiterProfile },
   };
 });

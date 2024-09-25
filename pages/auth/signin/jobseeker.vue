@@ -73,6 +73,8 @@ const handleLogin = async () => {
   } catch (error: any) {
     const errorData = error.data as ApiErrorResponse;
 
+    console.log(error);
+
     if (errorData.data?.errorCode === 'CI0001') {
       toast.error(errorData.data.message, {
         timeout: 3000,
