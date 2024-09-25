@@ -32,7 +32,7 @@ const handleNavigation = () => {
       :class="[
         route.path === '/'
           ? 'bg-[#00000066] backdrop-blur-sm shadow-md'
-          : 'text-black-300 bg-[#00000066]',
+          : 'text-black-300',
       ]"
     >
       <div class="md:flex hidden">
