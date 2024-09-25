@@ -18,7 +18,9 @@
       <div class="w-full pt-4">
         <div>
           <form class="md:py-4 space-y-2">
-            <div class="pt-2 flex flex-col md:flex-row gap-x-2">
+            <div
+              class="pt-2 flex flex-col md:flex-row space-y-2 md:space-y-0 space-x-0 md:space-x-2"
+            >
               <!-- First Input Field -->
               <div class="flex items-start flex-col w-full md:w-1/2">
                 <label for="first-name" class="text-sm mb-2">Name</label>
@@ -42,7 +44,9 @@
               </div>
             </div>
             <!--  -->
-            <div class="pt-2 flex flex-col md:flex-row gap-x-2">
+            <div
+              class="pt-2 flex flex-col md:flex-row space-y-2 md:space-y-0 space-x-0 md:space-x-2"
+            >
               <!-- First Input Field -->
               <div class="flex items-start flex-col w-full md:w-1/2">
                 <label for="first-name" class="text-sm mb-2"
@@ -68,7 +72,9 @@
               </div>
             </div>
             <!--  -->
-            <div class="pt-2 flex flex-col md:flex-row gap-x-2">
+            <div
+              class="pt-2 flex flex-col md:flex-row space-y-2 md:space-y-0 space-x-0 md:space-x-2"
+            >
               <!-- First Input Field -->
               <div class="flex items-start flex-col w-full md:w-1/2">
                 <label for="first-name" class="text-sm mb-2"
