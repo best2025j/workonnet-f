@@ -53,11 +53,11 @@
         <img src="/assets/images/crop.png" class="w-full md:hidden" alt="" />
         <!-- input -->
         <div
-          class="text-white absolute w-full h-full top-0 pt-[370px] md:pt-[230px] px-6 space-y-4 flex justify-end md:pr-20"
+          class="text-white absolute w-full h-full top-0 pt-[370px] md:pt-[230px] px-6 space-y-4 flex justify-end md:pr-52"
         >
           <!--  -->
           <div
-            class="border bg-[#62696FCC] rounded-10 md:p-6 md:space-y-4 p-4 h-[360px] w-[580px]"
+            class="border bg-[#62696FCC] rounded-10 md:p-6 md:space-y-4 p-4 h-[360px] w-[440px]"
           >
             <!-- input -->
             <form class="md:py-4 space-y-2">
