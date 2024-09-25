@@ -10,19 +10,33 @@
             alt="a lady with book"
           />
           <!-- mobile image -->
-          <img src="/assets/images/croplady.png" class="md:hidden w-full" alt="">
+          <img
+            src="/assets/images/croplady.png"
+            class="md:hidden w-full"
+            alt=""
+          />
         </div>
 
         <div
-          class="text-white absolute top-0 h-full w-full pt-44 md:pt-24 md:px-8 px-6 space-y-4 md:flex justify-between"
+          class="text-white absolute top-0 h-full w-full pt-16 md:pt-24 md:px-8 px-6 space-y-4 md:flex justify-between"
         >
-          <div class=" md:mt-72 justify-center md:block flex flex-col items-center">
-            <h1 class="font-black md:text-xl text-base">
+          <div
+            class="md:mt-32 md:justify-between justify-center md:h-[75%] flex flex-col items-center md:items-start"
+          >
+            <h1 class="font-black md:text-5xl md:w-[623px] text-base leading-[52px]">
               The Future of Work Powered by AI
             </h1>
 
-            <div class="py-4 md:max-w-[864px] text-black-50 md:block flex flex-col justify-center items-center space-y-4">
-              <h1 class="font-black md:text-[80px] text-2xl md:leading-[88px] leading-6 text-center md:text-start w-60 md:w-full">
+            <div
+              class="py-4 md:max-w-[864px] text-black-50 md:block flex flex-col justify-center items-center space-y-4"
+            >
+              <p class="text-xl font-black">
+                You're a superstar candidate, your job search should reflect
+                that.
+              </p>
+              <h1
+                class="font-black md:text-[80px] text-2xl md:leading-[88px] leading-6 text-center md:text-start w-60 md:w-full"
+              >
                 Get Matched With Jobs Under 24hrs
               </h1>
 
@@ -51,7 +65,7 @@
 
           <!--  -->
           <div
-            class="border md:w-[440px] bg-[#62696FCC] rounded-10 p-6 space-y-4 md:h-[23rem]"
+            class="border md:w-[440px] bg-[#62696FCC] rounded-10 p-6 space-y-4 md:h-[23rem] absolute bottom-20 md:right-10"
           >
             <div class="flex items-center justify-between">
               <div>
@@ -62,7 +76,6 @@
               <img src="/assets/images/Logo2.png" alt="" />
             </div>
 
-            
             <!-- input -->
             <form class="md:py-4 space-y-2">
               <div class="flex flex-col w-full">
@@ -151,8 +164,12 @@
       </div>
     </div>
     <!-- slide 2 -->
-    <div class="bg-primary-1 text-white md:h-screen hidden md:block carousel-item w-full">
-      <div class="md:flex md:pt-0 pt-28 h-full w-full justify-between items-center px-6">
+    <div
+      class="bg-primary-1 text-white md:h-screen hidden md:block carousel-item w-full"
+    >
+      <div
+        class="md:flex md:pt-0 pt-28 h-full w-full justify-between items-center px-6"
+      >
         <div class="md:w-1/2 h-auto md:space-y-4 text-center md:text-start">
           <h1 class="font-black md:text-xl text-sm">
             Get Matched with Candidates Under 24hrs
@@ -199,7 +216,7 @@
 
           <!--  -->
           <div
-            class="bg-white w-64 h-[120px] hover:bg-westside-500  shadow md:shadow-none hover:text-white absolute md:bottom-60 -left-4 rounded-8"
+            class="bg-white w-64 h-[120px] hover:bg-westside-500 shadow md:shadow-none hover:text-white absolute md:bottom-60 -left-4 rounded-8"
           >
             <div class="flex justify-between items-center border-b-2">
               <div class="flex flex-co8 px-4 py-3 space-y-2">
@@ -219,7 +236,7 @@
           </div>
 
           <div
-            class="bg-white w-64 h-20  shadow md:shadow-none hover:bg-westside-500 hover:text-white absolute md:bottom-24 bottom-80 flex flex-col right-6 rounded-8"
+            class="bg-white w-64 h-20 shadow md:shadow-none hover:bg-westside-500 hover:text-white absolute md:bottom-24 bottom-80 flex flex-col right-6 rounded-8"
           >
             <div class="flex items-center">
               <div class="pl-3">
