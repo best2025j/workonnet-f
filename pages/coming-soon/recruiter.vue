@@ -108,7 +108,7 @@
         </button>
         <dialog
           id="my_modal_1"
-          class="modal text-black-950 backdrop-blur-sm backdrop-opacity-2 backdrop-filter"
+          class="modal text-black-950 backdrop-blur-sm backdrop-opacity-2 backdrop-filter -top-8"
         >
           <div class="modal-box flex-col max-w-md flex items-center space-y-3">
             <div
@@ -142,7 +142,7 @@
                 </button>
               </form>
             </div>
-            <span>
+            <span class="py-3">
               <svg
                 width="100"
                 height="100"
