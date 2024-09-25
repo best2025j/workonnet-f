@@ -39,7 +39,7 @@ const prevSlide = () => {
           :key="index"
           class="flex-none w-full mt-10 mb-6 p-4 pl-10"
         >
-          <p class="text-lg text-white mb-6 font-thin">
+          <p class="text-sm text-white mb-6 font-thin">
             "{{ testimonial.message }} "
           </p>
           <p class="mt-2 font-black text-white">{{ testimonial.name }}</p>

@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { POSITION, useToast } from 'vue-toastification';
-import { required, helpers, email } from '@vuelidate/validators';
-import { useVuelidate } from '@vuelidate/core';
-import type { ApiErrorResponse, ApiSuccessResponse } from '~/types';
+import { POSITION, useToast } from "vue-toastification";
+import { required, helpers, email } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
+import type { ApiErrorResponse, ApiSuccessResponse } from "~/types";
 
 definePageMeta({
-  layout: 'auth',
-  title: 'recruiter.signin',
-  pageName: 'recruiter.signin',
-  middleware: ['no-auth'],
+  layout: "auth",
+  title: "recruiter.signin",
+  pageName: "recruiter.signin",
+  middleware: ["no-auth"],
 });
 
 const router = useRouter();
@@ -19,18 +19,18 @@ const authStore = useAuthStore();
 const userStore = useUserStore();
 
 const formData = reactive({
-  email: route.query?.email ? route.query?.email : '',
-  password: '',
+  email: route.query?.email ? route.query?.email : "",
+  password: "",
 });
 
 const rules = computed(() => {
   return {
     email: {
-      required: helpers.withMessage('Email is required', required),
-      email: helpers.withMessage('Enter a valid email', email),
+      required: helpers.withMessage("Email is required", required),
+      email: helpers.withMessage("Enter a valid email", email),
     },
     password: {
-      required: helpers.withMessage('Please enter a password', required),
+      required: helpers.withMessage("Please enter a password", required),
     },
   };
 });
@@ -41,7 +41,7 @@ const getRecruiterProfile = async (token: string) => {
   try {
     const resp = await userStore.$api.refreshAuthRecruiterProfile(token);
     const responseData = resp as ApiSuccessResponse;
-    userStore.setUserDetails(responseData)
+    userStore.setUserDetails(responseData);
   } catch (e) {
     console.log(e);
   }
@@ -51,7 +51,7 @@ const loginRecruiter = async () => {
   isLoading.value = true;
   const isValidForm = await v$.value.$validate();
   if (!isValidForm) {
-    toast.error('Please enter a valid email or password', {
+    toast.error("Please enter a valid email or password", {
       timeout: 3000,
       position: POSITION.TOP_RIGHT,
     });
@@ -63,12 +63,12 @@ const loginRecruiter = async () => {
   }
 
   try {
-    const response = await $fetch('/api/auth/recruiter/authenticate', {
-      method: 'POST',
+    const response = await $fetch("/api/auth/recruiter/authenticate", {
+      method: "POST",
       body: formData,
     });
 
-    toast.success('Signin successful', {
+    toast.success("Signin successful", {
       timeout: 3000,
       position: POSITION.TOP_RIGHT,
     });
@@ -83,23 +83,22 @@ const loginRecruiter = async () => {
 
     authStore.setUserToken(responseData.data.accessToken);
 
-
-   await getRecruiterProfile(responseData.data.accessToken)
+    await getRecruiterProfile(responseData.data.accessToken);
     setTimeout(() => {
       isLoading.value = false;
     }, 1000);
 
-    return router.push('/dashboard/recruiter');
+    return router.push("/dashboard/recruiter");
   } catch (error: any) {
     const errorData = error.data as ApiErrorResponse;
 
-    if (errorData.data?.errorCode === 'CI0001') {
+    if (errorData.data?.errorCode === "CI0001") {
       toast.error(errorData.data.message, {
         timeout: 3000,
         position: POSITION.TOP_RIGHT,
       });
     } else {
-      toast.error('An error occurred try again', {
+      toast.error("An error occurred try again", {
         timeout: 3000,
         position: POSITION.TOP_RIGHT,
       });
@@ -114,7 +113,7 @@ const loginRecruiter = async () => {
 
 <template>
   <div class="flex justify-center items-center w-full">
-    <div class="w-[23.375rem] flex flex-col">
+    <div class="md:w-[23.375rem] w-full flex flex-col">
       <h2
         class="text-center text-3xl md:text-[32px] mb-6 font-[Georgia] font-normal"
       >
@@ -218,21 +217,19 @@ const loginRecruiter = async () => {
             >Forgot password?</NuxtLink
           >
         </div>
-        <div class="mt-10">
-
-        </div>
+        <div class="mt-10"></div>
         <BtnPrimary
           @click="loginRecruiter()"
           :isLoading="isLoading"
           :disabled="isLoading || v$.$invalid"
         >
           <template #text>
-            {{ !isLoading ? 'Sign in' : 'Please wait...' }}
+            {{ !isLoading ? "Sign in" : "Please wait..." }}
           </template>
         </BtnPrimary>
       </form>
 
-      <p class="text-center mt-10 mb-5 text-sm font-thin">
+      <p class="text-center pt-10 pb-4 text-sm font-thin">
         Don't have an account?
         <NuxtLink to="/auth/signup/recruiter" class="font-thin text-[#007AFF]"
           >Sign up</NuxtLink

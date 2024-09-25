@@ -1,6 +1,6 @@
 <template>
-  <div class="bg-custom-gradient w-[75%] rounded-lg">
-    <div class="flex items-center justify-center gap-10 mx-4 mt-10">
+  <div class="bg-custom-gradient w-[45%] rounded-lg">
+    <div class="flex items-center justify-center gap-10 mx-4 pt-10">
       <h1 class="text-[34.33px] font-['Georgia'] font-normal text-white mx-6">
         {{
           $route.meta.title.includes("recruiter")
