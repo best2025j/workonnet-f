@@ -1,4 +1,22 @@
-<script lang="ts"></script>
+<script setup lang="ts">
+definePageMeta({
+  title: "Join our waitlist",
+  pageName: 'waitlist',
+})
+
+const router = useRouter();
+
+enum SELECTED_USER_TYPE {
+  JOBSEEKER = 'jobseeker',
+  RECRUITER = 'recruiter',
+}
+
+const selectedUserType = ref<SELECTED_USER_TYPE |  null>(null)
+
+const selectUserType = (selectedType: SELECTED_USER_TYPE) => {
+  selectedUserType.value = selectedType
+}
+</script>
 <template>
   <div class="w-full h-full">
     <div
@@ -34,8 +52,8 @@
           <p class="text-xl">describes you, or what you do</p>
         </div>
         <div class="flex space-x-8">
-          <div class="relative">
-            <img src="/assets/images/borderimage.png" alt="image with border" />
+          <div @click="selectUserType(SELECTED_USER_TYPE.JOBSEEKER)" class="relative cursor-pointer" >
+            <img src="/assets/images/waitlist-jobseeker.png" class="rounded-[50px]"  :class="[selectedUserType === SELECTED_USER_TYPE.JOBSEEKER ? 'border-[6px] border-primary-1' : '']" alt="JOBSEEKER" />
             <h1
               class="absolute bottom-8 uppercase left-0 right-0 text-white font-black"
             >
@@ -43,8 +61,8 @@
             </h1>
           </div>
 
-          <div class="relative">
-            <img src="/assets/images/office.png" alt="image without border" />
+          <div @click="selectUserType(SELECTED_USER_TYPE.RECRUITER)" class="relative cursor-pointer" >
+            <img src="/assets/images/waitlist-recruiter.png" class="rounded-[50px]" :class="[selectedUserType === SELECTED_USER_TYPE.RECRUITER ? 'border-[6px] border-primary-1' : '']" alt="RECRUITER" />
             <h1
               class="absolute bottom-8 uppercase left-0 right-0 text-white font-black"
             >
@@ -54,11 +72,16 @@
         </div>
       </div>
       <div class="py-4">
-        <button
-          class="font-black text-white w-[182px] h-12 bg-primary-1 rounded-8 uppercase"
+        <BtnPrimary
+         @click="router.push(`/waitlist/${selectedUserType}`)"
+        :isLoading="false"
+        :disabled="selectedUserType === null"
+          class="uppercase !px-12"
         >
-          continue
-        </button>
+          <template #text>
+            continue
+          </template>
+        </BtnPrimary>
       </div>
     </div>
   </div>

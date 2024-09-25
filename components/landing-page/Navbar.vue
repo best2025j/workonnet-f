@@ -28,12 +28,7 @@ const handleNavigation = () => {
   <!-- Navbar -->
   <div class="pb-4">
     <nav
-      class="flex flex-row-reverse md:flex-row justify-between text-white w-full left-0 items-center md:px-12 px-6 h-16 text-xs fixed top-0 z-50"
-      :class="[
-        route.path === '/'
-          ? 'bg-[#00000066] backdrop-blur-sm shadow-md'
-          : 'text-black-300',
-      ]"
+      class="flex flex-row-reverse md:flex-row justify-between w-full left-0 items-center md:px-12 px-6 h-16 text-xs fixed top-0 z-50 bg-rbg-nav backdrop-blur-sm"
     >
       <div class="md:flex hidden">
         <img src="/assets/images/logo3.png" alt="Logo" class="" />
@@ -47,18 +42,19 @@ const handleNavigation = () => {
         >
           Dashboard
         </button>
-        <button
+        <NuxtLink
+        to="/waitlist"
           v-if="!authStore.$state.isAuthenticated"
           class="text-white py-2 px-4 rounded-8 bg-primary-1"
         >
-          Register
-        </button>
-        <button
+          Join Waitlist
+        </NuxtLink>
+        <!-- <button
           v-if="!authStore.$state.isAuthenticated"
           class="bg-gray-200 text-primary-1 py-2 px-4 rounded-8 hover:bg-gray-300"
         >
           Login
-        </button>
+        </button> -->
       </div>
 
       <!-- Desktop Nav Links -->
@@ -103,21 +99,22 @@ const handleNavigation = () => {
           v-if="authStore.$state.isAuthenticated"
           @click="handleNavigation()"
           class="text-white py-2 px-4 rounded-8 bg-primary-1"
-        >
+          >
           Dashboard
         </button>
-        <button
+        <NuxtLink
+        to="/waitlist"
           v-if="!authStore.$state.isAuthenticated"
           class="text-white py-2 px-4 rounded-8 bg-primary-1"
         >
-          Register
-        </button>
-        <button
+        Join Waitlist
+        </NuxtLink>
+        <!-- <button
           v-if="!authStore.$state.isAuthenticated"
           class="bg-gray-200 text-primary-1 py-2 px-4 rounded-8 hover:bg-gray-300"
         >
           Login
-        </button>
+        </button> -->
       </div>
     </nav>
   </div>
@@ -161,5 +158,9 @@ const handleNavigation = () => {
 button.close {
   background-color: white;
   color: black;
+}
+
+.bg-rbg-nav {
+  background-color: rgba(0, 0, 0, 0.4);
 }
 </style>

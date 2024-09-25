@@ -31,7 +31,7 @@ const handleError = () => {
         </div>
 
         <div class="w-1/4">
-          <BtnPrimary @click="handleError()">
+          <BtnPrimary @click="handleError()" :is-loading="false">
             <template #text>
                 Go to Home
             </template>
