@@ -6,7 +6,7 @@
       class="flex flex-col items-center mx-auto h-full justify-center max-w-[516px] text-center space-y-3 absolute top-0 left-0 right-0"
     >
       <h1
-        class="md:text-6xl text-3xl font-black bg-custom-gradient bg-clip-text text-transparent leading-[77px]"
+        class="md:text-6xl text-3xl font-black bg-custom-gradient bg-clip-text text-transparent leading-[77px] py-4"
       >
         Coming Soon
       </h1>
