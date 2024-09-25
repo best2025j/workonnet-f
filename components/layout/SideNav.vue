@@ -115,39 +115,6 @@ const recruiterLinks = [
   },
 ];
 
-const admin = [
-  {
-    to: '/admin/dashboard/',
-    icon: DashBoardIcon,
-    name: 'Dashboard',
-    pageName: 'admin.dashboard.index',
-  },
-  {
-    to: '/admin/dashboard/posted-jobs?tab=under-review',
-    icon: ApplicationIcon,
-    name: 'Jobs',
-    pageName: 'admin.dashboard.posted-jobs',
-  },
-  {
-    to: '/admin/dashboard/recruiters',
-    icon: SpeekerIcon,
-    name: 'Recruiters',
-    pageName: 'admin.dashboard.recruiters',
-  },
-  {
-    to: '/admin/dashboard/jobseekers',
-    icon: CandidatesIcon,
-    name: 'Jobseekers',
-    pageName: 'admin.dashboard.jobseekers',
-  },
-  {
-    to: '/admin/dashboard/subscriptions',
-    icon: NairaIcon,
-    name: 'Subscriptions',
-    pageName: 'admin.dashboard.subscriptions',
-  },
-];
-
 // const isActive = (pageName: string) => route.meta?.pageName === pageName;
 
 const logoutUser = () => {
@@ -207,32 +174,6 @@ const isActive = (pageName: string) => {
               isActive(link.pageName)
               ? 'bg-westside-100 text-primary-1 border-primary-1 border-l-4 pl-6 md:!pl-11 font-[900]'
               : 'md:pl-12 pl-6',
-              'flex items-center py-4 text-xs',
-            ]"
-          >
-            <!-- Render Icon -->
-            <component
-              :is="link.icon"
-              class="inline-block mr-2"
-              :isActive="isActive(link.pageName)"
-            />
-            {{ link.name }}
-          </NuxtLink>
-        </li>
-      </ul>
-
-      <!-- admin -->
-      <ul
-        class="w-full"
-        v-show="authStore.$state.currentUserType === LOGGED_IN_USER.ADMIN"
-      >
-        <li v-for="(link, index) in admin" :key="index">
-          <NuxtLink
-            :to="link.to"
-            :class="[
-              isActive(link.pageName)
-                ? 'bg-westside-100 text-primary-1 border-primary-1 border-l-4 md:!pl-11 pl-5 font-[900]'
-                : 'md:pl-12 pl-6',
               'flex items-center py-4 text-xs',
             ]"
           >
