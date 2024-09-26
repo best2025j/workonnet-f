@@ -1,8 +1,89 @@
 <script lang="ts"></script>
 <template>
-  <div>
-    <div class="bg-westside-600 h-[535px] w-ful my-10 relative">
-      <span>
+  <div class="">
+    <div class="pt-20 flex justify-around items-start mx-auto h-full w-full">
+      <div class="w-[537px] space-y-8 pt-14">
+        <div class="space-y-6">
+          <h1 class="text-3xl font-black">DISCOVER US</h1>
+          <div class="flex flex-col">
+            <h4>Workonnect is here to help you;</h4>
+            <h4>
+              Our experts are available to answer any questions you might have.
+              We’ve got the answers.
+            </h4>
+          </div>
+        </div>
+
+        <div class="space-y-6 w-[366px]">
+          <h1 class="text-3xl font-black">Visit Us</h1>
+          <div class="flex flex-col space-y-4">
+            <h4>
+              Office no. G-02. Building 1, Ground Floor. Dubai Media City –
+              Dubai
+            </h4>
+            <h4>Feel free to get in touch with us through our channels:</h4>
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          <h1 class="text-3xl font-black">Email US</h1>
+          <div class="flex flex-col">
+            <h4>example@example.com</h4>
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          <h1 class="text-3xl font-black">Call US</h1>
+          <div class="flex flex-col space-y-4">
+            <h4>+23445766770, +234559837007</h4>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-8">
+        <div class="flex gap-8 justify-between w-full">
+          <div class="relative">
+            <img
+              src="/assets/images/image(8).png"
+              alt="no pix to display"
+              class=""
+            />
+          </div>
+
+          <div class="relative top-32">
+            <img
+              src="/assets/images/image(9).png"
+              alt="no pix to display"
+              class=""
+            />
+          </div>
+        </div>
+        <div
+          class="flex gap-8 justify-between w-full relative bottom-24 right-32"
+        >
+          <div class="relative bottom-32">
+            <img
+              src="/assets/images/image(6).png"
+              alt="no pix to display"
+              class=""
+            />
+          </div>
+
+          <div class="relative">
+            <img
+              src="/assets/images/image(7).png"
+              alt="no pix to display"
+              class=""
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="bg-westside-600 md:h-[545px] h-screen w-full relative"
+    >
+      <span class="md:flex hidden">
         <svg
           width="820"
           height="124"
@@ -37,9 +118,11 @@
       <div
         class="flex md:flex-row flex-col-reverse md:max-w-[1640px] justify-center mx-auto items-center absolute top-0 right-0 left-0"
       >
-        <div class="md:w-1/2 max-w-[506px]">
+        <div class="md:w-1/2 max-w-[506px] pb-[6.5rem]">
           <div class="text-white w-[365px] space-y-6">
-            <h1 class="text-5xl font-black">Have a project! Let’s discuss</h1>
+            <h1 class="text-5xl font-black leading-[55px]">
+              Have a project! Let’s discuss
+            </h1>
             <div class="space-y-1">
               <p class="text-2xl">Thank you for getting in touch!</p>
               <h1 class="text-2xl">Kindly.</h1>
@@ -49,10 +132,10 @@
         </div>
 
         <div
-          class="md:w-1/2 px-8 md:px-0 flex justify-center items-center mx-auto py-8"
+          class="md:w-1/2 w-full px-8 md:px-0 flex justify-center items-center mx-auto py-8 md:pl-10"
         >
           <div class="w-full space-y-4">
-            <form class="md:py-4 space-y-6">
+            <form class="md:py-4 md:space-y-6 space-y-2">
               <div
                 class="pt-2 flex flex-col md:flex-row space-y-2 md:space-y-0 space-x-0 md:space-x-6"
               >
@@ -155,35 +238,16 @@
 
             <div class="py-4">
               <button
-                class="h-[50px] md:w-[221px] w-full flex items-center gap-x-3 justify-center bg-white text-xs text-black-800 font-black rounded-8"
+                class="px-16 py-4 md:w-auto w-full bg-white text-xs text-black-800 font-black rounded-8"
               >
-                Get Started
-                <svg
-                  width="19"
-                  height="18"
-                  viewBox="0 0 19 18"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M10.9265 4.04976C11.1461 3.83009 11.5023 3.83009 11.722 4.04976L16.2745 8.60226C16.38 8.70775 16.4392 8.85083 16.4392 9.00001C16.4392 9.14919 16.38 9.29227 16.2745 9.39776L11.722 13.9503C11.5023 14.1699 11.1461 14.1699 10.9265 13.9503C10.7068 13.7306 10.7068 13.3744 10.9265 13.1548L15.0812 9.00001L10.9265 4.84526C10.7068 4.62559 10.7068 4.26943 10.9265 4.04976Z"
-                    fill="#15131B"
-                  />
-                  <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M2.5625 9C2.5625 8.68934 2.81434 8.4375 3.125 8.4375H15.7475C16.0582 8.4375 16.31 8.68934 16.31 9C16.31 9.31066 16.0582 9.5625 15.7475 9.5625H3.125C2.81434 9.5625 2.5625 9.31066 2.5625 9Z"
-                    fill="#15131B"
-                  />
-                </svg>
+                Submit
               </button>
             </div>
           </div>
         </div>
       </div>
     </div>
+
     <div>
       <LandingPageFooter />
     </div>
