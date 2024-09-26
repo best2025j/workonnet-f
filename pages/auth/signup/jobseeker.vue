@@ -70,55 +70,55 @@ const handleSignup = async () => {
     return;
   }
 
-  try {
-    await $fetch('/api/auth/jobseeker/register', {
-      method: 'POST',
-      body: formData,
-    });
+  // try {
+  //   await $fetch('/api/auth/jobseeker/register', {
+  //     method: 'POST',
+  //     body: formData,
+  //   });
 
-    const loginResponse = await $fetch('/api/auth/jobseeker/authenticate', {
-      method: 'POST',
-      body: { password: formData.password, email: formData.email },
-    });
+  //   const loginResponse = await $fetch('/api/auth/jobseeker/authenticate', {
+  //     method: 'POST',
+  //     body: { password: formData.password, email: formData.email },
+  //   });
 
-    const responseData = loginResponse as ApiSuccessResponse;
-    authStore.setLoginSecret(responseData.data.accessToken);
+  //   const responseData = loginResponse as ApiSuccessResponse;
+  //   authStore.setLoginSecret(responseData.data.accessToken);
 
-    setTimeout(() => {
-      isLoading.value = false;
-    }, 1000);
+  //   setTimeout(() => {
+  //     isLoading.value = false;
+  //   }, 1000);
 
-    return router.push({
-      path: '/auth/activation-code',
-      query: {
-        tk: responseData.data.accessToken,
-        email: formData.email,
-      },
-    });
-  } catch (error: any) {
-    const errorData = error.data as ApiErrorResponse;
+  //   return router.push({
+  //     path: '/auth/activation-code',
+  //     query: {
+  //       tk: responseData.data.accessToken,
+  //       email: formData.email,
+  //     },
+  //   });
+  // } catch (error: any) {
+  //   const errorData = error.data as ApiErrorResponse;
 
-    if (errorData.data?.errorCode === 'E11000') {
-      toast.error('Email already in use', {
-        timeout: 3000,
-        position: POSITION.TOP_RIGHT,
-      });
-    } else if (errorData.data?.errorCode === '100001') {
-      toast.error('Password must be 8 characters long', {
-        timeout: 3000,
-        position: POSITION.TOP_RIGHT,
-      });
-    } else {
-      toast.error('An error occurred try again', {
-        timeout: 3000,
-        position: POSITION.TOP_RIGHT,
-      });
-    }
+  //   if (errorData.data?.errorCode === 'E11000') {
+  //     toast.error('Email already in use', {
+  //       timeout: 3000,
+  //       position: POSITION.TOP_RIGHT,
+  //     });
+  //   } else if (errorData.data?.errorCode === '100001') {
+  //     toast.error('Password must be 8 characters long', {
+  //       timeout: 3000,
+  //       position: POSITION.TOP_RIGHT,
+  //     });
+  //   } else {
+  //     toast.error('An error occurred try again', {
+  //       timeout: 3000,
+  //       position: POSITION.TOP_RIGHT,
+  //     });
+  //   }
 
-    setTimeout(() => {
-      isLoading.value = false;
-    }, 2000);
-  }
+  //   setTimeout(() => {
+  //     isLoading.value = false;
+  //   }, 2000);
+  // }
 };
 </script>
 <template>
