@@ -7,11 +7,13 @@
       <div class="divider divider-end">©2024</div>
     </div>
     <!--  -->
-    <div class="flex justify-center flex-col h-[900px] items-center mx-auto mt-14 md:mt-0">
+    <div
+      class="flex justify-center flex-col h-full items-center mx-auto md:mt-0"
+    >
       <div
-        class="mx-auto text-center justify-center items-center flex flex-col space-y-4"
+        class="mx-auto text-center justify-center items-center flex flex-col my-20 space-y-4"
       >
-        <h1 class="max-w-3xl text-2xl md:text-[32px] font-black py-4 ">
+        <h1 class="max-w-3xl text-2xl md:text-[32px] font-black py-4">
           We shorten the hiring process from months to weeks or even days.
         </h1>
         <p class="md:hidden text-sm">

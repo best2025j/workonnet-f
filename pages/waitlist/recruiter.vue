@@ -109,7 +109,7 @@ const handleSubmit = async () => {
           <span>
             <img
               src="/assets/svgs/rocket-red.svg"
-              class="w-auto h-auto ml-8"
+              class="w-auto h-auto ml-2"
               alt="Polygon Image"
             />
           </span>

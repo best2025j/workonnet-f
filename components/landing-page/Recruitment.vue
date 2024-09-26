@@ -1,5 +1,5 @@
 <template>
-  <div class="py-10 h-full w-full">
+  <div class="h-full w-full">
     <!-- grid divider vertical using daisy ui -->
     <div class="grid grid-cols-3 w-full text-sm px-4 md:px-8">
       <div class="divider divider-start">Recruitment Process</div>
@@ -101,7 +101,7 @@
         </div>
       </div>
       <!--  -->
-      <div class="h-full bg-primary-1 my-10 md:my-40 w-full ">
+      <div class="h-full bg-primary-1 my-10 w-full ">
         <div
           class="flex md:flex-row flex-col-reverse md:max-w-[1240px] text-center justify-center mx-auto items-center"
         >
