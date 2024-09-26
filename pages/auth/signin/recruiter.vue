@@ -62,52 +62,52 @@ const loginRecruiter = async () => {
     return;
   }
 
-  // try {
-  //   const response = await $fetch("/api/auth/recruiter/authenticate", {
-  //     method: "POST",
-  //     body: formData,
-  //   });
+  try {
+    const response = await $fetch("/api/auth/recruiter/authenticate", {
+      method: "POST",
+      body: formData,
+    });
 
-  //   toast.success("Signin successful", {
-  //     timeout: 3000,
-  //     position: POSITION.TOP_RIGHT,
-  //   });
+    toast.success("Signin successful", {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
 
-  //   const responseData = response as ApiSuccessResponse;
+    const responseData = response as ApiSuccessResponse;
 
-  //   authStore.setCurrentUserType(LOGGED_IN_USER.RECRUITER);
-  //   authStore.setUserAuthData({
-  //     accountType: LOGGED_IN_USER.RECRUITER,
-  //     recruiterId: responseData.data.recruiterId,
-  //   });
+    authStore.setCurrentUserType(LOGGED_IN_USER.RECRUITER);
+    authStore.setUserAuthData({
+      accountType: LOGGED_IN_USER.RECRUITER,
+      recruiterId: responseData.data.recruiterId,
+    });
 
-  //   authStore.setUserToken(responseData.data.accessToken);
+    authStore.setUserToken(responseData.data.accessToken);
 
-  //   await getRecruiterProfile(responseData.data.accessToken);
-  //   setTimeout(() => {
-  //     isLoading.value = false;
-  //   }, 1000);
+    await getRecruiterProfile(responseData.data.accessToken);
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 1000);
 
-  //   return router.push("/dashboard/recruiter");
-  // } catch (error: any) {
-  //   const errorData = error.data as ApiErrorResponse;
+    return router.push("/dashboard/recruiter");
+  } catch (error: any) {
+    const errorData = error.data as ApiErrorResponse;
 
-  //   if (errorData.data?.errorCode === "CI0001") {
-  //     toast.error(errorData.data.message, {
-  //       timeout: 3000,
-  //       position: POSITION.TOP_RIGHT,
-  //     });
-  //   } else {
-  //     toast.error("An error occurred try again", {
-  //       timeout: 3000,
-  //       position: POSITION.TOP_RIGHT,
-  //     });
-  //   }
+    if (errorData.data?.errorCode === "CI0001") {
+      toast.error(errorData.data.message, {
+        timeout: 3000,
+        position: POSITION.TOP_RIGHT,
+      });
+    } else {
+      toast.error("An error occurred try again", {
+        timeout: 3000,
+        position: POSITION.TOP_RIGHT,
+      });
+    }
 
-  //   setTimeout(() => {
-  //     isLoading.value = false;
-  //   }, 2000);
-  // }
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+  }
 };
 </script>
 

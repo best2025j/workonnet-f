@@ -17,4 +17,13 @@ export default defineNuxtConfig({
   pinia: {
     storesDirs: ['./store/**', './store/modules/**'],
   },
+
+  // config
+  runtimeConfig: {
+    apiBaseUrl: '',
+    public: {
+      apiSecret: '',
+    },
+  },
 });
+

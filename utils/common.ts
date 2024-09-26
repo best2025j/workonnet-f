@@ -82,7 +82,6 @@ export enum ERROR_CODE {
   WEBHOOK_FAILED = 'WEHSEC1',
 }
 
-// migrate to env.
+// migrate to env. :::::DONE
 // export const BACKEND_URL = 'http:127.0.0.1:5400/api/v1/';
-export const BACKEND_URL = 'https://backend-api-539373731455.us-central1.run.app/api/v1/';
 

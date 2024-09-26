@@ -1,13 +1,14 @@
 import axios from 'axios';
 import { ValidationError } from '~/types';
-import { BACKEND_URL } from '~/utils/common';
 
 export default defineEventHandler(async (event) => {
   const headers = getHeaders(event);
+  const config = useRuntimeConfig(event);
   const authHeader = headers['authorization'];
 
   try {
-    const response = await axios.get(`${BACKEND_URL}recruiters/my-profile`, {
+    const response = await axios.get('recruiters/my-profile', {
+      baseURL: config.apiBaseUrl,
       headers: {
         Authorization: authHeader,
       },

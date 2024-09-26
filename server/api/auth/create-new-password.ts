@@ -1,15 +1,14 @@
 import axios from 'axios';
 import { ValidationError } from '~/types';
-import { BACKEND_URL } from '~/utils/common';
 
 export default defineEventHandler(async (event) => {
+  const config = useRuntimeConfig(event);
   const data = await readBody(event);
 
   try {
-    const response = await axios.put(
-      `${BACKEND_URL}auth/set-new-password`,
-      data
-    );
+    const response = await axios.put('auth/set-new-password', data, {
+      baseURL: config.apiBaseUrl,
+    });
     return { status: 200, data: response.data.data };
   } catch (e: any) {
     if (axios.isAxiosError<ValidationError, Record<string, unknown>>(e)) {

@@ -1,15 +1,19 @@
 import axios from 'axios';
 import { ValidationError } from '~/types';
-import { BACKEND_URL } from '~/utils/common';
 
 export default defineEventHandler(async (event) => {
+  const config = useRuntimeConfig(event);
   const data = await readBody(event);
 
   try {
-    const response = await axios.post(`${BACKEND_URL}auth/verify-code`, {
-      code: data.code,
-      token: data.token,
-    });
+    const response = await axios.post(
+      'auth/verify-code',
+      {
+        code: data.code,
+        token: data.token,
+      },
+      { baseURL: config.apiBaseUrl }
+    );
     return { status: 200, data: response.data.data };
   } catch (e: any) {
     if (axios.isAxiosError<ValidationError, Record<string, unknown>>(e)) {

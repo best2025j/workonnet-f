@@ -1,14 +1,15 @@
 import axios from 'axios';
 import { ValidationError } from '~/types';
-import { BACKEND_URL } from '~/utils/common';
 
 export default defineEventHandler(async (event) => {
+  const config = useRuntimeConfig(event);
   const data = await readBody(event);
 
   try {
     const response = await axios.post(
-      `${BACKEND_URL}auth/forgot-password?userType=${data.reqId}`,
-      { email: data.email }
+      `auth/forgot-password?userType=${data.reqId}`,
+      { email: data.email },
+      { baseURL: config.apiBaseUrl }
     );
     return { status: 200, data: response.data.data };
   } catch (e: any) {
