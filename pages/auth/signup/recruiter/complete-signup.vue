@@ -1,13 +1,191 @@
-<script setup>
+<script setup lang="ts">
+import { POSITION, useToast } from 'vue-toastification';
+import {
+  required,
+  helpers,
+  email,
+  url,
+  minLength,
+} from '@vuelidate/validators';
+import { useVuelidate } from '@vuelidate/core';
+import type { ApiErrorResponse, ApiSuccessResponse } from '~/types';
+
 definePageMeta({
   layout: 'auth',
-  title: 'recruiter.signup',
+  title: 'recruiter.signup.complete',
+  pageName: 'recruiter.signup',
+  middleware: [
+    function (to, from) {
+      const authStore = useAuthStore();
+      if (import.meta.server) return;
+      if (authStore.stepOneRecruiterForm !== null) return;
+      return navigateTo('/');
+    },
+  ],
+});
+
+const toast = useToast();
+const router = useRouter();
+const authStore = useAuthStore();
+const isLoading = ref<boolean>(false);
+const isSubmitted = ref<boolean>(false);
+
+const formData = reactive({
+  fullName: '',
+  email: '',
+  password: '',
+  companyName: '',
+  companySize: '',
+  industry: '',
+  websiteUrl: '',
+});
+
+const rules = computed(() => {
+  return {
+    fullName: {
+      required: helpers.withMessage('Full names is required', required),
+    },
+    email: {
+      required: helpers.withMessage('Email is required', required),
+      email: helpers.withMessage('Enter a valid email', email),
+    },
+    password: {
+      required: helpers.withMessage('Please enter a password', required),
+      minLength: helpers.withMessage(
+        'Password cannot be less than 8 characters',
+        minLength(8)
+      ),
+    },
+    companyName: {
+      required: helpers.withMessage('Company name is required', required),
+    },
+    companySize: {
+      required: helpers.withMessage('Company size is required', required),
+    },
+    industry: {
+      required: helpers.withMessage('Industry is required', required),
+    },
+    websiteUrl: {
+      required: helpers.withMessage('Website url is required', required),
+      url: helpers.withMessage('Must be a valid url', url),
+    },
+  };
+});
+
+const v$ = useVuelidate(rules, formData);
+
+const handleSignup = async () => {
+  isLoading.value = true;
+  const isValidForm = await v$.value.$validate();
+  if (!isValidForm) {
+    toast.error('Please fill all fields correctly', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+    return;
+  }
+
+  try {
+    await $fetch('/api/auth/recruiter/register', {
+      method: 'POST',
+      body: formData,
+    });
+
+    toast.success('Signup successful, Please login', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 500);
+
+    isSubmitted.value = true
+    return router.push({
+      path: '/auth/signin/recruiter',
+      query: {
+        email: formData.email,
+      },
+    });
+  } catch (error: any) {
+    const errorData = error.data as ApiErrorResponse;
+
+    if (errorData.data?.errorCode === 'E11000') {
+      toast.error('Email already in use', {
+        timeout: 3000,
+        position: POSITION.TOP_RIGHT,
+      });
+    } else if (errorData.data?.errorCode === '100001') {
+      toast.error('Password must be 8 characters long', {
+        timeout: 3000,
+        position: POSITION.TOP_RIGHT,
+      });
+    } else {
+      toast.error('An error occurred try again', {
+        timeout: 3000,
+        position: POSITION.TOP_RIGHT,
+      });
+    }
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+  }
+};
+
+const resetForm = () => {
+  formData.fullName = '';
+  formData.email = '';
+  formData.password = '';
+  formData.companyName = '';
+  formData.companySize = '';
+  formData.industry = '';
+  formData.websiteUrl = '';
+};
+
+onMounted(() => {
+  if (authStore.stepOneRecruiterForm != null) {
+    if (authStore.stepOneRecruiterForm?.fullName !== null) {
+      formData.fullName = authStore.stepOneRecruiterForm.fullName;
+    }
+    if (authStore.stepOneRecruiterForm?.email !== null) {
+      formData.email = authStore.stepOneRecruiterForm?.email;
+    }
+    if (authStore.stepOneRecruiterForm.password !== null) {
+      formData.password = authStore.stepOneRecruiterForm?.password;
+    }
+    if (authStore.stepOneRecruiterForm.companyName !== null) {
+      formData.companyName = authStore.stepOneRecruiterForm.companyName;
+    }
+    if (authStore.stepOneRecruiterForm.companySize !== null) {
+      formData.companySize = authStore.stepOneRecruiterForm.companySize;
+    }
+    if (authStore.stepOneRecruiterForm.websiteUrl !== null) {
+      formData.websiteUrl = authStore.stepOneRecruiterForm.websiteUrl;
+    }
+    if (authStore.stepOneRecruiterForm.industry !== null) {
+      formData.industry = authStore.stepOneRecruiterForm.industry;
+    }
+  }
+});
+
+onBeforeRouteLeave(() => {
+  if(isSubmitted.value === true){
+    authStore.setStepOneFormData(null);
+  } else {
+    authStore.setStepOneFormData(formData);
+  }
+  
 });
 </script>
 
 <template>
   <div class="flex justify-center items-center w-full">
-    <div class="w-[23.375rem] flex flex-col">
+    <div class="md:w-[23.375rem] flex flex-col">
       <h2 class="text-center text-[32px] mb-6 font-['Georgia'] font-normal">
         Signup to account
       </h2>
@@ -80,100 +258,155 @@ definePageMeta({
         </button>
       </div>
       <form
-        class="flex flex-col mt-6 mx-auto items-start justify-center text-left w-full max-w-md"
+        class="flex flex-col mt-6 mx-auto items-start justify-center text-left w-full max-w-md space-y-2"
       >
-        <label class="text-sm font-thin mb-2 text-left mt-4"
+       <div class="w-full">
+        <label class="text-base font-thin mb-2 text-left mt-4"
           >Company Name</label
         >
         <input
           type="text"
           placeholder="Enter company name here"
-          class="outline-none w-full text-[12px] font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
+          v-model="formData.companyName"
+          :disabled="isLoading"
+          @change="v$.companyName.$touch"
+          class="outline-none w-full text-base font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
         />
-        <!--Company Size -->
-       <div class="w-full">
-        <label class="text-sm font-thin mb-2 text-left mt-4"
-          >Company Size
-          <select
-            class="outline-none mt-2 bg-white w-full text-sm font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
-          >
-            Company Size
-            <option value="" disabled selected>Select company size</option>
-            <option value="">0-10</option>
-            <option value="">11-50</option>
-            <option value="">51-100</option>
-            <option value="">101-500</option>
-            <option value="">500+</option>
-          </select>
-        </label>
+
+        <div
+              class="input-errors"
+              v-for="error of v$.companyName.$errors"
+              :key="error.$uid"
+            >
+              <div class="text-xs text-danger-500">* {{ error.$message }}</div>
+            </div>
        </div>
+        <!--Company Size -->
+        <div class="w-full">
+          <label class="text-base font-thin mb-2 text-left mt-4"
+            >Company Size
+            <select
+              v-model="formData.companySize"
+              :disabled="isLoading"
+              @change="v$.companySize.$touch"
+              class="outline-none mt-2 bg-white w-full text-base font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
+            >
+              Company Size
+              <option value="" disabled selected>Select company size</option>
+              <option value="0-10">0-10</option>
+              <option value="11-50">11-50</option>
+              <option value="51-100">51-100</option>
+              <option value="101-500">101-500</option>
+              <option value="500+">500+</option>
+            </select>
+          </label>
+
+          <div
+              class="input-errors"
+              v-for="error of v$.companySize.$errors"
+              :key="error.$uid"
+            >
+              <div class="text-xs text-danger-500">* {{ error.$message }}</div>
+            </div>
+        </div>
         <!--Industry -->
 
-       <div class="w-full">
-        <label class="text-sm font-thin mb-2 text-left mt-4">
-          Industry
-          <select
-            class="outline-none mt-2 bg-white w-full text-sm font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
-          >
-            <option value="" disabled selected>Select Industry</option>
-            <option value="Accounting & Finance">Accounting & Finance</option>
-            <option value="Administration & Office Support">
-              Administration & Office Support
-            </option>
-            <option value="Advertising & Marketing">
-              Advertising & Marketing
-            </option>
-            <option value="Agriculture & Farming">Agriculture & Farming</option>
-            <option value="Arts & Entertainment">Arts & Entertainment</option>
-            <option value="Construction & Engineering">
-              Construction & Engineering
-            </option>
-            <option value="Education & Training">Education & Training</option>
-            <option value="Healthcare & Medical">Healthcare & Medical</option>
-            <option value="Hospitality & Tourism">Hospitality & Tourism</option>
-            <option value="Human Resources">Human Resources</option>
-            <option value="Information Technology">
-              Information Technology
-            </option>
-            <option value="Legal">Legal</option>
-            <option value="Manufacturing & Production">
-              Manufacturing & Production
-            </option>
-            <option value="Retail">Retail</option>
-            <option value="Science & Research">Science & Research</option>
-            <option value="Transportation & Logistics">
-              Transportation & Logistics
-            </option>
-            <option value="Telecommunications">Telecommunications</option>
-            <option value="Utilities & Energy">Utilities & Energy</option>
-            <option value="Real Estate">Real Estate</option>
-            <option value="Nonprofit & Charity">Nonprofit & Charity</option>
-          </select>
-        </label>
-       </div>
+        <div class="w-full">
+          <label class="text-base font-thin mb-2 text-left mt-4">
+            Industry
+            <select
+              v-model="formData.industry"
+              :disabled="isLoading"
+              @change="v$.industry.$touch"
+              class="outline-none mt-2 bg-white w-full text-base font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
+            >
+              <option value="" disabled selected>Select Industry</option>
+              <option value="Accounting & Finance">Accounting & Finance</option>
+              <option value="Administration & Office Support">
+                Administration & Office Support
+              </option>
+              <option value="Advertising & Marketing">
+                Advertising & Marketing
+              </option>
+              <option value="Agriculture & Farming">
+                Agriculture & Farming
+              </option>
+              <option value="Arts & Entertainment">Arts & Entertainment</option>
+              <option value="Construction & Engineering">
+                Construction & Engineering
+              </option>
+              <option value="Education & Training">Education & Training</option>
+              <option value="Healthcare & Medical">Healthcare & Medical</option>
+              <option value="Hospitality & Tourism">
+                Hospitality & Tourism
+              </option>
+              <option value="Human Resources">Human Resources</option>
+              <option value="Information Technology">
+                Information Technology
+              </option>
+              <option value="Legal">Legal</option>
+              <option value="Manufacturing & Production">
+                Manufacturing & Production
+              </option>
+              <option value="Retail">Retail</option>
+              <option value="Science & Research">Science & Research</option>
+              <option value="Transportation & Logistics">
+                Transportation & Logistics
+              </option>
+              <option value="Telecommunications">Telecommunications</option>
+              <option value="Utilities & Energy">Utilities & Energy</option>
+              <option value="Real Estate">Real Estate</option>
+              <option value="Nonprofit & Charity">Nonprofit & Charity</option>
+            </select>
+          </label>
 
-        <label class="text-sm font-thin mb-2 text-left mt-4"
+          <div
+              class="input-errors"
+              v-for="error of v$.industry.$errors"
+              :key="error.$uid"
+            >
+              <div class="text-xs text-danger-500">* {{ error.$message }}</div>
+            </div>
+        </div>
+
+        <div class="w-full">
+          <label class="text-base font-thin mb-2 text-left mt-4"
           >Company Website</label
         >
         <input
           type="url"
           placeholder="Website url"
-          class="outline-none w-full text-[12px] font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
+          v-model="formData.websiteUrl"
+          :disabled="isLoading"
+          @change="v$.websiteUrl.$touch"
+          class="outline-none w-full text-basefont-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
         />
 
-        <div class="mt-10 w-full flex space-x-2">
-          <button
-          @click="$router.back()"
-            class="w-1/3 items-center font-light border-[#D0D5DD] border-solid px-5 py-2 text-[#344054] border rounded-lg"
+          <div
+              class="input-errors"
+              v-for="error of v$.websiteUrl.$errors"
+              :key="error.$uid"
+            >
+              <div class="text-xs text-danger-500">* {{ error.$message }}</div>
+            </div>
+        </div>
+        <div class="pt-5"></div>
+        <div class="w-full flex space-x-2">
+          <NuxtLink
+            to="/auth/signup/recruiter"
+            class="w-1/3 items-center font-light border-[#D0D5DD] text-center border-solid px-5 py-2 text-[#344054] border rounded-lg"
           >
             Back
-          </button>
+          </NuxtLink>
 
-          <button
-            class="bg-[#FE8900] font-black text-white py-3.5 text-sm w-full rounded-lg"
+          <div class="pt-10"></div>
+          <BtnPrimary
+            @click="handleSignup()"
+            :isLoading="isLoading"
+            :disabled="isLoading || v$.$invalid"
           >
-            <NuxtLink to="/auth/activation-code">Complete Signup</NuxtLink>
-          </button>
+            <template #text> Complete Signup </template>
+          </BtnPrimary>
         </div>
       </form>
 

@@ -1,8 +1,9 @@
 <script setup lang="ts">
 definePageMeta({
-  title: 'Create job opening',
-  pageName: 'dashboard.recruiter.job.create',
-  layout: 'dashboard',
+  title: "Create job opening",
+  pageName: "dashboard.recruiter.job.create",
+  layout: "dashboard",
+  middleware: ["auth", "is-recruiter"],
 });
 
 // Reactive variables
@@ -24,7 +25,9 @@ const addSkill = (): void => {
   <div class="font-[Nexa] scrollbar-hide bg-white p-2 rounded-10 w-full h-full">
     <div class="flex justify-between items-center p-2">
       <div>
-        <h1 class="font-[Georgia] font-black text-2xl">Job details</h1>
+        <h1 class="font-[Georgia] font-black text-xl md:text-2xl">
+          Job details
+        </h1>
         <div class="flex space-x-2 items-center py-3">
           <svg
             width="16"
@@ -128,7 +131,7 @@ const addSkill = (): void => {
     </div>
 
     <!-- form input with dropdown  -->
-    <form class="p-4 font-[Nexa] space-y-4 w-3/4">
+    <form class="md:p-4 font-[Nexa] space-y-4 w-full md:w-3/4">
       <!-- ocupation -->
       <div class="flex flex-col w-full">
         <label for="first-name" class="text-sm mb-2">Job Title</label>
@@ -140,7 +143,7 @@ const addSkill = (): void => {
       </div>
 
       <!-- input with drop down  -->
-      <div class="flex gap-2">
+      <div class="flex flex-col md:flex-row gap-2">
         <div class="flex flex-col w-full relative">
           <label for="first-name" class="text-sm mb-2">Department</label>
 
@@ -175,6 +178,7 @@ const addSkill = (): void => {
             </svg>
           </div>
         </div>
+
         <div class="flex flex-col w-full relative">
           <label for="first-name" class="text-sm mb-2">Job Type</label>
           <div class="relative dropdown dropdown-bottom flex flex-col w-full">
@@ -212,7 +216,7 @@ const addSkill = (): void => {
       </div>
 
       <!--  -->
-      <div class="flex gap-2">
+      <div class="flex flex-col md:flex-row gap-2">
         <div class="flex flex-col w-full relative">
           <label for="first-name" class="text-sm mb-2">Recruitment Quota</label>
           <div class="relative dropdown dropdown-bottom flex flex-col w-full">
@@ -299,7 +303,7 @@ const addSkill = (): void => {
       </div>
 
       <!--  -->
-      <div class="flex gap-2">
+      <div class="flex flex-col md:flex-row gap-2">
         <div class="flex flex-col w-full relative">
           <label for="first-name" class="text-sm mb-2">Expected Salary</label>
 
@@ -367,7 +371,7 @@ const addSkill = (): void => {
         </div>
       </div>
       <!--  -->
-      <div class="flex gap-2">
+      <div class="flex flex-col md:flex-row gap-2">
         <div class="flex flex-col w-full">
           <label for="first-name" class="text-sm mb-2">Location</label>
           <input

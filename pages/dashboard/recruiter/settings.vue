@@ -1,15 +1,20 @@
 <script setup lang="ts">
 definePageMeta({
-  title: 'Settings',
-  pageName: 'dashboard.recruiter.settings',
-  layout: 'dashboard',
+  title: "Settings",
+  pageName: "dashboard.recruiter.settings",
+  layout: "dashboard",
+  middleware: ["auth", "is-recruiter"],
 });
 </script>
 
 <template>
-  <div class="text-black-700 flex gap-4 text-sm pb-4 relative">
+  <div
+    class="text-black-700 flex flex-col md:flex-row gap-4 text-sm pb-4 relative"
+  >
     <!-- Fixed position left sidebar -->
-    <div class="bg-white w-[28rem] font-[Georgia] rounded-10 fixed">
+    <div
+      class="bg-white md:w-[28rem] hidden md:block font-[Georgia] rounded-10 fixed"
+    >
       <div class="border border-b-2 h-20 w-full items-center flex px-4">
         <div class="space-x-3 flex items-center">
           <span
@@ -121,12 +126,12 @@ definePageMeta({
       </div>
     </div>
     <!--  -->
-    <div class="w-3/4 h-full space-y-3 ml-[30rem]">
+    <div class="md:w-3/4 h-full space-y-3 md:ml-[30rem]">
       <div
         id="preferences_notifications"
         class="bg-white rounded-10 p-4 font-[Nexa] h-full space-y-3"
       >
-        <div class="py-4 space-y-2 w-[440px]">
+        <div class="py-4 space-y-2 md:w-[440px]">
           <h1 class="font-black">Preferences & Notifications</h1>
           <p class="text-xs">
             Change your preferences and decide what you want to be notified
@@ -135,84 +140,112 @@ definePageMeta({
         </div>
 
         <div class="space-y-4">
-          <div
-            class="flex items-center justify-between w-full py-6 border-t-2 px-4"
-          >
-            <div class="w-1/4">
-              <h1 class="text-xs font-black">Email address</h1>
-            </div>
-            <div class="w-2/4">
-              <p class="text-xs">example@example.com</p>
-            </div>
-            <div class="w-1/4 flex justify-end">
-              <button class="text-xs px-4 py-2 border rounded-8 text-[#344054]">
-                Change
-              </button>
-            </div>
-          </div>
-          <!--  -->
-          <div
-            class="flex items-center h-12 justify-between w-full px-4 border-t-2"
-          >
-            <div class="w-1/4">
-              <h1 class="text-xs font-black">News and updates</h1>
-            </div>
-            <div class="w-2/4">
-              <p class="text-xs">News about products and feature updates.</p>
-            </div>
-            <div class="w-1/4 flex justify-end">
-              <div class="form-control">
-                <input
-                  type="checkbox"
-                  defaultChecked
-                  class="toggle toggle-sm checked:bg-white checked:border-primary-1 border-primary-1 bg-black-300 [--tglbg:#FE8900] hover:bg-none"
-                />
+          <div>
+            <div
+              class="flex items-center justify-between w-full md:py-6 border-t-2 md:px-4"
+            >
+              <div class="md:w-1/4">
+                <h1 class="text-xs font-black">Email address</h1>
               </div>
-            </div>
-          </div>
-          <!--  -->
-          <div
-            class="flex items-center h-12 justify-between w-full px-4 border-t-2"
-          >
-            <div class="w-1/4">
-              <h1 class="text-xs font-black">Tips and tutorials</h1>
-            </div>
-            <div class="w-2/4">
-              <p class="text-xs">Tips on getting more out of Workonnect.</p>
-            </div>
-            <div class="w-1/4 flex justify-end">
-              <div class="form-control">
-                <input
-                  type="checkbox"
-                  defaultChecked
-                  class="toggle toggle-sm checked:bg-white checked:border-primary-1 border-primary-1 bg-black-300 [--tglbg:#FE8900] hover:bg-none"
-                />
+              <div class="md:w-2/4 hidden md:flex">
+                <p class="text-xs">example@example.com</p>
               </div>
-            </div>
-          </div>
-          <!--  -->
-          <div
-            class="flex items-center h-12 justify-between w-full px-4 border-t-2"
-          >
-            <div class="w-1/4">
-              <h1 class="text-xs font-black">Reminders</h1>
-            </div>
-            <div class="w-2/4">
-              <p class="text-xs">
-                These are notifications to remind you updates about what you
-                might miss about Workonnect.
-              </p>
-            </div>
 
-            <div class="justify-end w-1/4 flex">
-              <div class="form-control">
-                <input
-                  type="checkbox"
-                  defaultChecked
-                  class="toggle toggle-sm checked:bg-white checked:border-primary-1 border-primary-1 bg-black-300 [--tglbg:#FE8900] hover:bg-none"
-                />
+              <div class="md:w-1/4 flex justify-end pt-3 md:pt-0">
+                <button
+                  class="text-xs px-4 py-2 border rounded-8 text-[#344054]"
+                >
+                  Change
+                </button>
               </div>
             </div>
+            <p class="text-xs md:hidden">example@example.com</p>
+          </div>
+          <!--  -->
+
+          <div>
+            <div
+              class="flex items-center h-12 justify-between w-full md:px-4 border-t-2"
+            >
+              <div class="md:w-1/4">
+                <h1 class="text-xs font-black">News and updates</h1>
+              </div>
+              <div class="w-2/4">
+                <p class="text-xs hidden md:flex">
+                  News about products and feature updates.
+                </p>
+              </div>
+              <div class="md:w-1/4 flex justify-end">
+                <div class="form-control">
+                  <input
+                    type="checkbox"
+                    defaultChecked
+                    class="toggle toggle-sm bg-primary-1 checked:bg-white checked:border-primary-1 border-primary-1 checked:[--tglbg:#FE8900] hover:bg-none"
+                  />
+                </div>
+              </div>
+            </div>
+            <p class="text-xs md:hidden">
+              News about products and feature updates.
+            </p>
+          </div>
+
+          <!--  -->
+          <div>
+            <div
+              class="flex items-center h-12 justify-between w-full md:px-4 border-t-2"
+            >
+              <div class="md:w-1/4">
+                <h1 class="text-xs font-black">Tips and tutorials</h1>
+              </div>
+              <div class="w-2/4">
+                <p class="text-xs hidden md:flex">
+                  Tips on getting more out of Workonnect.
+                </p>
+              </div>
+              <div class="md:w-1/4 flex justify-end">
+                <div class="form-control">
+                  <input
+                    type="checkbox"
+                    defaultChecked
+                    class="toggle toggle-sm bg-primary-1 checked:bg-white checked:border-primary-1 border-primary-1 checked:[--tglbg:#FE8900] hover:bg-none"
+                  />
+                </div>
+              </div>
+            </div>
+            <p class="text-xs md:hidden">
+              Tips on getting more out of Workonnect.
+            </p>
+          </div>
+          <!--  -->
+          <div>
+            <div
+              class="flex items-center h-12 justify-between w-full md:px-4 border-t-2"
+            >
+              <div class="md:w-1/4">
+                <h1 class="text-xs font-black">Reminders</h1>
+              </div>
+              <div class="w-2/4">
+                <p class="text-xs hidden md:flex">
+                  These are notifications to remind you updates about what you
+                  might miss about Workonnect.
+                </p>
+              </div>
+
+              <div class="justify-end md:w-1/4 flex">
+                <div class="form-control">
+                  <input
+                    type="checkbox"
+                    defaultChecked
+                    class="toggle toggle-sm bg-primary-1 checked:bg-white checked:border-primary-1 border-primary-1 checked:[--tglbg:#FE8900] hover:bg-none"
+                  />
+                </div>
+              </div>
+            </div>
+            <p class="text-xs">
+              These are notifications to remind you updates about what you might
+              miss about Workonnect.
+            </p>
           </div>
         </div>
       </div>
@@ -222,178 +255,210 @@ definePageMeta({
         id="privacy"
         class="bg-white rounded-10 p-4 font-[Nexa] h-full space-y-3"
       >
-        <div class="py-4 space-y-2 w-[440px]">
+        <div class="py-4 space-y-2 md:w-[440px]">
           <h1 class="font-black">Privacy settings</h1>
           <p class="text-xs">
             Exercise your privacy rights and control how your data is used.
           </p>
         </div>
         <!--  -->
-        <div
-          class="flex items-center justify-around w-full py-6 border-t-2 px-4"
-        >
-          <div class="w-">
-            <h1 class="text-xs font-black">Privacy</h1>
-          </div>
+        <div>
+          <div
+            class="flex items-center md:justify-around justify-between w-full py-6 border-t-2 md:px-4"
+          >
+            <div class="md:w-1/2">
+              <h1 class="text-xs font-black">Privacy</h1>
+            </div>
 
-          <div class="w-1/2 space-y-2">
-            <p class="text-xs">example@example.com</p>
-            <p class="text-xs">
-              Select "Manage" to change your privacy settings and exercise your
-              rights using our request form.
-            </p>
-          </div>
+            <div class="md:w-1/2 space-y-2">
+              <p class="text-xs hidden md:flex">example@example.com</p>
+              <p class="text-xs hidden md:flex">
+                Select "Manage" to change your privacy settings and exercise
+                your rights using our request form.
+              </p>
+            </div>
 
-          <div class="w- flex justify-end">
-            <button class="text-xs px-3.5 py-2 border rounded-8 text-[#344054]">
-              Manage
-            </button>
+            <div class="md:w-1/2 flex justify-end">
+              <button
+                class="text-xs px-3.5 py-2 border rounded-8 text-[#344054]"
+              >
+                Manage
+              </button>
+            </div>
           </div>
+          <p class="text-xs md:hidden py-2">example@example.com</p>
+
+          <p class="text-xs md:hidden">
+            Select "Manage" to change your privacy settings and exercise your
+            rights using our request form.
+          </p>
         </div>
       </div>
 
-      <!--  -->
+      <!-- security -->
       <div
         id="security"
         class="bg-white rounded-10 p-4 font-[Nexa] h-full space-y-3"
       >
-        <div class="py-4 space-y-2 w-[440px]">
+        <div class="py-4 space-y-2 md:w-[440px]">
           <h1 class="font-black">Security</h1>
           <p class="text-xs">
             Change your security settings, set up secure authentication, or
             delete your account.
           </p>
         </div>
+
         <!--  -->
-        <div
-          class="flex items-center justify-around w-full py-6 border-t-2 px-4"
-        >
-          <div class="w-1/4">
-            <h1 class="text-xs font-black w-20">Two-Factor Authentication</h1>
+        <div>
+          <div
+            class="flex items-center md:justify-around justify-between w-full py-6 border-t-2 md:px-4"
+          >
+            <div class="md:w-1/4">
+              <h1 class="text-xs font-black md:w-20">
+                Two-Factor Authentication
+              </h1>
+            </div>
+            <div class="md:w-2/4">
+              <p class="text-xs hidden md:flex">
+                Increase your account's security by setting up two-factor
+                authentication.
+              </p>
+            </div>
+            <div class="md:w-1/4 flex justify-end">
+              <button class="text-xs px-4 py-2 border rounded-8 text-[#344054]">
+                Setup
+              </button>
+            </div>
           </div>
-          <div class="w-2/4">
-            <p class="text-xs">
-              Increase your account's security by setting up two-factor
-              authentication.
-            </p>
-          </div>
-          <div class="w-1/4 flex justify-end">
-            <button class="text-xs px-4 py-2 border rounded-8 text-[#344054]">
-              Setup
-            </button>
-          </div>
+          <p class="text-xs md:hidden">
+            Increase your account's security by setting up two-factor
+            authentication.
+          </p>
         </div>
 
         <!--  -->
-        <div
-          class="flex items-center justify-between w-full py-6 border-t-2 px-4"
-        >
-          <div class="w-1/4">
-            <h1 class="text-xs font-black">Active sessions</h1>
+        <div>
+          <div
+            class="flex items-center justify-between w-full py-6 border-t-2 md:px-4"
+          >
+            <div class="md:w-1/4">
+              <h1 class="text-xs font-black">Active sessions</h1>
+            </div>
+            <div class="md:w-2/4">
+              <p class="text-xs md:flex hidden">
+                Selecting "Sign out" will sign you out from all devices except
+                this one. This can take up to 10 minutes..
+              </p>
+            </div>
+            <div class="md:w-1/4 flex justify-end">
+              <button class="text-xs px-4 py-2 border rounded-8 text-[#344054]">
+                Sign out
+              </button>
+            </div>
           </div>
-          <div class="w-2/4">
-            <p class="text-xs">
-              Selecting "Sign out" will sign you out from all devices except
-              this one. This can take up to 10 minutes..
-            </p>
-          </div>
-          <div class="w-1/4 flex justify-end">
-            <button class="text-xs px-4 py-2 border rounded-8 text-[#344054]">
-              Sign out
-            </button>
-          </div>
+          <p class="text-xs md:hidden">
+            Selecting "Sign out" will sign you out from all devices except this
+            one. This can take up to 10 minutes..
+          </p>
         </div>
         <!--  -->
-        <div
-          class="flex items-center justify-between w-full py-6 border-t-2 px-4"
-        >
-          <div class="w-1/4">
-            <h1 class="text-xs font-black">Delete account</h1>
-          </div>
-          <div class="w-2/4">
-            <p class="text-xs">Permanently delete your Bookingcorps account.</p>
-          </div>
-          <!-- delete modal -->
-          <div class="w-1/4 flex justify-end">
-            <button
-              onclick="my_modal_1.showModal()"
-              class="text-xs px-4 py-2 border rounded-8 text-[#344054]"
-            >
-              Delete account
-              <!-- Open the modal using ID.showModal() method -->
-
-              <dialog
-                id="my_modal_1"
-                class="modal text-black-950 backdrop-blur-sm backdrop-filter"
+        <div>
+          <div
+            class="flex items-center justify-between w-full py-6 border-t-2 md:px-4"
+          >
+            <div class="md:w-1/4">
+              <h1 class="text-xs font-black">Delete account</h1>
+            </div>
+            <div class="md:w-2/4 hidden md:flex">
+              <p class="text-xs">
+                Permanently delete your Bookingcorps account.
+              </p>
+            </div>
+            <!-- delete modal -->
+            <div class="md:w-1/4 flex justify-end">
+              <button
+                onclick="my_modal_1.showModal()"
+                class="text-xs px-4 py-2 border rounded-8 text-[#344054]"
               >
-                <div class="modal-box flex-col flex items-center space-y-3">
-                  <div
-                    class="flex items-center justify-around w-full pb-4 border-b-2"
-                  >
-                    <div class="text-white">no text.</div>
-                    <h3 class="text-lg font-bold">Information!</h3>
+                Delete account
+                <!-- Open the modal using ID.showModal() method -->
 
-                    <form method="dialog">
-                      <button class="btn">
-                        <svg
-                          width="14"
-                          height="14"
-                          viewBox="0 0 14 14"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
-                            d="M0.726027 0.724657C0.970105 0.480579 1.36583 0.480579 1.60991 0.724657L13.2758 12.3905C13.5199 12.6346 13.5199 13.0303 13.2758 13.2744C13.0317 13.5185 12.636 13.5185 12.3919 13.2744L0.726027 1.60854C0.481949 1.36446 0.481949 0.968734 0.726027 0.724657Z"
-                            fill="#57575B"
-                          />
-                          <path
-                            fill-rule="evenodd"
-                            clip-rule="evenodd"
-                            d="M13.274 0.724657C13.5181 0.968734 13.5181 1.36446 13.274 1.60854L1.60809 13.2744C1.36401 13.5185 0.968285 13.5185 0.724208 13.2744C0.48013 13.0303 0.480131 12.6346 0.724208 12.3905L12.3901 0.724657C12.6342 0.480579 13.0299 0.480579 13.274 0.724657Z"
-                            fill="#57575B"
-                          />
-                        </svg>
+                <dialog
+                  id="my_modal_1"
+                  class="modal text-black-950 backdrop-blur-sm backdrop-filter"
+                >
+                  <div class="modal-box flex-col flex items-center space-y-3">
+                    <div
+                      class="flex items-center justify-around w-full pb-4 border-b-2"
+                    >
+                      <div class="text-white">no text.</div>
+                      <h3 class="text-lg font-bold">Information!</h3>
+
+                      <form method="dialog">
+                        <button class="btn">
+                          <svg
+                            width="14"
+                            height="14"
+                            viewBox="0 0 14 14"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              clip-rule="evenodd"
+                              d="M0.726027 0.724657C0.970105 0.480579 1.36583 0.480579 1.60991 0.724657L13.2758 12.3905C13.5199 12.6346 13.5199 13.0303 13.2758 13.2744C13.0317 13.5185 12.636 13.5185 12.3919 13.2744L0.726027 1.60854C0.481949 1.36446 0.481949 0.968734 0.726027 0.724657Z"
+                              fill="#57575B"
+                            />
+                            <path
+                              fill-rule="evenodd"
+                              clip-rule="evenodd"
+                              d="M13.274 0.724657C13.5181 0.968734 13.5181 1.36446 13.274 1.60854L1.60809 13.2744C1.36401 13.5185 0.968285 13.5185 0.724208 13.2744C0.48013 13.0303 0.480131 12.6346 0.724208 12.3905L12.3901 0.724657C12.6342 0.480579 13.0299 0.480579 13.274 0.724657Z"
+                              fill="#57575B"
+                            />
+                          </svg>
+                        </button>
+                      </form>
+                    </div>
+                    <span
+                      ><svg
+                        width="100"
+                        height="100"
+                        viewBox="0 0 100 100"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M92.5003 73.4729L58.3401 14.1487C57.4865 12.6953 56.2679 11.4902 54.805 10.6528C53.3421 9.8155 51.6858 9.375 50.0003 9.375C48.3147 9.375 46.6584 9.8155 45.1956 10.6528C43.7327 11.4902 42.5141 12.6953 41.6604 14.1487L7.50028 73.4729C6.67894 74.8787 6.24609 76.4776 6.24609 78.1057C6.24609 79.7339 6.67894 81.3327 7.50028 82.7385C8.34298 84.2007 9.55954 85.4124 11.0251 86.2492C12.4907 87.086 14.1526 87.5178 15.8401 87.5003H84.1604C85.8467 87.5164 87.5069 87.0839 88.971 86.2472C90.4351 85.4105 91.6504 84.1996 92.4925 82.7385C93.315 81.3334 93.7492 79.7349 93.7506 78.1068C93.7519 76.4786 93.3204 74.8794 92.5003 73.4729ZM46.8753 40.6253C46.8753 39.7965 47.2045 39.0016 47.7906 38.4155C48.3766 37.8295 49.1715 37.5003 50.0003 37.5003C50.8291 37.5003 51.6239 37.8295 52.21 38.4155C52.796 39.0016 53.1253 39.7965 53.1253 40.6253V56.2503C53.1253 57.0791 52.796 57.8739 52.21 58.46C51.6239 59.046 50.8291 59.3753 50.0003 59.3753C49.1715 59.3753 48.3766 59.046 47.7906 58.46C47.2045 57.8739 46.8753 57.0791 46.8753 56.2503V40.6253ZM50.0003 75.0003C49.0732 75.0003 48.1669 74.7253 47.396 74.2103C46.6252 73.6952 46.0244 72.9631 45.6696 72.1066C45.3148 71.2501 45.222 70.3076 45.4029 69.3983C45.5837 68.489 46.0302 67.6538 46.6857 66.9982C47.3413 66.3426 48.1765 65.8962 49.0858 65.7153C49.9951 65.5345 50.9376 65.6273 51.7941 65.9821C52.6506 66.3369 53.3827 66.9377 53.8978 67.7085C54.4129 68.4794 54.6878 69.3857 54.6878 70.3128C54.6878 71.556 54.1939 72.7482 53.3148 73.6273C52.4358 74.5064 51.2435 75.0003 50.0003 75.0003Z"
+                          fill="#F79009"
+                        />
+                      </svg>
+                    </span>
+                    <p class="py-2 w-2/3 text-sm">
+                      Are you sure you want to delete your Workonnect account?
+                    </p>
+                    <p class="py-2">This cannot be undone</p>
+
+                    <div class="space-x-2">
+                      <!-- if there is a button in form, it will close the modal -->
+                      <button
+                        class="px-4 py-2 border border-danger-600 text-danger-600 text-xs rounded-10"
+                      >
+                        Cancel
                       </button>
-                    </form>
+                      <button
+                        class="rounded-10 px-4 py-2 text-white text-xs bg-primary-1"
+                      >
+                        Proceed
+                      </button>
+                    </div>
                   </div>
-                  <span
-                    ><svg
-                      width="100"
-                      height="100"
-                      viewBox="0 0 100 100"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M92.5003 73.4729L58.3401 14.1487C57.4865 12.6953 56.2679 11.4902 54.805 10.6528C53.3421 9.8155 51.6858 9.375 50.0003 9.375C48.3147 9.375 46.6584 9.8155 45.1956 10.6528C43.7327 11.4902 42.5141 12.6953 41.6604 14.1487L7.50028 73.4729C6.67894 74.8787 6.24609 76.4776 6.24609 78.1057C6.24609 79.7339 6.67894 81.3327 7.50028 82.7385C8.34298 84.2007 9.55954 85.4124 11.0251 86.2492C12.4907 87.086 14.1526 87.5178 15.8401 87.5003H84.1604C85.8467 87.5164 87.5069 87.0839 88.971 86.2472C90.4351 85.4105 91.6504 84.1996 92.4925 82.7385C93.315 81.3334 93.7492 79.7349 93.7506 78.1068C93.7519 76.4786 93.3204 74.8794 92.5003 73.4729ZM46.8753 40.6253C46.8753 39.7965 47.2045 39.0016 47.7906 38.4155C48.3766 37.8295 49.1715 37.5003 50.0003 37.5003C50.8291 37.5003 51.6239 37.8295 52.21 38.4155C52.796 39.0016 53.1253 39.7965 53.1253 40.6253V56.2503C53.1253 57.0791 52.796 57.8739 52.21 58.46C51.6239 59.046 50.8291 59.3753 50.0003 59.3753C49.1715 59.3753 48.3766 59.046 47.7906 58.46C47.2045 57.8739 46.8753 57.0791 46.8753 56.2503V40.6253ZM50.0003 75.0003C49.0732 75.0003 48.1669 74.7253 47.396 74.2103C46.6252 73.6952 46.0244 72.9631 45.6696 72.1066C45.3148 71.2501 45.222 70.3076 45.4029 69.3983C45.5837 68.489 46.0302 67.6538 46.6857 66.9982C47.3413 66.3426 48.1765 65.8962 49.0858 65.7153C49.9951 65.5345 50.9376 65.6273 51.7941 65.9821C52.6506 66.3369 53.3827 66.9377 53.8978 67.7085C54.4129 68.4794 54.6878 69.3857 54.6878 70.3128C54.6878 71.556 54.1939 72.7482 53.3148 73.6273C52.4358 74.5064 51.2435 75.0003 50.0003 75.0003Z"
-                        fill="#F79009"
-                      />
-                    </svg>
-                  </span>
-                  <p class="py-2 w-2/3 text-sm">
-                    Are you sure you want to delete your Workonnect account?
-                  </p>
-                  <p class="py-2">This cannot be undone</p>
-
-                  <div class="space-x-2">
-                    <!-- if there is a button in form, it will close the modal -->
-                    <button
-                      class="px-4 py-2 border border-danger-600 text-danger-600 text-xs rounded-10"
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      class="rounded-10 px-4 py-2 text-white text-xs bg-primary-1"
-                    >
-                      Proceed
-                    </button>
-                  </div>
-                </div>
-              </dialog>
-            </button>
+                </dialog>
+              </button>
+            </div>
           </div>
+          <p class="text-xs md:hidden">
+            Permanently delete your Bookingcorps account.
+          </p>
         </div>
       </div>
     </div>

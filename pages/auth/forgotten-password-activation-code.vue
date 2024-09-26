@@ -1,16 +1,134 @@
-<script setup>
-import messageicon from "@/assets/images/messageicon.png";
+<script setup lang="ts">
+import { required, helpers, maxLength } from '@vuelidate/validators';
+import { useVuelidate } from '@vuelidate/core';
+import { useToast, POSITION } from 'vue-toastification';
+import VOtpInput from 'vue3-otp-input';
+import type { ApiErrorResponse, ApiSuccessResponse } from '~/types';
 
-const inputValue = ref("");
-const inputValue2 = ref("");
-const inputValue3 = ref("");
-const inputValue4 = ref("");
+definePageMeta({
+  title: 'Password Auth Code',
+  pageName: 'auth.forgotten.password.code',
+});
+
+const toast = useToast();
+const countDown = ref<number>(60);
+const otpInput = ref<InstanceType<typeof VOtpInput> | null>(null);
+const isLoading = ref<boolean>(false);
+
+const route = useRoute();
+const router = useRouter();
+
+const handleOnComplete = (value: string) => {
+  formData.code = value;
+};
+
+const handleOnChange = (value: string) => {
+  // console.log('OTP changed: ', value);
+};
+
+const clearInput = () => {
+  otpInput.value?.clearInput();
+};
+
+const formData = reactive({
+  token: route.query.tke,
+  code: '',
+});
+
+const rules = computed(() => {
+  return {
+    token: {
+      required: helpers.withMessage('Invalid token', required),
+    },
+    code: {
+      required: helpers.withMessage('Code is required', required),
+      maxLength: helpers.withMessage('Please enter a valid code', maxLength(5)),
+    },
+  };
+});
+
+const v$ = useVuelidate(rules, formData);
+
+const verifyCode = async () => {
+  isLoading.value = true;
+  const isValidForm = await v$.value.$validate();
+  if (!isValidForm) {
+    toast.error('Please enter a valid code', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+    return;
+  }
+
+  try {
+    const response = await $fetch('/api/auth/code-forgot-password', {
+      method: 'POST',
+      body: { ...formData, email: route.query.email },
+    });
+
+    toast.success('Code verification successful.', {
+      timeout: 2000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    const responseData = response as ApiSuccessResponse;
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+
+    setTimeout(() => {
+      router.push({
+        path: '/auth/set-new-password',
+        query: {
+          tke: responseData.data.token,
+          reqId: route.query.reqId,
+          email: route.query.email,
+        },
+      });
+    }, 2000);
+  } catch (error: any) {
+    const errorData = error.data as ApiErrorResponse;
+    toast.error('An error occurred try again', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+  }
+};
+
+onMounted(() => {
+  if (
+    !route.query ||
+    !route.query.tke ||
+    !route.query.email ||
+    !route.query.reqId
+  ) {
+    return router.replace('/');
+  }
+
+  const interval = setInterval(() => {
+    --countDown.value;
+  }, 1000);
+
+  watch(countDown, (countDown, oldCount) => {
+    if (countDown <= 0) {
+      clearInterval(interval);
+    }
+  });
+});
 </script>
 
 <template>
-  <div class="w-1/2 mx-auto h-full">
+  <div class="md:w-1/2 mx-auto h-full">
     <div
-      class="flex flex-col items-center justify-center w-[23.375rem] mx-auto mt-10"
+      class="flex flex-col items-center justify-center md:w-[23.375rem] mx-auto mt-10"
     >
       <span class="mt-8">
         <svg
@@ -30,65 +148,113 @@ const inputValue4 = ref("");
       </span>
       <h2 class="mt-3 text-xl font-['Georgia'] font-normal">Enter Code</h2>
       <p class="mb-5 text-[12px] font-thin">
-        We sent a code to example@example.com
+        We sent a code to {{ route.query.email }}
       </p>
       <div class="flex items-center justify-center gap-3 mt-5 mb-7">
-        <input
-          type="text"
-          maxlength="1"
-          v-model="inputValue"
-          :class="{
-            'focus:outline-none  border-2 border-solid shadow-lg': inputValue,
-            'border-2 border-solid  ': !inputValue,
-          }"
-          class="focus:outline-none resize-none w-[64px] font-medium rounded-lg text-5xl text-center h-[64px] text-purple-500"
-          required
-        />
-        <input
-          type="text"
-          maxlength="1"
-          v-model="inputValue2"
-          :class="{
-            ' focus:outline-none  border-2 border-solid shadow-lg': inputValue2,
-            'border-2 border-solid  ': !inputValue2,
-          }"
-          class="focus:outline-none resize-none w-[64px] font-medium rounded-lg text-5xl text-center h-[64px] text-purple-500"
-          required
-        />
-        <input
-          type="text"
-          maxlength="1"
-          v-model="inputValue3"
-          :class="{
-            'focus:outline-none  border-2 border-solid shadow-lg': inputValue3,
-            'border-2 border-solid  ': !inputValue3,
-          }"
-          class="focus:outline-none w-[64px] font-medium rounded-lg text-5xl text-center h-[64px] text-purple-500"
-          required
-        />
-        <input
-          type="text"
-          maxlength="1"
-          v-model="inputValue4"
-          :class="{
-            'focus:outline-none  border-2 border-solid shadow-lg': inputValue4,
-            'border-2 border-solid  ': !inputValue4,
-          }"
-          class="focus:outline-none w-[64px] rounded-lg font-medium text-5xl text-center h-[64px] text-purple-500"
-          required
-        />
+        <div class="flex items-center justify-center space-y-6">
+          <v-otp-input
+            v-model="formData.code"
+            @change="v$.code.$touch"
+            ref="otpInput"
+            input-classes="otp-input"
+            separator="&nbsp;"
+            :num-inputs="5"
+            :should-auto-focus="true"
+            :is-input-num="true"
+            :conditionalClass="['one', 'two', 'three', 'four', 'five']"
+            :placeholder="['0', '0', '0', '0', '0']"
+            @on-change="handleOnChange"
+            @on-complete="handleOnComplete"
+          />
+        </div>
       </div>
-      <p class="text-sm font-thin mb-14">
-        Didn't receive the code?<NuxtLink
+      <p class="text-xs font-thin mb-10">
+        Didn't receive the code?
+
+        <span v-if="countDown > 0">
+          Resend Code in {{ countDown }} Second(s)
+        </span>
+        <button
+          v-else
           class="ml-1 cursor-pointer text-black font-semibold rounded-b-sm border-b-2 border-b-black border-b-solid"
-          >Click to resend</NuxtLink
         >
+          Click to resend
+        </button>
       </p>
-      <button
-        class="font-black text-white w-full  py-3.5 rounded-lg text-sm bg-[#FE8900]"
+      <BtnPrimary
+        @click="verifyCode()"
+        :disabled="isLoading || v$.$invalid"
+        :isLoading="isLoading"
       >
-        <NuxtLink to="/auth/set-new-password">Continue</NuxtLink>
-      </button>
+        <template #text>
+          {{ !isLoading ? 'Continue' : 'Verifying Otp...' }}
+        </template>
+      </BtnPrimary>
     </div>
-   </div>
+  </div>
 </template>
+
+<style>
+.otp-input {
+  width: 52px;
+  height: 52px;
+  padding: 8px;
+  margin: 0 4px;
+  font-weight: 500;
+  border-radius: 6px;
+  border: 1px solid #d0d5dd;
+  text-align: center;
+  color: #7f56d9;
+  background-color: #fff;
+  font-size: 32px;
+  line-height: 40px;
+  font-family: "Inter";
+}
+
+@media (min-width: 640px) {
+  .otp-input {
+    width: 64px;
+    height: 64px;
+    padding: 8px;
+    margin: 0 4px;
+    font-weight: 500;
+    border-radius: 8px;
+    border: 1px solid #d0d5dd;
+    text-align: center;
+    color: #7f56d9;
+    background-color: #fff;
+    font-size: 48px;
+    line-height: 60px;
+    font-family: "Inter";
+  }
+
+  input.otp-input::placeholder {
+    font-size: 48px !important;
+    text-align: center;
+    font-weight: 500;
+  }
+}
+
+/* Background color of an input field with value */
+.otp-input.is-complete {
+  background-color: transparent;
+  border: 4px solid #f4ebff;
+}
+
+.otp-input::-webkit-inner-spin-button,
+.otp-input::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input.otp-input::placeholder {
+  font-size: 32px;
+  text-align: center;
+  font-weight: 500;
+}
+
+input.otp-input:focus {
+  border: 4px solid #f4ebff;
+  outline: none;
+}
+</style>

@@ -3,6 +3,7 @@ definePageMeta({
   title: "Find Jobs",
   pageName: "dashboard.jobseeker.find-jobs.index",
   layout: "dashboard",
+  middleware: ["auth", "is-jobseeker"],
 });
 
 enum CARD_LAYOUT {
@@ -18,10 +19,10 @@ const handleLayoutChange = (newLayout: CARD_LAYOUT) => {
 </script>
 
 <template>
-  <div class="flex gap-4 text-black-900">
-    <div class="w-[65%]">
+  <div class="flex flex-col md:flex-row gap-4 text-black-900">
+    <div class="md:w-[65%] w-full">
       <div
-        class="bg-info-100 text-black-700 p-4 rounded-10 space-y-2 w-full h-[164px]"
+        class="bg-info-100 text-black-700 p-4 rounded-10 space-y-2 w-full md:h-[164px] h-full"
       >
         <h3 class="font-black text-2xl">
           Discover your ideal career right here
@@ -32,7 +33,7 @@ const handleLayoutChange = (newLayout: CARD_LAYOUT) => {
         </p>
 
         <!-- input search -->
-        <form class="flex gap-2 w-full pt-2">
+        <form class="flex flex-col md:flex-row gap-2 w-full pt-2">
           <div class="relative dropdown dropdown-bottom flex flex-col w-full">
             <input
               type="text"
@@ -94,7 +95,11 @@ const handleLayoutChange = (newLayout: CARD_LAYOUT) => {
             </svg>
           </div>
 
-          <button class="bg-primary-1 px-4 rounded-10">
+          <button
+            class="bg-primary-1 md:px-4 p-3 md:p-0 flex items-center space-x-2 md:space-x-0 capitalize font-black justify-center rounded-10"
+          >
+            <h1 class="md:hidden text-white">search</h1>
+
             <svg
               width="18"
               height="18"
@@ -112,9 +117,9 @@ const handleLayoutChange = (newLayout: CARD_LAYOUT) => {
       </div>
 
       <!-- btn -->
-      <div class="py-5 flex justify-between w-full">
+      <div class="py-5 flex flex-wrap gap-y-3 justify-between w-full">
         <button
-          class="bg-westside-200 text-primary-1 gap-2 flex items-center font-black p-2 px-4 rounded-10 text-xs"
+          class="bg-westside-200 text-primary-1 gap-x-2 flex items-center font-black md:p-2 px-4 rounded-10 md:text-xs text-[10px]"
         >
           <svg
             width="14"
@@ -130,9 +135,10 @@ const handleLayoutChange = (newLayout: CARD_LAYOUT) => {
           </svg>
           New jobs
         </button>
-        <button class="bg-white p-2 px-4 rounded-10 text-xs">Full-time</button>
+
+        <button class="bg-white p-2 px-4 rounded-10 md:text-xs text-[10px]">Full-time</button>
         <button
-          class="bg-westside-200 text-primary-1 gap-2 flex items-center font-black p-2 px-4 rounded-10 text-xs"
+          class="bg-westside-200 text-primary-1 gap-2 flex items-center font-black p-2 px-4 rounded-10 md:text-xs text-[10px]"
         >
           <svg
             width="14"
@@ -148,8 +154,9 @@ const handleLayoutChange = (newLayout: CARD_LAYOUT) => {
           </svg>
           Freelance
         </button>
+
         <button
-          class="bg-westside-200 text-primary-1 gap-2 flex items-center font-black p-2 px-4 rounded-10 text-xs"
+          class="bg-westside-200 text-primary-1 gap-2 flex items-center font-black p-2 px-4 rounded-10 md:text-xs text-[10px]"
         >
           <svg
             width="14"
@@ -165,10 +172,11 @@ const handleLayoutChange = (newLayout: CARD_LAYOUT) => {
           </svg>
           Remote
         </button>
-        <button class="bg-white p-2 px-4 rounded-10 text-xs">Hybrid</button>
+
+        <button class="bg-white p-2 px-4 rounded-10 md:text-xs text-[10px]">Hybrid</button>
 
         <!-- dropdown button -->
-        <button class="rounded-10 text-xs dropdown dropdown-end">
+        <button class="rounded-10 text-xs dropdown dropdown-bottom dropdown-end pl-44 md:pl-0">
           <svg
             width="17"
             height="10"
@@ -250,7 +258,7 @@ const handleLayoutChange = (newLayout: CARD_LAYOUT) => {
           </ul>
         </button>
 
-        <button class="text-primary-1 font-black text-xs">
+        <button class="text-primary-1 font-black md:text-xs text-[10px]">
           Remove Filters
         </button>
       </div>
@@ -305,12 +313,14 @@ const handleLayoutChange = (newLayout: CARD_LAYOUT) => {
     </div>
 
     <!--  second div-->
-    <div class="bg-white w-[35%] h-full rounded-10">
+    <div class="bg-white md:w-[35%] w-full h-full hidden md:block rounded-10">
       <div class="flex items-center flex-col space-y-3 py-4 border-b-2">
         <img src="/assets/images/ms.png" alt="" />
         <h1 class="text base font-black">Social Media Assistant</h1>
         <p class="text-xs">Microsoft</p>
       </div>
+
+      
       <!--  -->
       <div class="flex gap-x-6 p-6 border-b-2">
         <div class="space-y-4">
@@ -342,10 +352,10 @@ const handleLayoutChange = (newLayout: CARD_LAYOUT) => {
           </div>
 
           <div class="flex items-center space-x-2">
-            <button class="bg-primary-1 px-4 py-3 text-xs rounded-8 text-white">
+            <button class="bg-primary-1 px-4 py-3 md:text-xs text-[8px] rounded-8 text-white">
               Apply Now
             </button>
-            <button class="border-primary-1 px-4 border py-3 rounded-8">
+            <button class="border-primary-1 px-4 border md:py-3 py-2 rounded-8">
               <svg
                 width="12"
                 height="17"
@@ -478,11 +488,11 @@ const handleLayoutChange = (newLayout: CARD_LAYOUT) => {
           </div>
 
           <div class="flex space-x-4 py-3">
-            <button class="bg-primary-1 px-6 py-3 rounded-10 text-white">
+            <button class="bg-primary-1 md:px-6 py-3 w-full md:w-auto rounded-10 text-white text-xs font-black">
               Apply Now
             </button>
             <button
-              class="border-primary-1 border px-6 py-3 text-primary-1 rounded-10"
+              class="border-primary-1 border md:px-6 py-3 w-full md:w-auto  text-primary-1 rounded-10 text-xs font-black"
             >
               More Details
             </button>

@@ -1,11 +1,17 @@
 <script setup lang="ts">
-const route = useRoute()
+const route = useRoute();
+
+const title = computed(() => route.meta.title as string)
 </script>
 <template>
-  <div class="bg-custom-gradient w-[75%] rounded-lg">
-    <div class="flex items-center justify-center gap-10 mx-4 mt-10">
+  <div class="bg-custom-gradient max-w-[545px] rounded-lg">
+    <div class="flex items-center justify-center gap-10 mx-4 pt-10">
       <h1 class="text-[34.33px] font-['Georgia'] font-normal text-white mx-6">
-       {{ $route.meta.title.includes('recruiter') ? 'Recruiting Executive Talents' : 'What Our Jobseekers Said.' }}
+        {{
+          title.includes("recruiter")
+            ? "Recruiting Executive Talents"
+            : "What Our Jobseekers Said."
+        }}
       </h1>
       <span>
         <svg
@@ -23,10 +29,14 @@ const route = useRoute()
         </svg>
       </span>
     </div>
-  <LayoutRecruiterTestimonials v-if="$route.meta.title.includes('recruiter')"/>
-  <LayoutJobSeekerTestimonials v-if="$route.meta.title.includes('jobseeker')" />
+    <LayoutRecruiterTestimonials
+      v-if="title.includes('recruiter')"
+    />
+    <LayoutJobSeekerTestimonials
+      v-if="title.includes('jobseeker')"
+    />
     <div class="w-[85%] mt-10 mx-10 mb-5 rounded-tr-15%]">
-      <img src="../../assets/images/Frame1618869200.svg" alt="" />
+      <img src="../../assets/svgs/Frame1618869200.svg" alt="" />
     </div>
   </div>
 </template>

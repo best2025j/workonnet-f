@@ -1,13 +1,102 @@
 <script setup lang="ts">
+import { POSITION, useToast } from 'vue-toastification';
+import { required, helpers, email } from '@vuelidate/validators';
+import { useVuelidate } from '@vuelidate/core';
+import type { ApiErrorResponse, ApiSuccessResponse } from '~/types';
+
 definePageMeta({
   layout: 'auth',
-  title: "jobseeker.signin"
+  title: 'jobseeker.signin',
+  pageName: 'jobseeker.signin',
+  middleware: ['no-auth'],
 });
+
+const router = useRouter();
+const route = useRoute();
+const toast = useToast();
+const isLoading = ref<boolean>(false);
+const authStore = useAuthStore();
+
+const formData = reactive({
+  email: route.query?.email ? route.query?.email : '',
+  password: '',
+});
+
+const rules = computed(() => {
+  return {
+    email: {
+      required: helpers.withMessage('Email is required', required),
+      email: helpers.withMessage('Enter a valid email', email),
+    },
+    password: {
+      required: helpers.withMessage('Please enter a password', required),
+    },
+  };
+});
+
+const v$ = useVuelidate(rules, formData);
+
+const handleLogin = async () => {
+  isLoading.value = true;
+  const isValidForm = await v$.value.$validate();
+  if (!isValidForm) {
+    toast.error('Please enter a valid email or password', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 1000);
+    return;
+  }
+
+  try {
+    const response = await $fetch('/api/auth/jobseeker/authenticate', {
+      method: 'POST',
+      body: formData,
+    });
+
+    const responseData = response as ApiSuccessResponse;
+    authStore.setLoginSecret(responseData.data.accessToken);
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 1000);
+
+    return router.push({
+      path: '/auth/activation-code',
+      query: {
+        tk: responseData.data.accessToken,
+        email: formData.email,
+      },
+    });
+  } catch (error: any) {
+    const errorData = error.data as ApiErrorResponse;
+
+    console.log(error);
+
+    if (errorData.data?.errorCode === 'CI0001') {
+      toast.error(errorData.data.message, {
+        timeout: 3000,
+        position: POSITION.TOP_RIGHT,
+      });
+    } else {
+      toast.error('An error occurred try again', {
+        timeout: 3000,
+        position: POSITION.TOP_RIGHT,
+      });
+    }
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+  }
+};
 </script>
 <template>
   <div class="flex justify-center items-center w-full">
-    <div class="w-[23.375rem] flex flex-col">
-      <h2 class="text-center text-[32px] mb-6 font-['Georgia'] font-normal">
+    <div class="md:w-[23.375rem] w-full flex flex-col">
+      <h2 class="text-center text-3xl md:text-[32px] mb-6 font-[Georgia] font-normal">
         Continue to account
       </h2>
       <div class="flex flex-col items-center justify-center gap-4 text-[12px]">
@@ -82,36 +171,48 @@ definePageMeta({
         class="flex flex-col mt-6 mx-auto items-start justify-center text-left w-full max-w-md"
       >
         <div class="flex flex-col w-full">
-          <label class="text-sm font-thin mb-2 text-left mt-4">Email </label>
+          <label class="text-basefont-thin mb-2 text-left mt-4">Email </label>
           <input
             type="email"
             placeholder="Enter email address here"
-            class="outline-none text-xs w-full font-thin rounded-lg px-3 py-2 border border-black-200 border-solid"
+            v-model="formData.email"
+            :disabled="isLoading"
+            @change="v$.email.$touch"
+            class="outline-none text-base w-full font-thin rounded-lg px-3 py-2.5 border border-black-200 border-solid"
           />
 
-          <label class="text-sm font-thin mb-2 text-left mt-4">Password</label>
+          <label class="text-base font-thin mb-2 text-left mt-4">Password</label>
           <input
             type="password"
             placeholder="Enter password"
             pattern=".{8,}"
-            class="outline-none text-xs leading-5 w-full p-4 border border-solid border-black-200 rounded-lg px-3 py-2"
+            v-model="formData.password"
+            :disabled="isLoading"
+            @change="v$.password.$touch"
+            class="outline-none text-base w-full border border-solid border-black-200 rounded-lg px-3 py-2.5"
           />
           <div class="flex justify-end mt-2">
             <NuxtLink
-              class="text-sm  text-black underline cursor-pointer"
-              to="/auth/password-forgotten"
+              class="text-sm text-black underline cursor-pointer"
+              to="/auth/password-forgotten?reqId=jobseeker"
             >
-            Forgot password?
+              Forgot password?
             </NuxtLink>
           </div>
         </div>
-        <button
-          class="w-full bg-[#FE8900] font-black text-white mt-20 text-sm py-3.5 rounded-md"
+
+        <div class="mt-10"></div>
+        <BtnPrimary
+          @click="handleLogin()"
+          :isLoading="isLoading"
+          :disabled="isLoading || v$.$invalid"
         >
-          <NuxtLink to="/auth/activation-code">Sign In</NuxtLink>
-        </button>
+          <template #text>
+            {{ !isLoading ? 'Sign in' : 'Please wait...' }}
+          </template>
+        </BtnPrimary>
       </form>
-      <p class="text-center mt-10 mb-5 text-sm font-thin">
+      <p class="text-center md:mt-10 pt-4 md:mb-5 text-xs md:text-sm font-thin">
         Don't have an account?
         <NuxtLink to="/auth/signup/jobseeker" class="font-light text-[#007AFF]"
           >Sign up</NuxtLink

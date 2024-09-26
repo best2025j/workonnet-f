@@ -1,6 +1,6 @@
 <template>
   <!-- table -->
-  <div class="align-middle inline-block min-w-full">
+  <div class="align-middle inline-block w-full">
     <div class="overflow-hidden mt-2">
       <table class="min-w-full table-fixed">
         <tbody class="divide-y divide-grey-200">
@@ -11,43 +11,53 @@
                   <img
                     src="/assets/images/ms.png"
                     alt="Google"
-                    class="w-10 h-10 rounded"
+                    class="md:w-10 md:h-10 rounded"
                   />
                 </div>
 
                 <div
                   class="text-left flex flex-col w-[104px] whitespace-break-spaces"
                 >
-                  <span class="text-sm font-black">Social Media Assistant</span>
-                  <span class="text-sm font-semimedium">Microsoft</span>
+                  <span class="md:text-sm text-[8px] font-black"
+                    >Social Media Assistant</span
+                  >
+                  <span class="md:text-sm text-[8px] font-semimedium"
+                    >Microsoft</span
+                  >
                 </div>
               </div>
             </td>
 
             <td class="py-4 whitespace-nowrap">
               <div class="text-left flex flex-col">
-                <span class="text-sm font-black">Location</span
-                ><span class="text-sm font-semimedium">Paris, France.</span>
+                <span class="md:text-sm text-[8px] font-black">Location</span
+                ><span class="md:text-sm text-[6px] font-semimedium"
+                  >Paris, France.</span
+                >
               </div>
             </td>
 
             <td class="py-4 whitespace-nowrap">
               <div class="text-left flex flex-col">
-                <span class="text-sm font-black">Date Applied</span
-                ><span class="text-sm font-semimedium">14th July, 2024</span>
+                <span class="md:text-sm text-[8px] font-black"
+                  >Date Applied</span
+                ><span class="md:text-sm text-[6px] font-semimedium"
+                  >14th July, 2024</span
+                >
               </div>
             </td>
 
-            <td class="py-4 whitespace-nowrap">
+            <td class="py-4 whitespace-nowrap pl-4 md:pl-0">
               <div class="font-normal flex text-left">
                 <span
-                  class="px-6 py-2 rounded-10 font-black bg-westside-100 text-xs text-primary-1"
+                  class="px-6 py-2 rounded-10 font-black bg-westside-100 md:text-xs text-[6px] text-primary-1"
                   >In Review</span
                 >
               </div>
             </td>
 
-            <td class="py-4 whitespace-nowrap pr-4">
+         
+            <td class=" py-4 whitespace-nowrap pr-4">
               <div class="font-normal flex text-left">
                 <svg
                   width="32"
@@ -72,42 +82,51 @@
                   <img
                     src="/assets/images/SocialMedia.png"
                     alt="Google"
-                    class="w-10 h-10 rounded"
+                    class="md:w-10 md:h-10 rounded"
                   />
                 </div>
                 <div
                   class="text-left w-[104px] flex whitespace-break-spaces flex-col"
                 >
-                  <span class="text-sm font-black">Social Media Assistant</span
-                  ><span class="text-sm font-semimedium">Microsoft</span>
+                  <span class="md:text-sm text-[8px] font-black"
+                    >Social Media Assistant</span
+                  ><span class="md:text-sm text-[6px] font-semimedium"
+                    >Microsoft</span
+                  >
                 </div>
               </div>
             </td>
 
             <td class="py-4 whitespace-nowrap">
               <div class="text-left flex flex-col">
-                <span class="text-sm font-black">Location</span
-                ><span class="text-sm font-semimedium">Paris, France.</span>
+                <span class="md:text-sm text-[8px] font-black">Location</span
+                ><span class="md:text-sm text-[6px] font-semimedium"
+                  >Paris, France.</span
+                >
               </div>
             </td>
 
             <td class="py-4 whitespace-nowrap">
               <div class="text-left flex flex-col">
-                <span class="text-sm font-black">Date Applied</span
-                ><span class="text-sm font-semimedium">14th July, 2024</span>
+                <span class="md:text-sm text-[8px] font-black"
+                  >Date Applied</span
+                ><span class="md:text-sm text-[6px] font-semimedium"
+                  >14th July, 2024</span
+                >
               </div>
             </td>
 
-            <td class="py-4 whitespace-nowrap">
+            <td class="py-4 whitespace-nowrap pl-4 md:pl-0">
               <div class="font-normal flex text-left">
                 <span
-                  class="px-6 py-2 rounded-10 font-black bg-[#FFDEE0] text-xs text-[#F60C17]"
+                  class="px-6 py-2 rounded-10 font-black bg-[#FFDEE0] text-[6px] md:text-xs text-[#F60C17]"
                   >Not selected</span
                 >
               </div>
             </td>
 
-            <td class="py-4 whitespace-nowrap pr-4">
+         
+            <td class=" py-4 whitespace-nowrap pr-4">
               <div class="font-normal flex text-left">
                 <svg
                   width="32"
@@ -132,41 +151,50 @@
                   <img
                     src="/assets/images/SocialMedia2.png"
                     alt="Google"
-                    class="w-10 h-10 rounded"
+                    class="md:w-10 md:h-10 rounded"
                   />
                 </div>
                 <div
                   class="text-left w-[104px] flex whitespace-break-spaces flex-col"
                 >
-                  <span class="text-sm font-black">Social Media Assistant</span
-                  ><span class="text-sm font-semimedium">Microsoft</span>
+                  <span class="md:text-sm text-[8px] font-black"
+                    >Social Media Assistant</span
+                  ><span class="md:text-sm text-[6px] font-semimedium"
+                    >Microsoft</span
+                  >
                 </div>
               </div>
             </td>
             <td class="py-4 whitespace-nowrap">
               <div class="text-left flex flex-col">
-                <span class="text-sm font-black">Location</span
-                ><span class="text-sm font-semimedium">Paris, France.</span>
+                <span class="md:text-sm text-[8px] font-black">Location</span
+                ><span class="md:text-sm text-[6px] font-semimedium"
+                  >Paris, France.</span
+                >
               </div>
             </td>
 
             <td class="py-4 whitespace-nowrap">
               <div class="text-left flex flex-col">
-                <span class="text-sm font-black">Date Applied</span
-                ><span class="text-sm font-semimedium">14th July, 2024</span>
+                <span class="md:text-sm text-[8px] font-black"
+                  >Date Applied</span
+                ><span class="md:text-sm text-[6px] font-semimedium"
+                  >14th July, 2024</span
+                >
               </div>
             </td>
 
-            <td class="py-4 whitespace-nowrap">
+            <td class="py-4 whitespace-nowrap pl-4 md:pl-0">
               <div class="font-normal flex text-left">
                 <span
-                  class="px-6 py-2 rounded-10 font-black bg-[#D1EFFF] text-xs text-[#006EFF]"
+                  class="px-6 py-2 rounded-10 font-black bg-[#D1EFFF] text-[6px] md:text-xs text-[#006EFF]"
                   >Pending</span
                 >
               </div>
             </td>
 
-            <td class="py-4 whitespace-nowrap pr-4">
+         
+            <td class=" py-4 whitespace-nowrap pr-4">
               <div class="font-normal flex text-left">
                 <svg
                   width="32"
@@ -191,41 +219,50 @@
                   <img
                     src="/assets/images/SocialMedia3.png"
                     alt="Google"
-                    class="w-10 h-10 rounded"
+                    class="md:w-10 md:h-10 rounded"
                   />
                 </div>
                 <div
                   class="text-left w-[104px] flex whitespace-break-spaces flex-col"
                 >
-                  <span class="text-sm font-black">Social Media Assistant</span
-                  ><span class="text-sm font-semimedium">Microsoft</span>
+                  <span class="md:text-sm text-[8px] font-black"
+                    >Social Media Assistant</span
+                  ><span class="md:text-sm text-[6px] font-semimedium"
+                    >Microsoft</span
+                  >
                 </div>
               </div>
             </td>
             <td class="py-4 whitespace-nowrap">
               <div class="text-left flex flex-col">
-                <span class="text-sm font-black">Location</span
-                ><span class="text-sm font-semimedium">Paris, France.</span>
+                <span class="md:text-sm text-[8px] font-black">Location</span
+                ><span class="md:text-sm text-[6px] font-semimedium"
+                  >Paris, France.</span
+                >
               </div>
             </td>
 
             <td class="py-4 whitespace-nowrap">
               <div class="text-left flex flex-col">
-                <span class="text-sm font-black">Date Applied</span
-                ><span class="text-sm font-semimedium">14th July, 2024</span>
+                <span class="md:text-sm text-[8px] font-black"
+                  >Date Applied</span
+                ><span class="md:text-sm text-[6px] font-semimedium"
+                  >14th July, 2024</span
+                >
               </div>
             </td>
 
-            <td class="py-4 whitespace-nowrap">
+            <td class="py-4 whitespace-nowrap pl-4 md:pl-0">
               <div class="font-normal flex text-left">
                 <span
-                  class="px-6 py-2 rounded-10 font-black bg-success-100 text-xs text-success-600"
+                  class="px-6 py-2 rounded-10 font-black bg-success-100 md:text-xs text-[6px] text-success-600"
                   >Selected</span
                 >
               </div>
             </td>
 
-            <td class="py-4 whitespace-nowrap pr-4">
+         
+            <td class=" py-4 whitespace-nowrap pr-4">
               <div class="font-normal flex text-left">
                 <svg
                   width="32"

@@ -1,6 +1,6 @@
 <template>
-  <footer class="bg-[#F8F7F9] h-full py-20">
-    <div class="flex w-full justify-between p-6 items-start">
+  <footer class="bg-[#F8F7F9] h-full mt-32 md:px-8 md:py-20">
+    <div class="md:flex w-full justify-between p-6 items-start">
       <div class="flex w-28 space-y-3 flex-col">
         <h1 class="text-base font-black">Workonnect</h1>
         <div class="flex justify-between">
@@ -56,34 +56,28 @@
           </span>
         </div>
       </div>
-      <!--  -->
-      <div>
-        <table>
-          <thead>
-            <tr class="text-base">
-              <th class="text-left pl-24">Company</th>
-              <th class="text-left pl-24">Help</th>
-              <th class="text-left pl-24">Resources</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="pl-24 pt-5">About</td>
-              <td class="pl-24 pt-5">Customer Support</td>
-              <td class="pl-24 pt-5">Press Kitl</td>
-            </tr>
-            <tr>
-              <td class="pl-24 pt-5">Contact</td>
-              <td class="pl-24 pt-5">Terms & Conditions</td>
-              <td class="pl-24 pt-5">How to - Blog</td>
-            </tr>
-            <tr>
-              <td class="pl-24 pt-5">Services</td>
-              <td class="pl-24 pt-5">Privacy Policy</td>
-              <td class="pl-24 pt-5">Youtube Playlist</td>
-            </tr>
-          </tbody>
-        </table>
+
+      <div
+        class="grid grid-cols-2 py-10 md:py-0 md:w-[590px] md:grid-cols-3 text-sm"
+      >
+        <div>
+          <h1 class="font-black text-base">Company</h1>
+          <h1 class="pt-8">About</h1>
+          <h1 class="pt-5">Contact</h1>
+          <h1 class="pt-5">Services</h1>
+        </div>
+        <div>
+          <h1 class="font-black text-base">Help</h1>
+          <h1 class="pt-8">Customer Support</h1>
+          <h1 class="pt-5">Terms & Conditions</h1>
+          <h1 class="pt-5">Privacy Policy</h1>
+        </div>
+        <div class="mt-8 md:mt-0">
+          <h1 class="font-black text-base md:pl-4">Resources</h1>
+          <h1 class="pt-8 md:pl-4">Press Kitl</h1>
+          <h1 class="pt-5 md:pl-4">How to - Blog</h1>
+          <h1 class="pt-5 md:pl-4">Youtube Playlist</h1>
+        </div>
       </div>
       <!--  -->
       <div class="w-72">
@@ -94,7 +88,7 @@
           <button
             class="h-[50px] w-full flex items-center gap-x-3 justify-center bg-primary-1 text-white text-xs font-black rounded-8"
           >
-            Get Started
+            Join our waitlist
             <svg
               width="19"
               height="18"
@@ -123,10 +117,14 @@
     <div
       class="text-center justify-center max-w-[1130px] space-y-3 w-full items-center flex flex-col mx-auto"
     >
-      <h1 class="text-[100px] line-1 border-b-2 w-full border-[#EAE8EE]">
+      <h1
+        class="md:text-[100px] text-[46px] md:line-1 border-b-2 w-full border-[#EAE8EE]"
+      >
         Workonnect
       </h1>
-      <h1 class="text-xs">COPYRIGHT © 2024. WORKONNECT. ALL RIGHTS RESERVED</h1>
+      <h1 class="text-xs text-center w-64 md:w-full py-6 md:py-0">
+        COPYRIGHT © 2024. WORKONNECT. ALL RIGHTS RESERVED
+      </h1>
     </div>
   </footer>
 </template>

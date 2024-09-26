@@ -3,6 +3,7 @@ definePageMeta({
   title: "Jobs Openings",
   pageName: "dashboard.recruiter.jobs-opening.profile-veiw",
   layout: "dashboard",
+  middleware: ["auth", "is-recruiter"],
 });
 </script>
 
@@ -12,13 +13,15 @@ definePageMeta({
     <div class="p-4 bg-white rounded-10">
       <img
         src="/assets/images/bridge.png"
-        class="w-full"
+        class="w-full h-32 md:h-auto"
         alt="no image yet..."
       />
-      <div class="-mt-12 pl-6 space-y-2">
+      <div class="-mt-12 md:pl-6 pl-3 space-y-2">
         <img src="/assets/images/man.png" alt="profile-image" />
-        <div class="flex justify-between items-center">
-          <div class="space-y-2">
+        <div
+          class="flex flex-col md:flex-row justify-between text-start md:items-center"
+        >
+          <div class="space-y-2 py-2">
             <h1 class="font-black text-base">Stephen Howard</h1>
             <div class="flex items-start space-x-4">
               <div class="space-y-2">
@@ -28,7 +31,7 @@ definePageMeta({
             </div>
           </div>
           <!--  user info-->
-          <div class="space-y-2">
+          <div class="space-y-2 py-2">
             <div class="flex gap-2 items-center">
               <svg
                 width="18"
@@ -80,7 +83,7 @@ definePageMeta({
             </div>
           </div>
           <!-- socialmedia links -->
-          <div class="space-y-2">
+          <div class="space-y-2 py-2">
             <div class="flex gap-2 items-center">
               <svg
                 width="18"
@@ -134,7 +137,7 @@ definePageMeta({
             </div>
           </div>
           <!-- btn -->
-          <div class="space-y-3">
+          <div class="space-y-3 py-2">
             <div class="flex justify-end">
               <button class="text-info-600 font-black text-xs">
                 Premium user
@@ -155,13 +158,13 @@ definePageMeta({
                     fill="#343330"
                   />
                 </svg>
-                <h1 class="text-lg font-black">$5,000/month</h1>
+                <h1 class="md:text-lg text-sm font-black">$5,000/month</h1>
               </div>
 
               <nuxt-link to="/dashboard/jobseeker/my-profile/edit">
-                <div class="flex justify-end">
+                <div class="flex justify-end py-3">
                   <button
-                    class="px-[14px] text-xs py-2 rounded-5 bg-primary-1 text-white"
+                    class="md:px-[14px] w-full font-black text-xs py-2 rounded-5 bg-primary-1 text-white"
                   >
                     Edit profile info
                   </button>
@@ -173,7 +176,7 @@ definePageMeta({
       </div>
     </div>
 
-    <div class="flex gap-4">
+    <div class="flex flex-col md:flex-row gap-4">
       <!-- cards -->
       <div class="p-4 bg-white rounded-10 w-full my-4">
         <div class="space-y-4 pt-4">
@@ -298,7 +301,7 @@ definePageMeta({
       </div>
 
       <!--  -->
-      <div class="p-4 bg-white rounded-10 my-4 w-[670px] h-full">
+      <div class="p-4 bg-white rounded-10 my-4 w-full md:w-[670px] h-full">
         <!-- uploading -->
         <div>
           <div class="bg-white rounded-10 py-2">

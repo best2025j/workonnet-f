@@ -3,7 +3,9 @@
 
 <template>
   <div class="py-4 gap-4 space-y-4 w-full">
-    <div class="bg-white rounded-10 w-full border-2 border-westside-300 shadow">
+    <div
+      class="bg-white rounded-10 w-full border-2 border-westside-300 shadow h-full"
+    >
       <div class="flex items-center justify-between border-b-2 p-3">
         <div class="flex items-center space-x-4">
           <img
@@ -18,7 +20,6 @@
         </div>
 
         <div class="flex space-x-4 items-center relative right-5">
-        
           <button>
             <svg
               width="28"
@@ -36,10 +37,12 @@
         </div>
       </div>
 
-      <div class="flex justify-between items-center px-4 py-4 bg-white-100">
+      <div
+        class="flex flex-col rounded-10 md:flex-row justify-between items-center md:px-4 py-6 bg-white w-full"
+      >
         <div class="flex items-center space-x-6">
           <div class="">
-            <div class="flex space-x-2 items-center mt-2 p-2">
+            <div class="flex space-x-2 items-center mt-2 py-2">
               <svg
                 width="14"
                 height="18"
@@ -55,7 +58,7 @@
               <span class="text-xs text-gray-700">Paris, France</span>
             </div>
 
-            <div class="flex space-x-2 items-center mt-2 p-2">
+            <div class="flex space-x-2 items-center mt-2 py-2">
               <svg
                 width="12"
                 height="18"
@@ -73,7 +76,7 @@
               >
             </div>
 
-            <div class="flex space-x-2 items-center mt-2 p-2">
+            <div class="flex space-x-2 items-center mt-2 py-2">
               <svg
                 width="18"
                 height="18"
@@ -140,21 +143,22 @@
             </div>
           </div>
         </div>
-        <nuxt-link to="/dashboard/jobseeker/find-jobs/more-details">
-          <div
-            class="flex flex-col justify-end relative right-5 top-12 w-[99px]"
+
+        <div
+          class="flex justify-end relative md:top-12 px-4 top-2 w-full md:w-auto"
+        >
+          <button
+            class="py-3 border text-primary-1 border-primary-1 rounded-10 text-xs w-full md:w-[99px]"
           >
-            <button
-              class="py-3 border text-primary-1 border-primary-1 rounded-10 text-xs"
-            >
+            <nuxt-link to="/dashboard/jobseeker/find-jobs/more-details">
               More details
-            </button>
-          </div>
-        </nuxt-link>
+            </nuxt-link>
+          </button>
+        </div>
       </div>
     </div>
     <!--  -->
-    <div class="bg-white rounded-10 w-full">
+    <div class="bg-white rounded-10 w-full h-full">
       <div class="flex items-center justify-between border-b-2 p-3">
         <div class="flex items-center space-x-4">
           <img
@@ -171,7 +175,6 @@
         </div>
 
         <div class="flex space-x-4 items-center relative right-5">
-        
           <button>
             <svg
               width="28"
@@ -189,7 +192,9 @@
         </div>
       </div>
 
-      <div class="flex justify-between items-center px-4 py-4 bg-white-100">
+      <div
+        class="flex flex-col rounded-10 md:flex-row justify-between items-center md:px-4 py-6 bg-white w-full"
+      >
         <div class="flex items-center space-x-6">
           <div class="">
             <div class="flex space-x-2 items-center mt-2 p-2">
@@ -244,7 +249,7 @@
           </div>
 
           <div class="">
-            <div class="flex space-x-2 items-center mt-2 p-2">
+            <div class="flex space-x-2 items-center mt-2 py-2">
               <svg
                 width="18"
                 height="16"
@@ -260,7 +265,7 @@
               <span class="text-xs">Hybrid</span>
             </div>
 
-            <div class="flex space-x-2 items-center mt-2 p-2">
+            <div class="flex space-x-2 items-center mt-2 py-2">
               <svg
                 width="18"
                 height="18"
@@ -276,7 +281,7 @@
               <span class="text-xs">Full-time</span>
             </div>
 
-            <div class="flex space-x-2 items-center mt-2 p-2">
+            <div class="flex space-x-2 items-center mt-2 py-2">
               <svg
                 width="18"
                 height="16"
@@ -293,21 +298,22 @@
             </div>
           </div>
         </div>
-        <nuxt-link to="/dashboard/jobseeker/find-jobs/more-details">
-          <div
-            class="flex flex-col justify-end relative right-5 top-12 w-[99px]"
+
+        <div
+          class="flex justify-end relative md:top-12 px-4 top-2 w-full md:w-auto"
+        >
+          <button
+            class="py-3 border text-primary-1 border-primary-1 rounded-10 text-xs w-full md:w-[99px]"
           >
-            <button
-              class="py-3 border text-primary-1 border-primary-1 rounded-10 text-xs"
-            >
+            <nuxt-link to="/dashboard/jobseeker/find-jobs/more-details">
               More details
-            </button>
-          </div>
-        </nuxt-link>
+            </nuxt-link>
+          </button>
+        </div>
       </div>
     </div>
     <!--  -->
-    <div class="bg-white rounded-10 w-full">
+    <div class="bg-white rounded-10 w-full h-full">
       <div class="flex items-center justify-between border-b-2 p-3">
         <div class="flex items-center space-x-4">
           <img
@@ -322,7 +328,6 @@
         </div>
 
         <div class="flex space-x-4 items-center relative right-5">
-        
           <button>
             <svg
               width="28"
@@ -340,10 +345,12 @@
         </div>
       </div>
 
-      <div class="flex justify-between items-center px-4 py-4 bg-white-100">
+      <div
+        class="flex flex-col rounded-10 md:flex-row justify-between items-center md:px-4 py-6 bg-white w-full"
+      >
         <div class="flex items-center space-x-6">
           <div class="">
-            <div class="flex space-x-2 items-center mt-2 p-2">
+            <div class="flex space-x-2 items-center mt-2 py-2">
               <svg
                 width="14"
                 height="18"
@@ -359,7 +366,7 @@
               <span class="text-xs text-gray-700">Paris, France</span>
             </div>
 
-            <div class="flex space-x-2 items-center mt-2 p-2">
+            <div class="flex space-x-2 items-center mt-2 py-2">
               <svg
                 width="12"
                 height="18"
@@ -377,7 +384,7 @@
               >
             </div>
 
-            <div class="flex space-x-2 items-center mt-2 p-2">
+            <div class="flex space-x-2 items-center mt-2 py-2">
               <svg
                 width="18"
                 height="18"
@@ -395,7 +402,7 @@
           </div>
 
           <div class="">
-            <div class="flex space-x-2 items-center mt-2 p-2">
+            <div class="flex space-x-2 items-center mt-2 py-2">
               <svg
                 width="18"
                 height="16"
@@ -411,7 +418,7 @@
               <span class="text-xs">Hybrid</span>
             </div>
 
-            <div class="flex space-x-2 items-center mt-2 p-2">
+            <div class="flex space-x-2 items-center mt-2 py-2">
               <svg
                 width="18"
                 height="18"
@@ -427,7 +434,7 @@
               <span class="text-xs">Full-time</span>
             </div>
 
-            <div class="flex space-x-2 items-center mt-2 p-2">
+            <div class="flex space-x-2 items-center mt-2 py-2">
               <svg
                 width="18"
                 height="16"
@@ -444,21 +451,22 @@
             </div>
           </div>
         </div>
-        <nuxt-link to="/dashboard/jobseeker/find-jobs/more-details">
-          <div
-            class="flex flex-col justify-end relative right-5 top-12 w-[99px]"
+
+        <div
+          class="flex justify-end relative md:top-12 px-4 top-2 w-full md:w-auto"
+        >
+          <button
+            class="py-3 border text-primary-1 border-primary-1 rounded-10 text-xs w-full md:w-[99px]"
           >
-            <button
-              class="py-3 border text-primary-1 border-primary-1 rounded-10 text-xs"
-            >
+            <nuxt-link to="/dashboard/jobseeker/find-jobs/more-details">
               More details
-            </button>
-          </div>
-        </nuxt-link>
+            </nuxt-link>
+          </button>
+        </div>
       </div>
     </div>
     <!--  -->
-    <div class="bg-white rounded-10 w-full">
+    <div class="bg-white rounded-10 w-full h-full">
       <div class="flex items-center justify-between border-b-2 p-3">
         <div class="flex items-center space-x-4">
           <img
@@ -475,7 +483,6 @@
         </div>
 
         <div class="flex space-x-4 items-center relative right-5">
-        
           <button>
             <svg
               width="28"
@@ -493,10 +500,12 @@
         </div>
       </div>
 
-      <div class="flex justify-between items-center px-4 py-4 bg-white-100">
+      <div
+        class="flex flex-col rounded-10 md:flex-row justify-between items-center md:px-4 py-6 bg-white w-full"
+      >
         <div class="flex items-center space-x-6">
           <div class="">
-            <div class="flex space-x-2 items-center mt-2 p-2">
+            <div class="flex space-x-2 items-center mt-2 py-2">
               <svg
                 width="14"
                 height="18"
@@ -512,7 +521,7 @@
               <span class="text-xs text-gray-700">Paris, France</span>
             </div>
 
-            <div class="flex space-x-2 items-center mt-2 p-2">
+            <div class="flex space-x-2 items-center mt-2 py-2">
               <svg
                 width="12"
                 height="18"
@@ -530,7 +539,7 @@
               >
             </div>
 
-            <div class="flex space-x-2 items-center mt-2 p-2">
+            <div class="flex space-x-2 items-center mt-2 py-2">
               <svg
                 width="18"
                 height="18"
@@ -597,21 +606,22 @@
             </div>
           </div>
         </div>
-        <nuxt-link to="/dashboard/jobseeker/find-jobs/more-details">
-          <div
-            class="flex flex-col justify-end relative right-5 top-12 w-[99px]"
+
+        <div
+          class="flex justify-end relative md:top-12 px-4 top-2 w-full md:w-auto"
+        >
+          <button
+            class="py-3 border text-primary-1 border-primary-1 rounded-10 text-xs w-full md:w-[99px]"
           >
-            <button
-              class="py-3 border text-primary-1 border-primary-1 rounded-10 text-xs"
-            >
+            <nuxt-link to="/dashboard/jobseeker/find-jobs/more-details">
               More details
-            </button>
-          </div>
-        </nuxt-link>
+            </nuxt-link>
+          </button>
+        </div>
       </div>
     </div>
     <!--  -->
-    <div class="bg-white rounded-10 w-full">
+    <div class="bg-white rounded-10 w-full h-full">
       <div class="flex items-center justify-between border-b-2 p-3">
         <div class="flex items-center space-x-4">
           <img
@@ -630,7 +640,6 @@
         </div>
 
         <div class="flex space-x-4 items-center relative right-5">
-        
           <button>
             <svg
               width="28"
@@ -648,7 +657,9 @@
         </div>
       </div>
 
-      <div class="flex justify-between items-center px-4 py-4 bg-white-100">
+      <div
+        class="flex flex-col rounded-10 md:flex-row justify-between items-center md:px-4 py-6 bg-white w-full"
+      >
         <div class="flex items-center space-x-6">
           <div class="">
             <div class="flex space-x-2 items-center mt-2 p-2">
@@ -752,17 +763,18 @@
             </div>
           </div>
         </div>
-        <nuxt-link to="/dashboard/jobseeker/find-jobs/more-details">
-          <div
-            class="flex flex-col justify-end relative right-5 top-12 w-[99px]"
+
+        <div
+          class="flex justify-end relative md:top-12 px-4 top-2 w-full md:w-auto"
+        >
+          <button
+            class="py-3 border text-primary-1 border-primary-1 rounded-10 text-xs w-full md:w-[99px]"
           >
-            <button
-              class="py-3 border text-primary-1 border-primary-1 rounded-10 text-xs"
-            >
+            <nuxt-link to="/dashboard/jobseeker/find-jobs/more-details">
               More details
-            </button>
-          </div>
-        </nuxt-link>
+            </nuxt-link>
+          </button>
+        </div>
       </div>
     </div>
   </div>

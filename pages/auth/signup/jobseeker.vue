@@ -1,18 +1,138 @@
 <script setup lang="ts">
+import { POSITION, useToast } from 'vue-toastification';
+import {
+  required,
+  helpers,
+  email,
+  minLength,
+  alpha,
+} from '@vuelidate/validators';
+import { useVuelidate } from '@vuelidate/core';
+import type { ApiErrorResponse, ApiSuccessResponse } from '~/types';
+
 definePageMeta({
   layout: 'auth',
-  title: "jobseeker.signup"
+  title: 'jobseeker.signup',
+  pageName: 'jobseeker.signin',
+  middleware: ['no-auth'],
 });
+
+const router = useRouter();
+const toast = useToast();
+const isLoading = ref<boolean>(false);
+const authStore = useAuthStore();
+
+const formData = reactive({
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+});
+
+const rules = computed(() => {
+  return {
+    firstName: {
+      required: helpers.withMessage('Firstname is required', required),
+      alpha: helpers.withMessage('Firstname can only contain letters', alpha),
+    },
+    lastName: {
+      required: helpers.withMessage('Lastname is required', required),
+      alpha: helpers.withMessage('Lastname can only contain letters', alpha),
+    },
+    email: {
+      required: helpers.withMessage('Email is required', required),
+      email: helpers.withMessage('Enter a valid email', email),
+    },
+    password: {
+      required: helpers.withMessage('Please enter a password', required),
+      minLength: helpers.withMessage(
+        'Password cannot be less than 8 characters',
+        minLength(8)
+      ),
+    },
+  };
+});
+
+const v$ = useVuelidate(rules, formData);
+
+const handleSignup = async () => {
+  isLoading.value = true;
+  const isValidForm = await v$.value.$validate();
+  if (!isValidForm) {
+    toast.error('Please enter a valid email or password', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+    return;
+  }
+
+  try {
+    await $fetch('/api/auth/jobseeker/register', {
+      method: 'POST',
+      body: formData,
+    });
+
+    const loginResponse = await $fetch('/api/auth/jobseeker/authenticate', {
+      method: 'POST',
+      body: { password: formData.password, email: formData.email },
+    });
+
+    const responseData = loginResponse as ApiSuccessResponse;
+    authStore.setLoginSecret(responseData.data.accessToken);
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 1000);
+
+    return router.push({
+      path: '/auth/activation-code',
+      query: {
+        tk: responseData.data.accessToken,
+        email: formData.email,
+      },
+    });
+  } catch (error: any) {
+    const errorData = error.data as ApiErrorResponse;
+
+    if (errorData.data?.errorCode === 'E11000') {
+      toast.error('Email already in use', {
+        timeout: 3000,
+        position: POSITION.TOP_RIGHT,
+      });
+    } else if (errorData.data?.errorCode === '100001') {
+      toast.error('Password must be 8 characters long', {
+        timeout: 3000,
+        position: POSITION.TOP_RIGHT,
+      });
+    } else {
+      toast.error('An error occurred try again', {
+        timeout: 3000,
+        position: POSITION.TOP_RIGHT,
+      });
+    }
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+  }
+};
 </script>
 <template>
-    <div class="flex justify-center items-center w-full">
-        <div  class="w-[23.375rem] flex flex-col">
+  <div class="flex justify-center items-center w-full">
+    <div class="md:w-[23.375rem] w-full flex flex-col">
+      <h2
+        class="text-center md:text-[32px] mb-10 font-[Georgia] text-2xl font-normal"
+      >
+        Create Account
+      </h2>
 
-        
-        <h2 class="text-center text-[32px] mb-10 font-['Georgia'] font-normal">
-          Create Account
-        </h2>
-        <div class="flex flex-col items-center justify-center gap-4 text-[12px]">
+      <div
+        class="flex flex-col items-center justify-center space-y-4 text-[12px]"
+      >
         <button
           class="w-full flex gap-4 items-center justify-center border font-light border-[#D0D5DD] border-solid px-5 py-2 text-[#344054] rounded-lg"
         >
@@ -80,47 +200,106 @@ definePageMeta({
           Continue with LinkedIn
         </button>
       </div>
-        <form
-          class="flex flex-col mt-6 mx-auto items-start justify-center text-left w-full max-w-md"
-        >
-          <label class="text-sm font-thin mb-2 text-left mt-4"
-            >Full Name
-          </label>
-          <input
-            type="email"
-            placeholder="Enter full name here"
-            class="outline-none w-full text-xs  placehoder:text-[#958D8D] rounded-md px-3 py-2 border border-black-200 border-solid"
-          />
 
-          <label class="text-sm font-thin mb-2 text-left mt-4">Email </label>
+      <form
+        class="flex flex-col mt-6 mx-auto space-y-2 items-start justify-center text-left w-full max-w-md"
+      >
+        <div class="flex items-start justify-between space-x-2">
+          <div>
+            <label class="text-sm font-thin text-left">First Name </label>
+            <input
+              type="text"
+              placeholder="Enter firstname here"
+              v-model="formData.firstName"
+              :disabled="isLoading"
+              @change="v$.firstName.$touch"
+              class="outline-none w-full text-base rounded-md px-3 py-2 border border-black-200 border-solid"
+            />
+            <div
+              class="input-errors"
+              v-for="error of v$.firstName.$errors"
+              :key="error.$uid"
+            >
+              <div class="text-xs text-danger-500">* {{ error.$message }}</div>
+            </div>
+          </div>
+          <div>
+            <label class="text-sm font-thin text-left">Last Name </label>
+            <input
+              type="text"
+              placeholder="Enter lastname here"
+              v-model="formData.lastName"
+              :disabled="isLoading"
+              @change="v$.lastName.$touch"
+              class="outline-none w-full text-base rounded-md px-3 py-2 border border-black-200 border-solid"
+            />
+
+            <div
+              class="input-errors"
+              v-for="error of v$.lastName.$errors"
+              :key="error.$uid"
+            >
+              <div class="text-xs text-danger-500">* {{ error.$message }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="w-full">
+          <label class="text-sm font-thin text-left">Email </label>
           <input
             type="email"
             placeholder="Enter email address here"
-            class="outline-none w-full text-xs rounded-md px-3 py-2 border border-black-200 border-solid"
+            v-model="formData.email"
+            :disabled="isLoading"
+            @change="v$.email.$touch"
+            class="outline-none w-full text-base rounded-md px-3 py-2 border border-black-200 border-solid"
           />
 
-          <label class="text-sm font-thin mb-2 text-left mt-4"
-            >Create Password
-          </label>
+          <div
+            class="input-errors"
+            v-for="error of v$.email.$errors"
+            :key="error.$uid"
+          >
+            <div class="text-xs text-danger-500">* {{ error.$message }}</div>
+          </div>
+        </div>
+        <div class="w-full">
+          <label class="text-base font-thin text-left">Create Password </label>
           <input
             type="password"
-            placeholder="Create new password"
+            placeholder="Enter new password"
             pattern=".{8,}"
-            class="outline-none text-xs leading-5 w-full p border border-solid border-black-200 rounded-lg  px-3 py-2"
+            v-model="formData.password"
+            :disabled="isLoading"
+            @change="v$.password.$touch"
+            class="outline-none text-base leading-5 w-full p border border-solid border-black-200 rounded-lg px-3 py-2"
           />
-          <button
-            class="bg-[#FE8900] font-black text-white mt-20 py-3.5 text-sm w-full rounded-lg"
-          >
-            <NuxtLink to="/auth/activation-code"> Create Account</NuxtLink>
-          </button>
-        </form>
-        <p class="text-center mt-10 mb-5 text-sm font-thin">
-          Already have an account?
-          <NuxtLink to="/auth/signin/jobseeker" class="font-thin text-[#007AFF]"
-            >Sign In</NuxtLink
-          >
-        </p>
-      </div>
-</div>
 
+          <div
+            class="input-errors"
+            v-for="error of v$.password.$errors"
+            :key="error.$uid"
+          >
+            <div class="text-xs text-danger-500">* {{ error.$message }}</div>
+          </div>
+        </div>
+
+        <div class="pt-5"></div>
+        <BtnPrimary
+          @click="handleSignup()"
+          :isLoading="isLoading"
+          :disabled="isLoading || v$.$invalid"
+        >
+          <template #text>
+            {{ !isLoading ? 'Signup' : 'Please wait...' }}
+          </template>
+        </BtnPrimary>
+      </form>
+      <p class="text-center mt-5 text-sm mb-5 font-thin">
+        Already have an account?
+        <NuxtLink to="/auth/signin/jobseeker" class="font-thin text-[#007AFF]"
+          >Sign In</NuxtLink
+        >
+      </p>
+    </div>
+  </div>
 </template>

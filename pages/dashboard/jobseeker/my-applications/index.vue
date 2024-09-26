@@ -4,6 +4,7 @@ definePageMeta({
   title: "My Applications",
   pageName: "dashboard.jobseeker.my-applications.index",
   layout: "dashboard",
+  middleware: ['auth', 'is-jobseeker']
 });
 </script>
 

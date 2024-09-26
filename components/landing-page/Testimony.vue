@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full w-full px-6 my-20">
+  <div class="h-full w-full px-8 my-20">
     <!-- grid divider vertical using daisy ui -->
     <div class="grid grid-cols-3 w-full text-sm">
       <div class="divider divider-start">Testimonials</div>
@@ -14,7 +14,7 @@
         <h1 class="text-[32px] font-black">Testimonials</h1>
       </div>
       <!--  -->
-      <div class="text-base grid grid-cols-3 gap-6 max-w-5xl">
+      <div class="text-base grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl">
         <div
           class="space-y-4 p-8 border-2 border-black-950 rounded-[16px] shadow-box shadow-black-950"
         >
@@ -49,13 +49,13 @@
             </svg>
           </span>
 
-          <h1 class="text-sm">
+          <h1 class="text-xs md:text-sm">
             <i
               >“Since implementing workonnect, our business has been significant
               growth”</i
             >
           </h1>
-          <div class="flex flex-col">
+          <div class="flex flex-col text-sm md:text-base">
             <h1 class="font-black">Jack Blare</h1>
             <p class="">Lead Manager, UTC</p>
           </div>
@@ -94,13 +94,13 @@
             </svg>
           </span>
 
-          <h1 class="text-sm">
+          <h1 class="text-xs md:text-sm">
             <i
               >“Since implementing workonnect, our business has been significant
               growth”</i
             >
           </h1>
-          <div class="flex flex-col">
+          <div class="flex flex-col text-sm md:text-base">
             <h1 class="font-black">Jack Blare</h1>
             <p class="">Lead Manager, UTC</p>
           </div>
@@ -139,13 +139,13 @@
             </svg>
           </span>
 
-          <h1 class="text-sm">
+          <h1 class="text-xs md:text-sm">
             <i
               >“Since implementing workonnect, our business has been significant
               growth”</i
             >
           </h1>
-          <div class="flex flex-col">
+          <div class="flex flex-col text-sm md:text-base">
             <h1 class="font-black">Jack Blare</h1>
             <p class="">Lead Manager, UTC</p>
           </div>
@@ -184,13 +184,13 @@
             </svg>
           </span>
 
-          <h1 class="text-sm">
+          <h1 class="text-xs md:text-sm">
             <i
               >“Since implementing workonnect, our business has been significant
               growth”</i
             >
           </h1>
-          <div class="flex flex-col">
+          <div class="flex flex-col text-sm md:text-base">
             <h1 class="font-black">Jack Blare</h1>
             <p class="">Lead Manager, UTC</p>
           </div>
@@ -229,23 +229,24 @@
             </svg>
           </span>
 
-          <h1 class="text-sm">
+          <h1 class="text-xs md:text-sm">
             <i
               >“Since implementing workonnect, our business has been significant
               growth”</i
             >
           </h1>
-          <div class="flex flex-col">
+          <div class="flex flex-col text-sm md:text-base">
             <h1 class="font-black">Jack Blare</h1>
             <p class="">Lead Manager, UTC</p>
           </div>
         </div>
+
         <div
-          class="space-y-4 p-8 border-2 border-black-950 rounded-[16px] shadow-box shadow-black-950"
+          class="space-y-4 p-8 border-2 border-black-950 rounded-[16px] shadow-box shadow-black-950 h-auto w-full"
         >
-          <div class="flex justify-center items-center mx-auto h-full w-full">
+          <div class="flex justify-center items-center mx-auto h-32 md:h-full w-full">
             <button
-              class="px-4 py-2 text-base bg-primary-1 rounded-8 text-white font-black"
+              class="px-4 py-2 text-sm md:text-base bg-primary-1 rounded-8 text-white font-black"
             >
               View More
             </button>

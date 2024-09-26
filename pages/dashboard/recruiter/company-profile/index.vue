@@ -3,6 +3,7 @@ definePageMeta({
   title: "Company Profile",
   pageName: "dashboard.recruiter.company-profile.index",
   layout: "dashboard",
+  middleware: ['auth', 'is-recruiter']
 });
 </script>
 
@@ -11,16 +12,17 @@ definePageMeta({
     <div class="p-4 bg-white rounded-10">
       <img
         src="/assets/images/team-image.png"
-        class="w-full"
+        class="w-full h-32 md:h-auto"
         alt="no image yet..."
       />
-      <div class="-mt-12 pl-6 space-y-2">
+      <div class="-mt-12 md:pl-6 pl-3 space-y-2">
         <img src="/assets/images/sportify.png" alt="profile-image" />
-        <div class="flex justify-between">
+        <div class="flex flex-col md:flex-row justify-between">
           <div class="space-y-2">
             <div class="flex items-center space-x-6">
-              <h1 class="font-black text-base">Full-Time UI/UX Designer</h1>
+              <h1 class="font-black text-sm md:text-base">Full-Time UI/UX Designer</h1>
             </div>
+
             <div class="flex items-start space-x-4">
               <div class="space-y-2">
                 <h1 class="text-xs flex items-center gap-x-2">
@@ -58,10 +60,10 @@ definePageMeta({
           </div>
 
           <div>
-            <div class="flex justify-end">
+            <div class="flex justify-end w-full">
               <NuxtLink to="/dashboard/recruiter/company-profile/edit">
                 <button
-                  class="px-4 py-2 rounded-8 text-xs text-white bg-primary-1"
+                  class=" px-4 py-2 rounded-8 text-xs text-white bg-primary-1"
                 >
                   Edit company profile info
                 </button>
@@ -71,6 +73,7 @@ definePageMeta({
         </div>
       </div>
     </div>
+
     <div class="p-4 mt-4 bg-white rounded-10">
       <div class="space-y-4">
         <h1 class="font-black text-sm">About my company</h1>
@@ -91,7 +94,7 @@ definePageMeta({
         <h1 class="text-sm font-black">Company links</h1>
 
         <!-- company links -->
-        <div class="flex w-1/3 flex-col h-full">
+        <div class="flex md:w-1/3 flex-col h-full">
           <label for="first-name" class="text-sm mb-2">Company URL</label>
           <div class="flex w-full gap-x-2">
             <div class="flex flex-grow w-full">
@@ -121,7 +124,7 @@ definePageMeta({
           </div>
         </div>
 
-        <div class="flex w-1/3 flex-col h-full">
+        <div class="flex md:w-1/3 flex-col h-full">
           <label for="first-name" class="text-sm mb-2">Company job URL</label>
           <div class="flex w-full gap-x-2">
             <div class="flex flex-grow w-full">

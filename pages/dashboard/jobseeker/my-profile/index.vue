@@ -3,6 +3,7 @@ definePageMeta({
   title: "My Profile",
   pageName: "dashboard.jobseeker.my-profile.index",
   layout: "dashboard",
+  middleware: ['auth', 'is-jobseeker']
 });
 </script>
 
@@ -12,12 +13,14 @@ definePageMeta({
     <div class="p-4 bg-white rounded-10">
       <img
         src="/assets/images/bridge.png"
-        class="w-full"
+        class="w-full h-32 md:h-auto "
         alt="no image yet..."
       />
-      <div class="-mt-12 pl-6 space-y-2">
-        <img src="/assets/images/man.png" alt="profile-image" />
-        <div class="flex justify-between items-center">
+
+      <div class="-mt-12 md:pl-6 space-y-2">
+        <img src="/assets/images/man.png" alt="profile-image" class="flex justify-center w-[30%] mx-auto md:mx-0 md:w-auto h-full items-center" />
+
+        <div class="flex flex-col md:flex-row justify-between space-y-3 md:items-center">
           <div class="space-y-2">
             <h1 class="font-black text-base">Stanley Nwosu</h1>
             <div class="flex items-start space-x-4">
@@ -134,8 +137,8 @@ definePageMeta({
             </div>
           </div>
           <!-- btn -->
-          <div class="space-y-3">
-            <div class="flex justify-end">
+          <div class="space-y-3 pt-4 md:pt-0">
+            <div class="flex md:justify-end">
               <button class="text-info-600 font-black text-xs">
                 Premium user
               </button>
@@ -155,13 +158,13 @@ definePageMeta({
                     fill="#343330"
                   />
                 </svg>
-                <h1 class="text-lg font-black">$5,000/month</h1>
+                <h1 class="md:text-lg text-sm font-black">$5,000/month</h1>
               </div>
 
               <nuxt-link to="/dashboard/jobseeker/my-profile/edit">
                 <div class="flex justify-end">
                   <button
-                    class="px-[14px] text-xs py-2 rounded-5 bg-primary-1 text-white"
+                    class="md:px-[14px] w-full my-4 text-xs md:py-2 py-3 rounded-5 bg-primary-1 text-white"
                   >
                     Edit profile info
                   </button>
@@ -173,7 +176,7 @@ definePageMeta({
       </div>
     </div>
 
-    <div class="flex gap-4">
+    <div class="flex flex-col md:flex-row gap-4">
       <!-- cards -->
       <div class="p-4 bg-white rounded-10 w-full my-4">
         <div class="space-y-4 pt-4">
@@ -298,7 +301,7 @@ definePageMeta({
       </div>
 
       <!--  -->
-      <div class="p-4 bg-white rounded-10 my-4 w-[670px] h-full">
+      <div class="p-4 bg-white rounded-10 my-4 md:w-[670px] w-full h-full">
         <div class="space-y-6">
           <h1 class="text-xl font-black">Uploaded Documents</h1>
           <div class="flex justify-between">

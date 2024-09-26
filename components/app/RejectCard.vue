@@ -3,13 +3,21 @@ export default {};
 </script>
 
 <template>
-  <div class="bg-white rounded-10 w-2/4 my-8">
+  <div class="bg-white rounded-10 w-full md:w-2/4 my-8">
     <div class="flex items-center justify-between border-b-2 p-3">
-      <div class="flex gap-x-4 items-center">
-        <img src="/assets/images/SocialMedia2.png" alt="Google" class="w-10 h-10 rounded" />
-        <div class="pl-4">
-          <span class="block text-base font-black">Admin Assistant</span>
-          <span class="text-xs font-semimedium text-gray-500">Hour Glass</span>
+      <div class="flex items-center md:space-x-4">
+        <img
+          src="/assets/images/SocialMedia2.png"
+          alt="Google"
+          class="md:w-10 md:h-10 h-8 w-8 rounded"
+        />
+        <div class="md:pl-4 pl-2">
+          <span class="block md:text-base text-xs font-black"
+            >Admin Assistant
+          </span>
+          <span class="md:text-xs text-[10px] font-semimedium text-gray-500">
+            Hour Glass
+          </span>
         </div>
       </div>
 
@@ -20,8 +28,8 @@ export default {};
       </div>
     </div>
 
-    <div class="flex justify-between items-center px-4 py-4 bg-white-100">
-      <div class="flex items-center space-x-6">
+    <div class="md:flex justify-between items-center px-4 py-4 bg-white-100">
+      <div class="flex items-center md:space-x-6">
         <div class="">
           <div class="flex space-x-2 items-center mt-2 p-2">
             <svg
@@ -125,11 +133,15 @@ export default {};
         </div>
       </div>
 
-      <div class="flex flex-col justify-end relative right-5 top-12 w-32">
-        <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
-          View reason
-        </button>
-      </div>
+      <nuxt-link to="/dashboard/jobseeker/my-applications/track-app">
+        <div
+          class="flex flex-col justify-end relative py-4 md:py-0 md:right-5 md:top-12 md:w-32"
+        >
+          <button class="py-3 bg-primary-1 text-white rounded-10 text-xs">
+            Track Application
+          </button>
+        </div>
+      </nuxt-link>
     </div>
   </div>
 </template>

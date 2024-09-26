@@ -1,16 +1,106 @@
-<script setup>
-import { ref } from "vue";
-import passwordicon from "@/assets/images/password.png";
+<script setup lang="ts">
+import { POSITION, useToast } from 'vue-toastification';
+import { required, helpers, email } from '@vuelidate/validators';
+import { useVuelidate } from '@vuelidate/core';
+import type { ApiErrorResponse, ApiSuccessResponse } from '~/types';
 
-const inputValue = ref("");
+definePageMeta({
+  title: 'Forgotten Password',
+  pageName: 'auth.forgotten.password',
+})
+
+const router  = useRouter();
+const route  = useRoute();
+const toast = useToast();
+const isLoading = ref<boolean>(false);
+
+const formData = reactive({
+  email: '',
+});
+
+const rules = computed(() => {
+  return {
+    email: {
+      required: helpers.withMessage('Email is required', required),
+      email: helpers.withMessage('Enter a valid email', email),
+    }
+  };
+});
+
+const v$ = useVuelidate(rules, formData);
+
+const forgotPassword = async () => {
+  isLoading.value = true;
+  const isValidForm = await v$.value.$validate();
+  if (!isValidForm) {
+    toast.error('Please enter a valid email', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+    return;
+  }
+
+  try {
+    const response = await $fetch('/api/auth/forgot-password', {
+      method: 'POST',
+      body: {
+        email: formData.email,
+        reqId: route.query.reqId?.toString().toUpperCase()
+      },
+    });
+
+    toast.info('Forgot password code sent to your email.', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    const responseData = response as ApiSuccessResponse;
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 1000);
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 1000);
+
+   return router.push({
+    path: '/auth/forgotten-password-activation-code',
+    query: {
+      email: formData.email,
+      reqId: route.query.reqId,
+      tke: responseData.data.publicToken
+    }
+   });
+  } catch (error: any) {
+    const errorData = error.data as ApiErrorResponse;
+      toast.error('An error occurred try again', {
+        timeout: 3000,
+        position: POSITION.TOP_RIGHT,
+      });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+  }
+};
+
+onMounted(() => {
+  if(!route.query || !route.query.reqId){
+    return router.replace('/')
+  }
+})
 </script>
 
 <template>
-    <div class="w-1/2 mx-auto h-full">
+  <div class="md:w-1/2 mx-auto h-full">
     <div
-      class="flex flex-col items-center justify-center w-[23.375rem] mx-auto mt-10"
+      class="flex flex-col items-center justify-center md:w-[23.375rem] mx-auto mt-32"
     >
-    <span class="mt-5">
+      <span class="mt-5">
         <svg
           width="72"
           height="72"
@@ -26,31 +116,26 @@ const inputValue = ref("");
           />
         </svg>
       </span>
-        <h2 class="mt-3 text-xl font-normal font-['Nexa']">Forgot password?</h2>
-        <p class="mb-6 font-thin text-sm">Enter your email for instructions</p>
+      <h2 class="mt-3 text-xl font-normal font-['Nexa']">Forgot password?</h2>
+      <p class="mb-6 font-thin text-sm">Enter your email for instructions</p>
 
-        <form class="flex flex-col mb-14">
-          <label class="mb-3 text-sm">Email address</label>
-          <input
-            v-model="inputValue"
-            :class="{
-              'focus:outline-none border-black-200 border-2 border-solid shadow-lg':
-                inputValue,
-              'border-2 border-solid  ': !inputValue,
-            }"
-            type="text"
-            class="outline-none w-[375px] border-black-200 border-2 border-solid px-3 py-2 rounded-md"
-            placeholder="example@exapmle.com"
-          />
-        </form>
+      <form class="flex flex-col mb-5 w-full">
+        <label class="mb-3 text-sm">Email address</label>
+        <input
+        v-model="formData.email"
+            :disabled="isLoading"
+            @change="v$.email.$touch"
+         class="outline-none text-base w-full font-thin rounded-lg px-3 py-2.5 border border-black-200 border-solid"
+          type="text"
+          placeholder="Enter email"
+        />
+      </form>
 
-        <button
-          class="font-black text-white w-[375px] h-12 rounded-xl text-sm bg-[#FE8900]"
-        >
-          <NuxtLink to="/auth/forgotten-password-activation-code"
-            >Send 4-digits</NuxtLink
-          >
-        </button>
-      </div>
+      <BtnPrimary @click="forgotPassword()" :disabled="isLoading || v$.$invalid" :isLoading="isLoading">
+        <template #text>
+          {{ !isLoading ? 'Send 5-digits' : 'Please waiting...' }}
+        </template>
+      </BtnPrimary>
     </div>
+  </div>
 </template>

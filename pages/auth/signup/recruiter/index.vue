@@ -1,17 +1,105 @@
-<script setup>
+<script setup lang="ts">
+import { POSITION, useToast } from 'vue-toastification';
+import { required, helpers, email, minLength } from '@vuelidate/validators';
+import { useVuelidate } from '@vuelidate/core';
+
 definePageMeta({
   layout: 'auth',
-  title: "recruiter.signup"
+  title: 'recruiter.signup.index',
+  pageName: 'recruiter.signup',
+  // middleware: ['no-auth'],
+});
+
+const toast = useToast();
+const router = useRouter();
+const authStore = useAuthStore();
+const isLoading = ref<boolean>(false);
+
+const formData = reactive({
+  fullName: '',
+  email: '',
+  password: '',
+  companyName: '',
+  companySize: '',
+  industry: '',
+  websiteUrl: '',
+});
+
+const rules = computed(() => {
+  return {
+    fullName: {
+      required: helpers.withMessage('FullName is required', required),
+    },
+    email: {
+      required: helpers.withMessage('Email is required', required),
+      email: helpers.withMessage('Enter a valid email', email),
+    },
+    password: {
+      required: helpers.withMessage('Please enter a password', required),
+      minLength: helpers.withMessage('Password cannot be less than 8 characters', minLength(8)),
+    },
+  };
+});
+
+const v$ = useVuelidate(rules, formData);
+
+const handleNextStep = async () => {
+  isLoading.value = true;
+  const isValidForm = await v$.value.$validate();
+  if (!isValidForm) {
+    toast.error('Please enter a valid email or password or fullname', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+
+    return;
+  }
+
+  // store step one data -
+  authStore.setStepOneFormData(formData);
+  // navigate to step two
+  router.push('/auth/signup/recruiter/complete-signup');
+};
+
+onMounted(() => {
+  if (authStore.stepOneRecruiterForm != null) {
+    if (authStore.stepOneRecruiterForm?.fullName !== null) {
+      formData.fullName = authStore.stepOneRecruiterForm.fullName;
+    }
+    if (authStore.stepOneRecruiterForm?.email !== null) {
+      formData.email = authStore.stepOneRecruiterForm?.email;
+    }
+    if (authStore.stepOneRecruiterForm.password !== null) {
+      formData.password = authStore.stepOneRecruiterForm?.password;
+    }
+    if (authStore.stepOneRecruiterForm.companyName !== null) {
+      formData.companyName = authStore.stepOneRecruiterForm.companyName;
+    }
+    if (authStore.stepOneRecruiterForm.companySize !== null) {
+      formData.companySize = authStore.stepOneRecruiterForm.companySize;
+    }
+    if (authStore.stepOneRecruiterForm.industry !== null) {
+      formData.industry = authStore.stepOneRecruiterForm.industry;
+    }
+    if (authStore.stepOneRecruiterForm.websiteUrl !== null) {
+      formData.websiteUrl = authStore.stepOneRecruiterForm.websiteUrl;
+    }      
+  }
 });
 </script>
 
 <template>
-    <div class="flex justify-center items-center w-full">
-      <div  class="w-[23.375rem] flex flex-col">
-        <h2 class="text-center text-[32px] mb-6 font-['Georgia'] font-normal">
-          Signup to account
-        </h2>
-        <div class="flex flex-col items-center justify-center gap-4 text-[12px]">
+  <div class="flex justify-center items-center w-full">
+    <div class="md:w-[23.375rem] w-full flex flex-col">
+      <h2 class="text-center text-[32px] mb-6 font-['Georgia'] font-normal">
+        Signup to account
+      </h2>
+
+      <div class="flex flex-col items-center justify-center gap-4 text-[12px] w-full">
         <button
           class="w-full flex gap-4 items-center justify-center border font-light border-[#D0D5DD] border-solid px-5 py-2 text-[#344054] rounded-lg"
         >
@@ -79,45 +167,88 @@ definePageMeta({
           Continue with LinkedIn
         </button>
       </div>
+
       <form
-          class="flex flex-col mt-6 mx-auto items-start justify-center text-left w-full max-w-md"
+        class="flex flex-col mt-6 mx-auto items-start space-y-2 justify-center text-left w-full max-w-md"
+      >
+       <div class="w-full">
+        <label class="text-base font-thin mb-2 text-left mt-4">Full Name</label>
+        <input
+          type="text"
+          placeholder="Full name here"
+          v-model="formData.fullName"
+          :disabled="isLoading"
+          @change="v$.lastName.$touch"
+          class="outline-none w-full text-base font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
+        />
+
+
+        <div
+              class="input-errors"
+              v-for="error of v$.fullName.$errors"
+              :key="error.$uid"
+            >
+              <div class="text-xs text-danger-500">* {{ error.$message }}</div>
+            </div>
+       </div>
+       
+       <div class="w-full">
+        <label class="text-base font-thin mb-2 text-left mt-4">Email</label>
+        <input
+          type="email"
+          placeholder="Enter email address here"
+          v-model="formData.email"
+          :disabled="isLoading"
+          @change="v$.email.$touch"
+          class="outline-none w-full text-base font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
+        />
+
+        <div
+              class="input-errors"
+              v-for="error of v$.email.$errors"
+              :key="error.$uid"
+            >
+              <div class="text-xs text-danger-500">* {{ error.$message }}</div>
+            </div>
+       </div>
+
+       <div class="w-full">
+        <label class="text-base font-thin mb-2 text-left mt-4">Password</label>
+        <input
+          type="password"
+          placeholder="Create new password"
+          pattern=".{8,}"
+          v-model="formData.password"
+          :disabled="isLoading"
+          @change="v$.password.$touch"
+          class="outline-none text-base leading-5 w-full p border border-solid border-black-200 rounded-lg px-3 py-2"
+        />
+
+        <div
+              class="input-errors"
+              v-for="error of v$.password.$errors"
+              :key="error.$uid"
+            >
+              <div class="text-xs text-danger-500">* {{ error.$message }}</div>
+            </div>
+       </div>
+       
+        <div class="pt-10"></div>
+        <BtnPrimary
+          @click="handleNextStep()"
+          :isLoading="isLoading"
+          :disabled="isLoading || v$.$invalid"
         >
-          <label class="text-sm font-thin mb-2 text-left mt-4">Full Name</label>
-          <input
-            type="text"
-            placeholder="Full name here"
-            class="outline-none w-full text-[12px] font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
-          />
-          <label class="text-sm font-thin mb-2 text-left mt-4">Email</label>
-          <input
-            type="email"
-            placeholder="Enter email address here"
-            class="outline-none w-full text-[12px] font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
-          />
+          <template #text> Next : Add Company </template>
+        </BtnPrimary>
+      </form>
 
-          <label class="text-sm font-thin mb-2 text-left mt-4">Password</label>
-          <input
-            type="password"
-            placeholder="Create new password"
-            pattern=".{8,}"
-            class="outline-none text-xs leading-5 w-full p border border-solid border-black-200 rounded-lg  px-3 py-2"
-          />
-
-          <NuxtLink
-           class="bg-[#FE8900] text-center font-black text-white mt-20 py-3.5 text-sm w-full rounded-lg"
-          to="/auth/signup/recruiter/complete-signup">
-          Next : Add Company
-          </NuxtLink>
-        </form>
-
-        <p class="text-center mt-10 mb-5 text-sm font-thin">
-          Already have an account?
-          <NuxtLink
-            to="/auth/signin/recruiter"
-            class="font-thin text-[#007AFF]"
-            >Sign In</NuxtLink
-          >
-        </p>
-      </div>
+      <p class="text-center mt-10 mb-5 text-sm font-thin">
+        Already have an account?
+        <NuxtLink to="/auth/signin/recruiter" class="font-thin text-[#007AFF]"
+          >Sign In</NuxtLink
+        >
+      </p>
     </div>
+  </div>
 </template>

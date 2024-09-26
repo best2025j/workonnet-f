@@ -1,8 +1,9 @@
 <script setup lang="ts">
 definePageMeta({
-  title: 'Find Jobs',
-  pageName: 'dashboard.jobseeker.find-jobs.more-details',
-  layout: 'dashboard',
+  title: "Find Jobs",
+  pageName: "dashboard.jobseeker.find-jobs.more-details",
+  layout: "dashboard",
+  middleware: ["auth", "is-jobseeker"],
 });
 </script>
 
@@ -11,15 +12,18 @@ definePageMeta({
     <div class="p-4 bg-white rounded-10">
       <img
         src="/assets/images/team-image.png"
-        class="w-full"
+        class="w-full h-44 object-cover md:h-full"
         alt="no image yet..."
       />
-      <div class="-mt-12 pl-6 space-y-2">
+
+      <div class="-mt-12 md:pl-6 px-3 space-y-2">
         <img src="/assets/images/sportify.png" alt="profile-image" />
-        <div class="flex justify-between">
+        <div class="flex flex-col md:flex-row justify-between">
           <div class="space-y-2">
             <div class="flex items-center space-x-6">
-              <h1 class="font-black text-base">Full-Time UI/UX Designer</h1>
+              <h1 class="font-black text-xs md:text-base">
+                Full-Time UI/UX Designer
+              </h1>
               <div class="space-x-2 flex items-center">
                 <svg
                   width="20"
@@ -45,7 +49,7 @@ definePageMeta({
           </div>
 
           <div>
-            <div class="space-x-2 flex items-center">
+            <div class="space-x-2 flex items-center mt-4 md:mt-0">
               <svg
                 width="12"
                 height="19"
@@ -58,10 +62,13 @@ definePageMeta({
                   fill="#343330"
                 />
               </svg>
-              <h1 class="text-lg font-black">$5,000/month</h1>
+              <h1 class="md:text-lg text-sm font-black">5,000/month</h1>
             </div>
+
             <div class="flex justify-end">
-              <button class="px-4 py-2 rounded-8 text-white bg-primary-1">
+              <button
+                class="md:px-4 w-full mt-4 py-3 rounded-8 text-[10px] md:text-base text-white bg-primary-1"
+              >
                 Apply Now
               </button>
             </div>
@@ -69,45 +76,49 @@ definePageMeta({
         </div>
       </div>
     </div>
+
     <!-- levels -->
-    <div class="py-4 flex items-center justify-center w-full space-x-4">
+    <div
+      class="py-4 flex flex-col md:flex-row space-y-3 items-center justify-center w-full md:space-x-4"
+    >
       <div
         class="p-2 h-20 mx-auto justify-center flex-col flex bg-white rounded-10 w-full text-center"
       >
-        <h1 class="text-xs">Experience Level</h1>
+        <h1 class="text-sm">Experience Level</h1>
         <p class="font-black text-base">Intermediate</p>
       </div>
       <div
         class="p-2 h-20 mx-auto justify-center flex-col flex bg-white rounded-10 w-full text-center"
       >
-        <h1 class="text-xs">Job Type</h1>
+        <h1 class="text-sm">Job Type</h1>
         <p class="font-black text-base">Contract</p>
       </div>
       <div
         class="p-2 h-20 mx-auto justify-center flex-col flex bg-white rounded-10 w-full text-center"
       >
-        <h1 class="text-xs">Work Type</h1>
+        <h1 class="text-sm">Work Type</h1>
         <p class="font-black text-base">Remote</p>
       </div>
       <div
         class="p-2 h-20 mx-auto justify-center flex-col flex bg-white rounded-10 w-full text-center"
       >
-        <h1 class="text-xs">Salary</h1>
+        <h1 class="text-sm">Salary</h1>
         <p class="font-black text-base">$5,000/month</p>
       </div>
       <div
         class="p-2 h-20 mx-auto justify-center flex-col flex bg-white rounded-10 w-full text-center"
       >
-        <h1 class="text-xs">Location</h1>
+        <h1 class="text-sm">Location</h1>
         <p class="font-black text-base">London, UK</p>
       </div>
     </div>
+
     <!-- about the company -->
-    <div class="gap-x-4 flex">
+    <div class="gap-x-4 flex flex-col md:flex-row">
       <div class="bg-white p-4 rounded-10 h-full">
         <div class="space-y-2 py-2">
           <h1 class="font-black">About the company</h1>
-          <p class="text-sm tracking-wider">
+          <p class="md:text-sm text-xs tracking-wider">
             Headquartered in Stockholm, Sweden,
             <b class="text-info-600">Spotify</b> is a technology company focused
             on developing innovative solutions in the music and entertainment
@@ -121,7 +132,7 @@ definePageMeta({
         <!--  -->
         <div class="pt-4">
           <h1 class="font-black text-sm">Job Description</h1>
-          <ul class="space-y-1 list-disc pl-6 py-4">
+          <ul class="space-y-1 list-disc pl-6 py-4 text-xs md:text-sm">
             <li>
               Develop and execute paid advertising campaigns across various
               digital platforms.
@@ -154,7 +165,7 @@ definePageMeta({
         <!--  -->
         <div class="pt-4">
           <h1 class="font-black text-sm">Qualification</h1>
-          <ul class="space-y-1 list-disc pl-6 py-4">
+          <ul class="space-y-1 list-disc pl-6 py-4 text-xs md:text-sm">
             <li>
               1-2 years of experience in managing paid advertising campaigns.
             </li>
@@ -184,7 +195,7 @@ definePageMeta({
         <!--  -->
         <div class="pt-4">
           <h1 class="font-black text-sm">How to apply</h1>
-          <ul class="space-y-1 list-disc pl-6 py-4">
+          <ul class="space-y-1 list-disc pl-6 py-4 text-xs md:text-sm">
             <li>
               Please submit your resume + video highlighting your experience in
               paid advertising and your proficiency with Paid Channels, Google
@@ -194,14 +205,15 @@ definePageMeta({
           </ul>
         </div>
       </div>
+      
       <!--  -->
       <div>
         <div
-          class="bg-gradient-to-r from-primary-1 to-primary-2 rounded-10 p-4 w-[440px] text-white"
+          class="bg-gradient-to-r from-primary-1 to-primary-2 rounded-10 p-4 w-full my-4 md:my-0 md:w-[440px] text-white"
         >
           <div class="space-y-4">
-            <h1 class="text-base font-black">Never Miss to The Latest Jobs</h1>
-            <p class="text-sm">
+            <h1 class="md:text-base text-sm font-black">Never Miss to The Latest Jobs</h1>
+            <p class="md:text-sm text-xs">
               Be the first to get latest job right to your inbox. We'll send you
               the latest and greatest jobs that match your criteria everyday.
             </p>
@@ -217,14 +229,14 @@ definePageMeta({
         <div class="py-4 space-y-4">
           <div class="bg-white rounded-10 w-full">
             <div class="flex items-center justify-between border-b-2 p-3">
-              <div class="flex items-center space-x-4">
+              <div class="flex items-center md:space-x-4">
                 <img
-                  src="/assets/images/SocialMedia2.png"
+                  src="/assets/images/SocialMedia.png"
                   alt="Google"
                   class="w-10 h-10 rounded"
                 />
                 <div class="pl-4">
-                  <span class="block text-base font-black"
+                  <span class="block text-sm md:text-base font-black"
                     >Admin Assistant</span
                   >
                   <span class="text-xs font-semimedium text-gray-500"
@@ -233,7 +245,7 @@ definePageMeta({
                 </div>
               </div>
 
-              <div class="flex space-x-4 items-center relative right-5">
+              <div class="flex md:space-x-4 items-center relative md:right-5">
                 <span
                   class="px-3 py-1 rounded-10 text-xs font-black text-success-600"
                   >80% match</span
@@ -358,14 +370,14 @@ definePageMeta({
 
           <div class="bg-white rounded-10 w-full">
             <div class="flex items-center justify-between border-b-2 p-3">
-              <div class="flex items-center space-x-4">
+              <div class="flex items-center md:space-x-4">
                 <img
-                  src="/assets/images/SocialMedia2.png"
+                  src="/assets/images/SocialMedia3.png"
                   alt="Google"
                   class="w-10 h-10 rounded"
                 />
                 <div class="pl-4">
-                  <span class="block text-base font-black"
+                  <span class="block text-sm md:text-base font-black"
                     >Admin Assistant</span
                   >
                   <span class="text-xs font-semimedium text-gray-500"
@@ -374,7 +386,7 @@ definePageMeta({
                 </div>
               </div>
 
-              <div class="flex space-x-4 items-center relative right-5">
+              <div class="flex md:space-x-4 items-center relative md:right-5">
                 <span
                   class="px-3 py-1 rounded-10 text-xs font-black text-success-600"
                   >80% match</span
@@ -499,14 +511,14 @@ definePageMeta({
 
           <div class="bg-white rounded-10 w-full">
             <div class="flex items-center justify-between border-b-2 p-3">
-              <div class="flex items-center space-x-4">
+              <div class="flex items-center md:space-x-4">
                 <img
                   src="/assets/images/SocialMedia2.png"
                   alt="Google"
                   class="w-10 h-10 rounded"
                 />
                 <div class="pl-4">
-                  <span class="block text-base font-black"
+                  <span class="block text-sm md:text-base font-black"
                     >Admin Assistant</span
                   >
                   <span class="text-xs font-semimedium text-gray-500"
@@ -515,7 +527,7 @@ definePageMeta({
                 </div>
               </div>
 
-              <div class="flex space-x-4 items-center relative right-5">
+              <div class="flex md:space-x-4 items-center relative md:right-5">
                 <span
                   class="px-3 py-1 rounded-10 text-xs font-black text-success-600"
                   >80% match</span

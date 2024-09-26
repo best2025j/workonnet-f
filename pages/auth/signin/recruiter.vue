@@ -1,17 +1,125 @@
 <script setup lang="ts">
+import { POSITION, useToast } from "vue-toastification";
+import { required, helpers, email } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
+import type { ApiErrorResponse, ApiSuccessResponse } from "~/types";
+
 definePageMeta({
-  layout: 'auth',
-  title: "recruiter.signin"
+  layout: "auth",
+  title: "recruiter.signin",
+  pageName: "recruiter.signin",
+  middleware: ["no-auth"],
 });
+
+const router = useRouter();
+const route = useRoute();
+const toast = useToast();
+const isLoading = ref<boolean>(false);
+const authStore = useAuthStore();
+const userStore = useUserStore();
+
+const formData = reactive({
+  email: route.query?.email ? route.query?.email : "",
+  password: "",
+});
+
+const rules = computed(() => {
+  return {
+    email: {
+      required: helpers.withMessage("Email is required", required),
+      email: helpers.withMessage("Enter a valid email", email),
+    },
+    password: {
+      required: helpers.withMessage("Please enter a password", required),
+    },
+  };
+});
+
+const v$ = useVuelidate(rules, formData);
+
+const getRecruiterProfile = async (token: string) => {
+  try {
+    const resp = await userStore.$api.refreshAuthRecruiterProfile(token);
+    const responseData = resp as ApiSuccessResponse;
+    userStore.setUserDetails(responseData);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+const loginRecruiter = async () => {
+  isLoading.value = true;
+  const isValidForm = await v$.value.$validate();
+  if (!isValidForm) {
+    toast.error("Please enter a valid email or password", {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+    return;
+  }
+
+  try {
+    const response = await $fetch("/api/auth/recruiter/authenticate", {
+      method: "POST",
+      body: formData,
+    });
+
+    toast.success("Signin successful", {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    const responseData = response as ApiSuccessResponse;
+
+    authStore.setCurrentUserType(LOGGED_IN_USER.RECRUITER);
+    authStore.setUserAuthData({
+      accountType: LOGGED_IN_USER.RECRUITER,
+      recruiterId: responseData.data.recruiterId,
+    });
+
+    authStore.setUserToken(responseData.data.accessToken);
+
+    await getRecruiterProfile(responseData.data.accessToken);
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 1000);
+
+    return router.push("/dashboard/recruiter");
+  } catch (error: any) {
+    const errorData = error.data as ApiErrorResponse;
+
+    if (errorData.data?.errorCode === "CI0001") {
+      toast.error(errorData.data.message, {
+        timeout: 3000,
+        position: POSITION.TOP_RIGHT,
+      });
+    } else {
+      toast.error("An error occurred try again", {
+        timeout: 3000,
+        position: POSITION.TOP_RIGHT,
+      });
+    }
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+  }
+};
 </script>
 
 <template>
-    <div class="flex justify-center items-center w-full">
-      <div class="w-[23.375rem] flex flex-col">
-        <h2 class="text-center text-[32px] mb-6 font-['Georgia'] font-normal">
-          Continue to account
-        </h2>
-        <div class="flex flex-col items-center justify-center gap-4 text-[12px]">
+  <div class="flex justify-center items-center w-full">
+    <div class="md:w-[23.375rem] w-full flex flex-col">
+      <h2
+        class="text-center text-3xl md:text-[32px] mb-6 font-[Georgia] font-normal"
+      >
+        Continue to account
+      </h2>
+      <div class="flex flex-col items-center justify-center gap-4 text-[12px]">
         <button
           class="w-full flex gap-4 items-center justify-center border font-light border-[#D0D5DD] border-solid px-5 py-2 text-[#344054] rounded-lg"
         >
@@ -79,46 +187,54 @@ definePageMeta({
           Continue with LinkedIn
         </button>
       </div>
-        <form
-          class="flex flex-col mt-6 mx-auto items-start justify-center text-left w-full max-w-md"
-        >
-          <label class="text-sm font-thin mb-2 text-left mt-4">Email</label>
-          <input
-            type="email"
-            placeholder="Enter email address here"
-            class="outline-none w-full text-xs font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-md px-3 py-2 border border-black-200 border-solid"
-          />
+      <form
+        class="flex flex-col mt-6 mx-auto items-start justify-center text-left w-full max-w-md"
+      >
+        <label class="text-base font-thin mb-2 text-left mt-4">Email</label>
+        <input
+          type="email"
+          placeholder="Enter email address here"
+          v-model="formData.email"
+          :disabled="isLoading"
+          @change="v$.email.$touch"
+          class="outline-none w-full text-base placeholder:text-[#958D8D] rounded-md px-3 py-2.5 border border-black-200 border-solid"
+        />
 
-          <label class="text-sm font-thin mb-2 text-left mt-4">Password</label>
-          <input
-            type="password"
-            placeholder="Enter password"
-           class="placeholder-custom outline-none text-xs leading-5 w-full p-4 border border-solid border-black-200 rounded-lg px-3 py-2"
-          />
+        <label class="text-base font-thin mb-2 text-left mt-4">Password</label>
+        <input
+          type="password"
+          placeholder="Enter password"
+          v-model="formData.password"
+          :disabled="isLoading"
+          @change="v$.password.$touch"
+          class="placeholder-custom text-base outline-none w-full p-4 border border-solid border-black-200 rounded-lg px-3 py-2.5"
+        />
 
-          <div class="flex justify-end w-full mt-2">
-              <NuxtLink class="text-sm text-black underline cursor-pointer" to="/auth/password-forgotten"
-                >Forgot password?</NuxtLink
-              >
-          </div>
-
-          <button
-            class="bg-[#FE8900] font-black text-white mt-20 py-3.5 text-sm w-full rounded-lg"
-          >
-            <NuxtLink to="/auth/activation-code">Sign in</NuxtLink>
-          </button>
-        </form>
-
-        <p class="text-center mt-10 mb-5 text-sm font-thin">
-          Don't have an account?
+        <div class="flex justify-end w-full mt-2">
           <NuxtLink
-            to="/auth/signup/recruiter"
-            class="font-thin text-[#007AFF]"
-            >Sign up</NuxtLink
+            class="text-sm text-black underline cursor-pointer"
+            to="/auth/password-forgotten?reqId=recruiter"
+            >Forgot password?</NuxtLink
           >
-        </p>
-      </div>
-</div>
-     
-</template>
+        </div>
+        <div class="mt-10"></div>
+        <BtnPrimary
+          @click="loginRecruiter()"
+          :isLoading="isLoading"
+          :disabled="isLoading || v$.$invalid"
+        >
+          <template #text>
+            {{ !isLoading ? "Sign in" : "Please wait..." }}
+          </template>
+        </BtnPrimary>
+      </form>
 
+      <p class="text-center pt-10 pb-4 text-sm font-thin">
+        Don't have an account?
+        <NuxtLink to="/auth/signup/recruiter" class="font-thin text-[#007AFF]"
+          >Sign up</NuxtLink
+        >
+      </p>
+    </div>
+  </div>
+</template>

@@ -9,10 +9,13 @@ import NairaIcon from '../icons/NairaIcon.vue';
 import ProfileIcon from '../icons/ProfileIcon.vue';
 import SearchIcon from '../icons/SearchIcon.vue';
 import SettingIcon from '../icons/SettingIcon.vue';
-import SpeekerIcon from '../icons/SpeekerIcon.vue';
 
 const route = useRoute();
-const localStore = useLocalStore();
+const router = useRouter();
+
+const authStore = useAuthStore();
+const userStore = useUserStore();
+
 
 const jobSeekerLinks = [
   {
@@ -113,40 +116,13 @@ const recruiterLinks = [
   },
 ];
 
-const admin = [
-  {
-    to: '/admin/dashboard/',
-    icon: DashBoardIcon,
-    name: 'Dashboard',
-    pageName: 'admin.dashboard.index',
-  },
-  {
-    to: '/admin/dashboard/posted-jobs?tab=under-review',
-    icon: ApplicationIcon,
-    name: 'Jobs',
-    pageName: 'admin.dashboard.posted-jobs',
-  },
-  {
-    to: '/admin/dashboard/recruiters',
-    icon: SpeekerIcon,
-    name: 'Recruiters',
-    pageName: 'admin.dashboard.recruiters',
-  },
-  {
-    to: '/admin/dashboard/jobseekers',
-    icon: CandidatesIcon,
-    name: 'Jobseekers',
-    pageName: 'admin.dashboard.jobseekers',
-  },
-  {
-    to: '/admin/dashboard/subscriptions',
-    icon: NairaIcon,
-    name: 'Subscriptions',
-    pageName: 'admin.dashboard.subscriptions',
-  },
-];
-
 // const isActive = (pageName: string) => route.meta?.pageName === pageName;
+
+const logoutUser = () => {
+  authStore.logoutUser();
+  userStore.clearUserStore();
+  router.push('/')
+};
 
 const isActive = (pageName: string) => {
   return route.meta?.pageName === pageName;
@@ -156,7 +132,7 @@ const isActive = (pageName: string) => {
 <template>
   <aside class="bg-[#FFFFFF] text-black-800 min-h-screen fixed">
     <!-- logo -->
-    <div>
+    <div class="relative right-6 md:rght-0 md:left-0" >
       <img src="/assets/images/logo.png" class="w-full h-auto" alt="logo" />
     </div>
 
@@ -165,15 +141,15 @@ const isActive = (pageName: string) => {
       <!-- jobseekers sidenav -->
       <ul
         class="w-full"
-        v-show="localStore.$state.currentUserType === LOGGED_USER.JOBSEEKER"
+        v-show="authStore.$state.currentUserType === LOGGED_IN_USER.JOBSEEKER"
       >
         <li v-for="(link, index) in jobSeekerLinks" :key="index">
           <NuxtLink
             :to="link.to"
             :class="[
               isActive(link.pageName)
-                ? 'bg-westside-100 text-primary-1 border-primary-1 border-l-4 !pl-11 font-[900]'
-                : 'pl-12',
+                ? 'bg-westside-100 text-primary-1 border-primary-1 border-l-4 pl-6 md:!pl-11 font-[900]'
+                : 'md:pl-12 pl-6',
               'flex items-center py-4 text-xs',
             ]"
           >
@@ -191,41 +167,15 @@ const isActive = (pageName: string) => {
       <!-- recruiters sidenav -->
       <ul
         class="w-full"
-        v-show="localStore.$state.currentUserType === LOGGED_USER.RECRUITER"
+        v-show="authStore.$state.currentUserType === LOGGED_IN_USER.RECRUITER"
       >
         <li v-for="(link, index) in recruiterLinks" :key="index">
           <NuxtLink
             :to="link.to"
             :class="[
               isActive(link.pageName)
-                ? 'bg-westside-100 text-primary-1 border-primary-1 border-l-4 !pl-11 font-[900]'
-                : 'pl-12',
-              'flex items-center py-4 text-xs',
-            ]"
-          >
-            <!-- Render Icon -->
-            <component
-              :is="link.icon"
-              class="inline-block mr-2"
-              :isActive="isActive(link.pageName)"
-            />
-            {{ link.name }}
-          </NuxtLink>
-        </li>
-      </ul>
-
-      <!-- admin -->
-      <ul
-        class="w-full"
-        v-show="localStore.$state.currentUserType === LOGGED_USER.ADMIN"
-      >
-        <li v-for="(link, index) in admin" :key="index">
-          <NuxtLink
-            :to="link.to"
-            :class="[
-              isActive(link.pageName)
-                ? 'bg-westside-100 text-primary-1 border-primary-1 border-l-4 !pl-11 font-[900]'
-                : 'pl-12',
+              ? 'bg-westside-100 text-primary-1 border-primary-1 border-l-4 pl-6 md:!pl-11 font-[900]'
+              : 'md:pl-12 pl-6',
               'flex items-center py-4 text-xs',
             ]"
           >
@@ -242,8 +192,8 @@ const isActive = (pageName: string) => {
 
       <!--  -->
       <div
-        v-show="localStore.$state.currentUserType === LOGGED_USER.RECRUITER"
-        class="flex justify-center items-center mt-4 py-4 w-[218px] bg-westside-100 flex-col mx-auto rounded-10 space-y-4"
+        v-show="authStore.$state.currentUserType === LOGGED_IN_USER.RECRUITER"
+        class="flex justify-center items-center md:mt-4 mt-3 py-2 md:py-4 w-[218px] bg-westside-100 flex-col mx-auto rounded-10 space-y-4"
       >
         <span
           ><svg
@@ -259,8 +209,9 @@ const isActive = (pageName: string) => {
             />
           </svg>
         </span>
-        <div class="w-[173px] text-center space-y-4 pb-2">
-          <h1 class="font-black text-base">Discover our advanced feature</h1>
+
+        <div class="md:w-[173px] w-44 text-center space-y-4 pb-2">
+          <h1 class="font-black text-xs md:text-base">Discover our advanced feature</h1>
           <p class="text-xs">Subscribe to get more out of workonnect</p>
         </div>
       </div>
@@ -268,10 +219,11 @@ const isActive = (pageName: string) => {
       <!--  Logout Button -->
       <div class="absolute bottom-0 left-0 right-0 w-full">
         <button
-          class="flex py-6 w-full gap-2 pl-12 justify-start rounded hover:text-primary-1"
+          @click="logoutUser()"
+          class="flex items-center py-6 w-full gap-2 md:pl-12 pl-6 justify-start rounded"
         >
           <IconsLogoutIcon />
-          Logout
+          <span>Logout</span>
         </button>
       </div>
     </nav>

@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-3 gap-4">
+  <div class="grid md:grid-cols-3 gap-4 py-4 text-sm md:text-inherit">
     <!--  -->
     <div class="bg-white py-4 px-4 rounded-10 space-y-4 mt-4 h-full">
       <div class="flex items-start justify-between">

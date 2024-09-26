@@ -3,7 +3,7 @@
 
 <template>
   <div class="py-4">
-    <div class="grid grid-cols-3 gap-4">
+    <div class="grid md:grid-cols-3 gap-4">
     <div class="bg-white rounded-10 border border-westside-300">
         <div class="border-b-2 p-4 space-y-2">
           <div class="flex items-start space-x-4">

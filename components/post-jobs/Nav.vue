@@ -47,7 +47,7 @@ const isActive = (currentTab: POST_JOBS_TABS) =>
 </script>
 
 <template>
-  <nav class="flex w-1/3 border-b-2">
+  <nav class="flex md:w-1/3 border-b-2">
     <ul class="flex gap-x-6 items-center">
       <li v-for="(link, index) in links" :key="index" class="">
         <NuxtLink
@@ -55,8 +55,8 @@ const isActive = (currentTab: POST_JOBS_TABS) =>
           :class="[
             'flex items-center pb-2',
             isActive(link.tabId)
-              ? 'text-primary-1 border-primary-1 font-black text-xs'
-              : 'text-xs',
+              ? 'text-primary-1 border-primary-1 font-black md:text-xs text-[10px]'
+              : 'md:text-xs text-[10px]',
           ]"
         >
           {{ link.name }}

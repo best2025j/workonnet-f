@@ -3,13 +3,14 @@ definePageMeta({
   title: "Company Profile",
   pageName: "dashboard.recruiter.company-profile.edit",
   layout: "dashboard",
+  middleware: ['auth', 'is-recruiter']
 });
 </script>
 
 <template>
   <div class="w-full h-full">
-    <div class="text-black-700 flex gap-4 text-sm h-full w-full relative">
-      <div class="w-[28rem] fixed rounded-10 font-[Georgia] h-full">
+    <div class="text-black-700 flex flex-col md:flex-row gap-4 text-sm h-full w-full relative">
+      <div class="md:w-[28rem] fixed rounded-10 font-[Georgia] h-full hidden md:block">
         <div class="divide-y bg-white p-6 border-primary-1 border-l-4">
           <div class="space-x-3 flex items-center">
             <span
@@ -83,27 +84,27 @@ definePageMeta({
       </div>
 
       <!--  -->
-      <div class="h-full ml-[30rem] space-y-4 w-3/4">
+      <div class="h-full md:ml-[30rem] space-y-4 md:w-3/4 w-full">
         <div
           id="basic_information"
           class="bg-white w-full rounded-10 p-6 h-full space-y-3"
         >
-          <h1 class="font-bold text-xl font-[Georgia]">
+          <h1 class="font-bold md:text-xl text-lg font-[Georgia]">
             Company’s Basic Information
           </h1>
-          <div class="flex divide-x-2 gap-x-4">
+          <div class="flex flex-col md:flex-row md:divide-x-2 gap-x-4">
             <div class="py-2">
               <div class="pb-6 space-y-4">
                 <img src="/assets/images/sportify.png" alt="" />
                 <button
-                  class="text-xs py-2 text-primary-1 border px-3.5 rounded-8 border-primary-1 font-[Nexa] font-[100]"
+                  class="text-xs py-2 text-primary-1 border md:px-3.5 w-full rounded-8 border-primary-1 font-[Nexa] font-[100]"
                 >
                   Replace company photo
                 </button>
               </div>
 
               <!--  -->
-              <div class="bg-black-50 w-44 space-y-4 p-3 rounded-10">
+              <div class="bg-black-50 md:w-44 w-full space-y-4 p-3 rounded-10">
                 <div class="flex items-start gap-x-2">
                   <span
                     ><svg
@@ -134,7 +135,7 @@ definePageMeta({
             </div>
 
             <!-- input for full name -->
-            <div class="p-4 pl-12 font-[Nexa] w-full space-y-4">
+            <div class="p-4 md:pl-12 font-[Nexa] w-full space-y-4">
               <!-- ocupation -->
               <div class="flex flex-col w-full">
                 <label for="first-name" class="text-sm mb-2">Full Name</label>
@@ -321,15 +322,15 @@ definePageMeta({
           </div>
         </div>
 
-        <div class="flex gap-x-4 justify-end">
-          <div>
-            <button class="px-4 py-2 bg-primary-1 text-white rounded-5">
+        <div class="flex gap-x-4 md:justify-end">
+          <div class="w-full md:w-auto">
+            <button class="md:px-4 w-full py-2 bg-primary-1 text-white rounded-5">
               Save
             </button>
           </div>
-          <div>
+          <div class="w-full md:w-auto">
             <button
-              class="px-4 py-2 border border-danger-600 text-danger-600 rounded-5"
+              class="md:px-4 w-full py-2 border border-danger-600 text-danger-600 rounded-5"
             >
               Cancel
             </button>
