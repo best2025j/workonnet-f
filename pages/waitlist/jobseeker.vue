@@ -57,7 +57,7 @@ const handleSubmit = async () => {
     });
 
     toast.success("Hurray!!! You're on the List.", {
-      timeout: 3000,
+      timeout: 2000,
       position: POSITION.TOP_RIGHT,
     });
 
@@ -69,7 +69,7 @@ const handleSubmit = async () => {
 
   setTimeout(() => {
     (modalTrigger.value as unknown as any).showModal()
-  }, 100)
+  }, 1500)
   } catch (error: any) {
     const errorData = error.data as ApiErrorResponse;
 
