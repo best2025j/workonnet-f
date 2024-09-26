@@ -35,7 +35,7 @@ const title = computed(() => route.meta.title as string)
     <LayoutJobSeekerTestimonials
       v-if="title.includes('jobseeker')"
     />
-    <div class="w-[85%] mt-10 mx-10 mb-5 rounded-tr-15%]">
+    <div class="w-[85%] mt-10 mx-10 mb-5 rounded-tr-[15%]">
       <img src="../../assets/svgs/Frame1618869200.svg" alt="" />
     </div>
   </div>

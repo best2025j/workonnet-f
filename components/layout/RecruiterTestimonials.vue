@@ -31,7 +31,7 @@ const prevSlide = () => {
 
 <template>
   <div class="relative flex flex-col">
-    <div class="overflow-hidden w-[498px]">
+    <div class="overflow-hidden">
       <div
         class="flex transition-transform duration-300"
         :style="{ transform: `translateX(-${currentIndex * 100}%)` }"
