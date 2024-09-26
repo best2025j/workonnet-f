@@ -57,17 +57,23 @@
 
               <!-- mobile text-->
               <p class="text-xs md:hidden flex pt-4 text-center">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum
-                cumque praesentium ut earum tempore veniam, magnam voluptas
-                distinctio corrupti atque consectetur modi animi necessitatibus?
-                Accusantium ex expedita provident explicabo laborum!
+                Our recruitment platform bridges the gap between talented job
+                seekers and forward-thinking recruiters. We offer Job seekers an
+                intuitive search experience that matches them with the right
+                opportunities based on their skills, experience, and career
+                goals and our platform provides recruiters with a streamlined
+                job posting process and advanced candidate search tools,
+                enabling you to find the perfect fit for your team faster and
+                more efficiently. Whether you're looking to build your career or
+                build your team, our platform empowers both job seekers and
+                recruiters to connect and succeed.
               </p>
             </div>
           </div>
 
           <!--  -->
           <div
-            class="border md:w-[440px] bg-[#62696FCC] rounded-10 p-6 space-y-4 md:h-[23rem] relative md:top-96 md:right-10 left-0 right-0  md:mx-0"
+            class="border md:w-[440px] bg-[#62696FCC] rounded-10 p-6 space-y-4 md:h-[23rem] md:absolute bottom-5 md:right-10"
           >
             <div class="flex items-center justify-between">
               <div>
