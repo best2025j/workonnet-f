@@ -74,7 +74,7 @@
         </div>
         <div class="mt-8 md:mt-0">
           <h1 class="font-black text-base md:pl-4">Resources</h1>
-          <h1 class="pt-8 md:pl-4">Press Kitl</h1>
+          <h1 class="pt-8 md:pl-4">Press Kit</h1>
           <h1 class="pt-5 md:pl-4">How to - Blog</h1>
           <h1 class="pt-5 md:pl-4">Youtube Playlist</h1>
         </div>
@@ -85,7 +85,8 @@
           Join Workonnect today and explore a world of opportunities
         </h1>
         <div class="py-4">
-          <button
+          <NuxtLink
+          to="/waitlist"
             class="h-[50px] w-full flex items-center gap-x-3 justify-center bg-primary-1 text-white text-xs font-black rounded-8"
           >
             Join our waitlist
@@ -109,7 +110,7 @@
                 fill="#ffff"
               />
             </svg>
-          </button>
+          </NuxtLink>
         </div>
       </div>
     </div>
