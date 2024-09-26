@@ -62,9 +62,15 @@
       >
         <div>
           <h1 class="font-black text-base">Company</h1>
-          <h1 class="pt-8">About</h1>
-          <h1 class="pt-5">Contact</h1>
-          <h1 class="pt-5">Services</h1>
+          <NuxtLink to="/about-us">
+            <h1 class="pt-8">About</h1>
+          </NuxtLink>
+          <NuxtLink to="/contact-us">
+            <h1 class="pt-5">Contact</h1>
+          </NuxtLink>
+          <NuxtLink to="/service">
+            <h1 class="pt-5">Services</h1>
+          </NuxtLink>
         </div>
         <div>
           <h1 class="font-black text-base">Help</h1>

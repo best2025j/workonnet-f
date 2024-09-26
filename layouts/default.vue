@@ -2,7 +2,7 @@
 <template>
   <div class="w-full h-screen">
     <LandingPageNavbar class="" />
-    <div class="w-full px-8 pt-8 md:px-0 md:pt-0 h-full">
+    <div class="w-full pt-8 md:pt-0 h-full">
       <slot />
     </div>
   </div>
