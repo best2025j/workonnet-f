@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-[#F8F7F9] h-full mt-32 md:px-8 md:py-20">
+  <footer class="bg-[#F8F7F9] h-full md:px-8 md:py-20">
     <div class="md:flex w-full justify-between p-6 items-start">
       <div class="flex w-28 space-y-3 flex-col">
         <h1 class="text-base font-black">Workonnect</h1>
@@ -62,9 +62,15 @@
       >
         <div>
           <h1 class="font-black text-base">Company</h1>
-          <h1 class="pt-8">About</h1>
-          <h1 class="pt-5">Contact</h1>
-          <h1 class="pt-5">Services</h1>
+          <NuxtLink to="/about-us">
+            <h1 class="pt-8">About</h1>
+          </NuxtLink>
+          <NuxtLink to="/contact-us">
+            <h1 class="pt-5">Contact</h1>
+          </NuxtLink>
+          <NuxtLink to="/service">
+            <h1 class="pt-5">Services</h1>
+          </NuxtLink>
         </div>
         <div>
           <h1 class="font-black text-base">Help</h1>

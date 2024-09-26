@@ -18,12 +18,14 @@
         </div>
 
         <div
-          class="text-white absolute top-0 h-full w-full pt-16 md:pt-24 md:px-8 px-6 space-y-4 md:flex justify-between"
+          class="text-white absolute top-0 h-full w-full pt-24 md:pt-24 md:px-8 px-6 space-y-4 md:flex justify-between"
         >
           <div
-            class="md:mt-32 md:justify-between justify-center md:h-[75%] flex flex-col items-center md:items-start"
+            class="md:mt-32 h-auto md:justify-between justify-center md:h-[75%] flex flex-col items-center md:items-start"
           >
-            <h1 class="font-black md:text-5xl md:w-[623px] text-base leading-[52px]">
+            <h1
+              class="font-black md:text-5xl md:w-[623px] text-base leading-[52px]"
+            >
               The Future of Work Powered by AI
             </h1>
 
@@ -55,7 +57,16 @@
 
               <!-- mobile text-->
               <p class="text-xs md:hidden flex pt-4 text-center">
-                Our recruitment platform bridges the gap between talented job seekers and forward-thinking recruiters. We offer Job seekers an intuitive search experience that matches them with the right opportunities based on their skills, experience, and career goals and our platform provides recruiters with a streamlined job posting process and advanced candidate search tools, enabling you to find the perfect fit for your team faster and more efficiently. Whether you're looking to build your career or build your team, our platform empowers both job seekers and recruiters to connect and succeed.
+                Our recruitment platform bridges the gap between talented job
+                seekers and forward-thinking recruiters. We offer Job seekers an
+                intuitive search experience that matches them with the right
+                opportunities based on their skills, experience, and career
+                goals and our platform provides recruiters with a streamlined
+                job posting process and advanced candidate search tools,
+                enabling you to find the perfect fit for your team faster and
+                more efficiently. Whether you're looking to build your career or
+                build your team, our platform empowers both job seekers and
+                recruiters to connect and succeed.
               </p>
             </div>
           </div>
