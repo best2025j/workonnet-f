@@ -1,8 +1,92 @@
 <script setup lang="ts">
+import { POSITION, useToast } from 'vue-toastification';
+import { required, helpers, email } from '@vuelidate/validators';
+import { useVuelidate } from '@vuelidate/core';
+import type { ApiErrorResponse } from '~/types';
+
 definePageMeta({
-  title: "Recruiter | Join our waitlist",
+  title: 'Recruiter | Join our waitlist',
   pageName: 'waitlist',
-})
+});
+
+const toast = useToast();
+const isLoading = ref<boolean>(false);
+const isSubmitted = ref<boolean>(false);
+
+const modalTrigger = ref(null);
+
+const formData = reactive({
+  fullName: '',
+  email: '',
+  companyName: '',
+  userType: LOGGED_IN_USER.JOBSEEKER.toString().toUpperCase(),
+});
+
+const rules = computed(() => {
+  return {
+    fullName: {
+      required: helpers.withMessage('Full names is required', required),
+    },
+    email: {
+      required: helpers.withMessage('Email is required', required),
+      email: helpers.withMessage('Enter a valid email', email),
+    },
+    companyName: {
+      required: helpers.withMessage('Company name is required', required),
+    },
+  };
+});
+
+const v$ = useVuelidate(rules, formData);
+
+const handleSubmit = async () => {
+  isLoading.value = true;
+  const isValidForm = await v$.value.$validate();
+  if (!isValidForm) {
+    toast.error('Please fill all fields correctly', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+    return;
+  }
+
+  try {
+    await $fetch('/api/waitlist/recruiter', {
+      method: 'POST',
+      body: formData,
+    });
+
+    toast.success("Hurray!!! You're on the List.", {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 500);
+
+    isSubmitted.value = true;
+
+    setTimeout(() => {
+      (modalTrigger.value as unknown as any).showModal();
+    }, 100);
+  } catch (error: any) {
+    const errorData = error.data as ApiErrorResponse;
+
+    toast.error('An error occurred try again', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+  }
+};
 </script>
 <template>
   <div class="w-full h-full relative">
@@ -31,21 +115,47 @@ definePageMeta({
                 <label for="first-name" class="text-sm mb-2">Name</label>
                 <input
                   type="text"
-                  placeholder="Email address..."
-                  class="pl-2 placeholder:text-sm pr-4 h-12 w-full outline-none border bg-transparent border-gray-300 rounded-8"
+                  placeholder="Your name"
+                  class="pl-2 placeholder:text-sm pr-4 py-3.5 w-full outline-none border bg-transparent border-gray-300 rounded-8"
+                  v-model="formData.fullName"
+                  :disabled="isLoading"
+                  @change="v$.fullName.$touch"
                 />
+
+                <div
+                  class="input-errors"
+                  v-for="error of v$.fullName.$errors"
+                  :key="error.$uid"
+                >
+                  <div class="text-xs text-danger-500">
+                    * {{ error.$message }}
+                  </div>
+                </div>
               </div>
 
               <!-- Second Input Field -->
               <div class="flex items-start flex-col w-full md:w-1/2">
-                <label for="second-name" class="text-sm mb-2"
+                <label for="company-name" class="text-sm mb-2"
                   >Your Company</label
                 >
                 <input
                   type="text"
                   placeholder="Enter..."
-                  class="pl-2 placeholder:text-sm pr-4 h-12 w-full outline-none border bg-transparent border-gray-300 rounded-8"
+                  class="pl-2 placeholder:text-sm pr-4 py-3.5 w-full outline-none border bg-transparent border-gray-300 rounded-8"
+                  v-model="formData.companyName"
+                  :disabled="isLoading"
+                  @change="v$.companyName.$touch"
                 />
+
+                <div
+                  class="input-errors"
+                  v-for="error of v$.companyName.$errors"
+                  :key="error.$uid"
+                >
+                  <div class="text-xs text-danger-500">
+                    * {{ error.$message }}
+                  </div>
+                </div>
               </div>
             </div>
             <!--  -->
@@ -53,55 +163,28 @@ definePageMeta({
               class="pt-2 flex flex-col md:flex-row space-y-2 md:space-y-0 space-x-0 md:space-x-2"
             >
               <!-- First Input Field -->
-              <div class="flex items-start flex-col w-full md:w-1/2">
-                <label for="first-name" class="text-sm mb-2"
+              <div class="flex items-start flex-col w-full">
+                <label for="email" class="text-sm mb-2"
                   >Email Address</label
                 >
                 <input
-                  type="text"
+                  type="email"
                   placeholder="Email address..."
-                  class="pl-2 placeholder:text-sm pr-4 h-12 w-full outline-none border bg-transparent border-gray-300 rounded-8"
+                  class="pl-2 placeholder:text-sm pr-4 py-3.5 w-full outline-none border bg-transparent border-gray-300 rounded-8"
+                  v-model="formData.email"
+                  :disabled="isLoading"
+                  @change="v$.email.$touch"
                 />
-              </div>
 
-              <!-- Second Input Field -->
-              <div class="flex items-start flex-col w-full md:w-1/2">
-                <label for="second-name" class="text-sm mb-2"
-                  >What’s your position</label
+                <div
+                  class="input-errors"
+                  v-for="error of v$.email.$errors"
+                  :key="error.$uid"
                 >
-                <input
-                  type="text"
-                  placeholder="Enter your position..."
-                  class="pl-2 placeholder:text-sm pr-4 h-12 w-full outline-none border bg-transparent border-gray-300 rounded-8"
-                />
-              </div>
-            </div>
-            <!--  -->
-            <div
-              class="pt-2 flex flex-col md:flex-row space-y-2 md:space-y-0 space-x-0 md:space-x-2"
-            >
-              <!-- First Input Field -->
-              <div class="flex items-start flex-col w-full md:w-1/2">
-                <label for="first-name" class="text-sm mb-2"
-                  >Roles you regularly fill</label
-                >
-                <input
-                  type="text"
-                  placeholder="Email address..."
-                  class="pl-2 placeholder:text-sm pr-4 h-12 w-full outline-none border bg-transparent border-gray-300 rounded-8"
-                />
-              </div>
-
-              <!-- Second Input Field -->
-              <div class="flex items-start flex-col w-full md:w-1/2">
-                <label for="second-name" class="text-sm mb-2"
-                  >Top technical skills</label
-                >
-                <input
-                  type="text"
-                  placeholder="Enter..."
-                  class="pl-2 placeholder:text-sm pr-4 h-12 w-full outline-none border bg-transparent border-gray-300 rounded-8"
-                />
+                  <div class="text-xs text-danger-500">
+                    * {{ error.$message }}
+                  </div>
+                </div>
               </div>
             </div>
           </form>
@@ -110,14 +193,21 @@ definePageMeta({
 
       <!-- modal button -->
       <div class="w-full py-4">
-        <button
-          onclick="my_modal_1.showModal()"
-          class="bg-primary-1 w-full font-black text-white rounded-8 h-12 uppercase"
+        <BtnPrimary
+          @click="handleSubmit()"
+          :isLoading="isLoading"
+            :disabled="isLoading || v$.$invalid"
+          class="w-full font-black uppercase"
         >
-          join
-          <!-- success  -->
-        </button>
+
+        <template #text> join </template>
+          
+        </BtnPrimary>
+
+
+        <!-- modal -->
         <dialog
+        ref="modalTrigger"
           id="my_modal_1"
           class="modal text-black-950 backdrop-blur-sm backdrop-opacity-2 backdrop-filter -top-8"
         >
