@@ -18,12 +18,14 @@
         </div>
 
         <div
-          class="text-white absolute top-0 h-full w-full pt-16 md:pt-24 md:px-8 px-6 space-y-4 md:flex justify-between"
+          class="text-white absolute top-0 h-full w-full pt-24 md:pt-24 md:px-8 px-6 space-y-4 md:flex justify-between"
         >
           <div
-            class="md:mt-32 md:justify-between justify-center md:h-[75%] flex flex-col items-center md:items-start"
+            class="md:mt-32 h-auto md:justify-between justify-center md:h-[75%] flex flex-col items-center md:items-start"
           >
-            <h1 class="font-black md:text-5xl md:w-[623px] text-base leading-[52px]">
+            <h1
+              class="font-black md:text-5xl md:w-[623px] text-base leading-[52px]"
+            >
               The Future of Work Powered by AI
             </h1>
 
@@ -65,7 +67,7 @@
 
           <!--  -->
           <div
-            class="border md:w-[440px] bg-[#62696FCC] rounded-10 p-6 space-y-4 md:h-[23rem] absolute bottom-20 md:right-10"
+            class="border md:w-[440px] bg-[#62696FCC] rounded-10 p-6 space-y-4 md:h-[23rem] relative md:top-96 md:right-10 left-0 right-0  md:mx-0"
           >
             <div class="flex items-center justify-between">
               <div>
