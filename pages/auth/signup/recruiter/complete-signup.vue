@@ -89,52 +89,52 @@ const handleSignup = async () => {
     return;
   }
 
-  try {
-    await $fetch('/api/auth/recruiter/register', {
-      method: 'POST',
-      body: formData,
-    });
+  // try {
+  //   await $fetch('/api/auth/recruiter/register', {
+  //     method: 'POST',
+  //     body: formData,
+  //   });
 
-    toast.success('Signup successful, Please login', {
-      timeout: 3000,
-      position: POSITION.TOP_RIGHT,
-    });
+  //   toast.success('Signup successful, Please login', {
+  //     timeout: 3000,
+  //     position: POSITION.TOP_RIGHT,
+  //   });
 
-    setTimeout(() => {
-      isLoading.value = false;
-    }, 500);
+  //   setTimeout(() => {
+  //     isLoading.value = false;
+  //   }, 500);
 
-    isSubmitted.value = true
-    return router.push({
-      path: '/auth/signin/recruiter',
-      query: {
-        email: formData.email,
-      },
-    });
-  } catch (error: any) {
-    const errorData = error.data as ApiErrorResponse;
+  //   isSubmitted.value = true
+  //   return router.push({
+  //     path: '/auth/signin/recruiter',
+  //     query: {
+  //       email: formData.email,
+  //     },
+  //   });
+  // } catch (error: any) {
+  //   const errorData = error.data as ApiErrorResponse;
 
-    if (errorData.data?.errorCode === 'E11000') {
-      toast.error('Email already in use', {
-        timeout: 3000,
-        position: POSITION.TOP_RIGHT,
-      });
-    } else if (errorData.data?.errorCode === '100001') {
-      toast.error('Password must be 8 characters long', {
-        timeout: 3000,
-        position: POSITION.TOP_RIGHT,
-      });
-    } else {
-      toast.error('An error occurred try again', {
-        timeout: 3000,
-        position: POSITION.TOP_RIGHT,
-      });
-    }
+  //   if (errorData.data?.errorCode === 'E11000') {
+  //     toast.error('Email already in use', {
+  //       timeout: 3000,
+  //       position: POSITION.TOP_RIGHT,
+  //     });
+  //   } else if (errorData.data?.errorCode === '100001') {
+  //     toast.error('Password must be 8 characters long', {
+  //       timeout: 3000,
+  //       position: POSITION.TOP_RIGHT,
+  //     });
+  //   } else {
+  //     toast.error('An error occurred try again', {
+  //       timeout: 3000,
+  //       position: POSITION.TOP_RIGHT,
+  //     });
+  //   }
 
-    setTimeout(() => {
-      isLoading.value = false;
-    }, 2000);
-  }
+  //   setTimeout(() => {
+  //     isLoading.value = false;
+  //   }, 2000);
+  // }
 };
 
 const resetForm = () => {
