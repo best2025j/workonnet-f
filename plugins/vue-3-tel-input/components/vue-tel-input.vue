@@ -30,16 +30,11 @@
     <div class="relative w-full">
       <input v-model="phone" ref="input" :type="inputOptions.type" :autocomplete="inputOptions.autocomplete"
         :autofocus="inputOptions.autofocus"
-        :class="['vti__input px-4 py-4 peer border border-grey-60 bg-grey-70  appearance-none focus:ring-0 placeholder-transparent text-grey-50 text-sm rounded-lg focus:outline-none focus:border-grey-60', ...inputOptions.styleClasses]"
+        :class="['vti__input px-4 py-3.5 peer border appearance-none placeholder-transparent text-sm rounded-md focus:outline-none ', ...inputOptions.styleClasses]"
         :disabled="disabled" :id="inputOptions.id" :maxlength="inputOptions.maxlength" :name="inputOptions.name"
         :placeholder="parsedPlaceholder" :readonly="inputOptions.readonly" :required="inputOptions.required"
         :tabindex="inputOptions.tabindex" :value="modelValue" :aria-describedby="inputOptions['aria-describedby']"
         @blur="onBlur" @focus="onFocus" @input="onInput" @keyup.enter="onEnter" @keyup.space="onSpace" />
-
-      <label for="Phone Number"
-        class="absolute left-4 top-0.5 text-sm text-grey-50 peer-placeholder-shown:text-grey-50 peer-placeholder-shown:top-4 peer-placeholder-shown:text-base duration-300">
-        Phone Number
-      </label>
     </div>
     <slot name="icon-right" />
   </div>

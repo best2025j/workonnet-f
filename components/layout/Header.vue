@@ -1,7 +1,4 @@
 <script setup lang="ts">
-const authStore = useAuthStore();
-const useStore = useUserStore();
-
 const route = useRoute();
 
 // State to track whether the mobile side nav is open
@@ -39,7 +36,7 @@ const toggleSideNav = () => {
       </h1>
 
       <!-- search input -->
-      <form
+      <!-- <form
         v-show="authStore.$state.currentUserType === LOGGED_IN_USER.RECRUITER"
         class="relative hidden md:flex"
       >
@@ -61,7 +58,7 @@ const toggleSideNav = () => {
             fill="#343330"
           />
         </svg>
-      </form>
+      </form> -->
 
       <nav>
         <NuxtLink

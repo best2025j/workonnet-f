@@ -8,7 +8,7 @@ import {
   minLength,
 } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
-import type { ApiErrorResponse, ApiSuccessResponse } from '~/types';
+import type { ApiErrorResponse } from '~/types';
 
 definePageMeta({
   layout: 'auth',
@@ -105,6 +105,8 @@ const handleSignup = async () => {
     }, 500);
 
     isSubmitted.value = true
+
+    // TODO:// Login INSTEAD
     return router.push({
       path: '/auth/signin/recruiter',
       query: {
@@ -272,13 +274,12 @@ onBeforeRouteLeave(() => {
           @change="v$.companyName.$touch"
           class="outline-none w-full text-base font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
         />
-
         <div
               class="input-errors"
               v-for="error of v$.companyName.$errors"
               :key="error.$uid"
             >
-              <div class="text-xs text-danger-500">* {{ error.$message }}</div>
+              <span class="text-xs text-danger-500">* {{ error.$message }}</span>
             </div>
        </div>
         <!--Company Size -->
@@ -306,11 +307,10 @@ onBeforeRouteLeave(() => {
               v-for="error of v$.companySize.$errors"
               :key="error.$uid"
             >
-              <div class="text-xs text-danger-500">* {{ error.$message }}</div>
+              <span class="text-xs text-danger-500">* {{ error.$message }}</span>
             </div>
         </div>
         <!--Industry -->
-
         <div class="w-full">
           <label class="text-base font-thin mb-2 text-left mt-4">
             Industry
@@ -365,7 +365,7 @@ onBeforeRouteLeave(() => {
               v-for="error of v$.industry.$errors"
               :key="error.$uid"
             >
-              <div class="text-xs text-danger-500">* {{ error.$message }}</div>
+              <span class="text-xs text-danger-500">* {{ error.$message }}</span>
             </div>
         </div>
 
@@ -387,7 +387,7 @@ onBeforeRouteLeave(() => {
               v-for="error of v$.websiteUrl.$errors"
               :key="error.$uid"
             >
-              <div class="text-xs text-danger-500">* {{ error.$message }}</div>
+              <span class="text-xs text-danger-500">* {{ error.$message }}</span>
             </div>
         </div>
         <div class="pt-5"></div>

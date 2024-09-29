@@ -29,6 +29,25 @@ export interface IUserDetails {
   id: string;
 }
 
+
+export interface IRecruiterDetails {
+  id: string;
+  fullName: string;
+  email: string;
+  phoneNumber?: IPhoneNumberField;
+  phoneNumberVerified?: boolean;
+  status: 'active' | 'draft' | 'blocked';
+  photo?: IMediaFile;
+  photoHeader?: IMediaFile;
+  companyName: string;
+  companySize: string;
+  industry: string;
+  websiteUrl: string;
+  bio?: string;
+  username: string;
+  location: string;
+}
+
 export interface IAuthCodeResponseData {
   accessToken: string;
   accountType: string;

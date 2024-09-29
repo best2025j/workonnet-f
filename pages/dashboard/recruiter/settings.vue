@@ -242,7 +242,7 @@ definePageMeta({
                 </div>
               </div>
             </div>
-            <p class="text-xs">
+            <p class="text-xs md:hidden">
               These are notifications to remind you updates about what you might
               miss about Workonnect.
             </p>

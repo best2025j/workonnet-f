@@ -9,7 +9,7 @@ const getUserProfile = async () => {
     const token = authStore.userToken;
     const resp = await userStore.$api.refreshAuthUserProfile(token);
     const responseData = resp as ApiSuccessResponse;
-    userStore.setUserDetails(responseData);
+    userStore.setUserDetails(responseData.data);
   } catch (e) {
     console.log(e);
   }
@@ -20,7 +20,7 @@ const getRecruiterProfile = async () => {
     const token = authStore.userToken;
     const resp = await userStore.$api.refreshAuthRecruiterProfile(token);
     const responseData = resp as ApiSuccessResponse;
-    userStore.setUserDetails(responseData);
+    userStore.setUserDetails(responseData.data);
   } catch (e) {
     console.log(e);
   }

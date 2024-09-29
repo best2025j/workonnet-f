@@ -181,14 +181,12 @@ onMounted(() => {
           @change="v$.lastName.$touch"
           class="outline-none w-full text-base font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
         />
-
-
         <div
               class="input-errors"
               v-for="error of v$.fullName.$errors"
               :key="error.$uid"
             >
-              <div class="text-xs text-danger-500">* {{ error.$message }}</div>
+              <span class="text-xs text-danger-500">* {{ error.$message }}</span>
             </div>
        </div>
        
@@ -208,7 +206,7 @@ onMounted(() => {
               v-for="error of v$.email.$errors"
               :key="error.$uid"
             >
-              <div class="text-xs text-danger-500">* {{ error.$message }}</div>
+              <span class="text-xs text-danger-500">* {{ error.$message }}</span>
             </div>
        </div>
 
@@ -229,7 +227,7 @@ onMounted(() => {
               v-for="error of v$.password.$errors"
               :key="error.$uid"
             >
-              <div class="text-xs text-danger-500">* {{ error.$message }}</div>
+              <span class="text-xs text-danger-500">* {{ error.$message }}</span>
             </div>
        </div>
        
