@@ -93,6 +93,9 @@ const handleLogin = async () => {
   }
 };
 </script>
+
+
+
 <template>
   <div class="flex justify-center items-center w-full">
     <div class="md:w-[23.375rem] w-full flex flex-col">
@@ -167,6 +170,7 @@ const handleLogin = async () => {
           Continue with LinkedIn
         </button>
       </div>
+      
       <form
         class="flex flex-col mt-6 mx-auto items-start justify-center text-left w-full max-w-md"
       >
