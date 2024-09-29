@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full w-full md:px-8 px-4 md:py-20">
+  <div class="h-full w-full md:px-8 px-4 md:pt-10">
     <!-- grid divider vertical using daisy ui -->
     <div class="grid grid-cols-3 w-full text-xs md:text-sm">
       <div class="divider divider-start">Why choose us?</div>
@@ -8,13 +8,14 @@
     </div>
 
     <!--  -->
-    <div class="flex w-full md:py-20 flex-col md:flex-row space-y-6 md:space-y-0">
+    <div class="flex w-full md:py-10 flex-col md:flex-row space-y-6 md:space-y-0">
       <div class="md:w-1/2 space-y-4 pt-3 md:pt-0">
         <h1 class="font-black text-[32px] w-[284px] leading-8">
           Empowering Job Seekers, One Success at a Time
         </h1>
         <img src="/assets/images//sec.png" alt="a lady picture" />
       </div>
+
       <div class="md:w-1/2 w-full">
         <h1 class="text-xs">
           Democratizing the job market for Recruiters & Jobseekers with instant,
@@ -30,7 +31,7 @@
           <!--  -->
           <div class="flex gap-4 items-center py-6">
             <div
-              class="flex flex-col items-center w-10 space-y-1 rounded-10 bg-westside-50 py-4"
+              class="flex flex-col items-center w-10 space-y-1 py-4"
             >
               <!-- active checkbox -->
               <svg

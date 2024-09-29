@@ -42,7 +42,7 @@
                 Get Matched With Jobs Under 24hrs
               </h1>
 
-              <p class="text-xs md:max-w-[669px] md:block hidden">
+              <p class="text-xs md:max-w-[669px] md:block hidden" >
                 Our recruitment platform bridges the gap between talented job
                 seekers and forward-thinking recruiters. We offer Job seekers an
                 intuitive search experience that matches them with the right
@@ -56,7 +56,7 @@
               </p>
 
               <!-- mobile text-->
-              <p class="text-xs md:hidden flex pt-4 text-center">
+              <p class="text-xs md:hidden flex pt-4 text-center" >
                 Our recruitment platform bridges the gap between talented job
                 seekers and forward-thinking recruiters. We offer Job seekers an
                 intuitive search experience that matches them with the right
