@@ -70,3 +70,28 @@ body::-webkit-scrollbar:horizontal {
   background: #5a5a5a; /* slightly darker on hover */
   border-radius: 10px !important;
 }
+
+/* multiselect */
+
+.multiselect {
+  height: 0.55em;
+  background-color: #fff !important;
+  border: none;
+  padding-left: 0.55em;
+}
+
+.multiselect-tags-search {
+  background-color: #fff !important;
+}
+
+.multiselect-placeholder {
+  color: #077685;
+}
+
+.multiselect-tag {
+  background-color: #fff6d3 !important;
+  color: #fe8900 !important;
+  font-size: 12px !important;
+  font-weight: 100 !important;
+  line-height: 18.19px;
+}

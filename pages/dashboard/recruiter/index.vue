@@ -22,7 +22,7 @@ definePageMeta({
       </div>
 
       <div class="self-end pb-4">
-        <nuxt-link to="/dashboard/recruiter/job/create">
+        <NuxtLink to="/dashboard/recruiter/job/create">
           <button
             class="px-4 py-3 text-xs flex bg-primary-1 gap-x-2 rounded-8 text-white items-center justify-center"
           >
@@ -40,7 +40,7 @@ definePageMeta({
             </svg>
             Create a job opening
           </button>
-        </nuxt-link>
+        </NuxtLink>
       </div>
     </div>
 

@@ -12,11 +12,24 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
+
+  imports: {
+    autoImport: true,
+  },
   plugins: [{ src: '@/plugins/scroll-behavior.client.ts', mode: 'client' }],
   modules: ['@pinia/nuxt', '@pinia-plugin-persistedstate/nuxt', '@vueuse/nuxt'],
   pinia: {
     storesDirs: ['./store/**', './store/modules/**'],
   },
+
+  // app: {
+  //   head: {
+  //     title: 'Workonnect Africa',
+  //     charset: 'utf-8',
+  //     viewport: 'width=device-width, initial-scale=1',
+  //     link: [{ rel: 'icon', type: 'image/x-icon', href: './favicon.ico' }],
+  //   },
+  // },
 
   // config
   runtimeConfig: {
@@ -26,4 +39,3 @@ export default defineNuxtConfig({
     },
   },
 });
-
