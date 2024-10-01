@@ -3,9 +3,7 @@ import { POSITION, useToast } from 'vue-toastification';
 import {
   required,
   helpers,
-  email,
   url,
-  minLength,
 } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
 import type {
@@ -26,7 +24,6 @@ definePageMeta({
 const userStore = useUserStore();
 const authStore = useAuthStore();
 const toast = useToast();
-const router = useRouter();
 const isLoading = ref<boolean>(false);
 const isSubmitted = ref<boolean>(false);
 
@@ -87,7 +84,6 @@ const onPhoneInput = (phone: any, phoneObject: any, input: any) => {
 
 const handleProfileUpdate = async () => {
   isLoading.value = true;
-  console.log(formData);
   const isValidForm = await v$.value.$validate();
   if (!isValidForm) {
     toast.error('Please fill all fields correctly', {

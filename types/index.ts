@@ -48,11 +48,36 @@ export interface IRecruiterDetails {
   location: string;
 }
 
+export interface ISettingsDetails {
+  id: string;
+  recruiter?: IRecruiterDetails | string;
+  user?: IUserDetails | string;
+  twoFa: boolean;
+  newsAndUpdates: boolean;
+  tipsAndTutorials: boolean;
+  reminders: boolean;
+}
+
 export interface IAuthCodeResponseData {
   accessToken: string;
   accountType: string;
   completedOnboarding: boolean;
   userId: string;
+}
+
+export interface IJobPost {
+  recruiter: IRecruiterDetails | string;
+  title: string;
+  slug: string;
+  description: string;
+  requirements: string[];
+  benefits: string[];
+  location: 'remote' | 'onsite' | 'hybrid';
+  level: 'entry' | 'mid' | 'mid-senior' | 'senior';
+  externalUrl?: string;
+  skills: string[];
+  headerImage?: IMediaFile;
+  expectedSalary: number;
 }
 
 export interface TelInputData {

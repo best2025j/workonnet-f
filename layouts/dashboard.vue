@@ -26,7 +26,7 @@ const getRecruiterProfile = async () => {
   }
 };
 
-onMounted(async () => {
+onBeforeMount(async () => {
   if (userStore.loggedInUserDetails === null) {
     if (authStore.currentUserType === LOGGED_IN_USER.JOBSEEKER) {
       await getUserProfile();
