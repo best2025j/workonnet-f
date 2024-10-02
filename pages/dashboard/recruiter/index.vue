@@ -6,6 +6,8 @@ definePageMeta({
   layout: "dashboard",
   middleware: ["auth", "is-recruiter"],
 });
+
+const userStore = useUserStore()
 </script>
 
 <template>
@@ -15,7 +17,7 @@ definePageMeta({
       class="flex flex-col-reverse md:flex-row justify-between items-center md:pb-6"
     >
       <div class="space-y-1 pb-2">
-        <h2 class="text-2xl font-black">Good Morning, Stanley</h2>
+        <h2 class="text-2xl font-black">Good Morning, {{userStore.loggedInUserDetails.companyName}}</h2>
         <p class="text-sm">
           Here’s what’s happening with your job application since you joined us.
         </p>
@@ -46,9 +48,9 @@ definePageMeta({
 
     <!-- card -->
     <div class="flex flex-col md:flex-row md:space-x-4 w-full mt-2">
-      <!-- dextop -->
+      <!-- desktop -->
       <div class="flex flex-col md:flex-row md:space-x-4 md:w-3/5 items-center">
-        <!-- destop -->
+        <!-- desktop -->
         <div class="space-y-2 hidden md:block">
           <div class="rounded-10 w-full md:w-[310px] bg-white h-auto">
             <div class="px-4 space-y-2 pt-2">

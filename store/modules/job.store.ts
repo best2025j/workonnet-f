@@ -21,11 +21,28 @@ export const JobStore = defineStore('job-store', () => {
     }
   }
 
+  async function fetchRecruiterSingle(token: string, jobId: string) {
+    try {
+      const response = await $fetch('/api/recruiter/job/fetch-single', {
+        query: {
+          jobListingId: jobId,
+        },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return await Promise.resolve(response);
+    } catch (error) {
+      return await Promise.reject(error);
+    }
+  }
+
   return {
     jobList: skipHydrate(jobList),
     setJobList,
     $api: {
       fetchRecruiterJobs,
+      fetchRecruiterSingle,
     },
   };
 });

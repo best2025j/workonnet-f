@@ -32,7 +32,7 @@ export const formatTime = (dateString: string) => {
 };
 
 export const formatTimeDiffHuman = (dateString: string) => {
-  return moment(dateString).startOf('day').fromNow();
+  return moment(dateString).startOf('hour').fromNow();
 };
 
 export const formatDateSubmission = (dateString: string) => {

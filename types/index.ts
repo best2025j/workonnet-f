@@ -82,6 +82,7 @@ export interface IJobPost {
   createdAt: string;
   updatedAt: string;
   applicants: string[];
+  id: string;
 }
 
 export interface IJobPostWithPagination {

@@ -52,7 +52,7 @@ const userStore = useUserStore()
             class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
           >
             <li>
-              <NuxtLink to="/dashboard/recruiter/jobs-openings/candidates">
+              <NuxtLink :to="`/dashboard/recruiter/jobs-openings/${job.id}-${job.slug}`">
                 <div class="flex text-xs gap-3 bg-[#F9F5FF]">
                   <span
                     ><svg

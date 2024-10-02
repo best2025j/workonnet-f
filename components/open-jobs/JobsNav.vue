@@ -18,7 +18,7 @@ const links = [
   },
   {
     to: '/dashboard/recruiter/jobs-openings?tab=inactive',
-    name: 'Inactive',
+    name: 'Archived',
     disabled: false,
     badge: 1,
     tabId: JOB_OPENING_TABS.IN_ACTIVE,
