@@ -31,6 +31,10 @@ export const formatTime = (dateString: string) => {
   return moment(dateString).format('LT');
 };
 
+export const formatTimeDiffHuman = (dateString: string) => {
+  return moment(dateString).startOf('day').fromNow();
+};
+
 export const formatDateSubmission = (dateString: string) => {
   return moment(dateString).format('L');
 };

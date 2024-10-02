@@ -74,10 +74,27 @@ export interface IJobPost {
   benefits: string[];
   location: 'remote' | 'onsite' | 'hybrid';
   level: 'entry' | 'mid' | 'mid-senior' | 'senior';
+  jobType: string;
   externalUrl?: string;
   skills: string[];
-  headerImage?: IMediaFile;
   expectedSalary: number;
+  status: 'draft' | 'published' | 'archived';
+  createdAt: string;
+  updatedAt: string;
+  applicants: string[];
+}
+
+export interface IJobPostWithPagination {
+  docs: IJobPost[];
+  hasNextPage: false;
+  hasPrevPage: false;
+  limit: number;
+  nextPage: number;
+  page: number;
+  pagingCounter: number;
+  prevPage: number;
+  totalDocs: 2;
+  totalPages: 1;
 }
 
 export interface TelInputData {

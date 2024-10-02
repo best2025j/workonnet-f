@@ -15,14 +15,11 @@ const skillList = ref(['Vue.js', 'Javascript', 'Open Source']);
 
 const toast = useToast();
 const authStore = useAuthStore();
-const useStore = useUserStore();
 const isLoading = ref<boolean>(false);
 const isDraft = ref<boolean>(false);
 const isPublish = ref<boolean>(false);
 
-const isSubmitted = ref<boolean>(false);
-
-const formData = ref({
+const formData = reactive({
   // recruiter: (useStore.loggedInUserDetails as IRecruiterDetails).id,
   title: '',
   description: '',
@@ -35,14 +32,14 @@ const formData = ref({
   expectedSalary: 0,
 });
 
-const addRequirement = () => formData.value.requirements.push('');
+const addRequirement = () => formData.requirements.push('');
 const removeRequirement = (index: number) => {
-  formData.value.requirements.splice(index, 1);
+  formData.requirements.splice(index, 1);
 };
 
-const addBenefit = () => formData.value.benefits.push('');
+const addBenefit = () => formData.benefits.push('');
 const removeBenefit = (index: number) => {
-  formData.value.benefits.splice(index, 1);
+  formData.benefits.splice(index, 1);
 };
 
 const rules = computed(() => {
@@ -117,7 +114,7 @@ const handleJobPost = async (status: string) => {
     const token = authStore.userToken;
     await $fetch('/api/recruiter/job/create', {
       method: 'POST',
-      body: {...formData.value, status},
+      body: {...formData, status},
       headers: {
         Authorization: `Bearer ${token}`,
       },

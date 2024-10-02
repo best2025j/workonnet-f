@@ -38,7 +38,7 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-  <div class="flex w-full">
+  <div class="flex w-full bg-black-50">
     <!-- Side Navigation -->
     <div class="w-[250px] h-full flex-none hidden md:block">
       <LayoutSideNav />
@@ -47,9 +47,14 @@ onBeforeMount(async () => {
     <!-- Main Content Area -->
     <div class="w-full h-full bg-black-50">
       <LayoutHeader class="px-4 h-full" />
-      <main class="md:pl-4 px-4 md:px-0 md:pr-8 py-4">
+      <main class="md:pl-4 px-4 md:px-0 md:pr-8 py-4 bg-black-50">
         <slot />
       </main>
     </div>
   </div>
-</template>
+</template> 
+<style>
+body, html {
+  background-color: #f6f6f6 !important;
+}
+</style>
