@@ -1,10 +1,6 @@
 <script setup lang="ts">
 import { POSITION, useToast } from 'vue-toastification';
-import {
-  required,
-  helpers,
-  url,
-} from '@vuelidate/validators';
+import { required, helpers, url } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
 import type {
   ApiErrorResponse,
@@ -27,11 +23,48 @@ const toast = useToast();
 const isLoading = ref<boolean>(false);
 const isSubmitted = ref<boolean>(false);
 
-let phoneObjectData = ref<TelInputData | null>(null);
-
 const userData = computed<IRecruiterDetails>(
   () => userStore.loggedInUserDetails
 );
+
+const logoImagePreview = ref(null);
+const logoImageData = ref(null);
+const logoImageSelector = ref(null);
+
+const bannerImagePreview = ref(null);
+const bannerImageData = ref(null);
+const bannerImageSelector = ref(null);
+
+// Computed property to enable the upload button only when a file is selected
+const isUploadEnabled = computed(() => {
+  return bannerImageData.value !== null || logoImageData.value !== null;
+});
+
+const chooseBannerImage = () => {
+  (bannerImageSelector.value as unknown as any).click();
+};
+
+const showBannerImage = (file: any) => {
+  var reader = new FileReader();
+  reader.onload = (e: any) => {
+    bannerImagePreview.value = e.target.result;
+  };
+  reader.readAsDataURL(file);
+};
+
+const chooseCoverImage = () => {
+  (logoImageSelector.value as unknown as any).click();
+};
+
+const showCoverImage = (file: any) => {
+  var reader = new FileReader();
+  reader.onload = (e: any) => {
+    logoImagePreview.value = e.target.result;
+  };
+  reader.readAsDataURL(file);
+};
+
+let phoneObjectData = ref<TelInputData | null>(null);
 
 const formData = reactive({
   fullName: userData.value.fullName,
@@ -82,6 +115,20 @@ const onPhoneInput = (phone: any, phoneObject: any, input: any) => {
   }
 };
 
+const handleCoverPreview = (e: any) => {
+  var files = e.target.files || e.dataTransfer.files;
+  logoImageData.value = files![0];
+  if (files && !files.length) return;
+  showCoverImage(files![0]);
+};
+
+const handleBannerPreview = (e: any) => {
+  var files = e.target.files || e.dataTransfer.files;
+  bannerImageData.value = files![0];
+  if (files && !files.length) return;
+  showBannerImage(files![0]);
+};
+
 const handleProfileUpdate = async () => {
   isLoading.value = true;
   const isValidForm = await v$.value.$validate();
@@ -106,7 +153,7 @@ const handleProfileUpdate = async () => {
     },
   };
 
-  const data = {...formData, phoneNumber: formattedPhoneNumber}
+  const data = { ...formData, phoneNumber: formattedPhoneNumber };
 
   try {
     const token = authStore.userToken;
@@ -132,22 +179,61 @@ const handleProfileUpdate = async () => {
   } catch (error: any) {
     const errorData = error.data as ApiErrorResponse;
 
-    if (errorData.data?.errorCode === 'E11000') {
-      toast.error('Email already in use', {
-        timeout: 3000,
-        position: POSITION.TOP_RIGHT,
-      });
-    } else if (errorData.data?.errorCode === '100001') {
-      toast.error('Password must be 8 characters long', {
-        timeout: 3000,
-        position: POSITION.TOP_RIGHT,
-      });
-    } else {
-      toast.error('An error occurred try again', {
-        timeout: 3000,
-        position: POSITION.TOP_RIGHT,
-      });
-    }
+    toast.error('An error occurred try again', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+  }
+};
+
+const handleProfilePhotoUpdate = async () => {
+  isLoading.value = true;
+  const data = new FormData();
+  data.append('title', formData.companyName);
+
+  // Only append file if it exists
+  if (bannerImageData.value) {
+    data.append('headerPhoto', bannerImageData.value);
+  }
+
+  if (logoImageData.value) {
+    data.append('photo', logoImageData.value);
+  }
+
+  try {
+    const token = authStore.userToken;
+    const response = await $fetch('/api/recruiter/update-profile-photos', {
+      method: 'POST',
+      body: data,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const responseData = response as ApiSuccessResponse;
+    toast.success('Company profile photos updated successfully', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 500);
+
+    isSubmitted.value = true;
+    logoImageData.value = null
+    bannerImageData.value = null
+    userStore.setUserDetails(responseData.data);
+  } catch (error: any) {
+    const errorData = error.data as ApiErrorResponse;
+
+    toast.error('An error occurred try again', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
 
     setTimeout(() => {
       isLoading.value = false;
@@ -159,10 +245,11 @@ const handleProfileUpdate = async () => {
 <template>
   <div class="w-full h-full">
     <div
-      class="text-black-700 flex flex-col md:flex-row gap-4 text-sm h-full w-full relative"
+      class="text-black-700 flex flex-col md:flex-row md:space-x-4 text-sm h-full w-full pr-0"
     >
+      <!--  -->
       <div
-        class="md:w-[28rem] fixed rounded-10 font-[Georgia] h-full hidden md:block"
+        class="md:w-[30%] sticky top-24 rounded-10 font-[Georgia] h-full hidden md:block"
       >
         <div class="divide-y bg-white p-6 border-primary-1 border-l-4">
           <div class="space-x-3 flex items-center">
@@ -237,7 +324,7 @@ const handleProfileUpdate = async () => {
       </div>
 
       <!--  -->
-      <div class="h-full md:ml-[30rem] space-y-4 md:w-3/4 w-full">
+      <div class="h-full flex-grow space-y-4 md:w-[65%] w-full">
         <div
           id="basic_information"
           class="bg-white w-full rounded-10 p-6 h-full space-y-3"
@@ -246,20 +333,70 @@ const handleProfileUpdate = async () => {
             Company’s Basic Information
           </h1>
           <div class="flex flex-col md:flex-row md:divide-x-2 gap-x-4">
-            <div class="py-2">
-              <div class="pb-6 space-y-4">
-                <img src="/assets/images/sportify.png" alt="" />
+            <div class="py-2 md:w-2/5 space-y-4">
+              <div class="bg-black-50 w-full space-y-4 p-3 rounded-10">
+                <img
+                  v-if="userData?.photo && logoImagePreview === null"
+                  :src="userData?.photo?.url"
+                  class="h-[100px] w-[100px]"
+                  alt=""
+                />
+                <img
+                  v-if="logoImagePreview"
+                  :src="logoImagePreview"
+                  class="h-[100px] w-[100px]"
+                  alt=""
+                />
+                <span v-if="!userData?.photo && !logoImagePreview"
+                  ><svg
+                    width="20"
+                    height="18"
+                    viewBox="0 0 20 18"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M18.25 0.75H1.75C1.35218 0.75 0.970644 0.908035 0.68934 1.18934C0.408035 1.47064 0.25 1.85218 0.25 2.25V15.75C0.25 16.1478 0.408035 16.5294 0.68934 16.8107C0.970644 17.092 1.35218 17.25 1.75 17.25H18.25C18.6478 17.25 19.0294 17.092 19.3107 16.8107C19.592 16.5294 19.75 16.1478 19.75 15.75V2.25C19.75 1.85218 19.592 1.47064 19.3107 1.18934C19.0294 0.908035 18.6478 0.75 18.25 0.75ZM18.25 2.25V11.8828L15.8059 9.43969C15.6666 9.30036 15.5013 9.18984 15.3193 9.11444C15.1372 9.03904 14.9422 9.00023 14.7452 9.00023C14.5481 9.00023 14.3531 9.03904 14.1711 9.11444C13.989 9.18984 13.8237 9.30036 13.6844 9.43969L11.8094 11.3147L7.68438 7.18969C7.4031 6.9086 7.02172 6.7507 6.62406 6.7507C6.22641 6.7507 5.84503 6.9086 5.56375 7.18969L1.75 11.0034V2.25H18.25ZM1.75 13.125L6.625 8.25L14.125 15.75H1.75V13.125ZM18.25 15.75H16.2466L12.8716 12.375L14.7466 10.5L18.25 14.0044V15.75ZM11.5 6.375C11.5 6.1525 11.566 5.93499 11.6896 5.74998C11.8132 5.56498 11.9889 5.42078 12.1945 5.33564C12.4 5.25049 12.6262 5.22821 12.8445 5.27162C13.0627 5.31502 13.2632 5.42217 13.4205 5.5795C13.5778 5.73684 13.685 5.93729 13.7284 6.15552C13.7718 6.37375 13.7495 6.59995 13.6644 6.80552C13.5792 7.01109 13.435 7.18679 13.25 7.3104C13.065 7.43402 12.8475 7.5 12.625 7.5C12.3266 7.5 12.0405 7.38147 11.8295 7.1705C11.6185 6.95952 11.5 6.67337 11.5 6.375Z"
+                      fill="#343330"
+                    />
+                  </svg>
+                </span>
                 <button
-                  class="text-xs py-2 text-primary-1 border md:px-3.5 w-full rounded-8 border-primary-1 font-[Nexa] font-[100]"
+                  @click="chooseCoverImage"
+                  class="text-xs py-2 text-primary-1 border md:px-1.5 w-full rounded-8 border-primary-1 font-[Nexa] font-[100]"
                 >
-                  Replace company photo
+                  {{
+                    userData.photo
+                      ? 'Replace company logo'
+                      : 'Choose company logo'
+                  }}
                 </button>
+
+                <input
+                  type="file"
+                  accept="image/png, image/jpeg"
+                  ref="logoImageSelector"
+                  @change="handleCoverPreview"
+                  hidden
+                />
               </div>
 
               <!--  -->
-              <div class="bg-black-50 md:w-44 w-full space-y-4 p-3 rounded-10">
+              <div class="bg-black-50 w-full space-y-4 p-3 rounded-10">
                 <div class="flex items-start gap-x-2">
-                  <span
+                  <img
+                    v-if="userData?.photoHeader && bannerImagePreview === null"
+                    :src="userData?.photoHeader?.url"
+                    class="h-[100px] w-full"
+                    alt=""
+                  />
+                  <img
+                    v-if="bannerImagePreview"
+                    :src="bannerImagePreview"
+                    class="h-[100px] w-full"
+                    alt=""
+                  />
+                  <span v-if="!userData?.photoHeader && !bannerImagePreview"
                     ><svg
                       width="20"
                       height="18"
@@ -273,23 +410,43 @@ const handleProfileUpdate = async () => {
                       />
                     </svg>
                   </span>
-                  <div class="space-y-2">
-                    <h1 class="text-xs">Choose banner photo</h1>
-                    <h1 class="text-xs text-info-600">Document Name.pdf</h1>
-                  </div>
+
+                  <input
+                    type="file"
+                    accept="image/png, image/jpeg"
+                    ref="bannerImageSelector"
+                    @change="handleBannerPreview"
+                    hidden
+                  />
                 </div>
 
                 <button
+                  @click="chooseBannerImage"
                   class="text-xs py-2 w-full text-primary-1 border px-3.5 rounded-8 border-primary-1 font-[Nexa] font-[100]"
                 >
-                  Replace photo
+                  {{
+                    userData.photoHeader
+                      ? 'Replace company banner'
+                      : 'Choose company banner'
+                  }}
                 </button>
+              </div>
+
+              <!--  -->
+              <div class="mt-4">
+                <BtnPrimary
+                  @click="handleProfilePhotoUpdate()"
+                  :isLoading="isLoading"
+                  :disabled="!isUploadEnabled"
+                >
+                  <template #text> Upload Photos </template>
+                </BtnPrimary>
               </div>
             </div>
 
-            <!-- input for full name -->
+            <!-- form -->
             <div class="p-4 md:pl-12 font-[Nexa] w-full space-y-4">
-              <!-- occupation -->
+              <!--  -->
               <div class="flex flex-col w-full">
                 <label for="first-name" class="text-sm mb-2">Full Name</label>
                 <input

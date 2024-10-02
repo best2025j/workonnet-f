@@ -32,7 +32,7 @@ const userData = computed(() => userStore.loggedInUserDetails);
           <img
             v-if="userData.photo"
             :src="userData.photo.url"
-            class="rounded-full max-w-[100px] max-h-[100px]"
+            class="w-[70px] h-[70px]"
             alt="profile-image"
           />
         </div>

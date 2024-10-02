@@ -60,7 +60,7 @@ onBeforeMount(async () => {
     <div v-if="isLoading" class="h-40 w-full flex items-center justify-center">
       <span class="loader-2"></span>
     </div>
-    <div v-if="!isLoading" class="h-full">
+    <div v-else class="h-full">
       <!--  -->
       <div class="w-full">
         <!-- content for applied -->

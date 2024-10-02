@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ApiSuccessResponse, IJobPost } from '~/types';
+import type { ApiSuccessResponse, IJobPost, IRecruiterDetails } from '~/types';
 
 definePageMeta({
   title: 'Jobs Openings',
@@ -14,13 +14,18 @@ const userStore = useUserStore();
 const jobStore = useJobStore();
 const currentJob = ref<IJobPost | null>(null);
 const applications = ref([]);
-const isLoading = ref(false)
+const isLoading = ref(false);
 
-const publishJob = () => {}
-const archiveJob = () => {}
+const userData = computed<IRecruiterDetails>(
+  () => userStore.loggedInUserDetails
+);
+
+const publishJob = () => {};
+const archiveJob = () => {};
 
 onBeforeMount(async () => {
   try {
+    isLoading.value = true;
     const token = authStore.userToken;
     const response = await jobStore.$api.fetchRecruiterSingle(
       token,
@@ -28,6 +33,10 @@ onBeforeMount(async () => {
     );
     const responseData = response as ApiSuccessResponse;
     currentJob.value = responseData.data;
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 1000);
   } catch (e) {
     console.log(e);
   }
@@ -35,13 +44,13 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-  <div class="w-full h-full">
+  <div v-if="isLoading" class="h-full py-40 w-full flex items-center justify-center">
+    <span class="loader-2"></span>
+  </div>
+  <div v-else class="w-full h-full">
     <div class="p-4 bg-white rounded-10">
       <div class="md:mt-12 md:pl-6 space-y-2">
-        <img
-          :src="userStore.loggedInUserDetails.photo.url"
-          alt="profile-image"
-        />
+        <img :src="userData!.photo?.url" alt="profile-image" />
 
         <div class="flex flex-col md:flex-row justify-between">
           <div class="space-y-2">
@@ -72,10 +81,10 @@ onBeforeMount(async () => {
             <div class="flex items-start space-x-4">
               <div class="space-y-2">
                 <h1 class="text-xs">
-                  {{ userStore.loggedInUserDetails.companyName }}
+                  {{ userData!.companyName }}
                 </h1>
                 <h1 class="text-xs">
-                  {{ userStore.loggedInUserDetails.location }}
+                  {{ userData!.location }}
                 </h1>
               </div>
             </div>
@@ -89,19 +98,21 @@ onBeforeMount(async () => {
             </div>
             <div class="flex justify-end w-full pt-4">
               <button
-              v-if="currentJob?.status === 'published'"
+                v-if="currentJob?.status === 'published'"
                 class="md:px-4 w-full text-xs md:text-sm py-3 rounded-8 text-back-50 bg-white border border:bg-black-50"
               >
                 Archive
               </button>
               <BtnPrimary
-              @click="publishJob()"
-              :isLoading="isLoading"
-              :disabled="isLoading"
-              v-if="currentJob?.status === 'draft'"
+                @click="publishJob()"
+                :isLoading="isLoading"
+                :disabled="isLoading"
+                v-if="currentJob?.status === 'draft'"
                 class="md:px-4 w-full text-xs font-black md:text-sm py-3 rounded-8 text-white bg-primary"
               >
-                Publish
+                <template #text>
+                  Publish
+                </template>
               </BtnPrimary>
             </div>
           </div>
@@ -150,7 +161,7 @@ onBeforeMount(async () => {
       >
         <h1 class="text-xs">Location</h1>
         <p class="font-black md:text-base text-xs">
-          {{ userStore.loggedInUserDetails.location }}
+          {{ userData!.location }}
         </p>
       </div>
     </div>
@@ -161,7 +172,7 @@ onBeforeMount(async () => {
         <div class="space-y-2 py-2">
           <h1 class="font-black">About the company</h1>
           <p class="md:text-sm text-xs tracking-wider">
-            {{ userStore.loggedInUserDetails.bio }}
+            {{ userData!.bio }}
           </p>
         </div>
         <div class="space-y-2 py-2">

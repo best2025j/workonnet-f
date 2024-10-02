@@ -27,13 +27,13 @@ const getRecruiterProfile = async () => {
 };
 
 onBeforeMount(async () => {
-  if (userStore.loggedInUserDetails === null) {
+  // if (userStore.loggedInUserDetails === null) {
     if (authStore.currentUserType === LOGGED_IN_USER.JOBSEEKER) {
       await getUserProfile();
     } else if (authStore.currentUserType === LOGGED_IN_USER.RECRUITER) {
       await getRecruiterProfile();
     }
-  }
+  // }
 });
 </script>
 
@@ -52,9 +52,10 @@ onBeforeMount(async () => {
       </main>
     </div>
   </div>
-</template> 
+</template>
 <style>
-body, html {
+body,
+html {
   background-color: #f6f6f6 !important;
 }
 </style>

@@ -46,6 +46,8 @@ export interface IRecruiterDetails {
   bio?: string;
   username: string;
   location: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface ISettingsDetails {
@@ -106,6 +108,11 @@ export interface TelInputData {
   nationalNumber: string;
   number: string;
   valid: boolean;
+}
+
+export interface IJobStatsData {
+  jobsLength: number;
+  recentJobs?: IJobPost[];
 }
 
 export interface IUserAuthData {
