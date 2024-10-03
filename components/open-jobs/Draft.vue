@@ -19,7 +19,7 @@ const userStore = useUserStore()
     >
       <div class="flex items-start justify-between">
         <div class="flex space-x-2">
-          <img :src="userStore.loggedInUserDetails.photo.url" />
+          <img :src="userStore.loggedInUserDetails.photo.url" class="w-[100px] h-[100px]" />
           <div class="">
             <h1 class="text-base font-black capitalize">{{ job.title }}</h1>
             <h1 class="text-xs">Posted {{formatTimeDiffHuman(job.createdAt)}}</h1>
