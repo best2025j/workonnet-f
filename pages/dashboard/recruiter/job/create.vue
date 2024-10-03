@@ -29,7 +29,7 @@ const formData = reactive({
   jobType: '',
   level: '',
   skills: [''],
-  expectedSalary: '0',
+  expectedSalary: '',
 });
 
 const addRequirement = () => formData.requirements.push('');

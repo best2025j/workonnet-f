@@ -28,7 +28,7 @@ export interface ISocialLinks {
 }
 
 export interface ISalaryExpectation {
-  amount: number;
+  amount: string;
   frequency: string;
   currency: string;
 }
@@ -55,7 +55,7 @@ export interface IUserDetails {
   firstName: string;
   lastName: string;
   occupation: string;
-  location: IPhysicalLocation;
+  location: string;
   resumeResource?: IResumeResource;
   salary?: ISalaryExpectation;
   bio: string;

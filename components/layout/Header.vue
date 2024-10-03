@@ -6,14 +6,17 @@ const route = useRoute();
 // State to track whether the mobile side nav is open
 const isSideNavOpen = ref(false);
 const authStore = useAuthStore()
+const userStore = useUserStore();
 // Function to toggle the side nav
 const toggleSideNav = () => {
   isSideNavOpen.value = !isSideNavOpen.value;
 };
 
-withDefaults(defineProps<{photoUrl: string | null}>(), {
-  photoUrl: null
-})
+const userData = computed<IUserDetails>(
+  () => userStore.loggedInUserDetails
+);
+
+
 </script>
 
 <template>
@@ -95,7 +98,7 @@ withDefaults(defineProps<{photoUrl: string | null}>(), {
         >
          <div class="rounded-full border p-1 flex items-center justify-center">
           <img
-            v-if="photoUrl === null"
+            v-if="!userData?.photo"
             src="/assets/svgs/avatar-user.svg"
             alt="Profile Picture"
             class="h-8 w-8"
@@ -103,7 +106,7 @@ withDefaults(defineProps<{photoUrl: string | null}>(), {
 
           <img
             v-else
-            :src="photoUrl"
+            :src="userData?.photo?.url"
             alt="Profile Picture"
             class="h-8 w-8"
           />

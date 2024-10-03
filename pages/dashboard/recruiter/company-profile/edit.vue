@@ -214,7 +214,7 @@ const handleProfilePhotoUpdate = async () => {
       },
     });
     const responseData = response as ApiSuccessResponse;
-    toast.success('Company profile photos updated successfully', {
+    toast.success('Company profile photos were updated successfully', {
       timeout: 3000,
       position: POSITION.TOP_RIGHT,
     });
@@ -324,7 +324,7 @@ const handleProfilePhotoUpdate = async () => {
       </div>
 
       <!--  -->
-      <div class="h-full flex-grow space-y-4 md:w-[65%] w-full">
+      <div class="h-full flex-grow space-y-4 md:w-[70%] w-full">
         <div
           id="basic_information"
           class="bg-white w-full rounded-10 p-6 h-full space-y-3"

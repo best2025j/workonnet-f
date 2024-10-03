@@ -54,7 +54,7 @@ onBeforeMount(() => {
             <div class="flex items-start space-x-4">
               <div class="space-y-2">
                 <h1 class="text-xs">{{userData?.occupation || ''}}</h1>
-                <h1 class="text-xs">{{userData?.location?.city || ''}} {{userData?.location?.country || ''}}</h1>
+                <h1 class="text-xs">{{userData?.location || ''}}</h1>
               </div>
             </div>
           </div>
