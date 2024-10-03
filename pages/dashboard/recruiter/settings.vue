@@ -1,9 +1,85 @@
 <script setup lang="ts">
+import type {
+  ApiErrorResponse,
+  ApiSuccessResponse,
+  IRecruiterDetails,
+  ISettingsDetails,
+} from '~/types';
+import { POSITION, useToast } from 'vue-toastification';
+
 definePageMeta({
-  title: "Settings",
-  pageName: "dashboard.recruiter.settings",
-  layout: "dashboard",
-  middleware: ["auth", "is-recruiter"],
+  title: 'Settings',
+  pageName: 'dashboard.recruiter.settings',
+  layout: 'dashboard',
+  middleware: ['auth', 'is-recruiter'],
+});
+
+const authStore = useAuthStore();
+const userStore = useUserStore();
+const isLoading = ref<boolean>(false);
+const toast = useToast();
+const userData = computed<IRecruiterDetails>(() => userStore.loggedInUserDetails)
+
+const userSettings = computed(() => userStore.userSettings);
+
+
+const onNewsAndUpdatesSettingsChange = async () => {
+   // run any checks before update
+  await handleUpdateSettings({newsAndUpdates: !userSettings.value?.newsAndUpdates})
+}
+
+const onSettingsRemindersChange = async () => {
+   // run any checks before update
+  await handleUpdateSettings({reminders: !userSettings.value?.reminders})
+}
+
+const onTipsAndTutorialsSettingsChange = async () => {
+  // run any checks before update
+  await handleUpdateSettings({tipsAndTutorials: !userSettings.value?.tipsAndTutorials})
+}
+
+const handleUpdateSettings = async (data: Partial<ISettingsDetails>) => {
+  try {
+    const token = authStore.userToken;
+    const response = await userStore.$api.updateRecruiterSettings(token, data, userSettings.value?.id as string);
+    const responseData = response as ApiSuccessResponse;
+    toast.success('Your settings was updated successfully', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 500);
+    userStore.setUserSettings(responseData.data);
+  } catch (error: any) {
+    const errorData = error.data as ApiErrorResponse;
+    toast.error('Could not update settings, An error occurred try again', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+  }
+};
+
+onBeforeMount(async () => {
+  // if (userStore.userSettings === null || !userStore.userSettings) {
+    try {
+      const token = authStore.userToken;
+      const response = await userStore.$api.refreshAuthRecruiterSettings(token);
+      const responseData = response as ApiSuccessResponse;
+      setTimeout(() => {
+        isLoading.value = false;
+      }, 500);
+
+      userStore.setUserSettings(responseData.data);
+    } catch (e) {
+      console.log(e);
+    }
+  // }
 });
 </script>
 
@@ -148,7 +224,7 @@ definePageMeta({
                 <h1 class="text-xs font-black">Email address</h1>
               </div>
               <div class="md:w-2/4 hidden md:flex">
-                <p class="text-xs">example@example.com</p>
+                <p class="text-xs">{{ userData?.email || '' }}</p>
               </div>
 
               <div class="md:w-1/4 flex justify-end pt-3 md:pt-0">
@@ -159,7 +235,9 @@ definePageMeta({
                 </button>
               </div>
             </div>
-            <p class="text-xs md:hidden">example@example.com</p>
+            <p class="text-xs md:hidden">
+              {{ userData?.email || '' }}
+            </p>
           </div>
           <!--  -->
 
@@ -179,7 +257,8 @@ definePageMeta({
                 <div class="form-control">
                   <input
                     type="checkbox"
-                    defaultChecked
+                    :checked="userSettings?.newsAndUpdates"
+                    @change="onNewsAndUpdatesSettingsChange()"
                     class="toggle toggle-sm bg-primary-1 checked:bg-white checked:border-primary-1 border-primary-1 checked:[--tglbg:#FE8900] hover:bg-none"
                   />
                 </div>
@@ -206,8 +285,9 @@ definePageMeta({
               <div class="md:w-1/4 flex justify-end">
                 <div class="form-control">
                   <input
+                    :checked="userSettings?.tipsAndTutorials"
+                    @change="onTipsAndTutorialsSettingsChange"
                     type="checkbox"
-                    defaultChecked
                     class="toggle toggle-sm bg-primary-1 checked:bg-white checked:border-primary-1 border-primary-1 checked:[--tglbg:#FE8900] hover:bg-none"
                   />
                 </div>
@@ -236,13 +316,14 @@ definePageMeta({
                 <div class="form-control">
                   <input
                     type="checkbox"
-                    defaultChecked
+                    :checked="userSettings?.reminders"
+                    @change="onSettingsRemindersChange()"
                     class="toggle toggle-sm bg-primary-1 checked:bg-white checked:border-primary-1 border-primary-1 checked:[--tglbg:#FE8900] hover:bg-none"
                   />
                 </div>
               </div>
             </div>
-            <p class="text-xs">
+            <p class="text-xs md:hidden">
               These are notifications to remind you updates about what you might
               miss about Workonnect.
             </p>
@@ -271,7 +352,9 @@ definePageMeta({
             </div>
 
             <div class="md:w-1/2 space-y-2">
-              <p class="text-xs hidden md:flex">example@example.com</p>
+              <p class="text-xs hidden md:flex">
+                {{ userData?.email || '' }}
+              </p>
               <p class="text-xs hidden md:flex">
                 Select "Manage" to change your privacy settings and exercise
                 your rights using our request form.
@@ -286,7 +369,9 @@ definePageMeta({
               </button>
             </div>
           </div>
-          <p class="text-xs md:hidden py-2">example@example.com</p>
+          <p class="text-xs md:hidden py-2">
+            {{ userData?.email  || '' }}
+          </p>
 
           <p class="text-xs md:hidden">
             Select "Manage" to change your privacy settings and exercise your
@@ -325,8 +410,11 @@ definePageMeta({
               </p>
             </div>
             <div class="md:w-1/4 flex justify-end">
-              <button class="text-xs px-4 py-2 border rounded-8 text-[#344054]">
-                Setup
+              <button
+                disabled
+                class="text-xs px-4 py-2 border rounded-8 text-[#344054]"
+              >
+                {{ userSettings?.twoFa === true ? 'Enabled' : 'Disabled' }}
               </button>
             </div>
           </div>
@@ -370,9 +458,7 @@ definePageMeta({
               <h1 class="text-xs font-black">Delete account</h1>
             </div>
             <div class="md:w-2/4 hidden md:flex">
-              <p class="text-xs">
-                Permanently delete your Bookingcorps account.
-              </p>
+              <p class="text-xs">Permanently delete your Workonnect account.</p>
             </div>
             <!-- delete modal -->
             <div class="md:w-1/4 flex justify-end">

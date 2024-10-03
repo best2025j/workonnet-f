@@ -1,10 +1,86 @@
 <script setup lang="ts">
+import type {
+  ApiErrorResponse,
+  ApiSuccessResponse,
+  IRecruiterDetails,
+  ISettingsDetails,
+IUserDetails,
+} from '~/types';
+import { POSITION, useToast } from 'vue-toastification';
+
 definePageMeta({
   title: "Settings",
   pageName: "dashboard.jobseeker.settings",
   layout: "dashboard",
   middleware: ["auth", "is-jobseeker"],
 });
+
+const authStore = useAuthStore();
+const userStore = useUserStore();
+const isLoading = ref<boolean>(false);
+const toast = useToast();
+const userSettings = computed(() => userStore.userSettings);
+const userData = computed<IUserDetails>(() => userStore.loggedInUserDetails)
+
+const onNewsAndUpdatesSettingsChange = async () => {
+   // run any checks before update
+  await handleUpdateSettings({newsAndUpdates: !userSettings.value?.newsAndUpdates})
+}
+
+const onSettingsRemindersChange = async () => {
+   // run any checks before update
+  await handleUpdateSettings({reminders: !userSettings.value?.reminders})
+}
+
+const onTipsAndTutorialsSettingsChange = async () => {
+  // run any checks before update
+  await handleUpdateSettings({tipsAndTutorials: !userSettings.value?.tipsAndTutorials})
+}
+
+const handleUpdateSettings = async (data: Partial<ISettingsDetails>) => {
+  try {
+    const token = authStore.userToken;
+    const response = await userStore.$api.updateUserSettings(token, data, userSettings.value?.id as string);
+    const responseData = response as ApiSuccessResponse;
+    toast.success('Your settings was updated successfully', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 500);
+    userStore.setUserSettings(responseData.data);
+  } catch (error: any) {
+    const errorData = error.data as ApiErrorResponse;
+    toast.error('Could not update settings, An error occurred try again', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+  }
+};
+
+onBeforeMount(async () => {
+  if (userStore.userSettings === null || !userStore.userSettings) {
+    try {
+      const token = authStore.userToken;
+      const response = await userStore.$api.refreshAuthUserSettings(token);
+      const responseData = response as ApiSuccessResponse;
+      setTimeout(() => {
+        isLoading.value = false;
+      }, 500);
+
+      userStore.setUserSettings(responseData.data);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+});
+
 </script>
 
 <template>
@@ -121,7 +197,7 @@ definePageMeta({
               </div>
 
               <div class="hidden md:flex md:w-2/4">
-                <p class="text-xs">example@example.com</p>
+                <p class="text-xs">{{userData?.email || ''}}</p>
               </div>
 
               <div class="md:w-1/4 flex justify-end">
@@ -132,7 +208,7 @@ definePageMeta({
                 </button>
               </div>
             </div>
-            <p class="text-xs md:hidden">example@example.com</p>
+            <p class="text-xs md:hidden">{{userData?.email || ''}}</p>
           </div>
 
           <!--  -->
@@ -150,7 +226,8 @@ definePageMeta({
                 <div class="form-control">
                   <input
                     type="checkbox"
-                    defaultChecked
+                    :checked="userSettings?.newsAndUpdates"
+                    @change="onNewsAndUpdatesSettingsChange()"
                     class="toggle toggle-sm bg-primary-1 checked:bg-white checked:border-primary-1 border-primary-1 checked:[--tglbg:#FE8900] hover:bg-none"
                   />
                 </div>
@@ -176,7 +253,8 @@ definePageMeta({
                 <div class="form-control">
                   <input
                     type="checkbox"
-                    defaultChecked
+                    :checked="userSettings?.tipsAndTutorials"
+                    @change="onTipsAndTutorialsSettingsChange"
                     class="toggle toggle-sm bg-primary-1 checked:bg-white checked:border-primary-1 border-primary-1 checked:[--tglbg:#FE8900] hover:bg-none"
                   />
                 </div>
@@ -206,7 +284,8 @@ definePageMeta({
                 <div class="form-control">
                   <input
                     type="checkbox"
-                    defaultChecked
+                     :checked="userSettings?.reminders"
+                    @change="onSettingsRemindersChange()"
                     class="toggle toggle-sm bg-primary-1 checked:bg-white checked:border-primary-1 border-primary-1 checked:[--tglbg:#FE8900] hover:bg-none"
                   />
                 </div>
@@ -241,7 +320,7 @@ definePageMeta({
               <h1 class="text-xs font-black">Privacy</h1>
             </div>
             <div class="md:w-2/4 hidden md:block">
-              <p class="text-xs">example@example.com</p>
+              <p class="text-xs">{{userData?.email || ''}}</p>
               <p class="text-xs">
                 Select "Manage" to change your privacy settings and exercise
                 your rights using our request form.
@@ -255,7 +334,7 @@ definePageMeta({
           </div>
 
           <div class="flex md:hidden flex-col space-y-3">
-            <p class="text-xs">example@example.com</p>
+            <p class="text-xs">{{userData?.email || ''}}</p>
             <p class="text-xs">
               Select "Manage" to change your privacy settings and exercise your
               rights using our request form.
@@ -287,19 +366,19 @@ definePageMeta({
             </div>
             <div class="md:w-2/4">
               <p class="text-xs hidden md:flex">
-                example@Increase your account's security by setting up
+                Increase your account's security by setting up
                 two-factor authentication..com
               </p>
             </div>
             <div class="md:w-1/4 flex justify-end">
               <button class="text-xs px-4 py-2 border rounded-8 text-[#344054]">
-                Setup
+                Enabled
               </button>
             </div>
           </div>
 
           <p class="text-xs md:hidden">
-            example@Increase your account's security by setting up two-factor
+            Increase your account's security by setting up two-factor
             authentication..com
           </p>
         </div>
@@ -352,7 +431,7 @@ definePageMeta({
             </div>
             <div class="md:w-2/4 hidden md:flex">
               <p class="text-xs">
-                Permanently delete your Bookingcorps account.
+                Permanently delete your Workonnect account.
               </p>
             </div>
             <div class="md:w-1/4 flex justify-end">
@@ -437,7 +516,7 @@ definePageMeta({
             </div>
           </div>
           <p class="text-xs md:hidden">
-            Permanently delete your Bookingcorps account.
+            Permanently delete your Workonnect account.
           </p>
         </div>
       </div>

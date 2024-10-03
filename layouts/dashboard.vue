@@ -1,15 +1,17 @@
 <script setup lang="ts">
-import type { ApiSuccessResponse } from '~/types';
+import type { ApiSuccessResponse, IUserDetails } from '~/types';
 
 const authStore = useAuthStore();
 const userStore = useUserStore();
+const userData = computed<IUserDetails>(() => userStore?.loggedInUserDetails)
+
 
 const getUserProfile = async () => {
   try {
     const token = authStore.userToken;
     const resp = await userStore.$api.refreshAuthUserProfile(token);
     const responseData = resp as ApiSuccessResponse;
-    userStore.setUserDetails(responseData);
+    userStore.setUserDetails(responseData.data);
   } catch (e) {
     console.log(e);
   }
@@ -20,25 +22,25 @@ const getRecruiterProfile = async () => {
     const token = authStore.userToken;
     const resp = await userStore.$api.refreshAuthRecruiterProfile(token);
     const responseData = resp as ApiSuccessResponse;
-    userStore.setUserDetails(responseData);
+    userStore.setUserDetails(responseData.data);
   } catch (e) {
     console.log(e);
   }
 };
 
-onMounted(async () => {
-  if (userStore.loggedInUserDetails === null) {
+onBeforeMount(async () => {
+  // if (userStore.loggedInUserDetails === null) {
     if (authStore.currentUserType === LOGGED_IN_USER.JOBSEEKER) {
       await getUserProfile();
     } else if (authStore.currentUserType === LOGGED_IN_USER.RECRUITER) {
       await getRecruiterProfile();
     }
-  }
+  // }
 });
 </script>
 
 <template>
-  <div class="flex w-full">
+  <div class="flex w-full bg-black-50">
     <!-- Side Navigation -->
     <div class="w-[250px] h-full flex-none hidden md:block">
       <LayoutSideNav />
@@ -46,10 +48,16 @@ onMounted(async () => {
 
     <!-- Main Content Area -->
     <div class="w-full h-full bg-black-50">
-      <LayoutHeader class="px-4 h-full" />
-      <main class="md:pl-4 px-4 md:px-0 md:pr-8 py-4">
+      <LayoutHeader :photoUrl="userData?.photo?.url || null" class="px-4 h-full" />
+      <main class="md:pl-4 px-4 md:px-0 md:pr-8 py-4 bg-black-50">
         <slot />
       </main>
     </div>
   </div>
 </template>
+<style>
+body,
+html {
+  background-color: #f6f6f6 !important;
+}
+</style>

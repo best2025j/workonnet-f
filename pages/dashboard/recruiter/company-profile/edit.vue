@@ -1,16 +1,256 @@
 <script setup lang="ts">
+import { POSITION, useToast } from 'vue-toastification';
+import { required, helpers, url } from '@vuelidate/validators';
+import { useVuelidate } from '@vuelidate/core';
+import type {
+  ApiErrorResponse,
+  ApiSuccessResponse,
+  IPhoneNumberField,
+  IRecruiterDetails,
+  TelInputData,
+} from '~/types';
+
 definePageMeta({
-  title: "Company Profile",
-  pageName: "dashboard.recruiter.company-profile.edit",
-  layout: "dashboard",
-  middleware: ['auth', 'is-recruiter']
+  title: 'Company Profile',
+  pageName: 'dashboard.recruiter.company-profile.edit',
+  layout: 'dashboard',
+  middleware: ['auth', 'is-recruiter'],
 });
+
+const userStore = useUserStore();
+const authStore = useAuthStore();
+const toast = useToast();
+const isLoading = ref<boolean>(false);
+const isSubmitted = ref<boolean>(false);
+
+const userData = computed<IRecruiterDetails>(
+  () => userStore.loggedInUserDetails
+);
+
+const logoImagePreview = ref(null);
+const logoImageData = ref(null);
+const logoImageSelector = ref(null);
+
+const bannerImagePreview = ref(null);
+const bannerImageData = ref(null);
+const bannerImageSelector = ref(null);
+
+// Computed property to enable the upload button only when a file is selected
+const isUploadEnabled = computed(() => {
+  return bannerImageData.value !== null || logoImageData.value !== null;
+});
+
+const chooseBannerImage = () => {
+  (bannerImageSelector.value as unknown as any).click();
+};
+
+const showBannerImage = (file: any) => {
+  var reader = new FileReader();
+  reader.onload = (e: any) => {
+    bannerImagePreview.value = e.target.result;
+  };
+  reader.readAsDataURL(file);
+};
+
+const chooseCoverImage = () => {
+  (logoImageSelector.value as unknown as any).click();
+};
+
+const showCoverImage = (file: any) => {
+  var reader = new FileReader();
+  reader.onload = (e: any) => {
+    logoImagePreview.value = e.target.result;
+  };
+  reader.readAsDataURL(file);
+};
+
+let phoneObjectData = ref<TelInputData | null>(null);
+
+const formData = reactive({
+  fullName: userData.value.fullName,
+  companyName: userData.value.companyName,
+  companySize: userData.value.companySize,
+  industry: userData.value.industry,
+  websiteUrl: userData.value.websiteUrl,
+  phoneNumber: userData.value.phoneNumber?.number || '',
+  bio: userData.value.bio || '',
+  location: userData.value.location || '',
+});
+
+const rules = computed(() => {
+  return {
+    fullName: {
+      required: helpers.withMessage('Full names is required', required),
+    },
+    companyName: {
+      required: helpers.withMessage('Company name is required', required),
+    },
+    companySize: {
+      required: helpers.withMessage('Company size is required', required),
+    },
+    industry: {
+      required: helpers.withMessage('Industry is required', required),
+    },
+    websiteUrl: {
+      required: helpers.withMessage('Website url is required', required),
+      url: helpers.withMessage('Must be a valid url', url),
+    },
+    bio: {
+      required: helpers.withMessage('About is required', required),
+    },
+    phoneNumber: {
+      required: helpers.withMessage('Please enter your phone number', required),
+    },
+    location: {
+      required: helpers.withMessage('Please enter your location', required),
+    },
+  };
+});
+
+const v$ = useVuelidate(rules, formData);
+
+const onPhoneInput = (phone: any, phoneObject: any, input: any) => {
+  if (phoneObject?.formatted) {
+    phoneObjectData.value = phoneObject;
+  }
+};
+
+const handleCoverPreview = (e: any) => {
+  var files = e.target.files || e.dataTransfer.files;
+  logoImageData.value = files![0];
+  if (files && !files.length) return;
+  showCoverImage(files![0]);
+};
+
+const handleBannerPreview = (e: any) => {
+  var files = e.target.files || e.dataTransfer.files;
+  bannerImageData.value = files![0];
+  if (files && !files.length) return;
+  showBannerImage(files![0]);
+};
+
+const handleProfileUpdate = async () => {
+  isLoading.value = true;
+  const isValidForm = await v$.value.$validate();
+  if (!isValidForm) {
+    toast.error('Please fill all fields correctly', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+    return;
+  }
+
+  const formattedPhoneNumber: IPhoneNumberField = {
+    code: phoneObjectData.value!.countryCallingCode,
+    number: phoneObjectData.value!.number,
+    country: {
+      shortCode: phoneObjectData.value!.country.iso2,
+      name: phoneObjectData.value!.country.name,
+    },
+  };
+
+  const data = { ...formData, phoneNumber: formattedPhoneNumber };
+
+  try {
+    const token = authStore.userToken;
+    const response = await $fetch('/api/recruiter/update-profile', {
+      method: 'POST',
+      body: data,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const responseData = response as ApiSuccessResponse;
+    toast.success('Company profile updated successfully', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 500);
+
+    isSubmitted.value = true;
+    userStore.setUserDetails(responseData.data);
+  } catch (error: any) {
+    const errorData = error.data as ApiErrorResponse;
+
+    toast.error('An error occurred try again', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+  }
+};
+
+const handleProfilePhotoUpdate = async () => {
+  isLoading.value = true;
+  const data = new FormData();
+  data.append('title', formData.companyName);
+
+  // Only append file if it exists
+  if (bannerImageData.value) {
+    data.append('headerPhoto', bannerImageData.value);
+  }
+
+  if (logoImageData.value) {
+    data.append('photo', logoImageData.value);
+  }
+
+  try {
+    const token = authStore.userToken;
+    const response = await $fetch('/api/recruiter/update-profile-photos', {
+      method: 'POST',
+      body: data,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const responseData = response as ApiSuccessResponse;
+    toast.success('Company profile photos were updated successfully', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 500);
+
+    isSubmitted.value = true;
+    logoImageData.value = null
+    bannerImageData.value = null
+    userStore.setUserDetails(responseData.data);
+  } catch (error: any) {
+    const errorData = error.data as ApiErrorResponse;
+
+    toast.error('An error occurred try again', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+  }
+};
 </script>
 
 <template>
   <div class="w-full h-full">
-    <div class="text-black-700 flex flex-col md:flex-row gap-4 text-sm h-full w-full relative">
-      <div class="md:w-[28rem] fixed rounded-10 font-[Georgia] h-full hidden md:block">
+    <div
+      class="text-black-700 flex flex-col md:flex-row md:space-x-4 text-sm h-full w-full pr-0"
+    >
+      <!--  -->
+      <div
+        class="md:w-[30%] sticky top-24 rounded-10 font-[Georgia] h-full hidden md:block"
+      >
         <div class="divide-y bg-white p-6 border-primary-1 border-l-4">
           <div class="space-x-3 flex items-center">
             <span
@@ -84,7 +324,7 @@ definePageMeta({
       </div>
 
       <!--  -->
-      <div class="h-full md:ml-[30rem] space-y-4 md:w-3/4 w-full">
+      <div class="h-full flex-grow space-y-4 md:w-[70%] w-full">
         <div
           id="basic_information"
           class="bg-white w-full rounded-10 p-6 h-full space-y-3"
@@ -93,20 +333,70 @@ definePageMeta({
             Company’s Basic Information
           </h1>
           <div class="flex flex-col md:flex-row md:divide-x-2 gap-x-4">
-            <div class="py-2">
-              <div class="pb-6 space-y-4">
-                <img src="/assets/images/sportify.png" alt="" />
+            <div class="py-2 md:w-2/5 space-y-4">
+              <div class="bg-black-50 w-full space-y-4 p-3 rounded-10">
+                <img
+                  v-if="userData?.photo && logoImagePreview === null"
+                  :src="userData?.photo?.url"
+                  class="h-[100px] w-[100px]"
+                  alt=""
+                />
+                <img
+                  v-if="logoImagePreview"
+                  :src="logoImagePreview"
+                  class="h-[100px] w-[100px]"
+                  alt=""
+                />
+                <span v-if="!userData?.photo && !logoImagePreview"
+                  ><svg
+                    width="20"
+                    height="18"
+                    viewBox="0 0 20 18"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M18.25 0.75H1.75C1.35218 0.75 0.970644 0.908035 0.68934 1.18934C0.408035 1.47064 0.25 1.85218 0.25 2.25V15.75C0.25 16.1478 0.408035 16.5294 0.68934 16.8107C0.970644 17.092 1.35218 17.25 1.75 17.25H18.25C18.6478 17.25 19.0294 17.092 19.3107 16.8107C19.592 16.5294 19.75 16.1478 19.75 15.75V2.25C19.75 1.85218 19.592 1.47064 19.3107 1.18934C19.0294 0.908035 18.6478 0.75 18.25 0.75ZM18.25 2.25V11.8828L15.8059 9.43969C15.6666 9.30036 15.5013 9.18984 15.3193 9.11444C15.1372 9.03904 14.9422 9.00023 14.7452 9.00023C14.5481 9.00023 14.3531 9.03904 14.1711 9.11444C13.989 9.18984 13.8237 9.30036 13.6844 9.43969L11.8094 11.3147L7.68438 7.18969C7.4031 6.9086 7.02172 6.7507 6.62406 6.7507C6.22641 6.7507 5.84503 6.9086 5.56375 7.18969L1.75 11.0034V2.25H18.25ZM1.75 13.125L6.625 8.25L14.125 15.75H1.75V13.125ZM18.25 15.75H16.2466L12.8716 12.375L14.7466 10.5L18.25 14.0044V15.75ZM11.5 6.375C11.5 6.1525 11.566 5.93499 11.6896 5.74998C11.8132 5.56498 11.9889 5.42078 12.1945 5.33564C12.4 5.25049 12.6262 5.22821 12.8445 5.27162C13.0627 5.31502 13.2632 5.42217 13.4205 5.5795C13.5778 5.73684 13.685 5.93729 13.7284 6.15552C13.7718 6.37375 13.7495 6.59995 13.6644 6.80552C13.5792 7.01109 13.435 7.18679 13.25 7.3104C13.065 7.43402 12.8475 7.5 12.625 7.5C12.3266 7.5 12.0405 7.38147 11.8295 7.1705C11.6185 6.95952 11.5 6.67337 11.5 6.375Z"
+                      fill="#343330"
+                    />
+                  </svg>
+                </span>
                 <button
-                  class="text-xs py-2 text-primary-1 border md:px-3.5 w-full rounded-8 border-primary-1 font-[Nexa] font-[100]"
+                  @click="chooseCoverImage"
+                  class="text-xs py-2 text-primary-1 border md:px-1.5 w-full rounded-8 border-primary-1 font-[Nexa] font-[100]"
                 >
-                  Replace company photo
+                  {{
+                    userData.photo
+                      ? 'Replace company logo'
+                      : 'Choose company logo'
+                  }}
                 </button>
+
+                <input
+                  type="file"
+                  accept="image/png, image/jpeg"
+                  ref="logoImageSelector"
+                  @change="handleCoverPreview"
+                  hidden
+                />
               </div>
 
               <!--  -->
-              <div class="bg-black-50 md:w-44 w-full space-y-4 p-3 rounded-10">
+              <div class="bg-black-50 w-full space-y-4 p-3 rounded-10">
                 <div class="flex items-start gap-x-2">
-                  <span
+                  <img
+                    v-if="userData?.photoHeader && bannerImagePreview === null"
+                    :src="userData?.photoHeader?.url"
+                    class="h-[100px] w-full"
+                    alt=""
+                  />
+                  <img
+                    v-if="bannerImagePreview"
+                    :src="bannerImagePreview"
+                    class="h-[100px] w-full"
+                    alt=""
+                  />
+                  <span v-if="!userData?.photoHeader && !bannerImagePreview"
                     ><svg
                       width="20"
                       height="18"
@@ -120,52 +410,111 @@ definePageMeta({
                       />
                     </svg>
                   </span>
-                  <div class="space-y-2">
-                    <h1 class="text-xs">Choose banner photo</h1>
-                    <h1 class="text-xs text-info-600">Document Name.pdf</h1>
-                  </div>
+
+                  <input
+                    type="file"
+                    accept="image/png, image/jpeg"
+                    ref="bannerImageSelector"
+                    @change="handleBannerPreview"
+                    hidden
+                  />
                 </div>
 
                 <button
+                  @click="chooseBannerImage"
                   class="text-xs py-2 w-full text-primary-1 border px-3.5 rounded-8 border-primary-1 font-[Nexa] font-[100]"
                 >
-                  Replace photo
+                  {{
+                    userData.photoHeader
+                      ? 'Replace company banner'
+                      : 'Choose company banner'
+                  }}
                 </button>
+              </div>
+
+              <!--  -->
+              <div class="mt-4">
+                <BtnPrimary
+                  @click="handleProfilePhotoUpdate()"
+                  :isLoading="isLoading"
+                  :disabled="!isUploadEnabled"
+                >
+                  <template #text> Upload Photos </template>
+                </BtnPrimary>
               </div>
             </div>
 
-            <!-- input for full name -->
+            <!-- form -->
             <div class="p-4 md:pl-12 font-[Nexa] w-full space-y-4">
-              <!-- ocupation -->
+              <!--  -->
               <div class="flex flex-col w-full">
                 <label for="first-name" class="text-sm mb-2">Full Name</label>
                 <input
                   type="text"
                   placeholder="Enter your full name here"
+                  v-model="formData.fullName"
+                  :disabled="isLoading"
+                  @change="v$.firstName.$touch"
                   class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border border-gray-300 rounded-md"
                 />
+                <div
+                  class="input-errors"
+                  v-for="error of v$.fullName.$errors"
+                  :key="error.$uid"
+                >
+                  <span class="text-xs text-danger-500"
+                    >* {{ error.$message }}</span
+                  >
+                </div>
               </div>
               <!--  -->
               <div class="flex flex-col w-full">
-                <label for="first-name" class="text-sm mb-2"
-                  >Email Address</label
+                <vue-tel-input
+                  v-model="formData.phoneNumber"
+                  :disabled="isLoading"
+                  @change="v$.phoneNumber.$touch"
+                  @on-input="onPhoneInput"
+                  :placeholder="'Enter phone number'"
+                  :inputClasses="['peer px-3.5 py-4 w-full border']"
                 >
-                <input
-                  type="text"
-                  placeholder="example@example.com"
-                  class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border border-gray-300 rounded-md"
-                />
+                  <template #arrow-icon>
+                    <img src="~/assets/svgs/arrow-down.svg" />
+                  </template>
+                </vue-tel-input>
+
+                <div
+                  class="input-errors"
+                  v-for="error of v$.phoneNumber.$errors"
+                  :key="error.$uid"
+                >
+                  <span class="text-xs text-danger-500"
+                    >* {{ error.$message }}</span
+                  >
+                </div>
               </div>
               <!-- company -->
               <div class="flex flex-col">
-                <label for="first-name" class="text-sm mb-2"
+                <label for="company name" class="text-sm mb-2"
                   >Company Name</label
                 >
                 <input
                   type="text"
-                  placeholder="Workonnect"
+                  placeholder="Enter company name"
+                  v-model="formData.companyName"
+                  :disabled="isLoading"
+                  @change="v$.companyName.$touch"
                   class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border border-gray-300 rounded-md"
                 />
+
+                <div
+                  class="input-errors"
+                  v-for="error of v$.companyName.$errors"
+                  :key="error.$uid"
+                >
+                  <span class="text-xs text-danger-500"
+                    >* {{ error.$message }}</span
+                  >
+                </div>
               </div>
 
               <!--  -->
@@ -173,47 +522,156 @@ definePageMeta({
                 <label for="first-name" class="text-sm mb-2">Website</label>
                 <input
                   type="text"
-                  placeholder="example.com"
+                  placeholder="Enter website url"
+                  v-model="formData.websiteUrl"
+                  :disabled="isLoading"
+                  @change="v$.websiteUrl.$touch"
                   class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border border-gray-300 rounded-md"
                 />
+
+                <div
+                  class="input-errors"
+                  v-for="error of v$.websiteUrl.$errors"
+                  :key="error.$uid"
+                >
+                  <span class="text-xs text-danger-500"
+                    >* {{ error.$message }}</span
+                  >
+                </div>
               </div>
 
               <!--  -->
-              <div class="flex flex-col">
-                <label for="first-name" class="text-sm mb-2"
-                  >Company Size</label
-                >
-                <div class="relative w-full">
-                  <input
-                    type="text"
-                    placeholder="Monthly"
-                    class="pl-2 placeholder:text-sm pr-4 h-11 w-full outline-none border rel border-gray-300 rounded-md"
-                  />
-                  <svg
-                    width="14"
-                    height="9"
-                    class="absolute right-3 top-3.5 h-4 w-4 text-gray-400"
-                    viewBox="0 0 14 9"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
+              <!--Company Size -->
+              <div class="w-full">
+                <label class="text-sm mb-2"
+                  >Company Size
+                  <select
+                    v-model="formData.companySize"
+                    :disabled="isLoading"
+                    @change="v$.companySize.$touch"
+                    class="outline-none mt-2 bg-white w-full text-base font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
                   >
-                    <path
-                      d="M13.6923 1.94254L7.44229 8.19254C7.38425 8.25065 7.31531 8.29675 7.23944 8.3282C7.16357 8.35965 7.08224 8.37584 7.0001 8.37584C6.91797 8.37584 6.83664 8.35965 6.76077 8.3282C6.68489 8.29675 6.61596 8.25065 6.55792 8.19254L0.307916 1.94254C0.19064 1.82526 0.124756 1.6662 0.124756 1.50035C0.124756 1.3345 0.19064 1.17544 0.307916 1.05816C0.425191 0.940884 0.584251 0.875 0.750103 0.875C0.915956 0.875 1.07502 0.940884 1.19229 1.05816L7.0001 6.86675L12.8079 1.05816C12.866 1.00009 12.9349 0.954028 13.0108 0.922601C13.0867 0.891175 13.168 0.875 13.2501 0.875C13.3322 0.875 13.4135 0.891175 13.4894 0.922601C13.5653 0.954028 13.6342 1.00009 13.6923 1.05816C13.7504 1.11623 13.7964 1.18517 13.8278 1.26104C13.8593 1.33691 13.8755 1.41823 13.8755 1.50035C13.8755 1.58247 13.8593 1.66379 13.8278 1.73966C13.7964 1.81553 13.7504 1.88447 13.6923 1.94254Z"
-                      fill="#343330"
-                    />
-                  </svg>
+                    Company Size
+                    <option value="" disabled selected>
+                      Select company size
+                    </option>
+                    <option value="0-10">0-10</option>
+                    <option value="11-50">11-50</option>
+                    <option value="51-100">51-100</option>
+                    <option value="101-500">101-500</option>
+                    <option value="500+">500+</option>
+                  </select>
+                </label>
+
+                <div
+                  class="input-errors"
+                  v-for="error of v$.companySize.$errors"
+                  :key="error.$uid"
+                >
+                  <span class="text-xs text-danger-500"
+                    >* {{ error.$message }}</span
+                  >
+                </div>
+              </div>
+              <!--Industry -->
+              <div class="w-full">
+                <label class="text-sm mb-2">
+                  Industry
+                  <select
+                    v-model="formData.industry"
+                    :disabled="isLoading"
+                    @change="v$.industry.$touch"
+                    class="outline-none mt-2 bg-white w-full text-base font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
+                  >
+                    <option value="" disabled selected>Select Industry</option>
+                    <option value="Accounting & Finance">
+                      Accounting & Finance
+                    </option>
+                    <option value="Administration & Office Support">
+                      Administration & Office Support
+                    </option>
+                    <option value="Advertising & Marketing">
+                      Advertising & Marketing
+                    </option>
+                    <option value="Agriculture & Farming">
+                      Agriculture & Farming
+                    </option>
+                    <option value="Arts & Entertainment">
+                      Arts & Entertainment
+                    </option>
+                    <option value="Construction & Engineering">
+                      Construction & Engineering
+                    </option>
+                    <option value="Education & Training">
+                      Education & Training
+                    </option>
+                    <option value="Healthcare & Medical">
+                      Healthcare & Medical
+                    </option>
+                    <option value="Hospitality & Tourism">
+                      Hospitality & Tourism
+                    </option>
+                    <option value="Human Resources">Human Resources</option>
+                    <option value="Information Technology">
+                      Information Technology
+                    </option>
+                    <option value="Legal">Legal</option>
+                    <option value="Manufacturing & Production">
+                      Manufacturing & Production
+                    </option>
+                    <option value="Retail">Retail</option>
+                    <option value="Science & Research">
+                      Science & Research
+                    </option>
+                    <option value="Transportation & Logistics">
+                      Transportation & Logistics
+                    </option>
+                    <option value="Telecommunications">
+                      Telecommunications
+                    </option>
+                    <option value="Utilities & Energy">
+                      Utilities & Energy
+                    </option>
+                    <option value="Real Estate">Real Estate</option>
+                    <option value="Nonprofit & Charity">
+                      Nonprofit & Charity
+                    </option>
+                  </select>
+                </label>
+
+                <div
+                  class="input-errors"
+                  v-for="error of v$.industry.$errors"
+                  :key="error.$uid"
+                >
+                  <span class="text-xs text-danger-500"
+                    >* {{ error.$message }}</span
+                  >
                 </div>
               </div>
 
               <!--  -->
               <div class="flex gap-2">
                 <div class="flex flex-col w-full">
-                  <label for="first-name" class="text-sm mb-2">Location</label>
+                  <label for="location" class="text-sm mb-2">Location</label>
                   <input
                     type="text"
-                    placeholder="Ikeja Lagos, Nigeria"
+                    placeholder="Enter location"
+                    v-model="formData.location"
+                    :disabled="isLoading"
+                    @change="v$.location.$touch"
                     class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border border-gray-300 rounded-md"
                   />
+
+                  <div
+                    class="input-errors"
+                    v-for="error of v$.location.$errors"
+                    :key="error.$uid"
+                  >
+                    <span class="text-xs text-danger-500"
+                      >* {{ error.$message }}</span
+                    >
+                  </div>
                 </div>
               </div>
             </div>
@@ -231,22 +689,25 @@ definePageMeta({
           <!--  -->
           <div class="flex flex-col space-y-4 pt-6">
             <div class="flex flex-col w-full">
-              <label for="first-name" class="text-sm mb-2">Section Title</label>
-              <input
-                type="text"
-                placeholder="About me"
-                class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border border-gray-300 rounded-md"
-              />
-            </div>
-
-            <div class="flex flex-col w-full">
-              <label for="first-name" class="text-sm mb-2">Description</label>
+              <label for="company" class="text-sm mb-2">Company About</label>
               <textarea
                 type="text"
+                v-model="formData.bio"
+                :disabled="isLoading"
+                @change="v$.bio.$touch"
                 rows="10"
                 placeholder="Write something about you that entice the recruiters......"
-                class="p-2 border border-gray-300 rounded-lg w-full"
+                class="p-2 border border-gray-300 rounded-lg w-full outline-none focus:outline-none"
               />
+              <div
+                class="input-errors"
+                v-for="error of v$.bio.$errors"
+                :key="error.$uid"
+              >
+                <span class="text-xs text-danger-500"
+                  >* {{ error.$message }}</span
+                >
+              </div>
             </div>
           </div>
 
@@ -254,20 +715,22 @@ definePageMeta({
         </div>
 
         <!-- social media links-->
-        <div id="links" class="bg-white p-4 rounded-10 font-[Nexa]">
+        <div id="links" class="bg-white p-4 rounded-10">
           <h1 class="font-bold text-xl font-[Georgia]">Links</h1>
           <p class="text-xs">
             Build trust with recruiters by verifying your social profiles
           </p>
 
           <!-- company links -->
-          <div class="flex w-3/4 flex-col h-full">
-            <label for="first-name" class="text-sm mb-2">Company URL</label>
+          <div class="flex w-full md:w-3/4 flex-col h-full">
+            <label for="company url" class="text-sm mb-2">Company URL</label>
             <div class="flex w-full gap-x-2">
               <div class="flex flex-grow w-full">
                 <input
                   type="text"
-                  placeholder="http://exampltext.example.com"
+                  v-model="formData.websiteUrl"
+                  readonly
+                  placeholder="Enter url"
                   class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border w-full border-gray-300 rounded-md"
                 />
               </div>
@@ -292,12 +755,14 @@ definePageMeta({
           </div>
 
           <div class="flex w-3/4 flex-col h-full">
-            <label for="first-name" class="text-sm mb-2">Company job URL</label>
+            <label for="company url" class="text-sm mb-2"
+              >Company job URL</label
+            >
             <div class="flex w-full gap-x-2">
               <div class="flex flex-grow w-full">
                 <input
                   type="text"
-                  placeholder="http://exampltext.example.com"
+                  placeholder="Enter url"
                   class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border w-full border-gray-300 rounded-md"
                 />
               </div>
@@ -324,78 +789,23 @@ definePageMeta({
 
         <div class="flex gap-x-4 md:justify-end">
           <div class="w-full md:w-auto">
-            <button class="md:px-4 w-full py-2 bg-primary-1 text-white rounded-5">
-              Save
-            </button>
+            <BtnPrimary
+              @click="handleProfileUpdate()"
+              :isLoading="isLoading"
+              :disabled="isLoading || v$.$invalid"
+              class="!px-10"
+            >
+              <template #text> Save </template>
+            </BtnPrimary>
           </div>
           <div class="w-full md:w-auto">
             <button
-              class="md:px-4 w-full py-2 border border-danger-600 text-danger-600 rounded-5"
+              class="md:px-10 w-full py-3.5 border border-danger-600 text-danger-600 rounded-5"
             >
               Cancel
             </button>
           </div>
         </div>
-
-        <!-- work experience -->
-        <!-- <div id="work_experience" class="bg-white p-4 rounded-10 font-[Nexa]">
-          <div class="flex justify-between items-center">
-            <div class="py-4">
-              <h1 class="font-bold text-xl font-[Georgia] capitalize">
-                work experience
-              </h1>
-              <p class="text-xs">
-                Build trust with recruiters by verifying your social profiles
-              </p>
-            </div>
-
-            <div>
-              <button class="px-4 py-2 bg-primary-1 text-white rounded-5">
-                Edit experience
-              </button>
-            </div>
-          </div>
-
-          <ul class="list-disc pl-4 space-y-4">
-            <div>
-              <li class="text-info-600 font-black">
-                User Interface Designer at Workonnect
-              </li>
-              <div class="text-sm flex gap-3">
-                <h1 class="font-black">May - June 2020</h1>
-                <h1>Lagos, Nigeria.</h1>
-              </div>
-            </div>
-
-            <div>
-              <li class="text-info-600 font-black">Accountant at Workonnect</li>
-              <div class="text-sm flex gap-3">
-                <h1 class="font-black">May - June 2020</h1>
-                <h1>Lagos, Nigeria.</h1>
-              </div>
-            </div>
-
-            <div>
-              <li class="text-info-600 font-black">HR Manager at Workonnect</li>
-              <div class="text-sm flex gap-3">
-                <h1 class="font-black">May - June 2020</h1>
-                <h1>Lagos, Nigeria.</h1>
-              </div>
-            </div>
-
-            <div>
-              <li class="text-info-600 font-black">
-                Graphic Designer at Workonnect
-              </li>
-              <div class="text-sm flex gap-3">
-                <h1 class="font-black">May - June 2020</h1>
-                <h1>Lagos, Nigeria.</h1>
-              </div>
-            </div>
-          </ul>
-
-
-        </div> -->
       </div>
     </div>
   </div>

@@ -19,14 +19,77 @@ export interface IMediaFile {
   metadata?: Map<string, string>;
 }
 
+export interface ISocialLinks {
+  facebookUrl?: string;
+  linkedinUrl?: string;
+  instagramUrl?: string;
+  twitterUrl?: string;
+  portfolioUrl?: string;
+}
+
+export interface ISalaryExpectation {
+  amount: string;
+  frequency: string;
+  currency: string;
+}
+
+export interface IPhysicalLocation {
+  city: string;
+  country: string;
+}
+
+export interface IResumeResource {
+  resumeCv?: IMediaFile;
+  coverLetter?: IMediaFile;
+}
+
 export interface IUserDetails {
+  [x: string]: any;
   username: string;
-  status: string;
-  accountType: LOGGED_IN_USER;
+  status: 'active' | 'draft' | 'blocked';
   phoneNumber: IPhoneNumberField;
   email?: string;
   photo?: IMediaFile;
+  photoHeader?: IMediaFile;
   id: string;
+  firstName: string;
+  lastName: string;
+  occupation: string;
+  location: string;
+  resumeResource?: IResumeResource;
+  salary?: ISalaryExpectation;
+  bio: string;
+  socialLinks: ISocialLinks;
+}
+
+export interface IRecruiterDetails {
+  id: string;
+  fullName: string;
+  email: string;
+  phoneNumber?: IPhoneNumberField;
+  phoneNumberVerified?: boolean;
+  status: 'active' | 'draft' | 'blocked';
+  photo?: IMediaFile;
+  photoHeader?: IMediaFile;
+  companyName: string;
+  companySize: string;
+  industry: string;
+  websiteUrl: string;
+  bio?: string;
+  username: string;
+  location: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ISettingsDetails {
+  id: string;
+  recruiter?: IRecruiterDetails | string;
+  user?: IUserDetails | string;
+  twoFa: boolean;
+  newsAndUpdates: boolean;
+  tipsAndTutorials: boolean;
+  reminders: boolean;
 }
 
 export interface IAuthCodeResponseData {
@@ -34,6 +97,46 @@ export interface IAuthCodeResponseData {
   accountType: string;
   completedOnboarding: boolean;
   userId: string;
+}
+
+export interface IJobPost {
+  recruiter: IRecruiterDetails | string;
+  title: string;
+  slug: string;
+  description: string;
+  requirements: string[];
+  benefits: string[];
+  location: 'remote' | 'onsite' | 'hybrid';
+  level: 'entry' | 'mid' | 'mid-senior' | 'senior';
+  jobType: string;
+  externalUrl?: string;
+  skills: string[];
+  expectedSalary: number;
+  status: 'draft' | 'published' | 'archived';
+  createdAt: string;
+  updatedAt: string;
+  applicants: string[];
+  id: string;
+}
+
+export interface IPagination {
+  hasNextPage: false;
+  hasPrevPage: false;
+  limit: number;
+  nextPage: number;
+  page: number;
+  pagingCounter: number;
+  prevPage: number;
+  totalDocs: number;
+  totalPages: number;
+}
+
+export interface IJobPostWithPagination extends IPagination {
+  docs: IJobPost[];
+}
+
+export interface IRecruitersWithPagination extends IPagination {
+  docs: IRecruiterDetails[];
 }
 
 export interface TelInputData {
@@ -44,6 +147,11 @@ export interface TelInputData {
   nationalNumber: string;
   number: string;
   valid: boolean;
+}
+
+export interface IJobStatsData {
+  jobsLength: number;
+  recentJobs?: IJobPost[];
 }
 
 export interface IUserAuthData {

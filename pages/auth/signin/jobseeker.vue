@@ -51,48 +51,51 @@ const handleLogin = async () => {
     return;
   }
 
-  // try {
-  //   const response = await $fetch('/api/auth/jobseeker/authenticate', {
-  //     method: 'POST',
-  //     body: formData,
-  //   });
+  try {
+    const response = await $fetch('/api/auth/jobseeker/authenticate', {
+      method: 'POST',
+      body: formData,
+    });
 
-  //   const responseData = response as ApiSuccessResponse;
-  //   authStore.setLoginSecret(responseData.data.accessToken);
-  //   setTimeout(() => {
-  //     isLoading.value = false;
-  //   }, 1000);
+    const responseData = response as ApiSuccessResponse;
+    authStore.setLoginSecret(responseData.data.accessToken);
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 1000);
 
-  //   return router.push({
-  //     path: '/auth/activation-code',
-  //     query: {
-  //       tk: responseData.data.accessToken,
-  //       email: formData.email,
-  //     },
-  //   });
-  // } catch (error: any) {
-  //   const errorData = error.data as ApiErrorResponse;
+    return router.push({
+      path: '/auth/activation-code',
+      query: {
+        tk: responseData.data.accessToken,
+        email: formData.email,
+      },
+    });
+  } catch (error: any) {
+    const errorData = error.data as ApiErrorResponse;
 
-  //   console.log(error);
+    console.log(error);
 
-  //   if (errorData.data?.errorCode === 'CI0001') {
-  //     toast.error(errorData.data.message, {
-  //       timeout: 3000,
-  //       position: POSITION.TOP_RIGHT,
-  //     });
-  //   } else {
-  //     toast.error('An error occurred try again', {
-  //       timeout: 3000,
-  //       position: POSITION.TOP_RIGHT,
-  //     });
-  //   }
+    if (errorData.data?.errorCode === 'CI0001') {
+      toast.error(errorData.data.message, {
+        timeout: 3000,
+        position: POSITION.TOP_RIGHT,
+      });
+    } else {
+      toast.error('An error occurred try again', {
+        timeout: 3000,
+        position: POSITION.TOP_RIGHT,
+      });
+    }
 
-  //   setTimeout(() => {
-  //     isLoading.value = false;
-  //   }, 2000);
-  // }
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+  }
 };
 </script>
+
+
+
 <template>
   <div class="flex justify-center items-center w-full">
     <div class="md:w-[23.375rem] w-full flex flex-col">
@@ -167,6 +170,7 @@ const handleLogin = async () => {
           Continue with LinkedIn
         </button>
       </div>
+      
       <form
         class="flex flex-col mt-6 mx-auto items-start justify-center text-left w-full max-w-md"
       >

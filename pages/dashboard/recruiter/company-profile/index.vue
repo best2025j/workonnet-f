@@ -1,26 +1,49 @@
 <script setup lang="ts">
+import type { IRecruiterDetails } from '~/types';
+
 definePageMeta({
-  title: "Company Profile",
-  pageName: "dashboard.recruiter.company-profile.index",
-  layout: "dashboard",
-  middleware: ['auth', 'is-recruiter']
+  title: 'Company Profile',
+  pageName: 'dashboard.recruiter.company-profile.index',
+  layout: 'dashboard',
+  middleware: ['auth', 'is-recruiter'],
 });
+
+const userStore = useUserStore();
+const userData = computed<IRecruiterDetails>(() => userStore.loggedInUserDetails);
 </script>
 
 <template>
   <div class="w-full h-full">
     <div class="p-4 bg-white rounded-10">
+      <div
+        class="w-full h-32 md:h-[214px] flex items-center justify-center bg-black-400 rounded"
+        v-if="!userData?.photoHeader"
+      >
+      <span class="text-white">No Header Photo</span>
+      </div>
       <img
-        src="/assets/images/team-image.png"
-        class="w-full h-32 md:h-auto"
+         v-if="userData?.photoHeader"
+        :src="userData?.photoHeader.url"
+        class="w-full h-32 md:h-[214px]"
         alt="no image yet..."
       />
-      <div class="-mt-12 md:pl-6 pl-3 space-y-2">
-        <img src="/assets/images/sportify.png" alt="profile-image" />
-        <div class="flex flex-col md:flex-row justify-between">
+      <div class="mt-12 md:pl-6 pl-3 space-y-2 z-[9999px] relative">
+        <div
+          class="bg-white rounded-full h-[100px] w-[100px] border-2 z-[9999px] flex items-center justify-center absolute -top-24"
+        >
+          <img
+            v-if="userData?.photo"
+            :src="userData?.photo?.url"
+            class="w-[70px] h-[70px]"
+            alt="profile-image"
+          />
+        </div>
+        <div class="flex flex-col md:flex-row justify-between pt-3">
           <div class="space-y-2">
             <div class="flex items-center space-x-6">
-              <h1 class="font-black text-sm md:text-base">Full-Time UI/UX Designer</h1>
+              <h1 class="font-black text-sm md:text-base">
+                {{ userData?.fullName || '' }}
+              </h1>
             </div>
 
             <div class="flex items-start space-x-4">
@@ -38,7 +61,7 @@ definePageMeta({
                       fill="#343330"
                     />
                   </svg>
-                  Spotify Technologies
+                  {{ userData.companyName || 'N/A' }}
                 </h1>
                 <h1 class="text-xs flex items-center gap-x-2">
                   <svg
@@ -53,7 +76,7 @@ definePageMeta({
                       fill="#343330"
                     />
                   </svg>
-                  London, UK
+                  {{ userData.location || 'N/A' }}
                 </h1>
               </div>
             </div>
@@ -62,11 +85,15 @@ definePageMeta({
           <div>
             <div class="flex justify-end w-full">
               <NuxtLink to="/dashboard/recruiter/company-profile/edit">
-                <button
-                  class=" px-4 py-2 rounded-8 text-xs text-white bg-primary-1"
+                <div
+                  class="px-4 py-2 rounded-8 text-xs text-white bg-primary-1"
                 >
-                  Edit company profile info
-                </button>
+                  {{
+                    userData?.status && userData?.status === 'draft'
+                      ? 'Complete my profile'
+                      : 'Edit company profile info'
+                  }}
+                </div>
               </NuxtLink>
             </div>
           </div>
@@ -78,19 +105,12 @@ definePageMeta({
       <div class="space-y-4">
         <h1 class="font-black text-sm">About my company</h1>
         <p class="text-xs">
-          Headquartered in Stockholm, Sweden,
-          <b class="text-info-600">Spotify</b> is a technology company focused
-          on developing innovative solutions in the music and entertainment
-          industry. We believe in the power of music and design to connect
-          people and create meaningful experiences. Join us to shape the future
-          of imusic streaming. The company has grown aggressively due to our
-          patent fed technology that has been recognized in the music industry
-          for excellence.
+          {{ userData.bio || "This should be the company's about" }}
         </p>
         <h1 class="text-sm font-black">My company size</h1>
-        <p class="text-xs">199-300</p>
+        <p class="text-xs">{{ userData?.companySize || 'N/A' }}</p>
         <h1 class="text-sm font-black">Website</h1>
-        <p class="text-xs">https://exampletext.example.com</p>
+        <p class="text-xs">{{ userData?.websiteUrl || '' }}</p>
         <h1 class="text-sm font-black">Company links</h1>
 
         <!-- company links -->
@@ -100,7 +120,8 @@ definePageMeta({
             <div class="flex flex-grow w-full">
               <input
                 type="text"
-                placeholder="http://exampltext.example.com"
+                readonly
+                :placeholder="userData?.websiteUrl"
                 class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border w-full border-gray-300 rounded-md"
               />
             </div>
@@ -124,13 +145,13 @@ definePageMeta({
           </div>
         </div>
 
-        <div class="flex md:w-1/3 flex-col h-full">
+        <div class="flex md:w-1/3 flex-col h-full" v-if="userData?.websiteUrl">
           <label for="first-name" class="text-sm mb-2">Company job URL</label>
           <div class="flex w-full gap-x-2">
             <div class="flex flex-grow w-full">
               <input
                 type="text"
-                placeholder="http://exampltext.example.com"
+                :value="userData?.websiteUrl"
                 class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border w-full border-gray-300 rounded-md"
               />
             </div>

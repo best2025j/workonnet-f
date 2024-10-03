@@ -1,32 +1,60 @@
 <script setup lang="ts">
+import type { IUserDetails } from '~/types';
+
 definePageMeta({
   title: "My Profile",
   pageName: "dashboard.jobseeker.my-profile.index",
   layout: "dashboard",
   middleware: ['auth', 'is-jobseeker']
 });
+
+const userStore = useUserStore();
+const userData = computed<IUserDetails>(() => userStore?.loggedInUserDetails);
+const isLoading = ref<boolean>(false)
+
+onBeforeMount(() => {
+  // fetch experience
+})
 </script>
 
 <template>
-  <div class="text-black-900">
+ <div v-if="isLoading" class="h-full py-40 w-full flex items-center justify-center">
+    <span class="loader-2"></span>
+  </div>
+  <div v-else class="text-black-900">
     <!-- profile uploads -->
     <div class="p-4 bg-white rounded-10">
+      <div
+        class="w-full h-32 md:h-[214px] flex items-center justify-center bg-black-400 rounded"
+        v-if="!userData?.photoHeader"
+      >
+      <span class="text-white">No Header Photo</span>
+      </div>
       <img
-        src="/assets/images/bridge.png"
-        class="w-full h-32 md:h-auto "
+         v-if="userData?.photoHeader"
+        :src="userData.photoHeader.url"
+        class="w-full h-32 md:h-[214px] rounded-md"
         alt="no image yet..."
       />
-
-      <div class="-mt-12 md:pl-6 space-y-2">
-        <img src="/assets/images/man.png" alt="profile-image" class="flex justify-center w-[30%] mx-auto md:mx-0 md:w-auto h-full items-center" />
+      <div class="mt-12 md:pl-6 pl-3 space-y-2 z-[9999] relative">
+        <div
+          class="bg-white rounded-full h-[80px] w-[80px] border-2 z-[9999] flex items-center justify-center absolute -top-24"
+        >
+          <img
+            v-if="userData?.photo"
+            :src="userData.photo.url"
+            class="w-[70px] h-[70px] rounded-full"
+            alt="profile-image"
+          />
+        </div>
 
         <div class="flex flex-col md:flex-row justify-between space-y-3 md:items-center">
-          <div class="space-y-2">
-            <h1 class="font-black text-base">Stanley Nwosu</h1>
+          <div class="space-y-2 pt-1">
+            <h1 class="font-black text-base">{{userData?.firstName || ''}} {{userData?.lastName || ''}}</h1>
             <div class="flex items-start space-x-4">
               <div class="space-y-2">
-                <h1 class="text-xs">UI/UX Designer</h1>
-                <h1 class="text-xs">Lagos, Nigeria</h1>
+                <h1 class="text-xs">{{userData?.occupation || ''}}</h1>
+                <h1 class="text-xs">{{userData?.location || ''}}</h1>
               </div>
             </div>
           </div>
@@ -47,7 +75,7 @@ definePageMeta({
               </svg>
 
               <h1 class="text-xs">
-                Portfolio link: <b>https://stanleynwosu.framer.ai</b>
+                Portfolio link: <b>{{ userData?.socialLink?.portfolioUrl || 'N/A' }}</b>
               </h1>
             </div>
             <div class="flex gap-2 items-center">
@@ -64,7 +92,7 @@ definePageMeta({
                 />
               </svg>
 
-              <h1 class="text-xs">Applied Jobs: <b>34</b></h1>
+              <h1 class="text-xs">Applied Jobs: <b>0</b></h1>
             </div>
             <div class="flex gap-2 items-center">
               <svg
@@ -79,10 +107,10 @@ definePageMeta({
                   fill="#343330"
                 />
               </svg>
-              <h1 class="text-xs">Profile views: <b>12</b></h1>
+              <h1 class="text-xs">Profile views: <b>0</b></h1>
             </div>
           </div>
-          <!-- socialmedia links -->
+          <!-- social media links -->
           <div class="space-y-2">
             <div class="flex gap-2 items-center">
               <svg
@@ -98,7 +126,7 @@ definePageMeta({
                 />
               </svg>
               <h1 class="text-xs">
-                Facebook: <b>https://www.facebook.com/example</b>
+                Facebook: <b>{{ userData?.socialLink?.facebookUrl || 'N/A' }}</b>
               </h1>
             </div>
             <div class="flex gap-2 items-center">
@@ -115,7 +143,7 @@ definePageMeta({
                 />
               </svg>
               <h1 class="text-xs">
-                Linkedin: <b>http://www.linkedin.com/in/stanleynw</b>
+                Linkedin: <b>{{ userData?.socialLinks?.linkedinUrl || 'N/A' }}</b>
               </h1>
             </div>
             <div class="flex gap-2 items-center">
@@ -132,7 +160,7 @@ definePageMeta({
                 />
               </svg>
               <h1 class="text-xs">
-                Instagram: <b>http://www.instagram.com/ </b>
+                Instagram: <b>{{ userData?.socialLinks?.instagramUrl || 'N/A' }}</b>
               </h1>
             </div>
           </div>
@@ -146,30 +174,23 @@ definePageMeta({
 
             <div class="space-y-3">
               <div class="space-x-2 flex items-center">
-                <svg
-                  width="12"
-                  height="19"
-                  viewBox="0 0 12 19"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M7.875 8.875H6.625V3.875H7.25C7.91304 3.875 8.54893 4.13839 9.01777 4.60723C9.48661 5.07607 9.75 5.71196 9.75 6.375C9.75 6.54076 9.81585 6.69973 9.93306 6.81694C10.0503 6.93415 10.2092 7 10.375 7C10.5408 7 10.6997 6.93415 10.8169 6.81694C10.9342 6.69973 11 6.54076 11 6.375C10.999 5.38076 10.6035 4.42753 9.90051 3.72449C9.19747 3.02145 8.24424 2.62603 7.25 2.625H6.625V1.375C6.625 1.20924 6.55915 1.05027 6.44194 0.933058C6.32473 0.815848 6.16576 0.75 6 0.75C5.83424 0.75 5.67527 0.815848 5.55806 0.933058C5.44085 1.05027 5.375 1.20924 5.375 1.375V2.625H4.75C3.75544 2.625 2.80161 3.02009 2.09835 3.72335C1.39509 4.42661 1 5.38044 1 6.375C1 7.36956 1.39509 8.32339 2.09835 9.02665C2.80161 9.72991 3.75544 10.125 4.75 10.125H5.375V15.125H4.125C3.46196 15.125 2.82607 14.8616 2.35723 14.3928C1.88839 13.9239 1.625 13.288 1.625 12.625C1.625 12.4592 1.55915 12.3003 1.44194 12.1831C1.32473 12.0658 1.16576 12 1 12C0.83424 12 0.675269 12.0658 0.558058 12.1831C0.440848 12.3003 0.375 12.4592 0.375 12.625C0.376034 13.6192 0.771454 14.5725 1.47449 15.2755C2.17753 15.9785 3.13076 16.374 4.125 16.375H5.375V17.625C5.375 17.7908 5.44085 17.9497 5.55806 18.0669C5.67527 18.1842 5.83424 18.25 6 18.25C6.16576 18.25 6.32473 18.1842 6.44194 18.0669C6.55915 17.9497 6.625 17.7908 6.625 17.625V16.375H7.875C8.86956 16.375 9.82339 15.9799 10.5267 15.2767C11.2299 14.5734 11.625 13.6196 11.625 12.625C11.625 11.6304 11.2299 10.6766 10.5267 9.97335C9.82339 9.27009 8.86956 8.875 7.875 8.875ZM4.75 8.875C4.08696 8.875 3.45107 8.61161 2.98223 8.14277C2.51339 7.67393 2.25 7.03804 2.25 6.375C2.25 5.71196 2.51339 5.07607 2.98223 4.60723C3.45107 4.13839 4.08696 3.875 4.75 3.875H5.375V8.875H4.75ZM7.875 15.125H6.625V10.125H7.875C8.53804 10.125 9.17393 10.3884 9.64277 10.8572C10.1116 11.3261 10.375 11.962 10.375 12.625C10.375 13.288 10.1116 13.9239 9.64277 14.3928C9.17393 14.8616 8.53804 15.125 7.875 15.125Z"
-                    fill="#343330"
-                  />
-                </svg>
-                <h1 class="md:text-lg text-sm font-black">$5,000/month</h1>
+                
+                <h1 class="md:text-lg text-sm font-black">NGN{{formatCurrency(userData?.salary?.amount?.toString()) || 'N/A'}} /month</h1>
               </div>
 
-              <nuxt-link to="/dashboard/jobseeker/my-profile/edit">
-                <div class="flex justify-end">
-                  <button
-                    class="md:px-[14px] w-full my-4 text-xs md:py-2 py-3 rounded-5 bg-primary-1 text-white"
+              <NuxtLink to="/dashboard/jobseeker/my-profile/edit">
+                <div class="flex justify-end items-center">
+                  <div
+                    class="md:px-[14px] w-full my-4 text-xs md:py-2 py-3 rounded-5 bg-primary-1 text-white text-center"
                   >
-                    Edit profile info
-                  </button>
+                  {{
+                    userData?.status && userData?.status === 'draft'
+                      ? 'Complete my profile'
+                      : 'Edit profile info'
+                  }}
+                  </div>
                 </div>
-              </nuxt-link>
+              </NuxtLink>
             </div>
           </div>
         </div>
@@ -182,54 +203,14 @@ definePageMeta({
         <div class="space-y-4 pt-4">
           <h1 class="text-xl font-black">About me</h1>
           <p class="text-xs tracking-wider">
-            Lorem ipsum dolor sit amet consectetur. Dignissim aliquam vitae
-            accumsan eget nisl felis magna rhoncus. Nisl duis netus id lobortis
-            nec dui leo. Ornare scelerisque vivamus egestas adipiscing in amet
-            varius. Velit in nec dolor ultrices scelerisque. Ipsum facilisi
-            nulla sed sed proin pulvinar. Libero sed donec lorem blandit aliquam
-            diam. Egestas et amet elit a nulla rhoncus sagittis in sem. Lectus
-            ut vivamus id at vitae. Elit non ut eget massa id lorem tincidunt
-            porttitor. Viverra duis sit a dignissim molestie placerat. Tempus
-            velit interdum fames pellentesque.
+            {{ userData?.bio || 'Complete your profile to add an about' }}
           </p>
         </div>
+
+        <!-- experience -->
         <div class="space-y-4 pt-10">
           <h1 class="text-xl font-black">Experience</h1>
           <div class="bg-westside-50 space-y-4 rounded-10 p-4">
-            <img src="/assets/images/Logo2.png" alt="no image yet" />
-            <h1 class="text-info-600 font-black text-sm">
-              User Interface Designer at Workonnect
-            </h1>
-            <div class="flex gap-2">
-              <h1 class="text-xs font-black">May - June 2020</h1>
-              <h1 class="text-xs">Lagos, Nigeria.</h1>
-            </div>
-            <p class="text-xs tracking-wider">
-              Lorem ipsum dolor sit amet consectetur. Dignissim aliquam vitae
-              accumsan eget nisl felis magna rhoncus. Nisl duis netus id
-              lobortis nec dui leo. Ornare scelerisque vivamus egestas
-              adipiscing in amet varius. Velit in nec dolor ultrices
-              scelerisque. Ipsum facilisi nulla sed sed proin pulvinar. Libero
-              sed donec lorem blandit aliquam diam. Egestas et amet elit a nulla
-              rhoncus sagittis in sem. Lectus ut vivamus id at vitae. Elit non
-              ut eget massa id lorem tincidunt porttitor. Viverra duis sit a
-              dignissim molestie placerat. Tempus velit interdum fames
-              pellentesque.
-            </p>
-            <p class="text-xs tracking-wider">
-              Lorem ipsum dolor sit amet consectetur. Dignissim aliquam vitae
-              accumsan eget nisl felis magna rhoncus. Nisl duis netus id
-              lobortis nec dui leo. Ornare scelerisque vivamus egestas
-              adipiscing in amet varius. Velit in nec dolor ultrices
-              scelerisque. Ipsum facilisi nulla sed sed proin pulvinar. Libero
-              sed donec lorem blandit aliquam diam. Egestas et amet elit a nulla
-              rhoncus sagittis in sem. Lectus ut vivamus id at vitae. Elit non
-              ut eget massa id lorem tincidunt porttitor. Viverra duis sit a
-              dignissim molestie placerat. Tempus velit interdum fames
-              pellentesque.
-            </p>
-          </div>
-          <div class="bg-westside-50 space-y-4 rounded-10 p-4">
             <img src="/assets/images/ms.png" alt="no image yet" />
             <h1 class="text-info-600 font-black text-sm">
               User Interface Designer at Workonnect
@@ -238,52 +219,6 @@ definePageMeta({
               <h1 class="text-xs font-black">May - June 2020</h1>
               <h1 class="text-xs">Lagos, Nigeria.</h1>
             </div>
-            <p class="text-xs tracking-wider">
-              Lorem ipsum dolor sit amet consectetur. Dignissim aliquam vitae
-              accumsan eget nisl felis magna rhoncus. Nisl duis netus id
-              lobortis nec dui leo. Ornare scelerisque vivamus egestas
-              adipiscing in amet varius. Velit in nec dolor ultrices
-              scelerisque. Ipsum facilisi nulla sed sed proin pulvinar. Libero
-              sed donec lorem blandit aliquam diam. Egestas et amet elit a nulla
-              rhoncus sagittis in sem. Lectus ut vivamus id at vitae. Elit non
-              ut eget massa id lorem tincidunt porttitor. Viverra duis sit a
-              dignissim molestie placerat. Tempus velit interdum fames
-              pellentesque.
-            </p>
-            <p class="text-xs tracking-wider">
-              Lorem ipsum dolor sit amet consectetur. Dignissim aliquam vitae
-              accumsan eget nisl felis magna rhoncus. Nisl duis netus id
-              lobortis nec dui leo. Ornare scelerisque vivamus egestas
-              adipiscing in amet varius. Velit in nec dolor ultrices
-              scelerisque. Ipsum facilisi nulla sed sed proin pulvinar. Libero
-              sed donec lorem blandit aliquam diam. Egestas et amet elit a nulla
-              rhoncus sagittis in sem. Lectus ut vivamus id at vitae. Elit non
-              ut eget massa id lorem tincidunt porttitor. Viverra duis sit a
-              dignissim molestie placerat. Tempus velit interdum fames
-              pellentesque.
-            </p>
-          </div>
-          <div class="bg-westside-50 space-y-4 rounded-10 p-4">
-            <img src="/assets/images/ms.png" alt="no image yet" />
-            <h1 class="text-info-600 font-black text-sm">
-              User Interface Designer at Workonnect
-            </h1>
-            <div class="flex gap-2">
-              <h1 class="text-xs font-black">May - June 2020</h1>
-              <h1 class="text-xs">Lagos, Nigeria.</h1>
-            </div>
-            <p class="text-xs tracking-wider">
-              Lorem ipsum dolor sit amet consectetur. Dignissim aliquam vitae
-              accumsan eget nisl felis magna rhoncus. Nisl duis netus id
-              lobortis nec dui leo. Ornare scelerisque vivamus egestas
-              adipiscing in amet varius. Velit in nec dolor ultrices
-              scelerisque. Ipsum facilisi nulla sed sed proin pulvinar. Libero
-              sed donec lorem blandit aliquam diam. Egestas et amet elit a nulla
-              rhoncus sagittis in sem. Lectus ut vivamus id at vitae. Elit non
-              ut eget massa id lorem tincidunt porttitor. Viverra duis sit a
-              dignissim molestie placerat. Tempus velit interdum fames
-              pellentesque.
-            </p>
             <p class="text-xs tracking-wider">
               Lorem ipsum dolor sit amet consectetur. Dignissim aliquam vitae
               accumsan eget nisl felis magna rhoncus. Nisl duis netus id
@@ -304,7 +239,7 @@ definePageMeta({
       <div class="p-4 bg-white rounded-10 my-4 md:w-[670px] w-full h-full">
         <div class="space-y-6">
           <h1 class="text-xl font-black">Uploaded Documents</h1>
-          <div class="flex justify-between">
+          <div  class="flex justify-between">
             <div class="flex items-start gap-x-2">
               <svg
                 width="18"
@@ -320,41 +255,17 @@ definePageMeta({
               </svg>
               <div>
                 <h1 class="text-xs">Resume/CV</h1>
-                <p class="text-xs text-info-600">Document Name.pdf</p>
+                <p v-if="userData?.resumeResource?.resumeCv" class="text-xs text-info-600">{{userData?.firstName}} {{userData?.lastName}}{{ '.'+userData?.resumeResource?.resumeCv?.url.split('.')[-1] }}</p>
+                <p v-else class="text-xs text-info-600">No file found</p>
               </div>
             </div>
 
-            <button
+            <NuxtLink
+             to="/dashboard/jobseeker/my-profile/work-experience"
               class="px-[14px] text-xs py-2 text-primary-1 rounded-10 border border-primary-1"
             >
-              Change
-            </button>
-          </div>
-          <div class="flex justify-between">
-            <div class="flex items-start gap-x-2">
-              <svg
-                width="18"
-                height="20"
-                viewBox="0 0 18 20"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M17.0306 5.71938L11.7806 0.469375C11.7109 0.399749 11.6282 0.344539 11.5371 0.306898C11.4461 0.269257 11.3485 0.249923 11.25 0.25H2.25C1.85218 0.25 1.47064 0.408035 1.18934 0.68934C0.908035 0.970645 0.75 1.35218 0.75 1.75V18.25C0.75 18.6478 0.908035 19.0294 1.18934 19.3107C1.47064 19.592 1.85218 19.75 2.25 19.75H15.75C16.1478 19.75 16.5294 19.592 16.8107 19.3107C17.092 19.0294 17.25 18.6478 17.25 18.25V6.25C17.2501 6.15148 17.2307 6.05391 17.1931 5.96286C17.1555 5.87182 17.1003 5.78908 17.0306 5.71938ZM12 2.81031L14.6897 5.5H12V2.81031ZM15.75 18.25H2.25V1.75H10.5V6.25C10.5 6.44891 10.579 6.63968 10.7197 6.78033C10.8603 6.92098 11.0511 7 11.25 7H15.75V18.25Z"
-                  fill="#343330"
-                />
-              </svg>
-              <div>
-                <h1 class="text-xs">Resume/CV</h1>
-                <p class="text-xs text-info-600">Document Name.pdf</p>
-              </div>
-            </div>
-
-            <button
-              class="px-[14px] text-xs py-2 text-primary-1 rounded-10 border border-primary-1"
-            >
-              Change
-            </button>
+            {{ userData?.resumeResource?.resumeCv ? 'Change' : 'Add'}}
+            </NuxtLink>
           </div>
         </div>
       </div>

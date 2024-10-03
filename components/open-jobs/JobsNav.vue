@@ -18,7 +18,7 @@ const links = [
   },
   {
     to: '/dashboard/recruiter/jobs-openings?tab=inactive',
-    name: 'Inactive',
+    name: 'Archived',
     disabled: false,
     badge: 1,
     tabId: JOB_OPENING_TABS.IN_ACTIVE,
@@ -50,12 +50,12 @@ const isActive = (currentTab: JOB_OPENING_TABS) =>
           ]"
         >
           {{ link.name }}
-          <span
+          <!-- <span
             v-if="link.badge"
             class="ml-1 text-xs bg-primary-1 text-white rounded-full px-2 py-0.5"
           >
             {{ link.badge }}
-          </span>
+          </span> -->
         </NuxtLink>
 
         <div

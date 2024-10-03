@@ -8,7 +8,7 @@ import {
   minLength,
 } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
-import type { ApiErrorResponse, ApiSuccessResponse } from '~/types';
+import type { ApiErrorResponse } from '~/types';
 
 definePageMeta({
   layout: 'auth',
@@ -74,6 +74,7 @@ const rules = computed(() => {
 
 const v$ = useVuelidate(rules, formData);
 
+
 const handleSignup = async () => {
   isLoading.value = true;
   const isValidForm = await v$.value.$validate();
@@ -89,52 +90,55 @@ const handleSignup = async () => {
     return;
   }
 
-  // try {
-  //   await $fetch('/api/auth/recruiter/register', {
-  //     method: 'POST',
-  //     body: formData,
-  //   });
 
-  //   toast.success('Signup successful, Please login', {
-  //     timeout: 3000,
-  //     position: POSITION.TOP_RIGHT,
-  //   });
+  try {
+    await $fetch('/api/auth/recruiter/register', {
+      method: 'POST',
+      body: formData,
+    });
 
-  //   setTimeout(() => {
-  //     isLoading.value = false;
-  //   }, 500);
+    toast.success('Signup successful, Please login', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
 
-  //   isSubmitted.value = true
-  //   return router.push({
-  //     path: '/auth/signin/recruiter',
-  //     query: {
-  //       email: formData.email,
-  //     },
-  //   });
-  // } catch (error: any) {
-  //   const errorData = error.data as ApiErrorResponse;
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 500);
 
-  //   if (errorData.data?.errorCode === 'E11000') {
-  //     toast.error('Email already in use', {
-  //       timeout: 3000,
-  //       position: POSITION.TOP_RIGHT,
-  //     });
-  //   } else if (errorData.data?.errorCode === '100001') {
-  //     toast.error('Password must be 8 characters long', {
-  //       timeout: 3000,
-  //       position: POSITION.TOP_RIGHT,
-  //     });
-  //   } else {
-  //     toast.error('An error occurred try again', {
-  //       timeout: 3000,
-  //       position: POSITION.TOP_RIGHT,
-  //     });
-  //   }
+    isSubmitted.value = true
 
-  //   setTimeout(() => {
-  //     isLoading.value = false;
-  //   }, 2000);
-  // }
+    // TODO:// Login INSTEAD
+    return router.push({
+      path: '/auth/signin/recruiter',
+      query: {
+        email: formData.email,
+      },
+    });
+  } catch (error: any) {
+    const errorData = error.data as ApiErrorResponse;
+
+    if (errorData.data?.errorCode === 'E11000') {
+      toast.error(errorData.data.message, {
+        timeout: 3000,
+        position: POSITION.TOP_RIGHT,
+      });
+    } else if (errorData.data?.errorCode === '100001') {
+      toast.error('Password must be 8 characters long', {
+        timeout: 3000,
+        position: POSITION.TOP_RIGHT,
+      });
+    } else {
+      toast.error('An error occurred try again', {
+        timeout: 3000,
+        position: POSITION.TOP_RIGHT,
+      });
+    }
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+  }
 };
 
 const resetForm = () => {
@@ -272,13 +276,12 @@ onBeforeRouteLeave(() => {
           @change="v$.companyName.$touch"
           class="outline-none w-full text-base font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
         />
-
         <div
               class="input-errors"
               v-for="error of v$.companyName.$errors"
               :key="error.$uid"
             >
-              <div class="text-xs text-danger-500">* {{ error.$message }}</div>
+              <span class="text-xs text-danger-500">* {{ error.$message }}</span>
             </div>
        </div>
         <!--Company Size -->
@@ -306,11 +309,10 @@ onBeforeRouteLeave(() => {
               v-for="error of v$.companySize.$errors"
               :key="error.$uid"
             >
-              <div class="text-xs text-danger-500">* {{ error.$message }}</div>
+              <span class="text-xs text-danger-500">* {{ error.$message }}</span>
             </div>
         </div>
         <!--Industry -->
-
         <div class="w-full">
           <label class="text-base font-thin mb-2 text-left mt-4">
             Industry
@@ -365,7 +367,7 @@ onBeforeRouteLeave(() => {
               v-for="error of v$.industry.$errors"
               :key="error.$uid"
             >
-              <div class="text-xs text-danger-500">* {{ error.$message }}</div>
+              <span class="text-xs text-danger-500">* {{ error.$message }}</span>
             </div>
         </div>
 
@@ -387,7 +389,7 @@ onBeforeRouteLeave(() => {
               v-for="error of v$.websiteUrl.$errors"
               :key="error.$uid"
             >
-              <div class="text-xs text-danger-500">* {{ error.$message }}</div>
+              <span class="text-xs text-danger-500">* {{ error.$message }}</span>
             </div>
         </div>
         <div class="pt-5"></div>

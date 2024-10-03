@@ -44,48 +44,48 @@ const forgotPassword = async () => {
     return;
   }
 
-  // try {
-  //   const response = await $fetch('/api/auth/forgot-password', {
-  //     method: 'POST',
-  //     body: {
-  //       email: formData.email,
-  //       reqId: route.query.reqId?.toString().toUpperCase()
-  //     },
-  //   });
+  try {
+    const response = await $fetch('/api/auth/forgot-password', {
+      method: 'POST',
+      body: {
+        email: formData.email,
+        reqId: route.query.reqId?.toString().toUpperCase()
+      },
+    });
 
-  //   toast.info('Forgot password code sent to your email.', {
-  //     timeout: 3000,
-  //     position: POSITION.TOP_RIGHT,
-  //   });
+    toast.info('Forgot password code sent to your email.', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
 
-  //   const responseData = response as ApiSuccessResponse;
-  //   setTimeout(() => {
-  //     isLoading.value = false;
-  //   }, 1000);
+    const responseData = response as ApiSuccessResponse;
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 1000);
 
-  //   setTimeout(() => {
-  //     isLoading.value = false;
-  //   }, 1000);
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 1000);
 
-  //  return router.push({
-  //   path: '/auth/forgotten-password-activation-code',
-  //   query: {
-  //     email: formData.email,
-  //     reqId: route.query.reqId,
-  //     tke: responseData.data.publicToken
-  //   }
-  //  });
-  // } catch (error: any) {
-  //   const errorData = error.data as ApiErrorResponse;
-  //     toast.error('An error occurred try again', {
-  //       timeout: 3000,
-  //       position: POSITION.TOP_RIGHT,
-  //     });
+   return router.push({
+    path: '/auth/forgotten-password-activation-code',
+    query: {
+      email: formData.email,
+      reqId: route.query.reqId,
+      tke: responseData.data.publicToken
+    }
+   });
+  } catch (error: any) {
+    const errorData = error.data as ApiErrorResponse;
+      toast.error('An error occurred try again', {
+        timeout: 3000,
+        position: POSITION.TOP_RIGHT,
+      });
 
-  //   setTimeout(() => {
-  //     isLoading.value = false;
-  //   }, 2000);
-  // }
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+  }
 };
 
 onMounted(() => {

@@ -3,7 +3,9 @@ import axios, { type AxiosInstance, type AxiosResponse } from 'axios';
 let instance: AxiosInstance;
 
 export const useAxiosInstance = () => {
-  const defaultUrl = BACKEND_URL;
+  const config = useRuntimeConfig();
+
+  const defaultUrl = config.apiBaseUrl;
 
   if (!instance) {
     instance = axios.create({

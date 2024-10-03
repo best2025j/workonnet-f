@@ -1,21 +1,69 @@
 <script setup lang="ts">
+import type {
+  ApiSuccessResponse,
+  IJobPostWithPagination,
+  IRecruiterDetails,
+} from '~/types';
+
 definePageMeta({
-  title: "Find Jobs",
-  pageName: "dashboard.jobseeker.find-jobs.index",
-  layout: "dashboard",
-  middleware: ["auth", "is-jobseeker"],
+  title: 'Find Jobs',
+  pageName: 'dashboard.jobseeker.find-jobs.index',
+  layout: 'dashboard',
+  middleware: ['auth', 'is-jobseeker'],
 });
 
 enum CARD_LAYOUT {
-  LIST = "list",
-  GRID = "grid",
+  LIST = 'list',
+  GRID = 'grid',
 }
 
+const jobStore = useJobStore();
+const authStore = useAuthStore();
+const jobListPage = ref<{}>({});
+const isLoading = ref(false);
+const route = useRoute();
+
+const jobsResult = computed(() => jobStore.jobList);
 const currentLayout = ref<CARD_LAYOUT>(CARD_LAYOUT.LIST);
 
 const handleLayoutChange = (newLayout: CARD_LAYOUT) => {
   currentLayout.value = newLayout;
 };
+
+const currentJobIndex = ref(0);
+
+const setCurrentJobIndex = (index: number) => {
+  currentJobIndex.value = index;
+};
+
+const getMyJobs = async (refresh: boolean = false) => {
+  try {
+    if (!jobStore.jobList.length && refresh === true) {
+      isLoading.value = true;
+    }
+    const token = authStore.userToken;
+    const response = await $fetch('/api/jobseeker/jobs/fetch-all', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const responseData = response as ApiSuccessResponse;
+
+    const { docs, ...other } = responseData.data as IJobPostWithPagination;
+    jobListPage.value = other;
+    jobStore.setJobList((responseData.data as IJobPostWithPagination).docs);
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 1000);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+onBeforeMount(async () => {
+  await getMyJobs();
+});
 </script>
 
 <template>
@@ -136,7 +184,9 @@ const handleLayoutChange = (newLayout: CARD_LAYOUT) => {
           New jobs
         </button>
 
-        <button class="bg-white p-2 px-4 rounded-10 md:text-xs text-[10px]">Full-time</button>
+        <button class="bg-white p-2 px-4 rounded-10 md:text-xs text-[10px]">
+          Full-time
+        </button>
         <button
           class="bg-westside-200 text-primary-1 gap-2 flex items-center font-black p-2 px-4 rounded-10 md:text-xs text-[10px]"
         >
@@ -173,10 +223,14 @@ const handleLayoutChange = (newLayout: CARD_LAYOUT) => {
           Remote
         </button>
 
-        <button class="bg-white p-2 px-4 rounded-10 md:text-xs text-[10px]">Hybrid</button>
+        <button class="bg-white p-2 px-4 rounded-10 md:text-xs text-[10px]">
+          Hybrid
+        </button>
 
         <!-- dropdown button -->
-        <button class="rounded-10 text-xs dropdown dropdown-bottom dropdown-end pl-44 md:pl-0">
+        <button
+          class="rounded-10 text-xs dropdown dropdown-bottom dropdown-end pl-44 md:pl-0"
+        >
           <svg
             width="17"
             height="10"
@@ -303,56 +357,103 @@ const handleLayoutChange = (newLayout: CARD_LAYOUT) => {
         </button>
       </div>
 
-      <!-- cards -->
-      <FindJobGridView
-        v-if="currentLayout.toString() === CARD_LAYOUT.GRID.toString()"
-      />
-      <FindJobListView
-        v-if="currentLayout.toString() === CARD_LAYOUT.LIST.toString()"
-      />
+      <div
+        v-if="isLoading"
+        class="h-60 w-full flex items-center justify-center"
+      >
+        <span class="loader-2"></span>
+      </div>
+
+      <div v-else>
+        <!-- cards -->
+        <div v-if="currentLayout.toString() === CARD_LAYOUT.GRID.toString()">
+          <FindJobGridView
+            :job-list="jobsResult"
+            :currentJobIndex="currentJobIndex"
+            v-on:setCurrentJobIndex="setCurrentJobIndex"
+          />
+        </div>
+        <div v-if="currentLayout.toString() === CARD_LAYOUT.LIST.toString()">
+          <FindJobListView
+            :job-list="jobsResult"
+            :currentJobIndex="currentJobIndex"
+            v-on:setCurrentJobIndex="setCurrentJobIndex"
+          />
+        </div>
+      </div>
     </div>
 
     <!--  second div-->
-    <div class="bg-white md:w-[35%] w-full h-full hidden md:block rounded-10">
+    <div
+      v-if="jobsResult.length && jobsResult[currentJobIndex]"
+      class="bg-white md:w-[35%] w-full h-full hidden md:block rounded-10"
+    >
       <div class="flex items-center flex-col space-y-3 py-4 border-b-2">
-        <img src="/assets/images/ms.png" alt="" />
-        <h1 class="text base font-black">Social Media Assistant</h1>
-        <p class="text-xs">Microsoft</p>
+        <img
+          v-if="(jobsResult[currentJobIndex].recruiter as IRecruiterDetails)?.photo"
+          :src="(jobsResult[currentJobIndex].recruiter as IRecruiterDetails)?.photo?.url"
+          :alt="(jobsResult[currentJobIndex].recruiter as IRecruiterDetails)?.companyName"
+        />
+        <h1 class="text base font-black capitalize">
+          {{ jobsResult[currentJobIndex].title }}
+        </h1>
+        <p class="text-xs capitalize">
+          {{
+            (jobsResult[currentJobIndex].recruiter as IRecruiterDetails)
+              .companyName
+          }}
+        </p>
       </div>
 
-      
       <!--  -->
       <div class="flex gap-x-6 p-6 border-b-2">
         <div class="space-y-4">
           <div class="space-y-2">
             <h1 class="text-xs">Job Type</h1>
-            <h1 class="font-black text-sm">Full-time</h1>
+            <h1 class="font-black text-sm capitalize">
+              {{ jobsResult[currentJobIndex].jobType }}
+            </h1>
           </div>
 
           <div class="space-y-2">
             <h1 class="text-xs">Location</h1>
-            <h1 class="font-black text-sm">Paris, France</h1>
+            <h1 class="font-black text-sm">
+              {{
+                (jobsResult[currentJobIndex].recruiter as IRecruiterDetails)
+                  ?.location
+              }}
+            </h1>
           </div>
 
           <div class="space-y-2">
             <h1 class="text-xs">Salary</h1>
-            <h1 class="font-black text-sm">$4,000 to $5,000/month</h1>
+            <h1 class="font-black text-sm">
+              {{
+                formatCurrency(jobsResult[currentJobIndex].expectedSalary)
+              }}/month
+            </h1>
           </div>
         </div>
         <!--  -->
         <div class="space-y-4">
           <div class="space-y-2">
             <h1 class="text-xs">Work Type</h1>
-            <h1 class="font-black text-sm">Hybrid</h1>
+            <h1 class="font-black text-sm capitalize">
+              {{ jobsResult[currentJobIndex].location }}
+            </h1>
           </div>
 
           <div class="space-y-2">
             <h1 class="text-xs">Experience</h1>
-            <h1 class="font-black text-sm">4 years</h1>
+            <h1 class="font-black text-sm capitalize">
+              {{ jobsResult[currentJobIndex].level }}
+            </h1>
           </div>
 
           <div class="flex items-center space-x-2">
-            <button class="bg-primary-1 px-4 py-3 md:text-xs text-[8px] rounded-8 text-white">
+            <button
+              class="bg-primary-1 px-4 py-3 md:text-xs text-[8px] rounded-8 text-white"
+            >
               Apply Now
             </button>
             <button class="border-primary-1 px-4 border md:py-3 py-2 rounded-8">
@@ -377,101 +478,64 @@ const handleLayoutChange = (newLayout: CARD_LAYOUT) => {
       <div class="space-y-4 py-4">
         <div class="px-6 space-y-2">
           <h1 class="font-black">Description</h1>
+
+          <div class="text-xs">
+            <p>
+              {{ jobsResult[currentJobIndex].description }}
+            </p>
+          </div>
+        </div>
+        <!--  -->
+        <div class="px-6 space-y-2">
+          <h1 class="font-black">Requirements</h1>
           <div class="px-4">
             <ul class="space-y-3 list-disc text-xs">
-              <li class="">
-                In this role, you’ll work underneath a Marketing Manager to
-                optimize our paid advertising channels.
-              </li>
-              <li>
-                This position is ideal for someone with 1+ years of experience
-                in paid ads who is eager to apply their expertise to platforms
-                such as Meta, X, Google and LinkedIn.
-              </li>
-              <li>
-                You'll also be working deeply in our CRM (HubSpot) and alongside
-                our creative + content teams and will be responsible for helping
-                to understand and track attribution cross-platform.
+              <li
+                v-for="(requirement, index) in jobsResult[currentJobIndex]
+                  ?.requirements"
+                :key="index"
+                class=""
+              >
+                {{ requirement }}
               </li>
             </ul>
           </div>
         </div>
         <!--  -->
         <div class="px-6 space-y-2">
-          <h1 class="font-black">Key Responsibilities</h1>
+          <h1 class="font-black">Benefits</h1>
           <div class="px-4">
             <ul class="space-y-3 list-disc text-xs">
-              <li class="">
-                Develop and execute paid advertising campaigns across various
-                digital platforms.
+              <li
+                v-for="(benefit, index) in jobsResult[currentJobIndex]
+                  ?.benefits"
+                :key="index"
+                class=""
+              >
+                {{ benefit }}
               </li>
-              <li>
-                Analyze conversion events using Google Analytics to inform
-                campaign strategies.
-              </li>
-              <li>
-                Utilize Google Tag Manager to deploy tracking tags and manage
-                marketing data.
-              </li>
-              <li>
-                Create compelling ad materials and write effective ad copy.
-              </li>
-              <li>Track and report on campaign performance metrics weekly.</li>
-              <li>
-                Maintain and update performance dashboards with the latest data.
-              </li>
-              <li>
-                Dive into our CRM and help understand channel attribution.
-              </li>
-              <li>Work alongside the creative team to get assets made.</li>
-              <li>
-                Collaborate closely with the marketing team to ensure alignment
-                with overall marketing objectives.
-              </li>
-              <li>
-                Help the team get landing page tests over the line that you'll
-                run conversion tests on.
+            </ul>
+          </div>
+        </div>
+
+        <div class="px-6 space-y-2">
+          <h1 class="font-black">Skills</h1>
+          <div class="px-4">
+            <ul class="space-y-3 list-disc text-xs">
+              <li
+                v-for="(skill, index) in jobsResult[currentJobIndex]?.skills"
+                :key="index"
+                class=""
+              >
+                {{ skill }}
               </li>
             </ul>
           </div>
         </div>
         <!--  -->
         <div class="px-6 space-y-2">
-          <h1 class="font-black">Qualification</h1>
-          <div class="px-4">
-            <ul class="space-y-3 list-disc text-xs">
-              <li class="">
-                1-2 years of experience in managing paid advertising campaigns.
-              </li>
-              <li>
-                Proficient in Google Analytics and Google Tag Manager for
-                tracking and data management.
-              </li>
-              <li>
-                Ability to create visually appealing ad creatives and write
-                effective ad copy.
-              </li>
-              <li>
-                Skilled in analyzing, tracking, and reporting on campaign
-                metrics.
-              </li>
-              <li>Proficient in using formulas in Google Sheets.</li>
-              <li>Knowledgable in a CRM (pref HubSpot)</li>
-              <li>
-                Strong communication skills and the ability to work effectively
-                in a remote environment.
-              </li>
-              <li>
-                Speak quickly. Everyone on our team is a fast-talker. This
-                matters to us ;)
-              </li>
-            </ul>
-          </div>
-        </div>
-        <!--  -->
-        <div class="px-6 space-y-2">
-          <h1 class="font-black">How to apply</h1>
-          <div class="px-4">
+          <!-- <h1 class="font-black">How to apply</h1> -->
+          <!-- <div class="px-4">
             <ul class="space-y-3 list-disc text-xs">
               <li>
                 Please submit your resume + video highlighting your experience
@@ -485,14 +549,16 @@ const handleLayoutChange = (newLayout: CARD_LAYOUT) => {
                 to understand and track attribution cross-platform.
               </li>
             </ul>
-          </div>
+          </div> -->
 
           <div class="flex space-x-4 py-3">
-            <button class="bg-primary-1 md:px-6 py-3 w-full md:w-auto rounded-10 text-white text-xs font-black">
+            <button
+              class="bg-primary-1 md:px-6 py-3 w-full md:w-auto rounded-10 text-white text-xs font-black"
+            >
               Apply Now
             </button>
             <button
-              class="border-primary-1 border md:px-6 py-3 w-full md:w-auto  text-primary-1 rounded-10 text-xs font-black"
+              class="border-primary-1 border md:px-6 py-3 w-full md:w-auto text-primary-1 rounded-10 text-xs font-black"
             >
               More Details
             </button>

@@ -16,20 +16,21 @@
   position: relative;
   padding: 14px 12px 14px 12px;
   cursor: pointer;
-  background-color: #3b3838;
-  border-radius: 8px;
+  background-color: #fff;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
 }
 .vti__dropdown.show {
   max-height: 300px;
   overflow: scroll;
 }
 .vti__dropdown.open {
-  background-color: #3b3838;
+  background-color: #fff;
 }
 .vti__dropdown.disabled {
   cursor: no-drop;
   outline: none;
-  background-color: #3b3838;
+  background-color: #fff;
 }
 
 .vti__selection {
@@ -85,10 +86,10 @@
   margin-right: 5px;
 }
 .vti__input {
-  border: 1px solid #858383;
+  border: 1px solid #d1d5db;
   width: 100%;
   outline: none;
-  background-color: #3b3838;
-  color: #d0ccd0;
-  border-radius: 8px;
+  background-color: #fff;
+  color: #5d5d5d;
+  border-radius: 6px;
 }

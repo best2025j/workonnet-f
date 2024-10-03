@@ -1,21 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 
+.loader-2 {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  position: relative;
+  animation: rotate 1s linear infinite,
+}
+
 .loader-1 {
-    width: 22px;
-    height: 22px;
+  width: 22px;
+  height: 22px;
+}
+
+.loader-2, .loader-1 {
     border-radius: 50%;
     position: relative;
     animation: rotate 1s linear infinite
   }
-  
+
+  .loader-2::before {
+    border: 3px solid #fe8900;
+  }
+
   .loader-1::before {
+    border: 3px solid #FFF;
+  }
+  
+  .loader-2::before, .loader-1::before {
     content: "";
     box-sizing: border-box;
     position: absolute;
     inset: 0px;
     border-radius: 50%;
-    border: 3px solid #FFF;
     animation: prixClipFix 2s linear infinite ;
   }
 
