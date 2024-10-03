@@ -190,7 +190,7 @@ onBeforeMount(async () => {
           <div class="flex gap-4 items-center">
             <div v-if="jobStats?.recentJobs?.length" class="flex flex-col items-center pt-6 space-y-2">
               <div class="space-y-4">
-                <img :src="userData?.photo?.url" alt="" />
+                <img :src="userData?.photo?.url" class="h-[40px] w-[40px]" alt="" />
                 <div
                   class="flex flex-col md:flex-row justify-between items-start"
                 >
