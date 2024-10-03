@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
   const query = getQuery(event);
   const authHeader = headers['authorization'];
   try {
-    const response = await axios.get(`job-listing/${query.jobListingId}`, {
+    const response = await axios.get(`job-listing/${query.jobListingId}/user`, {
       baseURL: config.apiBaseUrl,
       headers: {
         Authorization: authHeader,

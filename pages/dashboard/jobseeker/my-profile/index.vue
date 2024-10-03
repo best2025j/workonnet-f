@@ -49,7 +49,7 @@ onBeforeMount(() => {
         </div>
 
         <div class="flex flex-col md:flex-row justify-between space-y-3 md:items-center">
-          <div class="space-y-2">
+          <div class="space-y-2 pt-1">
             <h1 class="font-black text-base">{{userData?.firstName || ''}} {{userData?.lastName || ''}}</h1>
             <div class="flex items-start space-x-4">
               <div class="space-y-2">

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { IJobPost, IRecruiterDetails } from '~/types';
-
-defineProps<{ jobList: IJobPost[] }>();
+defineProps<{ jobList: IJobPost[], currentJobIndex: number }>();
 </script>
 <template>
   <div class="py-4">
@@ -9,7 +8,10 @@ defineProps<{ jobList: IJobPost[] }>();
       <div
         v-for="(job, index) in jobList"
         :key="index"
-        class="bg-white rounded-10 border border-westside-300"
+        class="bg-white rounded-10"
+        :class="[index === currentJobIndex ? 'border-2 border-westside-300': '']"
+
+        @click="$emit('setCurrentJobIndex', index)"
       >
         <div class="border-b-2 p-4 space-y-2">
           <div class="flex items-start space-x-4">
@@ -116,14 +118,14 @@ defineProps<{ jobList: IJobPost[] }>();
                 />
               </svg>
             </button>
-            <button
+            <NuxtLink
+            :to="`/dashboard/jobseeker/find-jobs/${job.id}`"
               class="py-3 px-4 border text-primary-1 border-primary-1 rounded-10 text-xs"
             >
               More details
-            </button>
+            </NuxtLink>
           </div>
         </div>
-        <!-- <nuxt-link to="/dashboard/jobseeker/find-jobs/more-details"> -->
       </div>
     </div>
   </div>

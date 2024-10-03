@@ -1,17 +1,26 @@
 <script setup lang="ts">
+import type { IUserDetails } from '~/types';
+
 definePageMeta({
   title: "Dashboard",
   pageName: "dashboard.jobseeker.index",
   layout: "dashboard",
   middleware: ["auth", "is-jobseeker"],
 });
+
+const userStore = useUserStore();
+const isLoading = ref(false);
+
+const userData = computed<IUserDetails>(
+  () => userStore.loggedInUserDetails
+);
 </script>
 
 <template>
   <div class="pt-4 text-black-900 w-full">
     <!-- Dashboard content goes here -->
     <div class="space-y-1 pb-2">
-      <h2 class="text-2xl font-black">Good Morning, Stanley</h2>
+      <h2 class="text-2xl font-black">Good Morning <span v-if="!isLoading">{{', ' + userData?.firstName || '' }}</span> </h2>
       <p class="text-sm">
         Here’s what’s happening with your job application since you joined us.
       </p>
@@ -22,7 +31,7 @@ definePageMeta({
       <div
         class="flex flex-col h-full md:flex-row space-y-4 md:space-x-4 md:w-3/5 items-center"
       >
-      <!-- for destop view -->
+      <!-- for desktop view -->
         <div class="hidden md:block w-96 min-w-[210px]">
           <div class="rounded-10 bg-white h-full mt-4">
             <div
