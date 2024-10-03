@@ -155,7 +155,7 @@ onMounted(() => {
       <BtnPrimary
         @click="handleSetNewPassword()"
         :isLoading="isLoading"
-        :disabled="isLoading || v$.$invalid"
+        :disabled="isLoading "
       >
         <template #text>
           {{ !isLoading ? 'Create new Password' : 'Please wait...' }}

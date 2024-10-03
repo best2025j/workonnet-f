@@ -221,7 +221,7 @@ const loginRecruiter = async () => {
         <BtnPrimary
           @click="loginRecruiter()"
           :isLoading="isLoading"
-          :disabled="isLoading || v$.$invalid"
+          :disabled="isLoading "
         >
           <template #text>
             {{ !isLoading ? "Sign in" : "Please wait..." }}

@@ -792,7 +792,7 @@ const handleProfilePhotoUpdate = async () => {
             <BtnPrimary
               @click="handleProfileUpdate()"
               :isLoading="isLoading"
-              :disabled="isLoading || v$.$invalid"
+              :disabled="isLoading "
               class="!px-10"
             >
               <template #text> Save </template>
