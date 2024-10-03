@@ -50,7 +50,7 @@ onBeforeMount(async () => {
   <div v-else class="w-full h-full">
     <div class="p-4 bg-white rounded-10">
       <div class="md:mt-12 md:pl-6 space-y-2">
-        <img :src="userData!.photo?.url" alt="profile-image" />
+        <img :src="userData!.photo?.url" class="h-[80px] w-[80px]" alt="profile-image" />
 
         <div class="flex flex-col md:flex-row justify-between">
           <div class="space-y-2">
