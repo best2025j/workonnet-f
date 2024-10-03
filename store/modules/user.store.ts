@@ -86,7 +86,7 @@ export const UserStore = defineStore('user-store', () => {
     settingsId: string
   ) {
     try {
-      const response = await $fetch('/api/settings/jobseeker/update', {
+      const response = await $fetch('/api/settings/recruiter/update', {
         method: 'PATCH',
         body: data,
         query: {
