@@ -372,7 +372,7 @@ onBeforeMount(async () => {
             </div>
             <div class="md:w-1/4 flex justify-end">
               <button class="text-xs px-4 py-2 border rounded-8 text-[#344054]">
-                Ena
+                Enabled
               </button>
             </div>
           </div>

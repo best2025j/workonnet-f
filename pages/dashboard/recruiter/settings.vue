@@ -66,7 +66,7 @@ const handleUpdateSettings = async (data: Partial<ISettingsDetails>) => {
 };
 
 onBeforeMount(async () => {
-  if (userStore.userSettings === null || !userStore.userSettings) {
+  // if (userStore.userSettings === null || !userStore.userSettings) {
     try {
       const token = authStore.userToken;
       const response = await userStore.$api.refreshAuthRecruiterSettings(token);
@@ -79,7 +79,7 @@ onBeforeMount(async () => {
     } catch (e) {
       console.log(e);
     }
-  }
+  // }
 });
 </script>
 

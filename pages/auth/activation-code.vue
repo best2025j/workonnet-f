@@ -201,7 +201,7 @@ onMounted(() => {
       </p>
       <BtnPrimary
         @click="verifyCode()"
-        :disabled="isLoading || v$.$invalid"
+        :disabled="isLoading"
         :isLoading="isLoading"
       >
         <template #text>
