@@ -19,16 +19,48 @@ export interface IMediaFile {
   metadata?: Map<string, string>;
 }
 
+export interface ISocialLinks {
+  facebookUrl?: string;
+  linkedinUrl?: string;
+  instagramUrl?: string;
+  twitterUrl?: string;
+  portfolioUrl?: string;
+}
+
+export interface ISalaryExpectation {
+  amount: number;
+  frequency: string;
+  currency: string;
+}
+
+export interface IPhysicalLocation {
+  city: string;
+  country: string;
+}
+
+export interface IResumeResource {
+  resumeCv?: IMediaFile;
+  coverLetter?: IMediaFile;
+}
+
 export interface IUserDetails {
+  [x: string]: any;
   username: string;
-  status: string;
-  accountType: LOGGED_IN_USER;
+  status: 'active' | 'draft' | 'blocked';
   phoneNumber: IPhoneNumberField;
   email?: string;
   photo?: IMediaFile;
+  photoHeader?: IMediaFile;
   id: string;
+  firstName: string;
+  lastName: string;
+  occupation: string;
+  location: IPhysicalLocation;
+  resumeResource?: IResumeResource;
+  salary?: ISalaryExpectation;
+  bio: string;
+  socialLinks: ISocialLinks;
 }
-
 
 export interface IRecruiterDetails {
   id: string;
@@ -87,8 +119,7 @@ export interface IJobPost {
   id: string;
 }
 
-export interface IJobPostWithPagination {
-  docs: IJobPost[];
+export interface IPagination {
   hasNextPage: false;
   hasPrevPage: false;
   limit: number;
@@ -96,8 +127,16 @@ export interface IJobPostWithPagination {
   page: number;
   pagingCounter: number;
   prevPage: number;
-  totalDocs: 2;
-  totalPages: 1;
+  totalDocs: number;
+  totalPages: number;
+}
+
+export interface IJobPostWithPagination extends IPagination {
+  docs: IJobPost[];
+}
+
+export interface IRecruitersWithPagination extends IPagination {
+  docs: IRecruiterDetails[];
 }
 
 export interface TelInputData {

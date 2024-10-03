@@ -1,8 +1,10 @@
 <script setup lang="ts">
-import type { ApiSuccessResponse } from '~/types';
+import type { ApiSuccessResponse, IUserDetails } from '~/types';
 
 const authStore = useAuthStore();
 const userStore = useUserStore();
+const userData = computed<IUserDetails>(() => userStore?.loggedInUserDetails)
+
 
 const getUserProfile = async () => {
   try {
@@ -46,7 +48,7 @@ onBeforeMount(async () => {
 
     <!-- Main Content Area -->
     <div class="w-full h-full bg-black-50">
-      <LayoutHeader class="px-4 h-full" />
+      <LayoutHeader :photoUrl="userData?.photo?.url || null" class="px-4 h-full" />
       <main class="md:pl-4 px-4 md:px-0 md:pr-8 py-4 bg-black-50">
         <slot />
       </main>

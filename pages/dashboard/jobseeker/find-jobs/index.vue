@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { ApiSuccessResponse, IJobPostWithPagination } from '~/types';
+
 definePageMeta({
   title: "Find Jobs",
   pageName: "dashboard.jobseeker.find-jobs.index",
@@ -11,11 +13,49 @@ enum CARD_LAYOUT {
   GRID = "grid",
 }
 
+const jobStore = useJobStore();
+const authStore = useAuthStore();
+const jobListPage = ref<{}>({});
+const isLoading = ref(false);
+const route = useRoute();
+
+const jobsResult = computed(() =>
+  jobStore.jobList
+);
 const currentLayout = ref<CARD_LAYOUT>(CARD_LAYOUT.LIST);
 
 const handleLayoutChange = (newLayout: CARD_LAYOUT) => {
   currentLayout.value = newLayout;
 };
+
+const getMyJobs = async () => {
+  try {
+    if(!jobStore.jobList.length){
+      isLoading.value = true;
+    }
+    const token = authStore.userToken;
+    const response = await $fetch('/api/jobseeker/jobs/fetch-all', {
+      headers: {
+          Authorization: `Bearer ${token}`,
+        },
+    });
+    const responseData = response as ApiSuccessResponse;
+
+    const { docs, ...other } = responseData.data as IJobPostWithPagination;
+    jobListPage.value = other;
+    jobStore.setJobList((responseData.data as IJobPostWithPagination).docs);
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 1000);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+onBeforeMount(async () => {
+  await getMyJobs();
+});
 </script>
 
 <template>
@@ -304,12 +344,16 @@ const handleLayoutChange = (newLayout: CARD_LAYOUT) => {
       </div>
 
       <!-- cards -->
-      <FindJobGridView
-        v-if="currentLayout.toString() === CARD_LAYOUT.GRID.toString()"
+      <div  v-if="currentLayout.toString() === CARD_LAYOUT.GRID.toString()">
+        <FindJobGridView
+       :job-list="jobsResult"
       />
-      <FindJobListView
-        v-if="currentLayout.toString() === CARD_LAYOUT.LIST.toString()"
+      </div>
+      <div v-if="currentLayout.toString() === CARD_LAYOUT.LIST.toString()">
+        <FindJobListView
+        :job-list="jobsResult"
       />
+      </div>
     </div>
 
     <!--  second div-->

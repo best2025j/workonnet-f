@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { IRecruiterDetails } from '~/types';
+
 definePageMeta({
   title: 'Company Profile',
   pageName: 'dashboard.recruiter.company-profile.index',
@@ -7,7 +9,7 @@ definePageMeta({
 });
 
 const userStore = useUserStore();
-const userData = computed(() => userStore.loggedInUserDetails);
+const userData = computed<IRecruiterDetails>(() => userStore.loggedInUserDetails);
 </script>
 
 <template>
@@ -30,8 +32,8 @@ const userData = computed(() => userStore.loggedInUserDetails);
           class="bg-white rounded-full h-[100px] w-[100px] border-2 z-[9999px] flex items-center justify-center absolute -top-24"
         >
           <img
-            v-if="userData.photo"
-            :src="userData.photo.url"
+            v-if="userData?.photo"
+            :src="userData?.photo?.url"
             class="w-[70px] h-[70px]"
             alt="profile-image"
           />
@@ -40,7 +42,7 @@ const userData = computed(() => userStore.loggedInUserDetails);
           <div class="space-y-2">
             <div class="flex items-center space-x-6">
               <h1 class="font-black text-sm md:text-base">
-                {{ userData.fullName }}
+                {{ userData?.fullName || '' }}
               </h1>
             </div>
 
@@ -83,15 +85,15 @@ const userData = computed(() => userStore.loggedInUserDetails);
           <div>
             <div class="flex justify-end w-full">
               <NuxtLink to="/dashboard/recruiter/company-profile/edit">
-                <button
+                <div
                   class="px-4 py-2 rounded-8 text-xs text-white bg-primary-1"
                 >
                   {{
-                    userData.status === 'draft'
+                    userData?.status && userData?.status === 'draft'
                       ? 'Complete my profile'
                       : 'Edit company profile info'
                   }}
-                </button>
+                </div>
               </NuxtLink>
             </div>
           </div>
@@ -106,9 +108,9 @@ const userData = computed(() => userStore.loggedInUserDetails);
           {{ userData.bio || "This should be the company's about" }}
         </p>
         <h1 class="text-sm font-black">My company size</h1>
-        <p class="text-xs">{{ userData.companySize || 'N/A' }}</p>
+        <p class="text-xs">{{ userData?.companySize || 'N/A' }}</p>
         <h1 class="text-sm font-black">Website</h1>
-        <p class="text-xs">{{ userData.websiteUrl }}</p>
+        <p class="text-xs">{{ userData?.websiteUrl || '' }}</p>
         <h1 class="text-sm font-black">Company links</h1>
 
         <!-- company links -->
@@ -119,7 +121,7 @@ const userData = computed(() => userStore.loggedInUserDetails);
               <input
                 type="text"
                 readonly
-                :placeholder="userData.websiteUrl"
+                :placeholder="userData?.websiteUrl"
                 class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border w-full border-gray-300 rounded-md"
               />
             </div>
@@ -143,13 +145,13 @@ const userData = computed(() => userStore.loggedInUserDetails);
           </div>
         </div>
 
-        <div class="flex md:w-1/3 flex-col h-full" v-if="userData.jobUrl">
+        <div class="flex md:w-1/3 flex-col h-full" v-if="userData?.websiteUrl">
           <label for="first-name" class="text-sm mb-2">Company job URL</label>
           <div class="flex w-full gap-x-2">
             <div class="flex flex-grow w-full">
               <input
                 type="text"
-                placeholder="http://exampltext.example.com"
+                :value="userData?.websiteUrl"
                 class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border w-full border-gray-300 rounded-md"
               />
             </div>

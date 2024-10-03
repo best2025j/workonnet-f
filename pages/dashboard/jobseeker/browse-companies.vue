@@ -1,10 +1,49 @@
 <script setup lang="ts">
+import type { IRecruiterDetails } from '~/types';
+import type { ApiSuccessResponse, IRecruitersWithPagination } from '~/types';
+
 definePageMeta({
   title: "Browse Companies (Ai)",
   pageName: "dashboard.jobseeker.browse-companies",
   layout: "dashboard",
   middleware: ["auth", "is-jobseeker"],
 });
+
+const authStore = useAuthStore();
+const userStore = useUserStore();
+const recruiterListPage = ref<{}>({});
+const isLoading = ref(false);
+
+const recruiters = computed<IRecruiterDetails[]>(() => userStore.recruiters)
+
+const browseCompanies = async () => {
+  try {
+    if(!userStore.recruiters.length){
+      isLoading.value = true;
+    }
+    const token = authStore.userToken;
+    const response = await $fetch('/api/jobseeker/company/browse', {
+      headers: {
+          Authorization: `Bearer ${token}`,
+        },
+    });
+    const responseData = response as ApiSuccessResponse;
+
+    const { docs, ...other } = responseData.data as IRecruitersWithPagination;
+    recruiterListPage.value = other;
+    userStore.setRecruiters((responseData.data as IRecruitersWithPagination).docs);
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 1000);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+onBeforeMount(async () => {
+ await browseCompanies()
+})
 </script>
 
 <template>
@@ -18,7 +57,7 @@ definePageMeta({
       </div>
       <!-- search inputs -->
       <div class="w-full">
-        <div class="flex flex-col md:flex-row w-full gap-2 pt-2">
+        <div class="flex flex-col md:flex-row w-full gap-2 pt-2 md:justify-end">
           <div class="relative">
             <input
               type="text"
@@ -82,231 +121,34 @@ definePageMeta({
       </div>
     </div>
     <!--  grid cards-->
-    <div class="grid md:grid-cols-3 gap-4 my-6">
-      <div class="bg-white h-full p-4 rounded-10 space-y-4">
+    <div v-if="isLoading" class="h-40 w-full flex items-center justify-center">
+      <span class="loader-2"></span>
+    </div>
+    <div v-else class="grid md:grid-cols-3 gap-4 my-6">
+      <div v-for="(recruiter, index) in recruiters" :key="index" class="bg-white h-full p-4 rounded-10 space-y-4">
         <div class="flex justify-between items-start">
           <div class="space-y-2">
-            <img src="/assets/images/ms.png" alt="no pix" />
-            <h1 class="text-sm font-black">Social Media Assistant</h1>
-            <h1 class="text-xs">Microsoft</h1>
+            <img v-if="recruiter?.photo" :src="recruiter?.photo?.url" alt="no pix" />
+            <h1 class="text-sm font-black">{{ recruiter.companyName }}</h1>
+            <h1 class="text-xs">{{recruiter.location }}</h1>
           </div>
-          <button class="py-2 text-primary-1 text-sm px-3 rounded-10">3 jobs</button>
+          <!-- <button class="py-2 text-primary-1 text-sm px-3 rounded-10">3 jobs</button> -->
         </div>
         <div class="md:text-sm text-xs text-[#000]">
-          Lorem ipsum dolor sit amet consectetur. Gravida volutpat lobortis
-          scelerisque nunc eget scelerisque lectus ante augue. Quis eros lacus
-          sed quisque in sagittis tempus mus diam.
+         {{recruiter?.bio?.substring(0, 200)+'...'}}
         </div>
         <div>
-          <button
+          <!-- <NuxtLink
+            
             class="border-primary-1 border py-2.5 rounded-10 text-xs px-4 text-primary-1"
           >
             More Information
-          </button>
-        </div>
-      </div>
-
-      <div class="bg-white h-full p-4 rounded-10 space-y-4">
-        <div class="flex justify-between items-start">
-          <div class="space-y-2">
-            <img src="/assets/images/ms.png" alt="no pix" />
-            <h1 class="text-sm font-black">Social Media Assistant</h1>
-            <h1 class="text-xs">Microsoft</h1>
-          </div>
-          <button class="py-2 text-primary-1 text-sm px-3 rounded-10">3 jobs</button>
-        </div>
-        <div class="md:text-sm text-xs text-[#000]">
-          Lorem ipsum dolor sit amet consectetur. Gravida volutpat lobortis
-          scelerisque nunc eget scelerisque lectus ante augue. Quis eros lacus
-          sed quisque in sagittis tempus mus diam.
-        </div>
-        <div>
-          <button
-            class="border-primary-1 border py-2.5 rounded-10 text-xs px-4 text-primary-1"
-          >
-            More Information
-          </button>
-        </div>
-      </div>
-
-      <div class="bg-white h-full p-4 rounded-10 space-y-4">
-        <div class="flex justify-between items-start">
-          <div class="space-y-2">
-            <img src="/assets/images/ms.png" alt="no pix" />
-            <h1 class="text-sm font-black">Social Media Assistant</h1>
-            <h1 class="text-xs">Microsoft</h1>
-          </div>
-          <button class="py-2 text-primary-1 text-sm px-3 rounded-10">3 jobs</button>
-        </div>
-        <div class="md:text-sm text-xs text-[#000]">
-          Lorem ipsum dolor sit amet consectetur. Gravida volutpat lobortis
-          scelerisque nunc eget scelerisque lectus ante augue. Quis eros lacus
-          sed quisque in sagittis tempus mus diam.
-        </div>
-        <div>
-          <button
-            class="border-primary-1 border py-2.5 rounded-10 text-xs px-4 text-primary-1"
-          >
-            More Information
-          </button>
-        </div>
-      </div>
-
-      <div class="bg-white h-full p-4 rounded-10 space-y-4">
-        <div class="flex justify-between items-start">
-          <div class="space-y-2">
-            <img src="/assets/images/ms.png" alt="no pix" />
-            <h1 class="text-sm font-black">Social Media Assistant</h1>
-            <h1 class="text-xs">Microsoft</h1>
-          </div>
-          <button class="py-2 text-primary-1 text-sm px-3 rounded-10">3 jobs</button>
-        </div>
-        <div class="md:text-sm text-xs text-[#000]">
-          Lorem ipsum dolor sit amet consectetur. Gravida volutpat lobortis
-          scelerisque nunc eget scelerisque lectus ante augue. Quis eros lacus
-          sed quisque in sagittis tempus mus diam.
-        </div>
-        <div>
-          <button
-            class="border-primary-1 border py-2.5 rounded-10 text-xs px-4 text-primary-1"
-          >
-            More Information
-          </button>
-        </div>
-      </div>
-      <div class="bg-white h-full p-4 rounded-10 space-y-4">
-        <div class="flex justify-between items-start">
-          <div class="space-y-2">
-            <img src="/assets/images/ms.png" alt="no pix" />
-            <h1 class="text-sm font-black">Social Media Assistant</h1>
-            <h1 class="text-xs">Microsoft</h1>
-          </div>
-          <button
-            class="py-2 px-3 text-primary-1"
-          >
-            3 jobs
-          </button>
-        </div>
-        <div class="md:text-sm text-xs text-[#000]">
-          Lorem ipsum dolor sit amet consectetur. Gravida volutpat lobortis
-          scelerisque nunc eget scelerisque lectus ante augue. Quis eros lacus
-          sed quisque in sagittis tempus mus diam.
-        </div>
-        <div>
-          <button
-            class="border-primary-1 border py-2.5 rounded-10 text-xs px-4 text-primary-1"
-          >
-            More Information
-          </button>
-        </div>
-      </div>
-      <div class="bg-white h-full p-4 rounded-10 space-y-4">
-        <div class="flex justify-between items-start">
-          <div class="space-y-2">
-            <img src="/assets/images/ms.png" alt="no pix" />
-            <h1 class="text-sm font-black">Social Media Assistant</h1>
-            <h1 class="text-xs">Microsoft</h1>
-          </div>
-          <button
-            class="py-2 px-3 text-primary-1"
-          >
-            3 jobs
-          </button>
-        </div>
-        <div class="md:text-sm text-xs text-[#000]">
-          Lorem ipsum dolor sit amet consectetur. Gravida volutpat lobortis
-          scelerisque nunc eget scelerisque lectus ante augue. Quis eros lacus
-          sed quisque in sagittis tempus mus diam.
-        </div>
-        <div>
-          <button
-            class="border-primary-1 border py-2.5 rounded-10 text-xs px-4 text-primary-1"
-          >
-            More Information
-          </button>
-        </div>
-      </div>
-      <div class="bg-white h-full p-4 rounded-10 space-y-4">
-        <div class="flex justify-between items-start">
-          <div class="space-y-2">
-            <img src="/assets/images/ms.png" alt="no pix" />
-            <h1 class="text-sm font-black">Social Media Assistant</h1>
-            <h1 class="text-xs">Microsoft</h1>
-          </div>
-          <button
-            class="py-2 px-3 text-primary-1"
-          >
-            3 jobs
-          </button>
-        </div>
-        <div class="md:text-sm text-xs text-[#000]">
-          Lorem ipsum dolor sit amet consectetur. Gravida volutpat lobortis
-          scelerisque nunc eget scelerisque lectus ante augue. Quis eros lacus
-          sed quisque in sagittis tempus mus diam.
-        </div>
-        <div>
-          <button
-            class="border-primary-1 border py-2.5 rounded-10 text-xs px-4 text-primary-1"
-          >
-            More Information
-          </button>
-        </div>
-      </div>
-      <div class="bg-white h-full p-4 rounded-10 space-y-4">
-        <div class="flex justify-between items-start">
-          <div class="space-y-2">
-            <img src="/assets/images/ms.png" alt="no pix" />
-            <h1 class="text-sm font-black">Social Media Assistant</h1>
-            <h1 class="text-xs">Microsoft</h1>
-          </div>
-          <button
-            class="py-2 px-3 text-primary-1"
-          >
-            3 jobs
-          </button>
-        </div>
-        <div class="md:text-sm text-xs text-[#000]">
-          Lorem ipsum dolor sit amet consectetur. Gravida volutpat lobortis
-          scelerisque nunc eget scelerisque lectus ante augue. Quis eros lacus
-          sed quisque in sagittis tempus mus diam.
-        </div>
-        <div>
-          <button
-            class="border-primary-1 border py-2.5 rounded-10 text-xs px-4 text-primary-1"
-          >
-            More Information
-          </button>
-        </div>
-      </div>
-      <div class="bg-white h-full p-4 rounded-10 space-y-4">
-        <div class="flex justify-between items-start">
-          <div class="space-y-2">
-            <img src="/assets/images/ms.png" alt="no pix" />
-            <h1 class="text-sm font-black">Social Media Assistant</h1>
-            <h1 class="text-xs">Microsoft</h1>
-          </div>
-          <button
-            class="py-2 px-3 text-primary-1"
-          >
-            3 jobs
-          </button>
-        </div>
-        <div class="md:text-sm text-xs text-[#000]">
-          Lorem ipsum dolor sit amet consectetur. Gravida volutpat lobortis
-          scelerisque nunc eget scelerisque lectus ante augue. Quis eros lacus
-          sed quisque in sagittis tempus mus diam.
-        </div>
-        <div>
-          <button
-            class="border-primary-1 border py-2.5 rounded-10 text-xs px-4 text-primary-1"
-          >
-            More Information
-          </button>
+          </NuxtLink> -->
         </div>
       </div>
     </div>
     <!-- button for pagination -->
-    <div class="flex gap-2 justify-center items- py-4">
+    <!-- <div class="flex gap-2 justify-center items- py-4">
       <button class="py-2 px-4 rounded-10 border bg-black-400">
         <svg
           width="9"
@@ -353,6 +195,6 @@ definePageMeta({
           />
         </svg>
       </button>
-    </div>
+    </div> -->
   </div>
 </template>

@@ -1,7 +1,7 @@
 import { STORAGE_LOGGED_IN_USER_DETAILS_KEY } from '~/utils/common';
 import { skipHydrate } from 'pinia';
 import { storageSerializer } from '~/composables';
-import type { ISettingsDetails } from '~/types';
+import type { IRecruiterDetails, ISettingsDetails } from '~/types';
 
 export const UserStore = defineStore('user-store', () => {
   const loggedInUserDetails = ref(
@@ -10,8 +10,14 @@ export const UserStore = defineStore('user-store', () => {
 
   const userSettings = ref<ISettingsDetails | null>(null);
 
+  const recruiters = ref<IRecruiterDetails[] | []>([]);
+
   function setUserDetails(userDetails: any) {
     loggedInUserDetails.value = userDetails;
+  }
+
+  function setRecruiters(recruitersData: IRecruiterDetails[]) {
+    recruiters.value = recruitersData;
   }
 
   function setUserSettings(userDetails: ISettingsDetails) {
@@ -80,7 +86,7 @@ export const UserStore = defineStore('user-store', () => {
     settingsId: string
   ) {
     try {
-      const response = await $fetch('/api/settings/recruiter/update', {
+      const response = await $fetch('/api/settings/jobseeker/update', {
         method: 'PATCH',
         body: data,
         query: {
@@ -98,12 +104,16 @@ export const UserStore = defineStore('user-store', () => {
 
   async function updateUserSettings(
     token: string,
-    data: Partial<ISettingsDetails>
+    data: Partial<ISettingsDetails>,
+    settingsId: string
   ) {
     try {
       const response = await $fetch('/api/settings/jobseeker/update', {
         method: 'PATCH',
         body: data,
+        query: {
+          settingsId,
+        },
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -117,9 +127,11 @@ export const UserStore = defineStore('user-store', () => {
   return {
     loggedInUserDetails: skipHydrate(loggedInUserDetails),
     userSettings: skipHydrate(userSettings),
+    recruiters: skipHydrate(recruiters),
     setUserDetails,
     setUserSettings,
     clearUserStore,
+    setRecruiters,
     $api: {
       updateRecruiterSettings,
       updateUserSettings,

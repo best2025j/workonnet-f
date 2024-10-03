@@ -2,6 +2,7 @@
 import type {
   ApiErrorResponse,
   ApiSuccessResponse,
+  IRecruiterDetails,
   ISettingsDetails,
 } from '~/types';
 import { POSITION, useToast } from 'vue-toastification';
@@ -17,6 +18,7 @@ const authStore = useAuthStore();
 const userStore = useUserStore();
 const isLoading = ref<boolean>(false);
 const toast = useToast();
+const userData = computed<IRecruiterDetails>(() => userStore.loggedInUserDetails)
 
 const userSettings = computed(() => userStore.userSettings);
 
@@ -69,7 +71,6 @@ onBeforeMount(async () => {
       const token = authStore.userToken;
       const response = await userStore.$api.refreshAuthRecruiterSettings(token);
       const responseData = response as ApiSuccessResponse;
-      console.log(responseData.data);
       setTimeout(() => {
         isLoading.value = false;
       }, 500);
@@ -223,7 +224,7 @@ onBeforeMount(async () => {
                 <h1 class="text-xs font-black">Email address</h1>
               </div>
               <div class="md:w-2/4 hidden md:flex">
-                <p class="text-xs">{{ userStore.loggedInUserDetails.email }}</p>
+                <p class="text-xs">{{ userData?.email || '' }}</p>
               </div>
 
               <div class="md:w-1/4 flex justify-end pt-3 md:pt-0">
@@ -235,7 +236,7 @@ onBeforeMount(async () => {
               </div>
             </div>
             <p class="text-xs md:hidden">
-              {{ userStore.loggedInUserDetails.email }}
+              {{ userData?.email || '' }}
             </p>
           </div>
           <!--  -->
@@ -352,7 +353,7 @@ onBeforeMount(async () => {
 
             <div class="md:w-1/2 space-y-2">
               <p class="text-xs hidden md:flex">
-                {{ userStore.loggedInUserDetails.email }}
+                {{ userData?.email || '' }}
               </p>
               <p class="text-xs hidden md:flex">
                 Select "Manage" to change your privacy settings and exercise
@@ -369,7 +370,7 @@ onBeforeMount(async () => {
             </div>
           </div>
           <p class="text-xs md:hidden py-2">
-            {{ userStore.loggedInUserDetails.email }}
+            {{ userData?.email  || '' }}
           </p>
 
           <p class="text-xs md:hidden">

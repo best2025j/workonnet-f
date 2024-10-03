@@ -6,24 +6,16 @@ export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig(event);
   const query = getQuery(event);
   const authHeader = headers['authorization'];
-
-  const data = await readBody(event);
-
   try {
-    const response = await axios.patch(
-      `user-settings/${query.settingsId}/user`,
-      data,
-      {
-        baseURL: config.apiBaseUrl,
-        headers: {
-          Authorization: authHeader,
-        },
-      }
-    );
+    const response = await axios.get(`job-listing/${query.jobListingId}`, {
+      baseURL: config.apiBaseUrl,
+      headers: {
+        Authorization: authHeader,
+      },
+    });
 
     return { status: 200, data: response.data.data };
   } catch (e: any) {
-    console.log(e);
     if (axios.isAxiosError<ValidationError, Record<string, unknown>>(e)) {
       if (e.response?.data) {
         return createError({

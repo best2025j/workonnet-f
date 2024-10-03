@@ -1,14 +1,19 @@
 <script setup lang="ts">
+import type { IUserDetails } from '~/types';
+
 const route = useRoute();
 
 // State to track whether the mobile side nav is open
 const isSideNavOpen = ref(false);
 const authStore = useAuthStore()
-
 // Function to toggle the side nav
 const toggleSideNav = () => {
   isSideNavOpen.value = !isSideNavOpen.value;
 };
+
+withDefaults(defineProps<{photoUrl: string | null}>(), {
+  photoUrl: null
+})
 </script>
 
 <template>
@@ -88,9 +93,17 @@ const toggleSideNav = () => {
           to="/"
           class="text-black-900 hover:underline flex items-center gap-4 flex-row-reverse"
         >
-         <div class="rounded-full border p-1">
+         <div class="rounded-full border p-1 flex items-center justify-center">
           <img
+            v-if="photoUrl === null"
             src="/assets/svgs/avatar-user.svg"
+            alt="Profile Picture"
+            class="h-8 w-8"
+          />
+
+          <img
+            v-else
+            :src="photoUrl"
             alt="Profile Picture"
             class="h-8 w-8"
           />

@@ -1,6 +1,5 @@
 <!-- pages/recruiter/dashboard/index.vue -->
 <script setup lang="ts">
-import { current } from 'tailwindcss/colors';
 import type { ApiSuccessResponse, IJobStatsData, IRecruiterDetails } from '~/types';
 
 definePageMeta({
@@ -13,7 +12,7 @@ definePageMeta({
 const authStore = useAuthStore();
 const userStore = useUserStore();
 const jobStore = useJobStore();
-const isLoading = ref(false);
+const isLoading = ref(true);
 
 const userData = computed<IRecruiterDetails>(
   () => userStore.loggedInUserDetails
@@ -21,14 +20,20 @@ const userData = computed<IRecruiterDetails>(
 const jobStats = computed<IJobStatsData | null>(() => jobStore.jobStats);
 
 onBeforeMount(async () => {
-  try {
+  if(jobStore.jobStats === null){
+    try {
     isLoading.value = true
     const token = authStore.userToken;
    const response = await jobStore.$api.fetchJobStats(token);
    const responseData = response as ApiSuccessResponse
+
+   setTimeout(() => {
+    isLoading.value = false
+   }, 500)
    jobStore.setJobStatsList(responseData.data)
   } catch (e) {
     console.log(e);
+  }
   }
 });
 </script>
@@ -41,7 +46,7 @@ onBeforeMount(async () => {
     >
       <div class="space-y-1 pb-2">
         <h2 class="text-2xl font-black">
-          Good Morning, {{ userData.companyName }}
+          Good Morning <span v-if="!isLoading">{{', ' + userData?.companyName || '' }}</span>
         </h2>
         <p class="text-sm">
           Here’s what’s happening with your job application since you joined us.
