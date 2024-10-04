@@ -24,6 +24,7 @@ const handleNavigation = () => {
   }
 };
 </script>
+
 <template>
   <!-- Navbar -->
   <div class="pb-4">
@@ -43,7 +44,7 @@ const handleNavigation = () => {
           Dashboard
         </button>
         <NuxtLink
-        to="/waitlist"
+          to="/waitlist"
           v-if="!authStore.$state.isAuthenticated"
           class="text-white py-2 px-4 rounded-8 bg-primary-1"
         >
@@ -99,15 +100,15 @@ const handleNavigation = () => {
           v-if="authStore.$state.isAuthenticated"
           @click="handleNavigation()"
           class="text-white py-2 px-4 rounded-8 bg-primary-1"
-          >
+        >
           Dashboard
         </button>
         <NuxtLink
-        to="/waitlist"
+          to="/waitlist"
           v-if="!authStore.$state.isAuthenticated"
           class="text-white py-2 px-4 rounded-8 bg-primary-1"
         >
-        Join Waitlist
+          Join Waitlist
         </NuxtLink>
         <!-- <button
           v-if="!authStore.$state.isAuthenticated"
@@ -127,6 +128,7 @@ const handleNavigation = () => {
   >
     <div
       @click="toggleSideNav"
+      @click.stop
       class="fixed inset-0 bg-black-50 w-56 -[#E7E7E7] md:hidden animate__animated animate__fadeInLeft shadow-md z-40 flex rounded-r-[20px] flex-col pt-10 space-y-10 h-[70%] justify-start"
     >
       <!-- <img src="/assets/images/logo3.png" class="w-32 h-auto pl-3" alt="" /> -->
@@ -134,20 +136,6 @@ const handleNavigation = () => {
       <ul class="flex flex-col space-y-4 px-4 text-black-50 justify-between">
         <LandingPageNavbarLinks />
         <!-- side nav buttons -->
-        <div
-          class="absolute bottom-0 font-black text-xs left-0 right-0 w-full flex flex-col px-4 space-y-2 py-3"
-        >
-          <!-- <button
-            class="text-white py-2 px-3.4 rounded-8 bg-primary-1"
-          >
-            Register
-          </button>
-          <button
-            class="bg-gray-200 text-primary-1 py-2 px-3.5 rounded-8 hover:bg-gray-300"
-          >
-            Login
-          </button> -->
-        </div>
       </ul>
     </div>
   </div>

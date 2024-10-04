@@ -9,7 +9,7 @@ definePageMeta({
 
 <template>
   <div class="text-black-900 pt-6">
-    <div class="flex flex-col md:flex-row justify-between items-center">
+    <div class="flex flex-col md:flex-row justify-between items-start space-y-2 md:space-y-0 md:items-center">
       <div class="space-y-2">
         <h1 class="font-black text-xl">Plan & Pricing</h1>
         <h1 class="text-sm">Let’s find the top job that we have.</h1>

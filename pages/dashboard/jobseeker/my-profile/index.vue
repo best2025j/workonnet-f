@@ -1,24 +1,27 @@
 <script setup lang="ts">
-import type { IUserDetails } from '~/types';
+import type { IUserDetails } from "~/types";
 
 definePageMeta({
   title: "My Profile",
   pageName: "dashboard.jobseeker.my-profile.index",
   layout: "dashboard",
-  middleware: ['auth', 'is-jobseeker']
+  middleware: ["auth", "is-jobseeker"],
 });
 
 const userStore = useUserStore();
 const userData = computed<IUserDetails>(() => userStore?.loggedInUserDetails);
-const isLoading = ref<boolean>(false)
+const isLoading = ref<boolean>(false);
 
 onBeforeMount(() => {
   // fetch experience
-})
+});
 </script>
 
 <template>
- <div v-if="isLoading" class="h-full py-40 w-full flex items-center justify-center">
+  <div
+    v-if="isLoading"
+    class="h-full py-40 w-full flex items-center justify-center"
+  >
     <span class="loader-2"></span>
   </div>
   <div v-else class="text-black-900">
@@ -28,17 +31,17 @@ onBeforeMount(() => {
         class="w-full h-32 md:h-[214px] flex items-center justify-center bg-black-400 rounded"
         v-if="!userData?.photoHeader"
       >
-      <span class="text-white">No Header Photo</span>
+        <span class="text-white">No Header Photo</span>
       </div>
       <img
-         v-if="userData?.photoHeader"
+        v-if="userData?.photoHeader"
         :src="userData.photoHeader.url"
         class="w-full h-32 md:h-[214px] rounded-md"
         alt="no image yet..."
       />
-      <div class="mt-12 md:pl-6 pl-3 space-y-2 z-[9999] relative">
+      <div class="mt-12 md:pl-6 pl-3 space-y-2 z-auto relative">
         <div
-          class="bg-white rounded-full h-[100px] w-[100px] border-2 z-[9999] flex items-center justify-center absolute -top-24"
+          class="bg-white rounded-full h-[100px] w-[100px] border-2 z-auto flex items-center justify-center absolute -top-24"
         >
           <img
             v-if="userData?.photo"
@@ -48,13 +51,17 @@ onBeforeMount(() => {
           />
         </div>
 
-        <div class="flex flex-col md:flex-row justify-between space-y-3 md:items-center">
+        <div
+          class="flex flex-col md:flex-row justify-between space-y-3 md:items-center"
+        >
           <div class="space-y-2 pt-1">
-            <h1 class="font-black text-base">{{userData?.firstName || ''}} {{userData?.lastName || ''}}</h1>
+            <h1 class="font-black text-base">
+              {{ userData?.firstName || "" }} {{ userData?.lastName || "" }}
+            </h1>
             <div class="flex items-start space-x-4">
               <div class="space-y-2">
-                <h1 class="text-xs">{{userData?.occupation || ''}}</h1>
-                <h1 class="text-xs">{{userData?.location || ''}}</h1>
+                <h1 class="text-xs">{{ userData?.occupation || "" }}</h1>
+                <h1 class="text-xs">{{ userData?.location || "" }}</h1>
               </div>
             </div>
           </div>
@@ -75,7 +82,8 @@ onBeforeMount(() => {
               </svg>
 
               <h1 class="text-xs">
-                Portfolio link: <b>{{ userData?.socialLink?.portfolioUrl || 'N/A' }}</b>
+                Portfolio link:
+                <b>{{ userData?.socialLink?.portfolioUrl || "N/A" }}</b>
               </h1>
             </div>
             <div class="flex gap-2 items-center">
@@ -126,7 +134,8 @@ onBeforeMount(() => {
                 />
               </svg>
               <h1 class="text-xs">
-                Facebook: <b>{{ userData?.socialLink?.facebookUrl || 'N/A' }}</b>
+                Facebook:
+                <b>{{ userData?.socialLink?.facebookUrl || "N/A" }}</b>
               </h1>
             </div>
             <div class="flex gap-2 items-center">
@@ -143,7 +152,8 @@ onBeforeMount(() => {
                 />
               </svg>
               <h1 class="text-xs">
-                Linkedin: <b>{{ userData?.socialLinks?.linkedinUrl || 'N/A' }}</b>
+                Linkedin:
+                <b>{{ userData?.socialLinks?.linkedinUrl || "N/A" }}</b>
               </h1>
             </div>
             <div class="flex gap-2 items-center">
@@ -160,7 +170,8 @@ onBeforeMount(() => {
                 />
               </svg>
               <h1 class="text-xs">
-                Instagram: <b>{{ userData?.socialLinks?.instagramUrl || 'N/A' }}</b>
+                Instagram:
+                <b>{{ userData?.socialLinks?.instagramUrl || "N/A" }}</b>
               </h1>
             </div>
           </div>
@@ -174,8 +185,9 @@ onBeforeMount(() => {
 
             <div class="space-y-3">
               <div class="space-x-2 flex items-center">
-                
-                <h1 class="md:text-lg text-sm font-black">{{userData?.salary?.amount || 'N/A'}} /month</h1>
+                <h1 class="md:text-lg text-sm font-black">
+                  {{ userData?.salary?.amount || "N/A" }} /month
+                </h1>
               </div>
 
               <NuxtLink to="/dashboard/jobseeker/my-profile/edit">
@@ -183,11 +195,11 @@ onBeforeMount(() => {
                   <div
                     class="md:px-[14px] w-full my-4 text-xs md:py-2 py-3 rounded-5 bg-primary-1 text-white"
                   >
-                  {{
-                    userData?.status && userData?.status === 'draft'
-                      ? 'Complete my profile'
-                      : 'Edit profile info'
-                  }}
+                    {{
+                      userData?.status && userData?.status === "draft"
+                        ? "Complete my profile"
+                        : "Edit profile info"
+                    }}
                   </div>
                 </div>
               </NuxtLink>
@@ -203,7 +215,7 @@ onBeforeMount(() => {
         <div class="space-y-4 pt-4">
           <h1 class="text-xl font-black">About me</h1>
           <p class="text-xs tracking-wider">
-            {{ userData?.bio || 'Complete your profile to add an about' }}
+            {{ userData?.bio || "Complete your profile to add an about" }}
           </p>
         </div>
 
@@ -239,7 +251,7 @@ onBeforeMount(() => {
       <div class="p-4 bg-white rounded-10 my-4 md:w-[670px] w-full h-full">
         <div class="space-y-6">
           <h1 class="text-xl font-black">Uploaded Documents</h1>
-          <div  class="flex justify-between">
+          <div class="flex justify-between">
             <div class="flex items-start gap-x-2">
               <svg
                 width="18"
@@ -255,16 +267,24 @@ onBeforeMount(() => {
               </svg>
               <div>
                 <h1 class="text-xs">Resume/CV</h1>
-                <p v-if="userData?.resumeResource?.resumeCv" class="text-xs text-info-600">{{userData?.firstName}} {{userData?.lastName}}{{ '.'+userData?.resumeResource?.resumeCv?.url.split('.')[-1] }}</p>
+                <p
+                  v-if="userData?.resumeResource?.resumeCv"
+                  class="text-xs text-info-600"
+                >
+                  {{ userData?.firstName }} {{ userData?.lastName
+                  }}{{
+                    "." + userData?.resumeResource?.resumeCv?.url.split(".")[-1]
+                  }}
+                </p>
                 <p v-else class="text-xs text-info-600">No file found</p>
               </div>
             </div>
 
             <NuxtLink
-             to="/dashboard/jobseeker/my-profile/work-experience"
+              to="/dashboard/jobseeker/my-profile/work-experience"
               class="px-[14px] text-xs py-2 text-primary-1 rounded-10 border border-primary-1"
             >
-            {{ userData?.resumeResource?.resumeCv ? 'Change' : 'Add'}}
+              {{ userData?.resumeResource?.resumeCv ? "Change" : "Add" }}
             </NuxtLink>
           </div>
         </div>
