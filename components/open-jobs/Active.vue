@@ -152,7 +152,7 @@ const userStore = useUserStore()
       </div>
 
       <div class="flex justify-between pt-4 items-center">
-        <h1 ><b class="text-2xl">{{job?.applicants?.length || 0}}</b>applicants</h1>
+        <h1 ><b class="text-2xl">{{job?.applicants || 0}}</b>applicants</h1>
         <h1 class="text-success-600 text-xs capitalize">{{job.status}}</h1>
       </div>
     </div>

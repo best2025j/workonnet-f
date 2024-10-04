@@ -200,7 +200,7 @@ onBeforeMount(async () => {
                   </div>
 
                   <div class="">
-                    <h1 class="gap-x-2"><b class="text-2xl">{{ jobStats.recentJobs[0]?.applicants?.length || 0}}</b>applicants</h1>
+                    <h1 class="gap-x-2"><b class="text-2xl">{{ jobStats.recentJobs[0]?.applicants || 0}}</b>applicants</h1>
                   </div>
                 </div>
 
@@ -368,7 +368,7 @@ onBeforeMount(async () => {
           </div>
 
           <div class="flex justify-between items-center">
-            <h1 class="gap-x-2"><b class="text-2xl">{{ job?.applicants?.length || 0}}</b>applicants</h1>
+            <h1 class="gap-x-2"><b class="text-2xl">{{ job?.applicants || 0}}</b>applicants</h1>
             <!-- <h1 class="text-success-600 text-xs">13 in last 2 days</h1> -->
           </div>
         </div>
