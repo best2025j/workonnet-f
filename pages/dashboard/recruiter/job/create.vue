@@ -184,7 +184,7 @@ const formatNumber = (): void => {
         <BtnPrimary
           @click="handleJobPost('draft')"
           :isLoading="isDraft"
-          :disabled="isDraft || v$.$invalid"
+          :disabled="isDraft "
           class="!bg-info-400 !px-4 !py-2 !rounded-5 !text-xs !disabled:bg-black-100"
         >
           <template #text>
@@ -196,7 +196,7 @@ const formatNumber = (): void => {
         <BtnPrimary
           @click="handleJobPost('published')"
           :isLoading="isPublish"
-          :disabled="isPublish || v$.$invalid"
+          :disabled="isPublish "
           class="!px-4 !py-2 !rounded-5 !text-xs"
         >
           <template #text>

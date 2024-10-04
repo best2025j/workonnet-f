@@ -393,6 +393,7 @@ onBeforeMount(async () => {
           v-if="(jobsResult[currentJobIndex].recruiter as IRecruiterDetails)?.photo"
           :src="(jobsResult[currentJobIndex].recruiter as IRecruiterDetails)?.photo?.url"
           :alt="(jobsResult[currentJobIndex].recruiter as IRecruiterDetails)?.companyName"
+          class="h-10 w-10"
         />
         <h1 class="text base font-black capitalize">
           {{ jobsResult[currentJobIndex].title }}

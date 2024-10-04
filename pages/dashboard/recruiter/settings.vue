@@ -7,6 +7,8 @@ import type {
 } from '~/types';
 import { POSITION, useToast } from 'vue-toastification';
 
+
+
 definePageMeta({
   title: 'Settings',
   pageName: 'dashboard.recruiter.settings',
@@ -18,30 +20,39 @@ const authStore = useAuthStore();
 const userStore = useUserStore();
 const isLoading = ref<boolean>(false);
 const toast = useToast();
-const userData = computed<IRecruiterDetails>(() => userStore.loggedInUserDetails)
+const userData = computed<IRecruiterDetails>(
+  () => userStore.loggedInUserDetails
+);
 
 const userSettings = computed(() => userStore.userSettings);
 
-
 const onNewsAndUpdatesSettingsChange = async () => {
-   // run any checks before update
-  await handleUpdateSettings({newsAndUpdates: !userSettings.value?.newsAndUpdates})
-}
+  // run any checks before update
+  await handleUpdateSettings({
+    newsAndUpdates: !userSettings.value?.newsAndUpdates,
+  });
+};
 
 const onSettingsRemindersChange = async () => {
-   // run any checks before update
-  await handleUpdateSettings({reminders: !userSettings.value?.reminders})
-}
+  // run any checks before update
+  await handleUpdateSettings({ reminders: !userSettings.value?.reminders });
+};
 
 const onTipsAndTutorialsSettingsChange = async () => {
   // run any checks before update
-  await handleUpdateSettings({tipsAndTutorials: !userSettings.value?.tipsAndTutorials})
-}
+  await handleUpdateSettings({
+    tipsAndTutorials: !userSettings.value?.tipsAndTutorials,
+  });
+};
 
 const handleUpdateSettings = async (data: Partial<ISettingsDetails>) => {
   try {
     const token = authStore.userToken;
-    const response = await userStore.$api.updateRecruiterSettings(token, data, userSettings.value?.id as string);
+    const response = await userStore.$api.updateRecruiterSettings(
+      token,
+      data,
+      userSettings.value?.id as string
+    );
     const responseData = response as ApiSuccessResponse;
     toast.success('Your settings was updated successfully', {
       timeout: 3000,
@@ -66,20 +77,20 @@ const handleUpdateSettings = async (data: Partial<ISettingsDetails>) => {
 };
 
 onBeforeMount(async () => {
-  if (userStore.userSettings === null || !userStore.userSettings) {
-    try {
-      const token = authStore.userToken;
-      const response = await userStore.$api.refreshAuthRecruiterSettings(token);
-      const responseData = response as ApiSuccessResponse;
-      setTimeout(() => {
-        isLoading.value = false;
-      }, 500);
+  // if (userStore.userSettings === null || !userStore.userSettings) {
+  try {
+    const token = authStore.userToken;
+    const response = await userStore.$api.refreshAuthRecruiterSettings(token);
+    const responseData = response as ApiSuccessResponse;
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 500);
 
-      userStore.setUserSettings(responseData.data);
-    } catch (e) {
-      console.log(e);
-    }
+    userStore.setUserSettings(responseData.data);
+  } catch (e) {
+    console.log(e);
   }
+  // }
 });
 </script>
 
@@ -370,7 +381,7 @@ onBeforeMount(async () => {
             </div>
           </div>
           <p class="text-xs md:hidden py-2">
-            {{ userData?.email  || '' }}
+            {{ userData?.email || '' }}
           </p>
 
           <p class="text-xs md:hidden">

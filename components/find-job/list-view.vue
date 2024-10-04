@@ -16,6 +16,7 @@ defineProps<{ jobList: IJobPost[], currentJobIndex: number }>();
           v-if="(job?.recruiter as IRecruiterDetails)?.photo"
               :src="(job?.recruiter as IRecruiterDetails)?.photo?.url"
               :alt="(job?.recruiter as IRecruiterDetails)?.companyName"
+              class="w-10 h-10 rounded"
           />
           <div class="pl-4">
             <span class="block text-base font-black capitalize">{{

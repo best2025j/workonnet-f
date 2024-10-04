@@ -50,7 +50,7 @@ onBeforeMount(async () => {
   <div v-else class="w-full h-full">
     <div class="p-4 bg-white rounded-10">
       <div class="md:mt-12 md:pl-6 space-y-2">
-        <img :src="userData!.photo?.url" alt="profile-image" />
+        <img :src="userData!.photo?.url" class="h-[80px] w-[80px]" alt="profile-image" />
 
         <div class="flex flex-col md:flex-row justify-between">
           <div class="space-y-2">
@@ -218,7 +218,7 @@ onBeforeMount(async () => {
         <div class="flex items-center justify-between py-2">
           <h1 class="text-sm font-black">Candidates</h1>
           <button
-            v-if="currentJob?.applicants.length"
+            v-if="currentJob!.applicants > 0"
             class="text-xs text-primary-1 flex gap-x-2 items-center"
           >
             View all candidates (72)
@@ -246,7 +246,7 @@ onBeforeMount(async () => {
         </div>
 
         <!-- list -->
-        <div v-if="currentJob?.applicants.length" class="w-full">
+        <div v-if="currentJob!.applicants > 0" class="w-full">
           <ul class="">
             <li
               class="flex my-2 items-center justify-between p-2 bg-black-50 w-full rounded-10"

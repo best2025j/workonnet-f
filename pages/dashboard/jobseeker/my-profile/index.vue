@@ -46,7 +46,7 @@ onBeforeMount(() => {
           <img
             v-if="userData?.photo"
             :src="userData.photo.url"
-            class="w-[70px] h-[70px]"
+            class="w-[70px] h-[70px] rounded-full"
             alt="profile-image"
           />
         </div>
@@ -83,7 +83,7 @@ onBeforeMount(() => {
 
               <h1 class="text-xs">
                 Portfolio link:
-                <b>{{ userData?.socialLink?.portfolioUrl || "N/A" }}</b>
+                <b>{{ userData?.socialLinks?.portfolioUrl || "N/A" }}</b>
               </h1>
             </div>
             <div class="flex gap-2 items-center">
@@ -186,14 +186,18 @@ onBeforeMount(() => {
             <div class="space-y-3">
               <div class="space-x-2 flex items-center">
                 <h1 class="md:text-lg text-sm font-black">
-                  {{ userData?.salary?.amount || "N/A" }} /month
+                  NGN{{
+                    formatCurrency(Number(userData?.salary?.amount) || 0) ||
+                    "N/A"
+                  }}
+                  /month
                 </h1>
               </div>
 
               <NuxtLink to="/dashboard/jobseeker/my-profile/edit">
-                <div class="flex justify-end">
+                <div class="flex justify-end items-center">
                   <div
-                    class="md:px-[14px] w-full my-4 text-xs md:py-2 py-3 rounded-5 bg-primary-1 text-white"
+                    class="md:px-[14px] w-full my-4 text-xs md:py-2 py-3 rounded-5 bg-primary-1 text-white text-center"
                   >
                     {{
                       userData?.status && userData?.status === "draft"

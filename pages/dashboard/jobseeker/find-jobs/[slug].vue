@@ -84,7 +84,7 @@ onBeforeMount(async () => {
       <img
         v-if="(currentJob?.recruiter as IRecruiterDetails)?.photoHeader"
         :src="(currentJob?.recruiter as IRecruiterDetails)?.photoHeader?.url"
-        class="w-full h-44 object-cover md:h-full"
+        class="w-full h-40 object-cover md:h-full"
         alt="no image yet..."
       />
 

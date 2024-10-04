@@ -74,6 +74,7 @@ const rules = computed(() => {
 
 const v$ = useVuelidate(rules, formData);
 
+
 const handleSignup = async () => {
   isLoading.value = true;
   const isValidForm = await v$.value.$validate();
@@ -88,6 +89,7 @@ const handleSignup = async () => {
     }, 2000);
     return;
   }
+
 
   try {
     await $fetch("/api/auth/recruiter/register", {
@@ -116,8 +118,8 @@ const handleSignup = async () => {
   } catch (error: any) {
     const errorData = error.data as ApiErrorResponse;
 
-    if (errorData.data?.errorCode === "E11000") {
-      toast.error("Email already in use", {
+    if (errorData.data?.errorCode === 'E11000') {
+      toast.error(errorData.data.message, {
         timeout: 3000,
         position: POSITION.TOP_RIGHT,
       });
@@ -404,7 +406,7 @@ onBeforeRouteLeave(() => {
           <BtnPrimary
             @click="handleSignup()"
             :isLoading="isLoading"
-            :disabled="isLoading || v$.$invalid"
+            :disabled="isLoading "
           >
             <template #text> Complete Signup </template>
           </BtnPrimary>
