@@ -19,7 +19,7 @@ const userStore = useUserStore()
     >
       <div class="flex items-start justify-between">
         <div class="flex space-x-2">
-          <img :src="userStore.loggedInUserDetails.photo.url" alt="no pix" />
+          <img :src="userStore.loggedInUserDetails.photo.url" class="w-[40px] h-[40px]" alt="no pix" />
           <div class="">
             <h1 class="text-base font-black capitalize">{{ job.title }}</h1>
             <h1 class="text-xs">Posted {{formatTimeDiffHuman(job.createdAt)}}</h1>
@@ -152,7 +152,7 @@ const userStore = useUserStore()
       </div>
 
       <div class="flex justify-between pt-4 items-center">
-        <h1 ><b class="text-2xl">{{job?.applicants?.length || 0}}</b>applicants</h1>
+        <h1 ><b class="text-2xl">{{job?.applicants || 0}}</b>applicants</h1>
         <h1 class="text-success-600 text-xs capitalize">{{job.status}}</h1>
       </div>
     </div>

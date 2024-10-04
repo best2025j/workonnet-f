@@ -287,7 +287,7 @@ const handleSignup = async () => {
         <BtnPrimary
           @click="handleSignup()"
           :isLoading="isLoading"
-          :disabled="isLoading || v$.$invalid"
+          :disabled="isLoading "
         >
           <template #text>
             {{ !isLoading ? 'Signup' : 'Please wait...' }}

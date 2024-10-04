@@ -29,8 +29,8 @@ export interface ISocialLinks {
 
 export interface ISalaryExpectation {
   amount: string;
-  frequency: string;
-  currency: string;
+  frequency?: string;
+  currency?: string;
 }
 
 export interface IPhysicalLocation {
@@ -60,6 +60,7 @@ export interface IUserDetails {
   salary?: ISalaryExpectation;
   bio: string;
   socialLinks: ISocialLinks;
+  // company: string;
 }
 
 export interface IRecruiterDetails {
@@ -115,7 +116,7 @@ export interface IJobPost {
   status: 'draft' | 'published' | 'archived';
   createdAt: string;
   updatedAt: string;
-  applicants: string[];
+  applicants: number;
   id: string;
 }
 
@@ -137,6 +138,19 @@ export interface IJobPostWithPagination extends IPagination {
 
 export interface IRecruitersWithPagination extends IPagination {
   docs: IRecruiterDetails[];
+}
+
+export interface IWorkExperience {
+  user?: IUserDetails | string;
+  companyOrganization: string;
+  website?: string;
+  companyLocation: string;
+  city: string;
+  jobTitle: string;
+  startingFrom: string;
+  endingIn: string;
+  presentlyWorking?: boolean;
+  details: string;
 }
 
 export interface TelInputData {

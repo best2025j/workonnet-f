@@ -131,7 +131,7 @@ onMounted(() => {
         />
       </form>
 
-      <BtnPrimary @click="forgotPassword()" :disabled="isLoading || v$.$invalid" :isLoading="isLoading">
+      <BtnPrimary @click="forgotPassword()" :disabled="isLoading " :isLoading="isLoading">
         <template #text>
           {{ !isLoading ? 'Send 5-digits' : 'Please waiting...' }}
         </template>

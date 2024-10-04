@@ -17,6 +17,22 @@ definePageMeta({
   middleware: ['auth', 'is-jobseeker'],
 });
 
+interface FormDataFields {
+  firstName: string;
+  lastName: string;
+  phoneNumber: string;
+  bio: string;
+  location: string;
+  facebookUrl: string;
+  linkedinUrl: string;
+  instagramUrl: string;
+  twitterUrl: string;
+  portfolioUrl: string;
+  occupation: string;
+  salary: string;
+  // company: string,
+}
+
 const userStore = useUserStore();
 const authStore = useAuthStore();
 const toast = useToast();
@@ -34,6 +50,17 @@ const bannerImageData = ref(null);
 const bannerImageSelector = ref(null);
 
 let phoneObjectData = ref<TelInputData | null>(null);
+
+// Set to track changed fields
+const changedFields = ref<Set<keyof FormDataFields>>(new Set());
+
+// Computed property to check if any fields are changed
+const hasChanges = computed(() => changedFields.value.size > 0);
+
+// Method to mark fields as changed when edited
+const markAsChanged = (field: keyof FormDataFields) => {
+  changedFields.value.add(field);
+};
 
 // Computed property to enable the upload button only when a file is selected
 const isUploadEnabled = computed(() => {
@@ -78,9 +105,9 @@ const handleBannerPreview = (e: any) => {
   showBannerImage(files![0]);
 };
 
-const formData = reactive({
+const formData = reactive<FormDataFields>({
   firstName: userData.value?.firstName || '',
-  lastName: userData.value?.firstName || '',
+  lastName: userData.value?.lastName || '',
   phoneNumber: userData.value?.phoneNumber?.number || '',
   bio: userData.value?.bio || '',
   location: userData.value.location || '',
@@ -91,6 +118,7 @@ const formData = reactive({
   portfolioUrl: userData.value?.socialLinks?.portfolioUrl || '',
   occupation: userData.value?.occupation || '',
   salary: userData.value?.salary?.amount || '',
+  // company: userData.value?.company || '',
 });
 
 const rules = computed(() => {
@@ -142,6 +170,7 @@ const v$ = useVuelidate(rules, formData);
 const onPhoneInput = (phone: any, phoneObject: any, input: any) => {
   if (phoneObject?.formatted) {
     phoneObjectData.value = phoneObject;
+    markAsChanged('phoneNumber');
   }
 };
 
@@ -223,30 +252,43 @@ const handleProfileUpdate = async () => {
 
   formData.salary = convertCurrencyToNumber(formData.salary).toString();
 
-  // delete formData.facebookUrl;
-  // delete formData.linkedinUrl;
-  // delete formData.instagramUrl;
-  // delete formData.twitterUrl;
-  // delete formData.portfolioUrl;
-  // restructure form data here
-  const data = {
-    firstName: formData.firstName,
-    lastName: formData.firstName,
-    bio: formData.bio,
-    location: formData.location,
-    occupation: formData.occupation,
-    phoneNumber: formattedPhoneNumber,
-    socialLinks: {
-      facebookUrl: formData.facebookUrl,
-      linkedinUrl: formData.linkedinUrl,
-      instagramUrl: formData.instagramUrl,
-      twitterUrl: formData.twitterUrl,
-      portfolioUrl: formData.portfolioUrl,
-    },
-    salary: {
-      amount: formData.salary,
-    },
-  };
+  let data: Partial<IUserDetails> = {};
+
+  // if (userData.value?.status === 'draft') {
+    data = {
+      firstName: formData.firstName,
+      lastName: formData.firstName,
+      bio: formData.bio,
+      location: formData.location,
+      occupation: formData.occupation,
+      phoneNumber: formattedPhoneNumber,
+      socialLinks: {
+        facebookUrl: formData.facebookUrl,
+        linkedinUrl: formData.linkedinUrl,
+        instagramUrl: formData.instagramUrl,
+        twitterUrl: formData.twitterUrl,
+        portfolioUrl: formData.portfolioUrl,
+      },
+      salary: {
+        amount: formData.salary,
+      },
+    };
+  // } else {
+  //   const updatedData: Partial<FormDataFields> = {};
+
+  //   // Only include the fields that have been changed
+  //   changedFields.value.forEach((field) => {
+
+  //     if(field === 'phoneNumber') {
+  //       updatedData[field] = formData[field];
+  //     } else {
+  //       updatedData[field] = formData[field];
+  //     }
+     
+  //   });
+
+  //   // data = {...updatedData}
+  // }
 
   try {
     const token = authStore.userToken;
@@ -295,6 +337,8 @@ const formatNumber = (): void => {
   formData.salary = new Intl.NumberFormat('en-NG', {
     minimumFractionDigits: 0,
   }).format(Number(value));
+
+  markAsChanged('salary');
 };
 </script>
 
@@ -374,7 +418,7 @@ const formatNumber = (): void => {
             >
           </div>
         </div>
-        <!-- <div class="bg-white p-6 border-t-2">
+        <div class="bg-white p-6 border-t-2">
           <div class="space-x-3 flex items-center">
             <span
               ><svg
@@ -396,11 +440,12 @@ const formatNumber = (): void => {
               </h1></NuxtLink
             >
           </div>
-        </div> -->
+        </div>
         <div class="text-right py-3 flex items-center justify-end">
           <BtnPrimary
             @click="handleProfileUpdate()"
             :isLoading="isLoading"
+            :disabled="isLoading || hasChanges === false"
             class="!bg-success-600 !text-xs !py-2 !px-3.5 !rounded-5 !w-auto !disabled:bg-black-100"
           >
             <template #text>
@@ -535,6 +580,7 @@ const formatNumber = (): void => {
                     v-model="formData.firstName"
                     :disabled="isLoading"
                     @change="v$.firstName.$touch"
+                    @input="markAsChanged('firstName')"
                     placeholder="Enter your first name here"
                     class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border border-gray-300 rounded-md"
                   />
@@ -556,6 +602,7 @@ const formatNumber = (): void => {
                     v-model="formData.lastName"
                     :disabled="isLoading"
                     @change="v$.lastName.$touch"
+                    @input="markAsChanged('lastName')"
                     placeholder="Enter your last name here"
                     class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border border-gray-300 rounded-md"
                   />
@@ -579,6 +626,7 @@ const formatNumber = (): void => {
                   v-model="formData.occupation"
                   :disabled="isLoading"
                   @change="v$.occupation.$touch"
+                  @input="markAsChanged('occupation')"
                   placeholder="Enter your role"
                   class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border border-gray-300 rounded-md"
                 />
@@ -594,14 +642,27 @@ const formatNumber = (): void => {
                 </div>
               </div>
               <!-- company -->
-              <div class="flex flex-col w-full">
+              <!-- <div class="flex flex-col w-full">
                 <label for="first-name" class="text-sm mb-2">Company</label>
                 <input
                   type="text"
-                  placeholder="Workonnect"
+                  v-model="formData.company"
+                  :disabled="isLoading"
+                  @input=" markAsChanged('company')"
+                  placeholder="Enter company name"
                   class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border border-gray-300 rounded-md"
                 />
-              </div>
+
+                <div
+                  class="input-errors"
+                  v-for="error of v$.company.$errors"
+                  :key="error.$uid"
+                >
+                  <span class="text-xs text-danger-500"
+                    >* {{ error.$message }}</span
+                  >
+                </div>
+              </div> -->
               <!--  -->
               <div class="flex flex-col w-full">
                 <vue-tel-input
@@ -636,6 +697,7 @@ const formatNumber = (): void => {
                     v-model="formData.location"
                     :disabled="isLoading"
                     @change="v$.location.$touch"
+                    @input="markAsChanged('location')"
                     placeholder="Enter your location"
                     class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border border-gray-300 rounded-md"
                   />
@@ -661,6 +723,7 @@ const formatNumber = (): void => {
                     v-model="formData.portfolioUrl"
                     :disabled="isLoading"
                     @change="v$.portfolioUrl.$touch"
+                    @input="markAsChanged('portfolioUrl')"
                     placeholder="Enter your portfolio url"
                     class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border border-gray-300 rounded-md"
                   />
@@ -768,6 +831,7 @@ const formatNumber = (): void => {
                 v-model="formData.facebookUrl"
                 :disabled="isLoading"
                 @change="v$.portfolioUrl.$touch"
+                @input="markAsChanged('portfolioUrl')"
                 placeholder="Facebook"
                 class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border border-gray-300 rounded-md"
               />
@@ -788,6 +852,7 @@ const formatNumber = (): void => {
                 v-model="formData.linkedinUrl"
                 :disabled="isLoading"
                 @change="v$.linkedinUrl.$touch"
+                @input="markAsChanged('linkedinUrl')"
                 placeholder="Linkedin"
                 class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border border-gray-300 rounded-md"
               />
@@ -809,6 +874,7 @@ const formatNumber = (): void => {
                 v-model="formData.instagramUrl"
                 :disabled="isLoading"
                 @change="v$.instagramUrl.$touch"
+                @input="markAsChanged('instagramUrl')"
                 placeholder="Instagram"
                 class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border border-gray-300 rounded-md"
               />
@@ -830,6 +896,7 @@ const formatNumber = (): void => {
                 v-model="formData.twitterUrl"
                 :disabled="isLoading"
                 @change="v$.twitterUrl.$touch"
+                @input="markAsChanged('twitterUrl')"
                 placeholder="Twitter"
                 class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border border-gray-300 rounded-md"
               />
@@ -865,6 +932,7 @@ const formatNumber = (): void => {
                 v-model="formData.bio"
                 :disabled="isLoading"
                 @change="v$.bio.$touch"
+                @input="markAsChanged('bio')"
                 rows="10"
                 placeholder="Write something about you that entice the recruiters......"
                 class="p-2 border border-gray-300 rounded-lg w-full"
@@ -886,7 +954,7 @@ const formatNumber = (): void => {
         </div>
 
         <!-- work experience -->
-        <!-- <div id="work_experience" class="bg-white p-4 rounded-10 font-[Nexa]">
+        <div id="work_experience" class="bg-white p-4 rounded-10 font-[Nexa]">
           <div
             class="flex flex-col md:flex-row justify-between md:items-center"
           >
@@ -947,7 +1015,7 @@ const formatNumber = (): void => {
               </div>
             </div>
           </ul>
-        </div> -->
+        </div>
       </div>
     </div>
   </div>

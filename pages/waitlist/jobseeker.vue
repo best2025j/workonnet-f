@@ -253,7 +253,7 @@ const handleSubmit = async () => {
       <BtnPrimary
         @click="handleSubmit()"
         :isLoading="isLoading"
-        :disabled="isLoading || v$.$invalid"
+        :disabled="isLoading "
         class="w-full font-black uppercase"
       >
         <template #text> join </template>

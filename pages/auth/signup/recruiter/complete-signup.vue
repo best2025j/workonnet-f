@@ -405,7 +405,7 @@ onBeforeRouteLeave(() => {
           <BtnPrimary
             @click="handleSignup()"
             :isLoading="isLoading"
-            :disabled="isLoading || v$.$invalid"
+            :disabled="isLoading "
           >
             <template #text> Complete Signup </template>
           </BtnPrimary>

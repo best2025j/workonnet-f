@@ -235,7 +235,7 @@ onMounted(() => {
         <BtnPrimary
           @click="handleNextStep()"
           :isLoading="isLoading"
-          :disabled="isLoading || v$.$invalid"
+          :disabled="isLoading "
         >
           <template #text> Next : Add Company </template>
         </BtnPrimary>

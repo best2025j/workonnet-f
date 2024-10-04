@@ -38,4 +38,8 @@ export default defineNuxtConfig({
       apiSecret: '',
     },
   },
+
+  build: {
+    transpile: ['vue-toastification'],
+  },
 });

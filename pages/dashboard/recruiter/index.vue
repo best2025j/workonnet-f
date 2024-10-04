@@ -190,7 +190,7 @@ onBeforeMount(async () => {
           <div class="flex gap-4 items-center">
             <div v-if="jobStats?.recentJobs?.length" class="flex flex-col items-center pt-6 space-y-2">
               <div class="space-y-4">
-                <img :src="userData?.photo?.url" alt="" />
+                <img :src="userData?.photo?.url" class="h-[40px] w-[40px]" alt="" />
                 <div
                   class="flex flex-col md:flex-row justify-between items-start"
                 >
@@ -200,7 +200,7 @@ onBeforeMount(async () => {
                   </div>
 
                   <div class="">
-                    <h1 class="gap-x-2"><b class="text-2xl">{{ jobStats.recentJobs[0]?.applicants?.length || 0}}</b>applicants</h1>
+                    <h1 class="gap-x-2"><b class="text-2xl">{{ jobStats.recentJobs[0]?.applicants || 0}}</b>applicants</h1>
                   </div>
                 </div>
 
@@ -368,7 +368,7 @@ onBeforeMount(async () => {
           </div>
 
           <div class="flex justify-between items-center">
-            <h1 class="gap-x-2"><b class="text-2xl">{{ job?.applicants?.length || 0}}</b>applicants</h1>
+            <h1 class="gap-x-2"><b class="text-2xl">{{ job?.applicants || 0}}</b>applicants</h1>
             <!-- <h1 class="text-success-600 text-xs">13 in last 2 days</h1> -->
           </div>
         </div>

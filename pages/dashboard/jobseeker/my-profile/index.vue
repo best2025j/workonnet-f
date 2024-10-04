@@ -75,7 +75,7 @@ onBeforeMount(() => {
               </svg>
 
               <h1 class="text-xs">
-                Portfolio link: <b>{{ userData?.socialLink?.portfolioUrl || 'N/A' }}</b>
+                Portfolio link: <b>{{ userData?.socialLinks?.portfolioUrl || 'N/A' }}</b>
               </h1>
             </div>
             <div class="flex gap-2 items-center">
@@ -175,7 +175,7 @@ onBeforeMount(() => {
             <div class="space-y-3">
               <div class="space-x-2 flex items-center">
                 
-                <h1 class="md:text-lg text-sm font-black">NGN{{formatCurrency(userData?.salary?.amount?.toString()) || 'N/A'}} /month</h1>
+                <h1 class="md:text-lg text-sm font-black">NGN{{formatCurrency(Number(userData?.salary?.amount) || 0) || 'N/A'}} /month</h1>
               </div>
 
               <NuxtLink to="/dashboard/jobseeker/my-profile/edit">
