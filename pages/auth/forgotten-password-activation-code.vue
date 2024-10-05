@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { required, helpers, maxLength } from '@vuelidate/validators';
-import { useVuelidate } from '@vuelidate/core';
-import { useToast, POSITION } from 'vue-toastification';
-import VOtpInput from 'vue3-otp-input';
-import type { ApiErrorResponse, ApiSuccessResponse } from '~/types';
+import { required, helpers, maxLength } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
+import { useToast, POSITION } from "vue-toastification";
+import VOtpInput from "vue3-otp-input";
+import type { ApiErrorResponse, ApiSuccessResponse } from "~/types";
 
 definePageMeta({
-  title: 'Password Auth Code',
-  pageName: 'auth.forgotten.password.code',
+  title: "Password Auth Code",
+  pageName: "auth.forgotten.password.code",
 });
 
 const toast = useToast();
@@ -32,17 +32,17 @@ const clearInput = () => {
 
 const formData = reactive({
   token: route.query.tke,
-  code: '',
+  code: "",
 });
 
 const rules = computed(() => {
   return {
     token: {
-      required: helpers.withMessage('Invalid token', required),
+      required: helpers.withMessage("Invalid token", required),
     },
     code: {
-      required: helpers.withMessage('Code is required', required),
-      maxLength: helpers.withMessage('Please enter a valid code', maxLength(5)),
+      required: helpers.withMessage("Code is required", required),
+      maxLength: helpers.withMessage("Please enter a valid code", maxLength(5)),
     },
   };
 });
@@ -53,7 +53,7 @@ const verifyCode = async () => {
   isLoading.value = true;
   const isValidForm = await v$.value.$validate();
   if (!isValidForm) {
-    toast.error('Please enter a valid code', {
+    toast.error("Please enter a valid code", {
       timeout: 3000,
       position: POSITION.TOP_RIGHT,
     });
@@ -65,12 +65,12 @@ const verifyCode = async () => {
   }
 
   try {
-    const response = await $fetch('/api/auth/code-forgot-password', {
-      method: 'POST',
+    const response = await $fetch("/api/auth/code-forgot-password", {
+      method: "POST",
       body: { ...formData, email: route.query.email },
     });
 
-    toast.success('Code verification successful.', {
+    toast.success("Code verification successful.", {
       timeout: 2000,
       position: POSITION.TOP_RIGHT,
     });
@@ -82,7 +82,7 @@ const verifyCode = async () => {
 
     setTimeout(() => {
       router.push({
-        path: '/auth/set-new-password',
+        path: "/auth/set-new-password",
         query: {
           tke: responseData.data.token,
           reqId: route.query.reqId,
@@ -92,7 +92,7 @@ const verifyCode = async () => {
     }, 2000);
   } catch (error: any) {
     const errorData = error.data as ApiErrorResponse;
-    toast.error('An error occurred try again', {
+    toast.error("An error occurred try again", {
       timeout: 3000,
       position: POSITION.TOP_RIGHT,
     });
@@ -110,7 +110,7 @@ onMounted(() => {
     !route.query.email ||
     !route.query.reqId
   ) {
-    return router.replace('/');
+    return router.replace("/");
   }
 
   const interval = setInterval(() => {
@@ -128,7 +128,7 @@ onMounted(() => {
 <template>
   <div class="md:w-1/2 mx-auto h-full">
     <div
-      class="flex flex-col items-center justify-center md:w-[23.375rem] mx-auto mt-10"
+      class="flex flex-col items-center justify-center md:w-[23.375rem] mx-auto mt-10 px-6 md:px-0"
     >
       <span class="mt-8">
         <svg
@@ -187,7 +187,7 @@ onMounted(() => {
         :isLoading="isLoading"
       >
         <template #text>
-          {{ !isLoading ? 'Continue' : 'Verifying Otp...' }}
+          {{ !isLoading ? "Continue" : "Verifying Otp..." }}
         </template>
       </BtnPrimary>
     </div>

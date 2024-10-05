@@ -1,14 +1,14 @@
 <script setup lang="ts">
-import { POSITION, useToast } from 'vue-toastification';
-import { required, helpers, email } from '@vuelidate/validators';
-import { useVuelidate } from '@vuelidate/core';
-import type { ApiErrorResponse, ApiSuccessResponse } from '~/types';
+import { POSITION, useToast } from "vue-toastification";
+import { required, helpers, email } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
+import type { ApiErrorResponse, ApiSuccessResponse } from "~/types";
 
 definePageMeta({
-  layout: 'auth',
-  title: 'jobseeker.signin',
-  pageName: 'jobseeker.signin',
-  middleware: ['no-auth'],
+  layout: "auth",
+  title: "jobseeker.signin",
+  pageName: "jobseeker.signin",
+  middleware: ["no-auth"],
 });
 
 const router = useRouter();
@@ -18,18 +18,18 @@ const isLoading = ref<boolean>(false);
 const authStore = useAuthStore();
 
 const formData = reactive({
-  email: route.query?.email ? route.query?.email : '',
-  password: '',
+  email: route.query?.email ? route.query?.email : "",
+  password: "",
 });
 
 const rules = computed(() => {
   return {
     email: {
-      required: helpers.withMessage('Email is required', required),
-      email: helpers.withMessage('Enter a valid email', email),
+      required: helpers.withMessage("Email is required", required),
+      email: helpers.withMessage("Enter a valid email", email),
     },
     password: {
-      required: helpers.withMessage('Please enter a password', required),
+      required: helpers.withMessage("Please enter a password", required),
     },
   };
 });
@@ -40,7 +40,7 @@ const handleLogin = async () => {
   isLoading.value = true;
   const isValidForm = await v$.value.$validate();
   if (!isValidForm) {
-    toast.error('Please enter a valid email or password', {
+    toast.error("Please enter a valid email or password", {
       timeout: 3000,
       position: POSITION.TOP_RIGHT,
     });
@@ -52,8 +52,8 @@ const handleLogin = async () => {
   }
 
   try {
-    const response = await $fetch('/api/auth/jobseeker/authenticate', {
-      method: 'POST',
+    const response = await $fetch("/api/auth/jobseeker/authenticate", {
+      method: "POST",
       body: formData,
     });
 
@@ -64,7 +64,7 @@ const handleLogin = async () => {
     }, 1000);
 
     return router.push({
-      path: '/auth/activation-code',
+      path: "/auth/activation-code",
       query: {
         tk: responseData.data.accessToken,
         email: formData.email,
@@ -75,13 +75,13 @@ const handleLogin = async () => {
 
     console.log(error);
 
-    if (errorData.data?.errorCode === 'CI0001') {
+    if (errorData.data?.errorCode === "CI0001") {
       toast.error(errorData.data.message, {
         timeout: 3000,
         position: POSITION.TOP_RIGHT,
       });
     } else {
-      toast.error('An error occurred try again', {
+      toast.error("An error occurred try again", {
         timeout: 3000,
         position: POSITION.TOP_RIGHT,
       });
@@ -94,12 +94,12 @@ const handleLogin = async () => {
 };
 </script>
 
-
-
 <template>
-  <div class="flex justify-center items-center w-full">
+  <div class="flex justify-center items-center w-full px-6 md:px-0">
     <div class="md:w-[23.375rem] w-full flex flex-col">
-      <h2 class="text-center text-3xl md:text-[32px] mb-6 font-[Georgia] font-normal">
+      <h2
+        class="text-center text-2xl md:text-[32px] mb-10 font-[Georgia] font-normal"
+      >
         Continue to account
       </h2>
       <div class="flex flex-col items-center justify-center gap-4 text-[12px]">
@@ -170,7 +170,7 @@ const handleLogin = async () => {
           Continue with LinkedIn
         </button>
       </div>
-      
+
       <form
         class="flex flex-col mt-6 mx-auto items-start justify-center text-left w-full max-w-md"
       >
@@ -185,7 +185,9 @@ const handleLogin = async () => {
             class="outline-none text-base w-full font-thin rounded-lg px-3 py-2.5 border border-black-200 border-solid"
           />
 
-          <label class="text-base font-thin mb-2 text-left mt-4">Password</label>
+          <label class="text-base font-thin mb-2 text-left mt-4"
+            >Password</label
+          >
           <input
             type="password"
             placeholder="Enter password"
@@ -212,7 +214,7 @@ const handleLogin = async () => {
           :disabled="isLoading "
         >
           <template #text>
-            {{ !isLoading ? 'Sign in' : 'Please wait...' }}
+            {{ !isLoading ? "Sign in" : "Please wait..." }}
           </template>
         </BtnPrimary>
       </form>

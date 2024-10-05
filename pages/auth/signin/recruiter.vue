@@ -112,10 +112,10 @@ const loginRecruiter = async () => {
 </script>
 
 <template>
-  <div class="flex justify-center items-center w-full">
+  <div class="flex justify-center items-center w-full px-6 md:px-0">
     <div class="md:w-[23.375rem] w-full flex flex-col">
       <h2
-        class="text-center text-3xl md:text-[32px] mb-6 font-[Georgia] font-normal"
+        class="text-center text-2xl md:text-[32px] mb-6 font-[Georgia] font-normal"
       >
         Continue to account
       </h2>

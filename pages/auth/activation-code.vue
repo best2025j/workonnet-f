@@ -146,7 +146,7 @@ onMounted(() => {
 <template>
   <div class="md:w-1/2 mx-auto h-full">
     <div
-      class="flex flex-col items-center justify-center md:w-[23.375rem] mx-auto mt-32"
+      class="flex flex-col items-center justify-center md:w-[23.375rem] mx-auto mt-32 px-6 md:px-0"
     >
       <span class="mt-5">
         <svg

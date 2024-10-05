@@ -122,7 +122,7 @@ const handleSignup = async () => {
 };
 </script>
 <template>
-  <div class="flex justify-center items-center w-full">
+  <div class="flex justify-center items-center w-full px-6 md:px-0">
     <div class="md:w-[23.375rem] w-full flex flex-col">
       <h2
         class="text-center md:text-[32px] mb-10 font-[Georgia] text-2xl font-normal"
@@ -202,7 +202,7 @@ const handleSignup = async () => {
       </div>
 
       <form
-        class="flex flex-col mt-6 mx-auto space-y-2 items-start justify-center text-left w-full max-w-md"
+        class="flex flex-col mt-6 mx-auto space-y-3 items-start justify-center text-left w-full max-w-md"
       >
         <div class="flex items-start justify-between space-x-2">
           <div>
@@ -213,7 +213,7 @@ const handleSignup = async () => {
               v-model="formData.firstName"
               :disabled="isLoading"
               @change="v$.firstName.$touch"
-              class="outline-none w-full text-base rounded-md px-3 py-2 border border-black-200 border-solid"
+              class="outline-none w-full text-base rounded-md px-3 py-2.5 border border-black-200 border-solid"
             />
             <div
               class="input-errors"
@@ -231,7 +231,7 @@ const handleSignup = async () => {
               v-model="formData.lastName"
               :disabled="isLoading"
               @change="v$.lastName.$touch"
-              class="outline-none w-full text-base rounded-md px-3 py-2 border border-black-200 border-solid"
+              class="outline-none w-full text-base rounded-md px-3 py-2.5 border border-black-200 border-solid"
             />
 
             <div
@@ -251,7 +251,7 @@ const handleSignup = async () => {
             v-model="formData.email"
             :disabled="isLoading"
             @change="v$.email.$touch"
-            class="outline-none w-full text-base rounded-md px-3 py-2 border border-black-200 border-solid"
+            class="outline-none w-full text-base rounded-md px-3 py-2.5 border border-black-200 border-solid"
           />
 
           <div
@@ -262,6 +262,7 @@ const handleSignup = async () => {
             <div class="text-xs text-danger-500">* {{ error.$message }}</div>
           </div>
         </div>
+
         <div class="w-full">
           <label class="text-base font-thin text-left">Create Password </label>
           <input
@@ -271,7 +272,7 @@ const handleSignup = async () => {
             v-model="formData.password"
             :disabled="isLoading"
             @change="v$.password.$touch"
-            class="outline-none text-base leading-5 w-full p border border-solid border-black-200 rounded-lg px-3 py-2"
+            class="outline-none text-base leading-5 w-full p border border-solid border-black-200 rounded-lg px-3 py-2.5"
           />
 
           <div

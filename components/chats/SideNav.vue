@@ -116,13 +116,14 @@
         <span class="text-xs text-black-900">07:25</span>
       </div>
       <!--  -->
-      <div class="flex items-start justify-between p-4 border-b">        <div class="space-x-3 flex">
-
-        <img src="/assets/images/Ellipse10.png" alt="no pix" />
-        <div class="space-y-1">
-          <h1 class="text-sm text-balck-950">Darlene Robertson</h1>
-          <h1 class="text-xs text-black-400">What’s the difference...</h1>
-        </div></div>
+      <div class="flex items-start justify-between p-4 border-b">
+        <div class="space-x-3 flex">
+          <img src="/assets/images/Ellipse10.png" alt="no pix" />
+          <div class="space-y-1">
+            <h1 class="text-sm text-balck-950">Darlene Robertson</h1>
+            <h1 class="text-xs text-black-400">What’s the difference...</h1>
+          </div>
+        </div>
         <span class="text-xs text-black-900">07:33</span>
       </div>
     </div>

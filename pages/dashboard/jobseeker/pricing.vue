@@ -9,7 +9,9 @@ definePageMeta({
 
 <template>
   <div class="text-black-900 pt-6">
-    <div class="flex flex-col md:flex-row justify-between md:items-center w-full space-y-4">
+    <div
+      class="flex flex-col md:flex-row justify-between items-start space-y-2 md:space-y-0 md:items-center"
+    >
       <div class="space-y-2 pt-3">
         <h1 class="font-black text-xl">Plan & Pricing</h1>
 
@@ -20,7 +22,9 @@ definePageMeta({
       </div>
 
       <div class="py-2 space-y-2">
-        <h1 class="text-xs md:text-sm">Choose the country for your job recommendations</h1>
+        <h1 class="text-xs md:text-sm">
+          Choose the country for your job recommendations
+        </h1>
         <div class="relative flex items-center">
           <svg
             width="19"

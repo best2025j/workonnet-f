@@ -1,25 +1,25 @@
 <script setup lang="ts">
-import { POSITION, useToast } from 'vue-toastification';
+import { POSITION, useToast } from "vue-toastification";
 import {
   required,
   helpers,
   email,
   url,
   minLength,
-} from '@vuelidate/validators';
-import { useVuelidate } from '@vuelidate/core';
-import type { ApiErrorResponse } from '~/types';
+} from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
+import type { ApiErrorResponse } from "~/types";
 
 definePageMeta({
-  layout: 'auth',
-  title: 'recruiter.signup.complete',
-  pageName: 'recruiter.signup',
+  layout: "auth",
+  title: "recruiter.signup.complete",
+  pageName: "recruiter.signup",
   middleware: [
     function (to, from) {
       const authStore = useAuthStore();
       if (import.meta.server) return;
       if (authStore.stepOneRecruiterForm !== null) return;
-      return navigateTo('/');
+      return navigateTo("/");
     },
   ],
 });
@@ -31,43 +31,43 @@ const isLoading = ref<boolean>(false);
 const isSubmitted = ref<boolean>(false);
 
 const formData = reactive({
-  fullName: '',
-  email: '',
-  password: '',
-  companyName: '',
-  companySize: '',
-  industry: '',
-  websiteUrl: '',
+  fullName: "",
+  email: "",
+  password: "",
+  companyName: "",
+  companySize: "",
+  industry: "",
+  websiteUrl: "",
 });
 
 const rules = computed(() => {
   return {
     fullName: {
-      required: helpers.withMessage('Full names is required', required),
+      required: helpers.withMessage("Full names is required", required),
     },
     email: {
-      required: helpers.withMessage('Email is required', required),
-      email: helpers.withMessage('Enter a valid email', email),
+      required: helpers.withMessage("Email is required", required),
+      email: helpers.withMessage("Enter a valid email", email),
     },
     password: {
-      required: helpers.withMessage('Please enter a password', required),
+      required: helpers.withMessage("Please enter a password", required),
       minLength: helpers.withMessage(
-        'Password cannot be less than 8 characters',
+        "Password cannot be less than 8 characters",
         minLength(8)
       ),
     },
     companyName: {
-      required: helpers.withMessage('Company name is required', required),
+      required: helpers.withMessage("Company name is required", required),
     },
     companySize: {
-      required: helpers.withMessage('Company size is required', required),
+      required: helpers.withMessage("Company size is required", required),
     },
     industry: {
-      required: helpers.withMessage('Industry is required', required),
+      required: helpers.withMessage("Industry is required", required),
     },
     websiteUrl: {
-      required: helpers.withMessage('Website url is required', required),
-      url: helpers.withMessage('Must be a valid url', url),
+      required: helpers.withMessage("Website url is required", required),
+      url: helpers.withMessage("Must be a valid url", url),
     },
   };
 });
@@ -79,7 +79,7 @@ const handleSignup = async () => {
   isLoading.value = true;
   const isValidForm = await v$.value.$validate();
   if (!isValidForm) {
-    toast.error('Please fill all fields correctly', {
+    toast.error("Please fill all fields correctly", {
       timeout: 3000,
       position: POSITION.TOP_RIGHT,
     });
@@ -92,12 +92,12 @@ const handleSignup = async () => {
 
 
   try {
-    await $fetch('/api/auth/recruiter/register', {
-      method: 'POST',
+    await $fetch("/api/auth/recruiter/register", {
+      method: "POST",
       body: formData,
     });
 
-    toast.success('Signup successful, Please login', {
+    toast.success("Signup successful, Please login", {
       timeout: 3000,
       position: POSITION.TOP_RIGHT,
     });
@@ -106,11 +106,11 @@ const handleSignup = async () => {
       isLoading.value = false;
     }, 500);
 
-    isSubmitted.value = true
+    isSubmitted.value = true;
 
     // TODO:// Login INSTEAD
     return router.push({
-      path: '/auth/signin/recruiter',
+      path: "/auth/signin/recruiter",
       query: {
         email: formData.email,
       },
@@ -123,13 +123,13 @@ const handleSignup = async () => {
         timeout: 3000,
         position: POSITION.TOP_RIGHT,
       });
-    } else if (errorData.data?.errorCode === '100001') {
-      toast.error('Password must be 8 characters long', {
+    } else if (errorData.data?.errorCode === "100001") {
+      toast.error("Password must be 8 characters long", {
         timeout: 3000,
         position: POSITION.TOP_RIGHT,
       });
     } else {
-      toast.error('An error occurred try again', {
+      toast.error("An error occurred try again", {
         timeout: 3000,
         position: POSITION.TOP_RIGHT,
       });
@@ -142,13 +142,13 @@ const handleSignup = async () => {
 };
 
 const resetForm = () => {
-  formData.fullName = '';
-  formData.email = '';
-  formData.password = '';
-  formData.companyName = '';
-  formData.companySize = '';
-  formData.industry = '';
-  formData.websiteUrl = '';
+  formData.fullName = "";
+  formData.email = "";
+  formData.password = "";
+  formData.companyName = "";
+  formData.companySize = "";
+  formData.industry = "";
+  formData.websiteUrl = "";
 };
 
 onMounted(() => {
@@ -178,19 +178,20 @@ onMounted(() => {
 });
 
 onBeforeRouteLeave(() => {
-  if(isSubmitted.value === true){
+  if (isSubmitted.value === true) {
     authStore.setStepOneFormData(null);
   } else {
     authStore.setStepOneFormData(formData);
   }
-  
 });
 </script>
 
 <template>
-  <div class="flex justify-center items-center w-full">
+  <div class="flex justify-center items-center w-full px-6 md:px-0">
     <div class="md:w-[23.375rem] flex flex-col">
-      <h2 class="text-center text-[32px] mb-6 font-['Georgia'] font-normal">
+      <h2
+        class="text-center text-2xl md:text-[32px] mb-6 font-['Georgia'] font-normal"
+      >
         Signup to account
       </h2>
       <div class="flex flex-col items-center justify-center gap-4 text-[12px]">
@@ -264,26 +265,26 @@ onBeforeRouteLeave(() => {
       <form
         class="flex flex-col mt-6 mx-auto items-start justify-center text-left w-full max-w-md space-y-2"
       >
-       <div class="w-full">
-        <label class="text-base font-thin mb-2 text-left mt-4"
-          >Company Name</label
-        >
-        <input
-          type="text"
-          placeholder="Enter company name here"
-          v-model="formData.companyName"
-          :disabled="isLoading"
-          @change="v$.companyName.$touch"
-          class="outline-none w-full text-base font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
-        />
-        <div
-              class="input-errors"
-              v-for="error of v$.companyName.$errors"
-              :key="error.$uid"
-            >
-              <span class="text-xs text-danger-500">* {{ error.$message }}</span>
-            </div>
-       </div>
+        <div class="w-full">
+          <label class="text-base font-thin mb-2 text-left mt-4"
+            >Company Name</label
+          >
+          <input
+            type="text"
+            placeholder="Enter company name here"
+            v-model="formData.companyName"
+            :disabled="isLoading"
+            @change="v$.companyName.$touch"
+            class="outline-none w-full text-base font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2.5 border border-black-200 border-solid"
+          />
+          <div
+            class="input-errors"
+            v-for="error of v$.companyName.$errors"
+            :key="error.$uid"
+          >
+            <span class="text-xs text-danger-500">* {{ error.$message }}</span>
+          </div>
+        </div>
         <!--Company Size -->
         <div class="w-full">
           <label class="text-base font-thin mb-2 text-left mt-4"
@@ -292,7 +293,7 @@ onBeforeRouteLeave(() => {
               v-model="formData.companySize"
               :disabled="isLoading"
               @change="v$.companySize.$touch"
-              class="outline-none mt-2 bg-white w-full text-base font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
+              class="outline-none mt-2 bg-white w-full text-base font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2.5 border border-black-200 border-solid"
             >
               Company Size
               <option value="" disabled selected>Select company size</option>
@@ -305,12 +306,12 @@ onBeforeRouteLeave(() => {
           </label>
 
           <div
-              class="input-errors"
-              v-for="error of v$.companySize.$errors"
-              :key="error.$uid"
-            >
-              <span class="text-xs text-danger-500">* {{ error.$message }}</span>
-            </div>
+            class="input-errors"
+            v-for="error of v$.companySize.$errors"
+            :key="error.$uid"
+          >
+            <span class="text-xs text-danger-500">* {{ error.$message }}</span>
+          </div>
         </div>
         <!--Industry -->
         <div class="w-full">
@@ -320,7 +321,7 @@ onBeforeRouteLeave(() => {
               v-model="formData.industry"
               :disabled="isLoading"
               @change="v$.industry.$touch"
-              class="outline-none mt-2 bg-white w-full text-base font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
+              class="outline-none mt-2 bg-white w-full text-base font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2.5 border border-black-200 border-solid"
             >
               <option value="" disabled selected>Select Industry</option>
               <option value="Accounting & Finance">Accounting & Finance</option>
@@ -363,34 +364,34 @@ onBeforeRouteLeave(() => {
           </label>
 
           <div
-              class="input-errors"
-              v-for="error of v$.industry.$errors"
-              :key="error.$uid"
-            >
-              <span class="text-xs text-danger-500">* {{ error.$message }}</span>
-            </div>
+            class="input-errors"
+            v-for="error of v$.industry.$errors"
+            :key="error.$uid"
+          >
+            <span class="text-xs text-danger-500">* {{ error.$message }}</span>
+          </div>
         </div>
 
         <div class="w-full">
           <label class="text-base font-thin mb-2 text-left mt-4"
-          >Company Website</label
-        >
-        <input
-          type="url"
-          placeholder="Website url"
-          v-model="formData.websiteUrl"
-          :disabled="isLoading"
-          @change="v$.websiteUrl.$touch"
-          class="outline-none w-full text-basefont-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
-        />
+            >Company Website</label
+          >
+          <input
+            type="url"
+            placeholder="Website url"
+            v-model="formData.websiteUrl"
+            :disabled="isLoading"
+            @change="v$.websiteUrl.$touch"
+            class="outline-none w-full text-basefont-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2.5 border border-black-200 border-solid"
+          />
 
           <div
-              class="input-errors"
-              v-for="error of v$.websiteUrl.$errors"
-              :key="error.$uid"
-            >
-              <span class="text-xs text-danger-500">* {{ error.$message }}</span>
-            </div>
+            class="input-errors"
+            v-for="error of v$.websiteUrl.$errors"
+            :key="error.$uid"
+          >
+            <span class="text-xs text-danger-500">* {{ error.$message }}</span>
+          </div>
         </div>
         <div class="pt-5"></div>
         <div class="w-full flex space-x-2">
