@@ -103,7 +103,7 @@ const loginRecruiter = async () => {
         position: POSITION.TOP_RIGHT,
       });
     }
-
+    
     setTimeout(() => {
       isLoading.value = false;
     }, 2000);
