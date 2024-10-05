@@ -98,7 +98,7 @@ const userData = computed<IUserDetails>(
           to="/"
           class="text-black-900 hover:underline flex items-center gap-4 flex-row-reverse"
         >
-         <div class="rounded-full border p-1 flex items-center justify-center">
+         <div class="rounded-full border p-0.5 flex items-center justify-center">
           <img
             v-if="!userData?.photo"
             src="/assets/svgs/avatar-user.svg"
