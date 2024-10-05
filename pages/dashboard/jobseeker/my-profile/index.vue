@@ -72,7 +72,7 @@ onBeforeMount(async () => {
       />
       <div class="mt-12 md:pl-6 pl-3 space-y-2 z-auto relative">
         <div
-          class="bg-white rounded-full h-[100px] w-[100px] border-2 z-auto flex items-center justify-center absolute -top-24"
+          class="bg-white rounded-full h-[70px] w-[70px] border-2 z-auto flex items-center justify-center absolute -top-24"
         >
           <img
             v-if="userData?.photo"

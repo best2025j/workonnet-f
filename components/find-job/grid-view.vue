@@ -104,7 +104,8 @@ defineProps<{ jobList: IJobPost[], currentJobIndex: number }>();
           </div>
 
           <div class="flex justify-between">
-            <button class="border border-primary-1 p-1.5 rounded-8">
+            <!-- love icon -->
+            <!-- <button class="border border-primary-1 p-1.5 rounded-8">
               <svg
                 width="28"
                 height="24"
@@ -117,7 +118,7 @@ defineProps<{ jobList: IJobPost[], currentJobIndex: number }>();
                   fill="#343330"
                 />
               </svg>
-            </button>
+            </button> -->
             <NuxtLink
             :to="`/dashboard/jobseeker/find-jobs/${job.id}`"
               class="py-3 px-4 border text-primary-1 border-primary-1 rounded-10 text-xs"
