@@ -120,6 +120,11 @@ const handleSignup = async () => {
     }, 2000);
   }
 };
+//password visibility
+const showPassword = ref(false);
+function toggleShowPassword() {
+  showPassword.value = !showPassword.value;
+}
 </script>
 <template>
   <div class="flex justify-center items-center w-full px-6 md:px-0">
@@ -265,15 +270,25 @@ const handleSignup = async () => {
 
         <div class="w-full">
           <label class="text-base font-thin text-left">Create Password </label>
-          <input
-            type="password"
-            placeholder="Enter new password"
+          <div class="relative">
+            <input
+            :type="showPassword ? 'text' : 'password'"
+            placeholder="....."
             pattern=".{8,}"
             v-model="formData.password"
             :disabled="isLoading"
             @change="v$.password.$touch"
-            class="outline-none text-base leading-5 w-full p border border-solid border-black-200 rounded-lg px-3 py-2.5"
+            class="outline-none text-base leading-5 w-full p border border-solid border-black-200 rounded-lg px-3 py-2.5  placeholder:text-[6rem]"
           />
+          <button
+      type="button"
+      @click="toggleShowPassword"
+      class="absolute right-3 top-1/2 transform -translate-y-1/2"
+    >
+      <span v-if="showPassword">Hide</span>
+      <span v-else>Show</span>
+    </button>
+          </div>
 
           <div
             class="input-errors"
