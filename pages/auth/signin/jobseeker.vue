@@ -215,7 +215,7 @@ const handleLogin = async () => {
         >
           <template #text>
             {{ !isLoading ? "Sign in" : "Please wait..." }}
-          </template>
+         </template>
         </BtnPrimary>
       </form>
       <p class="text-center md:mt-10 pt-4 md:mb-5 text-xs md:text-sm font-thin">
