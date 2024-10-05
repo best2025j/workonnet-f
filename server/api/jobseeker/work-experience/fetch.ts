@@ -7,7 +7,7 @@ export default defineEventHandler(async (event) => {
   const authHeader = headers['authorization'];
 
   try {
-    const response = await axios.patch('work-experience', {
+    const response = await axios.get('work-experience', {
       baseURL: config.apiBaseUrl,
       headers: {
         Authorization: authHeader,

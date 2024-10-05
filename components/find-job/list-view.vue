@@ -28,7 +28,7 @@ defineProps<{ jobList: IJobPost[], currentJobIndex: number }>();
           </div>
         </div>
 
-        <div class="flex space-x-4 items-center relative right-5">
+        <!-- <div class="flex space-x-4 items-center relative right-5">
           <button>
             <svg
               width="28"
@@ -43,7 +43,7 @@ defineProps<{ jobList: IJobPost[], currentJobIndex: number }>();
               />
             </svg>
           </button>
-        </div>
+        </div> -->
       </div>
 
       <div

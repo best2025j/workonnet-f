@@ -44,13 +44,24 @@ onBeforeMount(async () => {
 </script>
 
 <template>
-  <div v-if="isLoading" class="h-full py-40 w-full flex items-center justify-center">
+  <div
+    v-if="isLoading"
+    class="h-full py-40 w-full flex items-center justify-center"
+  >
     <span class="loader-2"></span>
   </div>
   <div v-else class="w-full h-full">
     <div class="p-4 bg-white rounded-10">
       <div class="md:mt-12 md:pl-6 space-y-2">
-        <img :src="userData!.photo?.url" class="h-[80px] w-[80px]" alt="profile-image" />
+        <div
+          class="bg-white rounded-full h-[70px] w-[70px] border-2 z-auto flex items-center justify-center absolute -top-24"
+        >
+          <img
+            :src="userData!.photo?.url"
+            class="h-[70px] w-[70px]"
+            alt="profile-image"
+          />
+        </div>
 
         <div class="flex flex-col md:flex-row justify-between">
           <div class="space-y-2">
@@ -110,9 +121,7 @@ onBeforeMount(async () => {
                 v-if="currentJob?.status === 'draft'"
                 class="md:px-4 w-full text-xs font-black md:text-sm py-3 rounded-8 text-white bg-primary"
               >
-                <template #text>
-                  Publish
-                </template>
+                <template #text> Publish </template>
               </BtnPrimary>
             </div>
           </div>

@@ -9,7 +9,9 @@ definePageMeta({
 });
 
 const userStore = useUserStore();
-const userData = computed<IRecruiterDetails>(() => userStore.loggedInUserDetails);
+const userData = computed<IRecruiterDetails>(
+  () => userStore.loggedInUserDetails
+);
 </script>
 
 <template>
@@ -19,17 +21,17 @@ const userData = computed<IRecruiterDetails>(() => userStore.loggedInUserDetails
         class="w-full h-32 md:h-[214px] flex items-center justify-center bg-black-400 rounded"
         v-if="!userData?.photoHeader"
       >
-      <span class="text-white">No Header Photo</span>
+        <span class="text-white">No Header Photo</span>
       </div>
       <img
-         v-if="userData?.photoHeader"
+        v-if="userData?.photoHeader"
         :src="userData?.photoHeader.url"
         class="w-full h-32 md:h-[214px]"
         alt="no image yet..."
       />
-      <div class="mt-12 md:pl-6 pl-3 space-y-2 z-[9999px] relative">
+      <div class="mt-12 md:pl-6 pl-3 space-y-2 z-auto relative">
         <div
-          class="bg-white rounded-full h-[100px] w-[100px] border-2 z-[9999px] flex items-center justify-center absolute -top-24"
+          class="bg-white rounded-full h-[70px] w-[70px] border-2 z-auto flex items-center justify-center absolute -top-24"
         >
           <img
             v-if="userData?.photo"

@@ -1,19 +1,50 @@
 <script setup lang="ts">
-import type { IUserDetails } from "~/types";
+import type {
+  ApiSuccessResponse,
+  IUserDetails,
+  IWorkExperience,
+} from '~/types';
 
 definePageMeta({
-  title: "My Profile",
-  pageName: "dashboard.jobseeker.my-profile.index",
-  layout: "dashboard",
-  middleware: ["auth", "is-jobseeker"],
+  title: 'My Profile',
+  pageName: 'dashboard.jobseeker.my-profile.index',
+  layout: 'dashboard',
+  middleware: ['auth', 'is-jobseeker'],
 });
 
 const userStore = useUserStore();
-const userData = computed<IUserDetails>(() => userStore?.loggedInUserDetails);
+const authStore = useAuthStore();
+const userData = computed<IUserDetails>(() => userStore.loggedInUserDetails);
 const isLoading = ref<boolean>(false);
 
-onBeforeMount(() => {
+const userWorkExperience = computed<IWorkExperience[]>(
+  () => userStore.workExperience
+);
+
+const fetchWorkExperience = async () => {
+  isLoading.value = true;
+
+  try {
+    if (!userStore.recruiters.length) {
+      isLoading.value = true;
+    }
+    const token = authStore.userToken;
+    const response = await userStore.$api.refreshUserWorkExperience(token);
+    const responseData = response as ApiSuccessResponse;
+
+    userStore.setWorkExperience(responseData.data);
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 1000);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+onBeforeMount(async () => {
   // fetch experience
+  await fetchWorkExperience();
 });
 </script>
 
@@ -41,7 +72,7 @@ onBeforeMount(() => {
       />
       <div class="mt-12 md:pl-6 pl-3 space-y-2 z-auto relative">
         <div
-          class="bg-white rounded-full h-[100px] w-[100px] border-2 z-auto flex items-center justify-center absolute -top-24"
+          class="bg-white rounded-full h-[70px] w-[70px] border-2 z-auto flex items-center justify-center absolute -top-24"
         >
           <img
             v-if="userData?.photo"
@@ -56,12 +87,12 @@ onBeforeMount(() => {
         >
           <div class="space-y-2 pt-1">
             <h1 class="font-black text-base">
-              {{ userData?.firstName || "" }} {{ userData?.lastName || "" }}
+              {{ userData?.firstName || '' }} {{ userData?.lastName || '' }}
             </h1>
             <div class="flex items-start space-x-4">
               <div class="space-y-2">
-                <h1 class="text-xs">{{ userData?.occupation || "" }}</h1>
-                <h1 class="text-xs">{{ userData?.location || "" }}</h1>
+                <h1 class="text-xs">{{ userData?.occupation || '' }}</h1>
+                <h1 class="text-xs">{{ userData?.location || '' }}</h1>
               </div>
             </div>
           </div>
@@ -83,7 +114,7 @@ onBeforeMount(() => {
 
               <h1 class="text-xs">
                 Portfolio link:
-                <b>{{ userData?.socialLinks?.portfolioUrl || "N/A" }}</b>
+                <b>{{ userData?.socialLinks?.portfolioUrl || 'N/A' }}</b>
               </h1>
             </div>
             <div class="flex gap-2 items-center">
@@ -135,7 +166,7 @@ onBeforeMount(() => {
               </svg>
               <h1 class="text-xs">
                 Facebook:
-                <b>{{ userData?.socialLink?.facebookUrl || "N/A" }}</b>
+                <b>{{ userData?.socialLink?.facebookUrl || 'N/A' }}</b>
               </h1>
             </div>
             <div class="flex gap-2 items-center">
@@ -153,7 +184,7 @@ onBeforeMount(() => {
               </svg>
               <h1 class="text-xs">
                 Linkedin:
-                <b>{{ userData?.socialLinks?.linkedinUrl || "N/A" }}</b>
+                <b>{{ userData?.socialLinks?.linkedinUrl || 'N/A' }}</b>
               </h1>
             </div>
             <div class="flex gap-2 items-center">
@@ -171,7 +202,7 @@ onBeforeMount(() => {
               </svg>
               <h1 class="text-xs">
                 Instagram:
-                <b>{{ userData?.socialLinks?.instagramUrl || "N/A" }}</b>
+                <b>{{ userData?.socialLinks?.instagramUrl || 'N/A' }}</b>
               </h1>
             </div>
           </div>
@@ -188,7 +219,7 @@ onBeforeMount(() => {
                 <h1 class="md:text-lg text-sm font-black">
                   NGN{{
                     formatCurrency(Number(userData?.salary?.amount) || 0) ||
-                    "N/A"
+                    'N/A'
                   }}
                   /month
                 </h1>
@@ -200,9 +231,9 @@ onBeforeMount(() => {
                     class="md:px-[14px] w-full my-4 text-xs md:py-2 py-3 rounded-5 bg-primary-1 text-white text-center"
                   >
                     {{
-                      userData?.status && userData?.status === "draft"
-                        ? "Complete my profile"
-                        : "Edit profile info"
+                      userData?.status && userData?.status === 'draft'
+                        ? 'Complete my profile'
+                        : 'Edit profile info'
                     }}
                   </div>
                 </div>
@@ -219,35 +250,36 @@ onBeforeMount(() => {
         <div class="space-y-4 pt-4">
           <h1 class="text-xl font-black">About me</h1>
           <p class="text-xs tracking-wider">
-            {{ userData?.bio || "Complete your profile to add an about" }}
+            {{ userData?.bio || 'Complete your profile to add an about' }}
           </p>
         </div>
 
         <!-- experience -->
         <div class="space-y-4 pt-10">
           <h1 class="text-xl font-black">Experience</h1>
-          <div class="bg-westside-50 space-y-4 rounded-10 p-4">
-            <img src="/assets/images/ms.png" alt="no image yet" />
-            <h1 class="text-info-600 font-black text-sm">
-              User Interface Designer at Workonnect
-            </h1>
-            <div class="flex gap-2">
-              <h1 class="text-xs font-black">May - June 2020</h1>
-              <h1 class="text-xs">Lagos, Nigeria.</h1>
+          <div v-if="userWorkExperience.length">
+            <div
+              v-for="(experience, index) in userWorkExperience"
+              :key="index"
+              class="bg-westside-50 space-y-4 rounded-10 p-4"
+            >
+              <h1 class="text-info-600 font-black text-sm">
+                {{ experience.jobTitle }} at
+                {{ experience.companyOrganization }}
+              </h1>
+              <div class="flex gap-2">
+                <h1 class="text-xs font-black">
+                  {{ formateDateMonthYear(experience.startingFrom) }} - {{ experience?.endingIn ? formateDateMonthYear(experience?.endingIn) : 'PRESENT' }}  
+                </h1>
+                <h1 class="text-xs">{{ experience.companyLocation }}</h1>
+              </div>
+              <p class="text-xs tracking-wider">
+                {{ experience.details }}
+              </p>
             </div>
-            <p class="text-xs tracking-wider">
-              Lorem ipsum dolor sit amet consectetur. Dignissim aliquam vitae
-              accumsan eget nisl felis magna rhoncus. Nisl duis netus id
-              lobortis nec dui leo. Ornare scelerisque vivamus egestas
-              adipiscing in amet varius. Velit in nec dolor ultrices
-              scelerisque. Ipsum facilisi nulla sed sed proin pulvinar. Libero
-              sed donec lorem blandit aliquam diam. Egestas et amet elit a nulla
-              rhoncus sagittis in sem. Lectus ut vivamus id at vitae. Elit non
-              ut eget massa id lorem tincidunt porttitor. Viverra duis sit a
-              dignissim molestie placerat. Tempus velit interdum fames
-              pellentesque.
-            </p>
           </div>
+
+          <div v-else>No work experience</div>
         </div>
       </div>
 
@@ -277,7 +309,7 @@ onBeforeMount(() => {
                 >
                   {{ userData?.firstName }} {{ userData?.lastName
                   }}{{
-                    "." + userData?.resumeResource?.resumeCv?.url.split(".")[-1]
+                    '.' + userData?.resumeResource?.resumeCv?.url.split('.')[-1]
                   }}
                 </p>
                 <p v-else class="text-xs text-info-600">No file found</p>
@@ -288,7 +320,7 @@ onBeforeMount(() => {
               to="/dashboard/jobseeker/my-profile/work-experience"
               class="px-[14px] text-xs py-2 text-primary-1 rounded-10 border border-primary-1"
             >
-              {{ userData?.resumeResource?.resumeCv ? "Change" : "Add" }}
+              {{ userData?.resumeResource?.resumeCv ? 'Change' : 'Add' }}
             </NuxtLink>
           </div>
         </div>
