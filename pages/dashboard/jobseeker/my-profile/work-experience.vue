@@ -1,10 +1,47 @@
 <script setup lang="ts">
+import type { ApiSuccessResponse, IUserDetails, IWorkExperience } from '~/types';
+
 definePageMeta({
   title: "My profile",
   pageName: "dashboard.jobseeker.my-profile.work-experience",
   layout: "dashboard",
   middleware: ["auth", "is-jobseeker"],
 });
+
+
+const userStore = useUserStore();
+const authStore = useAuthStore();
+const userData = computed<IUserDetails>(() => userStore.loggedInUserDetails);
+const isLoading = ref<boolean>(false)
+
+const userWorkExperience = computed<IWorkExperience[]>(() => userStore.workExperience)
+
+const fetchWorkExperience = async () => {
+  isLoading.value  = true;
+
+  try {
+    if(!userStore.recruiters.length){
+      isLoading.value = true;
+    }
+    const token = authStore.userToken;
+    const response = await userStore.$api.refreshUserWorkExperience(token)
+    const responseData = response as ApiSuccessResponse;
+    
+    userStore.setWorkExperience(responseData.data);
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 1000);
+  } catch (e) {
+    console.log(e);
+  }
+
+}
+
+onBeforeMount(async () => {
+  // fetch experience
+  await fetchWorkExperience()
+})
 </script>
 
 <template>
@@ -12,7 +49,7 @@ definePageMeta({
     <div class="flex flex-col md:flex-row md:gap-x-4">
       <div class="md:w-2/3 w-full h-full">
         <div
-        class="bg-white md:w-1/3 rounded-lg p-3 h-full flex flex-col md:flex-row items-center md:space-x-2 md:hidden"
+        class="bg-white md:w-1/3 rounded-lg p-3 h-full flex flex-col md:flex-row items-center md:space-x-2 md:hidden mb-2"
       >
         <div
           class="bg-black-50 flex space-x-2 p-2 w-full items-center md:justify-center justify-between rounded-8"

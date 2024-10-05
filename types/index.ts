@@ -151,6 +151,7 @@ export interface IWorkExperience {
   endingIn: string;
   presentlyWorking?: boolean;
   details: string;
+  // jobType: 'remote' | 'onsite' | 'hybrid';
 }
 
 export interface TelInputData {

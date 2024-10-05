@@ -8,7 +8,7 @@ export default defineEventHandler(async (event) => {
   const authHeader = headers['authorization'];
 
   try {
-    const response = await axios.put('work-experience', data, {
+    const response = await axios.post('work-experience', data, {
       baseURL: config.apiBaseUrl,
       headers: {
         Authorization: authHeader,
