@@ -2,7 +2,7 @@
 import { POSITION, useToast } from 'vue-toastification';
 import { required, helpers, minLength } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
-import type { ApiErrorResponse, IRecruiterDetails } from '~/types';
+import type { ApiErrorResponse } from '~/types';
 
 definePageMeta({
   title: 'Create job opening',
@@ -11,7 +11,7 @@ definePageMeta({
   middleware: ['auth', 'is-recruiter'],
 });
 
-const skillList = ref(['Vue.js', 'Javascript', 'Open Source']);
+const skillList = ref(availableSkillList);
 
 const toast = useToast();
 const authStore = useAuthStore();
@@ -20,7 +20,6 @@ const isDraft = ref<boolean>(false);
 const isPublish = ref<boolean>(false);
 
 const formData = reactive({
-  // recruiter: (useStore.loggedInUserDetails as IRecruiterDetails).id,
   title: '',
   description: '',
   requirements: [''],

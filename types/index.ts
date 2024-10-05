@@ -60,7 +60,8 @@ export interface IUserDetails {
   salary?: ISalaryExpectation;
   bio: string;
   socialLinks: ISocialLinks;
-  // company: string;
+  skills?: string[];
+  spokenLanguages?: string[];
 }
 
 export interface IRecruiterDetails {
@@ -151,6 +152,16 @@ export interface IWorkExperience {
   endingIn: string;
   presentlyWorking?: boolean;
   details: string;
+}
+
+export interface IEducationBackground {
+  id: string;
+  user?: IUserDetails | string;
+  schoolName: string;
+  fieldOfStudy: string;
+  degree: string;
+  startingYear: string;
+  endingYear: string;
 }
 
 export interface TelInputData {

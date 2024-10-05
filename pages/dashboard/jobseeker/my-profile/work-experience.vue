@@ -21,7 +21,11 @@ const authStore = useAuthStore();
 const userData = computed<IUserDetails>(() => userStore.loggedInUserDetails);
 const isLoading = ref<boolean>(false);
 const isEdit = ref<boolean>(false);
+const isEditEducation = ref<boolean>(false);
 const isDeleting = ref<boolean>(false);
+const isAddWorkExperience = ref<boolean>(false);
+  const isAddEducation= ref<boolean>(false);
+
 
 const selectedIndex = ref<number | null>(null);
 const modalTrigger = ref(null);
@@ -37,6 +41,37 @@ const workExperienceFormData = reactive({
   endingIn: '',
   presentlyWorking: false,
   details: '',
+});
+
+const educationFormData = reactive({
+  schoolName: '',
+  fieldOfStudy: '',
+  degree: '',
+  startingYear: '',
+  endingYear: '',
+});
+
+const eduRules = computed(() => {
+  return {
+    schoolName: {
+      required: helpers.withMessage('School name is required', required),
+    },
+    degree: {
+      required: helpers.withMessage('Degree is required', required),
+    },
+    fieldOfStudy: {
+      required: helpers.withMessage('Course of study is required', required),
+    },
+    startingYear: {
+      required: helpers.withMessage('Start year is required', required),
+    },
+    endingYear: {
+      requiredIf: helpers.withMessage(
+        'End year is required',
+        requiredIf(workExperienceFormData.presentlyWorking === false)
+      ),
+    },
+  };
 });
 
 const rules = computed(() => {
@@ -75,6 +110,7 @@ const rules = computed(() => {
 });
 
 const v$ = useVuelidate(rules, workExperienceFormData);
+const v2$ = useVuelidate(eduRules, educationFormData);
 
 const showDeleteModal = async () => {
   (modalTrigger.value as unknown as any).showModal();
@@ -120,6 +156,17 @@ const resetForm = () => {
   workExperienceFormData.endingIn = '';
   workExperienceFormData.presentlyWorking = false;
   workExperienceFormData.details = '';
+
+  v$.value.$reset();
+};
+
+const resetEduForm = () => {
+  isEditEducation.value = false;
+  educationFormData.schoolName = '';
+  educationFormData.endingYear = '';
+  educationFormData.startingYear = '';
+  educationFormData.fieldOfStudy = '';
+  educationFormData.degree = '';
 
   v$.value.$reset();
 };
@@ -385,158 +432,52 @@ onBeforeMount(async () => {
           <p class="text-xs">Showcase your previous roles and experiences</p>
 
           <!-- form -->
-          <div class="md:border rounded-10 md:p-4 mt-4">
-            <div class="">
-              <div class="md:w-2/3 md:p-2 space-y-2">
-                <div
-                  class="flex flex-col md:flex-row gap-x-2 gap-y-2 md:gap-y-0"
-                >
-                  <div class="flex flex-col w-full">
-                    <label for="first-name" class="text-sm mb-2"
-                      >Company / Organization</label
-                    >
-                    <input
-                      type="text"
-                      v-model="workExperienceFormData.companyOrganization"
-                      :disabled="isLoading"
-                      @change="v$.companyOrganization.$touch"
-                      placeholder="Enter Organization name"
-                      class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border border-gray-300 rounded-md"
-                    />
-
-                    <div
-                      class="input-errors"
-                      v-for="error of v$.companyOrganization.$errors"
-                      :key="error.$uid"
-                    >
-                      <span class="text-xs text-danger-500"
-                        >* {{ error.$message }}</span
-                      >
-                    </div>
-                  </div>
-                  <div class="flex flex-col w-full">
-                    <label for="first-name" class="text-sm mb-2"
-                      >Website <span class="text-xs">(optional)</span></label
-                    >
-                    <input
-                      type="text"
-                      v-model="workExperienceFormData.website"
-                      :disabled="isLoading"
-                      @change="v$.website.$touch"
-                      placeholder="https://"
-                      class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border border-gray-300 rounded-md"
-                    />
-
-                    <div
-                      class="input-errors"
-                      v-for="error of v$.website.$errors"
-                      :key="error.$uid"
-                    >
-                      <span class="text-xs text-danger-500"
-                        >* {{ error.$message }}</span
-                      >
-                    </div>
-                  </div>
-                </div>
-
-                <div class="flex flex-col w-full">
-                  <label for="location" class="text-sm mb-2">Location</label>
-                  <div class="w-full">
-                    <input
-                      type="text"
-                      v-model="workExperienceFormData.companyLocation"
-                      :disabled="isLoading"
-                      @change="v$.companyLocation.$touch"
-                      placeholder="Enter location"
-                      class="pl-2 placeholder:text-sm pr-4 h-11 w-full outline-none border rel border-gray-300 rounded-md"
-                    />
-
-                    <div
-                      class="input-errors"
-                      v-for="error of v$.companyLocation.$errors"
-                      :key="error.$uid"
-                    >
-                      <span class="text-xs text-danger-500"
-                        >* {{ error.$message }}</span
-                      >
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="border-b-2 py-4 w-full" />
-
-              <div class="py-4 divide-black-600 md:w-2/3 md:p-2 space-y-2">
-                <div class="flex flex-col w-full">
-                  <label for="first-name" class="text-sm mb-2">Position</label>
-                  <div class="relative w-full">
-                    <input
-                      type="text"
-                      v-model="workExperienceFormData.jobTitle"
-                      :disabled="isLoading"
-                      @change="v$.jobTitle.$touch"
-                      placeholder="Enter position"
-                      class="pl-2 placeholder:text-sm pr-4 h-11 w-full outline-none border rel border-gray-300 rounded-md"
-                    />
-
-                    <div
-                      class="input-errors"
-                      v-for="error of v$.jobTitle.$errors"
-                      :key="error.$uid"
-                    >
-                      <span class="text-xs text-danger-500"
-                        >* {{ error.$message }}</span
-                      >
-                    </div>
-                  </div>
-                </div>
-
-                <div class="flex flex-col w-full items-start justify-start">
-                  <label for="presentlyWorking" class="text-sm mb-2"
-                    >Presently Working here</label
-                  >
-                  <div class="w-full flex items-center space-x-2">
-                    <input
-                      type="checkbox"
-                      v-model="workExperienceFormData.presentlyWorking"
-                      :disabled="isLoading"
-                      @change="v$.presentlyWorking.$touch"
-                      class="h-5 w-5 outline-none rounded-md self-start"
-                    />
-                    <span>Yes</span>
-                  </div>
-
+          <div class="md:border rounded-10 md:px-4 md:pb-4 mt-4">
+            <div>
+              <div class="w-full" v-show="isAddWorkExperience">
+                <div class="md:w-2/3 md:p-2 space-y-2">
                   <div
-                    class="input-errors"
-                    v-for="error of v$.presentlyWorking.$errors"
-                    :key="error.$uid"
+                    class="flex flex-col md:flex-row gap-x-2 gap-y-2 md:gap-y-0"
                   >
-                    <span class="text-xs text-danger-500"
-                      >* {{ error.$message }}</span
-                    >
-                  </div>
-                </div>
-                <!--  -->
-                <div
-                  class="py-4 divide-black-600 grid md:grid-cols-4 items-center w-full md:space-x-2"
-                >
-                  <div class="flex flex-col w-full">
-                    <label for="first-name" class="text-sm mb-2"
-                      >Starting From</label
-                    >
-                    <div class="relative w-full">
+                    <div class="flex flex-col w-full">
+                      <label for="first-name" class="text-sm mb-2"
+                        >Company / Organization</label
+                      >
                       <input
-                        type="date"
-                        placeholder="Choose start date"
-                        v-model="workExperienceFormData.startingFrom"
+                        type="text"
+                        v-model="workExperienceFormData.companyOrganization"
                         :disabled="isLoading"
-                        @change="v$.startingFrom.$touch"
-                        class="pl-2 placeholder:text-sm pr-4 h-11 w-full outline-none border rel border-gray-300 rounded-md"
+                        @change="v$.companyOrganization.$touch"
+                        placeholder="Enter Organization name"
+                        class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border border-gray-300 rounded-md"
                       />
 
                       <div
                         class="input-errors"
-                        v-for="error of v$.startingFrom.$errors"
+                        v-for="error of v$.companyOrganization.$errors"
+                        :key="error.$uid"
+                      >
+                        <span class="text-xs text-danger-500"
+                          >* {{ error.$message }}</span
+                        >
+                      </div>
+                    </div>
+                    <div class="flex flex-col w-full">
+                      <label for="first-name" class="text-sm mb-2"
+                        >Website <span class="text-xs">(optional)</span></label
+                      >
+                      <input
+                        type="text"
+                        v-model="workExperienceFormData.website"
+                        :disabled="isLoading"
+                        @change="v$.website.$touch"
+                        placeholder="https://"
+                        class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border border-gray-300 rounded-md"
+                      />
+
+                      <div
+                        class="input-errors"
+                        v-for="error of v$.website.$errors"
                         :key="error.$uid"
                       >
                         <span class="text-xs text-danger-500"
@@ -546,26 +487,21 @@ onBeforeMount(async () => {
                     </div>
                   </div>
 
-                  <div
-                    v-if="!workExperienceFormData?.presentlyWorking"
-                    class="flex flex-col w-full"
-                  >
-                    <label for="first-name" class="text-sm mb-2"
-                      >End Date</label
-                    >
-                    <div class="relative w-full">
+                  <div class="flex flex-col w-full">
+                    <label for="location" class="text-sm mb-2">Location</label>
+                    <div class="w-full">
                       <input
-                        type="date"
-                        placeholder="Choose end date"
-                        v-model="workExperienceFormData.endingIn"
+                        type="text"
+                        v-model="workExperienceFormData.companyLocation"
                         :disabled="isLoading"
-                        @change="v$.endingIn.$touch"
+                        @change="v$.companyLocation.$touch"
+                        placeholder="Enter location"
                         class="pl-2 placeholder:text-sm pr-4 h-11 w-full outline-none border rel border-gray-300 rounded-md"
                       />
 
                       <div
                         class="input-errors"
-                        v-for="error of v$.endingIn.$errors"
+                        v-for="error of v$.companyLocation.$errors"
                         :key="error.$uid"
                       >
                         <span class="text-xs text-danger-500"
@@ -575,70 +511,180 @@ onBeforeMount(async () => {
                     </div>
                   </div>
                 </div>
+                <div class="border-b-2 py-2 w-full" />
+                <div class="py-4 divide-black-600 md:w-2/3 md:p-2 space-y-2">
+                  <div class="flex flex-col w-full">
+                    <label for="position" class="text-sm mb-2">Position</label>
+                    <div class="relative w-full">
+                      <input
+                        type="text"
+                        v-model="workExperienceFormData.jobTitle"
+                        :disabled="isLoading"
+                        @change="v$.jobTitle.$touch"
+                        placeholder="Enter position"
+                        class="pl-2 placeholder:text-sm pr-4 h-11 w-full outline-none border rel border-gray-300 rounded-md"
+                      />
 
-                <div class="flex flex-col">
-                  <label for="first-name" class="text-sm mb-2">Details</label>
-                  <textarea
-                    v-model="workExperienceFormData.details"
+                      <div
+                        class="input-errors"
+                        v-for="error of v$.jobTitle.$errors"
+                        :key="error.$uid"
+                      >
+                        <span class="text-xs text-danger-500"
+                          >* {{ error.$message }}</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="flex flex-col w-full items-start justify-start">
+                    <label for="presentlyWorking" class="text-sm mb-2"
+                      >Presently Working here</label
+                    >
+                    <div class="w-full flex items-center space-x-2">
+                      <input
+                        type="checkbox"
+                        v-model="workExperienceFormData.presentlyWorking"
+                        :disabled="isLoading"
+                        @change="v$.presentlyWorking.$touch"
+                        class="h-5 w-5 outline-none rounded-md self-start"
+                      />
+                      <span>Yes</span>
+                    </div>
+
+                    <div
+                      class="input-errors"
+                      v-for="error of v$.presentlyWorking.$errors"
+                      :key="error.$uid"
+                    >
+                      <span class="text-xs text-danger-500"
+                        >* {{ error.$message }}</span
+                      >
+                    </div>
+                  </div>
+                  <!--  -->
+                  <div
+                    class="py-4 divide-black-600 grid md:grid-cols-2 items-center w-full md:space-x-2"
+                  >
+                    <div class="flex flex-col w-full">
+                      <label for="first-name" class="text-sm mb-2"
+                        >Starting From</label
+                      >
+                      <div class="relative w-full">
+                        <input
+                          type="date"
+                          placeholder="Choose start date"
+                          v-model="workExperienceFormData.startingFrom"
+                          :disabled="isLoading"
+                          @change="v$.startingFrom.$touch"
+                          class="pl-2 placeholder:text-sm pr-4 h-11 w-full outline-none border rel border-gray-300 rounded-md"
+                        />
+
+                        <div
+                          class="input-errors"
+                          v-for="error of v$.startingFrom.$errors"
+                          :key="error.$uid"
+                        >
+                          <span class="text-xs text-danger-500"
+                            >* {{ error.$message }}</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+
+                    <div
+                      v-if="!workExperienceFormData?.presentlyWorking"
+                      class="flex flex-col w-full"
+                    >
+                      <label for="first-name" class="text-sm mb-2"
+                        >End Date</label
+                      >
+                      <div class="relative w-full">
+                        <input
+                          type="date"
+                          placeholder="Choose end date"
+                          v-model="workExperienceFormData.endingIn"
+                          :disabled="isLoading"
+                          @change="v$.endingIn.$touch"
+                          class="pl-2 placeholder:text-sm pr-4 h-11 w-full outline-none border rel border-gray-300 rounded-md"
+                        />
+
+                        <div
+                          class="input-errors"
+                          v-for="error of v$.endingIn.$errors"
+                          :key="error.$uid"
+                        >
+                          <span class="text-xs text-danger-500"
+                            >* {{ error.$message }}</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="flex flex-col">
+                    <label for="first-name" class="text-sm mb-2">Details</label>
+                    <textarea
+                      v-model="workExperienceFormData.details"
+                      :disabled="isLoading"
+                      @change="v$.details.$touch"
+                      name="details"
+                      rows="8"
+                      class="border pl-2 border-black-200 rounded-8 w-full"
+                      placeholder="Enter details about work experience"
+                    />
+
+                    <div
+                      class="input-errors"
+                      v-for="error of v$.details.$errors"
+                      :key="error.$uid"
+                    >
+                      <span class="text-xs text-danger-500"
+                        >* {{ error.$message }}</span
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="flex flex-col w-full md:w-auto items-center md:flex-row md:space-y-0 space-x-0 space-y-3 md:space-x-3 text-xs md:pl-2"
+                >
+                  <BtnSuccess
+                    v-if="!isEdit"
+                    @click="handleAddExperience()"
+                    :isLoading="isLoading"
                     :disabled="isLoading"
-                    @change="v$.details.$touch"
-                    name="details"
-                    rows="8"
-                    class="border pl-2 border-black-200 rounded-8 w-full"
-                    placeholder="Enter details about work experience"
-                  />
-
-                  <div
-                    class="input-errors"
-                    v-for="error of v$.details.$errors"
-                    :key="error.$uid"
                   >
-                    <span class="text-xs text-danger-500"
-                      >* {{ error.$message }}</span
-                    >
-                  </div>
+                    <template #text>
+                      {{ !isLoading ? 'Save changes' : 'Saving...' }}
+                    </template>
+                  </BtnSuccess>
+
+                  <BtnSuccess
+                    v-if="isEdit"
+                    @click="handleEditExperience()"
+                    :isLoading="isLoading"
+                    :disabled="isLoading"
+                  >
+                    <template #text>
+                      {{ !isLoading ? 'Update changes' : 'Updating...' }}
+                    </template>
+                  </BtnSuccess>
+
+                  <button
+                    @click="resetForm()"
+                    class="md:px-3.5 w-full md:w-auto border text-black-600 rounded-8 py-2"
+                  >
+                    Cancel
+                  </button>
+
+                  <button
+                    v-if="isEdit"
+                    @click="showDeleteModal()"
+                    class="md:px-3.5 w-full md:w-auto text-info-600 py-3"
+                  >
+                    Delete this work experience
+                  </button>
                 </div>
-              </div>
-
-              <div
-                class="flex flex-col w-full md:w-auto items-center md:flex-row md:space-y-0 space-x-0 space-y-3 md:space-x-3 text-xs md:pl-2"
-              >
-                <BtnSuccess
-                  v-if="!isEdit"
-                  @click="handleAddExperience()"
-                  :isLoading="isLoading"
-                  :disabled="isLoading"
-                >
-                  <template #text>
-                    {{ !isLoading ? 'Save changes' : 'Saving...' }}
-                  </template>
-                </BtnSuccess>
-
-                <BtnSuccess
-                  v-if="isEdit"
-                  @click="handleEditExperience()"
-                  :isLoading="isLoading"
-                  :disabled="isLoading"
-                >
-                  <template #text>
-                    {{ !isLoading ? 'Update changes' : 'Updating...' }}
-                  </template>
-                </BtnSuccess>
-
-                <button
-                  @click="resetForm()"
-                  class="md:px-3.5 w-full md:w-auto border text-black-600 rounded-8 py-2"
-                >
-                  Cancel
-                </button>
-
-                <button
-                  v-if="isEdit"
-                  @click="showDeleteModal()"
-                  class="md:px-3.5 w-full md:w-auto text-info-600 py-3"
-                >
-                  Delete this work experience
-                </button>
               </div>
 
               <!--  list -->
@@ -686,6 +732,25 @@ onBeforeMount(async () => {
                     </svg>
                   </button>
                 </div>
+
+                <button
+                  @click="isAddWorkExperience = !isAddWorkExperience"
+                  class="text-info-600 text-xs items-center flex gap-x-3 mt-2 py-4"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M17.5 10C17.5 10.1658 17.4342 10.3247 17.3169 10.4419C17.1997 10.5592 17.0408 10.625 16.875 10.625H10.625V16.875C10.625 17.0408 10.5592 17.1997 10.4419 17.3169C10.3247 17.4342 10.1658 17.5 10 17.5C9.83424 17.5 9.67527 17.4342 9.55806 17.3169C9.44085 17.1997 9.375 17.0408 9.375 16.875V10.625H3.125C2.95924 10.625 2.80027 10.5592 2.68306 10.4419C2.56585 10.3247 2.5 10.1658 2.5 10C2.5 9.83424 2.56585 9.67527 2.68306 9.55806C2.80027 9.44085 2.95924 9.375 3.125 9.375H9.375V3.125C9.375 2.95924 9.44085 2.80027 9.55806 2.68306C9.67527 2.56585 9.83424 2.5 10 2.5C10.1658 2.5 10.3247 2.56585 10.4419 2.68306C10.5592 2.80027 10.625 2.95924 10.625 3.125V9.375H16.875C17.0408 9.375 17.1997 9.44085 17.3169 9.55806C17.4342 9.67527 17.5 9.83424 17.5 10Z"
+                      fill="#006EFF"
+                    />
+                  </svg>
+                  Add Experience
+                </button>
               </div>
             </div>
           </div>
@@ -695,6 +760,193 @@ onBeforeMount(async () => {
           <h1 class="text xl font-black font-[Georgia] text-black-600">
             Education
           </h1>
+
+          <!-- edu form -->
+          <div v-if="isAddEducation" class="w-full">
+            <div class="md:w-2/3 md:p-2 space-y-2">
+              <div class="flex flex-col md:flex-row gap-x-2 gap-y-2 md:gap-y-0">
+                <div class="flex flex-col w-full">
+                  <label for="first-name" class="text-sm mb-2"
+                    >School Name</label
+                  >
+                  <input
+                    type="text"
+                    v-model="educationFormData.schoolName"
+                    :disabled="isLoading"
+                    @change="v2$.schoolName.$touch"
+                    placeholder="Enter School name"
+                    class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border border-gray-300 rounded-md"
+                  />
+
+                  <div
+                    class="input-errors"
+                    v-for="error of v2$.schoolName.$errors"
+                    :key="error.$uid"
+                  >
+                    <span class="text-xs text-danger-500"
+                      >* {{ error.$message }}</span
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="border-b-2 py-2 w-full" />
+            <div class="py-4 divide-black-600 md:w-2/3 md:p-2 space-y-2">
+              <div class="flex flex-col w-full">
+                <label for="fieldOfStudy" class="text-sm mb-2"
+                  >Course of study</label
+                >
+                <div class="relative w-full">
+                  <input
+                    type="text"
+                    v-model="educationFormData.fieldOfStudy"
+                    :disabled="isLoading"
+                    @change="v2$.fieldOfStudy.$touch"
+                    placeholder="Enter course of study"
+                    class="pl-2 placeholder:text-sm pr-4 h-11 w-full outline-none border rel border-gray-300 rounded-md"
+                  />
+
+                  <div
+                    class="input-errors"
+                    v-for="error of v2$.fieldOfStudy.$errors"
+                    :key="error.$uid"
+                  >
+                    <span class="text-xs text-danger-500"
+                      >* {{ error.$message }}</span
+                    >
+                  </div>
+                </div>
+              </div>
+              <div class="flex flex-col w-full">
+                <label for="fieldOfStudy" class="text-sm">Degree</label>
+                <select
+                  v-model="educationFormData.degree"
+                  :disabled="isLoading"
+                  @change="v2$.degree.$touch"
+                  class="outline-none mt-2 bg-white w-full text-sm font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2.5 border border-black-200 border-solid"
+                >
+                  <option value="" disabled>Select your degree</option>
+
+                  <optgroup
+                    v-for="group in schoolDegrees"
+                    :label="group.label"
+                    :key="group.label"
+                  >
+                    <option
+                      v-for="degree in group.options"
+                      :value="degree.value"
+                      :key="degree.value"
+                    >
+                      {{ degree.text }}
+                    </option>
+                  </optgroup>
+                </select>
+
+                <div
+                  class="input-errors"
+                  v-for="error of v2$.degree.$errors"
+                  :key="error.$uid"
+                >
+                  <span class="text-xs text-danger-500"
+                    >* {{ error.$message }}</span
+                  >
+                </div>
+              </div>
+              <div
+                class="py-4 divide-black-600 grid md:grid-cols-2 items-center w-full md:space-x-2"
+              >
+                <div class="flex flex-col w-full">
+                  <label for="first-name" class="text-sm mb-2"
+                    >Start Year</label
+                  >
+                  <div class="relative w-full">
+                    <input
+                      type="month"
+                      placeholder="Choose start date"
+                      v-model="educationFormData.startingYear"
+                      :disabled="isLoading"
+                      @change="v2$.startingYear.$touch"
+                      class="pl-2 placeholder:text-sm pr-4 h-11 w-full outline-none border rel border-gray-300 rounded-md"
+                    />
+
+                    <div
+                      class="input-errors"
+                      v-for="error of v2$.startingYear.$errors"
+                      :key="error.$uid"
+                    >
+                      <span class="text-xs text-danger-500"
+                        >* {{ error.$message }}</span
+                      >
+                    </div>
+                  </div>
+                </div>
+                <!--  -->
+                <div class="flex flex-col w-full">
+                  <label for="first-name" class="text-sm mb-2">End Year</label>
+                  <div class="relative w-full">
+                    <input
+                      type="month"
+                      placeholder="Choose end date"
+                      v-model="educationFormData.endingYear"
+                      :disabled="isLoading"
+                      @change="v2$.endingYear.$touch"
+                      class="pl-2 placeholder:text-sm pr-4 h-11 w-full outline-none border rel border-gray-300 rounded-md"
+                    />
+
+                    <div
+                      class="input-errors"
+                      v-for="error of v2$.endingYear.$errors"
+                      :key="error.$uid"
+                    >
+                      <span class="text-xs text-danger-500"
+                        >* {{ error.$message }}</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="flex flex-col w-full md:w-auto items-center md:flex-row md:space-y-0 space-x-0 space-y-3 md:space-x-3 text-xs md:pl-2"
+            >
+              <BtnSuccess
+                v-if="!isEditEducation"
+                :isLoading="isLoading"
+                :disabled="isLoading"
+              >
+                <template #text>
+                  {{ !isLoading ? 'Save changes' : 'Saving...' }}
+                </template>
+              </BtnSuccess>
+
+              <BtnSuccess
+                v-if="isEditEducation"
+                :isLoading="isLoading"
+                :disabled="isLoading"
+              >
+                <template #text>
+                  {{ !isLoading ? 'Update Education' : 'Updating...' }}
+                </template>
+              </BtnSuccess>
+
+              <button
+                @click="resetEduForm()"
+                class="md:px-3.5 w-full md:w-auto border text-black-600 rounded-8 py-2"
+              >
+                Cancel
+              </button>
+
+              <button
+                v-if="isEdit"
+                @click="showDeleteModal()"
+                class="md:px-3.5 w-full md:w-auto text-info-600 py-3"
+              >
+                Delete this education
+              </button>
+            </div>
+          </div>
+
+          <!-- edu list -->
           <div class="space-y-3">
             <div
               class="flex justify-between p-4 mt-4 bg-black-50 items-center rounded-10"
@@ -729,6 +981,7 @@ onBeforeMount(async () => {
           </div>
           <!-- button cross -->
           <button
+          @click="isAddEducation = !isAddEducation"
             class="text-info-600 text-xs items-center flex gap-x-3 mt-2 py-4"
           >
             <svg
