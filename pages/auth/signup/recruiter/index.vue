@@ -25,6 +25,11 @@ const formData = reactive({
   websiteUrl: "",
 });
 
+const showPassword = ref(false);
+function toggleShowPassword() {
+  showPassword.value = !showPassword.value;
+}
+
 const rules = computed(() => {
   return {
     fullName: {
@@ -221,15 +226,26 @@ onMounted(() => {
           <label class="text-base font-thin mb-2 text-left mt-4"
             >Password</label
           >
-          <input
-            type="password"
-            placeholder="Create new password"
+          <div class="relative">
+            <input
+            :type="showPassword ? 'text' : 'password'"
+            placeholder="....."
             pattern=".{8,}"
             v-model="formData.password"
             :disabled="isLoading"
             @change="v$.password.$touch"
-            class="outline-none text-base leading-5 w-full p border border-solid border-black-200 rounded-lg px-3 py-2.5"
+            class="outline-none text-base leading-5 w-full p border border-solid border-black-200 rounded-lg px-3 py-2.5  placeholder:text-[6rem]"
           />
+          <button
+      type="button"
+      @click="toggleShowPassword"
+      class="absolute right-3 top-1/2 transform -translate-y-1/2"
+    >
+      <span v-if="showPassword">Hide</span>
+      <span v-else>Show</span>
+    </button>
+          </div>
+         
 
           <div
             class="input-errors"

@@ -34,6 +34,11 @@ const rules = computed(() => {
     },
   };
 });
+//password visibility
+const showPassword = ref(false);
+function toggleShowPassword() {
+  showPassword.value = !showPassword.value;
+}
 
 const v$ = useVuelidate(rules, formData);
 
@@ -201,14 +206,25 @@ const loginRecruiter = async () => {
         />
 
         <label class="text-base font-thin mb-2 text-left mt-4">Password</label>
-        <input
-          type="password"
-          placeholder="Enter password"
-          v-model="formData.password"
-          :disabled="isLoading"
-          @change="v$.password.$touch"
-          class="placeholder-custom text-base outline-none w-full p-4 border border-solid border-black-200 rounded-lg px-3 py-2.5"
-        />
+        <div class="relative w-full">
+            <input
+            :type="showPassword ? 'text' : 'password'"
+            placeholder="....."
+            pattern=".{8,}"
+            v-model="formData.password"
+            :disabled="isLoading"
+            @change="v$.password.$touch"
+            class="outline-none text-base leading-5 w-full p border border-solid border-black-200 rounded-lg px-3 py-2.5  placeholder:text-[6rem]"
+          />
+          <button
+      type="button"
+      @click="toggleShowPassword"
+      class="absolute right-3 top-1/2 transform -translate-y-1/2"
+    >
+      <span v-if="showPassword">Hide</span>
+      <span v-else>Show</span>
+    </button>
+          </div>
 
         <div class="flex justify-end w-full mt-2">
           <NuxtLink
