@@ -269,7 +269,7 @@ onBeforeMount(async () => {
               </h1>
               <div class="flex gap-2">
                 <h1 class="text-xs font-black">
-                  {{ experience.startingFrom }} - {{ experience.endingIn }}
+                  {{ formateDateMonthYear(experience.startingFrom) }} - {{ experience?.endingIn ? formateDateMonthYear(experience?.endingIn) : 'PRESENT' }}  
                 </h1>
                 <h1 class="text-xs">{{ experience.companyLocation }}</h1>
               </div>

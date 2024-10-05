@@ -447,16 +447,15 @@ const formatNumber = (): void => {
           </div>
         </div>
         <div class="text-right py-3 flex items-center justify-end">
-          <BtnPrimary
+          <BtnSuccess
             @click="handleProfileUpdate()"
             :isLoading="isLoading"
             :disabled="isLoading || hasChanges === false"
-            class="!bg-success-600 !text-xs !py-2 !px-3.5 !rounded-5 !w-auto !disabled:bg-black-100"
           >
             <template #text>
               {{ !isLoading ? 'Save changes' : 'Saving...' }}
             </template>
-          </BtnPrimary>
+          </BtnSuccess>
         </div>
       </div>
 
@@ -1011,7 +1010,7 @@ const formatNumber = (): void => {
               </li>
               <div class="text-sm flex gap-3">
                 <h1 class="font-black">
-                  {{ experience.startingFrom }} - {{ experience.endingIn }}
+                  {{ formateDateMonthYear(experience.startingFrom) }} - {{ experience?.endingIn ? formateDateMonthYear(experience?.endingIn) : 'PRESENT' }} 
                 </h1>
                 <h1>{{ experience.companyLocation }}</h1>
               </div>
