@@ -20,6 +20,10 @@ const userStore = useUserStore();
 const authStore = useAuthStore();
 const userData = computed<IUserDetails>(() => userStore.loggedInUserDetails);
 const isLoading = ref<boolean>(false);
+const isEdit = ref<boolean>(false);
+
+const selectedIndex = ref<number | null>(null);
+
 const toast = useToast();
 
 const workExperienceFormData = reactive({
@@ -74,6 +78,42 @@ const userWorkExperience = computed<IWorkExperience[]>(
   () => userStore.workExperience
 );
 
+const setEditWorkExperience = (index: number) => {
+  isEdit.value = true;
+  workExperienceFormData.companyOrganization =
+    userWorkExperience.value[index].companyOrganization;
+  workExperienceFormData.website =
+    userWorkExperience.value[index]?.website || '';
+  workExperienceFormData.companyLocation =
+    userWorkExperience.value[index]?.companyLocation;
+  workExperienceFormData.jobTitle = userWorkExperience.value[index]?.jobTitle;
+  workExperienceFormData.startingFrom = formatDateForInput(
+    userWorkExperience.value[index]?.startingFrom
+  );
+  workExperienceFormData.endingIn = formatDateForInput(
+    userWorkExperience.value[index]?.endingIn
+  );
+  workExperienceFormData.presentlyWorking =
+    (userWorkExperience.value[index]?.presentlyWorking as boolean) || false;
+  workExperienceFormData.details = userWorkExperience.value[index]?.details;
+
+  selectedIndex.value = index;
+};
+
+const resetForm = () => {
+  isEdit.value = false;
+  workExperienceFormData.companyOrganization = '';
+  workExperienceFormData.website = '';
+  workExperienceFormData.companyLocation = '';
+  workExperienceFormData.jobTitle = '';
+  workExperienceFormData.startingFrom = '';
+  workExperienceFormData.endingIn = '';
+  workExperienceFormData.presentlyWorking = false;
+  workExperienceFormData.details = '';
+
+  v$.value.$reset()
+};
+
 const handleAddExperience = async () => {
   isLoading.value = true;
   const isValidForm = await v$.value.$validate();
@@ -83,7 +123,6 @@ const handleAddExperience = async () => {
       position: POSITION.TOP_RIGHT,
     });
 
-    console.log(v$.value.$errors);
     setTimeout(() => {
       isLoading.value = false;
     }, 2000);
@@ -92,14 +131,13 @@ const handleAddExperience = async () => {
 
   try {
     const token = authStore.userToken;
-    const response = await $fetch('/api/jobseeker/work-experience/add', {
+    await $fetch('/api/jobseeker/work-experience/add', {
       method: 'POST',
       body: workExperienceFormData,
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
-    const responseData = response as ApiSuccessResponse;
     toast.success('Work experience was added', {
       timeout: 3000,
       position: POSITION.TOP_RIGHT,
@@ -109,6 +147,7 @@ const handleAddExperience = async () => {
       isLoading.value = false;
     }, 500);
 
+    resetForm();
     await fetchWorkExperience();
   } catch (error: any) {
     const errorData = error.data as ApiErrorResponse;
@@ -123,6 +162,68 @@ const handleAddExperience = async () => {
     }, 2000);
   }
 };
+
+const handleEditExperience = async () => {
+  isLoading.value = true;
+  const isValidForm = await v$.value.$validate();
+  if (!isValidForm) {
+    toast.error('Please fill all fields correctly', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+    return;
+  }
+
+  if (selectedIndex.value === null) {
+    toast.error('Please select an experience to edit', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+  }
+
+  try {
+    const token = authStore.userToken;
+     await $fetch('/api/jobseeker/work-experience/update', {
+      method: 'POST',
+      body: workExperienceFormData,
+      query: {
+        workExperienceId:
+          userWorkExperience.value[selectedIndex.value as number].id,
+      },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    toast.success('Work experience was updated', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 500);
+
+    resetForm();
+    await fetchWorkExperience();
+  } catch (error: any) {
+    const errorData = error.data as ApiErrorResponse;
+
+    toast.error('An error occurred try again', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+  }
+};
+
+const handleDeleteExperience = async () => {}
 
 const fetchWorkExperience = async () => {
   isLoading.value = true;
@@ -320,14 +421,14 @@ onBeforeMount(async () => {
                     />
 
                     <div
-                    class="input-errors"
-                    v-for="error of v$.jobTitle.$errors"
-                    :key="error.$uid"
-                  >
-                    <span class="text-xs text-danger-500"
-                      >* {{ error.$message }}</span
+                      class="input-errors"
+                      v-for="error of v$.jobTitle.$errors"
+                      :key="error.$uid"
                     >
-                  </div>
+                      <span class="text-xs text-danger-500"
+                        >* {{ error.$message }}</span
+                      >
+                    </div>
                   </div>
                 </div>
 
@@ -444,6 +545,7 @@ onBeforeMount(async () => {
                 class="flex flex-col w-full md:w-auto items-center md:flex-row md:space-y-0 space-x-0 space-y-3 md:space-x-3 text-xs md:pl-2"
               >
                 <BtnSuccess
+                  v-if="!isEdit"
                   @click="handleAddExperience()"
                   :isLoading="isLoading"
                   :disabled="isLoading"
@@ -453,13 +555,25 @@ onBeforeMount(async () => {
                   </template>
                 </BtnSuccess>
 
+                <BtnSuccess
+                  v-if="isEdit"
+                  @click="handleEditExperience()"
+                  :isLoading="isLoading"
+                  :disabled="isLoading"
+                >
+                  <template #text>
+                    {{ !isLoading ? 'Update changes' : 'Updating...' }}
+                  </template>
+                </BtnSuccess>
+
                 <button
-                  class="md:px-3.5 w-full md:w-auto border text-black-600 rounded-8 py-3"
+                  @click="resetForm()"
+                  class="md:px-3.5 w-full md:w-auto border text-black-600 rounded-8 py-2"
                 >
                   Cancel
                 </button>
 
-                <button class="md:px-3.5 w-full md:w-auto text-info-600 py-3">
+                <button  v-if="isEdit" @click="handleDeleteExperience()" class="md:px-3.5 w-full md:w-auto text-info-600 py-3">
                   Delete this work experience
                 </button>
               </div>
@@ -478,7 +592,12 @@ onBeforeMount(async () => {
                     </li>
                     <div class="flex gap-x-3">
                       <h1 class="font-black text-xs">
-                        {{ formateDateMonthYear(experience.startingFrom) }} - {{ experience?.endingIn ? formateDateMonthYear(experience?.endingIn) : 'PRESENT' }} 
+                        {{
+                          formatExperienceDates(
+                            experience.startingFrom,
+                            experience?.endingIn
+                          )
+                        }}
                       </h1>
                       <h1 class="font-blacl text-xs">
                         {{ experience.companyLocation }}
@@ -489,7 +608,7 @@ onBeforeMount(async () => {
                       {{ experience.details }}
                     </p>
                   </ul>
-                  <button>
+                  <button @click="setEditWorkExperience(index)">
                     <svg
                       width="24"
                       height="24"

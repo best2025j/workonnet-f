@@ -86,7 +86,7 @@ onBeforeMount(async () => {
           class="flex flex-col md:flex-row justify-between space-y-3 md:items-center"
         >
           <div class="space-y-2 pt-1">
-            <h1 class="font-black text-base">
+            <h1 class="font-black text-base capitalize">
               {{ userData?.firstName || '' }} {{ userData?.lastName || '' }}
             </h1>
             <div class="flex items-start space-x-4">
@@ -257,7 +257,7 @@ onBeforeMount(async () => {
         <!-- experience -->
         <div class="space-y-4 pt-10">
           <h1 class="text-xl font-black">Experience</h1>
-          <div v-if="userWorkExperience.length">
+          <div v-if="userWorkExperience.length" class="space-y-3">
             <div
               v-for="(experience, index) in userWorkExperience"
               :key="index"
@@ -269,7 +269,12 @@ onBeforeMount(async () => {
               </h1>
               <div class="flex gap-2">
                 <h1 class="text-xs font-black">
-                  {{ formateDateMonthYear(experience.startingFrom) }} - {{ experience?.endingIn ? formateDateMonthYear(experience?.endingIn) : 'PRESENT' }}  
+                  {{
+                    formatExperienceDates(
+                      experience.startingFrom,
+                      experience?.endingIn
+                    )
+                  }}
                 </h1>
                 <h1 class="text-xs">{{ experience.companyLocation }}</h1>
               </div>

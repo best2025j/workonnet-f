@@ -141,17 +141,16 @@ export interface IRecruitersWithPagination extends IPagination {
 }
 
 export interface IWorkExperience {
+  id: string;
   user?: IUserDetails | string;
   companyOrganization: string;
   website?: string;
   companyLocation: string;
-  city: string;
   jobTitle: string;
   startingFrom: string;
   endingIn: string;
   presentlyWorking?: boolean;
   details: string;
-  // jobType: 'remote' | 'onsite' | 'hybrid';
 }
 
 export interface TelInputData {

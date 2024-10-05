@@ -43,6 +43,32 @@ export const formatDateSubmission = (dateString: string) => {
   return moment(dateString).format('L');
 };
 
+export function formatExperienceDates(startingFrom: string, endingIn: string) {
+  if (!startingFrom) return '';
+
+  const startDate = moment(startingFrom);
+  const endDate = endingIn ? moment(endingIn) : null;
+
+  // Check if both dates are in the same year
+  if (endDate && startDate.year() === endDate.year()) {
+    return `${startDate.format('MMMM')} - ${endDate.format('MMMM YYYY')}`;
+  }
+
+  return `${formateDateMonthYear(startingFrom)} - ${
+    endDate ? formateDateMonthYear(endingIn) : 'PRESENT'
+  }`;
+}
+
+export function formatDateForInput(dateString: string): string {
+  if (!dateString) return '';
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+
 export const ROUTES = {
   HOME: '/home',
   MYPROFILE: '/myprofile',

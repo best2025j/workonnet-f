@@ -1010,7 +1010,12 @@ const formatNumber = (): void => {
               </li>
               <div class="text-sm flex gap-3">
                 <h1 class="font-black">
-                  {{ formateDateMonthYear(experience.startingFrom) }} - {{ experience?.endingIn ? formateDateMonthYear(experience?.endingIn) : 'PRESENT' }} 
+                  {{
+                    formatExperienceDates(
+                      experience.startingFrom,
+                      experience?.endingIn
+                    )
+                  }}
                 </h1>
                 <h1>{{ experience.companyLocation }}</h1>
               </div>

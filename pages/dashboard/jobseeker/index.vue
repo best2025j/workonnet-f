@@ -20,7 +20,7 @@ const userData = computed<IUserDetails>(
   <div class="pt-4 text-black-900 w-full">
     <!-- Dashboard content goes here -->
     <div class="space-y-1 pb-2">
-      <h2 class="text-2xl font-black">Good Morning <span v-if="!isLoading">{{', ' + userData?.firstName || '' }}</span> </h2>
+      <h2 class="text-2xl font-black">Good Morning <span v-if="!isLoading" class="capitalize">{{', ' + userData?.firstName || '' }}</span> </h2>
       <p class="text-sm">
         Here’s what’s happening with your job application since you joined us.
       </p>
