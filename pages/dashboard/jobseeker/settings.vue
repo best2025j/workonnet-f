@@ -153,7 +153,7 @@ onBeforeMount(async () => {
         </div>
       </div>
 
-      <div class="h-20 w-full items-center flex px-4">
+      <!-- <div class="h-20 w-full items-center flex px-4">
         <div class="space-x-3 flex items-center">
           <span
             ><svg
@@ -171,7 +171,7 @@ onBeforeMount(async () => {
           </span>
           <h1 class="font-bold text-sm text-black-600">Saved/Favourites</h1>
         </div>
-      </div>
+      </div> -->
     </div>
     <!--  -->
     <div class="md:w-3/4 w-full h-full space-y-3 md:ml-[33%]">
