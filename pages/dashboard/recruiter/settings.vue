@@ -129,29 +129,6 @@ onBeforeMount(async () => {
         <div class="space-x-3 flex items-center">
           <span
             ><svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M21 4.5H3C2.60218 4.5 2.22064 4.65804 1.93934 4.93934C1.65804 5.22064 1.5 5.60218 1.5 6V18C1.5 18.3978 1.65804 18.7794 1.93934 19.0607C2.22064 19.342 2.60218 19.5 3 19.5H21C21.3978 19.5 21.7794 19.342 22.0607 19.0607C22.342 18.7794 22.5 18.3978 22.5 18V6C22.5 5.60218 22.342 5.22064 22.0607 4.93934C21.7794 4.65804 21.3978 4.5 21 4.5ZM21 6V8.25H3V6H21ZM21 18H3V9.75H21V18ZM19.5 15.75C19.5 15.9489 19.421 16.1397 19.2803 16.2803C19.1397 16.421 18.9489 16.5 18.75 16.5H15.75C15.5511 16.5 15.3603 16.421 15.2197 16.2803C15.079 16.1397 15 15.9489 15 15.75C15 15.5511 15.079 15.3603 15.2197 15.2197C15.3603 15.079 15.5511 15 15.75 15H18.75C18.9489 15 19.1397 15.079 19.2803 15.2197C19.421 15.3603 19.5 15.5511 19.5 15.75ZM13.5 15.75C13.5 15.9489 13.421 16.1397 13.2803 16.2803C13.1397 16.421 12.9489 16.5 12.75 16.5H11.25C11.0511 16.5 10.8603 16.421 10.7197 16.2803C10.579 16.1397 10.5 15.9489 10.5 15.75C10.5 15.5511 10.579 15.3603 10.7197 15.2197C10.8603 15.079 11.0511 15 11.25 15H12.75C12.9489 15 13.1397 15.079 13.2803 15.2197C13.421 15.3603 13.5 15.5511 13.5 15.75Z"
-                fill="#3D3D3D"
-              />
-            </svg>
-          </span>
-          <NuxtLink :to="{ hash: '#payment-details' }">
-            <h1 class="font-bold text-sm text-black-600">Payment Details</h1>
-          </NuxtLink>
-        </div>
-      </div>
-
-      <!--  -->
-      <div class="border-b-2 h-20 w-full items-center flex px-4">
-        <div class="space-x-3 flex items-center">
-          <span
-            ><svg
               width="20"
               height="18"
               viewBox="0 0 20 18"
@@ -192,7 +169,7 @@ onBeforeMount(async () => {
         </div>
       </div>
 
-      <div class="h-20 w-full items-center flex px-4">
+      <!-- <div class="h-20 w-full items-center flex px-4">
         <div class="space-x-3 flex items-center">
           <span
             ><svg
@@ -210,7 +187,7 @@ onBeforeMount(async () => {
           </span>
           <h1 class="font-bold text-sm text-black-600">Saved/Favourites</h1>
         </div>
-      </div>
+      </div> -->
     </div>
     <!--  -->
     <div class="md:w-3/4 h-full space-y-3 md:ml-[30rem]">
