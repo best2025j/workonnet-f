@@ -2,7 +2,7 @@
   <div class="h-full w-full md:px-8 px-4 md:pt-10">
     <!-- grid divider vertical using daisy ui -->
   <div
-      class="flex justify-between items-center w-full text-xs md:text-sm md:space-x-4 md:px-8 px-4 gap-x-2 "
+      class="flex justify-between items-center w-full text-xs md:text-sm md:space-x-4 gap-x-2 "
     >
       <h1 class="whitespace-nowrap md:flex hidden">Why choose us?</h1>
       <h1 class="whitespace-nowrap md:hidden">Why us?</h1>
