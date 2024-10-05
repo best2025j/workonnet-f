@@ -18,17 +18,19 @@ const showProfileView = ref(false);
 
 // Toggle notifications visibility
 const toggleNotifications = () => {
+  showProfileView.value = false;
   showNotifications.value = !showNotifications.value;
 };
 
 const toggleProfileView = () => {
+  showNotifications.value = false;
   showProfileView.value = !showProfileView.value;
 };
 
 // Close notifications
-const closeNotifications = () => {
-  showNotifications.value = false;
-};
+// const closeNotifications = () => {
+//   showNotifications.value = false;
+// };
 
 const userData = computed<IUserDetails>(() => userStore.loggedInUserDetails);
 </script>
