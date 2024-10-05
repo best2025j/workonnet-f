@@ -21,8 +21,10 @@ const authStore = useAuthStore();
 const userData = computed<IUserDetails>(() => userStore.loggedInUserDetails);
 const isLoading = ref<boolean>(false);
 const isEdit = ref<boolean>(false);
+const isDeleting = ref<boolean>(false);
 
 const selectedIndex = ref<number | null>(null);
+const modalTrigger = ref(null);
 
 const toast = useToast();
 
@@ -74,6 +76,14 @@ const rules = computed(() => {
 
 const v$ = useVuelidate(rules, workExperienceFormData);
 
+const showDeleteModal = async () => {
+  (modalTrigger.value as unknown as any).showModal();
+};
+
+const hideDeleteModal = async () => {
+  (modalTrigger.value as unknown as any).close();
+};
+
 const userWorkExperience = computed<IWorkExperience[]>(
   () => userStore.workExperience
 );
@@ -111,7 +121,7 @@ const resetForm = () => {
   workExperienceFormData.presentlyWorking = false;
   workExperienceFormData.details = '';
 
-  v$.value.$reset()
+  v$.value.$reset();
 };
 
 const handleAddExperience = async () => {
@@ -179,7 +189,7 @@ const handleEditExperience = async () => {
   }
 
   if (selectedIndex.value === null) {
-    toast.error('Please select an experience to edit', {
+    toast.warning('Please select an experience to edit', {
       timeout: 3000,
       position: POSITION.TOP_RIGHT,
     });
@@ -187,7 +197,7 @@ const handleEditExperience = async () => {
 
   try {
     const token = authStore.userToken;
-     await $fetch('/api/jobseeker/work-experience/update', {
+    await $fetch('/api/jobseeker/work-experience/update', {
       method: 'POST',
       body: workExperienceFormData,
       query: {
@@ -223,7 +233,56 @@ const handleEditExperience = async () => {
   }
 };
 
-const handleDeleteExperience = async () => {}
+const handleDeleteExperience = async () => {
+  isDeleting.value = true;
+  if (selectedIndex.value === null) {
+    toast.warning('Please select an experience to delete', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+  }
+
+  try {
+    const token = authStore.userToken;
+    await $fetch('/api/jobseeker/work-experience/delete', {
+      query: {
+        workExperienceId:
+          userWorkExperience.value[selectedIndex.value as number].id,
+      },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    toast.success('Work experience was deleted', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+      isDeleting.value = true;
+    }, 500);
+
+    resetForm();
+    setTimeout(() => {
+      hideDeleteModal();
+    }, 1000);
+    await fetchWorkExperience();
+  } catch (error: any) {
+    const errorData = error.data as ApiErrorResponse;
+
+    toast.error('An error occurred try again', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+      isDeleting.value = true;
+      isEdit.value = false;
+    }, 2000);
+  }
+};
 
 const fetchWorkExperience = async () => {
   isLoading.value = true;
@@ -573,7 +632,11 @@ onBeforeMount(async () => {
                   Cancel
                 </button>
 
-                <button  v-if="isEdit" @click="handleDeleteExperience()" class="md:px-3.5 w-full md:w-auto text-info-600 py-3">
+                <button
+                  v-if="isEdit"
+                  @click="showDeleteModal()"
+                  class="md:px-3.5 w-full md:w-auto text-info-600 py-3"
+                >
                   Delete this work experience
                 </button>
               </div>
@@ -1094,5 +1157,70 @@ onBeforeMount(async () => {
         </div>
       </div>
     </div>
+
+    <!-- modals -->
+    <dialog
+      ref="modalTrigger"
+      id="delete_modal"
+      class="modal text-black-950 backdrop-blur-sm backdrop-opacity-2 backdrop-filter"
+    >
+      <div class="modal-box flex-col max-w-md flex items-center space-y-3">
+        <div
+          class="flex items-center justify-between w-full pb-3 -mt-3 border-b-2"
+        >
+          <div class="text-white">no text.</div>
+          <h3 class="text-lg font-bold">Notice</h3>
+
+          <form method="dialog">
+            <button class="btn">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M0.726027 0.724657C0.970105 0.480579 1.36583 0.480579 1.60991 0.724657L13.2758 12.3905C13.5199 12.6346 13.5199 13.0303 13.2758 13.2744C13.0317 13.5185 12.636 13.5185 12.3919 13.2744L0.726027 1.60854C0.481949 1.36446 0.481949 0.968734 0.726027 0.724657Z"
+                  fill="#57575B"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M13.274 0.724657C13.5181 0.968734 13.5181 1.36446 13.274 1.60854L1.60809 13.2744C1.36401 13.5185 0.968285 13.5185 0.724208 13.2744C0.48013 13.0303 0.480131 12.6346 0.724208 12.3905L12.3901 0.724657C12.6342 0.480579 13.0299 0.480579 13.274 0.724657Z"
+                  fill="#57575B"
+                />
+              </svg>
+            </button>
+          </form>
+        </div>
+
+        <p class="py-2 w-2/3 text-sm text-center">
+          Do you want to delete this work experience ?
+        </p>
+
+        <div class="space-x-4 flex items-center justify-between w-full">
+          <BtnPrimary
+            @click="handleDeleteExperience()"
+            :isLoading="isDeleting"
+            :disabled="isDeleting"
+            class="rounded-8 px-3.5 py-2 text-white text-xs bg-primary-1 !flex-1"
+          >
+            <template #text>
+              {{ !isDeleting ? 'Yes, Delete' : 'Deleting...' }}
+            </template>
+          </BtnPrimary>
+          <form method="dialog" class="flex-1">
+            <button
+              class="md:px-3.5 w-full md:w-full border text-black-600 rounded-8 py-1"
+            >
+              No, Cancel
+            </button>
+          </form>
+        </div>
+      </div>
+    </dialog>
   </div>
 </template>

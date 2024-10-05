@@ -44,7 +44,9 @@ const fetchWorkExperience = async () => {
 
 onBeforeMount(async () => {
   // fetch experience
+ if(!userWorkExperience.value.length || !userWorkExperience.value){
   await fetchWorkExperience();
+ }
 });
 </script>
 

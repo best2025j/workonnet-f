@@ -345,6 +345,14 @@ const formatNumber = (): void => {
 
   markAsChanged('salary');
 };
+
+//TODO:// attend to this later
+// onBeforeMount(async () => {
+//   // fetch experience
+//  if(!userWorkExperience.value.length || !userWorkExperience.value){
+//   await fetchWorkExperience();
+//  }
+// });
 </script>
 
 <template>
