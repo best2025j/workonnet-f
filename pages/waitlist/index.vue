@@ -20,7 +20,7 @@ const selectUserType = (selectedType: SELECTED_USER_TYPE) => {
 <template>
   <div class="w-full h-full">
     <div
-      class="flex flex-col items-center mx-auto h-full justify-center max-w-[516px] text-center space-y-3"
+      class="flex flex-col items-center mx-auto h-full justify-center max-w-[516px] text-center space-y-3 p-3"
     >
       <div
         class="flex items-center bg-westside-50 space-x-2 p-1 px-4 rounded-2xl"
@@ -45,11 +45,11 @@ const selectUserType = (selectedType: SELECTED_USER_TYPE) => {
           </svg>
         </span>
       </div>
-      <hi class="text-5xl font-black">The Future of Work Powered by AI</hi>
+      <hi class="md:text-5xl text-2xl font-black">The Future of Work Powered by AI</hi>
       <div class="flex flex-col pt-8 space-y-6">
         <div>
-          <p class="text-xl">To continue, choose a user type that best</p>
-          <p class="text-xl">describes you, or what you do</p>
+          <p class="text-sm md:text-xl">To continue, choose a user type that best</p>
+          <p class="text-sm md:text-xl">describes you, or what you do</p>
         </div>
         <div class="flex space-x-8">
           <div @click="selectUserType(SELECTED_USER_TYPE.JOBSEEKER)" class="relative cursor-pointer" >

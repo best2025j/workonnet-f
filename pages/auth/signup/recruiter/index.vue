@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { POSITION, useToast } from 'vue-toastification';
-import { required, helpers, email, minLength } from '@vuelidate/validators';
-import { useVuelidate } from '@vuelidate/core';
+import { POSITION, useToast } from "vue-toastification";
+import { required, helpers, email, minLength } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
 
 definePageMeta({
-  layout: 'auth',
-  title: 'recruiter.signup.index',
-  pageName: 'recruiter.signup',
+  layout: "auth",
+  title: "recruiter.signup.index",
+  pageName: "recruiter.signup",
   // middleware: ['no-auth'],
 });
 
@@ -16,27 +16,30 @@ const authStore = useAuthStore();
 const isLoading = ref<boolean>(false);
 
 const formData = reactive({
-  fullName: '',
-  email: '',
-  password: '',
-  companyName: '',
-  companySize: '',
-  industry: '',
-  websiteUrl: '',
+  fullName: "",
+  email: "",
+  password: "",
+  companyName: "",
+  companySize: "",
+  industry: "",
+  websiteUrl: "",
 });
 
 const rules = computed(() => {
   return {
     fullName: {
-      required: helpers.withMessage('FullName is required', required),
+      required: helpers.withMessage("FullName is required", required),
     },
     email: {
-      required: helpers.withMessage('Email is required', required),
-      email: helpers.withMessage('Enter a valid email', email),
+      required: helpers.withMessage("Email is required", required),
+      email: helpers.withMessage("Enter a valid email", email),
     },
     password: {
-      required: helpers.withMessage('Please enter a password', required),
-      minLength: helpers.withMessage('Password cannot be less than 8 characters', minLength(8)),
+      required: helpers.withMessage("Please enter a password", required),
+      minLength: helpers.withMessage(
+        "Password cannot be less than 8 characters",
+        minLength(8)
+      ),
     },
   };
 });
@@ -47,7 +50,7 @@ const handleNextStep = async () => {
   isLoading.value = true;
   const isValidForm = await v$.value.$validate();
   if (!isValidForm) {
-    toast.error('Please enter a valid email or password or fullname', {
+    toast.error("Please enter a valid email or password or fullname", {
       timeout: 3000,
       position: POSITION.TOP_RIGHT,
     });
@@ -62,7 +65,7 @@ const handleNextStep = async () => {
   // store step one data -
   authStore.setStepOneFormData(formData);
   // navigate to step two
-  router.push('/auth/signup/recruiter/complete-signup');
+  router.push("/auth/signup/recruiter/complete-signup");
 };
 
 onMounted(() => {
@@ -87,19 +90,21 @@ onMounted(() => {
     }
     if (authStore.stepOneRecruiterForm.websiteUrl !== null) {
       formData.websiteUrl = authStore.stepOneRecruiterForm.websiteUrl;
-    }      
+    }
   }
 });
 </script>
 
 <template>
-  <div class="flex justify-center items-center w-full">
+  <div class="flex justify-center items-center w-full px-6 md:px-0">
     <div class="md:w-[23.375rem] w-full flex flex-col">
-      <h2 class="text-center text-[32px] mb-6 font-['Georgia'] font-normal">
+      <h2 class="text-center text-2xl md:text-[32px] mb-6 font-['Georgia'] font-normal">
         Signup to account
       </h2>
 
-      <div class="flex flex-col items-center justify-center gap-4 text-[12px] w-full">
+      <div
+        class="flex flex-col items-center justify-center gap-4 text-[12px] w-full"
+      >
         <button
           class="w-full flex gap-4 items-center justify-center border font-light border-[#D0D5DD] border-solid px-5 py-2 text-[#344054] rounded-lg"
         >
@@ -171,66 +176,70 @@ onMounted(() => {
       <form
         class="flex flex-col mt-6 mx-auto items-start space-y-2 justify-center text-left w-full max-w-md"
       >
-       <div class="w-full">
-        <label class="text-base font-thin mb-2 text-left mt-4">Full Name</label>
-        <input
-          type="text"
-          placeholder="Full name here"
-          v-model="formData.fullName"
-          :disabled="isLoading"
-          @change="v$.lastName.$touch"
-          class="outline-none w-full text-base font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
-        />
-        <div
-              class="input-errors"
-              v-for="error of v$.fullName.$errors"
-              :key="error.$uid"
-            >
-              <span class="text-xs text-danger-500">* {{ error.$message }}</span>
-            </div>
-       </div>
-       
-       <div class="w-full">
-        <label class="text-base font-thin mb-2 text-left mt-4">Email</label>
-        <input
-          type="email"
-          placeholder="Enter email address here"
-          v-model="formData.email"
-          :disabled="isLoading"
-          @change="v$.email.$touch"
-          class="outline-none w-full text-base font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
-        />
+        <div class="w-full">
+          <label class="text-base font-thin mb-2 text-left mt-4"
+            >Full Name</label
+          >
+          <input
+            type="text"
+            placeholder="Full name here"
+            v-model="formData.fullName"
+            :disabled="isLoading"
+            @change="v$.lastName.$touch"
+            class="outline-none w-full text-base font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2.5 border border-black-200 border-solid"
+          />
+          <div
+            class="input-errors"
+            v-for="error of v$.fullName.$errors"
+            :key="error.$uid"
+          >
+            <span class="text-xs text-danger-500">* {{ error.$message }}</span>
+          </div>
+        </div>
 
-        <div
-              class="input-errors"
-              v-for="error of v$.email.$errors"
-              :key="error.$uid"
-            >
-              <span class="text-xs text-danger-500">* {{ error.$message }}</span>
-            </div>
-       </div>
+        <div class="w-full">
+          <label class="text-base font-thin mb-2 text-left mt-4">Email</label>
+          <input
+            type="email"
+            placeholder="Enter email address here"
+            v-model="formData.email"
+            :disabled="isLoading"
+            @change="v$.email.$touch"
+            class="outline-none w-full text-base font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2.5 border border-black-200 border-solid"
+          />
 
-       <div class="w-full">
-        <label class="text-base font-thin mb-2 text-left mt-4">Password</label>
-        <input
-          type="password"
-          placeholder="Create new password"
-          pattern=".{8,}"
-          v-model="formData.password"
-          :disabled="isLoading"
-          @change="v$.password.$touch"
-          class="outline-none text-base leading-5 w-full p border border-solid border-black-200 rounded-lg px-3 py-2"
-        />
+          <div
+            class="input-errors"
+            v-for="error of v$.email.$errors"
+            :key="error.$uid"
+          >
+            <span class="text-xs text-danger-500">* {{ error.$message }}</span>
+          </div>
+        </div>
 
-        <div
-              class="input-errors"
-              v-for="error of v$.password.$errors"
-              :key="error.$uid"
-            >
-              <span class="text-xs text-danger-500">* {{ error.$message }}</span>
-            </div>
-       </div>
-       
+        <div class="w-full">
+          <label class="text-base font-thin mb-2 text-left mt-4"
+            >Password</label
+          >
+          <input
+            type="password"
+            placeholder="Create new password"
+            pattern=".{8,}"
+            v-model="formData.password"
+            :disabled="isLoading"
+            @change="v$.password.$touch"
+            class="outline-none text-base leading-5 w-full p border border-solid border-black-200 rounded-lg px-3 py-2.5"
+          />
+
+          <div
+            class="input-errors"
+            v-for="error of v$.password.$errors"
+            :key="error.$uid"
+          >
+            <span class="text-xs text-danger-500">* {{ error.$message }}</span>
+          </div>
+        </div>
+
         <div class="pt-10"></div>
         <BtnPrimary
           @click="handleNextStep()"

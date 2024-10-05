@@ -7,6 +7,8 @@ const route = useRoute();
 const isSideNavOpen = ref(false);
 const authStore = useAuthStore()
 const userStore = useUserStore();
+
+
 // Function to toggle the side nav
 const toggleSideNav = () => {
   isSideNavOpen.value = !isSideNavOpen.value;

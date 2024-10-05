@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { required, helpers, minLength, sameAs } from '@vuelidate/validators';
-import { useVuelidate } from '@vuelidate/core';
-import { useToast, POSITION } from 'vue-toastification';
-import VOtpInput from 'vue3-otp-input';
-import type { ApiErrorResponse, ApiSuccessResponse } from '~/types';
+import { required, helpers, minLength, sameAs } from "@vuelidate/validators";
+import { useVuelidate } from "@vuelidate/core";
+import { useToast, POSITION } from "vue-toastification";
+import VOtpInput from "vue3-otp-input";
+import type { ApiErrorResponse, ApiSuccessResponse } from "~/types";
 
 definePageMeta({
-  title: 'Set New Password',
-  pageName: 'auth.set-new.password',
+  title: "Set New Password",
+  pageName: "auth.set-new.password",
 });
 
 const route = useRoute();
@@ -16,24 +16,24 @@ const toast = useToast();
 const isLoading = ref<boolean>(false);
 
 const formData = reactive({
-  password: '',
-  confirmPassword: '',
+  password: "",
+  confirmPassword: "",
   token: route.query.tke,
 });
 
 const rules = computed(() => {
   return {
     password: {
-      required: helpers.withMessage('Please enter a password', required),
+      required: helpers.withMessage("Please enter a password", required),
       minLength: helpers.withMessage(
-        'Password cannot be less than 8 characters',
+        "Password cannot be less than 8 characters",
         minLength(8)
       ),
     },
     confirmPassword: {
-      required: helpers.withMessage('Please enter a password', required),
+      required: helpers.withMessage("Please enter a password", required),
       sameAs: helpers.withMessage(
-        'Password does not match',
+        "Password does not match",
         sameAs(formData.password)
       ),
     },
@@ -47,7 +47,7 @@ const handleSetNewPassword = async () => {
   isLoading.value = true;
   const isValidForm = await v$.value.$validate();
   if (!isValidForm) {
-    toast.error('Passwords does not match', {
+    toast.error("Passwords does not match", {
       timeout: 3000,
       position: POSITION.TOP_RIGHT,
     });
@@ -59,13 +59,13 @@ const handleSetNewPassword = async () => {
   }
 
   try {
-    await $fetch('/api/auth/create-new-password', {
-      method: 'POST',
+    await $fetch("/api/auth/create-new-password", {
+      method: "POST",
       body: { password: formData.password, token: formData.token },
     });
 
     toast.success(
-      'New password successfully created, please proceed to login.',
+      "New password successfully created, please proceed to login.",
       {
         timeout: 3000,
         position: POSITION.TOP_RIGHT,
@@ -77,7 +77,7 @@ const handleSetNewPassword = async () => {
     }, 500);
 
     return router.push({
-      path: '/auth/password-confirmation',
+      path: "/auth/password-confirmation",
       query: {
         email: route.query.email,
         reqId: route.query.reqId,
@@ -85,10 +85,10 @@ const handleSetNewPassword = async () => {
     });
   } catch (error: any) {
     const errorData = error.data as ApiErrorResponse;
-      toast.error('An error occurred try again', {
-        timeout: 3000,
-        position: POSITION.TOP_RIGHT,
-      });
+    toast.error("An error occurred try again", {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
 
     setTimeout(() => {
       isLoading.value = false;
@@ -103,7 +103,7 @@ onMounted(() => {
     !route.query.email ||
     !route.query.reqId
   ) {
-    return router.replace('/');
+    return router.replace("/");
   }
 });
 </script>
@@ -111,7 +111,7 @@ onMounted(() => {
 <template>
   <div class="md:w-1/2 mx-auto h-full">
     <div
-      class="flex flex-col items-center justify-center md:w-[23.375rem] mx-auto mt-10"
+      class="flex flex-col items-center justify-center md:w-[23.375rem] mx-auto mt-10 px-6 md:px-0"
     >
       <span class="mt-8">
         <svg
@@ -146,10 +146,15 @@ onMounted(() => {
           class="outline-none text-xs w-full border border-solid border-black-200 rounded-lg px-3 py-2.5"
         />
         <label class="text-sm font-thin">Confirm Password</label>
-        <input type="password" placeholder="Confirm password" pattern=".{8,}"
-        v-model="formData.confirmPassword" :disabled="isLoading"
-        @change="v$.confirmPassword.$touch" class="outline-none text-xs w-full
-        border border-solid border-black-200 rounded-lg px-3 py-2.5" />
+        <input
+          type="password"
+          placeholder="Confirm password"
+          pattern=".{8,}"
+          v-model="formData.confirmPassword"
+          :disabled="isLoading"
+          @change="v$.confirmPassword.$touch"
+          class="outline-none text-xs w-full border border-solid border-black-200 rounded-lg px-3 py-2.5"
+        />
       </form>
       <div class="pt-5"></div>
       <BtnPrimary
@@ -158,7 +163,7 @@ onMounted(() => {
         :disabled="isLoading "
       >
         <template #text>
-          {{ !isLoading ? 'Create new Password' : 'Please wait...' }}
+          {{ !isLoading ? "Create new Password" : "Please wait..." }}
         </template>
       </BtnPrimary>
     </div>

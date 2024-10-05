@@ -12,13 +12,12 @@ onMounted(() => {
     return router.replace("/");
   }
 });
-
 </script>
 
 <template>
   <div class="md:w-1/2 mx-auto h-full">
     <div
-      class="flex flex-col items-center justify-center h-full md:w-[23.375rem] mx-auto mt-10"
+      class="flex flex-col items-center justify-center h-full md:w-[23.375rem] mx-auto mt-10 px-6 md:px-0"
     >
       <span class="mt-8">
         <svg

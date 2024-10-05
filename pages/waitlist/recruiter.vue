@@ -95,7 +95,7 @@ const handleSubmit = async () => {
     </div>
 
     <div
-      class="h-full w-full flex mx-auto justify-around items-center absolute top-0"
+      class="h-full w-full mx-auto justify-around items-center absolute top-0 md:flex hidden"
     >
       <div class="flex flex-col relative">
         <!--  -->
@@ -181,7 +181,7 @@ const handleSubmit = async () => {
   </div>
 
   <div
-    class="flex flex-col items-center mx-auto mt-24 md:mt-0 h-full justify-center max-w-[516px] text-center space-y-3 absolute top-0 left-0 right-0"
+    class="flex flex-col px-6 md:px-0 items-center mx-auto h-full justify-center max-w-[516px] text-center space-y-3 absolute top-0 left-0 right-0"
   >
     <h1
       class="md:text-6xl text-3xl font-black bg-custom-gradient bg-clip-text text-transparent leading-[77px] py-4"
