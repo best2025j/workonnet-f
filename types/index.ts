@@ -19,6 +19,16 @@ export interface IMediaFile {
   metadata?: Map<string, string>;
 }
 
+export interface IJobApplicationStats {
+  recentJobs: IJobApplications[];
+  totalJobsApplied: number;
+  totalInterview: number;
+  totalInReview: number;
+  totalRejected: number;
+  totalAccepted: number;
+  offeredJobs: IJobApplications[];
+}
+
 export interface ISocialLinks {
   facebookUrl?: string;
   linkedinUrl?: string;

@@ -13,7 +13,7 @@ import type {
 
 definePageMeta({
   title: 'My profile',
-  pageName: 'dashboard.jobseeker.my-profile.edit',
+  pageName: 'dashboard.jobseeker.my-profile.index',
   layout: 'dashboard',
   middleware: ['auth', 'is-jobseeker'],
 });

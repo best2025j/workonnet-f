@@ -34,6 +34,22 @@ export const JobStore = defineStore('job-store', () => {
     }
   }
 
+  async function fetchUserJobApplicationStats(token: string) {
+    try {
+      const response = await $fetch(
+        '/api/job-applications/jobseeker/user-stats',
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return await Promise.resolve(response);
+    } catch (error) {
+      return await Promise.reject(error);
+    }
+  }
+
   async function fetchRecruiterJobs(token: string) {
     try {
       const response = await $fetch('/api/recruiter/job/fetch', {
@@ -78,7 +94,7 @@ export const JobStore = defineStore('job-store', () => {
 
   async function fetchJobseekerSingle(token: string, jobId: string) {
     try {
-      const response = await $fetch('/api/jobseeker/jobs/get-single', {
+      const response = await $fetch('/api/jobs/get-single', {
         query: {
           jobListingId: jobId,
         },
@@ -125,6 +141,7 @@ export const JobStore = defineStore('job-store', () => {
       fetchJobseekerSingle,
       fetchUserJobApplications,
       fetchSingleApplication,
+      fetchUserJobApplicationStats,
     },
   };
 });

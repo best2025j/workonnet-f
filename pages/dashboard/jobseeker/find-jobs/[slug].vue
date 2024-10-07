@@ -9,7 +9,7 @@ IUserDetails,
 
 definePageMeta({
   title: 'Find Jobs',
-  pageName: 'dashboard.jobseeker.find-jobs.more-details',
+  pageName: 'dashboard.jobseeker.find-jobs.index',
   layout: 'dashboard',
   middleware: ['auth', 'is-jobseeker'],
 });

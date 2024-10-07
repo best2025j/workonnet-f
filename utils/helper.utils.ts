@@ -67,6 +67,38 @@ export function formatDateForInput(dateString: string): string {
   const day = String(date.getDate()).padStart(2, '0');
   return `${year}-${month}-${day}`;
 }
+function getOrdinalSuffix(day: number) {
+  if (day > 3 && day < 21) return 'th'; // Special case for 11-20
+  switch (day % 10) {
+    case 1:
+      return 'st';
+    case 2:
+      return 'nd';
+    case 3:
+      return 'rd';
+    default:
+      return 'th';
+  }
+}
+
+export function formatDateWithSuffix(dateString: string) {
+  if (!dateString) return '';
+  const date = new Date(dateString);
+  const day = moment(date).date();
+  const month = moment(date).format('MMMM');
+  const year = moment(date).format('YYYY');
+  const suffix = getOrdinalSuffix(day);
+
+  return `${day}${suffix} ${month}, ${year}`;
+}
+
+export function formatDateTime(dateString: string) {
+  if (!dateString) return '';
+  const dateToFormat = new Date(dateString);
+  const formattedDate = moment(dateToFormat).format('YYYY-MM-DD HH:mm:ss');
+
+  return formattedDate;
+}
 
 
 export function formatMonthDateForInput(dateString: string): string {

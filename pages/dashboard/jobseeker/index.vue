@@ -1,26 +1,63 @@
 <script setup lang="ts">
-import type { IUserDetails } from '~/types';
+import type {
+  ApiSuccessResponse,
+  IJobApplicationStats,
+  IUserDetails,
+  JOB_APPLICATION_STATUS,
+} from '~/types';
 
 definePageMeta({
-  title: "Dashboard",
-  pageName: "dashboard.jobseeker.index",
-  layout: "dashboard",
-  middleware: ["auth", "is-jobseeker"],
+  title: 'Dashboard',
+  pageName: 'dashboard.jobseeker.index',
+  layout: 'dashboard',
+  middleware: ['auth', 'is-jobseeker'],
 });
 
 const userStore = useUserStore();
 const isLoading = ref(false);
+const authStore = useAuthStore();
+const jobStore = useJobStore();
+const jobStats = ref<IJobApplicationStats | null>(null);
 
-const userData = computed<IUserDetails>(
-  () => userStore.loggedInUserDetails
-);
+const userData = computed<IUserDetails>(() => userStore.loggedInUserDetails);
+
+const getJobStats = async () => {
+  try {
+    isLoading.value = true;
+    const token = authStore.userToken;
+    const response = await jobStore.$api.fetchUserJobApplicationStats(token);
+    const responseData = response as ApiSuccessResponse;
+    jobStats.value = responseData.data;
+    console.log(jobStats.value);
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 1000);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+onMounted(() => {
+  getJobStats();
+});
 </script>
 
 <template>
-  <div class="pt-4 text-black-900 w-full">
+  <div
+    v-if="isLoading"
+    class="h-full py-40 w-full flex items-center justify-center"
+  >
+    <span class="loader-2"></span>
+  </div>
+  <div v-else class="pt-4 text-black-900 w-full">
     <!-- Dashboard content goes here -->
     <div class="space-y-1 pb-2">
-      <h2 class="text-2xl font-black">Good Morning <span v-if="!isLoading" class="capitalize">{{', ' + userData?.firstName || '' }}</span> </h2>
+      <h2 class="text-2xl font-black">
+        Good Morning
+        <span v-if="!isLoading" class="capitalize">{{
+          ', ' + userData?.firstName || ''
+        }}</span>
+      </h2>
       <p class="text-sm">
         Here’s what’s happening with your job application since you joined us.
       </p>
@@ -31,7 +68,7 @@ const userData = computed<IUserDetails>(
       <div
         class="flex flex-col h-full md:flex-row space-y-4 md:space-x-4 md:w-3/5 items-center"
       >
-      <!-- for desktop view -->
+        <!-- for desktop view -->
         <div class="hidden md:block w-96 min-w-[210px]">
           <div class="rounded-10 bg-white h-full mt-4">
             <div
@@ -45,7 +82,7 @@ const userData = computed<IUserDetails>(
                 <p
                   class="md:text-5xl text-2xl md:pb-8 md:tracking-tighter font-[Georgia] font-black"
                 >
-                  23
+                  {{ jobStats?.totalJobsApplied }}
                 </p>
                 <div class="md:pt-7">
                   <IconsWhiteFileIcon class="hidden md:block" />
@@ -65,7 +102,7 @@ const userData = computed<IUserDetails>(
                 <p
                   class="md:text-5xl text-2xl md:pb-8 md:tracking-tighter font-[Georgia] font-black"
                 >
-                  12
+                  {{ jobStats?.totalInterview }}
                 </p>
                 <div class="md:pt-8">
                   <IconsWhiteChatIcon class="md:block hidden" />
@@ -74,10 +111,10 @@ const userData = computed<IUserDetails>(
             </div>
           </div>
         </div>
-        
+
         <!-- for mobile view -->
         <div class="block md:hidden w-full min-w-[210px] space-y-4">
-          <div class="rounded-10 bg-white h-full py-3 ">
+          <div class="rounded-10 bg-white h-full py-3">
             <div
               class="px-4 flex md:block items-center space-y-2 space-x-8 md:space-x-0 md:space-y-0 md:pt-4"
             >
@@ -103,7 +140,7 @@ const userData = computed<IUserDetails>(
               <p
                 class="md:text-5xl text-2xl md:pb-8 md:tracking-tighter font-[Georgia] font-black"
               >
-                23
+                {{ jobStats?.totalJobsApplied }}
               </p>
             </div>
           </div>
@@ -133,7 +170,7 @@ const userData = computed<IUserDetails>(
               <p
                 class="md:text-5xl text-2xl md:pb-8 md:tracking-tighter font-[Georgia] font-black"
               >
-                12
+                {{ jobStats?.totalInterview }}
               </p>
             </div>
           </div>
@@ -243,7 +280,9 @@ const userData = computed<IUserDetails>(
                 />
                 <div>
                   <h6 class="font-semibold text-gray-800">Juliet Spincer</h6>
-                  <p class="md:text-xs text-[9px] text-gray-500">HR Manager at Microsoft</p>
+                  <p class="md:text-xs text-[9px] text-gray-500">
+                    HR Manager at Microsoft
+                  </p>
                 </div>
               </div>
             </div>
@@ -270,6 +309,193 @@ const userData = computed<IUserDetails>(
       </div>
     </div>
     <!--  -->
-    <DashboardRecentAppHistory class=" md:inline-flex" />
+    <div
+      class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-4 w-full py-4"
+    >
+      <div
+        class="text-black-900 bg-white h-full divide-y rounded-10 w-full md:w-3/5"
+      >
+        <div class="mx-auto h-12 flex justify-between w-full items-center p-4">
+          <h1 class="md:text-lg text-xs text-black-900 font-black">
+            Recent Application History
+          </h1>
+          <!-- Ensure the icon component is used correctly -->
+          <div class="pb-6">
+            <BtnBlueRight
+              @click="$router.push('/dashboard/jobseeker/my-applications')"
+              class="text-[7px] hidden md:flex"
+            />
+          </div>
+        </div>
+        <!-- table -->
+        <div class="align-middle inline-block w-full">
+          <div class="overflow-hidden mt-2">
+            <table class="min-w-full table-fixed">
+              <tbody
+                v-if="jobStats?.recentJobs.length"
+                class="divide-y divide-grey-200"
+              >
+                <tr
+                  v-for="(job, index) in jobStats.recentJobs"
+                  :key="index"
+                  class="text-black-900"
+                  :class="{
+                    'bg-westside-50': index % 2 === 0,
+                    'bg-white': index % 2 !== 0,
+                  }"
+                >
+                  <td class="py-6 whitespace-nowrap pl-4">
+                    <div class="flex space-x-4">
+                      <div class="flex flex-col">
+                        <img
+                          :src="job?.recruiter?.photo?.url"
+                          alt="Google"
+                          class="md:w-10 md:h-10 rounded"
+                        />
+                      </div>
+
+                      <div
+                        class="text-left flex flex-col w-[104px] whitespace-break-spaces"
+                      >
+                        <span
+                          class="md:text-sm text-[8px] font-black capitalize"
+                          >{{ job.jobListing.title }}</span
+                        >
+                        <span class="md:text-sm text-[8px] font-semimedium">{{
+                          job.recruiter?.companyName
+                        }}</span>
+                      </div>
+                    </div>
+                  </td>
+
+                  <td class="py-4 whitespace-nowrap">
+                    <div class="text-left flex flex-col">
+                      <span class="md:text-sm text-[8px] font-black"
+                        >Location</span
+                      ><span class="md:text-sm text-[6px] font-semimedium">{{
+                        job.recruiter?.location
+                      }}</span>
+                    </div>
+                  </td>
+
+                  <td class="py-4 whitespace-nowrap">
+                    <div class="text-left flex flex-col">
+                      <span class="md:text-sm text-[8px] font-black"
+                        >Date Applied</span
+                      ><span class="md:text-sm text-[6px] font-semimedium">{{
+                        formatDateWithSuffix(job.createdAt as string)
+                      }}</span>
+                    </div>
+                  </td>
+
+                  <td class="py-4 whitespace-nowrap pl-4 md:pl-0">
+                    <div class="font-normal flex text-left">
+                      <span
+                        class="px-6 py-2 rounded-10 font-black md:text-xs text-[6px]"
+                        :class="[
+                          job.status === 'Accepted'
+                            ? 'bg-success-100 text-success-600'
+                            : job.status === 'Rejected'
+                            ? 'bg-[#FFDEE0] text-[#F60C17]'
+                            : 'bg-westside-100 text-primary-1',
+                        ]"
+                        >{{ job.status }}</span
+                      >
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+              <tbody v-else class="divide-y divide-grey-200">
+                <tr class="text-black-900">
+                  <td class="py-6 whitespace-nowrap pl-4">
+                    No recent jobs yet.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!-- end of table -->
+      </div>
+      <!-- first table -->
+      <div class="md:w-2/5 w-full">
+        <div
+          class="text-black-900 bg-white w-full divide-y rounded-10 flex-grow h-full"
+        >
+          <div class="mx-auto h-12 flex justify-between items-center p-4">
+            <h1 class="text-base text-black-900 font-black">Offered jobs</h1>
+            <!-- Ensure the icon component is used correctly -->
+          </div>
+
+          <div class="align-middle inline-block min-w-full">
+            <div class="overflow-hidden mt-2">
+              <table class="min-w-full table-fixed">
+                <tbody v-if="jobStats?.offeredJobs.length" class="divide-y divide-grey-200">
+                  <tr v-for="(job, index) in jobStats?.offeredJobs" :key="index" class="text-black-900">
+                    <td class="py-6 whitespace-nowrap pl-4">
+                      <div class="flex space-x-4 items-center">
+                        <div class="flex flex-col">
+                          <img
+                            :src="job.recruiter?.photo?.url"
+                            alt="Google"
+                            class="md:w-10 md:h-10 h-8 w-8 rounded"
+                          />
+                        </div>
+                        <div
+                          class="text-left w-[104px] flex whitespace-break-spaces flex-col"
+                        >
+                          <span class="md:text-sm text-[8px] font-black capitalize"
+                            >{{job.jobListing.title}}</span
+                          ><span class="md:text-sm text-[7px] font-semimedium"
+                            >{{ job.recruiter?.companyName }}</span
+                          >
+                        </div>
+                      </div>
+                    </td>
+
+                    <td class="py-4 whitespace-nowrap pr-3">
+                      <div class="text-left flex flex-col">
+                        <span class="md:text-sm text-[8px] font-black"
+                          >Location</span
+                        ><span class="md:text-sm text-[7px] font-semimedium capitalize"
+                          >{{job.jobListing.location }}</span
+                        >
+                      </div>
+                    </td>
+
+                    <td class="py-4 whitespace-nowrap">
+                      <div class="text-left flex flex-col">
+                        <span class="md:text-sm text-[8px] font-black "
+                          >Date Applied</span
+                        ><span class="md:text-sm text-[7px] font-semimedium"
+                          >{{formatDateWithSuffix(job.createdAt as string)}}</span
+                        >
+                      </div>
+                    </td>
+
+                    <td class="py-4 whitespace-nowrap">
+                      <div class="font-normal flex text-left px-2 md:px-0">
+                        <span
+                          class="px-6 py-2 rounded-10 font-black bg-success-100 md:text-xs text-[7px] text-success-600"
+                          >Selected</span
+                        >
+                      </div>
+                    </td>
+                  </tr>
+
+                </tbody>
+                <tbody v-else class="divide-y divide-grey-200">
+                <tr class="text-black-900">
+                  <td class="py-6 whitespace-nowrap pl-4">
+                    No recently offered jobs yet.
+                  </td>
+                </tr>
+              </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
