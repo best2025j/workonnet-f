@@ -457,7 +457,7 @@ onBeforeMount(async () => {
             >
               Apply Now
             </button>
-            <button class="border-primary-1 px-4 border md:py-3 py-2 rounded-8">
+            <!-- <button class="border-primary-1 px-4 border md:py-3 py-2 rounded-8">
               <svg
                 width="12"
                 height="17"
@@ -470,7 +470,7 @@ onBeforeMount(async () => {
                   fill="#FE8900"
                 />
               </svg>
-            </button>
+            </button> -->
           </div>
         </div>
       </div>
@@ -558,11 +558,12 @@ onBeforeMount(async () => {
             >
               Apply Now
             </button>
-            <button
-              class="border-primary-1 border md:px-6 py-3 w-full md:w-auto text-primary-1 rounded-10 text-xs font-black"
+            <NuxtLink
+            :to="`/dashboard/jobseeker/find-jobs/${jobsResult[currentJobIndex].id}`"
+              class="py-3 px-4 border text-primary-1 border-primary-1 rounded-10 text-xs"
             >
-              More Details
-            </button>
+              More details
+            </NuxtLink>
           </div>
         </div>
       </div>

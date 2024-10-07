@@ -35,6 +35,10 @@ export const formatTimeDiffHuman = (dateString: string) => {
   return moment(dateString).startOf('hour').fromNow();
 };
 
+export const formateDateMonthYear = (dateString: string) => {
+  return moment(dateString).format('MMMM YYYY');
+};
+
 export const formatDateSubmission = (dateString: string) => {
   return moment(dateString).format('L');
 };

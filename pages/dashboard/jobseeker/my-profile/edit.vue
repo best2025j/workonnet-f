@@ -7,6 +7,7 @@ import type {
   ApiSuccessResponse,
   IPhoneNumberField,
   IUserDetails,
+  IWorkExperience,
   TelInputData,
 } from '~/types';
 
@@ -48,6 +49,10 @@ const logoImageSelector = ref(null);
 const bannerImagePreview = ref(null);
 const bannerImageData = ref(null);
 const bannerImageSelector = ref(null);
+
+const userWorkExperience = computed<IWorkExperience[]>(
+  () => userStore.workExperience
+);
 
 let phoneObjectData = ref<TelInputData | null>(null);
 
@@ -255,24 +260,24 @@ const handleProfileUpdate = async () => {
   let data: Partial<IUserDetails> = {};
 
   // if (userData.value?.status === 'draft') {
-    data = {
-      firstName: formData.firstName,
-      lastName: formData.firstName,
-      bio: formData.bio,
-      location: formData.location,
-      occupation: formData.occupation,
-      phoneNumber: formattedPhoneNumber,
-      socialLinks: {
-        facebookUrl: formData.facebookUrl,
-        linkedinUrl: formData.linkedinUrl,
-        instagramUrl: formData.instagramUrl,
-        twitterUrl: formData.twitterUrl,
-        portfolioUrl: formData.portfolioUrl,
-      },
-      salary: {
-        amount: formData.salary,
-      },
-    };
+  data = {
+    firstName: formData.firstName,
+    lastName: formData.firstName,
+    bio: formData.bio,
+    location: formData.location,
+    occupation: formData.occupation,
+    phoneNumber: formattedPhoneNumber,
+    socialLinks: {
+      facebookUrl: formData.facebookUrl,
+      linkedinUrl: formData.linkedinUrl,
+      instagramUrl: formData.instagramUrl,
+      twitterUrl: formData.twitterUrl,
+      portfolioUrl: formData.portfolioUrl,
+    },
+    salary: {
+      amount: formData.salary,
+    },
+  };
   // } else {
   //   const updatedData: Partial<FormDataFields> = {};
 
@@ -284,7 +289,7 @@ const handleProfileUpdate = async () => {
   //     } else {
   //       updatedData[field] = formData[field];
   //     }
-     
+
   //   });
 
   //   // data = {...updatedData}
@@ -442,16 +447,15 @@ const formatNumber = (): void => {
           </div>
         </div>
         <div class="text-right py-3 flex items-center justify-end">
-          <BtnPrimary
+          <BtnSuccess
             @click="handleProfileUpdate()"
             :isLoading="isLoading"
             :disabled="isLoading || hasChanges === false"
-            class="!bg-success-600 !text-xs !py-2 !px-3.5 !rounded-5 !w-auto !disabled:bg-black-100"
           >
             <template #text>
               {{ !isLoading ? 'Save changes' : 'Saving...' }}
             </template>
-          </BtnPrimary>
+          </BtnSuccess>
         </div>
       </div>
 
@@ -948,6 +952,19 @@ const formatNumber = (): void => {
                 >
               </div>
             </div>
+
+            <div class="text-right py-3 flex items-center justify-end md:hidden">
+              <BtnPrimary
+                @click="handleProfileUpdate()"
+                :isLoading="isLoading"
+                :disabled="isLoading || hasChanges === false"
+                class="!bg-success-600 !text-xs !py-2 !px-3.5 !rounded-5 !w-auto !disabled:bg-black-100"
+              >
+                <template #text>
+                  {{ !isLoading ? 'Save changes' : 'Saving...' }}
+                </template>
+              </BtnPrimary>
+            </div>
           </div>
 
           <!-- about me -->
@@ -972,49 +989,35 @@ const formatNumber = (): void => {
                 <button
                   class="md:px-4 w-full py-2 bg-primary-1 text-white rounded-5"
                 >
-                  Edit experience
+                  {{
+                    userWorkExperience.length
+                      ? 'Edit experience'
+                      : 'Add experience'
+                  }}
                 </button>
               </NuxtLink>
             </div>
           </div>
 
-          <ul class="list-disc pl-4 space-y-4 pt-6">
-            <div>
+          <ul
+            v-if="userWorkExperience.length"
+            class="list-disc pl-4 space-y-4 pt-6"
+          >
+            <div v-for="(experience, index) in userWorkExperience" :key="index">
               <li class="text-info-600 font-black">
-                User Interface Designer at Workonnect
+                {{ experience.jobTitle }} at
+                {{ experience.companyOrganization }}
               </li>
               <div class="text-sm flex gap-3">
-                <h1 class="font-black">May - June 2020</h1>
-                <h1>Lagos, Nigeria.</h1>
-              </div>
-            </div>
-
-            <div>
-              <li class="text-info-600 font-black">Accountant at Workonnect</li>
-              <div class="text-sm flex gap-3">
-                <h1 class="font-black">May - June 2020</h1>
-                <h1>Lagos, Nigeria.</h1>
-              </div>
-            </div>
-
-            <div>
-              <li class="text-info-600 font-black">HR Manager at Workonnect</li>
-              <div class="text-sm flex gap-3">
-                <h1 class="font-black">May - June 2020</h1>
-                <h1>Lagos, Nigeria.</h1>
-              </div>
-            </div>
-
-            <div>
-              <li class="text-info-600 font-black">
-                Graphic Designer at Workonnect
-              </li>
-              <div class="text-sm flex gap-3">
-                <h1 class="font-black">May - June 2020</h1>
-                <h1>Lagos, Nigeria.</h1>
+                <h1 class="font-black">
+                  {{ formateDateMonthYear(experience.startingFrom) }} - {{ experience?.endingIn ? formateDateMonthYear(experience?.endingIn) : 'PRESENT' }} 
+                </h1>
+                <h1>{{ experience.companyLocation }}</h1>
               </div>
             </div>
           </ul>
+
+          <div v-else>No work experience added</div>
         </div>
       </div>
     </div>

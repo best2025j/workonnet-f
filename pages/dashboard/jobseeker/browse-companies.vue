@@ -128,7 +128,7 @@ onBeforeMount(async () => {
       <div v-for="(recruiter, index) in recruiters" :key="index" class="bg-white h-full p-4 rounded-10 space-y-4">
         <div class="flex justify-between items-start">
           <div class="space-y-2">
-            <img v-if="recruiter?.photo" :src="recruiter?.photo?.url" alt="no pix" />
+            <img v-if="recruiter?.photo" :src="recruiter?.photo?.url" class="w-[40px] h-[40px]" alt="no pix" />
             <h1 class="text-sm font-black">{{ recruiter.companyName }}</h1>
             <h1 class="text-xs">{{recruiter.location }}</h1>
           </div>

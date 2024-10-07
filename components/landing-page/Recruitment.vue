@@ -1,24 +1,33 @@
 <template>
   <div class="h-full w-full">
     <!-- grid divider vertical using daisy ui -->
-    <div class="grid grid-cols-3 w-full text-sm px-4 md:px-8">
-      <div class="divider divider-start">Recruitment Process</div>
-      <div class="divider">Workonnect</div>
-      <div class="divider divider-end">©2024</div>
+    <div
+      class="flex justify-between items-center w-full text-xs md:text-sm md:space-x-4 md:px-8 px-4 gap-x-2 "
+    >
+      <h1 class="whitespace-nowrap md:flex hidden">Why choose us?</h1>
+      <h1 class="whitespace-nowrap md:hidden">Why us?</h1>
+      <div class="border-1 border h-full w-full" />
+      <h1>Workonnect</h1>
+      <div class="border-1 border h-full w-full" />
+      <h1>©2024</h1>
     </div>
     <!--  -->
     <div class="flex flex-col pt-12">
       <div
         class="mx-auto text-center p-4 justify-center items-center flex flex-col space-y-3 px-8"
       >
-        <h1 class=" text-2xl md:text-[32px] font-black">End-to-End Recruitment Process</h1>
+        <h1 class="text-2xl md:text-[32px] font-black">
+          End-to-End Recruitment Process
+        </h1>
         <p class="text-xs max-w-md">
           Candidates shortlisting and interview process has been redefined for a
           better talent addition to your organisation
         </p>
       </div>
       <!--  -->
-      <div class="grid md:grid-cols-3 grid-cols-1 md:gap-x-10 gap-6 w-full my-10 px-8">
+      <div
+        class="grid md:grid-cols-3 grid-cols-1 md:gap-x-10 gap-6 w-full my-10 px-8"
+      >
         <div
           class="border shadow-md rounded-10 space-y-4 py-4 text-center flex flex-col justify-center items-center"
         >
@@ -36,7 +45,7 @@
               />
             </svg>
           </span>
-          <div class="flex  flex-col space-y-4 py-4">
+          <div class="flex flex-col space-y-4 py-4">
             <h1 class="text-lg font-black">Candidate Shortlisting</h1>
             <p class="text-xs max-w-[300px]">
               Your opening will be matched immediately with 5-star candidates
@@ -45,7 +54,6 @@
             </p>
           </div>
         </div>
-
 
         <div
           class="border shadow-md rounded-10 space-y-4 py-4 text-center flex flex-col justify-center items-center w-full"
@@ -64,7 +72,7 @@
               />
             </svg>
           </span>
-          <div class="flex  flex-col space-y-4 py-4">
+          <div class="flex flex-col space-y-4 py-4">
             <h1 class="text-lg font-black">Candidate Shortlisting</h1>
             <p class="text-xs max-w-[300px]">
               Your opening will be matched immediately with 5-star candidates
@@ -90,7 +98,7 @@
               />
             </svg>
           </span>
-          <div class="flex  flex-col space-y-4 py-4">
+          <div class="flex flex-col space-y-4 py-4">
             <h1 class="text-lg font-black">Candidate Shortlisting</h1>
             <p class="text-xs max-w-[300px]">
               Your opening will be matched immediately with 5-star candidates
@@ -101,7 +109,7 @@
         </div>
       </div>
       <!--  -->
-      <div class="h-full bg-primary-1 my-10 w-full ">
+      <div class="h-full bg-primary-1 my-10 w-full">
         <div
           class="flex md:flex-row flex-col-reverse md:max-w-[1240px] text-center justify-center mx-auto items-center"
         >
@@ -109,10 +117,13 @@
             <img src="/assets/images/white-lady.png" alt="no pix avaliable" />
           </div>
 
-
-          <div class="md:w-1/2 px-8 md:px-0 flex justify-center items-center mx-auto py-8">
+          <div
+            class="md:w-1/2 px-8 md:px-0 flex justify-center items-center mx-auto py-8"
+          >
             <div class="max-w-md md:text-start space-y-4">
-              <h1 class="text-black-900 md:text-[40px] font-black md:leading-10">
+              <h1
+                class="text-black-900 md:text-[40px] font-black md:leading-10"
+              >
                 We think about hiring more than anyone else on the planet
               </h1>
               <p class="text-xs text-white">

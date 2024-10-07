@@ -1,14 +1,21 @@
 <template>
   <div class="h-full w-full md:px-8 px-4 md:pt-10">
     <!-- grid divider vertical using daisy ui -->
-    <div class="grid grid-cols-3 w-full text-xs md:text-sm">
-      <div class="divider divider-start">Why choose us?</div>
-      <div class="divider">Workonnect</div>
-      <div class="divider divider-end">©2024</div>
+  <div
+      class="flex justify-between items-center w-full text-xs md:text-sm md:space-x-4 gap-x-2 "
+    >
+      <h1 class="whitespace-nowrap md:flex hidden">Why choose us?</h1>
+      <h1 class="whitespace-nowrap md:hidden">Why us?</h1>
+      <div class="border-1 border h-full w-full" />
+      <h1>Workonnect</h1>
+      <div class="border-1 border h-full w-full" />
+      <h1>©2024</h1>
     </div>
 
     <!--  -->
-    <div class="flex w-full md:py-10 flex-col md:flex-row space-y-6 md:space-y-0">
+    <div
+      class="flex w-full md:py-10 flex-col md:flex-row space-y-6 md:space-y-0"
+    >
       <div class="md:w-1/2 space-y-4 pt-3 md:pt-0">
         <h1 class="font-black text-[32px] w-[284px] leading-8">
           Empowering Job Seekers, One Success at a Time
@@ -30,9 +37,7 @@
           <h1 class="text-xl border-b-2 py-2">Our Impressive milestone</h1>
           <!--  -->
           <div class="flex gap-4 items-center py-6">
-            <div
-              class="flex flex-col items-center w-10 space-y-1 py-4"
-            >
+            <div class="flex flex-col items-center w-10 space-y-1 py-4">
               <!-- active checkbox -->
               <svg
                 width="20"
