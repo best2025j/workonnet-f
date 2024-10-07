@@ -4,6 +4,7 @@ import type {
   IJobPost,
   IJobPostWithPagination,
   IRecruiterDetails,
+IUserDetails,
 } from '~/types';
 
 definePageMeta({
@@ -14,13 +15,20 @@ definePageMeta({
 });
 
 const route = useRoute();
+const userStore = useUserStore();
 const authStore = useAuthStore();
 const jobStore = useJobStore();
 const currentJob = ref<IJobPost | null>(null);
 const jobListPage = ref<{}>({});
 const isLoading = ref(false);
+const userData = computed<IUserDetails>(() => userStore.loggedInUserDetails);
+const modalTrigger = ref(null);
 
 const jobsResult = computed(() => jobStore.jobList);
+
+const showUpdateProfileModal = () => {
+  (modalTrigger.value as unknown as any).showModal();
+};
 
 const getMyJobs = async (refresh: boolean = false) => {
   try {
@@ -63,6 +71,16 @@ const getSingleJob = async () => {
     }, 1000);
   } catch (e) {
     console.log(e);
+  }
+};
+
+const applyNow = async (jobId: string) => {
+  // check user is not in draft mode.
+  if (userData.value.status !== 'draft') {
+    showUpdateProfileModal()
+  }
+  if(!userData.value?.resumeResource || !userData.value.resumeResource?.resumeCv) {
+    showUpdateProfileModal()
   }
 };
 
@@ -145,6 +163,7 @@ onBeforeMount(async () => {
 
             <div class="flex justify-end">
               <button
+              @click="applyNow(currentJob!.id)"
                 class="md:px-4 w-full mt-4 py-3 rounded-8 text-[10px] md:text-base text-white bg-primary-1"
               >
                 Apply Now
@@ -416,5 +435,60 @@ onBeforeMount(async () => {
         </div>
       </div>
     </div>
+
+
+     <!-- modals -->
+     <dialog
+      ref="modalTrigger"
+      id="delete_modal"
+      class="modal text-black-950 backdrop-blur-sm backdrop-opacity-2 backdrop-filter"
+    >
+      <div class="modal-box flex-col max-w-md flex items-center space-y-3">
+        <div
+          class="flex items-center justify-between w-full pb-3 -mt-3 border-b-2"
+        >
+          <div class="text-white">no text.</div>
+          <h3 class="text-lg font-bold">Notice</h3>
+
+          <form method="dialog">
+            <button class="btn">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M0.726027 0.724657C0.970105 0.480579 1.36583 0.480579 1.60991 0.724657L13.2758 12.3905C13.5199 12.6346 13.5199 13.0303 13.2758 13.2744C13.0317 13.5185 12.636 13.5185 12.3919 13.2744L0.726027 1.60854C0.481949 1.36446 0.481949 0.968734 0.726027 0.724657Z"
+                  fill="#57575B"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M13.274 0.724657C13.5181 0.968734 13.5181 1.36446 13.274 1.60854L1.60809 13.2744C1.36401 13.5185 0.968285 13.5185 0.724208 13.2744C0.48013 13.0303 0.480131 12.6346 0.724208 12.3905L12.3901 0.724657C12.6342 0.480579 13.0299 0.480579 13.274 0.724657Z"
+                  fill="#57575B"
+                />
+              </svg>
+            </button>
+          </form>
+        </div>
+
+        <p class="py-2 w-2/3 text-sm text-center">
+          Please complete your profile to apply for jobs
+        </p>
+
+        <div class="space-x-4 flex items-center justify-center w-full">
+          <NuxtLink
+          to="/dashboard/jobseeker/my-profile/edit"
+            class="rounded-8 px-3.5 py-2 text-white text-xs bg-primary-1"
+          >
+            Complete my profile
+          </NuxtLink>
+        </div>
+      </div>
+    </dialog>
   </div>
 </template>

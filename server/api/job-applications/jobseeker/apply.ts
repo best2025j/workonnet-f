@@ -4,7 +4,7 @@ import { ValidationError } from '~/types';
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig(event);
   const headers = getHeaders(event);
-  const query = getHeaders(event);
+  const query = getQuery(event);
   const authHeader = headers['authorization'];
 
   try {

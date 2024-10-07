@@ -39,7 +39,7 @@ const getMyJobs = async () => {
 
     const { docs, ...other } = responseData.data as IJobPostWithPagination;
     jobListPage.value = other;
-    jobStore.setJobList((responseData.data as IJobPostWithPagination).docs);
+    jobStore.setJobList(docs);
 
     setTimeout(() => {
       isLoading.value = false;

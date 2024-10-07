@@ -1,8 +1,9 @@
-import type { IJobPost, IJobStatsData } from '~/types';
+import type { IJobApplications, IJobPost, IJobStatsData } from '~/types';
 import { skipHydrate } from 'pinia';
 
 export const JobStore = defineStore('job-store', () => {
   const jobList = ref<IJobPost[] | []>([]);
+  const jobApplicationList = ref<IJobApplications[] | []>([]);
   const jobStats = ref<IJobStatsData | null>(null);
 
   function setJobList(data: IJobPost[]) {
@@ -11,6 +12,26 @@ export const JobStore = defineStore('job-store', () => {
 
   function setJobStatsList(data: IJobStatsData) {
     jobStats.value = data;
+  }
+
+  function setUserJobApplicationList(data: IJobApplications[]) {
+    jobApplicationList.value = data;
+  }
+
+  async function fetchUserJobApplications(token: string) {
+    try {
+      const response = await $fetch(
+        '/api/job-applications/jobseeker/my-applications',
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return await Promise.resolve(response);
+    } catch (error) {
+      return await Promise.reject(error);
+    }
   }
 
   async function fetchRecruiterJobs(token: string) {
@@ -74,13 +95,16 @@ export const JobStore = defineStore('job-store', () => {
   return {
     jobList: skipHydrate(jobList),
     jobStats: skipHydrate(jobStats),
+    jobApplicationList: skipHydrate(jobApplicationList),
     setJobList,
     setJobStatsList,
+    setUserJobApplicationList,
     $api: {
       fetchRecruiterJobs,
       fetchRecruiterSingle,
       fetchJobStats,
       fetchJobseekerSingle,
+      fetchUserJobApplications,
     },
   };
 });

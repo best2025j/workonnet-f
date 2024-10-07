@@ -4,12 +4,11 @@ import { ValidationError } from '~/types';
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig(event);
   const headers = getHeaders(event);
-  const query = getHeaders(event);
   const authHeader = headers['authorization'];
 
   try {
     const response = await axios.get(
-      `job-application-tracking/${query.userId}/applied`,
+      `job-application-tracking/applied/my-applications`,
       {
         baseURL: config.apiBaseUrl,
         headers: {

@@ -154,6 +154,21 @@ export interface IWorkExperience {
   details: string;
 }
 
+export interface IJobApplicationsWithPagination extends IPagination {
+  docs: IJobApplications[];
+}
+
+export interface IJobApplications {
+  id: string;
+  user?: IUserDetails | string;
+  recruiter?: Partial<IRecruiterDetails>;
+  status: JOB_APPLICATION_STATUS;
+  rejectionNotice?: string;
+  jobListing: Partial<IJobPost>;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export interface IEducationBackground {
   id: string;
   user?: IUserDetails | string;
@@ -221,4 +236,12 @@ export interface ApiErrorResponse {
 export interface ApiSuccessResponse {
   status: number;
   data: any;
+}
+
+export enum JOB_APPLICATION_STATUS {
+  IN_REVIEW = 'In Review',
+  PENDING = 'Pending',
+  INTERVIEW = 'Interview',
+  ACCEPTED = 'Accepted',
+  REJECTED = 'Rejected',
 }

@@ -168,7 +168,7 @@ onBeforeMount(async () => {
               </svg>
               <h1 class="text-xs">
                 Facebook:
-                <b>{{ userData?.socialLink?.facebookUrl || 'N/A' }}</b>
+                <b>{{ userData?.socialLinks?.facebookUrl || 'N/A' }}</b>
               </h1>
             </div>
             <div class="flex gap-2 items-center">
