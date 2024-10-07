@@ -76,16 +76,16 @@ const chooseBannerImage = () => {
   (bannerImageSelector.value as unknown as any).click();
 };
 
+const chooseCoverImage = () => {
+  (logoImageSelector.value as unknown as any).click();
+};
+
 const showBannerImage = (file: any) => {
   var reader = new FileReader();
   reader.onload = (e: any) => {
     bannerImagePreview.value = e.target.result;
   };
   reader.readAsDataURL(file);
-};
-
-const chooseCoverImage = () => {
-  (logoImageSelector.value as unknown as any).click();
 };
 
 const showCoverImage = (file: any) => {
@@ -203,7 +203,7 @@ const handleProfilePhotoUpdate = async () => {
       },
     });
     const responseData = response as ApiSuccessResponse;
-    toast.success('Your profile photos were updated successfully', {
+    toast.success('Your profile picture or header photo was updated successfully', {
       timeout: 3000,
       position: POSITION.TOP_RIGHT,
     });

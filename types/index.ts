@@ -159,7 +159,10 @@ export interface IEducationBackground {
   user?: IUserDetails | string;
   schoolName: string;
   fieldOfStudy: string;
-  degree: string;
+  degree: {
+    slug: string;
+    text: string;
+  };
   startingYear: string;
   endingYear: string;
 }

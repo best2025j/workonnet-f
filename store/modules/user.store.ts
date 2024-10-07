@@ -2,6 +2,7 @@ import { STORAGE_LOGGED_IN_USER_DETAILS_KEY } from '~/utils/common';
 import { skipHydrate } from 'pinia';
 import { storageSerializer } from '~/composables';
 import type {
+  IEducationBackground,
   IRecruiterDetails,
   ISettingsDetails,
   IWorkExperience,
@@ -18,6 +19,8 @@ export const UserStore = defineStore('user-store', () => {
 
   const workExperience = ref<IWorkExperience[] | []>([]);
 
+  const educations = ref<IEducationBackground[] | []>([]);
+
   function setUserDetails(userDetails: any) {
     loggedInUserDetails.value = userDetails;
   }
@@ -28,6 +31,10 @@ export const UserStore = defineStore('user-store', () => {
 
   function setWorkExperience(workExps: IWorkExperience[]) {
     workExperience.value = workExps;
+  }
+
+  function setEducations(edus: IEducationBackground[]) {
+    educations.value = edus;
   }
 
   function setUserSettings(userDetails: ISettingsDetails) {
@@ -147,16 +154,34 @@ export const UserStore = defineStore('user-store', () => {
     }
   }
 
+  async function refreshUserEducation(token: string) {
+    try {
+      const response = await $fetch(
+        '/api/jobseeker/educational-background/fetch',
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return await Promise.resolve(response);
+    } catch (error) {
+      return await Promise.reject(error);
+    }
+  }
+
   return {
     loggedInUserDetails: skipHydrate(loggedInUserDetails),
     userSettings: skipHydrate(userSettings),
     recruiters: skipHydrate(recruiters),
     workExperience: skipHydrate(workExperience),
+    userEducations: skipHydrate(educations),
     setUserDetails,
     setUserSettings,
     clearUserStore,
     setRecruiters,
     setWorkExperience,
+    setEducations,
     $api: {
       updateRecruiterSettings,
       updateUserSettings,
@@ -165,6 +190,7 @@ export const UserStore = defineStore('user-store', () => {
       refreshAuthRecruiterProfile,
       refreshAuthRecruiterSettings,
       refreshUserWorkExperience,
+      refreshUserEducation,
     },
   };
 });

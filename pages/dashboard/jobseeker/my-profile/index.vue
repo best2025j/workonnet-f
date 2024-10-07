@@ -25,7 +25,7 @@ const fetchWorkExperience = async () => {
   isLoading.value = true;
 
   try {
-    if (!userStore.recruiters.length) {
+    if (!userStore.workExperience.length) {
       isLoading.value = true;
     }
     const token = authStore.userToken;
@@ -44,9 +44,9 @@ const fetchWorkExperience = async () => {
 
 onBeforeMount(async () => {
   // fetch experience
- if(!userWorkExperience.value.length || !userWorkExperience.value){
-  await fetchWorkExperience();
- }
+  if (!userWorkExperience.value.length || !userWorkExperience.value) {
+    await fetchWorkExperience();
+  }
 });
 </script>
 
@@ -293,7 +293,7 @@ onBeforeMount(async () => {
       <!--  -->
       <div class="p-4 bg-white rounded-10 my-4 md:w-[670px] w-full h-full">
         <div class="space-y-6">
-          <h1 class="text-xl font-black">Uploaded Documents</h1>
+          <h1 class="text-xl font-black">Uploaded Document</h1>
           <div class="flex justify-between">
             <div class="flex items-start gap-x-2">
               <svg
@@ -310,25 +310,32 @@ onBeforeMount(async () => {
               </svg>
               <div>
                 <h1 class="text-xs">Resume/CV</h1>
-                <p
-                  v-if="userData?.resumeResource?.resumeCv"
-                  class="text-xs text-info-600"
-                >
-                  {{ userData?.firstName }} {{ userData?.lastName
-                  }}{{
-                    '.' + userData?.resumeResource?.resumeCv?.url.split('.')[-1]
-                  }}
-                </p>
+                <div v-if="userData?.resumeResource?.resumeCv">
+                  <p class="text-xs font-bold">
+                    {{ userData?.resumeResource?.resumeCv?.name }}
+                  </p>
+                  <p class="text-xs text-info-600">
+                    Size:
+                    {{
+                      (userData?.resumeResource?.resumeCv?.size / 1024).toFixed(
+                        2
+                      )
+                    }}
+                    KB
+                  </p>
+                </div>
                 <p v-else class="text-xs text-info-600">No file found</p>
               </div>
             </div>
 
-            <NuxtLink
-              to="/dashboard/jobseeker/my-profile/work-experience"
-              class="px-[14px] text-xs py-2 text-primary-1 rounded-10 border border-primary-1"
-            >
-              {{ userData?.resumeResource?.resumeCv ? 'Change' : 'Add' }}
-            </NuxtLink>
+            <div>
+              <NuxtLink
+                to="/dashboard/jobseeker/my-profile/work-experience"
+                class="px-[14px] text-xs py-2 text-primary-1 rounded-10 border border-primary-1"
+              >
+                {{ userData?.resumeResource?.resumeCv ? 'Change' : 'Add' }}
+              </NuxtLink>
+            </div>
           </div>
         </div>
       </div>
