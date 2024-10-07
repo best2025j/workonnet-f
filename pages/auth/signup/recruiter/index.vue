@@ -226,15 +226,15 @@ onMounted(() => {
           <label class="text-base font-thin mb-2 text-left mt-4"
             >Password</label
           >
-          <div class="relative">
+          <div class="relative mb-3">
             <input
             :type="showPassword ? 'text' : 'password'"
-            placeholder="....."
+            placeholder="Enter new password"
             pattern=".{8,}"
             v-model="formData.password"
             :disabled="isLoading"
             @change="v$.password.$touch"
-            class="outline-none text-base leading-5 w-full p border border-solid border-black-200 rounded-lg px-3 py-2.5  placeholder:text-[6rem]"
+            class="outline-none text-base leading-5 w-full p border border-solid border-black-200 rounded-lg px-3 py-2.5"
           />
           <button
       type="button"
@@ -246,6 +246,26 @@ onMounted(() => {
     </button>
           </div>
          
+          <label class="text-base font-thin text-left">Confirm Password </label>
+          <div class="relative">
+            <input
+            :type="showPassword ? 'text' : 'password'"
+            placeholder="Confirm password"
+            pattern=".{8,}"
+            v-model="formData.password"
+            :disabled="isLoading"
+            @change="v$.password.$touch"
+            class="outline-none text-base leading-5 w-full p border border-solid border-black-200 rounded-lg px-3 py-2.5"
+          />
+          <button
+      type="button"
+      @click="toggleShowPassword"
+      class="absolute right-3 top-1/2 transform -translate-y-1/2"
+    >
+      <span v-if="showPassword">Hide</span>
+      <span v-else>Show</span>
+    </button>
+          </div>
 
           <div
             class="input-errors"
