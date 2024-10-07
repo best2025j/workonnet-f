@@ -173,12 +173,16 @@ const getApplicationStatus = (status: JOB_APPLICATION_STATUS) => {
           </div>
         </div>
 
-        <NuxtLink
-          to="/dashboard/jobseeker/my-applications/track-app"
+        <div
           class="flex flex-col justify-end relative py-4 md:py-0 md:right-5 md:top-12 md:w-32"
         >
-          Track Application
-        </NuxtLink>
+          <NuxtLink
+            :to="`/dashboard/jobseeker/my-applications/${jobApp.id}-${jobApp.jobListing.slug}`"
+            class="py-3 bg-primary-1 text-white rounded-10 text-xs text-center"
+          >
+            Track Application
+          </NuxtLink>
+        </div>
       </div>
     </div>
   </div>

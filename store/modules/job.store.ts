@@ -92,6 +92,25 @@ export const JobStore = defineStore('job-store', () => {
     }
   }
 
+  async function fetchSingleApplication(token: string, appId: string) {
+    try {
+      const response = await $fetch(
+        '/api/job-applications/get-single-application',
+        {
+          query: {
+            jobApplicationId: appId,
+          },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return await Promise.resolve(response);
+    } catch (error) {
+      return await Promise.reject(error);
+    }
+  }
+
   return {
     jobList: skipHydrate(jobList),
     jobStats: skipHydrate(jobStats),
@@ -105,6 +124,7 @@ export const JobStore = defineStore('job-store', () => {
       fetchJobStats,
       fetchJobseekerSingle,
       fetchUserJobApplications,
+      fetchSingleApplication,
     },
   };
 });
