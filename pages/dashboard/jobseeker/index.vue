@@ -5,6 +5,9 @@ import type {
   IUserDetails,
   JOB_APPLICATION_STATUS,
 } from '~/types';
+import { DoughnutChart } from 'vue-chart-3';
+import { Chart, registerables } from 'chart.js';
+Chart.register(...registerables);
 
 definePageMeta({
   title: 'Dashboard',
@@ -35,6 +38,21 @@ const getJobStats = async () => {
   } catch (e) {
     console.log(e);
   }
+};
+
+const chartData = {
+  datasets: [
+    {
+      label: 'Job Applications',
+      data: [
+        jobStats.value?.totalRejected || 0,
+        jobStats.value?.totalInReview || 0,
+        jobStats.value?.totalInterview || 0,
+      ],
+      backgroundColor: ['#82410C', '#FE8900', '#FFD76D'],
+      hoverOffset: 2,
+    },
+  ],
 };
 
 onMounted(() => {
@@ -178,38 +196,54 @@ onMounted(() => {
         <!--  -->
         <div class="font-[Nexa] bg-[#FFFFFF] w-full rounded-10 px-4 py-4 h-72">
           <h3 class="font-black">Jobs Applied Status</h3>
-          <div class="flex gap-4 items-center">
-            <div class="flex flex-col items-center pt-6">
+          <div v-if="jobStats!.totalRejected  > 0 || jobStats!.totalInReview > 0 || jobStats!.totalInterview > 0" class="flex gap-4 items-center">
+            <div  class="flex flex-col items-center pt-6">
               <!-- chart -->
-              <div
-                class="w-32 h-32 rounded-full border-8 border-black/20"
-              ></div>
-              <BtnBlueRight class="text-xs md:text-sm" />
+              <div v-if="!isLoading" class="w-full">
+                <div class="w-44 h-44">
+                  <DoughnutChart :chartData="chartData" class="h-full w-full" />
+                </div>
+              </div>
+              <BtnBlueRight
+                @click="$router.push('/dashboard/jobseeker/my-applications')"
+                class="text-xs md:text-sm"
+              />
             </div>
 
             <div class="space-y-4">
               <div class="flex items-center space-x-3">
                 <div class="bg-[#82410C] w-6 h-6 rounded" />
                 <div class="text-sm">
-                  <h6 class="font-black">20%</h6>
+                  <h6 class="font-black">
+                    {{ jobStats?.totalRejected || 0 }}
+                  </h6>
                   <p>Unsuccessful</p>
                 </div>
               </div>
               <div class="flex items-center space-x-3">
                 <div class="bg-[#FE8900] w-6 h-6 rounded" />
                 <div class="text-sm">
-                  <h6 class="font-black">32%</h6>
+                  <h6 class="font-black">
+                    {{ jobStats?.totalInReview || 0 }}
+                  </h6>
                   <p>Under Review</p>
                 </div>
               </div>
               <div class="flex items-center space-x-3">
                 <div class="bg-[#FFD76D] w-6 h-6 rounded" />
                 <div class="text-sm">
-                  <h6 class="font-black">48%</h6>
+                  <h6 class="font-black">
+                    {{ jobStats?.totalInterview || 0 }}
+                  </h6>
                   <p>Interviewed</p>
                 </div>
               </div>
             </div>
+          </div>
+          <div v-else class="h-32 flex items-center justify-center w-full">
+              <p>
+                Nothing to show here
+              </p>
           </div>
         </div>
       </div>
@@ -430,8 +464,15 @@ onMounted(() => {
           <div class="align-middle inline-block min-w-full">
             <div class="overflow-hidden mt-2">
               <table class="min-w-full table-fixed">
-                <tbody v-if="jobStats?.offeredJobs.length" class="divide-y divide-grey-200">
-                  <tr v-for="(job, index) in jobStats?.offeredJobs" :key="index" class="text-black-900">
+                <tbody
+                  v-if="jobStats?.offeredJobs.length"
+                  class="divide-y divide-grey-200"
+                >
+                  <tr
+                    v-for="(job, index) in jobStats?.offeredJobs"
+                    :key="index"
+                    class="text-black-900"
+                  >
                     <td class="py-6 whitespace-nowrap pl-4">
                       <div class="flex space-x-4 items-center">
                         <div class="flex flex-col">
@@ -444,9 +485,11 @@ onMounted(() => {
                         <div
                           class="text-left w-[104px] flex whitespace-break-spaces flex-col"
                         >
-                          <span class="md:text-sm text-[8px] font-black capitalize"
-                            >{{job.jobListing.title}}</span
-                          ><span class="md:text-sm text-[7px] font-semimedium"
+                          <span
+                            class="md:text-sm text-[8px] font-black capitalize"
+                            >{{ job.jobListing.title }}</span
+                          ><span
+                            class="md:text-sm text-[7px] font-semimedium"
                             >{{ job.recruiter?.companyName }}</span
                           >
                         </div>
@@ -457,19 +500,20 @@ onMounted(() => {
                       <div class="text-left flex flex-col">
                         <span class="md:text-sm text-[8px] font-black"
                           >Location</span
-                        ><span class="md:text-sm text-[7px] font-semimedium capitalize"
-                          >{{job.jobListing.location }}</span
+                        ><span
+                          class="md:text-sm text-[7px] font-semimedium capitalize"
+                          >{{ job.jobListing.location }}</span
                         >
                       </div>
                     </td>
 
                     <td class="py-4 whitespace-nowrap">
                       <div class="text-left flex flex-col">
-                        <span class="md:text-sm text-[8px] font-black "
+                        <span class="md:text-sm text-[8px] font-black"
                           >Date Applied</span
-                        ><span class="md:text-sm text-[7px] font-semimedium"
-                          >{{formatDateWithSuffix(job.createdAt as string)}}</span
-                        >
+                        ><span class="md:text-sm text-[7px] font-semimedium">{{
+                          formatDateWithSuffix(job.createdAt as string)
+                        }}</span>
                       </div>
                     </td>
 
@@ -482,15 +526,14 @@ onMounted(() => {
                       </div>
                     </td>
                   </tr>
-
                 </tbody>
                 <tbody v-else class="divide-y divide-grey-200">
-                <tr class="text-black-900">
-                  <td class="py-6 whitespace-nowrap pl-4">
-                    No recently offered jobs yet.
-                  </td>
-                </tr>
-              </tbody>
+                  <tr class="text-black-900">
+                    <td class="py-6 whitespace-nowrap pl-4">
+                      No recently offered jobs yet.
+                    </td>
+                  </tr>
+                </tbody>
               </table>
             </div>
           </div>
