@@ -1,14 +1,113 @@
 <script setup lang="ts">
+import {
+  JOB_APPLICATION_STATUS,
+  type ApiSuccessResponse,
+  type IEducationBackground,
+  type IJobApplications,
+  type IRecruiterDetails,
+  type IUserDetails,
+  type IWorkExperience,
+} from '~/types';
+
 definePageMeta({
-  title: "Jobs Openings",
-  pageName: "dashboard.recruiter.jobs-opening.profile-veiw",
-  layout: "dashboard",
-  middleware: ["auth", "is-recruiter"],
+  title: 'View Candidate',
+  pageName: 'dashboard.recruiter.candidates',
+  layout: 'dashboard',
+  middleware: ['auth', 'is-recruiter'],
+});
+
+const route = useRoute();
+const authStore = useAuthStore();
+const jobStore = useJobStore();
+const userStore = useUserStore();
+const currentJobApp = ref<IJobApplications | null>(null);
+const userWorkExperiences = ref<IWorkExperience[] | []>([]);
+const userEducations = ref<IEducationBackground[] | []>([]);
+const showModal = ref(false); // Manage modal visibility
+
+const userData = computed<IRecruiterDetails>(
+  () => userStore.loggedInUserDetails
+);
+const isLoading = ref(false);
+
+const getData = async (jobAppId: string, isRefresh: boolean) => {
+  try {
+    if (isRefresh === true) {
+      isLoading.value = true;
+    }
+
+    const token = authStore.userToken;
+    const response = await jobStore.$api.fetchSingleApplicationDetailed(
+      token,
+      jobAppId
+    );
+    const responseData = response as ApiSuccessResponse;
+    currentJobApp.value = responseData.data.jobDetailed;
+    userWorkExperiences.value = responseData.data.userExperiences;
+    userEducations.value = responseData.data.userEducations;
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 1000);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+const changeAppStatus = async (status: JOB_APPLICATION_STATUS) => {
+  if (status === JOB_APPLICATION_STATUS.INTERVIEW) {
+    // show modal to enter rejection reason
+
+    return;
+  }
+
+  if (status === JOB_APPLICATION_STATUS.REJECTED) {
+    // show modal to enter rejection reason
+
+    return;
+  }
+
+  const data = {
+    status,
+  };
+
+  await updateApplicationStage(data);
+};
+
+const updateApplicationStage = async (data: any) => {
+  try {
+    isLoading.value = true;
+    const token = authStore.userToken;
+    await jobStore.$api.updateSingleApplicationData(
+      token,
+      (route.params.slug as string).split('-')[0],
+      data
+    );
+
+    await getData((route.params.slug as string).split('-')[0], false);
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 1000);
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+const mapUserDetails = (user: any) => user as IUserDetails;
+
+onBeforeMount(async () => {
+  await getData((route.params.slug as string).split('-')[0], true);
 });
 </script>
 
 <template>
-  <div class="text-black-900">
+  <div
+    v-if="isLoading"
+    class="h-full py-40 w-full flex items-center justify-center"
+  >
+    <span class="loader-2"></span>
+  </div>
+  <div v-else class="text-black-900">
     <!-- profile uploads -->
     <div class="p-4 bg-white rounded-10">
       <img
@@ -22,11 +121,18 @@ definePageMeta({
           class="flex flex-col md:flex-row justify-between text-start md:items-center"
         >
           <div class="space-y-2 py-2">
-            <h1 class="font-black text-base">Stephen Howard</h1>
+            <h1 class="font-black text-base">
+              {{ mapUserDetails(currentJobApp?.user).firstName }}
+              {{ mapUserDetails(currentJobApp?.user).lastName }}
+            </h1>
             <div class="flex items-start space-x-4">
               <div class="space-y-2">
-                <h1 class="text-xs">UI/UX Designer</h1>
-                <h1 class="text-xs">Lagos, Nigeria</h1>
+                <h1 class="text-xs">
+                  {{ mapUserDetails(currentJobApp?.user)?.occupation || 'N/A' }}
+                </h1>
+                <h1 class="text-xs">
+                  {{ mapUserDetails(currentJobApp?.user)?.location || 'N/A' }}
+                </h1>
               </div>
             </div>
           </div>
@@ -47,10 +153,14 @@ definePageMeta({
               </svg>
 
               <h1 class="text-xs">
-                Portfolio link: <b>https://stanleynwosu.framer.ai</b>
+                Portfolio link:
+                <b>{{
+                  mapUserDetails(currentJobApp?.user)?.socialLinks
+                    ?.portfolioUrl || 'N/A'
+                }}</b>
               </h1>
             </div>
-            <div class="flex gap-2 items-center">
+            <!-- <div class="flex gap-2 items-center">
               <svg
                 width="18"
                 height="16"
@@ -65,8 +175,8 @@ definePageMeta({
               </svg>
 
               <h1 class="text-xs">Applied Jobs: <b>34</b></h1>
-            </div>
-            <div class="flex gap-2 items-center">
+            </div> -->
+            <!-- <div class="flex gap-2 items-center">
               <svg
                 width="20"
                 height="14"
@@ -80,9 +190,9 @@ definePageMeta({
                 />
               </svg>
               <h1 class="text-xs">Profile views: <b>12</b></h1>
-            </div>
+            </div> -->
           </div>
-          <!-- socialmedia links -->
+          <!-- social media links -->
           <div class="space-y-2 py-2">
             <div class="flex gap-2 items-center">
               <svg
@@ -98,7 +208,10 @@ definePageMeta({
                 />
               </svg>
               <h1 class="text-xs">
-                Facebook: <b>https://www.facebook.com/example</b>
+                Facebook:
+                <b>{{
+                  mapUserDetails(currentJobApp?.user)?.socialLinks?.facebookUrl
+                }}</b>
               </h1>
             </div>
             <div class="flex gap-2 items-center">
@@ -115,7 +228,11 @@ definePageMeta({
                 />
               </svg>
               <h1 class="text-xs">
-                Linkedin: <b>http://www.linkedin.com/in/stanleynw</b>
+                Linkedin:
+                <b>{{
+                  mapUserDetails(currentJobApp?.user)?.socialLinks
+                    ?.linkedinUrl || 'N/A'
+                }}</b>
               </h1>
             </div>
             <div class="flex gap-2 items-center">
@@ -132,44 +249,49 @@ definePageMeta({
                 />
               </svg>
               <h1 class="text-xs">
-                Instagram: <b>http://www.instagram.com/ </b>
+                Instagram:
+                <b>{{
+                  mapUserDetails(currentJobApp?.user)?.socialLinks
+                    ?.instagramUrl || 'N/A'
+                }}</b>
               </h1>
             </div>
           </div>
           <!-- btn -->
           <div class="space-y-3 py-2">
-            <div class="flex justify-end">
+            <!-- <div class="flex justify-end">
               <button class="text-info-600 font-black text-xs">
                 Premium user
               </button>
-            </div>
+            </div> -->
 
             <div class="space-y-3">
               <div class="space-x-2 flex items-center">
                 <svg
-                  width="12"
-                  height="19"
-                  viewBox="0 0 12 19"
-                  fill="none"
                   xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="size-5"
                 >
                   <path
-                    d="M7.875 8.875H6.625V3.875H7.25C7.91304 3.875 8.54893 4.13839 9.01777 4.60723C9.48661 5.07607 9.75 5.71196 9.75 6.375C9.75 6.54076 9.81585 6.69973 9.93306 6.81694C10.0503 6.93415 10.2092 7 10.375 7C10.5408 7 10.6997 6.93415 10.8169 6.81694C10.9342 6.69973 11 6.54076 11 6.375C10.999 5.38076 10.6035 4.42753 9.90051 3.72449C9.19747 3.02145 8.24424 2.62603 7.25 2.625H6.625V1.375C6.625 1.20924 6.55915 1.05027 6.44194 0.933058C6.32473 0.815848 6.16576 0.75 6 0.75C5.83424 0.75 5.67527 0.815848 5.55806 0.933058C5.44085 1.05027 5.375 1.20924 5.375 1.375V2.625H4.75C3.75544 2.625 2.80161 3.02009 2.09835 3.72335C1.39509 4.42661 1 5.38044 1 6.375C1 7.36956 1.39509 8.32339 2.09835 9.02665C2.80161 9.72991 3.75544 10.125 4.75 10.125H5.375V15.125H4.125C3.46196 15.125 2.82607 14.8616 2.35723 14.3928C1.88839 13.9239 1.625 13.288 1.625 12.625C1.625 12.4592 1.55915 12.3003 1.44194 12.1831C1.32473 12.0658 1.16576 12 1 12C0.83424 12 0.675269 12.0658 0.558058 12.1831C0.440848 12.3003 0.375 12.4592 0.375 12.625C0.376034 13.6192 0.771454 14.5725 1.47449 15.2755C2.17753 15.9785 3.13076 16.374 4.125 16.375H5.375V17.625C5.375 17.7908 5.44085 17.9497 5.55806 18.0669C5.67527 18.1842 5.83424 18.25 6 18.25C6.16576 18.25 6.32473 18.1842 6.44194 18.0669C6.55915 17.9497 6.625 17.7908 6.625 17.625V16.375H7.875C8.86956 16.375 9.82339 15.9799 10.5267 15.2767C11.2299 14.5734 11.625 13.6196 11.625 12.625C11.625 11.6304 11.2299 10.6766 10.5267 9.97335C9.82339 9.27009 8.86956 8.875 7.875 8.875ZM4.75 8.875C4.08696 8.875 3.45107 8.61161 2.98223 8.14277C2.51339 7.67393 2.25 7.03804 2.25 6.375C2.25 5.71196 2.51339 5.07607 2.98223 4.60723C3.45107 4.13839 4.08696 3.875 4.75 3.875H5.375V8.875H4.75ZM7.875 15.125H6.625V10.125H7.875C8.53804 10.125 9.17393 10.3884 9.64277 10.8572C10.1116 11.3261 10.375 11.962 10.375 12.625C10.375 13.288 10.1116 13.9239 9.64277 14.3928C9.17393 14.8616 8.53804 15.125 7.875 15.125Z"
-                    fill="#343330"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125"
                   />
                 </svg>
-                <h1 class="md:text-lg text-sm font-black">$5,000/month</h1>
+                <h1 class="md:text-lg text-sm font-black">
+                  NGN{{
+                    formatCurrency(
+                      Number(
+                        mapUserDetails(currentJobApp?.user)?.salary?.amount
+                      ) || 0
+                    ) || 'N/A'
+                  }}
+                  /month
+                </h1>
               </div>
-
-              <nuxt-link to="/dashboard/jobseeker/my-profile/edit">
-                <div class="flex justify-end py-3">
-                  <button
-                    class="md:px-[14px] w-full font-black text-xs py-2 rounded-5 bg-primary-1 text-white"
-                  >
-                    Edit profile info
-                  </button>
-                </div>
-              </nuxt-link>
             </div>
           </div>
         </div>
@@ -182,121 +304,39 @@ definePageMeta({
         <div class="space-y-4 pt-4">
           <h1 class="text-xl font-black">About me</h1>
           <p class="text-xs tracking-wider">
-            Lorem ipsum dolor sit amet consectetur. Dignissim aliquam vitae
-            accumsan eget nisl felis magna rhoncus. Nisl duis netus id lobortis
-            nec dui leo. Ornare scelerisque vivamus egestas adipiscing in amet
-            varius. Velit in nec dolor ultrices scelerisque. Ipsum facilisi
-            nulla sed sed proin pulvinar. Libero sed donec lorem blandit aliquam
-            diam. Egestas et amet elit a nulla rhoncus sagittis in sem. Lectus
-            ut vivamus id at vitae. Elit non ut eget massa id lorem tincidunt
-            porttitor. Viverra duis sit a dignissim molestie placerat. Tempus
-            velit interdum fames pellentesque.
+            {{ mapUserDetails(currentJobApp?.user).bio || 'No bio' }}
           </p>
         </div>
         <div class="space-y-4 pt-10">
           <h1 class="text-xl font-black">Experience</h1>
-          <div class="bg-westside-50 space-y-4 rounded-10 p-4">
-            <img src="/assets/images/Logo2.png" alt="no image yet" />
-            <h1 class="text-info-600 font-black text-sm">
-              User Interface Designer at Workonnect
-            </h1>
-            <div class="flex gap-2">
-              <h1 class="text-xs font-black">May - June 2020</h1>
-              <h1 class="text-xs">Lagos, Nigeria.</h1>
+          <div v-if="userWorkExperiences?.length" class="space-y-3">
+            <div
+              v-for="(experience, index) in userWorkExperiences"
+              :key="index"
+              class="bg-westside-50 space-y-4 rounded-10 p-4"
+            >
+              <h1 class="text-info-600 font-black text-sm">
+                {{ experience.jobTitle }} at
+                {{ experience.companyOrganization }}
+              </h1>
+              <div class="flex gap-2">
+                <h1 class="text-xs font-black">
+                  {{
+                    formatExperienceDates(
+                      experience.startingFrom,
+                      experience?.endingIn
+                    )
+                  }}
+                </h1>
+                <h1 class="text-xs">{{ experience.companyLocation }}</h1>
+              </div>
+              <p class="text-xs tracking-wider">
+                {{ experience.details }}
+              </p>
             </div>
-            <p class="text-xs tracking-wider">
-              Lorem ipsum dolor sit amet consectetur. Dignissim aliquam vitae
-              accumsan eget nisl felis magna rhoncus. Nisl duis netus id
-              lobortis nec dui leo. Ornare scelerisque vivamus egestas
-              adipiscing in amet varius. Velit in nec dolor ultrices
-              scelerisque. Ipsum facilisi nulla sed sed proin pulvinar. Libero
-              sed donec lorem blandit aliquam diam. Egestas et amet elit a nulla
-              rhoncus sagittis in sem. Lectus ut vivamus id at vitae. Elit non
-              ut eget massa id lorem tincidunt porttitor. Viverra duis sit a
-              dignissim molestie placerat. Tempus velit interdum fames
-              pellentesque.
-            </p>
-            <p class="text-xs tracking-wider">
-              Lorem ipsum dolor sit amet consectetur. Dignissim aliquam vitae
-              accumsan eget nisl felis magna rhoncus. Nisl duis netus id
-              lobortis nec dui leo. Ornare scelerisque vivamus egestas
-              adipiscing in amet varius. Velit in nec dolor ultrices
-              scelerisque. Ipsum facilisi nulla sed sed proin pulvinar. Libero
-              sed donec lorem blandit aliquam diam. Egestas et amet elit a nulla
-              rhoncus sagittis in sem. Lectus ut vivamus id at vitae. Elit non
-              ut eget massa id lorem tincidunt porttitor. Viverra duis sit a
-              dignissim molestie placerat. Tempus velit interdum fames
-              pellentesque.
-            </p>
           </div>
-          <div class="bg-westside-50 space-y-4 rounded-10 p-4">
-            <img src="/assets/images/ms.png" alt="no image yet" />
-            <h1 class="text-info-600 font-black text-sm">
-              User Interface Designer at Workonnect
-            </h1>
-            <div class="flex gap-2">
-              <h1 class="text-xs font-black">May - June 2020</h1>
-              <h1 class="text-xs">Lagos, Nigeria.</h1>
-            </div>
-            <p class="text-xs tracking-wider">
-              Lorem ipsum dolor sit amet consectetur. Dignissim aliquam vitae
-              accumsan eget nisl felis magna rhoncus. Nisl duis netus id
-              lobortis nec dui leo. Ornare scelerisque vivamus egestas
-              adipiscing in amet varius. Velit in nec dolor ultrices
-              scelerisque. Ipsum facilisi nulla sed sed proin pulvinar. Libero
-              sed donec lorem blandit aliquam diam. Egestas et amet elit a nulla
-              rhoncus sagittis in sem. Lectus ut vivamus id at vitae. Elit non
-              ut eget massa id lorem tincidunt porttitor. Viverra duis sit a
-              dignissim molestie placerat. Tempus velit interdum fames
-              pellentesque.
-            </p>
-            <p class="text-xs tracking-wider">
-              Lorem ipsum dolor sit amet consectetur. Dignissim aliquam vitae
-              accumsan eget nisl felis magna rhoncus. Nisl duis netus id
-              lobortis nec dui leo. Ornare scelerisque vivamus egestas
-              adipiscing in amet varius. Velit in nec dolor ultrices
-              scelerisque. Ipsum facilisi nulla sed sed proin pulvinar. Libero
-              sed donec lorem blandit aliquam diam. Egestas et amet elit a nulla
-              rhoncus sagittis in sem. Lectus ut vivamus id at vitae. Elit non
-              ut eget massa id lorem tincidunt porttitor. Viverra duis sit a
-              dignissim molestie placerat. Tempus velit interdum fames
-              pellentesque.
-            </p>
-          </div>
-          <div class="bg-westside-50 space-y-4 rounded-10 p-4">
-            <img src="/assets/images/ms.png" alt="no image yet" />
-            <h1 class="text-info-600 font-black text-sm">
-              User Interface Designer at Workonnect
-            </h1>
-            <div class="flex gap-2">
-              <h1 class="text-xs font-black">May - June 2020</h1>
-              <h1 class="text-xs">Lagos, Nigeria.</h1>
-            </div>
-            <p class="text-xs tracking-wider">
-              Lorem ipsum dolor sit amet consectetur. Dignissim aliquam vitae
-              accumsan eget nisl felis magna rhoncus. Nisl duis netus id
-              lobortis nec dui leo. Ornare scelerisque vivamus egestas
-              adipiscing in amet varius. Velit in nec dolor ultrices
-              scelerisque. Ipsum facilisi nulla sed sed proin pulvinar. Libero
-              sed donec lorem blandit aliquam diam. Egestas et amet elit a nulla
-              rhoncus sagittis in sem. Lectus ut vivamus id at vitae. Elit non
-              ut eget massa id lorem tincidunt porttitor. Viverra duis sit a
-              dignissim molestie placerat. Tempus velit interdum fames
-              pellentesque.
-            </p>
-            <p class="text-xs tracking-wider">
-              Lorem ipsum dolor sit amet consectetur. Dignissim aliquam vitae
-              accumsan eget nisl felis magna rhoncus. Nisl duis netus id
-              lobortis nec dui leo. Ornare scelerisque vivamus egestas
-              adipiscing in amet varius. Velit in nec dolor ultrices
-              scelerisque. Ipsum facilisi nulla sed sed proin pulvinar. Libero
-              sed donec lorem blandit aliquam diam. Egestas et amet elit a nulla
-              rhoncus sagittis in sem. Lectus ut vivamus id at vitae. Elit non
-              ut eget massa id lorem tincidunt porttitor. Viverra duis sit a
-              dignissim molestie placerat. Tempus velit interdum fames
-              pellentesque.
-            </p>
-          </div>
+
+          <div v-else>No work experience, click edit profile to add</div>
         </div>
       </div>
 
@@ -320,44 +360,44 @@ definePageMeta({
                     fill="#343330"
                   />
                 </svg>
-                <div class="">
+                <div>
                   <h1 class="text-xs">Resume/CV</h1>
-                  <h1 class="text-xs text-info-600">Document Name.pdf</h1>
+                  <div
+                    class="space-y-1"
+                    v-if="
+                      mapUserDetails(currentJobApp?.user)?.resumeResource
+                        ?.resumeCv
+                    "
+                  >
+                    <p class="text-xs font-bold">
+                      {{
+                        mapUserDetails(currentJobApp?.user)?.resumeResource
+                          ?.resumeCv?.name
+                      }}
+                    </p>
+                    <p class="text-xs text-info-600">
+                      Size:
+                      {{
+                        (
+                          mapUserDetails(currentJobApp?.user)!.resumeResource!
+                            .resumeCv!.size / 1024
+                        ).toFixed(2)
+                      }}
+                      KB
+                    </p>
+                  </div>
+                  <p v-else class="text-xs text-info-600">No file found</p>
                 </div>
               </div>
 
-              <button
-                class="border text-primary-1 px-4 py-2 rounded-5 text-xs border-primary-1"
-              >
-                Change
-              </button>
-            </div>
-
-            <div class="flex py-2 justify-between">
-              <div class="flex gap-x-2">
-                <svg
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+              <div>
+                <button
+                  @click="showModal = true"
+                  class="px-[14px] text-xs py-2 text-primary-1 rounded-10 border border-primary-1"
                 >
-                  <path
-                    d="M20.0306 7.71938L14.7806 2.46938C14.7109 2.39975 14.6282 2.34454 14.5371 2.3069C14.4461 2.26926 14.3485 2.24992 14.25 2.25H5.25C4.85218 2.25 4.47064 2.40804 4.18934 2.68934C3.90804 2.97064 3.75 3.35218 3.75 3.75V20.25C3.75 20.6478 3.90804 21.0294 4.18934 21.3107C4.47064 21.592 4.85218 21.75 5.25 21.75H18.75C19.1478 21.75 19.5294 21.592 19.8107 21.3107C20.092 21.0294 20.25 20.6478 20.25 20.25V8.25C20.2501 8.15148 20.2307 8.05391 20.1931 7.96286C20.1555 7.87182 20.1003 7.78908 20.0306 7.71938ZM15 4.81031L17.6897 7.5H15V4.81031ZM18.75 20.25H5.25V3.75H13.5V8.25C13.5 8.44891 13.579 8.63968 13.7197 8.78033C13.8603 8.92098 14.0511 9 14.25 9H18.75V20.25Z"
-                    fill="#343330"
-                  />
-                </svg>
-                <div class="">
-                  <h1 class="text-xs">Cover letter</h1>
-                  <h1 class="text-xs text-info-600">Document Name.pdf</h1>
-                </div>
+                  View
+                </button>
               </div>
-
-              <button
-                class="border text-primary-1 px-4 py-2 rounded-5 text-xs border-primary-1"
-              >
-                Change
-              </button>
             </div>
           </div>
 
@@ -423,5 +463,57 @@ definePageMeta({
         </div>
       </div>
     </div>
+
+    <!-- Modal -->
+    <div
+      v-if="showModal"
+      class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
+    >
+      <div
+        class="bg-white p-0 rounded-lg w-full max-w-4xl relative overflow-hidden"
+      >
+        <!-- Close button -->
+        <button
+          @click="showModal = false"
+          class="absolute top-16 right-5 bg-white border-2 rounded-full p-2"
+        >
+        <svg
+        class="w-6 h-6"
+            width="70"
+            height="84"
+            viewBox="0 0 70 84"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M64.2692 60.7312C64.5014 60.9635 64.6857 61.2392 64.8114 61.5427C64.9371 61.8462 65.0018 62.1714 65.0018 62.4999C65.0018 62.8284 64.9371 63.1537 64.8114 63.4572C64.6857 63.7607 64.5014 64.0364 64.2692 64.2687C64.0369 64.501 63.7611 64.6852 63.4577 64.8109C63.1542 64.9366 62.8289 65.0013 62.5004 65.0013C62.1719 65.0013 61.8467 64.9366 61.5432 64.8109C61.2397 64.6852 60.9639 64.501 60.7317 64.2687L40.0004 43.5343L19.2692 64.2687C18.8001 64.7378 18.1638 65.0013 17.5004 65.0013C16.837 65.0013 16.2008 64.7378 15.7317 64.2687C15.2626 63.7996 14.999 63.1633 14.999 62.4999C14.999 61.8365 15.2626 61.2003 15.7317 60.7312L36.466 39.9999L15.7317 19.2687C15.2626 18.7996 14.999 18.1633 14.999 17.4999C14.999 16.8365 15.2626 16.2003 15.7317 15.7312C16.2008 15.2621 16.837 14.9985 17.5004 14.9985C18.1638 14.9985 18.8001 15.2621 19.2692 15.7312L40.0004 36.4656L60.7317 15.7312C61.2008 15.2621 61.837 14.9985 62.5004 14.9985C63.1638 14.9985 63.8001 15.2621 64.2692 15.7312C64.7383 16.2003 65.0018 16.8365 65.0018 17.4999C65.0018 18.1633 64.7383 18.7996 64.2692 19.2687L43.5348 39.9999L64.2692 60.7312Z"
+              fill="#343330"
+            />
+          </svg>
+        </button>
+
+        <!-- PDF Display Area -->
+        <iframe
+          :src="`https://drive.google.com/viewerng/viewer?embedded=true&url=${
+            mapUserDetails(currentJobApp?.user)?.resumeResource?.resumeCv?.url
+          }`"
+          class="w-full h-[90vh] border-0"
+          style="display: block"
+          frameborder="0"
+        ></iframe>
+      </div>
+    </div>
+    <!-- Modal -->
   </div>
 </template>
+<style scoped>
+/* Full screen modal with the PDF and no borders or scrollbars */
+body {
+  overflow: hidden; /* Disable body scroll when modal is open */
+}
+
+.modal-open iframe {
+  border: none;
+  overflow: hidden;
+}
+</style>

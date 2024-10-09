@@ -3,7 +3,7 @@ import type { ApiSuccessResponse, IJobPost, IRecruiterDetails } from '~/types';
 
 definePageMeta({
   title: 'Jobs Openings',
-  pageName: 'dashboard.recruiter.jobs-openings/candidates',
+  pageName: 'dashboard.recruiter.jobs-opening.index',
   layout: 'dashboard',
   middleware: ['auth', 'is-recruiter'],
 });

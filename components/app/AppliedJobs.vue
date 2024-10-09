@@ -51,7 +51,7 @@ const getApplicationStatus = (status: JOB_APPLICATION_STATUS) => {
       </div>
 
       <div class="md:flex justify-between items-center px-4 py-4 bg-white-100">
-        <div class="flex items-center md:space-x-6 spaxe-x-2">
+        <div class="flex items-center md:space-x-6 space-x-2">
           <div class="">
             <div class="flex space-x-2 items-center mt-2 p-2">
               <svg

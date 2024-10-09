@@ -9,7 +9,7 @@ export default defineEventHandler(async (event) => {
 
   try {
     const response = await axios.get(
-      `job-application-tracking/${query.jobListingId}/applications`,
+      `job-application-tracking/${query.jobApplicationId}`,
       {
         baseURL: config.apiBaseUrl,
         headers: {

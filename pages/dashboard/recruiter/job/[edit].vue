@@ -5,7 +5,7 @@ import { useVuelidate } from '@vuelidate/core';
 import type { ApiErrorResponse, IRecruiterDetails } from '~/types';
 
 definePageMeta({
-  title: 'Create job opening',
+  title: 'Edit job opening',
   pageName: 'dashboard.recruiter.job.create',
   layout: 'dashboard',
   middleware: ['auth', 'is-recruiter'],

@@ -210,11 +210,11 @@ onBeforeMount(async () => {
           </div>
           <!-- btn -->
           <div class="space-y-3 pt-4 md:pt-0">
-            <div class="flex md:justify-end">
+            <!-- <div class="flex md:justify-end">
               <button class="text-info-600 font-black text-xs">
                 Premium user
               </button>
-            </div>
+            </div> -->
 
             <div class="space-y-3">
               <div class="space-x-2 flex items-center">
@@ -286,7 +286,7 @@ onBeforeMount(async () => {
             </div>
           </div>
 
-          <div v-else>No work experience</div>
+          <div v-else>No work experience, click edit profile to add</div>
         </div>
       </div>
 
@@ -310,7 +310,10 @@ onBeforeMount(async () => {
               </svg>
               <div>
                 <h1 class="text-xs">Resume/CV</h1>
-                <div v-if="userData?.resumeResource?.resumeCv">
+                <div
+                  class="space-y-1"
+                  v-if="userData?.resumeResource?.resumeCv"
+                >
                   <p class="text-xs font-bold">
                     {{ userData?.resumeResource?.resumeCv?.name }}
                   </p>

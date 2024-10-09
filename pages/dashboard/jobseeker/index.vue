@@ -40,22 +40,28 @@ const getJobStats = async () => {
   }
 };
 
-const chartData = {
+const chartData = reactive({
   datasets: [
     {
       label: 'Job Applications',
-      data: [
-        jobStats.value?.totalRejected || 0,
-        jobStats.value?.totalInReview || 0,
-        jobStats.value?.totalInterview || 0,
-      ],
+      data: [0, 0, 0],
       backgroundColor: ['#82410C', '#FE8900', '#FFD76D'],
       hoverOffset: 2,
     },
   ],
-};
+});
+
+const shouldShowChart = computed(() => {
+  return chartData.datasets[0].data.some((value) => value > 0);
+});
 
 onMounted(() => {
+  chartData.datasets[0].data[0] = jobStats.value?.totalRejected || 0;
+  chartData.datasets[0].data[1] = jobStats.value?.totalInReview || 0;
+  chartData.datasets[0].data[2] = jobStats.value?.totalInterview || 0;
+});
+
+onBeforeMount(() => {
   getJobStats();
 });
 </script>
@@ -196,14 +202,19 @@ onMounted(() => {
         <!--  -->
         <div class="font-[Nexa] bg-[#FFFFFF] w-full rounded-10 px-4 py-4 h-72">
           <h3 class="font-black">Jobs Applied Status</h3>
-          <div v-if="jobStats!.totalRejected  > 0 || jobStats!.totalInReview > 0 || jobStats!.totalInterview > 0" class="flex gap-4 items-center">
-            <div  class="flex flex-col items-center pt-6">
+          <div class="flex gap-4 items-center">
+            <div class="flex flex-col items-center pt-6">
               <!-- chart -->
-              <div v-if="!isLoading" class="w-full">
-                <div class="w-44 h-44">
+              <div v-if="!isLoading && shouldShowChart" class="w-full">
+                <div class="w-40 h-40">
                   <DoughnutChart :chartData="chartData" class="h-full w-full" />
                 </div>
               </div>
+              <!-- chart -->
+              <div
+                v-else
+                class="w-40 h-40 rounded-full border-8 border-black/20"
+              ></div>
               <BtnBlueRight
                 @click="$router.push('/dashboard/jobseeker/my-applications')"
                 class="text-xs md:text-sm"
@@ -240,14 +251,8 @@ onMounted(() => {
               </div>
             </div>
           </div>
-          <div v-else class="h-32 flex items-center justify-center w-full">
-              <p>
-                Nothing to show here
-              </p>
-          </div>
         </div>
       </div>
-
       <div
         class="font-[Nexa] md:mt-4 mt-4 w-full bg-[#FFFFFF] h-72 rounded-10 md:w-2/5"
       >

@@ -50,6 +50,38 @@ export const JobStore = defineStore('job-store', () => {
     }
   }
 
+  async function fetchRecruiterJobApplications(token: string) {
+    try {
+      const response = await $fetch(
+        '/api/job-applications/recruiter/get-all-applications',
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return await Promise.resolve(response);
+    } catch (error) {
+      return await Promise.reject(error);
+    }
+  }
+
+  async function fetchRecruiterJobApplicationStats(token: string) {
+    try {
+      const response = await $fetch(
+        '/api/job-applications/recruiter/recruiter-stats',
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return await Promise.resolve(response);
+    } catch (error) {
+      return await Promise.reject(error);
+    }
+  }
+
   async function fetchRecruiterJobs(token: string) {
     try {
       const response = await $fetch('/api/recruiter/job/fetch', {
@@ -127,6 +159,49 @@ export const JobStore = defineStore('job-store', () => {
     }
   }
 
+  async function fetchSingleApplicationDetailed(token: string, appId: string) {
+    try {
+      const response = await $fetch(
+        '/api/job-applications/recruiter/get-single-application-detailed',
+        {
+          query: {
+            jobApplicationId: appId,
+          },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return await Promise.resolve(response);
+    } catch (error) {
+      return await Promise.reject(error);
+    }
+  }
+
+  async function updateSingleApplicationData(
+    token: string,
+    appId: string,
+    body: any
+  ) {
+    try {
+      const response = await $fetch(
+        '/api/job-applications/recruiter/update-application',
+        {
+          query: {
+            jobApplicationId: appId,
+          },
+          body,
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      return await Promise.resolve(response);
+    } catch (error) {
+      return await Promise.reject(error);
+    }
+  }
+
   return {
     jobList: skipHydrate(jobList),
     jobStats: skipHydrate(jobStats),
@@ -142,6 +217,10 @@ export const JobStore = defineStore('job-store', () => {
       fetchUserJobApplications,
       fetchSingleApplication,
       fetchUserJobApplicationStats,
+      fetchRecruiterJobApplicationStats,
+      fetchRecruiterJobApplications,
+      fetchSingleApplicationDetailed,
+      updateSingleApplicationData,
     },
   };
 });

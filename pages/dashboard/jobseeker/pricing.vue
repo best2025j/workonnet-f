@@ -5,6 +5,60 @@ definePageMeta({
   layout: "dashboard",
   middleware: ["auth", "is-jobseeker"],
 });
+
+const payWithPaystack = () => {
+  if (!document.getElementById('paystack-script')) {
+    const script = document.createElement('script');
+    script.id = 'paystack-script';
+    script.src = 'https://js.paystack.co/v1/inline.js';
+    script.onload = () => {
+      initPaystack();
+    };
+    document.body.appendChild(script);
+  } else {
+    initPaystack();
+  }
+};
+
+const initPaystack = () => {
+  const handler = (window as any).PaystackPop.setup({
+    key: 'your-paystack-public-key',   // Replace with your Paystack public key
+    email: 'customer@example.com',     // Replace with user's email
+    amount: 5000 * 100,                // Amount in kobo (e.g., 5000 NGN = 500000 kobo)
+    currency: 'NGN',
+    ref: `${Math.random().toString(36).substring(2, 15)}`,  // Generate a unique reference
+    callback: (response: any) => {
+      // This block is called after a successful or failed transaction
+      if (response.status === 'success') {
+        alert('Payment successful! Reference: ' + response.reference);
+        verifyPayment(response.reference);  // Call backend to verify the payment
+      } else {
+        alert('Payment failed! Please try again.');
+      }
+    },
+    onClose: () => {
+      // This block is called when the payment modal is closed without completing payment
+      alert('Payment window closed. No transaction was completed.');
+    },
+  });
+
+  handler.openIframe();
+};
+
+const verifyPayment = async (reference: string) => {
+  const response = await fetch('/api/subscriptions/verify', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ reference }),
+  });
+
+  const result = await response.json();
+  if (result.success) {
+    alert('Subscription activated!');
+  } else {
+    alert('Payment verification failed or payment not successful.');
+  }
+};
 </script>
 
 <template>
@@ -19,46 +73,6 @@ definePageMeta({
         <p class="md:text-sm text-xs">
           Simple Pricing No Hidden Fees. Advanced Features for you.
         </p>
-      </div>
-
-      <div class="py-2 space-y-2">
-        <h1 class="text-xs md:text-sm">
-          Choose the country for your job recommendations
-        </h1>
-        <div class="relative flex items-center">
-          <svg
-            width="19"
-            height="18"
-            class="absolute left-3"
-            viewBox="0 0 19 18"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M0.125 9C0.125 13.0937 2.75 16.5625 6.375 17.8437V0.15625C2.75 1.4375 0.125 4.90625 0.125 9ZM18.875 9C18.875 4.90625 16.2812 1.4375 12.625 0.15625V17.8437C16.2812 16.5625 18.875 13.0937 18.875 9Z"
-              fill="#83BF4F"
-            />
-          </svg>
-
-          <input
-            type="text"
-            placeholder="Nigeria"
-            class="pl-10 pr-4 h-11 w-full md:w-[357px] outline-none placeholder:text-sm border border-gray-300 rounded-md"
-          />
-          <svg
-            width="15"
-            height="9"
-            class="absolute right-3"
-            viewBox="0 0 15 9"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M14.1922 1.94254L7.94217 8.19254C7.88412 8.25065 7.81519 8.29675 7.73932 8.3282C7.66344 8.35965 7.58212 8.37584 7.49998 8.37584C7.41785 8.37584 7.33652 8.35965 7.26064 8.3282C7.18477 8.29675 7.11584 8.25065 7.05779 8.19254L0.807794 1.94254C0.690518 1.82526 0.624634 1.6662 0.624634 1.50035C0.624634 1.3345 0.690518 1.17544 0.807794 1.05816C0.925069 0.940884 1.08413 0.875 1.24998 0.875C1.41583 0.875 1.57489 0.940884 1.69217 1.05816L7.49998 6.86675L13.3078 1.05816C13.3659 1.00009 13.4348 0.954028 13.5107 0.922601C13.5865 0.891175 13.6679 0.875 13.75 0.875C13.8321 0.875 13.9134 0.891175 13.9893 0.922601C14.0652 0.954028 14.1341 1.00009 14.1922 1.05816C14.2502 1.11623 14.2963 1.18517 14.3277 1.26104C14.3592 1.33691 14.3753 1.41823 14.3753 1.50035C14.3753 1.58247 14.3592 1.66379 14.3277 1.73966C14.2963 1.81553 14.2502 1.88447 14.1922 1.94254Z"
-              fill="#343330"
-            />
-          </svg>
-        </div>
       </div>
     </div>
 
@@ -82,11 +96,11 @@ definePageMeta({
           <h6 class="text-xs">/month</h6>
         </div>
 
-        <div class="text-sm text-[#000]">
+        <!-- <div class="text-sm text-[#000]">
           Lorem ipsum dolor sit amet consectetur. Gravida volutpat lobortis
           scelerisque nunc eget scelerisque lectus ante augue. Quis eros lacus
           sed quisque in sagittis tempus mus diam.
-        </div>
+        </div> -->
         <div class="py-4">
           <button
             class="bg-success-100 border font-black py-3 rounded-10 text-xs w-full text-success-600"
@@ -98,7 +112,7 @@ definePageMeta({
         <!-- checks -->
         <div class="space-y-4 px-2">
           <div class="flex space-x-4 items-center">
-            <svg
+            <svg class="w-5 h-5"
               width="20"
               height="20"
               viewBox="0 0 20 20"
@@ -113,7 +127,7 @@ definePageMeta({
             <h1 class="text-xs">Profile Creation</h1>
           </div>
           <div class="flex space-x-4 items-center">
-            <svg
+            <svg class="w-5 h-5"
               width="20"
               height="20"
               viewBox="0 0 20 20"
@@ -128,7 +142,7 @@ definePageMeta({
             <h1 class="text-xs">Limited Job Applications: 5 applications</h1>
           </div>
           <div class="flex space-x-4 items-center">
-            <svg
+            <svg class="w-5 h-5"
               width="20"
               height="20"
               viewBox="0 0 20 20"
@@ -143,7 +157,7 @@ definePageMeta({
             <h1 class="text-xs">Basic Visibility</h1>
           </div>
           <div class="flex space-x-4 items-center">
-            <svg
+            <svg class="w-5 h-5"
               width="20"
               height="20"
               viewBox="0 0 20 20"
@@ -158,7 +172,7 @@ definePageMeta({
             <h1 class="text-xs">Standard AI Customer Support</h1>
           </div>
           <div class="flex space-x-4 items-center">
-            <svg
+            <svg class="w-5 h-5"
               width="20"
               height="20"
               viewBox="0 0 20 20"
@@ -175,7 +189,7 @@ definePageMeta({
             </h1>
           </div>
           <div class="flex space-x-4 items-center">
-            <svg
+            <svg class="w-5 h-5"
               width="20"
               height="20"
               viewBox="0 0 20 20"
@@ -209,11 +223,11 @@ definePageMeta({
           <h6 class="text-xs">/month</h6>
         </div>
 
-        <div class="text-sm text-[#000]">
+        <!-- <div class="text-sm text-[#000]">
           Lorem ipsum dolor sit amet consectetur. Gravida volutpat lobortis
           scelerisque nunc eget scelerisque lectus ante augue. Quis eros lacus
           sed quisque in sagittis tempus mus diam.
-        </div>
+        </div> -->
         <div class="py-4">
           <button
             class="border-primary-1 border bg-westside-100 font-black py-3 rounded-10 text-xs w-full text-primary-1"
@@ -225,7 +239,7 @@ definePageMeta({
         <!-- checks -->
         <div class="space-y-4 px-4">
           <div class="flex space-x-4 items-center">
-            <svg
+            <svg class="w-5 h-5"
               width="20"
               height="20"
               viewBox="0 0 20 20"
@@ -240,7 +254,7 @@ definePageMeta({
             <h1 class="text-xs">Enhanced Profile Visibility</h1>
           </div>
           <div class="flex space-x-4 items-center">
-            <svg
+            <svg class="w-5 h-5"
               width="20"
               height="20"
               viewBox="0 0 20 20"
@@ -255,7 +269,7 @@ definePageMeta({
             <h1 class="text-xs">10 Job Applications</h1>
           </div>
           <div class="flex space-x-4 items-center">
-            <svg
+            <svg class="w-5 h-5"
               width="20"
               height="20"
               viewBox="0 0 20 20"
@@ -270,7 +284,7 @@ definePageMeta({
             <h1 class="text-xs">Video Pitch Feature (Limited)</h1>
           </div>
           <div class="flex space-x-4 items-center">
-            <svg
+            <svg class="w-5 h-5"
               width="20"
               height="20"
               viewBox="0 0 20 20"
@@ -285,7 +299,7 @@ definePageMeta({
             <h1 class="text-xs">1 Live Interview Training Booth</h1>
           </div>
           <div class="flex space-x-4 items-center">
-            <svg
+            <svg class="w-5 h-5"
               width="20"
               height="20"
               viewBox="0 0 20 20"
@@ -300,7 +314,7 @@ definePageMeta({
             <h1 class="text-xs">Standard Analytics</h1>
           </div>
           <div class="flex space-x-4 items-center">
-            <svg
+            <svg class="w-5 h-5"
               width="20"
               height="20"
               viewBox="0 0 20 20"
@@ -315,7 +329,7 @@ definePageMeta({
             <h1 class="text-xs">Standard AI Support and Coaching</h1>
           </div>
           <div class="flex space-x-4 items-center">
-            <svg
+            <svg class="w-5 h-5"
               width="20"
               height="20"
               viewBox="0 0 20 20"
@@ -332,7 +346,7 @@ definePageMeta({
             </h1>
           </div>
           <div class="flex space-x-4 items-center">
-            <svg
+            <svg class="w-5 h-5"
               width="20"
               height="20"
               viewBox="0 0 20 20"
@@ -347,7 +361,7 @@ definePageMeta({
             <h1 class="text-xs">Resume Builder Assistance</h1>
           </div>
           <div class="flex space-x-4 items-center">
-            <svg
+            <svg class="w-5 h-5"
               width="20"
               height="20"
               viewBox="0 0 20 20"
@@ -383,11 +397,11 @@ definePageMeta({
           <h6 class="text-xs">/month</h6>
         </div>
 
-        <div class="text-sm text-[#000]">
+        <!-- <div class="text-sm text-[#000]">
           Lorem ipsum dolor sit amet consectetur. Gravida volutpat lobortis
           scelerisque nunc eget scelerisque lectus ante augue. Quis eros lacus
           sed quisque in sagittis tempus mus diam.
-        </div>
+        </div> -->
         <div class="py-4">
           <button
             class="border-primary-1 border bg-westside-100 font-black py-3 rounded-10 text-xs w-full text-primary-1"
@@ -398,8 +412,8 @@ definePageMeta({
 
         <!-- checks -->
         <div class="space-y-4 px-2">
-          <div class="flex space-x-4 w-80 items-center">
-            <svg
+          <div class="flex space-x-4 items-center">
+            <svg class="w-5 h-5"
               width="20"
               height="20"
               viewBox="0 0 20 20"
@@ -413,8 +427,8 @@ definePageMeta({
             </svg>
             <h1 class="text-xs">Enhanced Profile Visibility</h1>
           </div>
-          <div class="flex space-x-4 w-80 items-center">
-            <svg
+          <div class="flex space-x-4 items-center">
+            <svg class="w-5 h-5"
               width="20"
               height="20"
               viewBox="0 0 20 20"
@@ -428,8 +442,8 @@ definePageMeta({
             </svg>
             <h1 class="text-xs">Unlimited Job Applications</h1>
           </div>
-          <div class="flex space-x-4 w-80 items-center">
-            <svg
+          <div class="flex space-x-4 items-center">
+            <svg class="w-5 h-5"
               width="20"
               height="20"
               viewBox="0 0 20 20"
@@ -443,8 +457,8 @@ definePageMeta({
             </svg>
             <h1 class="text-xs">Video Pitch Feature</h1>
           </div>
-          <div class="flex space-x-4 w-80 items-center">
-            <svg
+          <div class="flex space-x-4 items-center">
+            <svg class="w-5 h-5"
               width="20"
               height="20"
               viewBox="0 0 20 20"
@@ -458,8 +472,8 @@ definePageMeta({
             </svg>
             <h1 class="text-xs">Advanced Analytics into recruiters ranking</h1>
           </div>
-          <div class="flex space-x-4 w-80 items-center">
-            <svg
+          <div class="flex space-x-4 items-center">
+            <svg class="w-5 h-5"
               width="20"
               height="20"
               viewBox="0 0 20 20"
@@ -473,8 +487,9 @@ definePageMeta({
             </svg>
             <h1 class="text-xs">Assessment & Screening Tools insight</h1>
           </div>
-          <div class="flex space-x-4 w-80 items-center">
-            <svg
+          <div class="flex space-x-4 items-center">
+            <svg class="w-5 h-5"
+            
               width="20"
               height="20"
               viewBox="0 0 20 20"
@@ -488,8 +503,10 @@ definePageMeta({
             </svg>
             <h1 class="text-xs">Instant Job Notifications</h1>
           </div>
-          <div class="flex space-x-4 w-80 items-center">
-            <svg
+          <div class="flex space-x-4 items-center">
+            <span  class="w-5 h-5">
+             
+              <svg 
               width="20"
               height="20"
               viewBox="0 0 20 20"
@@ -501,13 +518,15 @@ definePageMeta({
                 fill="#0FA968"
               />
             </svg>
+            </span>
+           
             <h1 class="text-xs">
               Resume Exclusive access to virtual networking events or webinars
               Builder Assistance
             </h1>
           </div>
-          <div class="flex space-x-4 w-80 items-center">
-            <svg
+          <div class="flex space-x-4 items-center">
+            <svg class="w-5 h-5"
               width="20"
               height="20"
               viewBox="0 0 20 20"
@@ -521,8 +540,8 @@ definePageMeta({
             </svg>
             <h1 class="text-xs">Gamified Certification Programs:</h1>
           </div>
-          <div class="flex space-x-4 w-80 items-center">
-            <svg
+          <div class="flex space-x-4 items-center">
+            <svg class="w-5 h-5"
               width="20"
               height="20"
               viewBox="0 0 20 20"
@@ -536,8 +555,8 @@ definePageMeta({
             </svg>
             <h1 class="text-xs">Psychometric test</h1>
           </div>
-          <div class="flex space-x-4 w-80 items-center">
-            <svg
+          <div class="flex space-x-4 items-center">
+            <svg class="w-5 h-5"
               width="20"
               height="20"
               viewBox="0 0 20 20"

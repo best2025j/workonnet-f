@@ -12,7 +12,7 @@ import type {
 
 definePageMeta({
   title: 'Company Profile',
-  pageName: 'dashboard.recruiter.company-profile.edit',
+  pageName: 'dashboard.recruiter.company-profile.index',
   layout: 'dashboard',
   middleware: ['auth', 'is-recruiter'],
 });

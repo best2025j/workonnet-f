@@ -323,7 +323,7 @@ onBeforeMount(async () => {
           <div class="flex space-x-4 items-start">
             <img :src="userData?.photo?.url" class="h-[40px] w-[40px]" alt="no pix" />
             <div class="">
-              <h1 class="text-base font-black">{{job.title}}</h1>
+              <h1 class="text-base font-black  capitalize">{{job.title}}</h1>
               <h1 class="text-xs">Posted {{formatTimeDiffHuman(job.createdAt) }}</h1>
             </div>
           </div>
