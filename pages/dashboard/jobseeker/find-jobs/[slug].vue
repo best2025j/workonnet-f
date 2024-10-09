@@ -4,7 +4,7 @@ import type {
   IJobPost,
   IJobPostWithPagination,
   IRecruiterDetails,
-IUserDetails,
+  IUserDetails,
 } from '~/types';
 
 definePageMeta({
@@ -77,10 +77,13 @@ const getSingleJob = async () => {
 const applyNow = async (jobId: string) => {
   // check user is not in draft mode.
   if (userData.value.status !== 'draft') {
-    showUpdateProfileModal()
+    showUpdateProfileModal();
   }
-  if(!userData.value?.resumeResource || !userData.value.resumeResource?.resumeCv) {
-    showUpdateProfileModal()
+  if (
+    !userData.value?.resumeResource ||
+    !userData.value.resumeResource?.resumeCv
+  ) {
+    showUpdateProfileModal();
   }
 };
 
@@ -163,7 +166,7 @@ onBeforeMount(async () => {
 
             <div class="flex justify-end">
               <button
-              @click="applyNow(currentJob!.id)"
+                @click="applyNow(currentJob!.id)"
                 class="md:px-4 w-full mt-4 py-3 rounded-8 text-[10px] md:text-base text-white bg-primary-1"
               >
                 Apply Now
@@ -255,6 +258,15 @@ onBeforeMount(async () => {
         </div>
         <!--  -->
         <div class="pt-4">
+          <h1 class="font-black text-sm">Must have Skills</h1>
+          <ul class="space-y-1 list-disc pl-6 py-4 text-xs md:text-sm">
+            <li v-for="(skill, index) in currentJob?.skills" :key="index">
+              {{ skill }}
+            </li>
+          </ul>
+        </div>
+        <!--  -->
+        <div class="pt-4">
           <h1 class="font-black text-sm">How to apply</h1>
           <div class="space-y-1 pl-1 py-4 text-xs md:text-sm">
             <p>Click on the apply button above</p>
@@ -299,12 +311,13 @@ onBeforeMount(async () => {
                   class="w-10 h-10 rounded"
                 />
                 <div class="pl-4">
-                  <span class="block text-sm md:text-base font-black capitalize"
-                    >{{job.title}}</span
+                  <span
+                    class="block text-sm md:text-base font-black capitalize"
+                    >{{ job.title }}</span
                   >
-                  <span class="text-xs font-semimedium text-gray-500"
-                    >{{(job?.recruiter as IRecruiterDetails).companyName}}</span
-                  >
+                  <span class="text-xs font-semimedium text-gray-500">{{
+                    (job?.recruiter as IRecruiterDetails).companyName
+                  }}</span>
                 </div>
               </div>
 
@@ -338,26 +351,29 @@ onBeforeMount(async () => {
                         fill="#343330"
                       />
                     </svg>
-                    <span class="text-xs text-gray-700">{{(currentJob?.recruiter as IRecruiterDetails).location}}</span>
+                    <span class="text-xs text-gray-700">{{
+                      (currentJob?.recruiter as IRecruiterDetails).location
+                    }}</span>
                   </div>
 
                   <div class="flex space-x-2 items-center mt-2 p-2">
                     <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="size-5"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125"
-                />
-              </svg>
-                    <span class="text-xs text-gray-700"
-                      > NGN{{ formatCurrency(currentJob!.expectedSalary) }}/per month</span
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="size-5"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M20.25 6.375c0 2.278-3.694 4.125-8.25 4.125S3.75 8.653 3.75 6.375m16.5 0c0-2.278-3.694-4.125-8.25-4.125S3.75 4.097 3.75 6.375m16.5 0v11.25c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125V6.375m16.5 0v3.75m-16.5-3.75v3.75m16.5 0v3.75C20.25 16.153 16.556 18 12 18s-8.25-1.847-8.25-4.125v-3.75m16.5 0c0 2.278-3.694 4.125-8.25 4.125s-8.25-1.847-8.25-4.125"
+                      />
+                    </svg>
+                    <span class="text-xs text-gray-700">
+                      NGN{{ formatCurrency(currentJob!.expectedSalary) }}/per
+                      month</span
                     >
                   </div>
 
@@ -375,7 +391,7 @@ onBeforeMount(async () => {
                       />
                     </svg>
                     <span class="text-xs text-gray-700"
-                      >Posted {{formatTimeDiffHuman(job.createdAt)}}</span
+                      >Posted {{ formatTimeDiffHuman(job.createdAt) }}</span
                     >
                   </div>
                 </div>
@@ -394,7 +410,7 @@ onBeforeMount(async () => {
                         fill="#343330"
                       />
                     </svg>
-                    <span class="text-xs capitalize">{{job.location}}</span>
+                    <span class="text-xs capitalize">{{ job.location }}</span>
                   </div>
 
                   <div class="flex space-x-2 items-center mt-2 p-2">
@@ -410,7 +426,7 @@ onBeforeMount(async () => {
                         fill="#343330"
                       />
                     </svg>
-                    <span class="text-xs capitalize">{{job.jobType}}</span>
+                    <span class="text-xs capitalize">{{ job.jobType }}</span>
                   </div>
 
                   <div class="flex space-x-2 items-center mt-2 p-2">
@@ -426,7 +442,7 @@ onBeforeMount(async () => {
                         fill="#343330"
                       />
                     </svg>
-                    <span class="text-xs">{{job.level}}</span>
+                    <span class="text-xs">{{ job.level }}</span>
                   </div>
                 </div>
               </div>
@@ -436,9 +452,8 @@ onBeforeMount(async () => {
       </div>
     </div>
 
-
-     <!-- modals -->
-     <dialog
+    <!-- modals -->
+    <dialog
       ref="modalTrigger"
       id="delete_modal"
       class="modal text-black-950 backdrop-blur-sm backdrop-opacity-2 backdrop-filter"
@@ -482,7 +497,7 @@ onBeforeMount(async () => {
 
         <div class="space-x-4 flex items-center justify-center w-full">
           <NuxtLink
-          to="/dashboard/jobseeker/my-profile/edit"
+            to="/dashboard/jobseeker/my-profile/edit"
             class="rounded-8 px-3.5 py-2 text-white text-xs bg-primary-1"
           >
             Complete my profile

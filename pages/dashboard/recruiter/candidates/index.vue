@@ -35,9 +35,6 @@ const getMyJobs = async () => {
       responseData.data as IJobApplicationsWithPagination;
     jobListPage.value = other;
     jobStore.setUserJobApplicationList(docs);
-
-    console.log(docs);
-
     setTimeout(() => {
       isLoading.value = false;
     }, 1000);
@@ -56,9 +53,6 @@ const getMyJobStats = async () => {
     const responseData = response as ApiSuccessResponse;
 
     jobStats.value = responseData.data;
-
-    console.log(jobStats);
-
     setTimeout(() => {
       isLoading.value = false;
     }, 1000);

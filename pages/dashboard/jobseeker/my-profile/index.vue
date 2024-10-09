@@ -61,7 +61,7 @@ onBeforeMount(async () => {
     <!-- profile uploads -->
     <div class="p-4 bg-white rounded-10">
       <div
-        class="w-full h-32 md:h-[214px] flex items-center justify-center bg-black-400 rounded"
+        class="w-full h-32 md:h-[200px] flex items-center justify-center bg-black-400 rounded"
         v-if="!userData?.photoHeader"
       >
         <span class="text-white">No Header Photo</span>
@@ -69,7 +69,7 @@ onBeforeMount(async () => {
       <img
         v-if="userData?.photoHeader"
         :src="userData.photoHeader.url"
-        class="w-full h-32 md:h-[214px] rounded-md"
+        class="w-full h-32 md:h-[200px] rounded-md"
         alt="no image yet..."
       />
       <div class="mt-12 md:pl-6 pl-3 space-y-2 z-auto relative">

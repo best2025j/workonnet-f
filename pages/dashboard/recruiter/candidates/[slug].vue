@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { POSITION, useToast } from 'vue-toastification';
 import {
   JOB_APPLICATION_STATUS,
   type ApiSuccessResponse,
@@ -24,6 +25,7 @@ const currentJobApp = ref<IJobApplications | null>(null);
 const userWorkExperiences = ref<IWorkExperience[] | []>([]);
 const userEducations = ref<IEducationBackground[] | []>([]);
 const showModal = ref(false); // Manage modal visibility
+const toast = useToast();
 
 const userData = computed<IRecruiterDetails>(
   () => userStore.loggedInUserDetails
@@ -32,7 +34,7 @@ const isLoading = ref(false);
 
 const getData = async (jobAppId: string, isRefresh: boolean) => {
   try {
-    if (isRefresh === true) {
+    if (isRefresh) {
       isLoading.value = true;
     }
 
@@ -84,6 +86,11 @@ const updateApplicationStage = async (data: any) => {
       data
     );
 
+    toast.success('Job application set in review', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
     await getData((route.params.slug as string).split('-')[0], false);
     setTimeout(() => {
       isLoading.value = false;
@@ -111,12 +118,22 @@ onBeforeMount(async () => {
     <!-- profile uploads -->
     <div class="p-4 bg-white rounded-10">
       <img
-        src="/assets/images/bridge.png"
-        class="w-full h-32 md:h-auto"
+        v-if="mapUserDetails(currentJobApp?.user)?.photoHeader"
+        :src="mapUserDetails(currentJobApp?.user)?.photoHeader?.url"
+        class="w-full h-32 md:h-[200px]"
         alt="no image yet..."
       />
-      <div class="-mt-12 md:pl-6 pl-3 space-y-2">
-        <img src="/assets/images/man.png" alt="profile-image" />
+      <div class="mt-12 md:pl-6 pl-3 space-y-2 z-auto relative">
+        <div
+          class="bg-white rounded-full h-[70px] w-[70px] border-2 z-auto flex items-center justify-center absolute -top-24"
+        >
+          <img
+            v-if="mapUserDetails(currentJobApp?.user)?.photo"
+            :src="mapUserDetails(currentJobApp?.user)?.photo?.url"
+            class="w-[70px] h-[70px] rounded-full"
+            alt="profile-image"
+          />
+        </div>
         <div
           class="flex flex-col md:flex-row justify-between text-start md:items-center"
         >
@@ -160,7 +177,7 @@ onBeforeMount(async () => {
                 }}</b>
               </h1>
             </div>
-            <!-- <div class="flex gap-2 items-center">
+            <div class="flex gap-2 items-center">
               <svg
                 width="18"
                 height="16"
@@ -174,8 +191,10 @@ onBeforeMount(async () => {
                 />
               </svg>
 
-              <h1 class="text-xs">Applied Jobs: <b>34</b></h1>
-            </div> -->
+              <h1 class="text-xs">
+                Current Stage: {{ currentJobApp?.status }}
+              </h1>
+            </div>
             <!-- <div class="flex gap-2 items-center">
               <svg
                 width="20"
@@ -300,14 +319,14 @@ onBeforeMount(async () => {
 
     <div class="flex flex-col md:flex-row gap-4">
       <!-- cards -->
-      <div class="p-4 bg-white rounded-10 w-full my-4">
+      <div class="p-4 bg-white rounded-10 w-full md:w-[62%] my-4">
         <div class="space-y-4 pt-4">
           <h1 class="text-xl font-black">About me</h1>
           <p class="text-xs tracking-wider">
             {{ mapUserDetails(currentJobApp?.user).bio || 'No bio' }}
           </p>
         </div>
-        <div class="space-y-4 pt-10">
+        <div class="space-y-4 pt-5">
           <h1 class="text-xl font-black">Experience</h1>
           <div v-if="userWorkExperiences?.length" class="space-y-3">
             <div
@@ -336,15 +355,80 @@ onBeforeMount(async () => {
             </div>
           </div>
 
-          <div v-else>No work experience, click edit profile to add</div>
+          <div v-else>No work experiences</div>
+        </div>
+        <!-- education -->
+        <div class="space-y-4 pt-5">
+          <h1 class="text-xl font-black">Education</h1>
+          <div class="space-y-3">
+            <div v-if="userEducations.length > 0" class="w-full">
+              <div
+                v-for="(education, index) in userEducations"
+                :key="index"
+                class="flex justify-between p-4 mt-4 bg-black-50 items-center rounded-10"
+              >
+                <div class="space-y-2 md:pl-4">
+                  <li class="text-sm font-black text-info-600">
+                    {{ education.schoolName }}
+                  </li>
+                  <p class="text-xs font-black text-black-600">
+                    {{ education.degree.text }} in {{ education.fieldOfStudy }}
+                  </p>
+                  <div class="flex gap-x-4">
+                    <h1 class="font-black text-xs">
+                      {{ formateDateMonthYear(education.startingYear) }} -
+                      {{ formateDateMonthYear(education.endingYear) }}
+                    </h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div v-else>
+              <p>No education data yet</p>
+            </div>
+          </div>
+        </div>
+        <!-- skills -->
+        <div class="pt-4">
+          <h1 class="font-black text-xl">Notable Skills</h1>
+          <ul
+            v-if="mapUserDetails(currentJobApp?.user)?.skills?.length"
+            class="space-y-1 list-disc pl-6 py-4 text-xs md:text-sm"
+          >
+            <li
+              v-for="(skill, index) in mapUserDetails(currentJobApp?.user)
+                ?.skills"
+              :key="index"
+            >
+              {{ skill }}
+            </li>
+          </ul>
+          <div v-else><p>No skills available</p></div>
+        </div>
+
+        <div class="pt-4">
+          <h1 class="font-black text-xl">Spoken Languages</h1>
+          <ul
+            v-if="mapUserDetails(currentJobApp?.user)?.spokenLanguages?.length"
+            class="space-y-1 list-disc pl-6 py-4 text-xs md:text-sm"
+          >
+            <li
+              v-for="(lang, index) in mapUserDetails(currentJobApp?.user)
+                ?.spokenLanguages"
+              :key="index"
+            >
+              {{ lang }}
+            </li>
+          </ul>
+          <div v-else><p>No language available</p></div>
         </div>
       </div>
 
       <!--  -->
-      <div class="p-4 bg-white rounded-10 my-4 w-full md:w-[670px] h-full">
+      <div class="my-4 w-full space-y-4 md:w-[38%] h-full">
         <!-- uploading -->
-        <div>
-          <div class="bg-white rounded-10 py-2">
+        <div class="bg-white rounded-10 p-4">
+          <div class="py-2">
             <h1 class="text-xl font-black">Uploaded Documents</h1>
             <div class="flex py-2 justify-between">
               <div class="flex gap-x-2">
@@ -404,6 +488,8 @@ onBeforeMount(async () => {
           <!-- the 3 button -->
           <div class="flex gap-x-2 w-full pt-3">
             <button
+              v-if="currentJobApp?.status === JOB_APPLICATION_STATUS.INTERVIEW"
+              @click="changeAppStatus(JOB_APPLICATION_STATUS.ACCEPTED)"
               class="flex items-center bg-success-200 w-full justify-center rounded-5 py-2"
             >
               <svg
@@ -421,6 +507,8 @@ onBeforeMount(async () => {
               <h1 class="text-xs font-black">Hire</h1>
             </button>
             <button
+              v-if="currentJobApp?.status === JOB_APPLICATION_STATUS.IN_REVIEW"
+               @click="changeAppStatus(JOB_APPLICATION_STATUS.INTERVIEW)"
               class="flex items-center bg-westside-200 justify-center rounded-5 w-full py-2"
             >
               <span>
@@ -439,6 +527,29 @@ onBeforeMount(async () => {
               </span>
 
               <h1 class="text-xs font-black">Interview</h1>
+            </button>
+            <button
+              v-if="currentJobApp?.status === JOB_APPLICATION_STATUS.PENDING"
+              @click="changeAppStatus(JOB_APPLICATION_STATUS.IN_REVIEW)"
+              class="flex items-center bg-info-300 w-full justify-center rounded-5 py-2 gap-x-1"
+            >
+              <span
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="size-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M7.5 7.5h-.75A2.25 2.25 0 0 0 4.5 9.75v7.5a2.25 2.25 0 0 0 2.25 2.25h7.5a2.25 2.25 0 0 0 2.25-2.25v-7.5a2.25 2.25 0 0 0-2.25-2.25h-.75m0-3-3-3m0 0-3 3m3-3v11.25m6-2.25h.75a2.25 2.25 0 0 1 2.25 2.25v7.5a2.25 2.25 0 0 1-2.25 2.25h-7.5a2.25 2.25 0 0 1-2.25-2.25v-.75"
+                  />
+                </svg>
+              </span>
+              <h1 class="text-xs font-black">Move to Review</h1>
             </button>
             <button
               class="flex items-center bg-danger-200 w-full justify-center rounded-5 py-2 gap-x-1"
@@ -461,13 +572,124 @@ onBeforeMount(async () => {
             </button>
           </div>
         </div>
+
+        <!-- job details -->
+        <div class="bg-white w-full rounded-10 pt-4">
+          <div class="p-6 flex flex-col items-start space-y-3 py-2 border-b-2">
+            <h1 class="text-xl font-black">Job Details</h1>
+
+            <div class="flex items-center justify-between space-x-2">
+                <h1 class="text-xs">Job Title</h1>
+                <h1 class="font-black text-sm capitalize">
+                  {{ currentJobApp?.jobListing?.title }}
+                </h1>
+              </div>
+          </div>
+          <!--  -->
+          <div class="flex gap-x-6 p-6 border-b-2">
+            
+            <div class="space-y-4">
+              <div class="space-y-2">
+                <h1 class="text-xs">Job Type</h1>
+                <h1 class="font-black text-sm capitalize">
+                  {{ currentJobApp?.jobListing?.jobType }}
+                </h1>
+              </div>
+
+              <div class="space-y-2">
+                <h1 class="text-xs">Salary</h1>
+                <h1 class="font-black text-sm capitalize">
+                  NGN{{
+                    formatCurrency(
+                      currentJobApp?.jobListing!.expectedSalary as number
+                    )
+                  }}/month
+                </h1>
+              </div>
+            </div>
+            <!--  -->
+            <div class="space-y-4">
+              <div class="space-y-2">
+                <h1 class="text-xs">Work Type</h1>
+                <h1 class="font-black text-sm capitalize">
+                  {{ currentJobApp?.jobListing.location }}
+                </h1>
+              </div>
+
+              <div class="space-y-2">
+                <h1 class="text-xs">Experience</h1>
+                <h1 class="font-black text-sm capitalize">
+                  {{ currentJobApp?.jobListing?.level }}
+                </h1>
+              </div>
+            </div>
+          </div>
+
+          <!--  -->
+          <div class="space-y-4 py-4">
+            <div class="px-6 space-y-2">
+              <h1 class="font-black">Description</h1>
+              <div>
+                <div class="list-disc text-xs">
+                  <p class="">
+                    {{ currentJobApp?.jobListing?.description }}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!--  -->
+            <div class="px-6 space-y-2">
+              <h1 class="font-black">Requirements</h1>
+              <div class="px-4">
+                <ul class="list-disc text-xs">
+                  <li
+                    v-for="(item, index) in currentJobApp?.jobListing
+                      ?.requirements"
+                    :key="index"
+                  >
+                    {{ item }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <!--  -->
+            <div class="px-6 space-y-2">
+              <h1 class="font-black">Benefits</h1>
+              <div class="px-4">
+                <ul class="list-disc text-xs">
+                  <li
+                    v-for="(item, index) in currentJobApp?.jobListing?.benefits"
+                    :key="index"
+                  >
+                    {{ item }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!--  -->
+            <div class="px-6">
+              <h1 class="font-black text-sm">Must have Skills</h1>
+              <ul class="space-y-1 list-disc pl-6 py-2 text-xs md:text-sm">
+                <li
+                  v-for="(skill, index) in currentJobApp?.jobListing.skills"
+                  :key="index"
+                  class="text-xs"
+                >
+                  {{ skill }}
+                </li>
+              </ul>
+            </div>
+            <!--  -->
+          </div>
+        </div>
       </div>
     </div>
 
     <!-- Modal -->
     <div
       v-if="showModal"
-      class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50"
+      class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 backdrop-blur-sm backdrop-opacity-2 backdrop-filter"
     >
       <div
         class="bg-white p-0 rounded-lg w-full max-w-4xl relative overflow-hidden"
@@ -477,8 +699,8 @@ onBeforeMount(async () => {
           @click="showModal = false"
           class="absolute top-16 right-5 bg-white border-2 rounded-full p-2"
         >
-        <svg
-        class="w-6 h-6"
+          <svg
+            class="w-6 h-6"
             width="70"
             height="84"
             viewBox="0 0 70 84"
@@ -500,6 +722,7 @@ onBeforeMount(async () => {
           class="w-full h-[90vh] border-0"
           style="display: block"
           frameborder="0"
+          defer
         ></iframe>
       </div>
     </div>

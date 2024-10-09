@@ -187,10 +187,11 @@ export const JobStore = defineStore('job-store', () => {
       const response = await $fetch(
         '/api/job-applications/recruiter/update-application',
         {
+          method: 'POST',
           query: {
             jobApplicationId: appId,
           },
-          body,
+          body: body,
           headers: {
             Authorization: `Bearer ${token}`,
           },
