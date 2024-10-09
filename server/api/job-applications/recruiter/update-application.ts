@@ -8,7 +8,6 @@ export default defineEventHandler(async (event) => {
   const data = await readBody(event);
   const authHeader = headers['authorization'];
 
-  console.log(data);
   try {
     const response = await axios.patch(
       `job-application-tracking/${query.jobApplicationId}`,

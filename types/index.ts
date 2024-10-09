@@ -177,6 +177,8 @@ export interface IJobApplications {
   jobListing: Partial<IJobPost>;
   createdAt: string;
   updatedAt: string;
+  interviewNotice?: string;
+  acceptanceMessage?: string;
 }
 
 export interface IEducationBackground {

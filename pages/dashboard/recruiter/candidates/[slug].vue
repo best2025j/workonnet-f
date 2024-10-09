@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import useVuelidate from '@vuelidate/core';
+import { helpers, required } from '@vuelidate/validators';
 import { POSITION, useToast } from 'vue-toastification';
 import {
   JOB_APPLICATION_STATUS,
@@ -25,12 +27,85 @@ const currentJobApp = ref<IJobApplications | null>(null);
 const userWorkExperiences = ref<IWorkExperience[] | []>([]);
 const userEducations = ref<IEducationBackground[] | []>([]);
 const showModal = ref(false); // Manage modal visibility
+const modalTrigger = ref(null);
+const modalInterviewTrigger = ref(null);
+const modalHireTrigger = ref(null);
+
 const toast = useToast();
+
+const jobAppStatusFormData = reactive({
+  rejectionNotice: '',
+});
+
+const jobAppStatusInterviewFormData = reactive({
+  interviewNotice: '',
+});
+
+const jobAppStatusHireFormData = reactive({
+  acceptanceMessage: '',
+});
+
+const jobAppStatusRules = computed(() => {
+  return {
+    rejectionNotice: {
+      required: helpers.withMessage('Message is required', required),
+    },
+  };
+});
+
+const jobAppStatusHireRules = computed(() => {
+  return {
+    acceptanceMessage: {
+      required: helpers.withMessage('Message is required', required),
+    },
+  };
+});
+
+const jobAppStatusInterviewRules = computed(() => {
+  return {
+    interviewNotice: {
+      required: helpers.withMessage('Message is required', required),
+    },
+  };
+});
+
+const v$ = useVuelidate(jobAppStatusRules, jobAppStatusFormData);
+const v2$ = useVuelidate(
+  jobAppStatusInterviewRules,
+  jobAppStatusInterviewFormData
+);
+const v3$ = useVuelidate(jobAppStatusHireRules, jobAppStatusHireFormData);
 
 const userData = computed<IRecruiterDetails>(
   () => userStore.loggedInUserDetails
 );
+
+const isChangingStatus = ref(false);
 const isLoading = ref(false);
+
+const showRejectModal = async () => {
+  (modalTrigger.value as unknown as any).showModal();
+};
+
+const hideRejectModal = async () => {
+  (modalTrigger.value as unknown as any).close();
+};
+
+const showInterviewModal = async () => {
+  (modalInterviewTrigger.value as unknown as any).showModal();
+};
+
+const hideInterviewModal = async () => {
+  (modalInterviewTrigger.value as unknown as any).close();
+};
+
+const showHireModal = async () => {
+  (modalHireTrigger.value as unknown as any).showModal();
+};
+
+const hideHireModal = async () => {
+  (modalHireTrigger.value as unknown as any).close();
+};
 
 const getData = async (jobAppId: string, isRefresh: boolean) => {
   try {
@@ -56,16 +131,77 @@ const getData = async (jobAppId: string, isRefresh: boolean) => {
   }
 };
 
+const rejectOrInterview = async (status: JOB_APPLICATION_STATUS) => {
+  isChangingStatus.value = true;
+
+  let data = {};
+
+  if (status === JOB_APPLICATION_STATUS.INTERVIEW) {
+    const isValidForm = await v2$.value.$validate();
+    if (!isValidForm) {
+      toast.error('Please fill all fields correctly', {
+        timeout: 3000,
+        position: POSITION.TOP_RIGHT,
+      });
+
+      setTimeout(() => {
+        isChangingStatus.value = false;
+      }, 2000);
+      return;
+    }
+
+    data = { status, ...jobAppStatusInterviewFormData };
+  } else if (status === JOB_APPLICATION_STATUS.ACCEPTED) {
+    const isValidForm = await v3$.value.$validate();
+    if (!isValidForm) {
+      toast.error('Please fill all fields correctly', {
+        timeout: 3000,
+        position: POSITION.TOP_RIGHT,
+      });
+
+      setTimeout(() => {
+        isChangingStatus.value = false;
+      }, 2000);
+      return;
+    }
+
+    data = { status, ...jobAppStatusHireFormData };
+  } else if (status === JOB_APPLICATION_STATUS.REJECTED) {
+    const isValidForm = await v$.value.$validate();
+    if (!isValidForm) {
+      toast.error('Please fill all fields correctly', {
+        timeout: 3000,
+        position: POSITION.TOP_RIGHT,
+      });
+
+      setTimeout(() => {
+        isChangingStatus.value = false;
+      }, 2000);
+      return;
+    }
+
+    data = { status, ...jobAppStatusFormData };
+  }
+
+  await updateApplicationStage(data);
+};
+
 const changeAppStatus = async (status: JOB_APPLICATION_STATUS) => {
   if (status === JOB_APPLICATION_STATUS.INTERVIEW) {
-    // show modal to enter rejection reason
+    // show modal to enter interview message
+    showInterviewModal();
+    return;
+  }
 
+  if (status === JOB_APPLICATION_STATUS.ACCEPTED) {
+    // show modal to enter hire message
+    showHireModal();
     return;
   }
 
   if (status === JOB_APPLICATION_STATUS.REJECTED) {
     // show modal to enter rejection reason
-
+    showRejectModal();
     return;
   }
 
@@ -78,7 +214,7 @@ const changeAppStatus = async (status: JOB_APPLICATION_STATUS) => {
 
 const updateApplicationStage = async (data: any) => {
   try {
-    isLoading.value = true;
+    isChangingStatus.value = true;
     const token = authStore.userToken;
     await jobStore.$api.updateSingleApplicationData(
       token,
@@ -86,15 +222,18 @@ const updateApplicationStage = async (data: any) => {
       data
     );
 
-    toast.success('Job application set in review', {
+    toast.success('Job application stage was updated', {
       timeout: 3000,
       position: POSITION.TOP_RIGHT,
     });
 
-    await getData((route.params.slug as string).split('-')[0], false);
+    hideRejectModal();
+    hideHireModal();
+    hideInterviewModal();
     setTimeout(() => {
-      isLoading.value = false;
+      isChangingStatus.value = false;
     }, 1000);
+    await getData((route.params.slug as string).split('-')[0], false);
   } catch (e) {
     console.log(e);
   }
@@ -422,6 +561,15 @@ onBeforeMount(async () => {
           </ul>
           <div v-else><p>No language available</p></div>
         </div>
+
+        <div
+          v-if="currentJobApp?.status === JOB_APPLICATION_STATUS.REJECTED"
+          class="bg-danger-50 rounded-10 px-8 py-4 text-danger-600 text-xs space-y-4"
+        >
+          <p>
+            {{ currentJobApp?.rejectionNotice }}
+          </p>
+        </div>
       </div>
 
       <!--  -->
@@ -490,6 +638,7 @@ onBeforeMount(async () => {
             <button
               v-if="currentJobApp?.status === JOB_APPLICATION_STATUS.INTERVIEW"
               @click="changeAppStatus(JOB_APPLICATION_STATUS.ACCEPTED)"
+              :disabled="isChangingStatus"
               class="flex items-center bg-success-200 w-full justify-center rounded-5 py-2"
             >
               <svg
@@ -507,9 +656,29 @@ onBeforeMount(async () => {
               <h1 class="text-xs font-black">Hire</h1>
             </button>
             <button
+              v-if="currentJobApp?.status === JOB_APPLICATION_STATUS.ACCEPTED"
+              :disabled="isChangingStatus"
+              class="flex items-center bg-success-200 w-full justify-center rounded-5 py-2"
+            >
+              <svg
+                width="21"
+                height="20"
+                viewBox="0 0 21 20"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M18.7812 6.25938C18.6053 6.05994 18.3888 5.90023 18.1464 5.79086C17.9039 5.68148 17.641 5.62495 17.375 5.625H13V4.375C13 3.5462 12.6708 2.75134 12.0847 2.16529C11.4987 1.57924 10.7038 1.25 9.875 1.25C9.75889 1.24992 9.64505 1.28218 9.54625 1.34317C9.44744 1.40417 9.36758 1.49148 9.31562 1.59531L6.36406 7.5H3C2.66848 7.5 2.35054 7.6317 2.11612 7.86612C1.8817 8.10054 1.75 8.41848 1.75 8.75V15.625C1.75 15.9565 1.8817 16.2745 2.11612 16.5089C2.35054 16.7433 2.66848 16.875 3 16.875H16.4375C16.8943 16.8752 17.3354 16.7085 17.6781 16.4065C18.0208 16.1044 18.2413 15.6876 18.2984 15.2344L19.2359 7.73438C19.2692 7.47033 19.2458 7.20224 19.1674 6.94792C19.089 6.6936 18.9574 6.45888 18.7812 6.25938ZM3 8.75H6.125V15.625H3V8.75ZM17.9953 7.57812L17.0578 15.0781C17.0388 15.2292 16.9653 15.3681 16.851 15.4688C16.7368 15.5695 16.5898 15.6251 16.4375 15.625H7.375V8.27266L10.243 2.53594C10.668 2.62101 11.0505 2.85075 11.3253 3.18605C11.6 3.52135 11.7501 3.9415 11.75 4.375V6.25C11.75 6.41576 11.8158 6.57473 11.9331 6.69194C12.0503 6.80915 12.2092 6.875 12.375 6.875H17.375C17.4637 6.87497 17.5514 6.89382 17.6322 6.93028C17.7131 6.96675 17.7852 7.02001 17.8439 7.08652C17.9026 7.15303 17.9464 7.23126 17.9725 7.31602C17.9986 7.40078 18.0064 7.49013 17.9953 7.57812Z"
+                  fill="#3D3D3D"
+                />
+              </svg>
+              <h1 class="text-xs font-black">Applicant was Hired</h1>
+            </button>
+            <button
               v-if="currentJobApp?.status === JOB_APPLICATION_STATUS.IN_REVIEW"
-               @click="changeAppStatus(JOB_APPLICATION_STATUS.INTERVIEW)"
+              @click="changeAppStatus(JOB_APPLICATION_STATUS.INTERVIEW)"
               class="flex items-center bg-westside-200 justify-center rounded-5 w-full py-2"
+              :disabled="isChangingStatus"
             >
               <span>
                 <svg
@@ -532,6 +701,7 @@ onBeforeMount(async () => {
               v-if="currentJobApp?.status === JOB_APPLICATION_STATUS.PENDING"
               @click="changeAppStatus(JOB_APPLICATION_STATUS.IN_REVIEW)"
               class="flex items-center bg-info-300 w-full justify-center rounded-5 py-2 gap-x-1"
+              :disabled="isChangingStatus"
             >
               <span
                 ><svg
@@ -552,7 +722,10 @@ onBeforeMount(async () => {
               <h1 class="text-xs font-black">Move to Review</h1>
             </button>
             <button
+            v-if="currentJobApp?.status !== JOB_APPLICATION_STATUS.REJECTED"
+              @click="changeAppStatus(JOB_APPLICATION_STATUS.REJECTED)"
               class="flex items-center bg-danger-200 w-full justify-center rounded-5 py-2 gap-x-1"
+              :disabled="isChangingStatus"
             >
               <span
                 ><svg
@@ -570,6 +743,27 @@ onBeforeMount(async () => {
               </span>
               <h1 class="text-xs font-black">Reject</h1>
             </button>
+            <button
+            v-if="currentJobApp?.status === JOB_APPLICATION_STATUS.REJECTED"
+              class="flex items-center bg-danger-200 w-full justify-center rounded-5 py-2 gap-x-1"
+              :disabled="isChangingStatus"
+            >
+              <span
+                ><svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M16.0675 15.1827C16.1256 15.2407 16.1717 15.3097 16.2031 15.3855C16.2345 15.4614 16.2507 15.5427 16.2507 15.6249C16.2507 15.707 16.2345 15.7883 16.2031 15.8642C16.1717 15.94 16.1256 16.009 16.0675 16.067C16.0095 16.1251 15.9405 16.1712 15.8647 16.2026C15.7888 16.234 15.7075 16.2502 15.6253 16.2502C15.5432 16.2502 15.4619 16.234 15.386 16.2026C15.3102 16.1712 15.2412 16.1251 15.1832 16.067L10.0003 10.8835L4.81753 16.067C4.70026 16.1843 4.5412 16.2502 4.37535 16.2502C4.2095 16.2502 4.05044 16.1843 3.93316 16.067C3.81588 15.9498 3.75 15.7907 3.75 15.6249C3.75 15.459 3.81588 15.2999 3.93316 15.1827L9.11675 9.99986L3.93316 4.81705C3.81588 4.69977 3.75 4.54071 3.75 4.37486C3.75 4.20901 3.81588 4.04995 3.93316 3.93267C4.05044 3.8154 4.2095 3.74951 4.37535 3.74951C4.5412 3.74951 4.70026 3.8154 4.81753 3.93267L10.0003 9.11627L15.1832 3.93267C15.3004 3.8154 15.4595 3.74951 15.6253 3.74951C15.7912 3.74951 15.9503 3.8154 16.0675 3.93267C16.1848 4.04995 16.2507 4.20901 16.2507 4.37486C16.2507 4.54071 16.1848 4.69977 16.0675 4.81705L10.8839 9.99986L16.0675 15.1827Z"
+                    fill="#3D3D3D"
+                  />
+                </svg>
+              </span>
+              <h1 class="text-xs font-black">Applicant was rejected</h1>
+            </button>
           </div>
         </div>
 
@@ -579,15 +773,14 @@ onBeforeMount(async () => {
             <h1 class="text-xl font-black">Job Details</h1>
 
             <div class="flex items-center justify-between space-x-2">
-                <h1 class="text-xs">Job Title</h1>
-                <h1 class="font-black text-sm capitalize">
-                  {{ currentJobApp?.jobListing?.title }}
-                </h1>
-              </div>
+              <h1 class="text-xs">Job Title</h1>
+              <h1 class="font-black text-sm capitalize">
+                {{ currentJobApp?.jobListing?.title }}
+              </h1>
+            </div>
           </div>
           <!--  -->
           <div class="flex gap-x-6 p-6 border-b-2">
-            
             <div class="space-y-4">
               <div class="space-y-2">
                 <h1 class="text-xs">Job Type</h1>
@@ -726,6 +919,264 @@ onBeforeMount(async () => {
         ></iframe>
       </div>
     </div>
+    <!-- Modal -->
+    <!-- Reject Modal -->
+    <dialog
+      ref="modalTrigger"
+      id="delete_modal"
+      class="modal text-black-950 backdrop-blur-sm backdrop-opacity-2 backdrop-filter"
+    >
+      <div class="modal-box flex-col max-w-md flex items-center space-y-3">
+        <div
+          class="flex items-center justify-between w-full pb-3 -mt-3 border-b-2"
+        >
+          <div class="text-white">no text.</div>
+          <h3 class="text-lg font-bold">Please give a feedback</h3>
+
+          <form method="dialog">
+            <button class="btn">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M0.726027 0.724657C0.970105 0.480579 1.36583 0.480579 1.60991 0.724657L13.2758 12.3905C13.5199 12.6346 13.5199 13.0303 13.2758 13.2744C13.0317 13.5185 12.636 13.5185 12.3919 13.2744L0.726027 1.60854C0.481949 1.36446 0.481949 0.968734 0.726027 0.724657Z"
+                  fill="#57575B"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M13.274 0.724657C13.5181 0.968734 13.5181 1.36446 13.274 1.60854L1.60809 13.2744C1.36401 13.5185 0.968285 13.5185 0.724208 13.2744C0.48013 13.0303 0.480131 12.6346 0.724208 12.3905L12.3901 0.724657C12.6342 0.480579 13.0299 0.480579 13.274 0.724657Z"
+                  fill="#57575B"
+                />
+              </svg>
+            </button>
+          </form>
+        </div>
+
+        <p class="py-2 text-sm text-center">
+          Do you want to want to reject this applicant ?
+        </p>
+
+        <div class="flex flex-col w-full">
+          <label for="first-name" class="text-sm mb-2">Enter a message</label>
+          <textarea
+            v-model="jobAppStatusFormData.rejectionNotice"
+            :disabled="isLoading"
+            @change="v$.rejectionNotice.$touch"
+            name="details"
+            rows="8"
+            class="border pl-2 border-black-200 rounded-8 w-full"
+            placeholder="Enter message to applicant"
+          />
+
+          <div
+            class="input-errors"
+            v-for="error of v$.rejectionNotice.$errors"
+            :key="error.$uid"
+          >
+            <span class="text-xs text-danger-500">* {{ error.$message }}</span>
+          </div>
+        </div>
+
+        <div class="space-x-4 flex items-center justify-between w-full">
+          <BtnPrimary
+            @click="rejectOrInterview(JOB_APPLICATION_STATUS.REJECTED)"
+            :isLoading="isChangingStatus"
+            :disabled="isChangingStatus"
+            class="rounded-8 px-3.5 py-2 text-white text-xs bg-primary-1 !flex-1"
+          >
+            <template #text>
+              {{ !isChangingStatus ? 'Yes, Reject Applicant' : 'Loading...' }}
+            </template>
+          </BtnPrimary>
+          <form method="dialog" class="flex-1">
+            <button
+              class="md:px-3.5 w-full md:w-full border text-black-600 rounded-8 py-1"
+            >
+              No, Cancel
+            </button>
+          </form>
+        </div>
+      </div>
+    </dialog>
+    <!-- Modal -->
+
+    <!-- Interview Modal -->
+    <dialog
+      ref="modalInterviewTrigger"
+      id="delete_modal"
+      class="modal text-black-950 backdrop-blur-sm backdrop-opacity-2 backdrop-filter"
+    >
+      <div class="modal-box flex-col max-w-md flex items-center space-y-3">
+        <div
+          class="flex items-center justify-between w-full pb-3 -mt-3 border-b-2"
+        >
+          <div class="text-white">no text.</div>
+          <h3 class="text-lg font-bold">Interview Note</h3>
+
+          <form method="dialog">
+            <button class="btn">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M0.726027 0.724657C0.970105 0.480579 1.36583 0.480579 1.60991 0.724657L13.2758 12.3905C13.5199 12.6346 13.5199 13.0303 13.2758 13.2744C13.0317 13.5185 12.636 13.5185 12.3919 13.2744L0.726027 1.60854C0.481949 1.36446 0.481949 0.968734 0.726027 0.724657Z"
+                  fill="#57575B"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M13.274 0.724657C13.5181 0.968734 13.5181 1.36446 13.274 1.60854L1.60809 13.2744C1.36401 13.5185 0.968285 13.5185 0.724208 13.2744C0.48013 13.0303 0.480131 12.6346 0.724208 12.3905L12.3901 0.724657C12.6342 0.480579 13.0299 0.480579 13.274 0.724657Z"
+                  fill="#57575B"
+                />
+              </svg>
+            </button>
+          </form>
+        </div>
+
+        <p class="py-2 text-sm text-center">Add some notes</p>
+
+        <div class="flex flex-col w-full">
+          <label for="message" class="text-sm mb-2">Enter a message</label>
+          <textarea
+            v-model="jobAppStatusInterviewFormData.interviewNotice"
+            :disabled="isLoading"
+            @change="v2$.interviewNotice.$touch"
+            name="details"
+            rows="8"
+            class="border pl-2 border-black-200 rounded-8 w-full"
+            placeholder="Enter message to applicant"
+          />
+
+          <div
+            class="input-errors"
+            v-for="error of v2$.interviewNotice.$errors"
+            :key="error.$uid"
+          >
+            <span class="text-xs text-danger-500">* {{ error.$message }}</span>
+          </div>
+        </div>
+
+        <div class="space-x-4 flex items-center justify-between w-full">
+          <BtnPrimary
+            @click="rejectOrInterview(JOB_APPLICATION_STATUS.INTERVIEW)"
+            :isLoading="isChangingStatus"
+            :disabled="isChangingStatus"
+            class="rounded-8 px-3.5 py-2 text-white text-xs bg-primary-1 !flex-1"
+          >
+            <template #text>
+              {{ !isChangingStatus ? 'Send Interview Message' : 'Loading...' }}
+            </template>
+          </BtnPrimary>
+          <form method="dialog" class="flex-1">
+            <button
+              class="md:px-3.5 w-full md:w-full border text-black-600 rounded-8 py-1"
+            >
+              No, Cancel
+            </button>
+          </form>
+        </div>
+      </div>
+    </dialog>
+    <!-- Modal -->
+
+    <!-- Hire Modal -->
+    <dialog
+      ref="modalHireTrigger"
+      id="hire_modal"
+      class="modal text-black-950 backdrop-blur-sm backdrop-opacity-2 backdrop-filter"
+    >
+      <div class="modal-box flex-col max-w-md flex items-center space-y-3">
+        <div
+          class="flex items-center justify-between w-full pb-3 -mt-3 border-b-2"
+        >
+          <div class="text-white">no text.</div>
+          <h3 class="text-lg font-bold">Add Note</h3>
+
+          <form method="dialog">
+            <button class="btn">
+              <svg
+                width="14"
+                height="14"
+                viewBox="0 0 14 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M0.726027 0.724657C0.970105 0.480579 1.36583 0.480579 1.60991 0.724657L13.2758 12.3905C13.5199 12.6346 13.5199 13.0303 13.2758 13.2744C13.0317 13.5185 12.636 13.5185 12.3919 13.2744L0.726027 1.60854C0.481949 1.36446 0.481949 0.968734 0.726027 0.724657Z"
+                  fill="#57575B"
+                />
+                <path
+                  fill-rule="evenodd"
+                  clip-rule="evenodd"
+                  d="M13.274 0.724657C13.5181 0.968734 13.5181 1.36446 13.274 1.60854L1.60809 13.2744C1.36401 13.5185 0.968285 13.5185 0.724208 13.2744C0.48013 13.0303 0.480131 12.6346 0.724208 12.3905L12.3901 0.724657C12.6342 0.480579 13.0299 0.480579 13.274 0.724657Z"
+                  fill="#57575B"
+                />
+              </svg>
+            </button>
+          </form>
+        </div>
+
+        <p class="py-2 text-sm text-center">
+          Send a congratulatory message to applicant
+        </p>
+
+        <div class="flex flex-col w-full">
+          <label for="first-name" class="text-sm mb-2">Message</label>
+          <textarea
+            v-model="jobAppStatusHireFormData.acceptanceMessage"
+            :disabled="isLoading"
+            @change="v3$.acceptanceMessage.$touch"
+            name="details"
+            rows="8"
+            class="border pl-2 border-black-200 rounded-8 w-full"
+            placeholder="Enter message"
+          />
+
+          <div
+            class="input-errors"
+            v-for="error of v3$.acceptanceMessage.$errors"
+            :key="error.$uid"
+          >
+            <span class="text-xs text-danger-500">* {{ error.$message }}</span>
+          </div>
+        </div>
+
+        <div class="space-x-4 flex items-center justify-between w-full">
+          <BtnPrimary
+            @click="rejectOrInterview(JOB_APPLICATION_STATUS.ACCEPTED)"
+            :isLoading="isChangingStatus"
+            :disabled="isChangingStatus"
+            class="rounded-8 px-3.5 py-2 text-white text-xs bg-primary-1 !flex-1"
+          >
+            <template #text>
+              {{ !isChangingStatus ? 'Continue' : 'Loading...' }}
+            </template>
+          </BtnPrimary>
+          <form method="dialog" class="flex-1">
+            <button
+              class="md:px-3.5 w-full md:w-full border text-black-600 rounded-8 py-1"
+            >
+              No, Cancel
+            </button>
+          </form>
+        </div>
+      </div>
+    </dialog>
     <!-- Modal -->
   </div>
 </template>

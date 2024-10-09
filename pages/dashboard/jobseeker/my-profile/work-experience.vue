@@ -1618,7 +1618,7 @@ onBeforeMount(async () => {
           </form>
         </div>
 
-        <p class="py-2 w-2/3 text-sm text-center">
+        <p class="py-2 text-sm text-center">
           Do you want to delete this work experience ?
         </p>
 

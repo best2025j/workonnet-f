@@ -382,18 +382,28 @@ onMounted(() => {
 
         <!--  -->
         <div
-          v-if="currentJobApp?.rejectionNotice"
+          v-if="currentJobApp?.status === JOB_APPLICATION_STATUS.REJECTED"
           class="bg-danger-50 rounded-10 px-8 py-4 text-danger-600 text-xs space-y-4"
         >
-          <h4>Dear {{ userData.firstName }},</h4>
           <p>
             {{ currentJobApp?.rejectionNotice }}
           </p>
-          <h3>
-            Role:
-            <span class="capitalize">{{ currentJobApp.jobListing.title }}</span>
-            role
-          </h3>
+        </div>
+        <div
+          v-if="currentJobApp?.status === JOB_APPLICATION_STATUS.INTERVIEW"
+          class="bg-success-50 rounded-10 px-8 py-4 text-black text-xs space-y-4"
+        >
+          <p>
+            {{ currentJobApp?.interviewNotice }}
+          </p>
+        </div>
+        <div
+          v-if="currentJobApp?.status === JOB_APPLICATION_STATUS.ACCEPTED"
+          class="bg-success-50 rounded-10 px-8 py-4 text-black text-xs space-y-4"
+        >
+          <p>
+            {{ currentJobApp?.acceptanceMessage }}
+          </p>
         </div>
       </div>
     </div>
