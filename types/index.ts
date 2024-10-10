@@ -181,6 +181,19 @@ export interface IJobApplications {
   acceptanceMessage?: string;
 }
 
+export interface IPricing {
+  id: string;
+  packageName: string;
+  frequencyType: string;
+  status: string;
+  description: string;
+  benefits: string[];
+  price: number;
+  forUserType: string;
+  subPlatformId?: string;
+  currency?: string;
+}
+
 export interface IEducationBackground {
   id: string;
   user?: IUserDetails | string;

@@ -23,7 +23,6 @@ export default defineEventHandler(async (event) => {
 
     return { status: 200, data: response.data.data };
   } catch (e: any) {
-    console.log(e);
     if (axios.isAxiosError<ValidationError, Record<string, unknown>>(e)) {
       if (e.response?.data) {
         return createError({

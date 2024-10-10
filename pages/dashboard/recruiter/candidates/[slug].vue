@@ -30,6 +30,7 @@ const showModal = ref(false); // Manage modal visibility
 const modalTrigger = ref(null);
 const modalInterviewTrigger = ref(null);
 const modalHireTrigger = ref(null);
+const isLoadingPdf = ref(true);
 
 const toast = useToast();
 
@@ -82,6 +83,15 @@ const userData = computed<IRecruiterDetails>(
 
 const isChangingStatus = ref(false);
 const isLoading = ref(false);
+
+const showPdfModal = () => {
+  showModal.value = true;
+  isLoadingPdf.value = true;
+};
+
+const onPdfLoad = () => {
+  isLoadingPdf.value = false;
+};
 
 const showRejectModal = async () => {
   (modalTrigger.value as unknown as any).showModal();
@@ -624,7 +634,7 @@ onBeforeMount(async () => {
 
               <div>
                 <button
-                  @click="showModal = true"
+                  @click="showPdfModal()"
                   class="px-[14px] text-xs py-2 text-primary-1 rounded-10 border border-primary-1"
                 >
                   View
@@ -722,7 +732,7 @@ onBeforeMount(async () => {
               <h1 class="text-xs font-black">Move to Review</h1>
             </button>
             <button
-            v-if="currentJobApp?.status !== JOB_APPLICATION_STATUS.REJECTED"
+              v-if="currentJobApp?.status !== JOB_APPLICATION_STATUS.REJECTED"
               @click="changeAppStatus(JOB_APPLICATION_STATUS.REJECTED)"
               class="flex items-center bg-danger-200 w-full justify-center rounded-5 py-2 gap-x-1"
               :disabled="isChangingStatus"
@@ -744,7 +754,7 @@ onBeforeMount(async () => {
               <h1 class="text-xs font-black">Reject</h1>
             </button>
             <button
-            v-if="currentJobApp?.status === JOB_APPLICATION_STATUS.REJECTED"
+              v-if="currentJobApp?.status === JOB_APPLICATION_STATUS.REJECTED"
               class="flex items-center bg-danger-200 w-full justify-center rounded-5 py-2 gap-x-1"
               :disabled="isChangingStatus"
             >
@@ -882,6 +892,7 @@ onBeforeMount(async () => {
     <!-- Modal -->
     <div
       v-if="showModal"
+      @click="showModal = false"
       class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 backdrop-blur-sm backdrop-opacity-2 backdrop-filter"
     >
       <div
@@ -907,8 +918,17 @@ onBeforeMount(async () => {
           </svg>
         </button>
 
+        <!-- Loading Spinner -->
+        <div
+          v-if="isLoadingPdf"
+          class="flex items-center justify-center h-full bg-white"
+        >
+          <div class="loader">Loading File...</div>
+        </div>
+
         <!-- PDF Display Area -->
         <iframe
+          v-show="!isLoadingPdf"
           :src="`https://drive.google.com/viewerng/viewer?embedded=true&url=${
             mapUserDetails(currentJobApp?.user)?.resumeResource?.resumeCv?.url
           }`"
@@ -916,6 +936,7 @@ onBeforeMount(async () => {
           style="display: block"
           frameborder="0"
           defer
+          @load="onPdfLoad"
         ></iframe>
       </div>
     </div>

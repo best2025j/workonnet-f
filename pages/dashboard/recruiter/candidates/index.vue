@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import type {
-  ApiSuccessResponse,
-  IJobApplications,
-  IJobApplicationStats,
-  IJobApplicationsWithPagination,
-IUserDetails,
+import {
+  JOB_APPLICATION_STATUS,
+  type ApiSuccessResponse,
+  type IJobApplications,
+  type IJobApplicationStats,
+  type IJobApplicationsWithPagination,
+  type IUserDetails,
 } from '~/types';
 
 definePageMeta({
@@ -19,16 +20,19 @@ const authStore = useAuthStore();
 const jobListPage = ref<{}>({});
 const jobStats = ref<Partial<IJobApplicationStats>>({});
 const isLoading = ref(false);
-const starFeature = ref(false)
-const route = useRoute();
+const starFeature = ref(false);
+const activeJobFilter = ref<JOB_APPLICATION_STATUS | null>(null);
 
 const jobApps = computed<IJobApplications[]>(() => jobStore.jobApplicationList);
 
-const getMyJobs = async () => {
+const getMyJobApps = async (query: any) => {
   try {
     isLoading.value = true;
     const token = authStore.userToken;
-    const response = await jobStore.$api.fetchRecruiterJobApplications(token);
+    const response = await jobStore.$api.fetchRecruiterJobApplications(
+      token,
+      query
+    );
     const responseData = response as ApiSuccessResponse;
 
     const { docs, ...other } =
@@ -43,7 +47,7 @@ const getMyJobs = async () => {
   }
 };
 
-const getMyJobStats = async () => {
+const getMyJobAppStats = async () => {
   try {
     isLoading.value = true;
     const token = authStore.userToken;
@@ -61,9 +65,15 @@ const getMyJobStats = async () => {
   }
 };
 
+const filterJobApp = async (status: JOB_APPLICATION_STATUS) => {
+  activeJobFilter.value = status;
+  const query = { status };
+  await getMyJobApps(query);
+};
+
 onBeforeMount(async () => {
-  await getMyJobStats()
-  await getMyJobs();
+  await getMyJobAppStats();
+  await getMyJobApps({});
 });
 </script>
 
@@ -73,7 +83,9 @@ onBeforeMount(async () => {
       <div class="bg-white rounded-8 px-4 pt-4 hidden md:block">
         <h1 class="text-sm">Total Candidates</h1>
 
-        <p class="md:text-5xl font-black font-[Georgia] pt-4">{{jobStats?.totalJobsApplied || 0}}</p>
+        <p class="md:text-5xl font-black font-[Georgia] pt-4">
+          {{ jobStats?.totalJobsApplied || 0 }}
+        </p>
         <span class="flex justify-end"
           ><svg
             class=""
@@ -94,7 +106,9 @@ onBeforeMount(async () => {
       <div class="bg-white rounded-8 px-4 pt-4 hidden md:block">
         <h1 class="text-sm">Total Hired Candidates</h1>
 
-        <p class="md:text-5xl font-black font-[Georgia] pt-4">{{jobStats?.totalAccepted || 0}}</p>
+        <p class="md:text-5xl font-black font-[Georgia] pt-4">
+          {{ jobStats?.totalAccepted || 0 }}
+        </p>
         <span class="flex justify-end">
           <svg
             width="80"
@@ -114,7 +128,9 @@ onBeforeMount(async () => {
       <div class="bg-white rounded-8 px-4 pt-4 hidden md:block">
         <h1 class="text-sm">Rejected Candidates</h1>
 
-        <p class="md:text-5xl font-black font-[Georgia] pt-4">{{jobStats?.totalRejected || 0}}</p>
+        <p class="md:text-5xl font-black font-[Georgia] pt-4">
+          {{ jobStats?.totalRejected || 0 }}
+        </p>
         <span class="flex justify-end">
           <svg
             width="80"
@@ -134,7 +150,9 @@ onBeforeMount(async () => {
       <div class="bg-white rounded-8 px-4 pt-4 hidden md:block">
         <h1 class="text-sm">Interviewed Candidates</h1>
 
-        <p class="md:text-5xl font-black font-[Georgia] pt-4">{{jobStats?.totalInterview || 0}}</p>
+        <p class="md:text-5xl font-black font-[Georgia] pt-4">
+          {{ jobStats?.totalInterview || 0 }}
+        </p>
         <span class="flex justify-end"
           ><svg
             width="80"
@@ -174,7 +192,9 @@ onBeforeMount(async () => {
           </span>
           <h1 class="text-sm">Total Candidates</h1>
         </div>
-        <p class="text-sm font-black font-[Georgia]">{{jobStats?.totalJobsApplied || 0}}</p>
+        <p class="text-sm font-black font-[Georgia]">
+          {{ jobStats?.totalJobsApplied || 0 }}
+        </p>
       </div>
 
       <div
@@ -197,7 +217,9 @@ onBeforeMount(async () => {
           </span>
           <h1 class="text-sm">Total Hired Candidates</h1>
         </div>
-        <p class="text-sm font-black font-[Georgia]">{{jobStats?.totalAccepted || 0}}</p>
+        <p class="text-sm font-black font-[Georgia]">
+          {{ jobStats?.totalAccepted || 0 }}
+        </p>
       </div>
 
       <div
@@ -220,7 +242,9 @@ onBeforeMount(async () => {
           </span>
           <h1 class="text-sm">Rejected Candidates</h1>
         </div>
-        <p class="text-sm font-black font-[Georgia]">{{jobStats?.totalRejected || 0}}</p>
+        <p class="text-sm font-black font-[Georgia]">
+          {{ jobStats?.totalRejected || 0 }}
+        </p>
       </div>
 
       <div
@@ -243,7 +267,9 @@ onBeforeMount(async () => {
           </span>
           <h1 class="text-sm">Interviewed Candidates</h1>
         </div>
-        <p class="text-sm font-black font-[Georgia]">{{jobStats?.totalInterview || 0}}</p>
+        <p class="text-sm font-black font-[Georgia]">
+          {{ jobStats?.totalInterview || 0 }}
+        </p>
       </div>
     </div>
 
@@ -278,30 +304,92 @@ onBeforeMount(async () => {
               class="dropdown-content menu bg-white rounded-box z-10 w-52 mt-4 space-y-2 py-3 shadow"
             >
               <li>
-                <div class="flex text-xs gap-3 bg-[#F9F5FF]">
-                  <a>Pending</a>
+                <div
+                  class="flex text-xs gap-3"
+                  :class="{ 'bg-[#F9F5FF]': activeJobFilter === null }"
+                >
+                  <button class="w-full" @click="getMyJobApps({})">All</button>
+                </div>
+
+                <div
+                  class="flex text-xs gap-3"
+                  :class="{
+                    'bg-[#F9F5FF]':
+                      activeJobFilter === JOB_APPLICATION_STATUS.PENDING,
+                  }"
+                >
+                  <button
+                    class="w-full"
+                    @click="filterJobApp(JOB_APPLICATION_STATUS.PENDING)"
+                  >
+                    Pending
+                  </button>
                 </div>
               </li>
 
               <li>
-                <div class="flex text-xs gap-3 bg-[#F9F5FF]">
-                  <a>In Review</a>
+                <div
+                  class="flex text-xs gap-3"
+                  :class="{
+                    'bg-[#F9F5FF]':
+                      activeJobFilter === JOB_APPLICATION_STATUS.IN_REVIEW,
+                  }"
+                >
+                  <button
+                    class="w-full"
+                    @click="filterJobApp(JOB_APPLICATION_STATUS.IN_REVIEW)"
+                  >
+                    In Review
+                  </button>
                 </div>
               </li>
 
               <li>
-                <div class="flex text-xs gap-3">
-                  <a>Interview</a>
+                <div
+                  class="flex text-xs gap-3"
+                  :class="{
+                    'bg-[#F9F5FF]':
+                      activeJobFilter === JOB_APPLICATION_STATUS.INTERVIEW,
+                  }"
+                >
+                  <button
+                    class="w-full"
+                    @click="filterJobApp(JOB_APPLICATION_STATUS.INTERVIEW)"
+                  >
+                    Interview
+                  </button>
                 </div>
               </li>
               <li>
-                <div class="flex text-xs gap-3">
-                  <a>Offered</a>
+                <div
+                  class="flex text-xs gap-3"
+                  :class="{
+                    'bg-[#F9F5FF]':
+                      activeJobFilter === JOB_APPLICATION_STATUS.ACCEPTED,
+                  }"
+                >
+                  <button
+                    class="w-full"
+                    @click="filterJobApp(JOB_APPLICATION_STATUS.ACCEPTED)"
+                  >
+                    Offered
+                  </button>
                 </div>
               </li>
               <li>
-                <div class="flex text-xs gap-3">
-                  <a>Rejected</a>
+                <div
+                  class="flex text-xs gap-3"
+                  :class="{
+                    'bg-[#F9F5FF]':
+                      activeJobFilter === JOB_APPLICATION_STATUS.REJECTED,
+                  }"
+                >
+                  <button
+                    class="w-full"
+                    @click="filterJobApp(JOB_APPLICATION_STATUS.REJECTED)"
+                  >
+                    Rejected
+                  </button>
                 </div>
               </li>
             </ul>
@@ -363,7 +451,10 @@ onBeforeMount(async () => {
                       :alt="((jobApp?.user as IUserDetails).firstName)"
                       class="!h-[32px] !w-[32px]"
                     />
-                    <h1>{{(jobApp?.user as IUserDetails).firstName}} {{(jobApp?.user as IUserDetails).lastName}}</h1>
+                    <h1>
+                      {{ (jobApp?.user as IUserDetails).firstName }}
+                      {{ (jobApp?.user as IUserDetails).lastName }}
+                    </h1>
                   </div>
                 </td>
 
@@ -401,13 +492,15 @@ onBeforeMount(async () => {
                   </div>
                   <div v-else>N/A</div>
                 </td>
-                <td>{{jobApp.status}}</td>
-                <td class="capitalize">{{jobApp.jobListing.title}}</td>
+                <td>{{ jobApp.status }}</td>
+                <td class="capitalize">{{ jobApp.jobListing.title }}</td>
                 <td>{{ formatDateWithSuffix(jobApp.createdAt) }}</td>
                 <td>
                   <div class="flex items-center gap-2">
-                    <NuxtLink :to="`/dashboard/recruiter/candidates/${jobApp.id}-${jobApp.jobListing.slug}`">
-                        View
+                    <NuxtLink
+                      :to="`/dashboard/recruiter/candidates/${jobApp.id}-${jobApp.jobListing.slug}`"
+                    >
+                      View
                     </NuxtLink>
                   </div>
                 </td>

@@ -50,11 +50,12 @@ export const JobStore = defineStore('job-store', () => {
     }
   }
 
-  async function fetchRecruiterJobApplications(token: string) {
+  async function fetchRecruiterJobApplications(token: string, query: any) {
     try {
       const response = await $fetch(
         '/api/job-applications/recruiter/get-all-applications',
         {
+          query: query,
           headers: {
             Authorization: `Bearer ${token}`,
           },
