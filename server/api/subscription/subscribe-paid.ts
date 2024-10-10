@@ -4,17 +4,21 @@ import { ValidationError } from '~/types';
 export default defineEventHandler(async (event) => {
   const headers = getHeaders(event);
   const config = useRuntimeConfig(event);
+  const data = await readBody(event);
   const query = getQuery(event);
   const authHeader = headers['authorization'];
 
   try {
-    const response = await axios.get('subscription/subscribe', {
-      params: query,
-      baseURL: config.apiBaseUrl,
-      headers: {
-        Authorization: authHeader,
-      },
-    });
+    const response = await axios.post(
+      `paystack-service/subscribe/${query.packageId}`,
+      data,
+      {
+        baseURL: config.apiBaseUrl,
+        headers: {
+          Authorization: authHeader,
+        },
+      }
+    );
     return { status: 200, data: response.data.data };
   } catch (e: any) {
     if (axios.isAxiosError<ValidationError, Record<string, unknown>>(e)) {

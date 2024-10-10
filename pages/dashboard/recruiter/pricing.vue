@@ -4,6 +4,7 @@ import type {
   ApiErrorResponse,
   ApiSuccessResponse,
   IPricing,
+  IRecruiterDetails,
   IUserSubscription,
 } from '~/types';
 
@@ -23,10 +24,21 @@ const userSubscription = ref<IUserSubscription | null>(null);
 const selectedPlan = ref<IPricing | null>(null);
 const isSubscribing = ref<boolean>(false);
 
+const userData = computed<IRecruiterDetails>(
+  () => userStore.loggedInUserDetails
+);
+
+const config = useRuntimeConfig();
+
+const paystackKey = config.public.paystackKey;
 const modalTrigger = ref(null);
 
 const showSubConfirmationModal = async () => {
   (modalTrigger.value as unknown as any).showModal();
+};
+
+const hideSubConfirmationModal = async () => {
+  (modalTrigger.value as unknown as any).close();
 };
 
 const subscribeToSelectedPlan = async () => {
@@ -44,6 +56,10 @@ const subscribeToSelectedPlan = async () => {
     await subscribeToFreePlan();
     return;
   }
+
+  hideSubConfirmationModal();
+
+  payWithPaystack();
 };
 
 const subscribeToPlan = (plan: IPricing) => {
@@ -54,6 +70,7 @@ const subscribeToPlan = (plan: IPricing) => {
 const subscribeToFreePlan = async () => {
   try {
     isSubscribing.value = true;
+    hideSubConfirmationModal();
     const token = authStore.userToken;
     await $fetch('/api/subscription/recruiter/subscribe', {
       headers: {
@@ -134,9 +151,108 @@ const getPackages = async () => {
   }
 };
 
+const payWithPaystack = () => {
+  if (!selectedPlan.value) {
+    toast.error('Invalid plan selected', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+    return;
+  }
+
+  if (!document.getElementById('paystack-script')) {
+    const script = document.createElement('script');
+    script.id = 'paystack-script';
+    script.src = 'https://js.paystack.co/v1/inline.js';
+    script.onload = () => {
+      initPaystack();
+    };
+    document.body.appendChild(script);
+  } else {
+    initPaystack();
+  }
+};
+
+const initPaystack = () => {
+  const handler = (window as any).PaystackPop.setup({
+    key: paystackKey, // Replace with your public key
+    email: userData.value.email, // Customer's email
+    amount: selectedPlan.value!.price * 100, // Amount in kobo
+    currency: 'NGN',
+    ref: `${Math.random().toString(36).substring(2, 15)}`, // Generate a unique reference
+    callback: function (transaction: any) {
+      if (transaction.status === 'success') {
+        verifyPayment({
+          customer: userData.value.email, // Customer's email or Paystack customer code
+          plan: selectedPlan.value!.subPlatformId as string, // Plan code from Paystack
+          authorization: transaction.trxref,
+        });
+      } else {
+        toast.error('Payment was failed', {
+          timeout: 2000,
+          position: POSITION.TOP_RIGHT,
+        });
+      }
+    },
+    onClose: () => {
+      // This block is called when the payment modal is closed without completing payment
+      toast.info('Payment was cancelled', {
+        timeout: 2000,
+        position: POSITION.TOP_RIGHT,
+      });
+    },
+  });
+
+  handler.openIframe();
+};
+
+const verifyPayment = async (data: {
+  customer: string;
+  plan: string;
+  authorization: string;
+}) => {
+  try {
+    isLoading.value = true;
+    const token = authStore.userToken;
+    await $fetch('/api/subscription/subscribe-paid', {
+      method: 'POST',
+      query: {
+        packageId: selectedPlan.value?.id
+      },
+      body: { ...data, userType: 'RECRUITER' },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    toast.success(
+      `Successfully subscribed to ${selectedPlan.value?.packageName}`,
+      {
+        timeout: 3000,
+        position: POSITION.TOP_RIGHT,
+      }
+    );
+
+    await getUserSubscription();
+    setTimeout(() => {
+      isLoading.value = false;
+      selectedPlan.value = null;
+    }, 1000);
+  } catch (error) {
+    toast.error('Subscription failed', {
+      timeout: 2000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 1000);
+  }
+};
+
 onBeforeMount(async () => {
   //
-  // await getUserSubscription();
+  await getUserSubscription();
   await getPackages();
 });
 </script>
@@ -166,7 +282,7 @@ onBeforeMount(async () => {
       <div
         v-for="(pricing, index) in pricingList"
         :key="index"
-        class="bg-white md:h-[481px] py-6 p-2 rounded-10 space-y-4 w-full mt-4"
+        class="bg-white md:h-auto py-6 p-2 rounded-10 space-y-4 w-full mt-4"
       >
         <div class="flex justify-between items-start">
           <div class="space-y-2">
@@ -178,7 +294,7 @@ onBeforeMount(async () => {
             v-if="pricing.packageName === 'Basic Plan'"
             class="py-2 px-3 border text-xs bg-info-100 text-info-600 rounded-8"
           >
-            Custom
+            Recommended
           </button>
         </div>
 
@@ -193,13 +309,13 @@ onBeforeMount(async () => {
           v-if="
             userSubscription && userSubscription?.packageType?.id === pricing.id
           "
-          class="py-4"
+          class="py-4 w-full"
         >
-          <span
+          <button
             class="bg-success-100 border font-black py-3 rounded-10 text-xs w-full text-success-600"
           >
             Active
-          </span>
+          </button>
         </div>
 
         <div v-else class="py-4">
@@ -281,19 +397,19 @@ onBeforeMount(async () => {
           </form>
         </div>
 
-        <p class="py-2 text-sm text-center">
-          You are subscribing to {{ selectedPlan?.packageName }} and would
-          <span v-if="selectedPlan?.frequencyType === 'free'"
-            >not be charge, continue below</span
-          >
-          <span v-else>
-            would be charged ₦{{
-              formatCurrency(selectedPlan!.price)
-            }}/month</span
-          >
-        </p>
-
-        <div class="flex flex-col w-full"></div>
+        <div v-if="selectedPlan !== null" class="flex flex-col w-full py-10">
+          <p class="py-2 text-sm text-center">
+            You are subscribing to {{ selectedPlan?.packageName }} and would
+            <span v-if="selectedPlan?.frequencyType === 'free'"
+              >not be charge, continue below</span
+            >
+            <span v-else>
+              would be charged ₦{{
+                formatCurrency(selectedPlan!.price)
+              }}/month</span
+            >
+          </p>
+        </div>
 
         <div class="space-x-4 flex items-center justify-between w-full">
           <BtnPrimary
