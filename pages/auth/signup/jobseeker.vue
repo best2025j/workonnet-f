@@ -270,25 +270,48 @@ function toggleShowPassword() {
 
         <div class="w-full">
           <label class="text-base font-thin text-left">Create Password </label>
+          <div class="relative mb-3">
+            <input
+              :type="showPassword ? 'text' : 'password'"
+              placeholder="Enter new password"
+              pattern=".{8,}"
+              v-model="formData.password"
+              :disabled="isLoading"
+              @change="v$.password.$touch"
+              class="outline-none text-base leading-5 w-full p border border-solid border-black-200 rounded-lg px-3 py-2.5"
+            />
+            <button
+              type="button"
+              @click="toggleShowPassword"
+              class="absolute right-3 top-1/2 transform -translate-y-1/2"
+            >
+              <span v-if="showPassword">Hide</span>
+              <span v-else>Show</span>
+            </button>
+          </div>
+
+          <!-- <label class="text-base font-thin text-left mt-2"
+            >Confirm Password
+          </label>
           <div class="relative">
             <input
-            :type="showPassword ? 'text' : 'password'"
-            placeholder="....."
-            pattern=".{8,}"
-            v-model="formData.password"
-            :disabled="isLoading"
-            @change="v$.password.$touch"
-            class="outline-none text-base leading-5 w-full p border border-solid border-black-200 rounded-lg px-3 py-2.5  placeholder:text-[6rem]"
-          />
-          <button
-      type="button"
-      @click="toggleShowPassword"
-      class="absolute right-3 top-1/2 transform -translate-y-1/2"
-    >
-      <span v-if="showPassword">Hide</span>
-      <span v-else>Show</span>
-    </button>
-          </div>
+              :type="showPassword ? 'text' : 'password'"
+              placeholder="Confirm password"
+              pattern=".{8,}"
+              v-model="formData.password"
+              :disabled="isLoading"
+              @change="v$.password.$touch"
+              class="outline-none text-base leading-5 w-full p border border-solid border-black-200 rounded-lg px-3 py-2.5"
+            />
+            <button
+              type="button"
+              @click="toggleShowPassword"
+              class="absolute right-3 top-1/2 transform -translate-y-1/2"
+            >
+              <span v-if="showPassword">Hide</span>
+              <span v-else>Show</span>
+            </button>
+          </div> -->
 
           <div
             class="input-errors"
@@ -303,7 +326,7 @@ function toggleShowPassword() {
         <BtnPrimary
           @click="handleSignup()"
           :isLoading="isLoading"
-          :disabled="isLoading "
+          :disabled="isLoading"
         >
           <template #text>
             {{ !isLoading ? 'Signup' : 'Please wait...' }}

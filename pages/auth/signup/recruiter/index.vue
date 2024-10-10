@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { POSITION, useToast } from "vue-toastification";
-import { required, helpers, email, minLength } from "@vuelidate/validators";
-import { useVuelidate } from "@vuelidate/core";
+import { POSITION, useToast } from 'vue-toastification';
+import { required, helpers, email, minLength } from '@vuelidate/validators';
+import { useVuelidate } from '@vuelidate/core';
 
 definePageMeta({
-  layout: "auth",
-  title: "recruiter.signup.index",
-  pageName: "recruiter.signup",
+  layout: 'auth',
+  title: 'recruiter.signup.index',
+  pageName: 'recruiter.signup',
   // middleware: ['no-auth'],
 });
 
@@ -16,13 +16,13 @@ const authStore = useAuthStore();
 const isLoading = ref<boolean>(false);
 
 const formData = reactive({
-  fullName: "",
-  email: "",
-  password: "",
-  companyName: "",
-  companySize: "",
-  industry: "",
-  websiteUrl: "",
+  fullName: '',
+  email: '',
+  password: '',
+  companyName: '',
+  companySize: '',
+  industry: '',
+  websiteUrl: '',
 });
 
 const showPassword = ref(false);
@@ -33,16 +33,16 @@ function toggleShowPassword() {
 const rules = computed(() => {
   return {
     fullName: {
-      required: helpers.withMessage("FullName is required", required),
+      required: helpers.withMessage('FullName is required', required),
     },
     email: {
-      required: helpers.withMessage("Email is required", required),
-      email: helpers.withMessage("Enter a valid email", email),
+      required: helpers.withMessage('Email is required', required),
+      email: helpers.withMessage('Enter a valid email', email),
     },
     password: {
-      required: helpers.withMessage("Please enter a password", required),
+      required: helpers.withMessage('Please enter a password', required),
       minLength: helpers.withMessage(
-        "Password cannot be less than 8 characters",
+        'Password cannot be less than 8 characters',
         minLength(8)
       ),
     },
@@ -55,7 +55,7 @@ const handleNextStep = async () => {
   isLoading.value = true;
   const isValidForm = await v$.value.$validate();
   if (!isValidForm) {
-    toast.error("Please enter a valid email or password or fullname", {
+    toast.error('Please enter a valid email or password or fullname', {
       timeout: 3000,
       position: POSITION.TOP_RIGHT,
     });
@@ -70,7 +70,7 @@ const handleNextStep = async () => {
   // store step one data -
   authStore.setStepOneFormData(formData);
   // navigate to step two
-  router.push("/auth/signup/recruiter/complete-signup");
+  router.push('/auth/signup/recruiter/complete-signup');
 };
 
 onMounted(() => {
@@ -103,7 +103,9 @@ onMounted(() => {
 <template>
   <div class="flex justify-center items-center w-full px-6 md:px-0">
     <div class="md:w-[23.375rem] w-full flex flex-col">
-      <h2 class="text-center text-2xl md:text-[32px] mb-6 font-['Georgia'] font-normal">
+      <h2
+        class="text-center text-2xl md:text-[32px] mb-6 font-['Georgia'] font-normal"
+      >
         Signup to account
       </h2>
 
@@ -226,26 +228,46 @@ onMounted(() => {
           <label class="text-base font-thin mb-2 text-left mt-4"
             >Password</label
           >
+          <div class="relative mb-3">
+            <input
+              :type="showPassword ? 'text' : 'password'"
+              placeholder="Enter new password"
+              pattern=".{8,}"
+              v-model="formData.password"
+              :disabled="isLoading"
+              @change="v$.password.$touch"
+              class="outline-none text-base leading-5 w-full p border border-solid border-black-200 rounded-lg px-3 py-2.5"
+            />
+            <button
+              type="button"
+              @click="toggleShowPassword"
+              class="absolute right-3 top-1/2 transform -translate-y-1/2"
+            >
+              <span v-if="showPassword">Hide</span>
+              <span v-else>Show</span>
+            </button>
+          </div>
+
+          <!-- <label class="text-base font-thin text-left">Confirm Password </label>
           <div class="relative">
             <input
-            :type="showPassword ? 'text' : 'password'"
-            placeholder="....."
-            pattern=".{8,}"
-            v-model="formData.password"
-            :disabled="isLoading"
-            @change="v$.password.$touch"
-            class="outline-none text-base leading-5 w-full p border border-solid border-black-200 rounded-lg px-3 py-2.5  placeholder:text-[6rem]"
-          />
-          <button
-      type="button"
-      @click="toggleShowPassword"
-      class="absolute right-3 top-1/2 transform -translate-y-1/2"
-    >
-      <span v-if="showPassword">Hide</span>
-      <span v-else>Show</span>
-    </button>
-          </div>
-         
+              :type="showPassword ? 'text' : 'password'"
+              placeholder="Confirm password"
+              pattern=".{8,}"
+              v-model="formData.password"
+              :disabled="isLoading"
+              @change="v$.password.$touch"
+              class="outline-none text-base leading-5 w-full p border border-solid border-black-200 rounded-lg px-3 py-2.5"
+            />
+            <button
+              type="button"
+              @click="toggleShowPassword"
+              class="absolute right-3 top-1/2 transform -translate-y-1/2"
+            >
+              <span v-if="showPassword">Hide</span>
+              <span v-else>Show</span>
+            </button>
+          </div> -->
 
           <div
             class="input-errors"
@@ -260,7 +282,7 @@ onMounted(() => {
         <BtnPrimary
           @click="handleNextStep()"
           :isLoading="isLoading"
-          :disabled="isLoading "
+          :disabled="isLoading"
         >
           <template #text> Next : Add Company </template>
         </BtnPrimary>

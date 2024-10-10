@@ -1,10 +1,15 @@
 <template>
-  <div class="h-full w-full px-8 my-20">
+  <div class="h-full w-full md:px-8 px-4 my-20">
     <!-- grid divider vertical using daisy ui -->
-    <div class="grid grid-cols-3 w-full text-sm">
-      <div class="divider divider-start">Testimonials</div>
-      <div class="divider">Workonnect</div>
-      <div class="divider divider-end">©2024</div>
+  <div
+      class="flex justify-between items-center w-full text-xs md:text-sm md:space-x-4 md:px-8 gap-x-2 "
+    >
+      <h1 class="whitespace-nowrap md:flex hidden">Why choose us?</h1>
+      <h1 class="whitespace-nowrap md:hidden">Why us?</h1>
+      <div class="border-1 border h-full w-full" />
+      <h1>Workonnect</h1>
+      <div class="border-1 border h-full w-full" />
+      <h1>©2024</h1>
     </div>
 
     <!-- cards with shadows -->
