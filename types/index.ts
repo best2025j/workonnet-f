@@ -181,6 +181,19 @@ export interface IJobApplications {
   acceptanceMessage?: string;
 }
 
+export interface IUserSubscription {
+  id: string;
+  user?: IUserDetails | string;
+  recruiter?: Partial<IRecruiterDetails> | string;
+  platform: string;
+  packageType: IPricing;
+  platformId?: string;
+  paymentMethod?: string;
+  lastDigits?: string;
+  status?: string;
+  subType: string;
+}
+
 export interface IPricing {
   id: string;
   packageName: string;

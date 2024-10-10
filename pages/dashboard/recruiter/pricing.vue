@@ -1,6 +1,11 @@
 <script setup lang="ts">
-import { useToast } from 'vue-toastification';
-import type { ApiErrorResponse, ApiSuccessResponse, IPricing } from '~/types';
+import { useToast, POSITION } from 'vue-toastification';
+import type {
+  ApiErrorResponse,
+  ApiSuccessResponse,
+  IPricing,
+  IUserSubscription,
+} from '~/types';
 
 definePageMeta({
   title: 'Pricing',
@@ -9,25 +14,98 @@ definePageMeta({
   middleware: ['auth', 'is-recruiter'],
 });
 
-const isLoading = ref(false);
+const isLoading = ref<boolean>(false);
 const authStore = useAuthStore();
 const userStore = useUserStore();
 const toast = useToast();
 const pricingList = ref<IPricing[] | []>([]);
+const userSubscription = ref<IUserSubscription | null>(null);
+const selectedPlan = ref<IPricing | null>(null);
+const isSubscribing = ref<boolean>(false);
+
 const modalTrigger = ref(null);
 
 const showSubConfirmationModal = async () => {
   (modalTrigger.value as unknown as any).showModal();
 };
 
-const subscribeToPlan = (plan: IPricing) => {
-  if (plan.frequencyType === 'free') {
+const subscribeToSelectedPlan = async () => {
+  if (!selectedPlan.value) {
+    toast.error('Invalid plan selected', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+    return;
+  }
+
+  if (selectedPlan.value?.frequencyType === 'free') {
     // run free subscription end point
+
+    await subscribeToFreePlan();
     return;
   }
 };
 
-const subscribeToFreePlan = (plan: IPricing) => {}
+const subscribeToPlan = (plan: IPricing) => {
+  selectedPlan.value = plan;
+  showSubConfirmationModal();
+};
+
+const subscribeToFreePlan = async () => {
+  try {
+    isSubscribing.value = true;
+    const token = authStore.userToken;
+    await $fetch('/api/subscription/recruiter/subscribe', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    toast.success('Free plan subscription was successful', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+    await getUserSubscription();
+    setTimeout(() => {
+      isSubscribing.value = false;
+    }, 1000);
+  } catch (error: any) {
+    const errorData = error.data as ApiErrorResponse;
+
+    console.log(error);
+    toast.error('Failed to subscribe to free plan, try again later', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+    setTimeout(() => {
+      isSubscribing.value = false;
+    }, 1000);
+  }
+};
+
+const getUserSubscription = async () => {
+  try {
+    const token = authStore.userToken;
+    const response = await $fetch(
+      '/api/subscription/recruiter/my-subscription',
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const responseData = response as ApiSuccessResponse;
+    userSubscription.value = responseData.data;
+    setTimeout(() => {
+      isSubscribing.value = false;
+    }, 1000);
+  } catch (error: any) {
+    const errorData = error.data as ApiErrorResponse;
+
+    console.log(error);
+  }
+};
 
 const getPackages = async () => {
   try {
@@ -56,32 +134,9 @@ const getPackages = async () => {
   }
 };
 
-const getMySubscription = async () => {
-  try {
-    isLoading.value = true;
-    const token = authStore.userToken;
-    const response = await $fetch('/api/subscription/recruiter/my-sub', {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
-    const responseData = response as ApiSuccessResponse;
-    pricingList.value = responseData.data;
-    setTimeout(() => {
-      isLoading.value = false;
-    }, 1000);
-  } catch (error: any) {
-    const errorData = error.data as ApiErrorResponse;
-
-    console.log(error);
-    setTimeout(() => {
-      isLoading.value = false;
-    }, 1000);
-  }
-};
-
 onBeforeMount(async () => {
   //
+  // await getUserSubscription();
   await getPackages();
 });
 </script>
@@ -134,20 +189,25 @@ onBeforeMount(async () => {
           <h6 class="text-xs">/month</h6>
         </div>
 
-        <!-- <div class="py-4">
-          <button
+        <div
+          v-if="
+            userSubscription && userSubscription?.packageType?.id === pricing.id
+          "
+          class="py-4"
+        >
+          <span
             class="bg-success-100 border font-black py-3 rounded-10 text-xs w-full text-success-600"
           >
             Active
-          </button>
-        </div> -->
+          </span>
+        </div>
 
-        <div class="py-4">
+        <div v-else class="py-4">
           <button
             @click="subscribeToPlan(pricing)"
             class="border-primary-1 border bg-westside-100 font-black py-3 rounded-10 text-xs w-full text-primary-1"
           >
-            Get Started
+            {{ userSubscription !== null ? 'Upgrade' : 'Get Started' }}
           </button>
         </div>
         <!-- checks -->
@@ -222,13 +282,22 @@ onBeforeMount(async () => {
         </div>
 
         <p class="py-2 text-sm text-center">
-          Do you want to want to reject this applicant ?
+          You are subscribing to {{ selectedPlan?.packageName }} and would
+          <span v-if="selectedPlan?.frequencyType === 'free'"
+            >not be charge, continue below</span
+          >
+          <span v-else>
+            would be charged ₦{{
+              formatCurrency(selectedPlan!.price)
+            }}/month</span
+          >
         </p>
 
         <div class="flex flex-col w-full"></div>
 
         <div class="space-x-4 flex items-center justify-between w-full">
           <BtnPrimary
+            @click="subscribeToSelectedPlan()"
             :isLoading="isLoading"
             :disabled="isLoading"
             class="rounded-8 px-3.5 py-2 text-white text-xs bg-primary-1 !flex-1"
