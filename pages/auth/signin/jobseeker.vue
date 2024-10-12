@@ -196,12 +196,12 @@ function toggleShowPassword() {
           <div class="relative">
             <input
             :type="showPassword ? 'text' : 'password'"
-            placeholder="....."
+            placeholder="Enter password"
             pattern=".{8,}"
             v-model="formData.password"
             :disabled="isLoading"
             @change="v$.password.$touch"
-            class="outline-none text-base leading-5 w-full p border border-solid border-black-200 rounded-lg px-3 py-2.5  placeholder:text-[6rem]"
+            class="outline-none text-base leading-5 w-full p border border-solid border-black-200 rounded-lg px-3 py-2.5"
           />
           <button
       type="button"
