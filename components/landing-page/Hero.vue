@@ -2,17 +2,17 @@
   <div class="carousel w-full h-full">
     <!-- slide -->
     <div class="text-white carousel-item w-full h-screen">
-      <div class="relative w-full h-full">
+      <div class="relative w-full md:h-full">
         <div class="h-full w-full">
           <img
             src="/assets/images/my-lady.png"
-            class="w-full md:h-screen md:object-cover hidden md:flex z-0"
+            class="w-full md:h-[745px] md:object-cover hidden md:flex z-0"
             alt="a lady with book"
           />
           <!-- mobile image -->
           <img
             src="/assets/images/croplady.png"
-            class="md:hidden w-full"
+            class="md:hidden w-full h-[513px]"
             alt=""
           />
         </div>
@@ -32,7 +32,7 @@
             <div
               class="py-4 md:max-w-[864px] text-black-50 md:block flex flex-col justify-center items-center space-y-4"
             >
-              <p class="text-xl font-black">
+              <p class="text-xl font-black md:flex hidden">
                 You're a superstar candidate, your job search should reflect
                 that.
               </p>
@@ -42,21 +42,7 @@
                 Get Matched With Jobs Under 24hrs
               </h1>
 
-              <p class="text-xs md:max-w-[669px] md:block hidden" >
-                Our recruitment platform bridges the gap between talented job
-                seekers and forward-thinking recruiters. We offer Job seekers an
-                intuitive search experience that matches them with the right
-                opportunities based on their skills, experience, and career
-                goals and our platform provides recruiters with a streamlined
-                job posting process and advanced candidate search tools,
-                enabling you to find the perfect fit for your team faster and
-                more efficiently. Whether you're looking to build your career or
-                build your team, our platform empowers both job seekers and
-                recruiters to connect and succeed.
-              </p>
-
-              <!-- mobile text-->
-              <p class="text-xs md:hidden flex pt-4 text-center" >
+              <p class="text-xs md:max-w-[669px] md:block hidden">
                 Our recruitment platform bridges the gap between talented job
                 seekers and forward-thinking recruiters. We offer Job seekers an
                 intuitive search experience that matches them with the right
@@ -173,7 +159,7 @@
     </div>
     <!-- slide 2 -->
     <div
-      class="bg-primary-1 text-white md:h-screen hidden md:block carousel-item w-full"
+      class="bg-primary-1 text-white md:h-[745px] hidden md:block carousel-item w-full"
     >
       <div
         class="md:flex md:pt-0 pt-28 h-full w-full justify-between items-center px-6"

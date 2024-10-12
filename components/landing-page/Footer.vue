@@ -58,20 +58,21 @@
       </div>
 
       <div
-        class="grid grid-cols-2 py-10 md:py-0 md:w-[590px] md:grid-cols-3 text-sm"
+        class="grid grid-cols-2 py-10 md:py-0 md:w-[490px] md:grid-cols-3 text-sm"
       >
         <div>
           <h1 class="font-black text-base">Company</h1>
           <NuxtLink to="/about-us">
             <h1 class="pt-8">About</h1>
           </NuxtLink>
-          <NuxtLink to="/contact-us">
+          <NuxtLink>
             <h1 class="pt-5">Contact</h1>
           </NuxtLink>
-          <NuxtLink to="/service">
+          <NuxtLink>
             <h1 class="pt-5">Services</h1>
           </NuxtLink>
         </div>
+
         <div>
           <h1 class="font-black text-base">Help</h1>
           <h1 class="pt-8">Customer Support</h1>
@@ -92,7 +93,7 @@
         </h1>
         <div class="py-4">
           <NuxtLink
-          to="/waitlist"
+            to="/waitlist"
             class="h-[50px] w-full flex items-center gap-x-3 justify-center bg-primary-1 text-white text-xs font-black rounded-8"
           >
             Join our waitlist
