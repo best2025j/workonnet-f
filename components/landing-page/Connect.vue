@@ -6,7 +6,7 @@
 </script>
 
 <template>
-  <div class="h-full w-full md:px-8">
+  <div class="h-full w-full md:px-8 py-10">
     <!-- grid divider vertical using daisy ui -->
     <div
       class="flex justify-between items-center w-full text-xs md:text-sm md:space-x-4 md:px-8 px-4 gap-x-2"
@@ -18,11 +18,12 @@
       <div class="border-1 border h-full w-full" />
       <h1>©2024</h1>
     </div>
+
     <!--  -->
     <div
-      class="flex flex-col md:flex-row md:space-x-6 space-y-8 h-full w-full py-14"
+      class="flex flex-col md:flex-row md:space-x-6 space-y-8 h-full w-full py-14 justify-center items-center"
     >
-      <div class="flex flex-col md:w-3/6 space-y-4 justify-between h-auto px-4">
+      <div class="flex flex-col md:w-[440px] space-y-4 justify-between md:h-[520px] px-4 md:mt-8">
         <h1 class="text-[32px] font-black max-w-[18rem] line">
           Connect Talent with Opportunity
         </h1>
@@ -49,20 +50,23 @@
         </button>
       </div>
 
-      <div class="h-full w-full relative">
+      <div class="md:h-[520px] md:w-[900px] relative">
         <img
           src="/assets/images/mate2.png"
-          class="md:flex hidden h-full w-full"
+          class="md:flex hidden h-full w-full rounded-[50px]"
           alt="mate image"
         />
+
+        <!-- mobile -->
         <img src="/assets/images/crop.png" class="w-full md:hidden" alt="" />
+
         <!-- input -->
         <div
-          class="text-white absolute w-full h-full top-0 pt-[370px] md:pt-[230px] px-6 space-y-4 flex justify-end md:pr-52"
+          class="text-white absolute w-full top-[200px] md:top-[170px] right-4 justify-end flex"
         >
           <!--  -->
           <div
-            class="border bg-[#62696FCC] rounded-10 md:p-6 md:space-y-4 p-4 h-[360px] w-[440px]"
+            class="border bg-[#62696FCC] rounded-10 md:p-6 md:space-y-4 p-4 md:h-[325px] md:w-[440px]"
           >
             <!-- input -->
             <form class="md:py-4 space-y-2">
@@ -115,6 +119,7 @@
                     </svg>
                   </div>
                 </div>
+
                 <div class="flex flex-col w-full">
                   <label for="first-name" class="text-sm mb-3">Work Type</label>
                   <div class="relative">

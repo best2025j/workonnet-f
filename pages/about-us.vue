@@ -1,15 +1,16 @@
 <script lang="ts"></script>
+
 <template>
   <div class="w-full h-full">
     <div class="left-0 relative w-full right-0 md:-mt-4 mt-4 text-white">
       <img
         src="/assets/images/image(2).jpg"
         alt="no pix yet"
-        class="md:h-full h-52 object-cover w-full"
+        class="sm:h-[682px] md:h-full h-52 object-cover w-full"
       />
 
       <div
-        class="md:w-[760px] space-y-8 pt-20 pl-5 absolute md:top-10 -top-3 w-[200px] md:pl-20"
+        class="md:w-[760px] space-y-8 pt-20 pl-5 sm:pl-10 absolute md:top-10 -top-3 w-[200px] md:pl-20"
       >
         <div class="flex space-x-4 items-center">
           <div class="md:h-[100px] w-1.5 rounded-l-10 bg-primary-1 h-10" />
@@ -34,16 +35,19 @@
       </div>
     </div>
 
-    <div class="md:py-32 py-12 flex flex-col md:flex-row px-8 w-full">
-      <div class="md:w-1/2 w-full">
+    <!--  -->
+    <div
+      class="md:py-32 py-12 flex flex-col md:flex-row px-8 w-full justify-center"
+    >
+      <div class="">
         <img
           src="/assets/images/family.png"
-          class="object-cover w-full h-full"
+          class="object-cover md:w-[600px] md:h-[535px]"
           alt=""
         />
       </div>
 
-      <div class="w-full md:w-1/2 flex flex-col md:items-end md:pr-32">
+      <div class="flex flex-col md:ml-6">
         <div
           class="md:w-[592px] flex flex-col justify-between h-full space-y-4 md:space-y-0"
         >
@@ -89,7 +93,8 @@
       </div>
     </div>
 
-    <div class="bg-[#292D32F2] h-auto md:h-screen text-white">
+    <!--  -->
+    <div class="bg-[#292D32F2] text-white">
       <div class="h-full w-full px-4 md:px-8 py-2">
         <!--  -->
         <div
@@ -308,31 +313,35 @@
     </div>
 
     <!--  -->
-    <div class="md:py-32 py-12 flex flex-col md:flex-row px-8 w-full">
-      <div class="md:w-1/2 w-full relative">
+    <div
+      class="md:py-32 py-12 flex flex-col md:flex-row px-8 w-full justify-center md:space-x-8"
+    >
+      <div class="md:w-[620px] w-full relative">
         <img
           src="/assets/images/image(4).png"
-          class="object-cover w-full h-auto"
+          class="object-cover md:w-[587.48px] md:h-[561.12px]"
           alt=""
         />
-        <div class="flex justify-between absolute -bottom-32 -right-20 left-0">
+        <div
+          class="flex justify-between absolute md:-bottom-32 bottom-0 right-0 left-0"
+        >
           <div
-            class="w-2.5 rounded-r-10 bg-primary-1 border-2 !h-[410px] relative bottom-44"
+            class="md:w-2.5 rounded-r-10 bg-primary-1 border-2 md:!h-[350px] h-44 w-2 relative bottom-16 md:bottom-56"
           />
 
-          <div>
+          <div class="relative md:bottom-14 md:left-2 left-5 -bottom-8">
             <img
               src="/assets/images/image(5).png"
-              class="object-cover w-[490px] h-auto"
+              class="object-cover h-44 md:h-auto"
               alt=""
             />
           </div>
         </div>
       </div>
 
-      <div class="w-full md:w-1/2 flex flex-col md:items-end md:pr-32">
+      <div class="flex flex-col md:w-[620px] pt-20 md:pt-0">
         <div
-          class="md:w-[592px] flex flex-col justify-between h-[550px] space-y-4 md:space-y-0"
+          class="flex flex-col justify-between md:h-[550px] space-y-4 md:space-y-0"
         >
           <div class="space-y-4">
             <h1 class="flex gap-x-3 items-center">
@@ -376,11 +385,12 @@
 
           <div class="flex space-x-4 items-center">
             <div class="md:h-[80px] w-1.5 rounded-r-10 bg-primary-1 h-10" />
-            <div class="md:text-sm space-y-4">
+            <div class="md:text-sm text-xs space-y-4">
               <div class="flex justify-between items-center">
                 <h1 class="text-primary-1 font-black">
                   Lorem Ipsum is simply dummy text of the prin....?
                 </h1>
+
                 <span>
                   <svg
                     width="32"
@@ -412,7 +422,7 @@
           <div class="flex space-x-4 items-center">
             <div class="w-1 rounded-r-10 h-10 bg-[#666C89]" />
             <div
-              class="md:text-sm space-y-4 flex justify-between items-center w-full"
+              class="md:text-sm text-xs space-y-4 flex justify-between items-center w-full"
             >
               <h1 class="text-[#666C89] font-black">
                 Lorem Ipsum is simply dummy text of the prin....?
@@ -449,7 +459,7 @@
           <div class="flex space-x-4 items-center">
             <div class="w-1 rounded-r-10 h-10 bg-[#666C89]" />
             <div
-              class="md:text-sm space-y-4 flex justify-between items-center w-full"
+              class="md:text-sm text-xs space-y-4 flex justify-between items-center w-full"
             >
               <h1 class="text-[#666C89] font-black">
                 Lorem Ipsum is simply dummy text of the prin....?
@@ -486,7 +496,7 @@
           <div class="flex space-x-4 items-center">
             <div class="w-1 rounded-r-10 h-10 bg-[#666C89]" />
             <div
-              class="md:text-sm space-y-4 flex justify-between items-center w-full"
+              class="md:text-sm text-xs space-y-4 flex justify-between items-center w-full"
             >
               <h1 class="text-[#666C89] font-black">
                 Lorem Ipsum is simply dummy text of the prin....?
@@ -521,15 +531,14 @@
       </div>
     </div>
 
-    <div class="my-14">
-      <div class="grid grid-cols-3 w-full text-sm px-4">
-        <div class="divider divider-start" />
-        <div class="divider text-[18px]">Companies with Workonnect</div>
-        <div class="divider divider-end" />
-      </div>
-      <!-- svgs -->
-      <div class="flex items-center">
-      </div>
+    <div
+      class="flex justify-between items-center w-full text-xs md:text-sm md:space-x-4 px-3 md:px-8 gap-x-2 py-4"
+    >
+      <h1 class="whitespace-nowrap md:flex hidden"></h1>
+      <div class="border-1 border h-full w-full" />
+      <h1 class="whitespace-nowrap md:text-[18px]">Companies with Workonnect</h1>
+      <div class="border-1 border h-full w-full" />
+      <h1></h1>
     </div>
 
     <div>

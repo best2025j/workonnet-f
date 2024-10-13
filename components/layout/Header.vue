@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { IUserDetails } from '~/types';
+import type { IUserDetails } from "~/types";
 
 const route = useRoute();
 
@@ -293,7 +293,7 @@ const userData = computed<IUserDetails>(() => userStore.loggedInUserDetails);
     <!-- profile view section -->
     <div
       v-if="showProfileView"
-      class="md:w-[241px] bg-white shadow py-4 px-4 space-y-4 right-2.5 absolute md:right-5 top-14 rounded-[20px] w-[341px]"
+      class="md:w-[241px] bg-white shadow py-4 px-4 space-y-4 absolute md:right-[4.5rem] right-4 top-14 rounded-[20px]"
     >
       <div class="flex space-x-2 bg-black-50 rounded-10 px-3 py-2">
         <img
