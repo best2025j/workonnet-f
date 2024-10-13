@@ -68,6 +68,7 @@ const prevSlide = () => {
           </svg>
         </span>
       </button>
+      
       <button
         @click="nextSlide"
         class="transform rounded-[3.4px] -translate-y-1/2 p-3 text-white bg-[#B7680C]"
