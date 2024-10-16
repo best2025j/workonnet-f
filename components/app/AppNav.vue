@@ -61,12 +61,12 @@ const isActive = (currentTab: TABS) => route?.query?.tab === currentTab;
           ]"
         >
           {{ link.name }}
-          <span
+          <!-- <span
             v-if="link.badge"
             class="ml-1 md:text-xs text-[10px] bg-primary-1 text-white rounded-full px-1 md:px-2 md:py-0.5"
           >
             {{ link.badge }}
-          </span>
+          </span> -->
         </NuxtLink>
         
         <div

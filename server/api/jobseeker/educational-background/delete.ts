@@ -8,8 +8,13 @@ export default defineEventHandler(async (event) => {
   const authHeader = headers['authorization'];
 
   try {
+<<<<<<<< HEAD:server/api/jobseeker/educational-background/delete.ts
     const response = await axios.delete(
       `education-background/${query.educationBackgroundId}`,
+========
+    const response = await axios.get(
+      `job-application-tracking/${query.jobApplicationId}`,
+>>>>>>>> e626179272ac82fccbecff50f7b4309d443842ac:server/api/job-applications/recruiter/get-joblisting-applications.ts
       {
         baseURL: config.apiBaseUrl,
         headers: {

@@ -19,6 +19,16 @@ export interface IMediaFile {
   metadata?: Map<string, string>;
 }
 
+export interface IJobApplicationStats {
+  recentJobs: IJobApplications[];
+  totalJobsApplied: number;
+  totalInterview: number;
+  totalInReview: number;
+  totalRejected: number;
+  totalAccepted: number;
+  offeredJobs: IJobApplications[];
+}
+
 export interface ISocialLinks {
   facebookUrl?: string;
   linkedinUrl?: string;
@@ -60,7 +70,8 @@ export interface IUserDetails {
   salary?: ISalaryExpectation;
   bio: string;
   socialLinks: ISocialLinks;
-  // company: string;
+  skills?: string[];
+  spokenLanguages?: string[];
 }
 
 export interface IRecruiterDetails {
@@ -141,17 +152,72 @@ export interface IRecruitersWithPagination extends IPagination {
 }
 
 export interface IWorkExperience {
+  id: string;
   user?: IUserDetails | string;
   companyOrganization: string;
   website?: string;
   companyLocation: string;
-  city: string;
   jobTitle: string;
   startingFrom: string;
   endingIn: string;
   presentlyWorking?: boolean;
   details: string;
-  // jobType: 'remote' | 'onsite' | 'hybrid';
+}
+
+export interface IJobApplicationsWithPagination extends IPagination {
+  docs: IJobApplications[];
+}
+
+export interface IJobApplications {
+  id: string;
+  user?: IUserDetails | string;
+  recruiter?: Partial<IRecruiterDetails>;
+  status: JOB_APPLICATION_STATUS;
+  rejectionNotice?: string;
+  jobListing: Partial<IJobPost>;
+  createdAt: string;
+  updatedAt: string;
+  interviewNotice?: string;
+  acceptanceMessage?: string;
+}
+
+export interface IUserSubscription {
+  id: string;
+  user?: IUserDetails | string;
+  recruiter?: Partial<IRecruiterDetails> | string;
+  platform: string;
+  packageType: IPricing;
+  platformId?: string;
+  paymentMethod?: string;
+  lastDigits?: string;
+  status?: string;
+  subType: string;
+}
+
+export interface IPricing {
+  id: string;
+  packageName: string;
+  frequencyType: string;
+  status: string;
+  description: string;
+  benefits: string[];
+  price: number;
+  forUserType: string;
+  subPlatformId?: string;
+  currency?: string;
+}
+
+export interface IEducationBackground {
+  id: string;
+  user?: IUserDetails | string;
+  schoolName: string;
+  fieldOfStudy: string;
+  degree: {
+    slug: string;
+    text: string;
+  };
+  startingYear: string;
+  endingYear: string;
 }
 
 export interface TelInputData {
@@ -208,4 +274,12 @@ export interface ApiErrorResponse {
 export interface ApiSuccessResponse {
   status: number;
   data: any;
+}
+
+export enum JOB_APPLICATION_STATUS {
+  IN_REVIEW = 'In Review',
+  PENDING = 'Pending',
+  INTERVIEW = 'Interview',
+  ACCEPTED = 'Accepted',
+  REJECTED = 'Rejected',
 }

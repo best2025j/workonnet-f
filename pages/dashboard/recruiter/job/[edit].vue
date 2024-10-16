@@ -2,16 +2,16 @@
 import { POSITION, useToast } from 'vue-toastification';
 import { required, helpers, minLength } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
-import type { ApiErrorResponse } from '~/types';
+import type { ApiErrorResponse, IRecruiterDetails } from '~/types';
 
 definePageMeta({
-  title: 'Create job opening',
+  title: 'Edit job opening',
   pageName: 'dashboard.recruiter.job.create',
   layout: 'dashboard',
   middleware: ['auth', 'is-recruiter'],
 });
 
-const skillList = ref(availableSkillList);
+const skillList = ref(['Vue.js', 'Javascript', 'Open Source']);
 
 const toast = useToast();
 const authStore = useAuthStore();
@@ -20,6 +20,7 @@ const isDraft = ref<boolean>(false);
 const isPublish = ref<boolean>(false);
 
 const formData = reactive({
+  // recruiter: (useStore.loggedInUserDetails as IRecruiterDetails).id,
   title: '',
   description: '',
   requirements: [''],
@@ -28,7 +29,7 @@ const formData = reactive({
   jobType: '',
   level: '',
   skills: [''],
-  expectedSalary: '',
+  expectedSalary: 0,
 });
 
 const addRequirement = () => formData.requirements.push('');
@@ -109,8 +110,6 @@ const handleJobPost = async (status: string) => {
     return;
   }
 
-  formData.expectedSalary = convertCurrencyToNumber(formData.expectedSalary).toString()
-
   try {
     const token = authStore.userToken;
     await $fetch('/api/recruiter/job/create', {
@@ -153,21 +152,6 @@ const handleJobPost = async (status: string) => {
     isPublish.value = false;
   }, 2000);
 };
-
-function convertCurrencyToNumber(currency: string): number {
-  // Remove commas and any other characters except digits and decimal points
-  const cleanedValue = currency.replace(/[^0-9.]/g, "");
-  // Convert the cleaned string to a number
-  return parseFloat(cleanedValue);
-}
-
-const formatNumber = (): void => {
-  const value = formData.expectedSalary.toString().replace(/\D/g, ''); // Remove non-numeric characters
-  formData.expectedSalary = new Intl.NumberFormat('en-NG', {
-    minimumFractionDigits: 0,
-  }).format(Number(value));
-};
-
 </script>
 
 <template>
@@ -299,14 +283,14 @@ const formatNumber = (): void => {
       <div class="flex flex-col md:flex-row gap-2">
         <div class="flex flex-col w-full relative">
           <label class="text-sm mb-2"
-           for="location" >Location Type
+            >Location Type
             <select
               v-model="formData.location"
               :disabled="isLoading"
               @change="v$.location.$touch"
               class="outline-none mt-2 bg-white w-full text-sm font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2.5 border border-black-200 border-solid"
             >
-              <option value="" disabled selected>Select location type</option>
+              <option disabled selected>Select location type</option>
               <option value="remote">Remote</option>
               <option value="hybrid">Hybrid</option>
               <option value="onsite">Onsite</option>
@@ -386,7 +370,6 @@ const formatNumber = (): void => {
             v-model="formData.expectedSalary"
             :disabled="isLoading"
             @change="v$.expectedSalary.$touch"
-             @input="formatNumber"
             placeholder="Enter amount"
             class="pl-28 placeholder:text-xs pr-4 py-2 outline-none border border-gray-300 rounded-md"
           />

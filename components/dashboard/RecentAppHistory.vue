@@ -33,7 +33,7 @@
             <table class="min-w-full table-fixed">
               <tbody class="divide-y divide-grey-200">
                 <tr class="text-black-900">
-                  <td class="py-6 whitespace-nowrap pl-4">
+                  <td class="py-2 whitespace-nowrap pl-4">
                     <div class="flex space-x-4 items-center">
                       <div class="flex flex-col">
                         <img

@@ -43,6 +43,74 @@ export const formatDateSubmission = (dateString: string) => {
   return moment(dateString).format('L');
 };
 
+export function formatExperienceDates(startingFrom: string, endingIn: string) {
+  if (!startingFrom) return '';
+
+  const startDate = moment(startingFrom);
+  const endDate = endingIn ? moment(endingIn) : null;
+
+  // Check if both dates are in the same year
+  if (endDate && startDate.year() === endDate.year()) {
+    return `${startDate.format('MMMM')} - ${endDate.format('MMMM YYYY')}`;
+  }
+
+  return `${formateDateMonthYear(startingFrom)} - ${
+    endDate ? formateDateMonthYear(endingIn) : 'PRESENT'
+  }`;
+}
+
+export function formatDateForInput(dateString: string): string {
+  if (!dateString) return '';
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+function getOrdinalSuffix(day: number) {
+  if (day > 3 && day < 21) return 'th'; // Special case for 11-20
+  switch (day % 10) {
+    case 1:
+      return 'st';
+    case 2:
+      return 'nd';
+    case 3:
+      return 'rd';
+    default:
+      return 'th';
+  }
+}
+
+export function formatDateWithSuffix(dateString: string) {
+  if (!dateString) return '';
+  const date = new Date(dateString);
+  const day = moment(date).date();
+  const month = moment(date).format('MMMM');
+  const year = moment(date).format('YYYY');
+  const suffix = getOrdinalSuffix(day);
+
+  return `${day}${suffix} ${month}, ${year}`;
+}
+
+export function formatDateTime(dateString: string) {
+  if (!dateString) return '';
+  const dateToFormat = new Date(dateString);
+  const formattedDate = moment(dateToFormat).format('YYYY-MM-DD HH:mm:ss');
+
+  return formattedDate;
+}
+
+
+export function formatMonthDateForInput(dateString: string): string {
+  if (!dateString) return '';
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}`;
+}
+
+
 export const ROUTES = {
   HOME: '/home',
   MYPROFILE: '/myprofile',

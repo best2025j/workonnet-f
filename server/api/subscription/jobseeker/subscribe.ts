@@ -3,7 +3,11 @@ import { ValidationError } from '~/types';
 
 export default defineEventHandler(async (event) => {
   const headers = getHeaders(event);
+<<<<<<<< HEAD:server/api/subscription/jobseeker/subscribe.ts
   const config = useRuntimeConfig(event);
+========
+  const query = getQuery(event);
+>>>>>>>> e626179272ac82fccbecff50f7b4309d443842ac:server/api/job-applications/jobseeker/apply.ts
   const authHeader = headers['authorization'];
 
   try {

@@ -1,6 +1,13 @@
 <!-- pages/recruiter/dashboard/index.vue -->
 <script setup lang="ts">
-import type { ApiSuccessResponse, IJobStatsData, IRecruiterDetails } from '~/types';
+import type {
+  ApiSuccessResponse,
+  IJobApplications,
+  IJobApplicationsWithPagination,
+  IJobStatsData,
+  IRecruiterDetails,
+IUserDetails,
+} from '~/types';
 
 definePageMeta({
   title: 'Dashboard',
@@ -13,27 +20,54 @@ const authStore = useAuthStore();
 const userStore = useUserStore();
 const jobStore = useJobStore();
 const isLoading = ref(true);
+const isLoadingApps = ref(false);
+const starFeature = ref(false)
+const jobStats = computed<IJobStatsData | null>(() => jobStore.jobStats);
+const jobApps = computed<IJobApplications[]>(() => jobStore.jobApplicationList);
+  const jobListPage = ref<{}>({});
 
-const userData = computed<IRecruiterDetails>(
+  const userData = computed<IRecruiterDetails>(
   () => userStore.loggedInUserDetails
 );
-const jobStats = computed<IJobStatsData | null>(() => jobStore.jobStats);
 
-onBeforeMount(async () => {
-  if(jobStore.jobStats === null){
-    try {
-    isLoading.value = true
+const getJobStats = async () => {
+  try {
+      isLoading.value = true;
+      const token = authStore.userToken;
+      const response = await jobStore.$api.fetchJobStats(token);
+      const responseData = response as ApiSuccessResponse;
+
+      setTimeout(() => {
+        isLoading.value = false;
+      }, 500);
+      jobStore.setJobStatsList(responseData.data);
+    } catch (e) {
+      console.log(e);
+    }
+}
+const getMyJobApps = async () => {
+  try {
+    isLoadingApps.value = true;
     const token = authStore.userToken;
-   const response = await jobStore.$api.fetchJobStats(token);
-   const responseData = response as ApiSuccessResponse
+    const response = await jobStore.$api.fetchRecruiterJobApplications(token, {});
+    const responseData = response as ApiSuccessResponse;
 
-   setTimeout(() => {
-    isLoading.value = false
-   }, 500)
-   jobStore.setJobStatsList(responseData.data)
+    const { docs, ...other } =
+      responseData.data as IJobApplicationsWithPagination;
+    jobListPage.value = other;
+    jobStore.setUserJobApplicationList(docs);
+    setTimeout(() => {
+      isLoadingApps.value = false;
+    }, 1000);
   } catch (e) {
     console.log(e);
   }
+};
+
+onBeforeMount(async () => {
+  if (jobStore.jobStats === null) {
+    await getJobStats()
+    await getMyJobApps();
   }
 });
 </script>
@@ -46,7 +80,10 @@ onBeforeMount(async () => {
     >
       <div class="space-y-1 pb-2">
         <h2 class="text-2xl font-black">
-          Good Morning <span v-if="!isLoading">{{', ' + userData?.companyName || '' }}</span>
+          Good Morning
+          <span v-if="!isLoading">{{
+            ', ' + userData?.companyName || ''
+          }}</span>
         </h2>
         <p class="text-sm">
           Here’s what’s happening with your job application since you joined us.
@@ -188,26 +225,44 @@ onBeforeMount(async () => {
         >
           <h3 class="font-black">Latest Job Posting</h3>
           <div class="flex gap-4 items-center">
-            <div v-if="jobStats?.recentJobs?.length" class="flex flex-col items-center pt-6 space-y-2">
+            <div
+              v-if="jobStats?.recentJobs?.length"
+              class="flex flex-col items-center pt-6 space-y-2"
+            >
               <div class="space-y-4">
-                <img :src="userData?.photo?.url" class="h-[40px] w-[40px]" alt="" />
+                <img
+                  :src="userData?.photo?.url"
+                  class="h-[40px] w-[40px]"
+                  alt=""
+                />
                 <div
                   class="flex flex-col md:flex-row justify-between items-start"
                 >
                   <div>
-                    <h1 class="text-base font-black capitalize">{{jobStats.recentJobs[0].title}}</h1>
-                    <hw class="text-xs">{{formatTimeDiffHuman(jobStats.recentJobs[0].createdAt) }}</hw>
+                    <h1 class="text-base font-black capitalize">
+                      {{ jobStats.recentJobs[0].title }}
+                    </h1>
+                    <hw class="text-xs">{{
+                      formatTimeDiffHuman(jobStats.recentJobs[0].createdAt)
+                    }}</hw>
                   </div>
 
                   <div class="">
-                    <h1 class="gap-x-2"><b class="text-2xl">{{ jobStats.recentJobs[0]?.applicants || 0}}</b>applicants</h1>
+                    <h1 class="gap-x-2">
+                      <b class="text-2xl">{{
+                        jobStats.recentJobs[0]?.applicants || 0
+                      }}</b
+                      >applicants
+                    </h1>
                   </div>
                 </div>
 
                 <div class="flex justify-between h-full w-full items-center">
                   <div>
                     <h1 class="md:text-sm text-xs md:w-5/6 w-full">
-                    {{jobStats.recentJobs[0].description.substring(0, 200)}}...
+                      {{
+                        jobStats.recentJobs[0].description.substring(0, 200)
+                      }}...
                     </h1>
                   </div>
                   <!--clip  icon -->
@@ -217,9 +272,7 @@ onBeforeMount(async () => {
                 </div>
               </div>
             </div>
-            <div v-else>
-                  No latest Job
-            </div>
+            <div v-else>No latest Job</div>
           </div>
         </div>
       </div>
@@ -318,13 +371,26 @@ onBeforeMount(async () => {
     <!--cards-->
     <div class="py-4">
       <h1 class="text-2xl font-black font-[Georgia]">Current openings</h1>
-      <div v-if="jobStats?.recentJobs?.length" class="grid md:grid-cols-3 gap-4">
-        <div v-for="(job, index) in jobStats?.recentJobs" :key="index" class="bg-white py-4 px-4 rounded-10 space-y-4 mt-4 h-full">
+      <div
+        v-if="jobStats?.recentJobs?.length"
+        class="grid md:grid-cols-3 gap-4"
+      >
+        <div
+          v-for="(job, index) in jobStats?.recentJobs"
+          :key="index"
+          class="bg-white py-4 px-4 rounded-10 space-y-4 mt-4 h-full"
+        >
           <div class="flex space-x-4 items-start">
-            <img :src="userData?.photo?.url" class="h-[40px] w-[40px]" alt="no pix" />
+            <img
+              :src="userData?.photo?.url"
+              class="h-[40px] w-[40px]"
+              alt="no pix"
+            />
             <div class="">
-              <h1 class="text-base font-black">{{job.title}}</h1>
-              <h1 class="text-xs">Posted {{formatTimeDiffHuman(job.createdAt) }}</h1>
+              <h1 class="text-base font-black capitalize">{{ job.title }}</h1>
+              <h1 class="text-xs">
+                Posted {{ formatTimeDiffHuman(job.createdAt) }}
+              </h1>
             </div>
           </div>
 
@@ -344,7 +410,7 @@ onBeforeMount(async () => {
                   fill="#343330"
                 />
               </svg>
-              <span class="text-xs text-gray-700">{{userData.location}}</span>
+              <span class="text-xs text-gray-700">{{ userData.location }}</span>
             </div>
 
             <div
@@ -368,7 +434,10 @@ onBeforeMount(async () => {
           </div>
 
           <div class="flex justify-between items-center">
-            <h1 class="gap-x-2"><b class="text-2xl">{{ job?.applicants || 0}}</b>applicants</h1>
+            <h1 class="gap-x-2">
+              <b class="text-2xl">{{ job?.applicants || 0 }}</b
+              >applicants
+            </h1>
             <!-- <h1 class="text-success-600 text-xs">13 in last 2 days</h1> -->
           </div>
         </div>
@@ -377,7 +446,135 @@ onBeforeMount(async () => {
         <span>No current jobs</span>
       </div>
     </div>
-    <!--  -->
-    <Candidate />
+    <!-- latest candidates -->
+    <div class="bg-white w-full rounded-10">
+      <div class="my-4">
+        <nav
+          class="w-full flex justify-start border-b px-4 py-2 border-y-black-200 items-center"
+        >
+        <h1 class="text-2xl font-black font-[Georgia]">Recent Applications</h1>
+        </nav>
+        <!--  -->
+        <div class="md:px-4 pt-2">
+          <table class="w-full">
+            <thead class="bg-bla h-10 rounded-10 px-3">
+              <tr class="">
+                <td
+                  class="text-left text-[8px] md:text-sm bg-black-50 pl-4 rounded-l-10"
+                >
+                  Candidates Name
+                </td>
+                <td class="text-left text-[8px] md:text-sm bg-black-50">
+                  Rating
+                </td>
+                <td class="text-left text-[8px] md:text-sm bg-black-50">
+                  Stages
+                </td>
+                <td class="text-left text-[8px] md:text-sm bg-black-50">
+                  Applied Role
+                </td>
+                <td class="text-left text-[8px] md:text-sm bg-black-50">
+                  Application Date
+                </td>
+                <td
+                  class="text-left text-[8px] md:text-sm rounded-r-10 bg-black-50"
+                >
+                  Action
+                </td>
+              </tr>
+            </thead>
+
+            <tbody v-if="isLoadingApps" class="text-[7px] md:text-base">
+              <tr class="md:h-14 h-8">
+                <td colspan="6" rowspan="7">
+                  <div class="h-40 w-full flex items-center justify-center">
+                    <span class="loader-2"></span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+
+            <tbody
+              v-if="jobApps.length > 0 && !isLoadingApps"
+              class="text-[7px] md:text-base"
+            >
+              <tr
+                v-for="(jobApp, index) in jobApps"
+                :key="index"
+                class="md:h-14 h-8"
+              >
+                <td>
+                  <div class="flex items-center space-x-2">
+                    <img
+                      :src="(jobApp?.user as IUserDetails)!.photo!.url"
+                      :alt="((jobApp?.user as IUserDetails).firstName)"
+                      class="!h-[32px] !w-[32px]"
+                    />
+                    <h1>{{(jobApp?.user as IUserDetails).firstName}} {{(jobApp?.user as IUserDetails).lastName}}</h1>
+                  </div>
+                </td>
+
+                <td class="">
+                  <div v-if="starFeature" class="flex items-center gap-1">
+                    <svg
+                      class="md:hidden"
+                      width="10"
+                      height="10"
+                      viewBox="0 0 18 18"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M17.3203 7.93603L13.7969 11.011L14.8524 15.5892C14.9082 15.8285 14.8923 16.079 14.8065 16.3093C14.7208 16.5396 14.5691 16.7396 14.3703 16.8841C14.1716 17.0287 13.9346 17.1114 13.6891 17.1221C13.4436 17.1327 13.2004 17.0707 12.9899 16.9438L8.99689 14.522L5.01252 16.9438C4.80202 17.0707 4.55881 17.1327 4.31328 17.1221C4.06775 17.1114 3.83079 17.0287 3.63204 16.8841C3.4333 16.7396 3.28157 16.5396 3.19584 16.3093C3.1101 16.079 3.09416 15.8285 3.15002 15.5892L4.20392 11.0157L0.679705 7.93603C0.493305 7.77526 0.358519 7.56304 0.292249 7.32598C0.225978 7.08892 0.231173 6.83757 0.307183 6.60345C0.383193 6.36933 0.526633 6.16287 0.719516 6.00994C0.912399 5.85702 1.14614 5.76445 1.39142 5.74384L6.03674 5.34149L7.85002 1.01649C7.94471 0.789554 8.10443 0.595704 8.30907 0.459352C8.51371 0.323 8.75411 0.250244 9.00002 0.250244C9.24592 0.250244 9.48633 0.323 9.69097 0.459352C9.8956 0.595704 10.0553 0.789554 10.15 1.01649L11.9688 5.34149L16.6125 5.74384C16.8578 5.76445 17.0915 5.85702 17.2844 6.00994C17.4773 6.16287 17.6207 6.36933 17.6968 6.60345C17.7728 6.83757 17.778 7.08892 17.7117 7.32598C17.6454 7.56304 17.5106 7.77526 17.3242 7.93603H17.3203Z"
+                        fill="#FE8900"
+                      />
+                    </svg>
+
+                    <svg
+                      class="hidden md:flex"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 18 18"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M17.3203 7.93603L13.7969 11.011L14.8524 15.5892C14.9082 15.8285 14.8923 16.079 14.8065 16.3093C14.7208 16.5396 14.5691 16.7396 14.3703 16.8841C14.1716 17.0287 13.9346 17.1114 13.6891 17.1221C13.4436 17.1327 13.2004 17.0707 12.9899 16.9438L8.99689 14.522L5.01252 16.9438C4.80202 17.0707 4.55881 17.1327 4.31328 17.1221C4.06775 17.1114 3.83079 17.0287 3.63204 16.8841C3.4333 16.7396 3.28157 16.5396 3.19584 16.3093C3.1101 16.079 3.09416 15.8285 3.15002 15.5892L4.20392 11.0157L0.679705 7.93603C0.493305 7.77526 0.358519 7.56304 0.292249 7.32598C0.225978 7.08892 0.231173 6.83757 0.307183 6.60345C0.383193 6.36933 0.526633 6.16287 0.719516 6.00994C0.912399 5.85702 1.14614 5.76445 1.39142 5.74384L6.03674 5.34149L7.85002 1.01649C7.94471 0.789554 8.10443 0.595704 8.30907 0.459352C8.51371 0.323 8.75411 0.250244 9.00002 0.250244C9.24592 0.250244 9.48633 0.323 9.69097 0.459352C9.8956 0.595704 10.0553 0.789554 10.15 1.01649L11.9688 5.34149L16.6125 5.74384C16.8578 5.76445 17.0915 5.85702 17.2844 6.00994C17.4773 6.16287 17.6207 6.36933 17.6968 6.60345C17.7728 6.83757 17.778 7.08892 17.7117 7.32598C17.6454 7.56304 17.5106 7.77526 17.3242 7.93603H17.3203Z"
+                        fill="#FE8900"
+                      />
+                    </svg>
+
+                    <h1>4.6</h1>
+                  </div>
+                  <div v-else>N/A</div>
+                </td>
+                <td>{{jobApp.status}}</td>
+                <td class="capitalize">{{jobApp.jobListing.title}}</td>
+                <td>{{ formatDateWithSuffix(jobApp.createdAt) }}</td>
+                <td>
+                  <div class="flex items-center gap-2">
+                    <NuxtLink :to="`/dashboard/recruiter/candidates/${jobApp.id}-${jobApp.jobListing.slug}`">
+                        View
+                    </NuxtLink>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+            <tbody
+              v-if="jobApps.length === 0 && !isLoadingApps"
+              class="text-[7px] md:text-base"
+            >
+              <tr class="md:h-14 h-8">
+                <td colspan="5" rowspan="6">
+                  <div>
+                    <EmptyJobState />
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
 </template>

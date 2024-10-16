@@ -4,15 +4,15 @@ import type {
   ApiErrorResponse,
   ApiSuccessResponse,
   IPricing,
-  IRecruiterDetails,
+  IUserDetails,
   IUserSubscription,
 } from '~/types';
 
 definePageMeta({
   title: 'Pricing',
-  pageName: 'dashboard.recruiter.pricing',
+  pageName: 'dashboard.jobseeker.pricing',
   layout: 'dashboard',
-  middleware: ['auth', 'is-recruiter'],
+  middleware: ['auth', 'is-jobseeker'],
 });
 
 const isLoading = ref<boolean>(false);
@@ -24,7 +24,7 @@ const userSubscription = ref<IUserSubscription | null>(null);
 const selectedPlan = ref<IPricing | null>(null);
 const isSubscribing = ref<boolean>(false);
 
-const userData = computed<IRecruiterDetails>(
+const userData = computed<IUserDetails>(
   () => userStore.loggedInUserDetails
 );
 
@@ -72,7 +72,7 @@ const subscribeToFreePlan = async () => {
     isSubscribing.value = true;
     hideSubConfirmationModal();
     const token = authStore.userToken;
-    await $fetch('/api/subscription/recruiter/subscribe', {
+    await $fetch('/api/subscription/jobseeker/subscribe', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -104,7 +104,7 @@ const getUserSubscription = async () => {
   try {
     const token = authStore.userToken;
     const response = await $fetch(
-      '/api/subscription/recruiter/my-subscription',
+      '/api/subscription/jobseeker/my-subscription',
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -130,7 +130,7 @@ const getPackages = async () => {
     const token = authStore.userToken;
     const response = await $fetch('/api/subscription/get-all-package', {
       query: {
-        forUserType: 'RECRUITER',
+        forUserType: 'JOBSEEKER',
       },
       headers: {
         Authorization: `Bearer ${token}`,
@@ -183,7 +183,7 @@ const initPaystack = () => {
     callback: function (transaction: any) {
       if (transaction.status === 'success') {
         verifyPayment({
-          customer: userData.value.email, // Customer's email or Paystack customer code
+          customer: userData.value?.email as string, // Customer's email or Paystack customer code
           plan: selectedPlan.value!.subPlatformId as string, // Plan code from Paystack
           authorization: transaction.trxref,
         });
@@ -219,7 +219,7 @@ const verifyPayment = async (data: {
       query: {
         packageId: selectedPlan.value?.id
       },
-      body: { ...data, userType: 'RECRUITER' },
+      body: { ...data, userType: 'JOBSEEKER' },
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -249,6 +249,10 @@ const verifyPayment = async (data: {
     }, 1000);
   }
 };
+
+const upgradePlan = async () => {
+  
+}
 
 onBeforeMount(async () => {
   //
