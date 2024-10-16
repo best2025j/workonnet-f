@@ -4,7 +4,7 @@ import { ValidationError } from '~/types';
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig(event);
   const data = await readBody(event);
-
+  
   try {
     const response = await axios.post('auth/jobseeker/authenticate', data, {
       baseURL: config.apiBaseUrl,
@@ -34,3 +34,5 @@ export default defineEventHandler(async (event) => {
     }
   }
 });
+
+

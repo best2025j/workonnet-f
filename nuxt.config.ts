@@ -17,7 +17,8 @@ export default defineNuxtConfig({
     autoImport: true,
   },
   plugins: [{ src: '@/plugins/scroll-behavior.client.ts', mode: 'client' }],
-  modules: ['@pinia/nuxt', '@pinia-plugin-persistedstate/nuxt', '@vueuse/nuxt'],
+  modules: ['@pinia/nuxt', '@pinia-plugin-persistedstate/nuxt', '@vueuse/nuxt',
+  ],
   pinia: {
     storesDirs: ['./store/**', './store/modules/**'],
   },
@@ -32,9 +33,12 @@ export default defineNuxtConfig({
   // },
 
   // config
+  
+
+
   runtimeConfig: {
     apiBaseUrl: '',
-    public: {
+        public: {
       apiSecret: '',
     },
   },

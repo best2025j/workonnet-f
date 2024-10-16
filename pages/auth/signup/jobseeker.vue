@@ -309,7 +309,7 @@ function toggleShowPassword() {
       <span v-if="showPassword">Hide</span>
       <span v-else>Show</span>
     </button>
-          </div>
+          </div> 
 
           <div
             class="input-errors"

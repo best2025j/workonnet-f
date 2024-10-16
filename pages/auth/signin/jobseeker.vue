@@ -52,7 +52,7 @@ const handleLogin = async () => {
   }
 
   try {
-    const response = await $fetch("/api/auth/jobseeker/authenticate", {
+    const response = await $fetch("auth/jobseeker/authenticate", {
       method: "POST",
       body: formData,
     });
