@@ -2,22 +2,18 @@ import axios from 'axios';
 import { ValidationError } from '~/types';
 
 export default defineEventHandler(async (event) => {
-  const config = useRuntimeConfig(event);
   const headers = getHeaders(event);
-  const query = getHeaders(event);
+  const config = useRuntimeConfig(event);
+  const query = getQuery(event);
   const authHeader = headers['authorization'];
-
   try {
-    const response = await axios.post(
-      `job-application-tracking/${query.jobListingId}/apply`,
-      {},
-      {
-        baseURL: config.apiBaseUrl,
-        headers: {
-          Authorization: authHeader,
-        },
-      }
-    );
+    const response = await axios.get(`job-listing/${query.jobListingId}/user`, {
+      baseURL: config.apiBaseUrl,
+      headers: {
+        Authorization: authHeader,
+      },
+    });
+
     return { status: 200, data: response.data.data };
   } catch (e: any) {
     if (axios.isAxiosError<ValidationError, Record<string, unknown>>(e)) {

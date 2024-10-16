@@ -7,15 +7,18 @@ export default defineEventHandler(async (event) => {
   const authHeader = headers['authorization'];
 
   try {
-    const response = await axios.get('user-settings/user', {
-      baseURL: config.apiBaseUrl,
-      headers: {
-        Authorization: authHeader,
-      },
-    });
+    const response = await axios.post(
+      'subscription/recruiter/subscribe',
+      {},
+      {
+        baseURL: config.apiBaseUrl,
+        headers: {
+          Authorization: authHeader,
+        },
+      }
+    );
     return { status: 200, data: response.data.data };
   } catch (e: any) {
-    console.log(e);
     if (axios.isAxiosError<ValidationError, Record<string, unknown>>(e)) {
       if (e.response?.data) {
         return createError({

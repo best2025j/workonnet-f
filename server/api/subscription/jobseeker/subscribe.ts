@@ -2,14 +2,14 @@ import axios from 'axios';
 import { ValidationError } from '~/types';
 
 export default defineEventHandler(async (event) => {
-  const config = useRuntimeConfig(event);
   const headers = getHeaders(event);
-  const query = getHeaders(event);
+  const config = useRuntimeConfig(event);
   const authHeader = headers['authorization'];
 
   try {
-    const response = await axios.get(
-      `job-application-tracking/${query.userId}/applied`,
+    const response = await axios.post(
+      'subscription/user/subscribe',
+      {},
       {
         baseURL: config.apiBaseUrl,
         headers: {
