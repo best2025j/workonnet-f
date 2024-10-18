@@ -31,12 +31,21 @@ const getJobStats = async () => {
     const response = await jobStore.$api.fetchUserJobApplicationStats(token);
     const responseData = response as ApiSuccessResponse;
     jobStats.value = responseData.data;
-    console.log(jobStats.value);
     setTimeout(() => {
       isLoading.value = false;
     }, 1000);
   } catch (e) {
     console.log(e);
+    jobStats.value = {
+      totalInterview: 0,
+      totalInReview: 0,
+      totalRejected: 0,
+      totalAccepted: 0,
+      totalJobsApplied: 0,
+    };
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 1000);
   }
 };
 
@@ -371,7 +380,7 @@ onBeforeMount(() => {
           <div class="overflow-hidden mt-2">
             <table class="min-w-full table-fixed">
               <tbody
-                v-if="jobStats?.recentJobs.length"
+                v-if="jobStats?.recentJobs && jobStats?.recentJobs.length"
                 class="divide-y divide-grey-200"
               >
                 <tr
@@ -470,7 +479,7 @@ onBeforeMount(() => {
             <div class="overflow-hidden mt-2">
               <table class="min-w-full table-fixed">
                 <tbody
-                  v-if="jobStats?.offeredJobs.length"
+                  v-if="jobStats?.offeredJobs && jobStats?.offeredJobs.length"
                   class="divide-y divide-grey-200"
                 >
                   <tr

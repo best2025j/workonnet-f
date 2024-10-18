@@ -2,15 +2,16 @@
 import type { IJobPost } from '~/types';
 
 defineProps<{ jobList: IJobPost[] }>();
-const userStore = useUserStore() 
+const userStore = useUserStore();
 </script>
 <template>
-  <EmptyJobState v-if="jobList === undefined || jobList.length <= 0" >
-    <template #title>
-      Not in your draft
-    </template>
+  <EmptyJobState v-if="jobList === undefined || jobList.length <= 0">
+    <template #title> Not in your draft </template>
   </EmptyJobState>
-  <div v-else class="h-full grid md:grid-cols-3 gap-4 py-4 text-sm md:text-inherit w-full">
+  <div
+    v-else
+    class="h-full grid md:grid-cols-3 gap-4 py-4 text-sm md:text-inherit w-full"
+  >
     <!--  -->
     <div
       v-for="(job, index) in jobList"
@@ -19,10 +20,15 @@ const userStore = useUserStore()
     >
       <div class="flex items-start justify-between">
         <div class="flex space-x-2">
-          <img :src="userStore.loggedInUserDetails.photo.url" class="w-[40px] h-[40px]" />
+          <img
+            :src="userStore.loggedInUserDetails.photo.url"
+            class="w-[40px] h-[40px]"
+          />
           <div class="">
             <h1 class="text-base font-black capitalize">{{ job.title }}</h1>
-            <h1 class="text-xs">Posted {{formatTimeDiffHuman(job.createdAt)}}</h1>
+            <h1 class="text-xs">
+              Posted {{ formatTimeDiffHuman(job.createdAt) }}
+            </h1>
           </div>
         </div>
         <!-- white svg  button-->
@@ -50,8 +56,10 @@ const userStore = useUserStore()
             class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
           >
             <li>
-              <NuxtLink :to="`/dashboard/recruiter/jobs-openings/${job.id}-${job.slug}`">
-                <div class="flex text-xs gap-3 bg-[#F9F5FF]">
+              <NuxtLink
+                :to="`/dashboard/recruiter/jobs-openings/${job.id}-${job.slug}`"
+              >
+                <div class="flex text-xs gap-3">
                   <span
                     ><svg
                       width="20"
@@ -71,25 +79,27 @@ const userStore = useUserStore()
             </li>
 
             <li>
-              <div class="flex text-xs gap-3">
-                <span
-                  ><svg
-                    width="17"
-                    height="17"
-                    viewBox="0 0 17 17"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M15.7586 4.73214L12.268 1.24073C12.1519 1.12463 12.0141 1.03253 11.8624 0.96969C11.7107 0.906853 11.5482 0.874512 11.384 0.874512C11.2198 0.874512 11.0572 0.906853 10.9056 0.96969C10.7539 1.03253 10.6161 1.12463 10.5 1.24073L0.866412 10.8751C0.749834 10.9908 0.657407 11.1284 0.594506 11.2801C0.531604 11.4318 0.499482 11.5945 0.500006 11.7587V15.2501C0.500006 15.5816 0.631702 15.8996 0.866123 16.134C1.10054 16.3684 1.41849 16.5001 1.75001 16.5001H5.24141C5.40563 16.5006 5.5683 16.4685 5.71999 16.4056C5.87168 16.3427 6.00935 16.2503 6.12501 16.1337L15.7586 6.5001C15.8747 6.38403 15.9668 6.24622 16.0296 6.09454C16.0925 5.94286 16.1248 5.7803 16.1248 5.61612C16.1248 5.45194 16.0925 5.28937 16.0296 5.1377C15.9668 4.98602 15.8747 4.84821 15.7586 4.73214ZM5.24141 15.2501H1.75001V11.7587L8.62501 4.8837L12.1164 8.3751L5.24141 15.2501ZM13 7.49073L9.5086 4.0001L11.3836 2.1251L14.875 5.61573L13 7.49073Z"
-                      fill="#3D3D3D"
-                    />
-                  </svg>
-                </span>
-                <a>Edit</a>
-              </div>
+              <NuxtLink :to="`/dashboard/recruiter/job/${job.id}-${job.slug}`">
+                <div class="flex text-xs gap-3">
+                  <span
+                    ><svg
+                      width="17"
+                      height="17"
+                      viewBox="0 0 17 17"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M15.7586 4.73214L12.268 1.24073C12.1519 1.12463 12.0141 1.03253 11.8624 0.96969C11.7107 0.906853 11.5482 0.874512 11.384 0.874512C11.2198 0.874512 11.0572 0.906853 10.9056 0.96969C10.7539 1.03253 10.6161 1.12463 10.5 1.24073L0.866412 10.8751C0.749834 10.9908 0.657407 11.1284 0.594506 11.2801C0.531604 11.4318 0.499482 11.5945 0.500006 11.7587V15.2501C0.500006 15.5816 0.631702 15.8996 0.866123 16.134C1.10054 16.3684 1.41849 16.5001 1.75001 16.5001H5.24141C5.40563 16.5006 5.5683 16.4685 5.71999 16.4056C5.87168 16.3427 6.00935 16.2503 6.12501 16.1337L15.7586 6.5001C15.8747 6.38403 15.9668 6.24622 16.0296 6.09454C16.0925 5.94286 16.1248 5.7803 16.1248 5.61612C16.1248 5.45194 16.0925 5.28937 16.0296 5.1377C15.9668 4.98602 15.8747 4.84821 15.7586 4.73214ZM5.24141 15.2501H1.75001V11.7587L8.62501 4.8837L12.1164 8.3751L5.24141 15.2501ZM13 7.49073L9.5086 4.0001L11.3836 2.1251L14.875 5.61573L13 7.49073Z"
+                        fill="#3D3D3D"
+                      />
+                    </svg>
+                  </span>
+                  <a>Edit</a>
+                </div>
+              </NuxtLink>
             </li>
-            <li>
+            <!-- <li>
               <div class="flex text-xs gap-3">
                 <span
                   ><svg
@@ -107,7 +117,7 @@ const userStore = useUserStore()
                 </span>
                 <a>Delete</a>
               </div>
-            </li>
+            </li> -->
           </ul>
         </div>
       </div>
@@ -128,7 +138,9 @@ const userStore = useUserStore()
               fill="#343330"
             />
           </svg>
-          <span class="text-xs text-gray-700">{{userStore.loggedInUserDetails.location}}</span>
+          <span class="text-xs text-gray-700">{{
+            userStore.loggedInUserDetails.location
+          }}</span>
         </div>
 
         <div
@@ -153,7 +165,7 @@ const userStore = useUserStore()
 
       <div class="flex justify-end pt-4 items-center">
         <!-- <h1 ><b class="text-2xl">{{job?.applicants?.length || 0}}</b>applicants</h1> -->
-        <h1 class="text-success-600 text-xs capitalize">{{job.status}}</h1>
+        <h1 class="text-success-600 text-xs capitalize">{{ job.status }}</h1>
       </div>
     </div>
   </div>
