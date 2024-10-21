@@ -1,4 +1,14 @@
-<script lang="ts"></script>
+<script lang="ts">
+import { ref } from "vue";
+
+// Track the active state
+const isActive = ref(false);
+
+// Toggle the active state when the accordion is clicked
+const toggleAccordion = async () => {
+  isActive.value = !isActive.value;
+};
+</script>
 
 <template>
   <div class="w-full h-full">
@@ -384,147 +394,139 @@
           </div>
 
           <div class="flex space-x-4 items-center">
-            <div class="md:h-[80px] w-1.5 rounded-r-10 bg-primary-1 h-10" />
-            <div class="md:text-sm text-xs space-y-4">
-              <div class="flex justify-between items-center">
-                <h1 class="text-primary-1 font-black">
+            <div
+              :class="{
+                'h-10 w-1.5 rounded-r-10 ': true,
+                'bg-primary-1 h-[80px]': isActive,
+                'bg-gray-400 h-10': !isActive,
+              }"
+            />
+
+            <div class="collapse collapse-plus bg-base-200">
+              <input
+                type="radio"
+                name="my-accordion-3"
+                @change="toggleAccordion"
+              />
+              <div class="collapse-title text-xl font-medium">
+                <h1
+                  :class="{
+                    'font-black md:text-sm text-xs': true,
+                    'text-primary-1': isActive,
+                    'text-gray-500': !isActive,
+                  }"
+                >
                   Lorem Ipsum is simply dummy text of the prin....?
                 </h1>
-
-                <span>
-                  <svg
-                    width="32"
-                    height="32"
-                    viewBox="0 0 32 32"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M8 16H24"
-                      stroke="#FE8900"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </span>
               </div>
-              <p class="text-[#666C89]">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s,
-              </p>
+
+              <div class="collapse-content">
+                <p class="text-[#666C89] md:text-sm text-xs">
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry's
+                  standard dummy text ever since the 1500s,
+                </p>
+              </div>
             </div>
           </div>
 
           <div class="h-[2px] w-full bg-black-50" />
 
           <div class="flex space-x-4 items-center">
-            <div class="w-1 rounded-r-10 h-10 bg-[#666C89]" />
             <div
-              class="md:text-sm text-xs space-y-4 flex justify-between items-center w-full"
-            >
-              <h1 class="text-[#666C89] font-black">
-                Lorem Ipsum is simply dummy text of the prin....?
-              </h1>
-              <span>
-                <svg
-                  width="32"
-                  height="32"
-                  viewBox="0 0 32 32"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+              :class="{
+                'h-10 w-1.5 rounded-r-10 ': true,
+                'bg-primary-1': isActive,
+                'bg-gray-400': !isActive,
+              }"
+            />
+            <div class="collapse collapse-plus bg-base-200">
+              <input type="radio" name="my-accordion-3" />
+              <div class="collapse-title text-xl font-medium">
+                <h1
+                  :class="{
+                    'font-black md:text-sm text-xs': true,
+                    'text-primary-1': isActive,
+                    'text-gray-500': !isActive,
+                  }"
                 >
-                  <path
-                    d="M8 16H24"
-                    stroke="#292D32"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M16 24V8"
-                    stroke="#292D32"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </span>
+                  Lorem Ipsum is simply dummy text of the prin....?
+                </h1>
+              </div>
+
+              <div class="collapse-content">
+                <p class="text-[#666C89] md:text-sm text-xs">
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry's
+                  standard dummy text ever since the 1500s,
+                </p>
+              </div>
             </div>
           </div>
-
           <div class="h-[2px] w-full bg-black-50" />
 
           <div class="flex space-x-4 items-center">
-            <div class="w-1 rounded-r-10 h-10 bg-[#666C89]" />
             <div
-              class="md:text-sm text-xs space-y-4 flex justify-between items-center w-full"
-            >
-              <h1 class="text-[#666C89] font-black">
-                Lorem Ipsum is simply dummy text of the prin....?
-              </h1>
-              <span>
-                <svg
-                  width="32"
-                  height="32"
-                  viewBox="0 0 32 32"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+              :class="{
+                'h-10 w-1.5 rounded-r-10 ': true,
+                'bg-primary-1': isActive,
+                'bg-gray-400': !isActive,
+              }"
+            />
+            <div class="collapse collapse-plus bg-base-200">
+              <input type="radio" name="my-accordion-3" />
+              <div class="collapse-title text-xl font-medium">
+                <h1
+                  :class="{
+                    'font-black md:text-sm text-xs': true,
+                    'text-primary-1': isActive,
+                    'text-gray-500': !isActive,
+                  }"
                 >
-                  <path
-                    d="M8 16H24"
-                    stroke="#292D32"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M16 24V8"
-                    stroke="#292D32"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </span>
+                  Lorem Ipsum is simply dummy text of the prin....?
+                </h1>
+              </div>
+
+              <div class="collapse-content">
+                <p class="text-[#666C89] md:text-sm text-xs">
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry's
+                  standard dummy text ever since the 1500s,
+                </p>
+              </div>
             </div>
           </div>
-
           <div class="h-[2px] w-full bg-black-50" />
 
           <div class="flex space-x-4 items-center">
-            <div class="w-1 rounded-r-10 h-10 bg-[#666C89]" />
             <div
-              class="md:text-sm text-xs space-y-4 flex justify-between items-center w-full"
-            >
-              <h1 class="text-[#666C89] font-black">
-                Lorem Ipsum is simply dummy text of the prin....?
-              </h1>
-              <span>
-                <svg
-                  width="32"
-                  height="32"
-                  viewBox="0 0 32 32"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+              :class="{
+                'h-10 w-1.5 rounded-r-10 ': true,
+                'bg-primary-1': isActive,
+                'bg-gray-400': !isActive,
+              }"
+            />
+            <div class="collapse collapse-plus bg-base-200">
+              <input type="radio" name="my-accordion-3" />
+              <div class="collapse-title text-xl font-medium">
+                <h1
+                  :class="{
+                    'font-black md:text-sm text-xs': true,
+                    'text-primary-1': isActive,
+                    'text-gray-500': !isActive,
+                  }"
                 >
-                  <path
-                    d="M8 16H24"
-                    stroke="#292D32"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M16 24V8"
-                    stroke="#292D32"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </span>
+                  Lorem Ipsum is simply dummy text of the prin....?
+                </h1>
+              </div>
+
+              <div class="collapse-content">
+                <p class="text-[#666C89] md:text-sm text-xs">
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry's
+                  standard dummy text ever since the 1500s,
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -536,7 +538,9 @@
     >
       <h1 class="whitespace-nowrap md:flex hidden"></h1>
       <div class="border-1 border h-full w-full" />
-      <h1 class="whitespace-nowrap md:text-[18px]">Companies with Workonnect</h1>
+      <h1 class="whitespace-nowrap md:text-[18px]">
+        Companies with Workonnect
+      </h1>
       <div class="border-1 border h-full w-full" />
       <h1></h1>
     </div>
@@ -546,3 +550,9 @@
     </div>
   </div>
 </template>
+
+<style scoped>
+.collapse {
+  cursor: pointer;
+}
+</style>
