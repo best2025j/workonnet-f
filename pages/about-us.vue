@@ -586,148 +586,146 @@ export default defineComponent({
       </div>
 
       <!-- carousel images -->
-      <div
-        class="overflow-hidden bg-gradient-to-r from-black-50 via-white to-black-50"
-      >
+      <div class="overflow-hidden bg-gradient-to-r">
         <div class="flex animate-scroll space-x-4">
           <div class="flex-shrink-0">
             <img
               src="../assets/images/Alfa-Romeo.png"
               alt="Alfa Romeo"
-              class="w-[128px] h-[128px]"
+              class="md:w-[128px] md:h-[128px] h-14 w-14"
             />
           </div>
           <div class="flex-shrink-0">
             <img
               src="../assets/images/Audi.png"
               alt="Audi"
-              class="w-[128px] h-[128px]"
+              class="md:w-[128px] md:h-[128px] h-14 w-14"
             />
           </div>
           <div class="flex-shrink-0">
             <img
               src="../assets/images/BMW.png"
               alt="BMW"
-              class="w-[128px] h-[128px]"
+              class="md:w-[128px] md:h-[128px] h-14 w-14"
             />
           </div>
           <div class="flex-shrink-0">
             <img
               src="../assets/images/Bugatti.png"
               alt="Bugatti"
-              class="w-[128px] h-[128px]"
+              class="md:w-[128px] md:h-[128px] h-14 w-14"
             />
           </div>
           <div class="flex-shrink-0">
             <img
               src="../assets/images/Citroen.png"
               alt="Citroen"
-              class="w-[128px] h-[128px]"
+              class="md:w-[128px] md:h-[128px] h-14 w-14"
             />
           </div>
           <div class="flex-shrink-0">
             <img
               src="../assets/images/Ferrari.png"
               alt="Ferrari"
-              class="w-[128px] h-[128px]"
+              class="md:w-[128px] md:h-[128px] h-14 w-14"
             />
           </div>
           <div class="flex-shrink-0">
             <img
               src="../assets/images/GT-R.png"
               alt="GT-R"
-              class="w-[128px] h-[128px]"
+              class="md:w-[128px] md:h-[128px] h-14 w-14"
             />
           </div>
           <div class="flex-shrink-0">
             <img
               src="../assets/images/Honda.png"
               alt="Honda"
-              class="w-[128px] h-[128px]"
+              class="md:w-[128px] md:h-[128px] h-14 w-14"
             />
           </div>
           <div class="flex-shrink-0">
             <img
               src="../assets/images/Hyundai.png"
               alt="Hyundai"
-              class="w-[128px] h-[128px]"
+              class="md:w-[128px] md:h-[128px] h-14 w-14"
             />
           </div>
           <div class="flex-shrink-0">
             <img
               src="../assets/images/iranKhodro.png"
               alt="Iran Khodro"
-              class="w-[128px] h-[128px]"
+              class="md:w-[128px] md:h-[128px] h-14 w-14"
             />
           </div>
           <div class="flex-shrink-0">
             <img
               src="../assets/images/Jaguar.png"
               alt="Jaguar"
-              class="w-[128px] h-[128px]"
+              class="md:w-[128px] md:h-[128px] h-14 w-14"
             />
           </div>
           <div class="flex-shrink-0">
             <img
               src="../assets/images/Lamborghini.png"
               alt="Lamborghini"
-              class="w-[128px] h-[128px]"
+              class="md:w-[128px] md:h-[128px] h-14 w-14"
             />
           </div>
           <div class="flex-shrink-0">
             <img
               src="../assets/images/Mazda.png"
               alt="Mazda"
-              class="w-[128px] h-[128px]"
+              class="md:w-[128px] md:h-[128px] h-14 w-14"
             />
           </div>
           <div class="flex-shrink-0">
             <img
               src="../assets/images/MercedesBenz.png"
               alt="Mercedes Benz"
-              class="w-[128px] h-[128px]"
+              class="md:w-[128px] md:h-[128px] h-14 w-14"
             />
           </div>
           <div class="flex-shrink-0">
             <img
               src="../assets/images/Peugeot.png"
               alt="Peugeot"
-              class="w-[128px] h-[128px]"
+              class="md:w-[128px] md:h-[128px] h-14 w-14"
             />
           </div>
           <div class="flex-shrink-0">
             <img
               src="../assets/images/Porsche.png"
               alt="Porsche"
-              class="w-[128px] h-[128px]"
+              class="md:w-[128px] md:h-[128px] h-14 w-14"
             />
           </div>
           <div class="flex-shrink-0">
             <img
               src="../assets/images/Renault.png"
               alt="Renault"
-              class="w-[128px] h-[128px]"
+              class="md:w-[128px] md:h-[128px] h-14 w-14"
             />
           </div>
           <div class="flex-shrink-0">
             <img
               src="../assets/images/Subaru.png"
               alt="Subaru"
-              class="w-[128px] h-[128px]"
+              class="md:w-[128px] md:h-[128px] h-14 w-14"
             />
           </div>
           <div class="flex-shrink-0">
             <img
               src="../assets/images/Suzuki.png"
               alt="Suzuki"
-              class="w-[128px] h-[128px]"
+              class="md:w-[128px] md:h-[128px] h-14 w-14"
             />
           </div>
           <div class="flex-shrink-0">
             <img
               src="../assets/images/Toyota.png"
               alt="Toyota"
-              class="w-[128px] h-[128px]"
+              class="md:w-[128px] md:h-[128px] h-14 w-14"
             />
           </div>
         </div>
