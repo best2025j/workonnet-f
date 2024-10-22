@@ -1,12 +1,27 @@
 <script lang="ts">
 import { ref } from "vue";
 
-// Track the active state
-const isActive = ref(false);
+export default {
+  setup() {
+    // Track the index of the active accordion
+    const activeIndex = ref(-1); // -1 means no accordion is active
 
-// Toggle the active state when the accordion is clicked
-const toggleAccordion = async () => {
-  isActive.value = !isActive.value;
+    // Toggle a specific accordion by index, and deactivate others
+    const toggleAccordion = (index: number) => {
+      if (activeIndex.value === index) {
+        // Collapse the current active accordion
+        activeIndex.value = -1;
+      } else {
+        // Activate the clicked accordion and deactivate others
+        activeIndex.value = index;
+      }
+    };
+
+    return {
+      activeIndex,
+      toggleAccordion,
+    };
+  },
 };
 </script>
 
@@ -393,12 +408,14 @@ const toggleAccordion = async () => {
             </h1>
           </div>
 
+          <!-- accordions -->
           <div class="flex space-x-4 items-center">
             <div
+              @click="toggleAccordion(0)"
               :class="{
                 'h-10 w-1.5 rounded-r-10 ': true,
-                'bg-primary-1 h-[80px]': isActive,
-                'bg-gray-400 h-10': !isActive,
+                'bg-primary-1 h-[80px]': activeIndex === 0,
+                'bg-gray-400 h-10': activeIndex !== 0,
               }"
             />
 
@@ -406,14 +423,14 @@ const toggleAccordion = async () => {
               <input
                 type="radio"
                 name="my-accordion-3"
-                @change="toggleAccordion"
+                @change="toggleAccordion(0)"
               />
               <div class="collapse-title text-xl font-medium">
                 <h1
                   :class="{
                     'font-black md:text-sm text-xs': true,
-                    'text-primary-1': isActive,
-                    'text-gray-500': !isActive,
+                    'text-primary-1': activeIndex === 0,
+                    'text-gray-500': activeIndex !== 0,
                   }"
                 >
                   Lorem Ipsum is simply dummy text of the prin....?
@@ -429,25 +446,31 @@ const toggleAccordion = async () => {
               </div>
             </div>
           </div>
-
+          <!--  -->
           <div class="h-[2px] w-full bg-black-50" />
-
+          <!--  -->
           <div class="flex space-x-4 items-center">
             <div
+              @click="toggleAccordion(1)"
               :class="{
                 'h-10 w-1.5 rounded-r-10 ': true,
-                'bg-primary-1': isActive,
-                'bg-gray-400': !isActive,
+                'bg-primary-1 h-[80px]': activeIndex === 1,
+                'bg-gray-400 h-10': activeIndex !== 1,
               }"
             />
+
             <div class="collapse collapse-plus bg-base-200">
-              <input type="radio" name="my-accordion-3" />
+              <input
+                type="radio"
+                name="my-accordion-3"
+                @change="toggleAccordion(1)"
+              />
               <div class="collapse-title text-xl font-medium">
                 <h1
                   :class="{
                     'font-black md:text-sm text-xs': true,
-                    'text-primary-1': isActive,
-                    'text-gray-500': !isActive,
+                    'text-primary-1': activeIndex === 1,
+                    'text-gray-500': activeIndex !== 1,
                   }"
                 >
                   Lorem Ipsum is simply dummy text of the prin....?
@@ -463,24 +486,31 @@ const toggleAccordion = async () => {
               </div>
             </div>
           </div>
+          <!--  -->
           <div class="h-[2px] w-full bg-black-50" />
-
+          <!--  -->
           <div class="flex space-x-4 items-center">
             <div
+              @click="toggleAccordion(2)"
               :class="{
                 'h-10 w-1.5 rounded-r-10 ': true,
-                'bg-primary-1': isActive,
-                'bg-gray-400': !isActive,
+                'bg-primary-1 h-[80px]': activeIndex === 2,
+                'bg-gray-400 h-10': activeIndex !== 2,
               }"
             />
+
             <div class="collapse collapse-plus bg-base-200">
-              <input type="radio" name="my-accordion-3" />
+              <input
+                type="radio"
+                name="my-accordion-3"
+                @change="toggleAccordion(2)"
+              />
               <div class="collapse-title text-xl font-medium">
                 <h1
                   :class="{
                     'font-black md:text-sm text-xs': true,
-                    'text-primary-1': isActive,
-                    'text-gray-500': !isActive,
+                    'text-primary-1': activeIndex === 2,
+                    'text-gray-500': activeIndex !== 2,
                   }"
                 >
                   Lorem Ipsum is simply dummy text of the prin....?
@@ -496,24 +526,31 @@ const toggleAccordion = async () => {
               </div>
             </div>
           </div>
+          <!--  -->
           <div class="h-[2px] w-full bg-black-50" />
 
           <div class="flex space-x-4 items-center">
             <div
+              @click="toggleAccordion(3)"
               :class="{
                 'h-10 w-1.5 rounded-r-10 ': true,
-                'bg-primary-1': isActive,
-                'bg-gray-400': !isActive,
+                'bg-primary-1 h-[80px]': activeIndex === 3,
+                'bg-gray-400 h-10': activeIndex !== 3,
               }"
             />
+
             <div class="collapse collapse-plus bg-base-200">
-              <input type="radio" name="my-accordion-3" />
+              <input
+                type="radio"
+                name="my-accordion-3"
+                @change="toggleAccordion(3)"
+              />
               <div class="collapse-title text-xl font-medium">
                 <h1
                   :class="{
                     'font-black md:text-sm text-xs': true,
-                    'text-primary-1': isActive,
-                    'text-gray-500': !isActive,
+                    'text-primary-1': activeIndex === 3,
+                    'text-gray-500': activeIndex !== 3,
                   }"
                 >
                   Lorem Ipsum is simply dummy text of the prin....?
