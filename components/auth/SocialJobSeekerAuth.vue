@@ -9,6 +9,8 @@ const isLoading = ref<boolean>(false);
 const authStore = useAuthStore();
 const userStore = useUserStore();
 
+const config = useRuntimeConfig();
+
 const emit = defineEmits(['update:isLoading']);
 const updateIsLoading = (value: boolean) => {
   emit('update:isLoading', value);
@@ -96,6 +98,14 @@ const handleGoogleLogin = async (token: string) => {
     }, 2000);
   }
 };
+
+const loginWithLinkedIn = () => {
+  const clientId = config.public.linkedinId;
+  const redirectUri = 'http://localhost:3000/auth/linkedin/jobseeker/callback';
+  const linkedInOAuthUrl = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&scope=r_liteprofile%20r_emailaddress`;
+
+  window.location.href = linkedInOAuthUrl;
+};
 </script>
 <template>
     <div class="flex flex-col items-center justify-center gap-4 text-[12px]">
@@ -145,6 +155,7 @@ const handleGoogleLogin = async (token: string) => {
            Continue with Google
          </button>
          <button
+          @click="loginWithLinkedIn()"
            class="w-full flex gap-3 items-center justify-center font-thin bg-[#0A66C2] px-5 py-2 text-white rounded-lg"
          >
            <span class="w-6">

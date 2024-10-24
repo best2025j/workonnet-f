@@ -44,6 +44,8 @@ export default defineNuxtConfig({
     public: {
       apiSecret: '',
       paystackKey: '',
+      linkedinId: '',
+      linkedinSecret: '',
     },
   },
 
