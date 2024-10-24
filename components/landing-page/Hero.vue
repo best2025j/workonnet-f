@@ -60,7 +60,7 @@
           <!--  -->
           <div class="">
             <div class="relative md:right-[358px] hidden md:block">
-              <button
+              <!-- <button
                 class="transform rounded-[3.4px] mr-2 -translate-y-1/2 p-3 text-white bg-white"
               >
                 <span>
@@ -94,7 +94,7 @@
                     fill="white"
                   />
                 </svg>
-              </button>
+              </button> -->
             </div>
             <!--  -->
             <div

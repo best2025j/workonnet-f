@@ -20,13 +20,13 @@ export interface IMediaFile {
 }
 
 export interface IJobApplicationStats {
-  recentJobs: IJobApplications[];
+  recentJobs?: IJobApplications[];
   totalJobsApplied: number;
   totalInterview: number;
   totalInReview: number;
   totalRejected: number;
   totalAccepted: number;
-  offeredJobs: IJobApplications[];
+  offeredJobs?: IJobApplications[];
 }
 
 export interface ISocialLinks {

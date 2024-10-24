@@ -15,9 +15,12 @@ const skillList = ref(availableSkillList);
 
 const toast = useToast();
 const authStore = useAuthStore();
+const userStore = useUserStore();
 const isLoading = ref<boolean>(false);
 const isDraft = ref<boolean>(false);
 const isPublish = ref<boolean>(false);
+const modalTrigger = ref(null);
+
 
 const formData = reactive({
   title: '',
@@ -168,6 +171,15 @@ const formatNumber = (): void => {
   }).format(Number(value));
 };
 
+const showUpdateProfileModal = () => {
+  (modalTrigger.value as unknown as any).showModal();
+};
+
+onMounted(() => {
+  if (userStore.loggedInUserDetails.status === 'draft') {
+    showUpdateProfileModal()
+  }
+});
 </script>
 
 <template>
@@ -648,5 +660,38 @@ const formatNumber = (): void => {
         </div>
       </div>
     </div>
+
+    <!--  -->
+     <!-- modals -->
+     <dialog
+      ref="modalTrigger"
+      id="delete_modal"
+      class="modal text-black-950 backdrop-blur-sm backdrop-opacity-2 backdrop-filter"
+    >
+      <div class="modal-box flex-col max-w-md flex items-center space-y-3">
+        <div
+          class="flex items-center justify-between w-full pb-3 -mt-3 border-b-2"
+        >
+          <div class="text-white">no text.</div>
+          <h3 class="text-lg font-bold">Notice</h3>
+
+          <form method="dialog">
+          </form>
+        </div>
+
+        <p class="py-2 w-2/3 text-sm text-center">
+          Please complete your profile
+        </p>
+
+        <div class="space-x-4 flex items-center justify-center w-full">
+          <NuxtLink
+            to="/dashboard/recruiter/company-profile/edit"
+            class="rounded-8 px-3.5 py-2 text-white text-xs bg-primary-1"
+          >
+            Complete my profile
+          </NuxtLink>
+        </div>
+      </div>
+    </dialog>
   </div>
 </template>

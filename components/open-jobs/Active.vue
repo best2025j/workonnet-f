@@ -2,15 +2,16 @@
 import type { IJobPost } from '~/types';
 defineProps<{ jobList: IJobPost[] }>();
 
-const userStore = useUserStore() 
+const userStore = useUserStore();
 </script>
 <template>
-  <EmptyJobState v-if="jobList === undefined || jobList.length <= 0" >
-    <template #title>
-      No active jobs 
-    </template>
+  <EmptyJobState v-if="jobList === undefined || jobList.length <= 0">
+    <template #title> No active jobs </template>
   </EmptyJobState>
-  <div v-else class="grid md:grid-cols-3 gap-4 py-4 text-sm md:text-inherit h-full">
+  <div
+    v-else
+    class="grid md:grid-cols-3 gap-4 py-4 text-sm md:text-inherit h-full"
+  >
     <!--  -->
     <div
       v-for="(job, index) in jobList"
@@ -19,10 +20,16 @@ const userStore = useUserStore()
     >
       <div class="flex items-start justify-between">
         <div class="flex space-x-2">
-          <img :src="userStore.loggedInUserDetails.photo.url" class="w-[40px] h-[40px]" alt="no pix" />
+          <img
+            :src="userStore.loggedInUserDetails.photo.url"
+            class="w-[40px] h-[40px]"
+            alt="no pix"
+          />
           <div class="">
             <h1 class="text-base font-black capitalize">{{ job.title }}</h1>
-            <h1 class="text-xs">Posted {{formatTimeDiffHuman(job.createdAt)}}</h1>
+            <h1 class="text-xs">
+              Posted {{ formatTimeDiffHuman(job.createdAt) }}
+            </h1>
           </div>
         </div>
         <!-- white svg  button-->
@@ -50,8 +57,10 @@ const userStore = useUserStore()
             class="dropdown-content menu bg-white rounded-box !top-[50%] !right-2 z-10 w-52 mt-4 space-y-2 py-3 shadow"
           >
             <li>
-              <NuxtLink :to="`/dashboard/recruiter/jobs-openings/${job.id}-${job.slug}`">
-                <div class="flex text-xs gap-3 bg-[#F9F5FF]">
+              <NuxtLink
+                :to="`/dashboard/recruiter/jobs-openings/${job.id}-${job.slug}`"
+              >
+                <div class="flex text-xs gap-3">
                   <span
                     ><svg
                       width="20"
@@ -71,42 +80,25 @@ const userStore = useUserStore()
             </li>
 
             <li>
-              <div class="flex text-xs gap-3">
-                <span
-                  ><svg
-                    width="17"
-                    height="17"
-                    viewBox="0 0 17 17"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M15.7586 4.73214L12.268 1.24073C12.1519 1.12463 12.0141 1.03253 11.8624 0.96969C11.7107 0.906853 11.5482 0.874512 11.384 0.874512C11.2198 0.874512 11.0572 0.906853 10.9056 0.96969C10.7539 1.03253 10.6161 1.12463 10.5 1.24073L0.866412 10.8751C0.749834 10.9908 0.657407 11.1284 0.594506 11.2801C0.531604 11.4318 0.499482 11.5945 0.500006 11.7587V15.2501C0.500006 15.5816 0.631702 15.8996 0.866123 16.134C1.10054 16.3684 1.41849 16.5001 1.75001 16.5001H5.24141C5.40563 16.5006 5.5683 16.4685 5.71999 16.4056C5.87168 16.3427 6.00935 16.2503 6.12501 16.1337L15.7586 6.5001C15.8747 6.38403 15.9668 6.24622 16.0296 6.09454C16.0925 5.94286 16.1248 5.7803 16.1248 5.61612C16.1248 5.45194 16.0925 5.28937 16.0296 5.1377C15.9668 4.98602 15.8747 4.84821 15.7586 4.73214ZM5.24141 15.2501H1.75001V11.7587L8.62501 4.8837L12.1164 8.3751L5.24141 15.2501ZM13 7.49073L9.5086 4.0001L11.3836 2.1251L14.875 5.61573L13 7.49073Z"
-                      fill="#3D3D3D"
-                    />
-                  </svg>
-                </span>
-                <a>Edit</a>
-              </div>
-            </li>
-            <li>
-              <div class="flex text-xs gap-3">
-                <span
-                  ><svg
-                    width="14"
-                    height="15"
-                    viewBox="0 0 14 15"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M13.1875 2.375H10.375V1.8125C10.375 1.36495 10.1972 0.935725 9.88074 0.619257C9.56428 0.30279 9.13505 0.125 8.6875 0.125H5.3125C4.86495 0.125 4.43572 0.30279 4.11926 0.619257C3.80279 0.935725 3.625 1.36495 3.625 1.8125V2.375H0.8125C0.663316 2.375 0.520242 2.43426 0.414753 2.53975C0.309263 2.64524 0.25 2.78832 0.25 2.9375C0.25 3.08668 0.309263 3.22976 0.414753 3.33525C0.520242 3.44074 0.663316 3.5 0.8125 3.5H1.375V13.625C1.375 13.9234 1.49353 14.2095 1.7045 14.4205C1.91548 14.6315 2.20163 14.75 2.5 14.75H11.5C11.7984 14.75 12.0845 14.6315 12.2955 14.4205C12.5065 14.2095 12.625 13.9234 12.625 13.625V3.5H13.1875C13.3367 3.5 13.4798 3.44074 13.5852 3.33525C13.6907 3.22976 13.75 3.08668 13.75 2.9375C13.75 2.78832 13.6907 2.64524 13.5852 2.53975C13.4798 2.43426 13.3367 2.375 13.1875 2.375ZM4.75 1.8125C4.75 1.66332 4.80926 1.52024 4.91475 1.41475C5.02024 1.30926 5.16332 1.25 5.3125 1.25H8.6875C8.83668 1.25 8.97976 1.30926 9.08525 1.41475C9.19074 1.52024 9.25 1.66332 9.25 1.8125V2.375H4.75V1.8125ZM11.5 13.625H2.5V3.5H11.5V13.625ZM5.875 6.3125V10.8125C5.875 10.9617 5.81574 11.1048 5.71025 11.2102C5.60476 11.3157 5.46168 11.375 5.3125 11.375C5.16332 11.375 5.02024 11.3157 4.91475 11.2102C4.80926 11.1048 4.75 10.9617 4.75 10.8125V6.3125C4.75 6.16332 4.80926 6.02024 4.91475 5.91475C5.02024 5.80926 5.16332 5.75 5.3125 5.75C5.46168 5.75 5.60476 5.80926 5.71025 5.91475C5.81574 6.02024 5.875 6.16332 5.875 6.3125ZM9.25 6.3125V10.8125C9.25 10.9617 9.19074 11.1048 9.08525 11.2102C8.97976 11.3157 8.83668 11.375 8.6875 11.375C8.53832 11.375 8.39524 11.3157 8.28975 11.2102C8.18426 11.1048 8.125 10.9617 8.125 10.8125V6.3125C8.125 6.16332 8.18426 6.02024 8.28975 5.91475C8.39524 5.80926 8.53832 5.75 8.6875 5.75C8.83668 5.75 8.97976 5.80926 9.08525 5.91475C9.19074 6.02024 9.25 6.16332 9.25 6.3125Z"
-                      fill="#343330"
-                    />
-                  </svg>
-                </span>
-                <a>Delete</a>
-              </div>
+              <NuxtLink :to="`/dashboard/recruiter/job/${job.id}-${job.slug}`">
+                <div class="flex text-xs gap-3">
+                  <span
+                    ><svg
+                      width="17"
+                      height="17"
+                      viewBox="0 0 17 17"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M15.7586 4.73214L12.268 1.24073C12.1519 1.12463 12.0141 1.03253 11.8624 0.96969C11.7107 0.906853 11.5482 0.874512 11.384 0.874512C11.2198 0.874512 11.0572 0.906853 10.9056 0.96969C10.7539 1.03253 10.6161 1.12463 10.5 1.24073L0.866412 10.8751C0.749834 10.9908 0.657407 11.1284 0.594506 11.2801C0.531604 11.4318 0.499482 11.5945 0.500006 11.7587V15.2501C0.500006 15.5816 0.631702 15.8996 0.866123 16.134C1.10054 16.3684 1.41849 16.5001 1.75001 16.5001H5.24141C5.40563 16.5006 5.5683 16.4685 5.71999 16.4056C5.87168 16.3427 6.00935 16.2503 6.12501 16.1337L15.7586 6.5001C15.8747 6.38403 15.9668 6.24622 16.0296 6.09454C16.0925 5.94286 16.1248 5.7803 16.1248 5.61612C16.1248 5.45194 16.0925 5.28937 16.0296 5.1377C15.9668 4.98602 15.8747 4.84821 15.7586 4.73214ZM5.24141 15.2501H1.75001V11.7587L8.62501 4.8837L12.1164 8.3751L5.24141 15.2501ZM13 7.49073L9.5086 4.0001L11.3836 2.1251L14.875 5.61573L13 7.49073Z"
+                        fill="#3D3D3D"
+                      />
+                    </svg>
+                  </span>
+                  <a>Edit</a>
+                </div>
+              </NuxtLink>
             </li>
           </ul>
         </div>
@@ -128,7 +120,9 @@ const userStore = useUserStore()
               fill="#343330"
             />
           </svg>
-          <span class="text-xs text-gray-700">{{userStore.loggedInUserDetails.location}}</span>
+          <span class="text-xs text-gray-700">{{
+            userStore.loggedInUserDetails.location
+          }}</span>
         </div>
 
         <div
@@ -152,8 +146,11 @@ const userStore = useUserStore()
       </div>
 
       <div class="flex justify-between pt-4 items-center">
-        <h1 ><b class="text-2xl">{{job?.applicants || 0}}</b>applicants</h1>
-        <h1 class="text-success-600 text-xs capitalize">{{job.status}}</h1>
+        <h1>
+          <b class="text-2xl">{{ job?.applicants || 0 }}</b
+          >applicants
+        </h1>
+        <h1 class="text-success-600 text-xs capitalize">{{ job.status }}</h1>
       </div>
     </div>
   </div>

@@ -63,8 +63,13 @@ const subscribeToSelectedPlan = async () => {
 };
 
 const subscribeToPlan = (plan: IPricing) => {
-  selectedPlan.value = plan;
-  showSubConfirmationModal();
+  if(userSubscription.value && userSubscription.value?.subType !== 'free') {
+    toast.error('Error occurred \n subscription needs to be canceled before upgrading')
+  } else {
+    selectedPlan.value = plan;
+    showSubConfirmationModal();
+  }
+  
 };
 
 const subscribeToFreePlan = async () => {
@@ -250,6 +255,10 @@ const verifyPayment = async (data: {
   }
 };
 
+const cancelSubscription = async () => {
+  toast.error('Error occurred')
+}
+
 onBeforeMount(async () => {
   //
   await getUserSubscription();
@@ -309,12 +318,20 @@ onBeforeMount(async () => {
           v-if="
             userSubscription && userSubscription?.packageType?.id === pricing.id
           "
-          class="py-4 w-full"
+          class="py-4 w-full space-y-2"
         >
           <button
             class="bg-success-100 border font-black py-3 rounded-10 text-xs w-full text-success-600"
           >
             Active
+          </button>
+
+          <button
+          v-if="userSubscription?.subType !== 'free'"
+             class="border-primary-1 border bg-westside-100 font-black py-3 rounded-10 text-xs w-full text-primary-1"
+             @click="cancelSubscription()"
+          >
+            Cancel Subscription
           </button>
         </div>
 

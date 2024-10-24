@@ -17,11 +17,18 @@ export default defineNuxtConfig({
     autoImport: true,
   },
   plugins: [{ src: '@/plugins/scroll-behavior.client.ts', mode: 'client' }],
-  modules: ['@pinia/nuxt', '@pinia-plugin-persistedstate/nuxt', '@vueuse/nuxt'],
+  modules: [
+    '@pinia/nuxt',
+    '@pinia-plugin-persistedstate/nuxt',
+    '@vueuse/nuxt',
+    'nuxt-vue3-google-signin',
+  ],
   pinia: {
     storesDirs: ['./store/**', './store/modules/**'],
   },
-
+  googleSignIn: {
+    clientId: process.env.NUXT_PUBLIC_GOOGLE_CLIENT_ID,
+  },
   // app: {
   //   head: {
   //     title: 'Workonnect Africa',
