@@ -2,7 +2,7 @@
 import { POSITION, useToast } from 'vue-toastification';
 import { required, helpers, minLength } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
-import type { ApiErrorResponse, IRecruiterDetails } from '~/types';
+import type { ApiErrorResponse, ApiSuccessResponse, IJobPost, IRecruiterDetails } from '~/types';
 
 definePageMeta({
   title: 'Edit job opening',
@@ -16,20 +16,20 @@ const skillList = ref(['Vue.js', 'Javascript', 'Open Source']);
 const toast = useToast();
 const authStore = useAuthStore();
 const isLoading = ref<boolean>(false);
-const isDraft = ref<boolean>(false);
-const isPublish = ref<boolean>(false);
+const route = useRoute();
+const currentJob = ref<IJobPost | null>(null);
+const jobStore = useJobStore();
 
 const formData = reactive({
-  // recruiter: (useStore.loggedInUserDetails as IRecruiterDetails).id,
-  title: '',
-  description: '',
-  requirements: [''],
-  benefits: [''],
-  location: '',
-  jobType: '',
-  level: '',
-  skills: [''],
-  expectedSalary: 0,
+  title: currentJob.value?.title || '',
+  description: currentJob.value?.description || '',
+  requirements: currentJob.value?.requirements || [''],
+  benefits: currentJob.value?.benefits || [''],
+  location: currentJob.value?.location || '',
+  jobType: currentJob.value?.jobType || '',
+  level: currentJob.value?.level || '',
+  skills: currentJob.value?.skills || [''],
+  expectedSalary: currentJob.value?.expectedSalary || 0,
 });
 
 const addRequirement = () => formData.requirements.push('');
@@ -91,10 +91,8 @@ const rules = computed(() => {
 
 const v$ = useVuelidate(rules, formData);
 
-const handleJobPost = async (status: string) => {
+const handleJobUpdate = async () => {
   isLoading.value = true;
-  if (status === 'draft') isDraft.value = true;
-  if (status === 'published') isPublish.value = true;
   const isValidForm = await v$.value.$validate();
   if (!isValidForm) {
     toast.error('Please fill all fields correctly', {
@@ -104,38 +102,30 @@ const handleJobPost = async (status: string) => {
 
     setTimeout(() => {
       isLoading.value = false;
-      isDraft.value = false;
-      isPublish.value = false;
     }, 2000);
     return;
   }
 
   try {
     const token = authStore.userToken;
-    await $fetch('/api/recruiter/job/create', {
+    await $fetch('/api/recruiter/job/edit', {
       method: 'POST',
-      body: {...formData, status},
+      query: {
+        jobListingId: (route.params.edit as string).split('-')[0],
+      },
+      body: { ...formData, status },
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
 
-    if (status === 'published') {
-      toast.success('Job post was successfully published', {
-        timeout: 3000,
-        position: POSITION.TOP_RIGHT,
-      });
-    } else if (status === 'draft') {
-      toast.info('Job post was saved as draft', {
-        timeout: 3000,
-        position: POSITION.TOP_RIGHT,
-      });
-    }
+    toast.success('Job post was successfully updated', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
 
     setTimeout(() => {
       isLoading.value = false;
-      isDraft.value = false;
-      isPublish.value = false;
     }, 2000);
   } catch (error: any) {
     const errorData = error.data as ApiErrorResponse;
@@ -148,10 +138,31 @@ const handleJobPost = async (status: string) => {
 
   setTimeout(() => {
     isLoading.value = false;
-    isDraft.value = false;
-    isPublish.value = false;
   }, 2000);
 };
+
+const setEditData = async (jobListing: IJobPost) => {
+
+}
+
+onBeforeMount(async () => {
+  try {
+    isLoading.value = true;
+    const token = authStore.userToken;
+    const response = await jobStore.$api.fetchRecruiterSingle(
+      token,
+      (route.params.edit as string).split('-')[0]
+    );
+    const responseData = response as ApiSuccessResponse;
+    currentJob.value = responseData.data;
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 1000);
+  } catch (e) {
+    console.log(e);
+  }
+});
 </script>
 
 <template>
@@ -164,26 +175,15 @@ const handleJobPost = async (status: string) => {
       </div>
 
       <div class="flex gap-3">
-        <BtnPrimary
-          @click="handleJobPost('draft')"
-          :isLoading="isDraft"
-          :disabled="isDraft "
-          class="!bg-info-400 !px-4 !py-2 !rounded-5 !text-xs !disabled:bg-black-100"
-        >
-          <template #text>
-            {{ isDraft ? 'Saving' : 'Save' }}
-          </template>
-        </BtnPrimary>
-
         <!-- for modal triggering -->
         <BtnPrimary
-          @click="handleJobPost('published')"
-          :isLoading="isPublish"
-          :disabled="isPublish "
+          @click="handleJobUpdate()"
+          :isLoading="isLoading"
+          :disabled="isLoading"
           class="!px-4 !py-2 !rounded-5 !text-xs"
         >
           <template #text>
-            {{ isPublish ? 'Publishing' : 'Publish' }}
+            {{ !isLoading ? 'Update job' : 'Updating...' }}
           </template>
         </BtnPrimary>
 

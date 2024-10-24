@@ -61,6 +61,7 @@ const getMyJobApps = async () => {
     }, 1000);
   } catch (e) {
     console.log(e);
+    isLoadingApps.value = false;
   }
 };
 
@@ -81,9 +82,11 @@ onBeforeMount(async () => {
       <div class="space-y-1 pb-2">
         <h2 class="text-2xl font-black">
           Good Morning
-          <span v-if="!isLoading">{{
-            ', ' + userData?.companyName || ''
-          }}</span>
+          <span v-if="!isLoading">
+            <span v-if="userData?.companyName">
+              {{userData?.companyName || ''}}
+            </span>
+          </span>
         </h2>
         <p class="text-sm">
           Here’s what’s happening with your job application since you joined us.

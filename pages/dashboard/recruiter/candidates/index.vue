@@ -44,6 +44,7 @@ const getMyJobApps = async (query: any) => {
     }, 1000);
   } catch (e) {
     console.log(e);
+    isLoading.value = false;
   }
 };
 
