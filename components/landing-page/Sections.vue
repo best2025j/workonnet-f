@@ -16,11 +16,11 @@
     <div
       class="flex w-full md:py-10 flex-col md:flex-row space-y-6 md:space-y-0"
     >
-      <div class="md:w-1/2 space-y-4 pt-3 md:pt-0">
+      <div class="md:w-1/2 space-y-4 pt-3 md:pt-0 h-[671px]">
         <h1 class="font-black text-[32px] w-[284px] leading-8">
           Empowering Job Seekers, One Success at a Time
         </h1>
-        <img src="/assets/images//sec.png" alt="a lady picture" />
+        <img src="/assets/images//sec.png" alt="a lady picture" class="rounded-[50px]"/>
       </div>
 
       <div class="md:w-1/2 w-full">

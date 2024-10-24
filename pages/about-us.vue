@@ -1,15 +1,44 @@
-<script lang="ts"></script>
+<script lang="ts">
+import { ref } from "vue";
+
+export default defineComponent({
+  setup() {
+    // Track the index of the active accordion
+    const activeIndex = ref(0); // Initialize the first accordion as active (0)
+
+    // Toggle a specific accordion by index, and deactivate others
+    const toggleAccordion = (index: number) => {
+      if (index === 0) {
+        // Ensure the first accordion is always active
+        activeIndex.value = 0;
+      } else if (activeIndex.value === index) {
+        // Deactivate if already active, except the first accordion
+        activeIndex.value = -1;
+      } else {
+        // Activate the clicked accordion
+        activeIndex.value = index;
+      }
+    };
+
+    return {
+      activeIndex,
+      toggleAccordion,
+    };
+  },
+});
+</script>
+
 <template>
   <div class="w-full h-full">
     <div class="left-0 relative w-full right-0 md:-mt-4 mt-4 text-white">
       <img
         src="/assets/images/image(2).jpg"
         alt="no pix yet"
-        class="md:h-full h-52 object-cover w-full"
+        class="sm:h-[682px] md:h-full object-cover w-full"
       />
 
       <div
-        class="md:w-[760px] space-y-8 pt-20 pl-5 absolute md:top-10 -top-3 w-[200px] md:pl-20"
+        class="md:w-[760px] space-y-8 pt-20 pl-5 sm:pl-10 absolute md:top-10 -top-3 w-[200px] md:pl-20"
       >
         <div class="flex space-x-4 items-center">
           <div class="md:h-[100px] w-1.5 rounded-l-10 bg-primary-1 h-10" />
@@ -34,16 +63,19 @@
       </div>
     </div>
 
-    <div class="md:py-32 py-12 flex flex-col md:flex-row px-8 w-full">
-      <div class="md:w-1/2 w-full">
+    <!--  -->
+    <div
+      class="md:py-32 py-12 flex flex-col md:flex-row px-8 w-full justify-center"
+    >
+      <div class="">
         <img
           src="/assets/images/family.png"
-          class="object-cover w-full h-full"
+          class="object-cover md:w-[600px] md:h-[535px]"
           alt=""
         />
       </div>
 
-      <div class="w-full md:w-1/2 flex flex-col md:items-end md:pr-32">
+      <div class="flex flex-col md:ml-6">
         <div
           class="md:w-[592px] flex flex-col justify-between h-full space-y-4 md:space-y-0"
         >
@@ -89,7 +121,8 @@
       </div>
     </div>
 
-    <div class="bg-[#292D32F2] h-auto md:h-screen text-white">
+    <!--  -->
+    <div class="bg-[#292D32F2] text-white">
       <div class="h-full w-full px-4 md:px-8 py-2">
         <!--  -->
         <div
@@ -166,11 +199,11 @@
                       fill="#E7E7E7"
                     />
                     <path
-                      d="M19.0895 21.7433C17.1357 21.7433 15.5547 23.3243 15.5547 25.2781V26.163C15.5547 26.6502 15.9524 27.0479 16.4396 27.0479H21.7418C22.229 27.0479 22.6267 26.6502 22.6267 26.163V25.2781C22.6267 23.3243 21.0457 21.7433 19.0919 21.7433H19.0895Z"
+                      d="M19.0895 21.7433C17.1357 21.7433 15.5547 23.3243 15.5547 25.2781V26.163C15.5547 26.6502 15 27.0479 16.4396 27.0479H21.7418C22.229 27.0479 22.6267 26.6502 22.6267 26.163V25.2781C22.6267 23.3243 21.0457 21.7433 19.0919 21.7433H19.0895Z"
                       fill="#E7E7E7"
                     />
                     <path
-                      d="M61.5161 19.9761H60.6312V17.3238C60.6312 13.9132 57.8571 11.1366 54.444 11.1366C51.0335 11.1366 48.2569 13.9108 48.2569 17.3238V19.9761H47.3719C45.9128 19.9761 44.7196 21.1693 44.7196 22.6285V27.0482H42.5097C40.8044 27.0482 39.4173 25.6612 39.4173 23.9559C39.4173 21.2762 37.2373 19.0937 34.5551 19.0937H32.3105C31.8606 12.1904 26.096 6.7196 19.0888 6.7196C11.7808 6.7196 5.83203 12.6681 5.83203 19.9763C5.83203 26.9865 11.3033 32.7481 18.2061 33.1981V57.9812C18.2061 58.292 18.3677 58.5803 18.6362 58.7394L22.6706 61.1606V61.1631C22.9266 62.8683 24.3932 64.1684 26.1607 64.1684C28.1145 64.1684 29.6955 62.5874 29.6955 60.6336C29.6955 58.6798 28.1145 57.0988 26.1607 57.0988C24.7015 57.0988 23.4462 57.9837 22.9167 59.2465V59.249L19.9735 57.4841V48.9403L22.6681 50.5586V50.5611C22.9241 52.2663 24.3907 53.5664 26.1582 53.5664C28.112 53.5664 29.693 51.9854 29.693 50.0316C29.693 48.0778 28.112 46.4968 26.1582 46.4968C24.699 46.4968 23.4437 47.3817 22.9142 48.6445V48.647L19.971 46.8821V38.3383L22.6656 39.9566V39.9591C22.9217 41.6643 24.3883 42.9644 26.1557 42.9644C28.1095 42.9644 29.6905 41.3834 29.6905 39.4296C29.6905 37.4758 28.1095 35.8948 26.1557 35.8948C24.6965 35.8948 23.4412 36.7797 22.9117 38.0425V38.045L19.9685 36.2801V33.2102C26.581 32.7776 31.873 27.4829 32.3082 20.8704H34.5529C36.2582 20.8704 37.6452 22.2575 37.6452 23.9628C37.6452 26.6425 39.8253 28.825 42.5074 28.825H44.7173V33.2447C44.7173 34.7039 45.9105 35.8971 47.3697 35.8971H53.5569V46.8871L50.6137 48.652V48.6495C50.0842 47.3867 48.8289 46.5018 47.3697 46.5018C45.4159 46.5018 43.8349 48.0827 43.8349 50.0366C43.8349 51.9904 45.4159 53.5714 47.3697 53.5714C49.1371 53.5714 50.6037 52.2713 50.8598 50.566V50.5635L53.5544 48.9453V57.4891L50.6112 59.254V59.2515C50.0817 57.9887 48.8264 57.1038 47.3672 57.1038C45.4134 57.1038 43.8324 58.6847 43.8324 60.6386C43.8324 62.5924 45.4134 64.1734 47.3672 64.1734C49.1346 64.1734 50.6012 62.8733 50.8573 61.168V61.1655L54.8917 58.7444C55.1577 58.5853 55.3218 58.2969 55.3218 57.9862V35.8898H61.5089C62.9681 35.8898 64.1613 34.6966 64.1613 33.2374V22.6305C64.1613 21.1713 62.9681 19.9781 61.5089 19.9781L61.5161 19.9761ZM26.1604 58.8637C27.1323 58.8637 27.9278 59.6591 27.9278 60.6311C27.9278 61.603 27.1323 62.3984 26.1604 62.3984C25.1885 62.3984 24.393 61.603 24.393 60.6311C24.393 59.6591 25.1885 58.8637 26.1604 58.8637ZM26.1604 48.2568C27.1323 48.2568 27.9278 49.0522 27.9278 50.0241C27.9278 50.9961 27.1323 51.7915 26.1604 51.7915C25.1885 51.7915 24.393 50.9961 24.393 50.0241C24.393 49.0522 25.1885 48.2568 26.1604 48.2568ZM26.1604 37.6524C27.1323 37.6524 27.9278 38.4479 27.9278 39.4198C27.9278 40.3917 27.1323 41.1872 26.1604 41.1872C25.1885 41.1872 24.393 40.3917 24.393 39.4198C24.393 38.4479 25.1885 37.6524 26.1604 37.6524ZM24.393 26.1603C24.393 27.6195 23.1999 28.8127 21.7407 28.8127H16.4385C14.9793 28.8127 13.7861 27.6195 13.7861 26.1603V25.2754C13.7861 22.3496 16.1626 19.9732 19.0883 19.9732C22.0141 19.9732 24.3905 22.3496 24.3905 25.2754V26.1603H24.393ZM19.0909 11.1364C21.0447 11.1364 22.6257 12.7174 22.6257 14.6712C22.6257 16.6251 21.0447 18.206 19.0909 18.206C17.137 18.206 15.556 16.6251 15.556 14.6712C15.556 12.7174 17.137 11.1364 19.0909 11.1364ZM47.374 51.7943C46.4021 51.7943 45.6067 50.9989 45.6067 50.0269C45.6067 49.055 46.4021 48.2596 47.374 48.2596C48.346 48.2596 49.1414 49.055 49.1414 50.0269C49.1414 50.9989 48.346 51.7943 47.374 51.7943ZM47.374 62.3987C46.4021 62.3987 45.6067 61.6032 45.6067 60.6313C45.6067 59.6594 46.4021 58.8639 47.374 58.8639C48.346 58.8639 49.1414 59.6594 49.1414 60.6313C49.1414 61.6032 48.346 62.3987 47.374 62.3987ZM50.0239 17.3238C50.0239 14.8852 52.0026 12.904 54.4437 12.904C56.8822 12.904 58.8634 14.8827 58.8634 17.3238V19.9761H50.0237L50.0239 17.3238Z"
+                      d="M61.5161 19.9761H60.6312V17.3238C60.6312 13.9132 57.8571 11.1366 54.444 11.1366C51.0335 11.1366 48.2569 13.9108 48.2569 17.3238V19.9761H47.3719C45.9128 19.9761 44.7196 21.1693 44.7196 22.6285V27.0482H42.5097C40.8044 27.0482 39.4173 25.6612 39.4173 23.9559C39.4173 21.2762 37.2373 19.0937 34.5551 19.0937H32.3105C31.8606 12.1904 26.096 6.7196 19.0888 6.7196C11.7808 6.7196 5.83203 12.6681 5.83203 19.9763C5.83203 26.9865 11.3033 32.7481 18.2061 33.1981V57.9812C18.2061 58.292 18.3677 58.5803 18.6362 58.7394L22.6706 61.1606V61.1631C22.9266 62.8683 24.3932 64.1684 26.1607 64.1684C28.1145 64.1684 29.6955 62.5874 29.6955 60.6336C29.6955 58.6798 28.1145 57.0988 26.1607 57.0988C24.7015 57.0988 23.4462 57.9837 22.9167 59.2465V59.249L19.9735 57.4841V48.9403L22.6681 50.5586V50.5611C22.9242663 24.3907 53.5664 26.1582 53.5664C28.112 53.5664 29.693 51.9854 29.693 50.0316C29.693 48.0778 28.112 46.4968 26.1582 46.4968C24.699 46.4968 23.4437 47.3817 22.9142 48.6445V48.647L19.971 46.8821V38.3383L22.6656 39.9566V39.9591C22.9217 41.6643 24.3883 42.9644 26.1557 42.9644C28.1095 42.9644 29.6905 41.3834 29.6905 39.4296C29.6905 37.4758 28.1095 35.8948 26.1557 35.8948C24.6965 35.8948 23.4412 36.7797 22.9117 38.0425V38.045L19.9685 36.2801V33.2102C26.581 32.7776 31.873 27.4829 32.3082 20.8704H34C36.2582 20.8704 37.22.2575 37.23.9628C37.26.6425 39.8253 28.825 42.5074 28.825H44.7173V33.2447C44.7173 34.7039 45.9105 35.8971 47.3697 35.8971H53.5569V46.8871L50.6137 4848.6495C50.0842 47.3867 48.8289 46.5018 47.3697 46.5018C45.4159 46.5018 43.8349 48.0827 43.8349 50.0366C43.8349 51.9904 45.4159 53.5714 47.3697 53.5714C49.1371 53.5714 50.6032713 50.8598 50.566V50.5635L53.5544 48.9453V57.4891L50.6112 59.254V59.2515C50.0817 57.9887 48.8264 57.1038 47.3672 57.1038C45.4134 57.1038 43.8324 58.6847 43.8324 60.6386C43.8324 62.5924 45.4134 64.1734 47.3672 64.1734C49.1346 64.1734 50.6012 62.8733 50.8573 61.168V61.1655L54.8917 58.7444C55.1577 58.5853 55.3218 58.2969 55.3218 57.9862V35.8898H61.5089C62.9681 35.8898 64.1613 34.6966 64.1613 33.2374V22.6305C64.1613 21.1713 62.9681 19.9781 61.5089 19.9781L61.5161 19.9761ZM26.1604 58.8637C27.1323 58.8637 27.9278 59.6591 27.9278 60.6311C27.9278 61.603 27.1323 62.3984 26.1604 62.3984C25.1885 62.3984 24.393 61.603 24.393 60.6311C24.393 59.6591 25.1885 58.8637 26.1604 58.8637ZM26.1604 48.2568C27.1323 48.2568 27.9278 49.0522 27.9278 50.0241C27.9278 50.9961 27.1323 51.7915 26.1604 51.7915C25.1885 51.7915 24.393 50.9961 24.393 50.0241C24.393 49.0522 25.1885 48.2568 26.1604 48.2568ZM26.1604 37.6524C27.1323 37.6524 27.9278 38.4479 27.9278 39.4198C27.9278 40.3917 27.1323 41.1872 26.1604 41.1872C25.1885 41.1872 24.393 40.3917 24.393 39.4198C24.393 38.4479 25.1885 37.6524 26.1604 37.6524ZM24.393 26.1603C24.393 27.6195 23.1999 28.8127 21.7407 28.8127H16.4385C14.9793 28.8127 13.7861 27.6195 13.7861 26.1603V25.2754C13.7861 22.3496 16.1626 19.9732 19.0883 19.9732C22.0141 19.9732 24.3905 22.3496 24.3905 25.2754V26.1603H24.393ZM19.0909 11.1364C21.0447 11.1364 22.6257 12.7174 22.6257 14.6712C22.6257 16.6251 21.0447 18.206 19.0909 18.206C17.137 18.206 15.556 16.6251 15.556 14.6712C15.556 12.7174 17.137 11.1364 19.0909 11.1364ZM47.374 51.7943C46.4021 51.7943 45.6067 50.9989 45.6067 50.0269C45.6067 49.055 46.4021 48.2596 47.374 48.2596C48.346 48.2596 49.1414 49.055 49.1414 50.0269C49.1414 50.9989 48.346 51.7943 47.374 51.7943ZM47.374 62.3987C46.4021 62.3987 45.6067 61.6032 45.6067 60.6313C45.6067 59.6594 46.4021 58.8639 47.374 58.8639C48.346 58.8639 49.1414 59.6594 49.1414 60.6313C49.1414 61.6032 48.346 62.3987 47.374 62.3987ZM50.0239 17.3238C50.0239 14.8852 52.0026 12.904 54.4437 12.904C56.8822 12.904 58.8634 14.8827 58.8634 17.3238V19.9761H50.0237L50.0239 17.3238Z"
                       fill="#E7E7E7"
                     />
                   </svg>
@@ -308,31 +341,35 @@
     </div>
 
     <!--  -->
-    <div class="md:py-32 py-12 flex flex-col md:flex-row px-8 w-full">
-      <div class="md:w-1/2 w-full relative">
+    <div
+      class="md:py-32 py-12 flex flex-col md:flex-row px-8 w-full justify-center md:space-x-8"
+    >
+      <div class="md:w-[620px] w-full relative">
         <img
           src="/assets/images/image(4).png"
-          class="object-cover w-full h-auto"
+          class="object-cover md:w-[587.48px] md:h-[561.12px]"
           alt=""
         />
-        <div class="flex justify-between absolute -bottom-32 -right-20 left-0">
+        <div
+          class="flex justify-between absolute md:-bottom-32 bottom-0 right-0 left-0"
+        >
           <div
-            class="w-2.5 rounded-r-10 bg-primary-1 border-2 !h-[410px] relative bottom-44"
+            class="md:w-2.5 rounded-r-10 bg-primary-1 border-2 md:!h-[350px] h-44 w-2 relative bottom-16 md:bottom-56"
           />
 
-          <div>
+          <div class="relative md:bottom-14 md:left-2 left-5 -bottom-8">
             <img
               src="/assets/images/image(5).png"
-              class="object-cover w-[490px] h-auto"
+              class="object-cover h-44 md:h-auto"
               alt=""
             />
           </div>
         </div>
       </div>
 
-      <div class="w-full md:w-1/2 flex flex-col md:items-end md:pr-32">
+      <div class="flex flex-col md:w-[620px] pt-20 md:pt-0">
         <div
-          class="md:w-[592px] flex flex-col justify-between h-[550px] space-y-4 md:space-y-0"
+          class="flex flex-col justify-between md:h-[550px] space-y-4 md:space-y-0"
         >
           <div class="space-y-4">
             <h1 class="flex gap-x-3 items-center">
@@ -374,161 +411,326 @@
             </h1>
           </div>
 
+          <!-- accordions -->
           <div class="flex space-x-4 items-center">
-            <div class="md:h-[80px] w-1.5 rounded-r-10 bg-primary-1 h-10" />
-            <div class="md:text-sm space-y-4">
-              <div class="flex justify-between items-center">
-                <h1 class="text-primary-1 font-black">
+            <div
+              @click="toggleAccordion(0)"
+              :class="{
+                'h-10 w-1.5 rounded-r-10 ': true,
+                'bg-primary-1 h-[80px]': activeIndex === 0,
+                'bg-gray-400 h-10': activeIndex !== 0,
+              }"
+            />
+
+            <div class="collapse collapse-plus bg-base-200">
+              <input
+                type="radio"
+                name="my-accordion-3"
+                @change="toggleAccordion(0)"
+              />
+              <div class="collapse-title text-xl font-medium">
+                <h1
+                  :class="{
+                    'font-black md:text-sm text-xs': true,
+                    'text-primary-1': activeIndex === 0,
+                    'text-gray-500': activeIndex !== 0,
+                  }"
+                >
                   Lorem Ipsum is simply dummy text of the prin....?
                 </h1>
-                <span>
-                  <svg
-                    width="32"
-                    height="32"
-                    viewBox="0 0 32 32"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M8 16H24"
-                      stroke="#FE8900"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </span>
               </div>
-              <p class="text-[#666C89]">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s,
-              </p>
+
+              <div class="collapse-content">
+                <p class="text-[#666C89] md:text-sm text-xs">
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry's
+                  standard dummy text ever since the 1500s,
+                </p>
+              </div>
             </div>
           </div>
+          <!--  -->
+          <div class="h-[2px] w-full bg-black-50" />
+          <!--  -->
+          <div class="flex space-x-4 items-center">
+            <div
+              @click="toggleAccordion(1)"
+              :class="{
+                'h-10 w-1.5 rounded-r-10 ': true,
+                'bg-primary-1 h-[80px]': activeIndex === 1,
+                'bg-gray-400 h-10': activeIndex !== 1,
+              }"
+            />
 
+            <div class="collapse collapse-plus bg-base-200">
+              <input
+                type="radio"
+                name="my-accordion-3"
+                @change="toggleAccordion(1)"
+              />
+              <div class="collapse-title text-xl font-medium">
+                <h1
+                  :class="{
+                    'font-black md:text-sm text-xs': true,
+                    'text-primary-1': activeIndex === 1,
+                    'text-gray-500': activeIndex !== 1,
+                  }"
+                >
+                  Lorem Ipsum is simply dummy text of the prin....?
+                </h1>
+              </div>
+
+              <div class="collapse-content">
+                <p class="text-[#666C89] md:text-sm text-xs">
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry's
+                  standard dummy text ever since the 1500s,
+                </p>
+              </div>
+            </div>
+          </div>
+          <!--  -->
+          <div class="h-[2px] w-full bg-black-50" />
+          <!--  -->
+          <div class="flex space-x-4 items-center">
+            <div
+              @click="toggleAccordion(2)"
+              :class="{
+                'h-10 w-1.5 rounded-r-10 ': true,
+                'bg-primary-1 h-[80px]': activeIndex === 2,
+                'bg-gray-400 h-10': activeIndex !== 2,
+              }"
+            />
+
+            <div class="collapse collapse-plus bg-base-200">
+              <input
+                type="radio"
+                name="my-accordion-3"
+                @change="toggleAccordion(2)"
+              />
+              <div class="collapse-title text-xl font-medium">
+                <h1
+                  :class="{
+                    'font-black md:text-sm text-xs': true,
+                    'text-primary-1': activeIndex === 2,
+                    'text-gray-500': activeIndex !== 2,
+                  }"
+                >
+                  Lorem Ipsum is simply dummy text of the prin....?
+                </h1>
+              </div>
+
+              <div class="collapse-content">
+                <p class="text-[#666C89] md:text-sm text-xs">
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry's
+                  standard dummy text ever since the 1500s,
+                </p>
+              </div>
+            </div>
+          </div>
+          <!--  -->
           <div class="h-[2px] w-full bg-black-50" />
 
           <div class="flex space-x-4 items-center">
-            <div class="w-1 rounded-r-10 h-10 bg-[#666C89]" />
             <div
-              class="md:text-sm space-y-4 flex justify-between items-center w-full"
-            >
-              <h1 class="text-[#666C89] font-black">
-                Lorem Ipsum is simply dummy text of the prin....?
-              </h1>
-              <span>
-                <svg
-                  width="32"
-                  height="32"
-                  viewBox="0 0 32 32"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+              @click="toggleAccordion(3)"
+              :class="{
+                'h-10 w-1.5 rounded-r-10 ': true,
+                'bg-primary-1 h-[80px]': activeIndex === 3,
+                'bg-gray-400 h-10': activeIndex !== 3,
+              }"
+            />
+
+            <div class="collapse collapse-plus bg-base-200">
+              <input
+                type="radio"
+                name="my-accordion-3"
+                @change="toggleAccordion(3)"
+              />
+              <div class="collapse-title text-xl font-medium">
+                <h1
+                  :class="{
+                    'font-black md:text-sm text-xs': true,
+                    'text-primary-1': activeIndex === 3,
+                    'text-gray-500': activeIndex !== 3,
+                  }"
                 >
-                  <path
-                    d="M8 16H24"
-                    stroke="#292D32"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M16 24V8"
-                    stroke="#292D32"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </span>
-            </div>
-          </div>
+                  Lorem Ipsum is simply dummy text of the prin....?
+                </h1>
+              </div>
 
-          <div class="h-[2px] w-full bg-black-50" />
-
-          <div class="flex space-x-4 items-center">
-            <div class="w-1 rounded-r-10 h-10 bg-[#666C89]" />
-            <div
-              class="md:text-sm space-y-4 flex justify-between items-center w-full"
-            >
-              <h1 class="text-[#666C89] font-black">
-                Lorem Ipsum is simply dummy text of the prin....?
-              </h1>
-              <span>
-                <svg
-                  width="32"
-                  height="32"
-                  viewBox="0 0 32 32"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M8 16H24"
-                    stroke="#292D32"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M16 24V8"
-                    stroke="#292D32"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </span>
-            </div>
-          </div>
-
-          <div class="h-[2px] w-full bg-black-50" />
-
-          <div class="flex space-x-4 items-center">
-            <div class="w-1 rounded-r-10 h-10 bg-[#666C89]" />
-            <div
-              class="md:text-sm space-y-4 flex justify-between items-center w-full"
-            >
-              <h1 class="text-[#666C89] font-black">
-                Lorem Ipsum is simply dummy text of the prin....?
-              </h1>
-              <span>
-                <svg
-                  width="32"
-                  height="32"
-                  viewBox="0 0 32 32"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M8 16H24"
-                    stroke="#292D32"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M16 24V8"
-                    stroke="#292D32"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </span>
+              <div class="collapse-content">
+                <p class="text-[#666C89] md:text-sm text-xs">
+                  Lorem Ipsum is simply dummy text of the printing and
+                  typesetting industry. Lorem Ipsum has been the industry's
+                  standard dummy text ever since the 1500s,
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="my-14">
-      <div class="grid grid-cols-3 w-full text-sm px-4">
-        <div class="divider divider-start" />
-        <div class="divider text-[18px]">Companies with Workonnect</div>
-        <div class="divider divider-end" />
+    <div class="py-10">
+      <div
+        class="flex justify-between items-center w-full text-xs md:text-sm md:space-x-4 px-3 md:px-8 gap-x-2 py-4"
+      >
+        <h1 class="whitespace-nowrap md:flex hidden"></h1>
+        <div class="border-1 border h-full w-full" />
+        <h1 class="whitespace-nowrap md:text-[18px]">
+          Companies with Workonnect
+        </h1>
+        <div class="border-1 border h-full w-full" />
       </div>
-      <!-- svgs -->
-      <div class="flex items-center">
+
+      <!-- carousel images -->
+      <div
+        class="overflow-hidden bg-gradient-to-r from-black-50 via-white to-black-50"
+      >
+        <div class="flex animate-scroll space-x-4">
+          <div class="flex-shrink-0">
+            <img
+              src="../assets/images/Alfa-Romeo.png"
+              alt="Alfa Romeo"
+              class="w-[128px] h-[128px]"
+            />
+          </div>
+          <div class="flex-shrink-0">
+            <img
+              src="../assets/images/Audi.png"
+              alt="Audi"
+              class="w-[128px] h-[128px]"
+            />
+          </div>
+          <div class="flex-shrink-0">
+            <img
+              src="../assets/images/BMW.png"
+              alt="BMW"
+              class="w-[128px] h-[128px]"
+            />
+          </div>
+          <div class="flex-shrink-0">
+            <img
+              src="../assets/images/Bugatti.png"
+              alt="Bugatti"
+              class="w-[128px] h-[128px]"
+            />
+          </div>
+          <div class="flex-shrink-0">
+            <img
+              src="../assets/images/Citroen.png"
+              alt="Citroen"
+              class="w-[128px] h-[128px]"
+            />
+          </div>
+          <div class="flex-shrink-0">
+            <img
+              src="../assets/images/Ferrari.png"
+              alt="Ferrari"
+              class="w-[128px] h-[128px]"
+            />
+          </div>
+          <div class="flex-shrink-0">
+            <img
+              src="../assets/images/GT-R.png"
+              alt="GT-R"
+              class="w-[128px] h-[128px]"
+            />
+          </div>
+          <div class="flex-shrink-0">
+            <img
+              src="../assets/images/Honda.png"
+              alt="Honda"
+              class="w-[128px] h-[128px]"
+            />
+          </div>
+          <div class="flex-shrink-0">
+            <img
+              src="../assets/images/Hyundai.png"
+              alt="Hyundai"
+              class="w-[128px] h-[128px]"
+            />
+          </div>
+          <div class="flex-shrink-0">
+            <img
+              src="../assets/images/iranKhodro.png"
+              alt="Iran Khodro"
+              class="w-[128px] h-[128px]"
+            />
+          </div>
+          <div class="flex-shrink-0">
+            <img
+              src="../assets/images/Jaguar.png"
+              alt="Jaguar"
+              class="w-[128px] h-[128px]"
+            />
+          </div>
+          <div class="flex-shrink-0">
+            <img
+              src="../assets/images/Lamborghini.png"
+              alt="Lamborghini"
+              class="w-[128px] h-[128px]"
+            />
+          </div>
+          <div class="flex-shrink-0">
+            <img
+              src="../assets/images/Mazda.png"
+              alt="Mazda"
+              class="w-[128px] h-[128px]"
+            />
+          </div>
+          <div class="flex-shrink-0">
+            <img
+              src="../assets/images/MercedesBenz.png"
+              alt="Mercedes Benz"
+              class="w-[128px] h-[128px]"
+            />
+          </div>
+          <div class="flex-shrink-0">
+            <img
+              src="../assets/images/Peugeot.png"
+              alt="Peugeot"
+              class="w-[128px] h-[128px]"
+            />
+          </div>
+          <div class="flex-shrink-0">
+            <img
+              src="../assets/images/Porsche.png"
+              alt="Porsche"
+              class="w-[128px] h-[128px]"
+            />
+          </div>
+          <div class="flex-shrink-0">
+            <img
+              src="../assets/images/Renault.png"
+              alt="Renault"
+              class="w-[128px] h-[128px]"
+            />
+          </div>
+          <div class="flex-shrink-0">
+            <img
+              src="../assets/images/Subaru.png"
+              alt="Subaru"
+              class="w-[128px] h-[128px]"
+            />
+          </div>
+          <div class="flex-shrink-0">
+            <img
+              src="../assets/images/Suzuki.png"
+              alt="Suzuki"
+              class="w-[128px] h-[128px]"
+            />
+          </div>
+          <div class="flex-shrink-0">
+            <img
+              src="../assets/images/Toyota.png"
+              alt="Toyota"
+              class="w-[128px] h-[128px]"
+            />
+          </div>
+        </div>
       </div>
     </div>
 
@@ -537,3 +739,22 @@
     </div>
   </div>
 </template>
+
+<style scoped>
+.collapse {
+  cursor: pointer;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-30%); /* Adjust based on the total width of images */
+  }
+}
+
+.animate-scroll {
+  animation: scroll 10s linear infinite; /* Adjust duration for scrolling speed */
+}
+</style>
