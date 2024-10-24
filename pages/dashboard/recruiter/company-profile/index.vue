@@ -44,7 +44,7 @@ const userData = computed<IRecruiterDetails>(
           <div class="space-y-2">
             <div class="flex items-center space-x-6">
               <h1 class="font-black text-sm md:text-base">
-                {{ userData?.fullName || '' }}
+                {{ userData?.fullName.includes('undefined') ? userData?.fullName.replace('undefined', '') : userData?.fullName  || '' }}
               </h1>
             </div>
 
@@ -63,7 +63,7 @@ const userData = computed<IRecruiterDetails>(
                       fill="#343330"
                     />
                   </svg>
-                  {{ userData.companyName || 'N/A' }}
+                  {{ userData?.companyName || 'N/A' }}
                 </h1>
                 <h1 class="text-xs flex items-center gap-x-2">
                   <svg

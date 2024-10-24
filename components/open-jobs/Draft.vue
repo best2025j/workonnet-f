@@ -6,7 +6,7 @@ const userStore = useUserStore();
 </script>
 <template>
   <EmptyJobState v-if="jobList === undefined || jobList.length <= 0">
-    <template #title> Not in your draft </template>
+    <template #title> Nothing in your draft </template>
   </EmptyJobState>
   <div
     v-else
