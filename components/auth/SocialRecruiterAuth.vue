@@ -154,7 +154,6 @@ const loginWithLinkedIn = () => {
       Continue with Google
     </button>
     <button
-      @click="loginWithLinkedIn"
       class="w-full flex gap-3 items-center justify-center font-thin bg-[#0A66C2] px-5 py-2 text-white rounded-lg"
     >
       <span class="w-6">
