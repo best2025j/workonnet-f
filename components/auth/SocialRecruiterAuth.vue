@@ -72,7 +72,7 @@ const handleGoogleLogin = async (token: string) => {
       isLoading.value = false;
       updateIsLoading(isLoading.value);
       router.push('/dashboard/recruiter');
-    }, 1000);
+    }, 1500);
   } catch (error: any) {
     const errorData = error.data as ApiErrorResponse;
 
@@ -93,15 +93,15 @@ const handleGoogleLogin = async (token: string) => {
     setTimeout(() => {
       isLoading.value = false;
       updateIsLoading(isLoading.value);
-    }, 2000);
+    }, 1500);
   }
 };
 
 const loginWithLinkedIn = () => {
   const clientId = config.public.linkedinId;
-  const redirectUri = 'http://localhost:3000/auth/linkedin/jobseeker/callback';
-  const linkedInOAuthUrl = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&scope=r_liteprofile%20r_emailaddress`;
-
+  const redirectBase = config.public.linkedinRedirectBase
+  const redirectUri = `${redirectBase}auth/linkedin/recruiter/callback`;
+  const linkedInOAuthUrl = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&scope=profile%20email%20openid`;
   window.location.href = linkedInOAuthUrl;
 };
 </script>
@@ -154,6 +154,7 @@ const loginWithLinkedIn = () => {
       Continue with Google
     </button>
     <button
+    @click="loginWithLinkedIn()"
       class="w-full flex gap-3 items-center justify-center font-thin bg-[#0A66C2] px-5 py-2 text-white rounded-lg"
     >
       <span class="w-6">

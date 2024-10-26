@@ -5,9 +5,12 @@ import type { ApiErrorResponse, ApiSuccessResponse } from '~/types';
 const router = useRouter();
 const route = useRoute();
 const toast = useToast();
-const isLoading = ref<boolean>(false);
+const isLoading = ref<boolean>(true);
 const authStore = useAuthStore();
 const userStore = useUserStore();
+const isError = ref<boolean>(false);
+
+const config = useRuntimeConfig();
 
 const getUserProfile = async (token: string) => {
   try {
@@ -18,39 +21,70 @@ const getUserProfile = async (token: string) => {
     console.log(e);
   }
 };
+const getRecruiterProfile = async (token: string) => {
+  try {
+    const resp = await userStore.$api.refreshAuthRecruiterProfile(token);
+    const responseData = resp as ApiSuccessResponse;
+    userStore.setUserDetails(responseData);
+  } catch (e) {
+    console.log(e);
+  }
+};
 
 const handleLinkedInLogin = async () => {
   const code = route.query.code;
+  const redirectBase = config.public.linkedinRedirectBase;
+  const redirectUrl = `${redirectBase}auth/linkedin/${route.params.slug}/callback`;
 
-  if (code) {
+  if (
+    code &&
+    [LOGGED_IN_USER.JOBSEEKER, LOGGED_IN_USER.RECRUITER].includes(
+      route.params.slug as string as LOGGED_IN_USER
+    )
+  ) {
     try {
       // Send the authorization code to the backend to exchange for an access token
       const response = await $fetch('/api/auth/social/linkedin', {
         method: 'POST',
         body: {
           token: code,
-          userType: LOGGED_IN_USER.JOBSEEKER.toString().toUpperCase(),
+          redirectUrl,
+          userType: (route.params.slug as string).toUpperCase(),
         },
       });
 
       const responseData = response as ApiSuccessResponse;
 
-      authStore.setCurrentUserType(LOGGED_IN_USER.JOBSEEKER);
-      authStore.setUserAuthData({
-        accountType: LOGGED_IN_USER.JOBSEEKER,
-        userId: responseData.data.userId,
-      });
-      authStore.setUserToken(responseData.data.accessToken);
+      if (route.params.slug === LOGGED_IN_USER.JOBSEEKER) {
+        authStore.setCurrentUserType(LOGGED_IN_USER.JOBSEEKER);
+        authStore.setUserAuthData({
+          accountType: LOGGED_IN_USER.JOBSEEKER,
+          userId: responseData.data.userId,
+        });
+        authStore.setUserToken(responseData.data.accessToken);
 
-      await getUserProfile(responseData.data.accessToken);
-      setTimeout(() => {
-        isLoading.value = false;
-        router.push('/dashboard/jobseeker');
-      }, 3000);
+        await getUserProfile(responseData.data.accessToken);
+        setTimeout(() => {
+          isLoading.value = false;
+          router.push('/dashboard/jobseeker');
+        }, 1500);
+      } else if (route.params.slug === LOGGED_IN_USER.RECRUITER) {
+        authStore.setCurrentUserType(LOGGED_IN_USER.RECRUITER);
+        authStore.setUserAuthData({
+          accountType: LOGGED_IN_USER.RECRUITER,
+          recruiterId: responseData.data.recruiterId,
+        });
+        authStore.setUserToken(responseData.data.accessToken);
+        await getRecruiterProfile(responseData.data.accessToken);
+        setTimeout(() => {
+          isLoading.value = false;
+          router.push('/dashboard/recruiter');
+        }, 1500);
+      }
     } catch (error: any) {
       const errorData = error.data as ApiErrorResponse;
       console.log(error);
-
+      isError.value = true;
       toast.error('An error occurred try again', {
         timeout: 3000,
         position: POSITION.TOP_RIGHT,
@@ -58,7 +92,7 @@ const handleLinkedInLogin = async () => {
 
       setTimeout(() => {
         isLoading.value = false;
-      }, 2000);
+      }, 1500);
     }
   }
 };
@@ -88,10 +122,21 @@ onMounted(() => {
           />
         </svg>
       </span>
-      <h2 class="mt-3 text-xl font-normal font-['Georgia']">
-        Login successful
+      <h2 v-if="isLoading" class="mt-3 text-xl font-normal font-['Georgia']">
+        Authenticating
       </h2>
-      <p class="mb-20 font-['Nexa']">Redirecting...</p>
+      <h2 v-else class="mt-3 text-xl font-normal font-['Georgia']">
+        Login <span v-if="!isError">Successful</span>
+        <span v-else>Failed</span>
+      </h2>
+      <p v-if="isLoading" class="mb-20 font-['Nexa']">Loading please wait...</p>
+      <p v-else class="mb-20 font-['Nexa']">Redirecting...</p>
+      <NuxtLink
+        v-if="isError"
+        :to="`/auth/signin/${route.params.slug}`"
+        class="font-black text-white w-full py-3.5 rounded-xl text-sm bg-[#FE8900] items-center text-center"
+        >Go Back</NuxtLink
+      >
     </div>
   </div>
 </template>
