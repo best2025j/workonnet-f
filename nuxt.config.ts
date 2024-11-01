@@ -46,6 +46,7 @@ export default defineNuxtConfig({
       paystackKey: '',
       linkedinId: '',
       linkedinSecret: '',
+      linkedinRedirectBase: '',
     },
   },
 
