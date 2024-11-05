@@ -42,6 +42,10 @@ const modalTrigger = ref(null);
 
 const skillList = ref(availableSkillList);
 
+const jobTypeList = ref(preferredJobTypeList);
+const jobLocationTypeList = ref(preferredLocationTypeList);
+
+
 const toast = useToast();
 
 const workExperienceFormData = reactive({
@@ -66,6 +70,11 @@ const educationFormData = reactive({
 const skillsLangFormData = reactive({
   skills: [''],
   spokenLanguages: [''],
+});
+
+const jobLocationPreferenceFormData = reactive({
+  preferredJobTypes: [''],
+  preferredLocationType: [''],
 });
 
 const eduRules = computed(() => {
@@ -111,6 +120,26 @@ const skillsLangRules = computed(() => {
   };
 });
 
+const jobLocationPreferenceRules = computed(() => {
+  return {
+    preferredJobTypes: {
+      $each: {
+        required: helpers.withMessage('Preferred job types is required', required),
+        minLength: helpers.withMessage('Add atleast one job type', minLength(1)),
+      },
+    },
+    preferredLocationType: {
+      $each: {
+        required: helpers.withMessage('Preferred location type is required', required),
+        minLength: helpers.withMessage(
+          'Add atleast one preferred location',
+          minLength(1)
+        ),
+      },
+    },
+  };
+});
+
 const rules = computed(() => {
   return {
     companyOrganization: {
@@ -149,6 +178,9 @@ const rules = computed(() => {
 const v$ = useVuelidate(rules, workExperienceFormData);
 const v2$ = useVuelidate(eduRules, educationFormData);
 const v3$ = useVuelidate(skillsLangFormData, skillsLangRules);
+
+const v4$ = useVuelidate(jobLocationPreferenceFormData, jobLocationPreferenceRules);
+
 
 const showDeleteModal = async () => {
   (modalTrigger.value as unknown as any).showModal();
@@ -735,6 +767,54 @@ const handleProfileResumeUpdate = async () => {
 
     resumeFilePreview.value = null;
     resumeFileData.value = null;
+    userStore.setUserDetails(responseData.data);
+  } catch (error: any) {
+    const errorData = error.data as ApiErrorResponse;
+
+    toast.error('An error occurred try again', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+  }
+};
+
+const handlePreferenceUpdate = async () => {
+  isLoading.value = true;
+  const isValidForm = await v4$.value.$validate();
+  if (!isValidForm) {
+    toast.error('Please fill all fields correctly', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+    return;
+  }
+
+  try {
+    const token = authStore.userToken;
+    const response = await $fetch('/api/jobseeker/update-job-preference', {
+      method: 'POST',
+      body: jobLocationPreferenceFormData,
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const responseData = response as ApiSuccessResponse;
+    toast.success('Your preference was updated successfully', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 500);
+
     userStore.setUserDetails(responseData.data);
   } catch (error: any) {
     const errorData = error.data as ApiErrorResponse;
@@ -1443,6 +1523,75 @@ onBeforeMount(async () => {
               :isLoading="isLoading"
               :disabled="isLoading"
               @click="handleProfileUpdate()"
+            >
+              <template #text>
+                {{ !isLoading ? 'Save changes' : 'Saving...' }}
+              </template>
+            </BtnSuccess>
+          </div>
+        </div>
+
+        <!-- preferred location types -->
+        <div class="bg-white mt-4 rounded-10 space-y-3 p-5">
+          <h1 class="text xl font-black font-[Georgia]">Preferred job type</h1>
+          <p class="text-xs pt-3">Add or edit your preferred job type</p>
+          <div class="space-y-3">
+            <!-- Input form to add new preferred job type -->
+            <div class="mt-4 flex flex-col">
+              <Multiselect
+                v-model="jobLocationPreferenceFormData.preferredJobTypes"
+                mode="tags"
+                :searchable="true"
+                :options="jobTypeList"
+                placeholder="Select Job Types"
+                :new="true"
+              />
+
+              <div
+                class="input-errors"
+                v-for="error of v4$.preferredJobTypes.$errors"
+                :key="error.$uid"
+              >
+                <span class="text-xs text-danger-500"
+                  >* {{ error.$message }}</span
+                >
+              </div>
+            </div>
+          </div>
+          <!-- Location Preference -->
+          <div class="space-y-3">
+            <h1 class="text xl font-black font-[Georgia]">Location Preference</h1>
+            <p class="text-xs pt-3">Add or edit your location preference</p>
+            <!-- Input form -->
+            <div class="mt-4 flex flex-col">
+              <Multiselect
+                v-model="jobLocationPreferenceFormData.preferredLocationType"
+                mode="tags"
+                :searchable="true"
+                :options="jobLocationTypeList"
+                placeholder="Select location preference"
+                :new="true"
+              />
+
+              <div
+                class="input-errors"
+                v-for="error of v4$.preferredLocationType.$errors"
+                :key="error.$uid"
+              >
+                <span class="text-xs text-danger-500"
+                  >* {{ error.$message }}</span
+                >
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="flex flex-col w-full md:w-auto items-center md:flex-row md:space-y-0 space-x-0 space-y-3 md:space-x-3 text-xs"
+          >
+            <BtnSuccess
+              :isLoading="isLoading"
+              :disabled="isLoading"
+              @click="handlePreferenceUpdate()"
             >
               <template #text>
                 {{ !isLoading ? 'Save changes' : 'Saving...' }}

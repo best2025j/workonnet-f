@@ -462,3 +462,7 @@ export const languageList = [
   'Icelandic',
   'Maltese',
 ];
+
+export const preferredJobTypeList = ['full-time', 'part-time', 'contract'];
+
+export const preferredLocationTypeList = ['remote', 'hybrid', 'onsite'];
