@@ -138,3 +138,13 @@ export function extractDataFromRequest(data: Record<string, any>) {
     data: data?.data,
   };
 }
+
+
+export function isNullOrEmpty(obj: any): boolean {
+  return (
+    obj === null ||
+    (typeof obj === 'object' &&
+      Object.keys(obj).length === 0 &&
+      !(obj instanceof Date))
+  );
+}

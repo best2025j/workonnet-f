@@ -63,7 +63,8 @@ const subscribeToSelectedPlan = async () => {
 };
 
 const subscribeToPlan = (plan: IPricing) => {
-  if(userSubscription.value && userSubscription.value?.subType !== 'free') {
+  console.log(userSubscription.value)
+  if(!isNullOrEmpty(userSubscription.value) && userSubscription.value?.subType !== 'free') {
     toast.error('Error occurred \n subscription needs to be canceled before upgrading')
   } else {
     selectedPlan.value = plan;
