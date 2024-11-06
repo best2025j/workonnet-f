@@ -128,6 +128,7 @@ export interface IJobPost {
   createdAt: string;
   updatedAt: string;
   applicants: number;
+  educationRequirement: string[];
   id: string;
 }
 

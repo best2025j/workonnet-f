@@ -36,7 +36,7 @@ const userData = computed<IRecruiterDetails>(
           <img
             v-if="userData?.photo"
             :src="userData?.photo?.url"
-            class="w-[70px] h-[70px]"
+            class="w-[70px] h-[70px] rounded-full"
             alt="profile-image"
           />
         </div>

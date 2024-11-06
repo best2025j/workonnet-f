@@ -1,5 +1,11 @@
 <script setup lang="ts">
-import type { ApiSuccessResponse, IJobPost, IRecruiterDetails } from '~/types';
+import { POSITION, useToast } from 'vue-toastification';
+import type {
+  ApiErrorResponse,
+  ApiSuccessResponse,
+  IJobPost,
+  IRecruiterDetails,
+} from '~/types';
 
 definePageMeta({
   title: 'Jobs Openings',
@@ -15,21 +21,73 @@ const jobStore = useJobStore();
 const currentJob = ref<IJobPost | null>(null);
 const applications = ref([]);
 const isLoading = ref(false);
+const toast = useToast();
+
+const slugId = computed(() => (route.params.slug as string).split('-')[0]);
 
 const userData = computed<IRecruiterDetails>(
   () => userStore.loggedInUserDetails
 );
 
-const publishJob = () => {};
-const archiveJob = () => {};
+const publishJob = async () => {
+  await updateJobApi('published')
+};
+const archiveJob = async () => {
 
-onBeforeMount(async () => {
+  await updateJobApi('archived')
+};
+
+const updateJobApi = async (action: string) => {
+  let actionUrl;
+
+  if (action === 'published') {
+    actionUrl = '/api/recruiter/job/publish';
+  } else {
+    actionUrl = '/api/recruiter/job/archive';
+  }
+  try {
+    isLoading.value = true;
+    const token = authStore.userToken;
+    await $fetch(actionUrl, {
+      method: 'POST',
+      query: {
+        jobListingId: slugId.value,
+      },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    toast.success(`Job post was ${action} successfully`, {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+
+    await getJob()
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 2000);
+  } catch (error: any) {
+    const errorData = error.data as ApiErrorResponse;
+
+    toast.error('An error occurred try again', {
+      timeout: 3000,
+      position: POSITION.TOP_RIGHT,
+    });
+  }
+
+  setTimeout(() => {
+    isLoading.value = false;
+  }, 2000);
+};
+
+const getJob = async ()  => {
   try {
     isLoading.value = true;
     const token = authStore.userToken;
     const response = await jobStore.$api.fetchRecruiterSingle(
       token,
-      (route.params.slug as string).split('-')[0]
+      slugId.value
     );
     const responseData = response as ApiSuccessResponse;
     currentJob.value = responseData.data;
@@ -40,6 +98,10 @@ onBeforeMount(async () => {
   } catch (e) {
     console.log(e);
   }
+}
+
+onBeforeMount(async () => {
+   await getJob()
 });
 </script>
 
@@ -110,6 +172,7 @@ onBeforeMount(async () => {
             <div class="flex justify-end w-full pt-4">
               <button
                 v-if="currentJob?.status === 'published'"
+                @click="archiveJob"
                 class="md:px-4 w-full text-xs md:text-sm py-3 rounded-8 text-back-50 bg-white border border:bg-black-50"
               >
                 Archive
@@ -225,7 +288,7 @@ onBeforeMount(async () => {
       <!-- second div -->
       <div class="bg-white px-4 py-4 w-full md:w-1/3 rounded-10">
         <div class="flex items-center justify-between py-2">
-          <h1 class="text-sm font-black">Candidates</h1>
+          <h1 class="text-sm font-black">Matched Candidates</h1>
           <button
             v-if="currentJob!.applicants > 0"
             class="text-xs text-primary-1 flex gap-x-2 items-center"
@@ -329,7 +392,7 @@ onBeforeMount(async () => {
                   >
                     <li>
                       <NuxtLink
-                        to="/dashboard/recruiter/jobs-openings/profile-veiw"
+                        to="/dashboard/recruiter/jobs-openings/profile-view"
                       >
                         <div class="flex text-xs gap-x-3">
                           <span
@@ -434,7 +497,7 @@ onBeforeMount(async () => {
           </ul>
         </div>
         <div v-else class="py-10 items-center flex justify-center">
-          <span>No applications yet</span>
+          <span>No matched candidate yet</span>
         </div>
         <!--  -->
       </div>

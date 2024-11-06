@@ -2,7 +2,7 @@
 import { POSITION, useToast } from 'vue-toastification';
 import { required, helpers, minLength } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
-import type { ApiErrorResponse, ApiSuccessResponse, IJobPost, IRecruiterDetails } from '~/types';
+import type { ApiErrorResponse, ApiSuccessResponse, IJobPost } from '~/types';
 
 definePageMeta({
   title: 'Edit job opening',
@@ -11,28 +11,52 @@ definePageMeta({
   middleware: ['auth', 'is-recruiter'],
 });
 
-const skillList = ref(['Vue.js', 'Javascript', 'Open Source']);
+const skillList = ref(availableSkillList);
 
+const route = useRoute();
 const toast = useToast();
 const authStore = useAuthStore();
 const isLoading = ref<boolean>(false);
-const route = useRoute();
-const currentJob = ref<IJobPost | null>(null);
 const jobStore = useJobStore();
+const editId = computed(() => (route.params.edit as string).split('-')[0]);
 
 const formData = reactive({
-  title: currentJob.value?.title || '',
-  description: currentJob.value?.description || '',
-  requirements: currentJob.value?.requirements || [''],
-  benefits: currentJob.value?.benefits || [''],
-  location: currentJob.value?.location || '',
-  jobType: currentJob.value?.jobType || '',
-  level: currentJob.value?.level || '',
-  skills: currentJob.value?.skills || [''],
-  expectedSalary: currentJob.value?.expectedSalary || 0,
+  title: '',
+  description: '',
+  requirements: [''],
+  benefits: [''],
+  location: '',
+  jobType: '',
+  level: '',
+  skills: [''],
+  expectedSalary: '',
+  educationRequirement: [],
 });
 
+const selectedEduFormData = ref<string | null>(null);
+
+const addEducationalRequirement = () => {
+  if (selectedEduFormData.value) {
+    const filtered = formData.educationRequirement.filter(
+      (value) => value === selectedEduFormData.value
+    );
+
+    if (filtered && filtered.length > 0) {
+      return false;
+    }
+    // add
+    (formData.educationRequirement as string[]).push(selectedEduFormData.value);
+
+    selectedEduFormData.value = null;
+  }
+};
+
+const removeEduRequirement = (index: number) => {
+  formData.educationRequirement.splice(index, 1);
+};
+
 const addRequirement = () => formData.requirements.push('');
+
 const removeRequirement = (index: number) => {
   formData.requirements.splice(index, 1);
 };
@@ -91,7 +115,7 @@ const rules = computed(() => {
 
 const v$ = useVuelidate(rules, formData);
 
-const handleJobUpdate = async () => {
+const handleJobPost = async (status: string) => {
   isLoading.value = true;
   const isValidForm = await v$.value.$validate();
   if (!isValidForm) {
@@ -106,14 +130,18 @@ const handleJobUpdate = async () => {
     return;
   }
 
+  formData.expectedSalary = convertCurrencyToNumber(
+    formData.expectedSalary
+  ).toString();
+
   try {
     const token = authStore.userToken;
     await $fetch('/api/recruiter/job/edit', {
       method: 'POST',
+      body: formData,
       query: {
-        jobListingId: (route.params.edit as string).split('-')[0],
+        jobListingId: editId.value,
       },
-      body: { ...formData, status },
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -141,20 +169,16 @@ const handleJobUpdate = async () => {
   }, 2000);
 };
 
-const setEditData = async (jobListing: IJobPost) => {
-
-}
-
-onBeforeMount(async () => {
+const getJob = async () => {
   try {
     isLoading.value = true;
     const token = authStore.userToken;
     const response = await jobStore.$api.fetchRecruiterSingle(
       token,
-      (route.params.edit as string).split('-')[0]
+      editId.value
     );
     const responseData = response as ApiSuccessResponse;
-    currentJob.value = responseData.data;
+    setEditJob(responseData.data as IJobPost);
 
     setTimeout(() => {
       isLoading.value = false;
@@ -162,6 +186,37 @@ onBeforeMount(async () => {
   } catch (e) {
     console.log(e);
   }
+};
+
+const setEditJob = (data: IJobPost) => {
+  formData.title = data.title;
+  formData.description = data.description;
+  formData.requirements = data.requirements;
+  formData.benefits = data.benefits;
+  formData.location = data.location;
+  formData.jobType = data.jobType;
+  formData.level = data.level;
+  formData.skills = data.skills;
+  formData.expectedSalary = data.expectedSalary.toString();
+  formData.educationRequirement = data.educationRequirement as any;
+};
+
+function convertCurrencyToNumber(currency: string): number {
+  // Remove commas and any other characters except digits and decimal points
+  const cleanedValue = currency.replace(/[^0-9.]/g, '');
+  // Convert the cleaned string to a number
+  return parseFloat(cleanedValue);
+}
+
+const formatNumber = (): void => {
+  const value = formData.expectedSalary.toString().replace(/\D/g, ''); // Remove non-numeric characters
+  formData.expectedSalary = new Intl.NumberFormat('en-NG', {
+    minimumFractionDigits: 0,
+  }).format(Number(value));
+};
+
+onMounted(async () => {
+  await getJob();
 });
 </script>
 
@@ -177,82 +232,15 @@ onBeforeMount(async () => {
       <div class="flex gap-3">
         <!-- for modal triggering -->
         <BtnPrimary
-          @click="handleJobUpdate()"
+          @click="handleJobPost('published')"
           :isLoading="isLoading"
           :disabled="isLoading"
           class="!px-4 !py-2 !rounded-5 !text-xs"
         >
           <template #text>
-            {{ !isLoading ? 'Update job' : 'Updating...' }}
+            {{ isLoading ? 'Updating' : 'Update' }}
           </template>
         </BtnPrimary>
-
-        <dialog
-          id="my_modal_1"
-          class="modal text-black-950 backdrop-blur-sm backdrop-filter"
-        >
-          <div class="modal-box flex-col flex items-center space-y-3">
-            <div class="flex items-center justify-between w-full">
-              <div class="text-white">hello.</div>
-              <h3 class="text-lg font-bold">Hello!</h3>
-
-              <form method="dialog">
-                <button class="btn">
-                  <svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 14 14"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
-                      d="M0.726027 0.724657C0.970105 0.480579 1.36583 0.480579 1.60991 0.724657L13.2758 12.3905C13.5199 12.6346 13.5199 13.0303 13.2758 13.2744C13.0317 13.5185 12.636 13.5185 12.3919 13.2744L0.726027 1.60854C0.481949 1.36446 0.481949 0.968734 0.726027 0.724657Z"
-                      fill="#57575B"
-                    />
-                    <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
-                      d="M13.274 0.724657C13.5181 0.968734 13.5181 1.36446 13.274 1.60854L1.60809 13.2744C1.36401 13.5185 0.968285 13.5185 0.724208 13.2744C0.48013 13.0303 0.480131 12.6346 0.724208 12.3905L12.3901 0.724657C12.6342 0.480579 13.0299 0.480579 13.274 0.724657Z"
-                      fill="#57575B"
-                    />
-                  </svg>
-                </button>
-              </form>
-            </div>
-            <span
-              ><svg
-                width="82"
-                height="82"
-                viewBox="0 0 82 82"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M41 0.375C32.9652 0.375 25.1107 2.75761 18.43 7.22155C11.7492 11.6855 6.54222 18.0302 3.46741 25.4535C0.392602 32.8767 -0.411908 41.0451 1.15562 48.9255C2.72314 56.806 6.5923 64.0447 12.2738 69.7262C17.9553 75.4077 25.194 79.2769 33.0745 80.8444C40.955 82.4119 49.1233 81.6074 56.5465 78.5326C63.9698 75.4578 70.3145 70.2508 74.7785 63.57C79.2424 56.8893 81.625 49.0349 81.625 41C81.6136 30.2291 77.3299 19.9025 69.7137 12.2863C62.0975 4.67015 51.7709 0.386374 41 0.375ZM58.836 33.8359L36.961 55.7109C36.6707 56.0015 36.3261 56.232 35.9467 56.3893C35.5673 56.5465 35.1607 56.6275 34.75 56.6275C34.3393 56.6275 33.9327 56.5465 33.5533 56.3893C33.174 56.232 32.8293 56.0015 32.5391 55.7109L23.1641 46.3359C22.5777 45.7496 22.2483 44.9543 22.2483 44.125C22.2483 43.2957 22.5777 42.5004 23.1641 41.9141C23.7505 41.3277 24.5458 40.9983 25.375 40.9983C26.2043 40.9983 26.9996 41.3277 27.586 41.9141L34.75 49.082L54.4141 29.4141C54.7044 29.1237 55.0491 28.8934 55.4285 28.7363C55.8078 28.5791 56.2144 28.4983 56.625 28.4983C57.0356 28.4983 57.4422 28.5791 57.8216 28.7363C58.2009 28.8934 58.5456 29.1237 58.836 29.4141C59.1263 29.7044 59.3566 30.0491 59.5137 30.4284C59.6709 30.8078 59.7518 31.2144 59.7518 31.625C59.7518 32.0356 59.6709 32.4422 59.5137 32.8216C59.3566 33.2009 59.1263 33.5456 58.836 33.8359Z"
-                  fill="#0FA968"
-                />
-              </svg>
-            </span>
-            <p class="py-4">
-              You job listing has been posted and it’s online now.
-            </p>
-            <div class="space-x-4">
-              <!-- if there is a button in form, it will close the modal -->
-              <button
-                class="px-4 py-2 border border-danger-600 text-danger-600 text-xs rounded-10"
-              >
-                Return to dashboard
-              </button>
-              <button
-                class="rounded-10 px-4 py-2 text-white text-xs bg-primary-1"
-              >
-                View posted job
-              </button>
-            </div>
-          </div>
-        </dialog>
       </div>
     </div>
 
@@ -267,7 +255,7 @@ onBeforeMount(async () => {
           :disabled="isLoading"
           @change="v$.title.$touch"
           placeholder="Enter a job title"
-          class="placeholder:text-sm px-3 py-2 outline-none border border-gray-300 rounded-md"
+          class="placeholder:text-sm text-sm px-3 py-2 outline-none border border-gray-300 rounded-md"
         />
 
         <div
@@ -282,7 +270,7 @@ onBeforeMount(async () => {
       <!-- input with drop down  -->
       <div class="flex flex-col md:flex-row gap-2">
         <div class="flex flex-col w-full relative">
-          <label class="text-sm mb-2"
+          <label class="text-sm mb-2" for="location"
             >Location Type
             <select
               v-model="formData.location"
@@ -290,7 +278,7 @@ onBeforeMount(async () => {
               @change="v$.location.$touch"
               class="outline-none mt-2 bg-white w-full text-sm font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2.5 border border-black-200 border-solid"
             >
-              <option disabled selected>Select location type</option>
+              <option value="" disabled selected>Select location type</option>
               <option value="remote">Remote</option>
               <option value="hybrid">Hybrid</option>
               <option value="onsite">Onsite</option>
@@ -370,6 +358,7 @@ onBeforeMount(async () => {
             v-model="formData.expectedSalary"
             :disabled="isLoading"
             @change="v$.expectedSalary.$touch"
+            @input="formatNumber"
             placeholder="Enter amount"
             class="pl-28 placeholder:text-xs pr-4 py-2 outline-none border border-gray-300 rounded-md"
           />
@@ -465,7 +454,7 @@ onBeforeMount(async () => {
                 type="text"
                 v-model="formData.requirements[index]"
                 placeholder="Enter requirement"
-                class="placeholder:text-sm px-3 py-2 outline-none border border-gray-300 rounded-md flex-grow"
+                class="placeholder:text-sm text-sm px-3 py-2 outline-none border border-gray-300 rounded-md flex-grow"
               />
               <button type="button" @click="removeRequirement(index)">
                 <svg
@@ -533,7 +522,7 @@ onBeforeMount(async () => {
                 type="text"
                 v-model="formData.benefits[index]"
                 placeholder="Enter benefit"
-                class="placeholder:text-sm px-3 py-2 outline-none border border-gray-300 rounded-md flex-grow"
+                class="placeholder:text-sm text-sm px-3 py-2 outline-none border border-gray-300 rounded-md flex-grow"
               />
               <button type="button" @click="removeBenefit(index)">
                 <svg
@@ -570,20 +559,6 @@ onBeforeMount(async () => {
       <div class="py-1 space-y-2">
         <h1 class="text-sm">Skill Sets</h1>
         <button type="button" class="flex items-center gap-2">
-          <!-- <span
-            ><svg
-              width="18"
-              height="18"
-              viewBox="0 0 18 18"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M16.5 0H1.5C1.10218 0 0.720644 0.158035 0.43934 0.43934C0.158035 0.720644 0 1.10218 0 1.5V16.5C0 16.8978 0.158035 17.2794 0.43934 17.5607C0.720644 17.842 1.10218 18 1.5 18H16.5C16.8978 18 17.2794 17.842 17.5607 17.5607C17.842 17.2794 18 16.8978 18 16.5V1.5C18 1.10218 17.842 0.720644 17.5607 0.43934C17.2794 0.158035 16.8978 0 16.5 0ZM14.25 9.75H9.75V14.25C9.75 14.4489 9.67098 14.6397 9.53033 14.7803C9.38968 14.921 9.19891 15 9 15C8.80109 15 8.61032 14.921 8.46967 14.7803C8.32902 14.6397 8.25 14.4489 8.25 14.25V9.75H3.75C3.55109 9.75 3.36032 9.67098 3.21967 9.53033C3.07902 9.38968 3 9.19891 3 9C3 8.80109 3.07902 8.61032 3.21967 8.46967C3.36032 8.32902 3.55109 8.25 3.75 8.25H8.25V3.75C8.25 3.55109 8.32902 3.36032 8.46967 3.21967C8.61032 3.07902 8.80109 3 9 3C9.19891 3 9.38968 3.07902 9.53033 3.21967C9.67098 3.36032 9.75 3.55109 9.75 3.75V8.25H14.25C14.4489 8.25 14.6397 8.32902 14.7803 8.46967C14.921 8.61032 15 8.80109 15 9C15 9.19891 14.921 9.38968 14.7803 9.53033C14.6397 9.67098 14.4489 9.75 14.25 9.75Z"
-                fill="#0FA968"
-              />
-            </svg>
-          </span> -->
           <h1 class="text-success-600 text-xs">Add New Skills</h1>
         </button>
 
@@ -603,6 +578,105 @@ onBeforeMount(async () => {
             :key="error.$uid"
           >
             <span class="text-xs text-danger-500">* {{ error.$message }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- educational requirement -->
+      <div class="py-1 space-y-2">
+        <h1 class="text-sm">Education Requirement <small>(optional)</small></h1>
+        <div class="flex items-center justify-between space-x-6 w-[59%]">
+          <div class="flex flex-col w-full">
+            <label for="fieldOfStudy" class="text-sm"
+              >Select Degree(s) -
+              <small>select a degree and click add button</small></label
+            >
+            <select
+              v-model="selectedEduFormData"
+              :disabled="isLoading"
+              class="outline-none mt-2 bg-white w-full text-sm font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2.5 border border-black-200 border-solid"
+            >
+              <option value="null" disabled>Select degree</option>
+
+              <optgroup
+                v-for="group in schoolDegrees"
+                :label="group.label"
+                :key="group.label"
+              >
+                <option
+                  v-for="degree in group.options"
+                  :value="degree.text"
+                  :key="degree.value"
+                >
+                  {{ degree.text }}
+                </option>
+              </optgroup>
+            </select>
+          </div>
+
+          <div class="flex-shrink-0 pt-6 flex items-center justify-center">
+            <button
+              type="button"
+              class="flex items-center justify-center gap-2"
+              @click="addEducationalRequirement"
+            >
+              <span
+                ><svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 18 18"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M16.5 0H1.5C1.10218 0 0.720644 0.158035 0.43934 0.43934C0.158035 0.720644 0 1.10218 0 1.5V16.5C0 16.8978 0.158035 17.2794 0.43934 17.5607C0.720644 17.842 1.10218 18 1.5 18H16.5C16.8978 18 17.2794 17.842 17.5607 17.5607C17.842 17.2794 18 16.8978 18 16.5V1.5C18 1.10218 17.842 0.720644 17.5607 0.43934C17.2794 0.158035 16.8978 0 16.5 0ZM14.25 9.75H9.75V14.25C9.75 14.4489 9.67098 14.6397 9.53033 14.7803C9.38968 14.921 9.19891 15 9 15C8.80109 15 8.61032 14.921 8.46967 14.7803C8.32902 14.6397 8.25 14.4489 8.25 14.25V9.75H3.75C3.55109 9.75 3.36032 9.67098 3.21967 9.53033C3.07902 9.38968 3 9.19891 3 9C3 8.80109 3.07902 8.61032 3.21967 8.46967C3.36032 8.32902 3.55109 8.25 3.75 8.25H8.25V3.75C8.25 3.55109 8.32902 3.36032 8.46967 3.21967C8.61032 3.07902 8.80109 3 9 3C9.19891 3 9.38968 3.07902 9.53033 3.21967C9.67098 3.36032 9.75 3.55109 9.75 3.75V8.25H14.25C14.4489 8.25 14.6397 8.32902 14.7803 8.46967C14.921 8.61032 15 8.80109 15 9C15 9.19891 14.921 9.38968 14.7803 9.53033C14.6397 9.67098 14.4489 9.75 14.25 9.75Z"
+                    fill="#0FA968"
+                  />
+                </svg>
+              </span>
+              <h1 class="text-success-600 text-xs">Add Degree</h1>
+            </button>
+          </div>
+        </div>
+
+        <div class="flex flex-col space-y-2 w-1/2">
+          <div
+            v-for="(degree, index) in formData.educationRequirement"
+            :key="index"
+            class="flex space-x-2 items-center"
+          >
+            <input
+              type="text"
+              readonly
+              :value="degree"
+              class="text-sm px-3 py-2 outline-none border border-gray-300 rounded-md flex-grow"
+            />
+            <button type="button" @click="removeEduRequirement(index)">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="size-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
+                />
+              </svg>
+            </button>
+
+            <div
+              class="input-errors"
+              v-for="error of v$.benefits.$errors"
+              :key="error.$uid"
+            >
+              <span class="text-xs text-danger-500"
+                >* {{ error.$message }}</span
+              >
+            </div>
           </div>
         </div>
       </div>
