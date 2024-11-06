@@ -63,7 +63,6 @@ const subscribeToSelectedPlan = async () => {
 };
 
 const subscribeToPlan = (plan: IPricing) => {
-  console.log(userSubscription.value)
   if(!isNullOrEmpty(userSubscription.value) && userSubscription.value?.subType !== 'free') {
     toast.error('Error occurred \n subscription needs to be canceled before upgrading')
   } else {
@@ -327,13 +326,13 @@ onBeforeMount(async () => {
             Active
           </button>
 
-          <button
+          <!-- <button
           v-if="userSubscription?.subType !== 'free'"
              class="border-primary-1 border bg-westside-100 font-black py-3 rounded-10 text-xs w-full text-primary-1"
              @click="cancelSubscription()"
           >
             Cancel Subscription
-          </button>
+          </button> -->
         </div>
 
         <div v-else class="py-4">
