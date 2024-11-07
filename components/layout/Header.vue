@@ -2,6 +2,7 @@
 import type { IUserDetails } from "~/types";
 
 const route = useRoute();
+const router = useRouter();
 
 // State to track whether the mobile side nav is open
 const isSideNavOpen = ref(false);
@@ -27,10 +28,9 @@ const toggleProfileView = () => {
   showProfileView.value = !showProfileView.value;
 };
 
-// Close notifications
-// const closeNotifications = () => {
-//   showNotifications.value = false;
-// };
+const logoutUser = () => {
+  router.push('/?logout=true')
+};
 
 const userData = computed<IUserDetails>(() => userStore.loggedInUserDetails);
 </script>
@@ -101,14 +101,14 @@ const userData = computed<IUserDetails>(() => userStore.loggedInUserDetails);
               v-if="!userData?.photo"
               src="/assets/svgs/avatar-user.svg"
               alt="Profile Picture"
-              class="h-8 w-8"
+              class="h-8 w-8 rounded-full"
             />
 
             <img
               v-else
               :src="userData?.photo?.url"
               alt="Profile Picture"
-              class="h-8 w-8"
+              class="h-8 w-8 rounded-full"
             />
           </div>
           <!-- Use the bellIcon component correctly -->
@@ -296,19 +296,19 @@ const userData = computed<IUserDetails>(() => userStore.loggedInUserDetails);
       class="md:w-[241px] bg-white shadow py-4 px-4 space-y-4 absolute md:right-[4.5rem] right-4 top-14 rounded-[20px]"
     >
       <div class="flex space-x-2 bg-black-50 rounded-10 px-3 py-2">
-        <img
+        <!-- <img
           src="/assets/images/Ellipse10.png"
           class="w-10 h-10"
           alt="no image"
-        />
+        /> -->
         <div class="flex flex-col">
-          <h1 class="text-sm capitalize">Stanley Nwosu</h1>
-          <p class="text-[10px] capitalize">example@example.com</p>
+          <h1 class="text-sm capitalize">{{userData?.fullName || ''}} {{userData?.firstName || ''}} {{userData?.lastName || ''}}</h1>
+          <p class="text-[10px]">{{ userData.email }}</p>
         </div>
       </div>
 
       <div class="space-y-2">
-        <div class="flex justify-between bg-black-50 rounded-10 px-3 py-2">
+        <!-- <div class="flex justify-between bg-black-50 rounded-10 px-3 py-2">
           <h1 class="text-xs font-[400] capitalize">Switch Language</h1>
 
           <span>
@@ -325,11 +325,11 @@ const userData = computed<IUserDetails>(() => userStore.loggedInUserDetails);
               />
             </svg>
           </span>
-        </div>
+        </div> -->
 
-        <div class="bg-danger-100 rounded-10 px-3 py-2">
+        <button @click="logoutUser" class="bg-danger-100 rounded-10 px-3 py-2 w-full">
           <h1 class="text-xs font-black text-danger-600 capitalize">Logout</h1>
-        </div>
+        </button>
       </div>
     </div>
 

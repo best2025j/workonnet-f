@@ -116,12 +116,9 @@ const recruiterLinks = [
   },
 ];
 
-// const isActive = (pageName: string) => route.meta?.pageName === pageName;
 
 const logoutUser = () => {
-  authStore.logoutUser();
-  userStore.clearUserStore();
-  router.push('/')
+  router.push('/?logout=true')
 };
 
 const isActive = (pageName: string) => {

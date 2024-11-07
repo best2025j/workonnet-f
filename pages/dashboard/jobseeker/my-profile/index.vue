@@ -1,42 +1,38 @@
 <script setup lang="ts">
-import type { ApiSuccessResponse, IUserDetails } from '~/types';
+import type {
+  ApiSuccessResponse,
+  IUserDetails,
+  IWorkExperience,
+} from '~/types';
 
 definePageMeta({
-  title: 'Candidate Profile',
-  pageName: 'dashboard.recruiter.jobseeker.index',
+  title: 'My Profile',
+  pageName: 'dashboard.jobseeker.my-profile.index',
   layout: 'dashboard',
-  middleware: ['auth', 'is-recruiter'],
+  middleware: ['auth', 'is-jobseeker'],
 });
 
-const route = useRoute();
 const userStore = useUserStore();
 const authStore = useAuthStore();
-const userData = ref<IUserDetails | null>(null);
+const userData = computed<IUserDetails>(() => userStore.loggedInUserDetails);
 const isLoading = ref<boolean>(false);
-const showModal = ref(false); // Manage modal visibility
-const isLoadingPdf = ref(true);
 
-const userId = computed(() => (route.params.slug as string).split('-')[0]);
-const showPdfModal = () => {
-  showModal.value = true;
-  isLoadingPdf.value = true;
-};
-const onPdfLoad = () => {
-  isLoadingPdf.value = false;
-};
+const userWorkExperience = computed<IWorkExperience[]>(
+  () => userStore.workExperience
+);
 
-const fetchUserFullDetails = async () => {
+const fetchWorkExperience = async () => {
   isLoading.value = true;
 
   try {
+    if (!userStore.workExperience.length) {
+      isLoading.value = true;
+    }
     const token = authStore.userToken;
-    const response = await userStore.$api.getUserSingleDetails(
-      token,
-      userId.value
-    );
+    const response = await userStore.$api.refreshUserWorkExperience(token);
     const responseData = response as ApiSuccessResponse;
 
-    userData.value = responseData.data;
+    userStore.setWorkExperience(responseData.data);
 
     setTimeout(() => {
       isLoading.value = false;
@@ -48,7 +44,9 @@ const fetchUserFullDetails = async () => {
 
 onBeforeMount(async () => {
   // fetch experience
-  await fetchUserFullDetails();
+  if (!userWorkExperience.value.length || !userWorkExperience.value) {
+    await fetchWorkExperience();
+  }
 });
 </script>
 
@@ -124,6 +122,40 @@ onBeforeMount(async () => {
             <div class="flex gap-2 items-center">
               <svg
                 width="18"
+                height="16"
+                viewBox="0 0 18 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M15.875 3.375H12.75V2.75C12.75 2.25272 12.5525 1.77581 12.2008 1.42417C11.8492 1.07254 11.3723 0.875 10.875 0.875H7.125C6.62772 0.875 6.15081 1.07254 5.79917 1.42417C5.44754 1.77581 5.25 2.25272 5.25 2.75V3.375H2.125C1.79348 3.375 1.47554 3.5067 1.24112 3.74112C1.0067 3.97554 0.875 4.29348 0.875 4.625V14.625C0.875 14.9565 1.0067 15.2745 1.24112 15.5089C1.47554 15.7433 1.79348 15.875 2.125 15.875H15.875C16.2065 15.875 16.5245 15.7433 16.7589 15.5089C16.9933 15.2745 17.125 14.9565 17.125 14.625V4.625C17.125 4.29348 16.9933 3.97554 16.7589 3.74112C16.5245 3.5067 16.2065 3.375 15.875 3.375ZM6.5 2.75C6.5 2.58424 6.56585 2.42527 6.68306 2.30806C6.80027 2.19085 6.95924 2.125 7.125 2.125H10.875C11.0408 2.125 11.1997 2.19085 11.3169 2.30806C11.4342 2.42527 11.5 2.58424 11.5 2.75V3.375H6.5V2.75ZM15.875 4.625V7.87578C13.7655 9.02404 11.4018 9.62543 9 9.625C6.59828 9.62544 4.23471 9.02434 2.125 7.87656V4.625H15.875ZM15.875 14.625H2.125V9.28438C4.26557 10.3314 6.61708 10.8755 9 10.875C11.383 10.8751 13.7344 10.3307 15.875 9.28359V14.625ZM7.125 7.75C7.125 7.58424 7.19085 7.42527 7.30806 7.30806C7.42527 7.19085 7.58424 7.125 7.75 7.125H10.25C10.4158 7.125 10.5747 7.19085 10.6919 7.30806C10.8092 7.42527 10.875 7.58424 10.875 7.75C10.875 7.91576 10.8092 8.07473 10.6919 8.19194C10.5747 8.30915 10.4158 8.375 10.25 8.375H7.75C7.58424 8.375 7.42527 8.30915 7.30806 8.19194C7.19085 8.07473 7.125 7.91576 7.125 7.75Z"
+                  fill="#343330"
+                />
+              </svg>
+
+              <h1 class="text-xs">Applied Jobs: <b>0</b></h1>
+            </div>
+            <div class="flex gap-2 items-center">
+              <svg
+                width="20"
+                height="14"
+                viewBox="0 0 20 14"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M19.3211 6.74688C19.2937 6.68516 18.632 5.21719 17.1609 3.74609C15.2008 1.78594 12.725 0.75 9.99999 0.75C7.27499 0.75 4.79921 1.78594 2.83905 3.74609C1.36796 5.21719 0.703118 6.6875 0.678899 6.74688C0.643362 6.82681 0.625 6.91331 0.625 7.00078C0.625 7.08826 0.643362 7.17476 0.678899 7.25469C0.706243 7.31641 1.36796 8.78359 2.83905 10.2547C4.79921 12.2141 7.27499 13.25 9.99999 13.25C12.725 13.25 15.2008 12.2141 17.1609 10.2547C18.632 8.78359 19.2937 7.31641 19.3211 7.25469C19.3566 7.17476 19.375 7.08826 19.375 7.00078C19.375 6.91331 19.3566 6.82681 19.3211 6.74688ZM9.99999 12C7.5953 12 5.49452 11.1258 3.75546 9.40234C3.0419 8.69273 2.43483 7.88356 1.95312 7C2.4347 6.11636 3.04179 5.30717 3.75546 4.59766C5.49452 2.87422 7.5953 2 9.99999 2C12.4047 2 14.5055 2.87422 16.2445 4.59766C16.9595 5.307 17.5679 6.11619 18.0508 7C17.4875 8.05156 15.0336 12 9.99999 12ZM9.99999 3.25C9.25831 3.25 8.53329 3.46993 7.9166 3.88199C7.29992 4.29404 6.81927 4.87971 6.53544 5.56494C6.25162 6.25016 6.17735 7.00416 6.32205 7.73159C6.46674 8.45902 6.82389 9.1272 7.34834 9.65165C7.87279 10.1761 8.54097 10.5333 9.2684 10.6779C9.99583 10.8226 10.7498 10.7484 11.4351 10.4645C12.1203 10.1807 12.7059 9.70007 13.118 9.08339C13.5301 8.4667 13.75 7.74168 13.75 7C13.749 6.00576 13.3535 5.05253 12.6505 4.34949C11.9475 3.64645 10.9942 3.25103 9.99999 3.25ZM9.99999 9.5C9.50554 9.5 9.02219 9.35338 8.61107 9.07867C8.19994 8.80397 7.87951 8.41352 7.69029 7.95671C7.50107 7.49989 7.45157 6.99723 7.54803 6.51227C7.64449 6.02732 7.88259 5.58186 8.23222 5.23223C8.58186 4.8826 9.02731 4.6445 9.51227 4.54804C9.99722 4.45157 10.4999 4.50108 10.9567 4.6903C11.4135 4.87952 11.804 5.19995 12.0787 5.61107C12.3534 6.0222 12.5 6.50555 12.5 7C12.5 7.66304 12.2366 8.29893 11.7678 8.76777C11.2989 9.23661 10.663 9.5 9.99999 9.5Z"
+                  fill="#343330"
+                />
+              </svg>
+              <h1 class="text-xs">Profile views: <b>0</b></h1>
+            </div>
+          </div>
+          <!-- social media links -->
+          <div class="space-y-2">
+            <div class="flex gap-2 items-center">
+              <svg
+                width="18"
                 height="18"
                 viewBox="0 0 18 18"
                 fill="none"
@@ -139,10 +171,6 @@ onBeforeMount(async () => {
                 <b>{{ userData?.socialLinks?.facebookUrl || 'N/A' }}</b>
               </h1>
             </div>
-          </div>
-          <!-- social media links -->
-          <div class="space-y-2">
-            
             <div class="flex gap-2 items-center">
               <svg
                 width="18"
@@ -198,6 +226,20 @@ onBeforeMount(async () => {
                   /month
                 </h1>
               </div>
+
+              <NuxtLink to="/dashboard/jobseeker/my-profile/edit">
+                <div class="flex justify-end items-center">
+                  <div
+                    class="md:px-[14px] w-full my-4 text-xs md:py-2 py-3 rounded-5 bg-primary-1 text-white text-center"
+                  >
+                    {{
+                      userData?.status && userData?.status === 'draft'
+                        ? 'Complete my profile'
+                        : 'Edit profile info'
+                    }}
+                  </div>
+                </div>
+              </NuxtLink>
             </div>
           </div>
         </div>
@@ -217,12 +259,9 @@ onBeforeMount(async () => {
         <!-- experience -->
         <div class="space-y-4 pt-10">
           <h1 class="text-xl font-black">Experience</h1>
-          <div
-            v-if="userData?.workHistory && userData?.workHistory.length"
-            class="space-y-3"
-          >
+          <div v-if="userWorkExperience.length" class="space-y-3">
             <div
-              v-for="(experience, index) in userData?.workHistory"
+              v-for="(experience, index) in userWorkExperience"
               :key="index"
               class="bg-westside-50 space-y-4 rounded-10 p-4"
             >
@@ -247,7 +286,7 @@ onBeforeMount(async () => {
             </div>
           </div>
 
-          <div v-else>No work experience added</div>
+          <div v-else>No work experience, click edit profile to add</div>
         </div>
       </div>
 
@@ -293,65 +332,15 @@ onBeforeMount(async () => {
             </div>
 
             <div>
-              <button
-                @click="showPdfModal()"
+              <NuxtLink
+                to="/dashboard/jobseeker/my-profile/work-experience"
                 class="px-[14px] text-xs py-2 text-primary-1 rounded-10 border border-primary-1"
               >
-                View
-              </button>
+                {{ userData?.resumeResource?.resumeCv ? 'Change' : 'Add' }}
+              </NuxtLink>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- Modal -->
-    <div
-      v-if="showModal"
-      @click="showModal = false"
-      class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 backdrop-blur-sm backdrop-opacity-2 backdrop-filter"
-    >
-      <div
-        class="bg-white p-0 rounded-lg w-full max-w-4xl relative overflow-hidden"
-      >
-        <!-- Close button -->
-        <button
-          @click="showModal = false"
-          class="absolute top-16 right-5 bg-white border-2 rounded-full p-2"
-        >
-          <svg
-            class="w-6 h-6"
-            width="70"
-            height="84"
-            viewBox="0 0 70 84"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M64.2692 60.7312C64.5014 60.9635 64.6857 61.2392 64.8114 61.5427C64.9371 61.8462 65.0018 62.1714 65.0018 62.4999C65.0018 62.8284 64.9371 63.1537 64.8114 63.4572C64.6857 63.7607 64.5014 64.0364 64.2692 64.2687C64.0369 64.501 63.7611 64.6852 63.4577 64.8109C63.1542 64.9366 62.8289 65.0013 62.5004 65.0013C62.1719 65.0013 61.8467 64.9366 61.5432 64.8109C61.2397 64.6852 60.9639 64.501 60.7317 64.2687L40.0004 43.5343L19.2692 64.2687C18.8001 64.7378 18.1638 65.0013 17.5004 65.0013C16.837 65.0013 16.2008 64.7378 15.7317 64.2687C15.2626 63.7996 14.999 63.1633 14.999 62.4999C14.999 61.8365 15.2626 61.2003 15.7317 60.7312L36.466 39.9999L15.7317 19.2687C15.2626 18.7996 14.999 18.1633 14.999 17.4999C14.999 16.8365 15.2626 16.2003 15.7317 15.7312C16.2008 15.2621 16.837 14.9985 17.5004 14.9985C18.1638 14.9985 18.8001 15.2621 19.2692 15.7312L40.0004 36.4656L60.7317 15.7312C61.2008 15.2621 61.837 14.9985 62.5004 14.9985C63.1638 14.9985 63.8001 15.2621 64.2692 15.7312C64.7383 16.2003 65.0018 16.8365 65.0018 17.4999C65.0018 18.1633 64.7383 18.7996 64.2692 19.2687L43.5348 39.9999L64.2692 60.7312Z"
-              fill="#343330"
-            />
-          </svg>
-        </button>
-
-        <!-- Loading Spinner -->
-        <div
-          v-if="isLoadingPdf"
-          class="flex items-center justify-center h-full bg-white"
-        >
-          <div class="loader">Loading File...</div>
-        </div>
-
-        <!-- PDF Display Area -->
-        <iframe
-          v-show="!isLoadingPdf"
-          :src="`https://drive.google.com/viewerng/viewer?embedded=true&url=${userData?.resumeResource?.resumeCv?.url}`"
-          class="w-full h-[90vh] border-0"
-          style="display: block"
-          frameborder="0"
-          defer
-          @load="onPdfLoad"
-        ></iframe>
       </div>
     </div>
   </div>

@@ -1,14 +1,25 @@
 <script setup lang="ts">
 definePageMeta({
-  title: "home",
+  title: 'home',
   pageName: 'home',
   layout: 'no-layout',
-})
+});
+const route = useRoute();
+
+const authStore = useAuthStore();
+const userStore = useUserStore();
+
+onMounted(() => {
+  if (route.query.logout) {
+    authStore.logoutUser();
+    userStore.clearUserStore();
+  }
+});
 </script>
 <template>
   <div class="h-full w-full bg-white">
     <div class="relative z-50">
-      <LandingPageNavbar/>
+      <LandingPageNavbar />
     </div>
     <LandingPageHero />
     <LandingPageSections />
@@ -19,4 +30,3 @@ definePageMeta({
     <LandingPageFooter />
   </div>
 </template>
-
