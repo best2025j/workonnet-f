@@ -72,6 +72,14 @@ export interface IUserDetails {
   socialLinks: ISocialLinks;
   skills?: string[];
   spokenLanguages?: string[];
+  educations?: IEducationBackground[];
+  workHistory?: IWorkExperience[];
+}
+
+export interface IMatchedUser {
+  [x: string]: any;
+  candidate: IUserDetails;
+  matchScore: number;
 }
 
 export interface IRecruiterDetails {

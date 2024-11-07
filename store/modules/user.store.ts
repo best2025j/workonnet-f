@@ -58,6 +58,22 @@ export const UserStore = defineStore('user-store', () => {
     }
   }
 
+  async function getUserSingleDetails(token: string, userId: string) {
+    try {
+      const response = await $fetch('/api/recruiter/get-candidate-profile', {
+        query: {
+          userId,
+        },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return await Promise.resolve(response);
+    } catch (error) {
+      return await Promise.reject(error);
+    }
+  }
+
   async function refreshAuthRecruiterProfile(token: string) {
     try {
       const response = await $fetch('/api/recruiter/my-profile', {
@@ -191,6 +207,7 @@ export const UserStore = defineStore('user-store', () => {
       refreshAuthRecruiterSettings,
       refreshUserWorkExperience,
       refreshUserEducation,
+      getUserSingleDetails,
     },
   };
 });

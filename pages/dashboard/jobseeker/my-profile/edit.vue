@@ -262,7 +262,7 @@ const handleProfileUpdate = async () => {
   // if (userData.value?.status === 'draft') {
   data = {
     firstName: formData.firstName,
-    lastName: formData.firstName,
+    lastName: formData.lastName,
     bio: formData.bio,
     location: formData.location,
     occupation: formData.occupation,

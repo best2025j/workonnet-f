@@ -73,7 +73,7 @@ const handleGoogleLogin = async (token: string) => {
       isLoading.value = false;
       updateIsLoading(isLoading.value);
       router.push('/dashboard/jobseeker');
-    }, 1500);
+    }, 1000);
   } catch (error: any) {
     const errorData = error.data as ApiErrorResponse;
 

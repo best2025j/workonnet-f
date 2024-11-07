@@ -5,6 +5,7 @@ import type {
   ApiSuccessResponse,
   IJobPost,
   IRecruiterDetails,
+  IMatchedUser
 } from '~/types';
 
 definePageMeta({
@@ -19,8 +20,9 @@ const authStore = useAuthStore();
 const userStore = useUserStore();
 const jobStore = useJobStore();
 const currentJob = ref<IJobPost | null>(null);
-const applications = ref([]);
+const matchedUsers = ref<IMatchedUser[]>([]);
 const isLoading = ref(false);
+const isEditAction = ref<boolean>(false);
 const toast = useToast();
 
 const slugId = computed(() => (route.params.slug as string).split('-')[0]);
@@ -30,11 +32,10 @@ const userData = computed<IRecruiterDetails>(
 );
 
 const publishJob = async () => {
-  await updateJobApi('published')
+  await updateJobApi('published');
 };
 const archiveJob = async () => {
-
-  await updateJobApi('archived')
+  await updateJobApi('archived');
 };
 
 const updateJobApi = async (action: string) => {
@@ -45,6 +46,8 @@ const updateJobApi = async (action: string) => {
   } else {
     actionUrl = '/api/recruiter/job/archive';
   }
+
+  isEditAction.value = true;
   try {
     isLoading.value = true;
     const token = authStore.userToken;
@@ -63,7 +66,7 @@ const updateJobApi = async (action: string) => {
       position: POSITION.TOP_RIGHT,
     });
 
-    await getJob()
+    await getJob();
     setTimeout(() => {
       isLoading.value = false;
     }, 2000);
@@ -81,7 +84,7 @@ const updateJobApi = async (action: string) => {
   }, 2000);
 };
 
-const getJob = async ()  => {
+const getJob = async () => {
   try {
     isLoading.value = true;
     const token = authStore.userToken;
@@ -92,16 +95,43 @@ const getJob = async ()  => {
     const responseData = response as ApiSuccessResponse;
     currentJob.value = responseData.data;
 
+    if (!isEditAction.value && currentJob.value?.status === 'published') {
+      await getMatchedCandidate(slugId.value);
+    }
+
     setTimeout(() => {
       isLoading.value = false;
     }, 1000);
   } catch (e) {
     console.log(e);
   }
-}
+};
+
+const getMatchedCandidate = async (jobId: string) => {
+  try {
+    isLoading.value = true;
+    const token = authStore.userToken;
+  const  response = await $fetch('/api/matching/get-matched-candidate', {
+      query: {
+        jobListingId: jobId,
+      },
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const responseData = response as ApiSuccessResponse;
+    matchedUsers.value = responseData.data
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 1000);
+  } catch (error: any) {
+    const errorData = error.data as ApiErrorResponse;
+    console.log(errorData);
+  }
+};
 
 onBeforeMount(async () => {
-   await getJob()
+  await getJob();
 });
 </script>
 
@@ -318,16 +348,19 @@ onBeforeMount(async () => {
         </div>
 
         <!-- list -->
-        <div v-if="currentJob!.applicants > 0" class="w-full">
+        <div v-if="matchedUsers && matchedUsers.length > 0" class="w-full">
           <ul class="">
             <li
+            v-for="(matchedCandidates, index) in matchedUsers" :key="index"
               class="flex my-2 items-center justify-between p-2 bg-black-50 w-full rounded-10"
             >
-              <div class="flex items-center space-x-3">
-                <img src="/assets/images/Ellipse5.png" alt="microsoft image" />
+              <div class="flex items-center space-x-3 w-2/3">
+                <img v-if="matchedCandidates?.candidate?.photo" :src="matchedCandidates?.candidate?.photo?.url" class="w-[32px] h-[32px] rounded-full">
                 <div class="">
-                  <h1 class="text-sm">Ronald Richards</h1>
-                  <h1 class="text-xs">Applied 2 days ago</h1>
+                  <h1 class="text-sm">{{matchedCandidates?.candidate?.firstName}} {{matchedCandidates?.candidate?.lastName}}</h1>
+                  <h1 class="text-xs">{{matchedCandidates?.candidate?.occupation || ' '}}</h1>
+                  <h1 class="text-xs">{{matchedCandidates?.candidate?.location || ' '}}</h1>
+
                 </div>
               </div>
 
@@ -345,27 +378,9 @@ onBeforeMount(async () => {
                   />
                 </svg>
 
-                <h1 class="text-xs">4.6</h1>
-              </div>
-
-              <div class="flex gap-2">
-                <svg
-                  width="15"
-                  height="18"
-                  viewBox="0 0 15 18"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M14.3794 8.55781C14.4375 8.61586 14.4836 8.68479 14.5151 8.76066C14.5465 8.83653 14.5627 8.91786 14.5627 9C14.5627 9.08213 14.5465 9.16346 14.5151 9.23934C14.4836 9.31521 14.4375 9.38414 14.3794 9.44219L7.96925 15.8484C7.14863 16.669 6.03568 17.1299 4.87522 17.1298C3.71477 17.1297 2.60187 16.6687 1.78136 15.848C0.960845 15.0274 0.499927 13.9145 0.5 12.754C0.500073 11.5936 0.961132 10.4807 1.78175 9.66015L9.53644 1.7914C10.1223 1.20492 10.9171 0.875196 11.7461 0.874756C12.5751 0.874317 13.3703 1.2032 13.9567 1.78906C14.5432 2.37492 14.873 3.16976 14.8734 3.99873C14.8738 4.8277 14.545 5.62289 13.9591 6.20937L6.20284 14.0781C5.8506 14.4304 5.37286 14.6283 4.87472 14.6283C4.37657 14.6283 3.89883 14.4304 3.54659 14.0781C3.19435 13.7259 2.99647 13.2481 2.99647 12.75C2.99647 12.2519 3.19435 11.7741 3.54659 11.4219L10.0544 4.81094C10.1114 4.75012 10.18 4.70133 10.2562 4.66742C10.3323 4.63351 10.4145 4.61518 10.4978 4.6135C10.5811 4.61183 10.664 4.62684 10.7414 4.65765C10.8189 4.68847 10.8894 4.73446 10.9488 4.79293C11.0082 4.8514 11.0553 4.92117 11.0874 4.99812C11.1194 5.07507 11.1357 5.15765 11.1354 5.24101C11.135 5.32437 11.118 5.40681 11.0853 5.48349C11.0526 5.56016 11.0049 5.62953 10.945 5.6875L4.43644 12.3055C4.37816 12.3633 4.33185 12.432 4.30013 12.5077C4.26842 12.5834 4.25193 12.6646 4.2516 12.7467C4.25127 12.8288 4.26712 12.9102 4.29823 12.9861C4.32934 13.0621 4.37511 13.1312 4.43292 13.1895C4.49073 13.2477 4.55946 13.294 4.63517 13.3258C4.71088 13.3575 4.7921 13.374 4.87418 13.3743C4.95627 13.3746 5.03762 13.3588 5.11358 13.3277C5.18954 13.2965 5.25863 13.2508 5.31691 13.193L13.0724 5.32812C13.4246 4.97661 13.6228 4.49956 13.6233 4.00193C13.6238 3.5043 13.4266 3.02685 13.0751 2.67461C12.7236 2.32237 12.2465 2.12419 11.7489 2.12368C11.2513 2.12317 10.7738 2.32036 10.4216 2.67187L2.66847 10.5375C2.37802 10.8275 2.14753 11.1718 1.99017 11.5509C1.8328 11.93 1.75164 12.3363 1.75131 12.7467C1.75099 13.1572 1.8315 13.5636 1.98827 13.9429C2.14503 14.3223 2.37497 14.667 2.66495 14.9574C2.95494 15.2479 3.29929 15.4784 3.67835 15.6357C4.05741 15.7931 4.46376 15.8742 4.87418 15.8746C5.28461 15.8749 5.69109 15.7944 6.0704 15.6376C6.44971 15.4809 6.79443 15.2509 7.08487 14.9609L13.4958 8.55469C13.6134 8.43798 13.7726 8.37275 13.9383 8.37333C14.1039 8.37392 14.2626 8.44027 14.3794 8.55781Z"
-                    fill="#3D3D3D"
-                  />
-                </svg>
-
-                <h1 class="text-xs">3 files</h1>
+                <h1 class="text-xs font-medium">{{convertNumToRating(matchedCandidates?.matchScore)}}</h1>
               </div>
               <!-- white svg toggle menu-->
-
               <div>
                 <div
                   class="text-black-950 dropdown dropdown-bottom dropdown-end px-4 py-2 flex gap-2 text-sm items-center rounded-8"
@@ -392,7 +407,7 @@ onBeforeMount(async () => {
                   >
                     <li>
                       <NuxtLink
-                        to="/dashboard/recruiter/jobs-openings/profile-view"
+                        :to="`/dashboard/recruiter/jobseeker/${slugify(`${matchedCandidates.candidate.id} ${matchedCandidates.candidate.firstName} ${matchedCandidates.candidate.lastName}`)}`"
                       >
                         <div class="flex text-xs gap-x-3">
                           <span
@@ -408,7 +423,7 @@ onBeforeMount(async () => {
                                 fill="#3D3D3D"
                               />
                             </svg> </span
-                          ><a>View</a>
+                          ><a>View Profile</a>
                         </div></NuxtLink
                       >
                     </li>
@@ -430,64 +445,6 @@ onBeforeMount(async () => {
                           </svg>
                         </span>
                         <a>Message</a>
-                      </div>
-                    </li>
-
-                    <li>
-                      <div class="flex text-xs gap-3">
-                        <span
-                          ><svg
-                            width="20"
-                            height="20"
-                            viewBox="0 0 20 20"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M18.2812 6.25938C18.1053 6.05994 17.8888 5.90023 17.6464 5.79086C17.4039 5.68148 17.141 5.62495 16.875 5.625H12.5V4.375C12.5 3.5462 12.1708 2.75134 11.5847 2.16529C10.9987 1.57924 10.2038 1.25 9.375 1.25C9.25889 1.24992 9.14505 1.28218 9.04625 1.34317C8.94744 1.40417 8.86758 1.49148 8.81562 1.59531L5.86406 7.5H2.5C2.16848 7.5 1.85054 7.6317 1.61612 7.86612C1.3817 8.10054 1.25 8.41848 1.25 8.75V15.625C1.25 15.9565 1.3817 16.2745 1.61612 16.5089C1.85054 16.7433 2.16848 16.875 2.5 16.875H15.9375C16.3943 16.8752 16.8354 16.7085 17.1781 16.4065C17.5208 16.1044 17.7413 15.6876 17.7984 15.2344L18.7359 7.73438C18.7692 7.47033 18.7458 7.20224 18.6674 6.94792C18.589 6.6936 18.4574 6.45888 18.2812 6.25938ZM2.5 8.75H5.625V15.625H2.5V8.75ZM17.4953 7.57812L16.5578 15.0781C16.5388 15.2292 16.4653 15.3681 16.351 15.4688C16.2368 15.5695 16.0898 15.6251 15.9375 15.625H6.875V8.27266L9.74297 2.53594C10.168 2.62101 10.5505 2.85075 10.8253 3.18605C11.1 3.52135 11.2501 3.9415 11.25 4.375V6.25C11.25 6.41576 11.3158 6.57473 11.4331 6.69194C11.5503 6.80915 11.7092 6.875 11.875 6.875H16.875C16.9637 6.87497 17.0514 6.89382 17.1322 6.93028C17.2131 6.96675 17.2852 7.02001 17.3439 7.08652C17.4026 7.15303 17.4464 7.23126 17.4725 7.31602C17.4986 7.40078 17.5064 7.49013 17.4953 7.57812Z"
-                              fill="#3D3D3D"
-                            />
-                          </svg>
-                        </span>
-                        <a>Hire</a>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="flex text-xs gap-3">
-                        <span
-                          ><svg
-                            width="19"
-                            height="18"
-                            viewBox="0 0 19 18"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M11.1492 0.938155C11.0441 0.88694 10.9268 0.866233 10.8105 0.878386C10.6942 0.890539 10.5836 0.935065 10.4914 1.0069L5.03516 5.24987H1.5C1.16848 5.24987 0.850537 5.38157 0.616116 5.61599C0.381696 5.85041 0.25 6.16835 0.25 6.49987V11.4999C0.25 11.8314 0.381696 12.1493 0.616116 12.3838C0.850537 12.6182 1.16848 12.7499 1.5 12.7499H5.03516L10.4914 16.9928C10.5837 17.0646 10.6944 17.1091 10.8107 17.1211C10.927 17.1331 11.0444 17.1123 11.1495 17.0609C11.2545 17.0096 11.3431 16.9298 11.405 16.8306C11.467 16.7314 11.4999 16.6168 11.5 16.4999V1.49987C11.5 1.38279 11.4671 1.26805 11.4051 1.16874C11.3431 1.06942 11.2544 0.989527 11.1492 0.938155ZM1.5 6.49987H4.625V11.4999H1.5V6.49987ZM10.25 15.2217L5.875 11.8194V6.18034L10.25 2.778V15.2217ZM14.4688 6.93425C14.9715 7.50493 15.2488 8.23935 15.2488 8.99987C15.2488 9.7604 14.9715 10.4948 14.4688 11.0655C14.3583 11.1868 14.2046 11.2599 14.0408 11.2689C13.877 11.2779 13.7162 11.2221 13.5932 11.1136C13.4701 11.0051 13.3947 10.8526 13.3831 10.689C13.3715 10.5253 13.4247 10.3637 13.5312 10.2389C13.8327 9.89657 13.999 9.45604 13.999 8.99987C13.999 8.5437 13.8327 8.10318 13.5312 7.76081C13.4247 7.63606 13.3715 7.47442 13.3831 7.31078C13.3947 7.14713 13.4701 6.99461 13.5932 6.88611C13.7162 6.77762 13.877 6.72186 14.0408 6.73086C14.2046 6.73987 14.3583 6.81292 14.4688 6.93425ZM18.375 8.99987C18.3759 10.5375 17.8092 12.0214 16.7836 13.1671C16.6723 13.2875 16.518 13.3594 16.3542 13.3672C16.1903 13.3749 16.03 13.318 15.9077 13.2085C15.7855 13.0991 15.7112 12.9461 15.7008 12.7824C15.6905 12.6186 15.7449 12.4574 15.8523 12.3335C16.6722 11.4168 17.1254 10.2301 17.1254 9.00027C17.1254 7.77044 16.6722 6.58375 15.8523 5.66706C15.7961 5.60617 15.7525 5.53469 15.7241 5.45679C15.6957 5.37888 15.6831 5.29611 15.687 5.21329C15.691 5.13047 15.7113 5.04926 15.7469 4.97439C15.7826 4.89951 15.8327 4.83248 15.8945 4.77718C15.9563 4.72188 16.0284 4.67942 16.1068 4.65229C16.1851 4.62515 16.2681 4.61387 16.3508 4.61911C16.4336 4.62435 16.5145 4.646 16.5888 4.6828C16.6631 4.7196 16.7293 4.77082 16.7836 4.83347C17.8095 5.97864 18.3762 7.46239 18.375 8.99987Z"
-                              fill="#3D3D3D"
-                            />
-                          </svg>
-                        </span>
-                        <a>Interview</a>
-                      </div>
-                    </li>
-                    <li>
-                      <div class="flex text-xs gap-3">
-                        <span
-                          ><svg
-                            width="20"
-                            height="20"
-                            viewBox="0 0 20 20"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M16.0675 15.1827C16.1256 15.2407 16.1717 15.3097 16.2031 15.3855C16.2345 15.4614 16.2507 15.5427 16.2507 15.6249C16.2507 15.707 16.2345 15.7883 16.2031 15.8642C16.1717 15.94 16.1256 16.009 16.0675 16.067C16.0095 16.1251 15.9405 16.1712 15.8647 16.2026C15.7888 16.234 15.7075 16.2502 15.6253 16.2502C15.5432 16.2502 15.4619 16.234 15.386 16.2026C15.3102 16.1712 15.2412 16.1251 15.1832 16.067L10.0003 10.8835L4.81753 16.067C4.70026 16.1843 4.5412 16.2502 4.37535 16.2502C4.2095 16.2502 4.05044 16.1843 3.93316 16.067C3.81588 15.9498 3.75 15.7907 3.75 15.6249C3.75 15.459 3.81588 15.2999 3.93316 15.1827L9.11675 9.99986L3.93316 4.81705C3.81588 4.69977 3.75 4.54071 3.75 4.37486C3.75 4.20901 3.81588 4.04995 3.93316 3.93267C4.05044 3.8154 4.2095 3.74951 4.37535 3.74951C4.5412 3.74951 4.70026 3.8154 4.81753 3.93267L10.0003 9.11627L15.1832 3.93267C15.3004 3.8154 15.4595 3.74951 15.6253 3.74951C15.7912 3.74951 15.9503 3.8154 16.0675 3.93267C16.1848 4.04995 16.2507 4.20901 16.2507 4.37486C16.2507 4.54071 16.1848 4.69977 16.0675 4.81705L10.8839 9.99986L16.0675 15.1827Z"
-                              fill="#3D3D3D"
-                            />
-                          </svg>
-                        </span>
-                        <a>Reject</a>
                       </div>
                     </li>
                   </ul>

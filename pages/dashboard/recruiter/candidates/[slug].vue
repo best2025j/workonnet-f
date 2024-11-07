@@ -944,7 +944,7 @@ onBeforeMount(async () => {
     <!-- Reject Modal -->
     <dialog
       ref="modalTrigger"
-      id="delete_modal"
+      id="reject_modal"
       class="modal text-black-950 backdrop-blur-sm backdrop-opacity-2 backdrop-filter"
     >
       <div class="modal-box flex-col max-w-md flex items-center space-y-3">
@@ -1031,7 +1031,7 @@ onBeforeMount(async () => {
     <!-- Interview Modal -->
     <dialog
       ref="modalInterviewTrigger"
-      id="delete_modal"
+      id="interview_modal"
       class="modal text-black-950 backdrop-blur-sm backdrop-opacity-2 backdrop-filter"
     >
       <div class="modal-box flex-col max-w-md flex items-center space-y-3">

@@ -148,3 +148,19 @@ export function isNullOrEmpty(obj: any): boolean {
       !(obj instanceof Date))
   );
 }
+
+export function convertNumToRating(num: number) {
+  return (num * 5).toFixed(1);
+}
+
+export function convertNumToPercentage(num: number) {
+  return (num * 100).toFixed(1) + '%';
+}
+
+export const slugify = (str: string) =>
+  str
+    .toLowerCase()
+    .trim()
+    .replace(/[^\w\s-]/g, '')
+    .replace(/[\s_-]+/g, '-')
+    .replace(/^-+|-+$/g, '');
