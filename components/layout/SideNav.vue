@@ -31,7 +31,7 @@ const jobSeekerLinks = [
     pageName: 'dashboard.jobseeker.my-applications.index',
   },
   {
-    to: '/dashboard/jobseeker/find-jobs',
+    to: '/dashboard/jobseeker/find-jobs?tab=all',
     icon: SearchIcon,
     name: 'Find Jobs',
     pageName: 'dashboard.jobseeker.find-jobs.index',

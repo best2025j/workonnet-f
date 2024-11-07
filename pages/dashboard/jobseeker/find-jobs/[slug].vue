@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type {
+  ApiErrorResponse,
   ApiSuccessResponse,
   IJobPost,
   IJobPostWithPagination,
@@ -23,8 +24,9 @@ const jobListPage = ref<{}>({});
 const isLoading = ref(false);
 const userData = computed<IUserDetails>(() => userStore.loggedInUserDetails);
 const modalTrigger = ref(null);
+const isErrorFetchingRecommendations = ref(false)
 
-const jobsResult = computed(() => jobStore.jobList);
+const jobsResult = ref<IJobPost[] | []>([]);
 
 const showUpdateProfileModal = () => {
   (modalTrigger.value as unknown as any).showModal();
@@ -36,22 +38,22 @@ const getMyJobs = async (refresh: boolean = false) => {
       isLoading.value = true;
     }
     const token = authStore.userToken;
-    const response = await $fetch('/api/jobseeker/jobs/fetch-all', {
+    const response = await $fetch('/api/jobseeker/jobs/recommended', {
       headers: {
         Authorization: `Bearer ${token}`,
       },
     });
     const responseData = response as ApiSuccessResponse;
-
-    const { docs, ...other } = responseData.data as IJobPostWithPagination;
-    jobListPage.value = other;
-    jobStore.setJobList((responseData.data as IJobPostWithPagination).docs);
+    jobsResult.value = responseData.data;
 
     setTimeout(() => {
       isLoading.value = false;
     }, 1000);
-  } catch (e) {
-    console.log(e);
+  } catch (e: any) {
+    const errorData = e.data as ApiErrorResponse;
+    if(errorData.data.errorCode == 'EEEEEE') {
+      isErrorFetchingRecommendations.value = true;
+    }
   }
 };
 
@@ -105,7 +107,7 @@ onBeforeMount(async () => {
       <img
         v-if="(currentJob?.recruiter as IRecruiterDetails)?.photoHeader"
         :src="(currentJob?.recruiter as IRecruiterDetails)?.photoHeader?.url"
-        class="w-full h-40 object-cover md:h-full"
+        class="w-full h-30 object-cover md:h-52 rounded"
         alt="no image yet..."
       />
 
@@ -116,7 +118,7 @@ onBeforeMount(async () => {
           <img
             v-if="(currentJob?.recruiter as IRecruiterDetails)?.photo"
             :src="(currentJob?.recruiter as IRecruiterDetails)?.photo?.url"
-            class="w-[70px] h-[70px]"
+            class="w-[70px] h-[70px] rounded-full"
             alt="profile-image"
           />
         </div>
@@ -295,8 +297,11 @@ onBeforeMount(async () => {
           </div>
         </div>
 
+        <div class="pt-4 pb-1">
+          <h1 class="font-semibold">Recommended jobs</h1>
+        </div>
         <!--  cards-->
-        <div v-if="jobsResult.length" class="py-4 space-y-4">
+        <div v-if="jobsResult && jobsResult.length" class="py-4 space-y-4">
           <div
             v-for="(job, index) in jobsResult"
             :key="index"
@@ -448,6 +453,10 @@ onBeforeMount(async () => {
               </div>
             </div>
           </div>
+        </div>
+        <div v-else class="py-4">
+            <p v-if="!isErrorFetchingRecommendations">No recommendations yet, check again later</p>
+            <p v-else>You do not have an active plan, please subscribe to get recommendations</p>
         </div>
       </div>
     </div>

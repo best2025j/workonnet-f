@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { POSITION, useToast } from 'vue-toastification';
+
 import type {
   ApiErrorResponse,
   ApiSuccessResponse,
+  IJobPost,
   IJobPostWithPagination,
   IRecruiterDetails,
   IUserDetails,
@@ -30,6 +32,11 @@ const route = useRoute();
 const userData = computed<IUserDetails>(() => userStore.loggedInUserDetails);
 const modalTrigger = ref(null);
 const isApplying = ref<boolean>(false);
+const isErrorFetchingRecommendations = ref(false);
+const isErrorFetchingMatched = ref(false);
+
+const recommendJobs = ref<IJobPost[] | []>([]);
+const matchedJobs = ref<IJobPost[] | []>([]);
 
 const jobsResult = computed(() => jobStore.jobList);
 const currentLayout = ref<CARD_LAYOUT>(CARD_LAYOUT.LIST);
@@ -46,6 +53,50 @@ const setCurrentJobIndex = (index: number) => {
 
 const showUpdateProfileModal = () => {
   (modalTrigger.value as unknown as any).showModal();
+};
+
+const getMyJobsRecommended = async (refresh: boolean = false) => {
+  try {
+    const token = authStore.userToken;
+    const response = await $fetch('/api/jobseeker/jobs/recommended', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const responseData = response as ApiSuccessResponse;
+    recommendJobs.value = responseData.data;
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 1000);
+  } catch (e: any) {
+    const errorData = e.data as ApiErrorResponse;
+    if (errorData.data.errorCode == 'EEEEEE') {
+      isErrorFetchingRecommendations.value = true;
+    }
+  }
+};
+
+const getMyJobsMatched = async (refresh: boolean = false) => {
+  try {
+    const token = authStore.userToken;
+    const response = await $fetch('/api/jobseeker/jobs/matched', {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const responseData = response as ApiSuccessResponse;
+    matchedJobs.value = responseData.data;
+
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 1000);
+  } catch (e: any) {
+    const errorData = e.data as ApiErrorResponse;
+    if (errorData.data.errorCode == 'EEEEEE') {
+      isErrorFetchingMatched.value = true;
+    }
+  }
 };
 
 const getMyJobs = async (refresh: boolean = false) => {
@@ -65,9 +116,8 @@ const getMyJobs = async (refresh: boolean = false) => {
     jobListPage.value = other;
     jobStore.setJobList((responseData.data as IJobPostWithPagination).docs);
 
-    setTimeout(() => {
-      isLoading.value = false;
-    }, 1000);
+    await getMyJobsRecommended();
+    await getMyJobsMatched();
   } catch (e) {
     console.log(e);
   }
@@ -368,7 +418,8 @@ onBeforeMount(async () => {
         </button>
       </div>
       <!-- btn 2 -->
-      <div class="flex justify-end space-x-3">
+      <div class="w-full flex space-x-3 justify-between pt-2">
+        <FindJobAppNav />
         <button
           v-show="currentLayout.toString() === CARD_LAYOUT.GRID.toString()"
           @click="handleLayoutChange(CARD_LAYOUT.LIST)"
@@ -416,20 +467,67 @@ onBeforeMount(async () => {
       </div>
 
       <div v-else>
-        <!-- cards -->
-        <div v-if="currentLayout.toString() === CARD_LAYOUT.GRID.toString()">
-          <FindJobGridView
-            :job-list="jobsResult"
-            :currentJobIndex="currentJobIndex"
-            v-on:setCurrentJobIndex="setCurrentJobIndex"
-          />
+        <div v-if="route?.query?.tab === 'all'">
+          <div v-if="!jobsResult.length">
+            <h1>No jobs available</h1>
+          </div>
+          <!-- cards -->
+          <div v-if="currentLayout.toString() === CARD_LAYOUT.GRID.toString()">
+            <FindJobGridView
+              :job-list="jobsResult"
+              :currentJobIndex="currentJobIndex"
+              v-on:setCurrentJobIndex="setCurrentJobIndex"
+            />
+          </div>
+          <div v-if="currentLayout.toString() === CARD_LAYOUT.LIST.toString()">
+            <FindJobListView
+              :job-list="jobsResult"
+              :currentJobIndex="currentJobIndex"
+              v-on:setCurrentJobIndex="setCurrentJobIndex"
+            />
+          </div>
         </div>
-        <div v-if="currentLayout.toString() === CARD_LAYOUT.LIST.toString()">
-          <FindJobListView
-            :job-list="jobsResult"
-            :currentJobIndex="currentJobIndex"
-            v-on:setCurrentJobIndex="setCurrentJobIndex"
-          />
+        <div v-if="route?.query?.tab === 'recommended'">
+          <div v-if="!recommendJobs.length" class="pt-5">
+            <p v-if="!isErrorFetchingRecommendations">No recommendations available</p>
+            <p v-else>You do not have an active plan, please subscribe to get recommendations</p>
+          </div>
+          <!-- cards -->
+          <div v-if="currentLayout.toString() === CARD_LAYOUT.GRID.toString()">
+            <FindJobGridView
+              :job-list="recommendJobs"
+              :currentJobIndex="currentJobIndex"
+              v-on:setCurrentJobIndex="setCurrentJobIndex"
+            />
+          </div>
+          <div v-if="currentLayout.toString() === CARD_LAYOUT.LIST.toString()">
+            <FindJobListView
+              :job-list="recommendJobs"
+              :currentJobIndex="currentJobIndex"
+              v-on:setCurrentJobIndex="setCurrentJobIndex"
+            />
+          </div>
+        </div>
+        <div v-if="route?.query?.tab === 'matched'">
+          <div v-if="!matchedJobs.length" class="pt-5">
+            <p v-if="!isErrorFetchingMatched">No matched jobs available</p>
+            <p v-else>You do not have an active plan, please subscribe to get matched to jobs</p>
+          </div>
+          <!-- cards -->
+          <div v-if="currentLayout.toString() === CARD_LAYOUT.GRID.toString()">
+            <FindJobGridView
+              :job-list="matchedJobs"
+              :currentJobIndex="currentJobIndex"
+              v-on:setCurrentJobIndex="setCurrentJobIndex"
+            />
+          </div>
+          <div v-if="currentLayout.toString() === CARD_LAYOUT.LIST.toString()">
+            <FindJobListView
+              :job-list="matchedJobs"
+              :currentJobIndex="currentJobIndex"
+              v-on:setCurrentJobIndex="setCurrentJobIndex"
+            />
+          </div>
         </div>
       </div>
     </div>
@@ -610,13 +708,13 @@ onBeforeMount(async () => {
           <div class="flex space-x-4 py-3">
             <div>
               <BtnPrimary
-              :isLoading="isApplying"
-              :disabled="isApplying"
-              @click="applyNow(jobsResult[currentJobIndex].id)"
-              class="bg-primary-1 w-auto px-4 py-3 md:text-xs text-[8px] rounded-8 text-white"
-            >
-              <template #text> Apply Now </template>
-            </BtnPrimary>
+                :isLoading="isApplying"
+                :disabled="isApplying"
+                @click="applyNow(jobsResult[currentJobIndex].id)"
+                class="bg-primary-1 w-auto px-4 py-3 md:text-xs text-[8px] rounded-8 text-white"
+              >
+                <template #text> Apply Now </template>
+              </BtnPrimary>
             </div>
             <NuxtLink
               :to="`/dashboard/jobseeker/find-jobs/${jobsResult[currentJobIndex].id}`"
