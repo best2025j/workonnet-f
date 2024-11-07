@@ -127,6 +127,7 @@ const getMyJobsRecommended = async (refresh: boolean = false) => {
   } catch (e: any) {
     isLoading.value = false;
     const errorData = e.data as ApiErrorResponse;
+    isErrorFetchingRecommendations.value = true;
     if (errorData.data.errorCode == 'EEEEEE') {
       isErrorFetchingRecommendations.value = true;
     }
@@ -150,6 +151,7 @@ const getMyJobsMatched = async (refresh: boolean = false) => {
   } catch (e: any) {
     isLoading.value = false;
     const errorData = e.data as ApiErrorResponse;
+    isErrorFetchingMatched.value = true;
     if (errorData.data.errorCode == 'EEEEEE') {
       isErrorFetchingMatched.value = true;
     }
