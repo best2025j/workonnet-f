@@ -47,6 +47,7 @@ export default defineNuxtConfig({
       linkedinId: '',
       linkedinSecret: '',
       linkedinRedirectBase: '',
+      googleApiKey: '',
     },
   },
 

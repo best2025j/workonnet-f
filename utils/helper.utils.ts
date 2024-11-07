@@ -100,7 +100,6 @@ export function formatDateTime(dateString: string) {
   return formattedDate;
 }
 
-
 export function formatMonthDateForInput(dateString: string): string {
   if (!dateString) return '';
   const date = new Date(dateString);
@@ -109,7 +108,6 @@ export function formatMonthDateForInput(dateString: string): string {
   const day = String(date.getDate()).padStart(2, '0');
   return `${year}-${month}`;
 }
-
 
 export const ROUTES = {
   HOME: '/home',
@@ -139,7 +137,6 @@ export function extractDataFromRequest(data: Record<string, any>) {
   };
 }
 
-
 export function isNullOrEmpty(obj: any): boolean {
   return (
     obj === null ||
@@ -164,3 +161,12 @@ export const slugify = (str: string) =>
     .replace(/[^\w\s-]/g, '')
     .replace(/[\s_-]+/g, '-')
     .replace(/^-+|-+$/g, '');
+
+export const removeEmptyKeys = (obj: Record<string, any>) => {
+  return Object.entries(obj)
+    .filter(([key, value]) => value != null && value !== '') // Filter out null, undefined, or empty string
+    .reduce((acc, [key, value]) => {
+      acc[key] = value; // Rebuild the object with filtered keys
+      return acc;
+    }, {} as Record<string, any>);
+};

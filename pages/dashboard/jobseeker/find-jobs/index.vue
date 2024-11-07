@@ -9,6 +9,7 @@ import type {
   IRecruiterDetails,
   IUserDetails,
 } from '~/types';
+import { removeEmptyKeys } from '~/utils/helper.utils';
 
 definePageMeta({
   title: 'Find Jobs',
@@ -45,7 +46,61 @@ const handleLayoutChange = (newLayout: CARD_LAYOUT) => {
   currentLayout.value = newLayout;
 };
 
+const selectedLocationTypeFilter = ref<string | null>(null); // Initially, no filter is selected for locationType
+const selectedJobTypeFilter = ref<string | null>(null); // Initially, no filter is selected for jobType
+
+const locationTypeFilters = ref(['hybrid', 'onsite', 'remote']); // locationType enum values
+const jobTypeFilters = ref(['contract', 'full-time', 'part-time']); // jobType enum values
+
 const currentJobIndex = ref(0);
+
+const clearFilters = () => {
+  selectedLocationTypeFilter.value = null;
+  selectedJobTypeFilter.value = null;
+};
+
+// Method to handle selection of locationType
+const selectLocationTypeFilter = (filter: string) => {
+  if (selectedLocationTypeFilter.value === filter) {
+    // If the selected filter is clicked again, unselect it
+    selectedLocationTypeFilter.value = null;
+  } else {
+    // Update the selected filter
+    selectedLocationTypeFilter.value = filter;
+  }
+};
+
+// Method to handle selection of jobType
+const selectJobTypeFilter = (filter: string) => {
+  if (selectedJobTypeFilter.value === filter) {
+    // If the selected filter is clicked again, unselect it
+    selectedJobTypeFilter.value = null;
+  } else {
+    // Update the selected filter
+    selectedJobTypeFilter.value = filter;
+  }
+};
+
+// Computed property to get combined selected filters for UI
+const selectedFilters = computed(() => {
+  return {
+    locationType: selectedLocationTypeFilter.value,
+    jobType: selectedJobTypeFilter.value,
+  };
+});
+
+const searchJobsWithFilter = async () => {
+  // Add locationType filter to the query if selected
+  if (!selectedFilters.value.locationType && !selectedFilters.value.jobType) {
+    return;
+  }
+
+  const cleanedQuery = removeEmptyKeys(selectedFilters.value)
+
+
+  await getMyJobs(true, cleanedQuery) 
+  
+};
 
 const setCurrentJobIndex = (index: number) => {
   currentJobIndex.value = index;
@@ -70,6 +125,7 @@ const getMyJobsRecommended = async (refresh: boolean = false) => {
       isLoading.value = false;
     }, 1000);
   } catch (e: any) {
+    isLoading.value = false;
     const errorData = e.data as ApiErrorResponse;
     if (errorData.data.errorCode == 'EEEEEE') {
       isErrorFetchingRecommendations.value = true;
@@ -92,6 +148,7 @@ const getMyJobsMatched = async (refresh: boolean = false) => {
       isLoading.value = false;
     }, 1000);
   } catch (e: any) {
+    isLoading.value = false;
     const errorData = e.data as ApiErrorResponse;
     if (errorData.data.errorCode == 'EEEEEE') {
       isErrorFetchingMatched.value = true;
@@ -99,13 +156,14 @@ const getMyJobsMatched = async (refresh: boolean = false) => {
   }
 };
 
-const getMyJobs = async (refresh: boolean = false) => {
+const getMyJobs = async (refresh: boolean = false, query: {}) => {
   try {
     if (!jobStore.jobList.length && refresh === true) {
       isLoading.value = true;
     }
     const token = authStore.userToken;
     const response = await $fetch('/api/jobseeker/jobs/fetch-all', {
+      query: { ...query },
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -119,6 +177,7 @@ const getMyJobs = async (refresh: boolean = false) => {
     await getMyJobsRecommended();
     await getMyJobsMatched();
   } catch (e) {
+    isLoading.value = false;
     console.log(e);
   }
 };
@@ -180,7 +239,7 @@ const applyNow = async (jobId: string) => {
 };
 
 onBeforeMount(async () => {
-  await getMyJobs();
+  await getMyJobs(false, {});
 });
 </script>
 
@@ -266,156 +325,78 @@ onBeforeMount(async () => {
       </div>
 
       <!-- btn -->
-      <div class="py-5 flex flex-wrap gap-y-3 justify-between w-full">
-        <button
-          class="bg-westside-200 text-primary-1 gap-x-2 flex items-center font-black md:p-2 px-4 rounded-10 md:text-xs text-[10px]"
-        >
-          <svg
-            width="14"
-            height="15"
-            viewBox="0 0 17 12"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+      <div class="flex items-center justify-between w-full">
+        <div class="py-5 flex flex-wrap gap-3 justify-start w-full">
+          <button
+            v-for="(item, index) in jobTypeFilters"
+            :key="index"
+            class="gap-x-2 flex items-start md:p-2 px-4 rounded-10 md:text-xs text-[10px]"
+            :class="[
+              selectedJobTypeFilter === item
+                ? 'bg-westside-200 text-primary-1 font-black'
+                : ' bg-white',
+            ]"
+            @click="selectJobTypeFilter(item)"
           >
-            <path
-              d="M15.9422 1.06729L5.9422 11.0673C5.88415 11.1254 5.81522 11.1715 5.73935 11.203C5.66348 11.2344 5.58215 11.2506 5.50001 11.2506C5.41788 11.2506 5.33655 11.2344 5.26067 11.203C5.1848 11.1715 5.11587 11.1254 5.05782 11.0673L0.682824 6.69229C0.565549 6.57502 0.499664 6.41596 0.499664 6.2501C0.499664 6.08425 0.565549 5.92519 0.682824 5.80792C0.8001 5.69064 0.959159 5.62476 1.12501 5.62476C1.29086 5.62476 1.44992 5.69064 1.5672 5.80792L5.50001 9.74151L15.0578 0.182916C15.1751 0.0656402 15.3342 -0.000244142 15.5 -0.000244141C15.6659 -0.000244139 15.8249 0.0656402 15.9422 0.182916C16.0595 0.300191 16.1254 0.459251 16.1254 0.625103C16.1254 0.790956 16.0595 0.950016 15.9422 1.06729Z"
-              fill="#FE8900"
-            />
-          </svg>
-          New jobs
-        </button>
+            <svg
+              v-if="selectedJobTypeFilter === item"
+              width="14"
+              height="15"
+              viewBox="0 0 17 12"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M15.9422 1.06729L5.9422 11.0673C5.88415 11.1254 5.81522 11.1715 5.73935 11.203C5.66348 11.2344 5.58215 11.2506 5.50001 11.2506C5.41788 11.2506 5.33655 11.2344 5.26067 11.203C5.1848 11.1715 5.11587 11.1254 5.05782 11.0673L0.682824 6.69229C0.565549 6.57502 0.499664 6.41596 0.499664 6.2501C0.499664 6.08425 0.565549 5.92519 0.682824 5.80792C0.8001 5.69064 0.959159 5.62476 1.12501 5.62476C1.29086 5.62476 1.44992 5.69064 1.5672 5.80792L5.50001 9.74151L15.0578 0.182916C15.1751 0.0656402 15.3342 -0.000244142 15.5 -0.000244141C15.6659 -0.000244139 15.8249 0.0656402 15.9422 0.182916C16.0595 0.300191 16.1254 0.459251 16.1254 0.625103C16.1254 0.790956 16.0595 0.950016 15.9422 1.06729Z"
+                fill="#FE8900"
+              />
+            </svg>
+            <span class="capitalize">{{ item }}</span>
+          </button>
 
-        <button class="bg-white p-2 px-4 rounded-10 md:text-xs text-[10px]">
-          Full-time
-        </button>
-        <button
-          class="bg-westside-200 text-primary-1 gap-2 flex items-center font-black p-2 px-4 rounded-10 md:text-xs text-[10px]"
-        >
-          <svg
-            width="14"
-            height="15"
-            viewBox="0 0 17 12"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+          <button
+            v-for="(item, index) in locationTypeFilters"
+            :key="index"
+            class="gap-x-2 flex items-start md:p-2 px-4 rounded-10 md:text-xs text-[10px]"
+            :class="[
+              selectedLocationTypeFilter === item
+                ? 'bg-westside-200 text-primary-1 font-black'
+                : ' bg-white',
+            ]"
+            @click="selectLocationTypeFilter(item)"
           >
-            <path
-              d="M15.9422 1.06729L5.9422 11.0673C5.88415 11.1254 5.81522 11.1715 5.73935 11.203C5.66348 11.2344 5.58215 11.2506 5.50001 11.2506C5.41788 11.2506 5.33655 11.2344 5.26067 11.203C5.1848 11.1715 5.11587 11.1254 5.05782 11.0673L0.682824 6.69229C0.565549 6.57502 0.499664 6.41596 0.499664 6.2501C0.499664 6.08425 0.565549 5.92519 0.682824 5.80792C0.8001 5.69064 0.959159 5.62476 1.12501 5.62476C1.29086 5.62476 1.44992 5.69064 1.5672 5.80792L5.50001 9.74151L15.0578 0.182916C15.1751 0.0656402 15.3342 -0.000244142 15.5 -0.000244141C15.6659 -0.000244139 15.8249 0.0656402 15.9422 0.182916C16.0595 0.300191 16.1254 0.459251 16.1254 0.625103C16.1254 0.790956 16.0595 0.950016 15.9422 1.06729Z"
-              fill="#FE8900"
-            />
-          </svg>
-          Freelance
-        </button>
+            <svg
+              v-if="selectedLocationTypeFilter === item"
+              width="14"
+              height="15"
+              viewBox="0 0 17 12"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M15.9422 1.06729L5.9422 11.0673C5.88415 11.1254 5.81522 11.1715 5.73935 11.203C5.66348 11.2344 5.58215 11.2506 5.50001 11.2506C5.41788 11.2506 5.33655 11.2344 5.26067 11.203C5.1848 11.1715 5.11587 11.1254 5.05782 11.0673L0.682824 6.69229C0.565549 6.57502 0.499664 6.41596 0.499664 6.2501C0.499664 6.08425 0.565549 5.92519 0.682824 5.80792C0.8001 5.69064 0.959159 5.62476 1.12501 5.62476C1.29086 5.62476 1.44992 5.69064 1.5672 5.80792L5.50001 9.74151L15.0578 0.182916C15.1751 0.0656402 15.3342 -0.000244142 15.5 -0.000244141C15.6659 -0.000244139 15.8249 0.0656402 15.9422 0.182916C16.0595 0.300191 16.1254 0.459251 16.1254 0.625103C16.1254 0.790956 16.0595 0.950016 15.9422 1.06729Z"
+                fill="#FE8900"
+              />
+            </svg>
+            <span class="capitalize">{{ item }}</span>
+          </button>
+        </div>
 
-        <button
-          class="bg-westside-200 text-primary-1 gap-2 flex items-center font-black p-2 px-4 rounded-10 md:text-xs text-[10px]"
-        >
-          <svg
-            width="14"
-            height="15"
-            viewBox="0 0 17 12"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+        <div class="flex-shrink-0 space-x-6">
+          <button
+            @click="searchJobsWithFilter()"
+            class="text-primary-1 font-black md:text-xs text-[10px] py-3"
           >
-            <path
-              d="M15.9422 1.06729L5.9422 11.0673C5.88415 11.1254 5.81522 11.1715 5.73935 11.203C5.66348 11.2344 5.58215 11.2506 5.50001 11.2506C5.41788 11.2506 5.33655 11.2344 5.26067 11.203C5.1848 11.1715 5.11587 11.1254 5.05782 11.0673L0.682824 6.69229C0.565549 6.57502 0.499664 6.41596 0.499664 6.2501C0.499664 6.08425 0.565549 5.92519 0.682824 5.80792C0.8001 5.69064 0.959159 5.62476 1.12501 5.62476C1.29086 5.62476 1.44992 5.69064 1.5672 5.80792L5.50001 9.74151L15.0578 0.182916C15.1751 0.0656402 15.3342 -0.000244142 15.5 -0.000244141C15.6659 -0.000244139 15.8249 0.0656402 15.9422 0.182916C16.0595 0.300191 16.1254 0.459251 16.1254 0.625103C16.1254 0.790956 16.0595 0.950016 15.9422 1.06729Z"
-              fill="#FE8900"
-            />
-          </svg>
-          Remote
-        </button>
+            Search
+          </button>
 
-        <button class="bg-white p-2 px-4 rounded-10 md:text-xs text-[10px]">
-          Hybrid
-        </button>
-
-        <!-- dropdown button -->
-        <button
-          class="rounded-10 text-xs dropdown dropdown-bottom dropdown-end pl-44 md:pl-0"
-        >
-          <svg
-            width="17"
-            height="10"
-            tabindex="0"
-            role="button"
-            class=""
-            viewBox="0 0 17 10"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+          <button
+            @click="clearFilters()"
+            class="text-primary-1 font-black md:text-xs text-[10px] py-3"
           >
-            <path
-              d="M16.5306 1.53055L9.03062 9.03055C8.96097 9.10029 8.87825 9.15561 8.7872 9.19335C8.69615 9.23109 8.59856 9.25052 8.5 9.25052C8.40144 9.25052 8.30384 9.23109 8.21279 9.19335C8.12174 9.15561 8.03903 9.10029 7.96937 9.03055L0.469372 1.53055C0.328642 1.38982 0.24958 1.19895 0.24958 0.999929C0.24958 0.800906 0.328642 0.610034 0.469372 0.469303C0.610103 0.328573 0.800974 0.249512 0.999997 0.249512C1.19902 0.249512 1.38989 0.328573 1.53062 0.469303L8.5 7.43962L15.4694 0.469303C15.5391 0.399621 15.6218 0.344345 15.7128 0.306633C15.8039 0.268921 15.9015 0.249512 16 0.249512C16.0985 0.249512 16.1961 0.268921 16.2872 0.306633C16.3782 0.344345 16.4609 0.399621 16.5306 0.469303C16.6003 0.538986 16.6556 0.621712 16.6933 0.712756C16.731 0.803801 16.7504 0.901383 16.7504 0.999929C16.7504 1.09847 16.731 1.19606 16.6933 1.2871C16.6556 1.37815 16.6003 1.46087 16.5306 1.53055Z"
-              fill="#343330"
-            />
-          </svg>
-          <ul
-            tabindex="0"
-            class="dropdown-content menu bg-white rounded-box z-10 w-72 mt-4 space-y-2 py-3 shadow"
-          >
-            <li>
-              <div
-                class="flex justify-between text-xs font-black gap-3 bg-gray-1"
-              >
-                <a>Job Type:</a>
-              </div>
-            </li>
-
-            <li><a>Full Time</a></li>
-            <li><a>Part Time</a></li>
-
-            <li><a>Contract</a></li>
-            <li>
-              <div
-                class="flex justify-between text-xs gap-3 bg-gray-1 font-black text-primary-1"
-              >
-                <a>Freelance</a>
-                <span
-                  ><svg
-                    width="15"
-                    height="11"
-                    viewBox="0 0 15 11"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M14.1479 1.46054L5.14792 10.4605C5.09567 10.5128 5.03364 10.5543 4.96535 10.5826C4.89706 10.6109 4.82387 10.6255 4.74995 10.6255C4.67603 10.6255 4.60283 10.6109 4.53454 10.5826C4.46626 10.5543 4.40422 10.5128 4.35198 10.4605L0.414478 6.52304C0.30893 6.41749 0.249634 6.27434 0.249634 6.12507C0.249634 5.9758 0.30893 5.83265 0.414478 5.7271C0.520026 5.62155 0.663179 5.56226 0.812447 5.56226C0.961714 5.56226 1.10487 5.62155 1.21042 5.7271L4.74995 9.26733L13.352 0.6646C13.4575 0.559052 13.6007 0.499756 13.7499 0.499756C13.8992 0.499756 14.0424 0.559052 14.1479 0.6646C14.2535 0.770147 14.3128 0.913301 14.3128 1.06257C14.3128 1.21184 14.2535 1.35499 14.1479 1.46054Z"
-                      fill="#FE8900"
-                    />
-                  </svg>
-                </span>
-              </div>
-            </li>
-
-            <li><a>Work Type:</a></li>
-            <li>
-              <div
-                class="flex justify-between text-xs gap-3 bg-gray-1 font-black text-primary-1"
-              >
-                <a>Remote </a>
-                <span
-                  ><svg
-                    width="15"
-                    height="11"
-                    viewBox="0 0 15 11"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M14.1479 1.46054L5.14792 10.4605C5.09567 10.5128 5.03364 10.5543 4.96535 10.5826C4.89706 10.6109 4.82387 10.6255 4.74995 10.6255C4.67603 10.6255 4.60283 10.6109 4.53454 10.5826C4.46626 10.5543 4.40422 10.5128 4.35198 10.4605L0.414478 6.52304C0.30893 6.41749 0.249634 6.27434 0.249634 6.12507C0.249634 5.9758 0.30893 5.83265 0.414478 5.7271C0.520026 5.62155 0.663179 5.56226 0.812447 5.56226C0.961714 5.56226 1.10487 5.62155 1.21042 5.7271L4.74995 9.26733L13.352 0.6646C13.4575 0.559052 13.6007 0.499756 13.7499 0.499756C13.8992 0.499756 14.0424 0.559052 14.1479 0.6646C14.2535 0.770147 14.3128 0.913301 14.3128 1.06257C14.3128 1.21184 14.2535 1.35499 14.1479 1.46054Z"
-                      fill="#FE8900"
-                    />
-                  </svg>
-                </span>
-              </div>
-            </li>
-
-            <li><a>Hybrid</a></li>
-            <li><a>Onsite</a></li>
-          </ul>
-        </button>
-
-        <button class="text-primary-1 font-black md:text-xs text-[10px]">
-          Remove Filters
-        </button>
+            Clear Filters
+          </button>
+        </div>
       </div>
       <!-- btn 2 -->
       <div class="w-full flex space-x-3 justify-between pt-2">
@@ -468,7 +449,7 @@ onBeforeMount(async () => {
 
       <div v-else>
         <div v-if="route?.query?.tab === 'all'">
-          <div v-if="!jobsResult.length">
+          <div v-if="!jobsResult.length" class="pt-5">
             <h1>No jobs available</h1>
           </div>
           <!-- cards -->
@@ -489,8 +470,13 @@ onBeforeMount(async () => {
         </div>
         <div v-if="route?.query?.tab === 'recommended'">
           <div v-if="!recommendJobs.length" class="pt-5">
-            <p v-if="!isErrorFetchingRecommendations">No recommendations available</p>
-            <p v-else>You do not have an active plan, please subscribe to get recommendations</p>
+            <p v-if="!isErrorFetchingRecommendations">
+              No recommendations available
+            </p>
+            <p v-else>
+              You do not have an active plan, please subscribe to get
+              recommendations
+            </p>
           </div>
           <!-- cards -->
           <div v-if="currentLayout.toString() === CARD_LAYOUT.GRID.toString()">
@@ -511,7 +497,10 @@ onBeforeMount(async () => {
         <div v-if="route?.query?.tab === 'matched'">
           <div v-if="!matchedJobs.length" class="pt-5">
             <p v-if="!isErrorFetchingMatched">No matched jobs available</p>
-            <p v-else>You do not have an active plan, please subscribe to get matched to jobs</p>
+            <p v-else>
+              You do not have an active plan, please subscribe to get matched to
+              jobs
+            </p>
           </div>
           <!-- cards -->
           <div v-if="currentLayout.toString() === CARD_LAYOUT.GRID.toString()">
@@ -534,7 +523,7 @@ onBeforeMount(async () => {
 
     <!--  second div-->
     <div
-      v-if="jobsResult.length && jobsResult[currentJobIndex]"
+      v-if="jobsResult.length && jobsResult[currentJobIndex] && !isLoading"
       class="bg-white md:w-[35%] w-full h-full hidden md:block rounded-10"
     >
       <div class="flex items-center flex-col space-y-3 py-4 border-b-2">
@@ -687,24 +676,6 @@ onBeforeMount(async () => {
         </div>
         <!--  -->
         <div class="px-6 space-y-2">
-          <!-- <h1 class="font-black">How to apply</h1> -->
-          <!-- <div class="px-4">
-            <ul class="space-y-3 list-disc text-xs">
-              <li>
-                Please submit your resume + video highlighting your experience
-                in paid advertising and your proficiency with Paid Channels,
-                Google Analytics, Google Tag Manager and a CRM.Include relevant
-                work samples or any case studies showcasing your expertise.
-              </li>
-              <li>
-                You'll also be working deeply in our CRM (HubSpot) and alongside
-                our creative + content teams and will be responsible for helping
-                to understand and track attribution cross-platform.
-              </li>
-            </ul>
-            
-          </div> -->
-
           <div class="flex space-x-4 py-3">
             <div>
               <BtnPrimary

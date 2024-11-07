@@ -4,10 +4,12 @@ import { ValidationError } from '~/types';
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig(event);
   const headers = getHeaders(event);
+  const query = getQuery(event);
   const authHeader = headers['authorization'];
 
   try {
     const response = await axios.get('job-listing', {
+      params: query,
       baseURL: config.apiBaseUrl,
       headers: {
         Authorization: authHeader,
