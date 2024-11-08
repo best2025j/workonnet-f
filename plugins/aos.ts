@@ -1,5 +1,5 @@
 // plugins/aos.client.js
-import AOS from "aos";
+import AOS from "../node_modules/aos/dist/aos";
 import "aos/dist/aos.css";
 
 export default defineNuxtPlugin((nuxtApp) => {

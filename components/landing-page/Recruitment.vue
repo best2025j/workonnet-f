@@ -120,7 +120,7 @@
               data-aos-easing="ease-in-out"
               src="/assets/images/smallframe.png"
               class="w-auto h-auto"
-              alt=""
+              alt=""        
             />
             <img
               data-aos="fade-right"
