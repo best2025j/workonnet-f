@@ -1,11 +1,15 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import { defineNuxtConfig } from 'nuxt/config';
+import { defineNuxtConfig } from "nuxt/config";
 
 export default defineNuxtConfig({
   ssr: true,
-  compatibilityDate: '2024-04-03',
+  compatibilityDate: "2024-04-03",
   devtools: { enabled: false },
-  css: ['@/assets/css/main.css', '@/assets/css/loaders.css'],
+  css: [
+    "@/assets/css/main.css",
+    "@/assets/css/loaders.css",
+    "aos/dist/aos.css",
+  ],
   postcss: {
     plugins: {
       tailwindcss: {},
@@ -16,15 +20,15 @@ export default defineNuxtConfig({
   imports: {
     autoImport: true,
   },
-  plugins: [{ src: '@/plugins/scroll-behavior.client.ts', mode: 'client' }],
+  plugins: [{ src: "@/plugins/scroll-behavior.client.ts", mode: "client" }],
   modules: [
-    '@pinia/nuxt',
-    '@pinia-plugin-persistedstate/nuxt',
-    '@vueuse/nuxt',
-    'nuxt-vue3-google-signin',
+    "@pinia/nuxt",
+    "@pinia-plugin-persistedstate/nuxt",
+    "@vueuse/nuxt",
+    "nuxt-vue3-google-signin",
   ],
   pinia: {
-    storesDirs: ['./store/**', './store/modules/**'],
+    storesDirs: ["./store/**", "./store/modules/**"],
   },
   googleSignIn: {
     clientId: process.env.NUXT_PUBLIC_GOOGLE_CLIENT_ID,
@@ -40,18 +44,18 @@ export default defineNuxtConfig({
 
   // config
   runtimeConfig: {
-    apiBaseUrl: '',
+    apiBaseUrl: "",
     public: {
-      apiSecret: '',
-      paystackKey: '',
-      linkedinId: '',
-      linkedinSecret: '',
-      linkedinRedirectBase: '',
-      googleApiKey: '',
+      apiSecret: "",
+      paystackKey: "",
+      linkedinId: "",
+      linkedinSecret: "",
+      linkedinRedirectBase: "",
+      googleApiKey: "",
     },
   },
 
   build: {
-    transpile: ['vue-toastification'],
+    transpile: ["vue-toastification"],
   },
 });

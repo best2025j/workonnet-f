@@ -2,7 +2,7 @@
   <div class="h-full w-full">
     <!-- grid divider vertical using daisy ui -->
     <div
-      class="flex justify-between items-center w-full text-xs md:text-sm md:space-x-4 md:px-8 px-4 gap-x-2 "
+      class="flex justify-between items-center w-full text-xs md:text-sm md:space-x-4 md:px-8 px-4 gap-x-2"
     >
       <h1 class="whitespace-nowrap md:flex hidden">Why choose us?</h1>
       <h1 class="whitespace-nowrap md:hidden">Why us?</h1>
@@ -108,14 +108,38 @@
           </div>
         </div>
       </div>
-      <!--  -->
+      <!-- the orange background content -->
       <div class="h-full bg-primary-1 my-10 w-full">
         <div
           class="flex md:flex-row flex-col-reverse md:max-w-[1240px] text-center justify-center mx-auto items-center"
         >
-          <div class="md:w-1/2">
-            <img src="/assets/images/white-lady.png" alt="no pix avaliable" />
+          <div class="relative h-[506px] w-full">
+            <img
+              data-aos="fade-left"
+              data-aos-anchor-placement="center-center"
+              data-aos-easing="ease-in-out"
+              src="/assets/images/smallframe.png"
+              class="w-auto h-auto"
+              alt=""
+            />
+            <img
+              data-aos="fade-right"
+              data-aos-anchor-placement="center-center"
+              data-aos-easing="ease-in-out"
+              src="/assets/images/white-lady2.png"
+              class="w-auto h-auto absolute top-0"
+              alt=""
+            />
           </div>
+
+          <!-- <div
+            data-aos="fade-right"
+            data-aos-anchor-placement="center-center"
+            data-aos-easing="ease-in-out"
+            class="md:w-1/2"
+          >
+            <img src="/assets/images/white-lady.png" alt="no pix avaliable" />
+          </div> -->
 
           <div
             class="md:w-1/2 px-8 md:px-0 flex justify-center items-center mx-auto py-8"
