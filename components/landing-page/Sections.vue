@@ -1,8 +1,10 @@
+<script setup lang="ts"></script>
+
 <template>
   <div class="h-full w-full md:px-8 px-4 md:pt-10">
     <!-- grid divider vertical using daisy ui -->
-  <div
-      class="flex justify-between items-center w-full text-xs md:text-sm md:space-x-4 gap-x-2 "
+    <div
+      class="flex justify-between items-center w-full text-xs md:text-sm md:space-x-4 gap-x-2"
     >
       <h1 class="whitespace-nowrap md:flex hidden">Why choose us?</h1>
       <h1 class="whitespace-nowrap md:hidden">Why us?</h1>
@@ -16,14 +18,28 @@
     <div
       class="flex w-full md:py-10 flex-col md:flex-row space-y-6 md:space-y-0"
     >
-      <div class="md:w-1/2 space-y-4 pt-3 md:pt-0 h-[671px]">
+      <div
+        data-aos="fade-right"
+        data-aos-anchor-placement="center-center"
+        data-aos-easing="ease-in-out"
+        class="md:w-1/2 space-y-4 pt-3 md:pt-0 h-[671px] bounce"
+      >
+        <!-- animate__animated animate__fadeInLeft -->
         <h1 class="font-black text-[32px] w-[284px] leading-8">
           Empowering Job Seekers, One Success at a Time
         </h1>
-        <img src="/assets/images//sec.png" alt="a lady picture" class="rounded-[50px]"/>
+        <img
+          src="/assets/images//sec.png"
+          alt="a lady picture"
+          class="rounded-[50px]"
+        />
       </div>
 
-      <div class="md:w-1/2 w-full">
+      <div
+        data-aos="fade-left"
+        data-aos-anchor-placement="center-center"
+        class="md:w-1/2 w-full"
+      >
         <h1 class="text-xs">
           Democratizing the job market for Recruiters & Jobseekers with instant,
           intuitive, AI enabled matching. The first of its kind Job matching
@@ -254,3 +270,19 @@
     </div>
   </div>
 </template>
+
+<style scoped>
+.bounce {
+  animation: bounce 0.6s ease-in-out;
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-10px);
+  }
+}
+</style>
