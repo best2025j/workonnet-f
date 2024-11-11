@@ -62,6 +62,9 @@ const currentJobIndex = ref(0);
 const clearFilters = () => {
   selectedLocationTypeFilter.value = null;
   selectedJobTypeFilter.value = null;
+  searchFormData.searchQuery = ''
+  searchFormData.locationSearchQuery = ''
+
 };
 
 // Method to handle selection of locationType
