@@ -36,6 +36,11 @@ const isApplying = ref<boolean>(false);
 const isErrorFetchingRecommendations = ref(false);
 const isErrorFetchingMatched = ref(false);
 
+const searchFormData = reactive({
+  searchQuery: '',
+  locationSearchQuery: '',
+});
+
 const recommendJobs = ref<IJobPost[] | []>([]);
 const matchedJobs = ref<IJobPost[] | []>([]);
 
@@ -57,6 +62,9 @@ const currentJobIndex = ref(0);
 const clearFilters = () => {
   selectedLocationTypeFilter.value = null;
   selectedJobTypeFilter.value = null;
+  searchFormData.searchQuery = ''
+  searchFormData.locationSearchQuery = ''
+
 };
 
 // Method to handle selection of locationType
@@ -82,24 +90,44 @@ const selectJobTypeFilter = (filter: string) => {
 };
 
 // Computed property to get combined selected filters for UI
-const selectedFilters = computed(() => {
+const selectedSearchAndQueryFilters = computed(() => {
   return {
     locationType: selectedLocationTypeFilter.value,
     jobType: selectedJobTypeFilter.value,
+    location: searchFormData.locationSearchQuery,
+    search:searchFormData. searchQuery,
   };
 });
 
+const searchJobsWithSearchForm = async () => {
+  console.log(selectedSearchAndQueryFilters.value)
+  if (
+    !selectedSearchAndQueryFilters.value.search &&
+    !selectedSearchAndQueryFilters.value.location
+  )
+    return;
+
+  const cleanedQuery = removeEmptyKeys(selectedSearchAndQueryFilters.value);
+
+  await getMyJobs(true, cleanedQuery);
+};
+
 const searchJobsWithFilter = async () => {
   // Add locationType filter to the query if selected
-  if (!selectedFilters.value.locationType && !selectedFilters.value.jobType) {
+  if (
+    !selectedSearchAndQueryFilters.value.locationType &&
+    !selectedSearchAndQueryFilters.value.jobType
+  ) {
     return;
   }
 
-  const cleanedQuery = removeEmptyKeys(selectedFilters.value)
+  const cleanedQuery = removeEmptyKeys(selectedSearchAndQueryFilters.value);
 
+  await getMyJobs(true, cleanedQuery);
+};
 
-  await getMyJobs(true, cleanedQuery) 
-  
+const setPlace = (value: any) => {
+  searchFormData.locationSearchQuery = value.formatted_address;
 };
 
 const setCurrentJobIndex = (index: number) => {
@@ -260,18 +288,19 @@ onBeforeMount(async () => {
         </p>
 
         <!-- input search -->
-        <form class="flex flex-col md:flex-row gap-2 w-full pt-2">
+        <div class="flex flex-col md:flex-row gap-2 w-full pt-2">
           <div class="relative dropdown dropdown-bottom flex flex-col w-full">
             <input
               type="text"
-              placeholder="Search"
-              class="pl-10 pr-4 outline-none h-11 placeholder:text-sm border border-gray-300 rounded-md"
+              v-model="searchFormData.searchQuery"
+              placeholder="Search job title e.g Banker"
+              class="pl-8 pr-3 outline-none h-11 placeholder:text-sm border border-gray-300 rounded-md"
             />
 
             <svg
               width="10"
               height="10"
-              class="absolute left-3 top-3.5 h-4 w-4 text-gray-400"
+              class="absolute left-2.5 top-3.5 h-4 w-4 text-gray-400"
               viewBox="0 0 18 18"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -284,16 +313,18 @@ onBeforeMount(async () => {
           </div>
 
           <div class="relative dropdown dropdown-bottom flex flex-col w-full">
-            <input
-              type="text"
-              placeholder="Job location"
-              class="pl-10 pr-4 outline-none h-11 placeholder:text-sm border border-gray-300 rounded-md"
-            />
+            <GMapAutocomplete
+              placeholder="Enter location, e.g Lagos, Nigeria"
+              class="pl-8 pr-3 outline-none h-11 placeholder:text-sm border border-gray-300 rounded-md"
+              v-model="searchFormData.locationSearchQuery"
+              @place_changed="setPlace"
+            >
+            </GMapAutocomplete>
 
             <svg
               width="10"
               height="10"
-              class="absolute left-3 top-3.5 h-4 w-4 text-gray-400"
+              class="absolute left-2.5 top-3.5 h-4 w-4 text-gray-400"
               viewBox="0 0 14 18"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -306,10 +337,9 @@ onBeforeMount(async () => {
           </div>
 
           <button
+            @click="searchJobsWithSearchForm()"
             class="bg-primary-1 md:px-4 p-3 md:p-0 flex items-center space-x-2 md:space-x-0 capitalize font-black justify-center rounded-10"
           >
-            <h1 class="md:hidden text-white">search</h1>
-
             <svg
               width="18"
               height="18"
@@ -323,7 +353,7 @@ onBeforeMount(async () => {
               />
             </svg>
           </button>
-        </form>
+        </div>
       </div>
 
       <!-- btn -->
