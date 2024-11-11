@@ -29,7 +29,7 @@
         class="grid md:grid-cols-3 grid-cols-1 md:gap-x-10 gap-6 w-full my-10 px-8"
       >
         <div
-          class="border shadow-md rounded-10 space-y-4 py-4 text-center flex flex-col justify-center items-center"
+          class="hover:scale-110 border shadow-md rounded-10 space-y-4 py-4 text-center flex flex-col justify-center items-center"
         >
           <span>
             <svg
@@ -56,7 +56,7 @@
         </div>
 
         <div
-          class="border shadow-md rounded-10 space-y-4 py-4 text-center flex flex-col justify-center items-center w-full"
+          class="border shadow-md rounded-10 space-y-4 py-4 text-center flex flex-col justify-center items-center w-full hover:scale-110"
         >
           <span>
             <svg
@@ -82,7 +82,7 @@
           </div>
         </div>
         <div
-          class="border shadow-md rounded-10 space-y-4 py-4 text-center flex flex-col justify-center items-center"
+          class="hover:scale-110 border shadow-md rounded-10 space-y-4 py-4 text-center flex flex-col justify-center items-center"
         >
           <span>
             <svg
@@ -113,14 +113,14 @@
         <div
           class="flex md:flex-row flex-col-reverse md:max-w-[1240px] text-center justify-center mx-auto items-center"
         >
-          <div class="relative h-[506px] w-full">
+          <div class="relative h-[442px] md:h-[506px] w-full">
             <img
               data-aos="fade-left"
               data-aos-anchor-placement="center-center"
               data-aos-easing="ease-in-out"
               src="/assets/images/smallframe.png"
-              class="w-auto h-auto"
-              alt=""        
+              class="md:w-auto md:h-auto"
+              alt=""
             />
             <img
               data-aos="fade-right"
@@ -135,6 +135,8 @@
           <!-- <div
             data-aos="fade-right"
             data-aos-anchor-placement="center-center"
+              data-aos-easing="linear"
+              data-aos="fade-down"
             data-aos-easing="ease-in-out"
             class="md:w-1/2"
           >
@@ -144,7 +146,14 @@
           <div
             class="md:w-1/2 px-8 md:px-0 flex justify-center items-center mx-auto py-8"
           >
-            <div class="max-w-md md:text-start space-y-4">
+            <div
+              class="max-w-md md:text-start space-y-4"
+              data-aos="fade-down"
+              data-aos-delay="500"
+              data-aos-offset="0"
+              data-aos-anchor-placement="center-bottom"
+              data-aos-easing="ease-in-out"
+            >
               <h1
                 class="text-black-900 md:text-[40px] font-black md:leading-10"
               >

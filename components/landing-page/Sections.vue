@@ -22,6 +22,7 @@
         data-aos="fade-right"
         data-aos-anchor-placement="center-center"
         data-aos-easing="ease-in-out"
+        data-aos-delay="500"
         class="md:w-1/2 space-y-4 pt-3 md:pt-0 h-[671px] bounce"
       >
         <!-- animate__animated animate__fadeInLeft -->
@@ -37,6 +38,7 @@
 
       <div
         data-aos="fade-left"
+        data-aos-delay="500"
         data-aos-anchor-placement="center-center"
         class="md:w-1/2 w-full"
       >

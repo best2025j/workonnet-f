@@ -29,7 +29,7 @@
           class="grid md:grid-cols-3 md:gap-x-10 gap-y-6 px-4 w-full grid-cols-1 md:max-w-5xl justify-center items-center mx-auto h-full py-10"
         >
           <div
-            class="border shadow-md rounded-10 space-y-4 py-4 text-center flex flex-col justify-center items-center"
+            class="border hover:scale-110 shadow-md rounded-10 space-y-4 py-4 text-center flex flex-col justify-center items-center"
           >
             <span>
               <svg
@@ -74,6 +74,7 @@
                 </defs>
               </svg>
             </span>
+
             <div class="flex flex-col space-y-4 py-4">
               <h1 class="text-base font-black">Register</h1>
               <p class="text-xs max-w-[150px]">
@@ -83,7 +84,7 @@
           </div>
 
           <div
-            class="border shadow-md rounded-10 space-y-4 py-4 text-center flex flex-col justify-center items-center"
+            class="border hover:scale-110 shadow-md rounded-10 space-y-4 py-4 text-center flex flex-col justify-center items-center"
           >
             <span>
               <svg
@@ -111,7 +112,7 @@
           </div>
 
           <div
-            class="border shadow-md rounded-10 space-y-4 py-4 text-center flex flex-col justify-center items-center"
+            class="border hover:scale-110 shadow-md rounded-10 space-y-4 py-4 text-center flex flex-col justify-center items-center"
           >
             <span>
               <svg

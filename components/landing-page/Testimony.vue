@@ -24,10 +24,11 @@
           data-aos="fade-left"
           data-aos-anchor-placement="center-center"
           data-aos-easing="ease-in-out"
-          class="grid grid-cols-3 gap-8"
+          data-aos-delay="500"
+          class="grid grid-cols-1 md:grid-cols-3 gap-8"
         >
           <div
-            class="space-y-4 p-8 border-2 border-black-950 rounded-[16px] shadow-box shadow-black-950"
+            class="space-y-4 hover:scale-110 p-8 border-2 border-black-950 rounded-[16px] shadow-box shadow-black-950"
           >
             <span
               ><svg
@@ -73,7 +74,7 @@
           </div>
 
           <div
-            class="space-y-4 p-8 border-2 border-black-950 rounded-[16px] shadow-box shadow-black-950"
+            class="space-y-4 hover:scale-110 p-8 border-2 border-black-950 rounded-[16px] shadow-box shadow-black-950"
           >
             <span
               ><svg
@@ -119,7 +120,7 @@
           </div>
 
           <div
-            class="space-y-4 p-8 border-2 border-black-950 rounded-[16px] shadow-box shadow-black-950"
+            class="space-y-4 hover:scale-110 p-8 border-2 border-black-950 rounded-[16px] shadow-box shadow-black-950"
           >
             <span
               ><svg
@@ -168,11 +169,12 @@
         <div
           data-aos="fade-right"
           data-aos-anchor-placement="center-center"
+          data-aos-delay="500"
           data-aos-easing="ease-in-out"
-          class="grid grid-cols-3 gap-8"
+          class="grid grid-cols-1 md:grid-cols-3 gap-8"
         >
           <div
-            class="space-y-4 p-8 border-2 border-black-950 rounded-[16px] shadow-box shadow-black-950"
+            class="space-y-4 hover:scale-110 p-8 border-2 border-black-950 rounded-[16px] shadow-box shadow-black-950"
           >
             <span
               ><svg
@@ -219,7 +221,7 @@
           </div>
 
           <div
-            class="space-y-4 p-8 border-2 border-black-950 rounded-[16px] shadow-box shadow-black-950"
+            class="space-y-4 hover:scale-110 p-8 border-2 border-black-950 rounded-[16px] shadow-box shadow-black-950"
           >
             <span
               ><svg
@@ -265,7 +267,7 @@
           </div>
 
           <div
-            class="space-y-4 p-8 border-2 border-black-950 rounded-[16px] shadow-box shadow-black-950 h-auto w-full"
+            class="space-y-4 p-8 border-2 border-black-950 rounded-[16px] shadow-box shadow-black-950 h-auto w-full hover:scale-110"
           >
             <div
               class="flex justify-center items-center mx-auto h-32 md:h-full w-full"
