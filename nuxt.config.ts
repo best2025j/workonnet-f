@@ -5,11 +5,7 @@ export default defineNuxtConfig({
   ssr: true,
   compatibilityDate: '2024-04-03',
   devtools: { enabled: false },
-  css: [
-    '@/assets/css/main.css',
-    '@/assets/css/loaders.css',
-    'aos/dist/aos.css',
-  ],
+  css: ['@/assets/css/main.css', '@/assets/css/loaders.css'],
   postcss: {
     plugins: {
       tailwindcss: {},

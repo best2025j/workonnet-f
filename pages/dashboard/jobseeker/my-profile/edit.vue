@@ -179,6 +179,11 @@ const onPhoneInput = (phone: any, phoneObject: any, input: any) => {
   }
 };
 
+const setPlace = (value: any) => {
+  formData.location = value.formatted_address;
+};
+
+
 const handleProfilePhotoUpdate = async () => {
   isLoading.value = true;
   const data = new FormData();
@@ -203,10 +208,13 @@ const handleProfilePhotoUpdate = async () => {
       },
     });
     const responseData = response as ApiSuccessResponse;
-    toast.success('Your profile picture or header photo was updated successfully', {
-      timeout: 3000,
-      position: POSITION.TOP_RIGHT,
-    });
+    toast.success(
+      'Your profile picture or header photo was updated successfully',
+      {
+        timeout: 3000,
+        position: POSITION.TOP_RIGHT,
+      }
+    );
 
     setTimeout(() => {
       isLoading.value = false;
@@ -704,15 +712,16 @@ const formatNumber = (): void => {
               <div class="flex flex-col md:flex-row w-full md:space-x-2">
                 <div class="flex flex-col md:w-1/2">
                   <label for="first-name" class="text-sm mb-2">Location</label>
-                  <input
-                    type="text"
+                  <GMapAutocomplete
+                    placeholder="Enter location, e.g Lagos, Nigeria"
                     v-model="formData.location"
                     :disabled="isLoading"
                     @change="v$.location.$touch"
                     @input="markAsChanged('location')"
-                    placeholder="Enter your location"
                     class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border border-gray-300 rounded-md"
-                  />
+                    @place_changed="setPlace"
+                  >
+                  </GMapAutocomplete>
 
                   <div
                     class="input-errors"
@@ -961,7 +970,9 @@ const formatNumber = (): void => {
               </div>
             </div>
 
-            <div class="text-right py-3 flex items-center justify-end md:hidden">
+            <div
+              class="text-right py-3 flex items-center justify-end md:hidden"
+            >
               <BtnPrimary
                 @click="handleProfileUpdate()"
                 :isLoading="isLoading"

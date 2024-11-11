@@ -38,6 +38,7 @@
   },
   "devDependencies": {
     "@pinia-plugin-persistedstate/nuxt": "^1.2.1",
+    "@types/aos": "^3.0.7",
     "@types/crypto-js": "^4.1.1",
     "@types/node": "^18.15.6",
     "@vueuse/core": "^11.0.3",
