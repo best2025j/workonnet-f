@@ -714,7 +714,7 @@ const formatNumber = (): void => {
                   <label for="first-name" class="text-sm mb-2">Location</label>
                   <GMapAutocomplete
                     placeholder="Enter location, e.g Lagos, Nigeria"
-                    v-model="formData.location"
+                    :value="formData.location"
                     :disabled="isLoading"
                     @change="v$.location.$touch"
                     @input="markAsChanged('location')"
