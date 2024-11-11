@@ -1,7 +1,13 @@
+import VueGoogleMaps from '@fawmi/vue-google-maps';
+
 export default defineNuxtPlugin((nuxtApp) => {
   const config = useRuntimeConfig();
-  const script = document.createElement('script');
-  script.src = `https://maps.googleapis.com/maps/api/js?key=${config.public.googleApiKey}&libraries=places`;
-  script.async = true;
-  document.head.appendChild(script);
+
+  nuxtApp.vueApp.use(VueGoogleMaps, {
+    load: {
+      key: config.public.googleApiKey,
+      libraries: 'places', // This is required if you use the Autocomplete plugin
+    },
+    autobindAllEvents: true,
+  });
 });

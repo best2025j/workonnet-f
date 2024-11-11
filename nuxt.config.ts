@@ -52,6 +52,6 @@ export default defineNuxtConfig({
   },
 
   build: {
-    transpile: ['vue-toastification'],
+    transpile: ['vue-toastification', '@fawmi/vue-google-maps'],
   },
 });
