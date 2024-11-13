@@ -3,6 +3,7 @@ import { POSITION, useToast } from 'vue-toastification';
 import { required, helpers, email } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
 import type { ApiErrorResponse, ApiSuccessResponse } from '~/types';
+import { ref, reactive, computed } from 'vue';
 
 definePageMeta({
   layout: 'auth',

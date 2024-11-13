@@ -46,10 +46,11 @@ export default defineNuxtConfig({
       paystackKey: '',
       linkedinId: '',
       linkedinSecret: '',
+      apiKey: ''
     },
   },
-
   build: {
     transpile: ['vue-toastification'],
   },
 });
+

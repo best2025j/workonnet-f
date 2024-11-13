@@ -8,13 +8,8 @@ export default defineEventHandler(async (event) => {
   const authHeader = headers['authorization'];
 
   try {
-//<<<<<<<< HEAD:server/api/jobseeker/educational-background/delete.ts
     const response = await axios.delete(
-      `education-background/${query.educationBackgroundId}`,
-//========
-    const response = await axios.get(
-      `job-application-tracking/${query.jobApplicationId}`,
-//>>>>>>>> e626179272ac82fccbecff50f7b4309d443842ac:server/api/job-applications/recruiter/get-joblisting-applications.ts
+      `education-background/${query.educationBackgroundId}`, 
       {
         baseURL: config.apiBaseUrl,
         headers: {
@@ -22,6 +17,7 @@ export default defineEventHandler(async (event) => {
         },
       }
     );
+
     return { status: 200, data: response.data.data };
   } catch (e: any) {
     if (axios.isAxiosError<ValidationError, Record<string, unknown>>(e)) {
@@ -46,4 +42,4 @@ export default defineEventHandler(async (event) => {
       });
     }
   }
-})
+});

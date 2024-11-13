@@ -240,6 +240,48 @@ const handleProfilePhotoUpdate = async () => {
     }, 2000);
   }
 };
+
+//autocomplete location
+const locationSuggestions = ref([]);
+const fetchLocation = async () => {
+  const locationValue = formData.location.trim();
+  if (locationValue.length < 3) {
+    locationSuggestions.value = [];
+    return;
+  }
+  const url = `https://api.geoapify.com/v1/geocode/autocomplete?text=${encodeURIComponent(locationValue)}&apiKey=d55b3a83262d4ea8b035158b91ddc8e7`;
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const result = await response.json();
+    if (result.features && result.features.length > 0) {
+      locationSuggestions.value = result.features.map((feature) => {
+        const { city = '', country = '' } = feature.properties || {};
+
+        return {
+          city,
+          country,
+          fullName: `${city} ${country}`.trim(), 
+        };
+      });
+
+      console.log('Mapped Suggestions:', locationSuggestions.value);
+    } else {
+      locationSuggestions.value = []; 
+    }
+  } catch (error) {
+    console.error('Error fetching places:', error);
+    locationSuggestions.value = []; 
+  }
+};
+const selectPlace = (suggestion) => {
+  formData.location = suggestion.fullName; 
+  locationSuggestions.value = []; 
+};
+
 </script>
 
 <template>
@@ -653,6 +695,8 @@ const handleProfilePhotoUpdate = async () => {
               <!--  -->
               <div class="flex gap-2">
                 <div class="flex flex-col w-full">
+                  <div class="relative dropdown dropdown-bottom flex flex-col w-full">
+                    <div class="flex flex-col" >
                   <label for="location" class="text-sm mb-2">Location</label>
                   <input
                     type="text"
@@ -660,9 +704,23 @@ const handleProfilePhotoUpdate = async () => {
                     v-model="formData.location"
                     :disabled="isLoading"
                     @change="v$.location.$touch"
+                    @input="fetchLocation"
                     class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border border-gray-300 rounded-md"
                   />
-
+                  <ul 
+            v-if="locationSuggestions.length"
+             class="border-2 border-gray-200 bg-white rounded-b-lg border-solid z-50 absolute top-[3.8rem] w-full" >
+              <li 
+        v-for="(suggestion, index) in locationSuggestions" 
+        :key="index" 
+        @click="selectPlace(suggestion)" 
+        class="p-2 cursor-pointer text-black hover:bg-[#F6F6F6]"
+      >
+        {{ suggestion.city || 'No city available' }} {{ suggestion.country || 'No country available' }}
+      </li>
+    </ul>
+  </div>
+</div>
                   <div
                     class="input-errors"
                     v-for="error of v$.location.$errors"

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import type { IRecruiterDetails } from '~/types';
 import type { ApiSuccessResponse, IRecruitersWithPagination } from '~/types';
 
@@ -44,6 +45,48 @@ const browseCompanies = async () => {
 onBeforeMount(async () => {
  await browseCompanies()
 })
+// job location
+const jobs = ref(''); 
+const locationSuggestions = ref([]);
+
+const fetchLocation = async () => {
+  if (jobs.value.length < 3) {
+    locationSuggestions.value = []; 
+    return;
+  }
+
+  const url = `https://api.geoapify.com/v1/geocode/autocomplete?text=${encodeURIComponent(jobs.value)}&apiKey=d55b3a83262d4ea8b035158b91ddc8e7`;
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    const result = await response.json();
+    if (result.features && result.features.length > 0) {
+      locationSuggestions.value = result.features.map((feature) => {
+        const city = feature.properties.city || ''; 
+        const country = feature.properties.country || ''; 
+        return {
+          city,
+          country,
+          fullName: `${city} ${country}`.trim(), 
+        };
+      });
+
+      console.log('Mapped Suggestions:', locationSuggestions.value); 
+    } else {
+      locationSuggestions.value = [];
+    }
+  } catch (error) {
+    console.error('Error fetching places:', error);
+    locationSuggestions.value = []; 
+  }
+};
+const selectPlace = (suggestion) => {
+  jobs.value = suggestion.fullName; 
+  locationSuggestions.value = []; 
+};
 </script>
 
 <template>
@@ -79,12 +122,16 @@ onBeforeMount(async () => {
             </svg>
           </div>
 
-          <div class="relative">
+          <div class="relative dropdown dropdown-bottom flex flex-col w-full">
+            <div class="flex flex-col" >
             <input
               type="text"
+              v-model="jobs"
+              @input="fetchLocation"
               placeholder="Job location"
-              class="pl-10 pr-4 h-11 w-full outline-none placeholder:text-sm border border-gray-300 rounded-md"
+              class="pl-10 pr-4 outline-none h-11 placeholder:text-sm border border-gray-300 rounded-md"
             />
+
             <svg
               width="10"
               height="10"
@@ -98,6 +145,19 @@ onBeforeMount(async () => {
                 fill="#343330"
               />
             </svg>
+            <ul 
+            v-if="locationSuggestions.length"
+             class="border-2 border-gray-200 bg-white rounded-b-lg border-solid z-50 absolute top-12 w-full" >
+              <li 
+        v-for="(suggestion, index) in locationSuggestions" 
+        :key="index" 
+        @click="selectPlace(suggestion)" 
+        class="p-2 cursor-pointer text-black hover:bg-[#F6F6F6]"
+      >
+        {{ suggestion.city || 'No city available' }} {{ suggestion.country || 'No country available' }}
+      </li>
+    </ul>
+    </div>
           </div>
 
           <button

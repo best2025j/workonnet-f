@@ -8,11 +8,11 @@ export default defineEventHandler(async (event) => {
 
   try {
     const response = await axios.get(
-<<<<<<<< HEAD:server/api/job-applications/recruiter/recruiter-stats.ts
+//<<<<<<<< HEAD:server/api/job-applications/recruiter/recruiter-stats.ts
       `job-application-tracking/recruiter/stats`,
-========
-      `job-application-tracking/applied/my-applications`,
->>>>>>>> e626179272ac82fccbecff50f7b4309d443842ac:server/api/job-applications/jobseeker/my-applications.ts
+//========
+     // `job-application-tracking/applied/my-applications`,
+//>>>>>>>> e626179272ac82fccbecff50f7b4309d443842ac:server/api/job-applications/jobseeker/my-applications.ts
       {
         baseURL: config.apiBaseUrl,
         headers: {
