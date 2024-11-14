@@ -240,6 +240,10 @@ const handleProfilePhotoUpdate = async () => {
     }, 2000);
   }
 };
+
+const setPlace = (value: any) => {
+  formData.location = value.formatted_address;
+};
 </script>
 
 <template>
@@ -657,11 +661,18 @@ const handleProfilePhotoUpdate = async () => {
                   <input
                     type="text"
                     placeholder="Enter location"
-                    v-model="formData.location"
+                   
+                  />
+
+                  <GMapAutocomplete
+                  v-model="formData.location"
                     :disabled="isLoading"
                     @change="v$.location.$touch"
                     class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border border-gray-300 rounded-md"
-                  />
+                    placeholder="Enter location, e.g Lagos, Nigeria"
+                    @place_changed="setPlace"
+                  >
+                  </GMapAutocomplete>
 
                   <div
                     class="input-errors"

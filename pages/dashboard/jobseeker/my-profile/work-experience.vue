@@ -830,6 +830,13 @@ const handlePreferenceUpdate = async () => {
   }
 };
 
+const setPlace = (value: any) => {
+  workExperienceFormData.companyLocation = value.formatted_address;
+};
+
+
+
+
 onMounted(() => {
   if (userData.value?.skills && userData.value?.skills?.length > 0) {
     skillsLangFormData.skills = userData?.value?.skills;
@@ -922,12 +929,17 @@ onBeforeMount(async () => {
                     <div class="w-full">
                       <input
                         type="text"
-                        v-model="workExperienceFormData.companyLocation"
+                        
+                      />
+                      <GMapAutocomplete
+                      v-model="workExperienceFormData.companyLocation"
                         :disabled="isLoading"
                         @change="v$.companyLocation.$touch"
-                        placeholder="Enter location"
                         class="pl-2 placeholder:text-sm pr-4 h-11 w-full outline-none border rel border-gray-300 rounded-md"
-                      />
+                    placeholder="Enter location, e.g Lagos, Nigeria"
+                    @place_changed="setPlace"
+                  >
+                  </GMapAutocomplete>
 
                       <div
                         class="input-errors"
