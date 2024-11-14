@@ -4,6 +4,18 @@ definePageMeta({
   pageName: 'home',
   layout: 'no-layout',
 });
+
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+AOS.init();
+AOS.refresh();
+
+if (process.client) {
+  import("aos").then((AOS) => {
+    AOS.init();
+  });
+}
 const route = useRoute();
 
 const authStore = useAuthStore();
