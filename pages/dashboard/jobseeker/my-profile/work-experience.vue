@@ -927,10 +927,7 @@ onBeforeMount(async () => {
                   <div class="flex flex-col w-full">
                     <label for="location" class="text-sm mb-2">Location</label>
                     <div class="w-full">
-                      <input
-                        type="text"
-                        
-                      />
+                     
                       <GMapAutocomplete
                       v-model="workExperienceFormData.companyLocation"
                         :disabled="isLoading"
