@@ -593,7 +593,9 @@ const formatNumber = (): void => {
               <div class="flex flex-col md:flex-row gap-2">
                 <div class="flex flex-col w-full">
                   <label for="first-name" class="text-sm mb-2"
-                    >First Name</label
+                    >First Name
+                    <span class="text-red-500 text-xl">*</span>
+                    </label
                   >
                   <input
                     type="text"
@@ -602,6 +604,7 @@ const formatNumber = (): void => {
                     @change="v$.firstName.$touch"
                     @input="markAsChanged('firstName')"
                     placeholder="Enter your first name here"
+                    required
                     class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border border-gray-300 rounded-md"
                   />
 
@@ -616,7 +619,9 @@ const formatNumber = (): void => {
                   </div>
                 </div>
                 <div class="flex flex-col w-full">
-                  <label for="first-name" class="text-sm mb-2">Last Name</label>
+                  <label for="first-name" class="text-sm mb-2">Last Name
+                    <span class="text-red-500 text-xl">*</span>
+                  </label>
                   <input
                     type="text"
                     v-model="formData.lastName"
@@ -624,6 +629,7 @@ const formatNumber = (): void => {
                     @change="v$.lastName.$touch"
                     @input="markAsChanged('lastName')"
                     placeholder="Enter your last name here"
+                    required
                     class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border border-gray-300 rounded-md"
                   />
 
@@ -640,7 +646,10 @@ const formatNumber = (): void => {
               </div>
               <!-- occupation -->
               <div class="flex flex-col w-full">
-                <label for="first-name" class="text-sm mb-2">Occupation</label>
+                <label for="first-name" class="text-sm mb-2">Occupation
+                  <span class="text-red-500 text-xl">*</span>
+
+                </label>
                 <input
                   type="text"
                   v-model="formData.occupation"
@@ -648,6 +657,7 @@ const formatNumber = (): void => {
                   @change="v$.occupation.$touch"
                   @input="markAsChanged('occupation')"
                   placeholder="Enter your role"
+                  required
                   class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border border-gray-300 rounded-md"
                 />
 
@@ -711,7 +721,10 @@ const formatNumber = (): void => {
               <!-- location -->
               <div class="flex flex-col md:flex-row w-full md:space-x-2">
                 <div class="flex flex-col md:w-1/2">
-                  <label for="first-name" class="text-sm mb-2">Location</label>
+                  <label for="first-name" class="text-sm mb-2">Location
+                    <span class="text-red-500 text-xl">*</span>
+
+                  </label>
                   <GMapAutocomplete
                     placeholder="Enter location, e.g Lagos, Nigeria"
                     :value="formData.location"
@@ -737,7 +750,9 @@ const formatNumber = (): void => {
                 <!-- portfolio -->
                 <div class="flex flex-col md:w-1/2">
                   <label for="first-name" class="text-sm mb-2"
-                    >Portfolio URL</label
+                    >Portfolio URL
+                    <span class="text-red-500 text-xl">*</span>
+                    </label
                   >
                   <input
                     type="url"
@@ -746,6 +761,7 @@ const formatNumber = (): void => {
                     @change="v$.portfolioUrl.$touch"
                     @input="markAsChanged('portfolioUrl')"
                     placeholder="Enter your portfolio url"
+                    required
                     class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border border-gray-300 rounded-md"
                   />
 
@@ -765,7 +781,9 @@ const formatNumber = (): void => {
               <div class="flex flex-col w-full relative">
                 <label for="first-name" class="text-sm mb-2"
                   >Expected Salary
-                  <span class="text-xs">(per month)</span></label
+                  <span class="text-xs">(per month)</span>
+                  <span class="text-red-500 text-xl">*</span>
+                  </label
                 >
 
                 <input
@@ -775,6 +793,7 @@ const formatNumber = (): void => {
                   @change="v$.salary.$touch"
                   @input="formatNumber"
                   placeholder="Enter amount"
+                  required
                   class="pl-28 placeholder:text-xs pr-4 py-3 outline-none border border-gray-300 rounded-md"
                 />
 
@@ -947,7 +966,10 @@ const formatNumber = (): void => {
           <!--  -->
           <div class="flex flex-col space-y-4 pt-6">
             <div class="flex flex-col w-full">
-              <label for="first-name" class="text-sm mb-2">Bio</label>
+              <label for="first-name" class="text-sm mb-2">Bio
+                <span class="text-red-500 text-xl">*</span>
+
+              </label>
               <textarea
                 type="text"
                 v-model="formData.bio"
@@ -956,6 +978,7 @@ const formatNumber = (): void => {
                 @input="markAsChanged('bio')"
                 rows="10"
                 placeholder="Write something about you that entice the recruiters......"
+                required
                 class="p-2 border border-gray-300 rounded-lg w-full"
               />
 

@@ -452,7 +452,9 @@ const setPlace = (value: any) => {
             <div class="p-4 md:pl-12 font-[Nexa] w-full space-y-4">
               <!--  -->
               <div class="flex flex-col w-full">
-                <label for="first-name" class="text-sm mb-2">Full Name</label>
+                <label for="first-name" class="text-sm mb-2">Full Name
+                  <span class="text-red-500 text-xl">*</span>
+                </label>
                 <input
                   type="text"
                   placeholder="Enter your full name here"
@@ -460,6 +462,7 @@ const setPlace = (value: any) => {
                   :disabled="isLoading"
                   @change="v$.firstName.$touch"
                   class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border border-gray-300 rounded-md"
+                  required
                 />
                 <div
                   class="input-errors"
@@ -480,6 +483,7 @@ const setPlace = (value: any) => {
                   @on-input="onPhoneInput"
                   :placeholder="'Enter phone number'"
                   :inputClasses="['peer px-3.5 py-4 w-full border']"
+                  required
                 >
                   <template #arrow-icon>
                     <img src="~/assets/svgs/arrow-down.svg" />
@@ -499,7 +503,9 @@ const setPlace = (value: any) => {
               <!-- company -->
               <div class="flex flex-col">
                 <label for="company name" class="text-sm mb-2"
-                  >Company Name</label
+                  >Company Name
+                  <span class="text-red-500 text-xl">*</span>
+                  </label
                 >
                 <input
                   type="text"
@@ -508,6 +514,7 @@ const setPlace = (value: any) => {
                   :disabled="isLoading"
                   @change="v$.companyName.$touch"
                   class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border border-gray-300 rounded-md"
+                  required
                 />
 
                 <div
@@ -523,7 +530,9 @@ const setPlace = (value: any) => {
 
               <!--  -->
               <div class="flex flex-col">
-                <label for="first-name" class="text-sm mb-2">Website</label>
+                <label for="first-name" class="text-sm mb-2">Website
+                  <span class="text-red-500 text-xl">*</span>
+                </label>
                 <input
                   type="text"
                   placeholder="Enter website url"
@@ -531,6 +540,7 @@ const setPlace = (value: any) => {
                   :disabled="isLoading"
                   @change="v$.websiteUrl.$touch"
                   class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border border-gray-300 rounded-md"
+                  required
                 />
 
                 <div
@@ -549,12 +559,14 @@ const setPlace = (value: any) => {
               <div class="w-full">
                 <label class="text-sm mb-2"
                   >Company Size
+                  <span class="text-red-500 text-xl">*</span>
                   <select
                     v-model="formData.companySize"
                     :disabled="isLoading"
                     @change="v$.companySize.$touch"
                     class="outline-none mt-2 bg-white w-full text-base font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
-                  >
+                 required
+                    >
                     Company Size
                     <option value="" disabled selected>
                       Select company size
@@ -581,12 +593,14 @@ const setPlace = (value: any) => {
               <div class="w-full">
                 <label class="text-sm mb-2">
                   Industry
+                  <span class="text-red-500 text-xl">*</span>
                   <select
                     v-model="formData.industry"
                     :disabled="isLoading"
                     @change="v$.industry.$touch"
                     class="outline-none mt-2 bg-white w-full text-base font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
-                  >
+                  required
+                    >
                     <option value="" disabled selected>Select Industry</option>
                     <option value="Accounting & Finance">
                       Accounting & Finance
@@ -657,7 +671,9 @@ const setPlace = (value: any) => {
               <!--  -->
               <div class="flex gap-2">
                 <div class="flex flex-col w-full">
-                  <label for="location" class="text-sm mb-2">Location</label>
+                  <label for="location" class="text-sm mb-2">Location
+                    <span class="text-red-500 text-xl">*</span>
+                  </label>
                   <input
                     type="text"
                     placeholder="Enter location"
@@ -692,7 +708,9 @@ const setPlace = (value: any) => {
 
         <!-- about -->
         <div id="about_me" class="bg-white p-4 rounded-10 font-[Nexa]">
-          <h1 class="font-bold text-xl font-[Georgia]">About me</h1>
+          <h1 class="font-bold text-xl font-[Georgia]">About me
+            <span class="text-red-500 text-xl">*</span>
+          </h1>
           <p class="text-xs">
             Write something about you that entice the recruiters......
           </p>
@@ -709,6 +727,7 @@ const setPlace = (value: any) => {
                 rows="10"
                 placeholder="Write something about you that entice the recruiters......"
                 class="p-2 border border-gray-300 rounded-lg w-full outline-none focus:outline-none"
+                required
               />
               <div
                 class="input-errors"
@@ -734,7 +753,10 @@ const setPlace = (value: any) => {
 
           <!-- company links -->
           <div class="flex w-full md:w-3/4 flex-col h-full">
-            <label for="company url" class="text-sm mb-2">Company URL</label>
+            <label for="company url" class="text-sm mb-2">Company URL
+              <span class="text-red-500 text-xl">*</span>
+
+            </label>
             <div class="flex w-full gap-x-2">
               <div class="flex flex-grow w-full">
                 <input
@@ -743,6 +765,7 @@ const setPlace = (value: any) => {
                   readonly
                   placeholder="Enter url"
                   class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border w-full border-gray-300 rounded-md"
+                  required
                 />
               </div>
 
@@ -767,7 +790,9 @@ const setPlace = (value: any) => {
 
           <div class="flex w-3/4 flex-col h-full">
             <label for="company url" class="text-sm mb-2"
-              >Company job URL</label
+              >Company job URL
+              <span class="text-red-500 text-xl">*</span>
+              </label
             >
             <div class="flex w-full gap-x-2">
               <div class="flex flex-grow w-full">
@@ -775,6 +800,7 @@ const setPlace = (value: any) => {
                   type="text"
                   placeholder="Enter url"
                   class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border w-full border-gray-300 rounded-md"
+                  required
                 />
               </div>
 

@@ -120,11 +120,14 @@ onMounted(() => {
       <p class="mb-6 font-thin text-sm">Enter your email for instructions</p>
 
       <form class="flex flex-col mb-5 w-full">
-        <label class="mb-3 text-sm">Email address</label>
+        <label class="mb-3 text-sm">Email address
+          <span class="text-red-500 text-xl">*</span>
+        </label>
         <input
         v-model="formData.email"
             :disabled="isLoading"
             @change="v$.email.$touch"
+            required
          class="outline-none text-base w-full font-thin rounded-lg px-3 py-2.5 border border-black-200 border-solid"
           type="text"
           placeholder="Enter email"
