@@ -116,7 +116,10 @@ const updateIsLoading  = (value: boolean) => {
         class="flex flex-col mt-6 mx-auto items-start justify-center text-left w-full max-w-md"
       >
         <div class="flex flex-col w-full">
-          <label class="text-basefont-thin mb-2 text-left mt-4">Email </label>
+          <label class="text-basefont-thin mb-2 text-left mt-4">Email 
+            <span class="text-red-500 text-xl">*</span>
+
+          </label>
           <input
             type="email"
             placeholder="Enter email address here"
@@ -124,10 +127,13 @@ const updateIsLoading  = (value: boolean) => {
             :disabled="isLoading"
             @change="v$.email.$touch"
             class="outline-none text-base w-full font-thin rounded-lg px-3 py-2.5 border border-black-200 border-solid"
+            reqiired
           />
 
           <label class="text-base font-thin mb-2 text-left mt-4"
-            >Password</label
+            >Password
+            <span class="text-red-500 text-xl">*</span>
+            </label
           >
           <div class="relative">
             <input
@@ -138,7 +144,7 @@ const updateIsLoading  = (value: boolean) => {
               :disabled="isLoading"
               @change="v$.password.$touch"
               class="outline-none text-base leading-5 w-full p border border-solid border-black-200 rounded-lg px-3 py-2.5"
-            />
+            required/>
             <button
               type="button"
               @click="toggleShowPassword"

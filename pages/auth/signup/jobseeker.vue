@@ -149,13 +149,16 @@ function toggleShowPassword() {
       >
         <div class="flex items-start justify-between space-x-2">
           <div>
-            <label class="text-sm font-thin text-left">First Name </label>
+            <label class="text-sm font-thin text-left">First Name
+              <span class="text-red-500 text-xl">*</span>
+            </label>
             <input
               type="text"
               placeholder="Enter firstname here"
               v-model="formData.firstName"
               :disabled="isLoading"
               @change="v$.firstName.$touch"
+              required
               class="outline-none w-full text-base rounded-md px-3 py-2.5 border border-black-200 border-solid"
             />
             <div
@@ -167,13 +170,16 @@ function toggleShowPassword() {
             </div>
           </div>
           <div>
-            <label class="text-sm font-thin text-left">Last Name </label>
+            <label class="text-sm font-thin text-left">Last Name
+              <span class="text-red-500 text-xl">*</span>
+            </label>
             <input
               type="text"
               placeholder="Enter lastname here"
               v-model="formData.lastName"
               :disabled="isLoading"
               @change="v$.lastName.$touch"
+              required
               class="outline-none w-full text-base rounded-md px-3 py-2.5 border border-black-200 border-solid"
             />
 
@@ -187,13 +193,16 @@ function toggleShowPassword() {
           </div>
         </div>
         <div class="w-full">
-          <label class="text-sm font-thin text-left">Email </label>
+          <label class="text-sm font-thin text-left">Email
+            <span class="text-red-500 text-xl">*</span>
+          </label>
           <input
             type="email"
             placeholder="Enter email address here"
             v-model="formData.email"
             :disabled="isLoading"
             @change="v$.email.$touch"
+            required
             class="outline-none w-full text-base rounded-md px-3 py-2.5 border border-black-200 border-solid"
           />
 
@@ -207,7 +216,10 @@ function toggleShowPassword() {
         </div>
 
         <div class="w-full">
-          <label class="text-base font-thin text-left">Create Password </label>
+          <label class="text-base font-thin text-left">Create Password 
+            <span class="text-red-500 text-xl">*</span>
+
+          </label>
           <div class="relative mb-3">
             <input
               :type="showPassword ? 'text' : 'password'"
@@ -216,6 +228,7 @@ function toggleShowPassword() {
               v-model="formData.password"
               :disabled="isLoading"
               @change="v$.password.$touch"
+              required
               class="outline-none text-base leading-5 w-full p border border-solid border-black-200 rounded-lg px-3 py-2.5"
             />
             <button

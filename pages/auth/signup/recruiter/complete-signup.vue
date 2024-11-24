@@ -219,10 +219,13 @@ onBeforeRouteLeave(() => {
       >
         <div class="w-full">
           <label class="text-base font-thin mb-2 text-left mt-4"
-            >Company Name</label
+            >Company Name
+            <span class="text-red-500 text-xl">*</span>
+            </label
           >
           <input
             type="text"
+            required
             placeholder="Enter company name here"
             v-model="formData.companyName"
             :disabled="isLoading"
@@ -241,9 +244,11 @@ onBeforeRouteLeave(() => {
         <div class="w-full">
           <label class="text-base font-thin mb-2 text-left mt-4"
             >Company Size
+            <span class="text-red-500 text-xl">*</span>
             <div class="relative">
               <select
                 v-model="formData.companySize"
+                required
                 :disabled="isLoading"
                 @change="v$.companySize.$touch"
                 class="mt-2 bg-white w-full text-base font-thin focus:outline-none placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2.5 border border-black-200 border-solid appearance-none"
@@ -286,9 +291,11 @@ onBeforeRouteLeave(() => {
         <div class="w-full">
           <label class="text-base font-thin mb-2 text-left mt-4">
             Industry
+            <span class="text-red-500 text-xl">*</span>
             <div class="relative">
               <select
                 v-model="formData.industry"
+                required
                 :disabled="isLoading"
                 @change="v$.industry.$touch"
                 class="outline-none mt-2 bg-white w-full text-base font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2.5 border border-black-200 border-solid"
@@ -369,12 +376,15 @@ onBeforeRouteLeave(() => {
 
         <div class="w-full">
           <label class="text-base font-thin mb-2 text-left mt-4"
-            >Company Website</label
+            >Company Website
+            <span class="text-red-500 text-xl">*</span>
+            </label
           >
           <input
             type="url"
             placeholder="Website url"
             v-model="formData.websiteUrl"
+            required
             :disabled="isLoading"
             @change="v$.websiteUrl.$touch"
             class="outline-none w-full text-basefont-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2.5 border border-black-200 border-solid"

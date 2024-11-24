@@ -878,7 +878,9 @@ onBeforeMount(async () => {
                   >
                     <div class="flex flex-col w-full">
                       <label for="first-name" class="text-sm mb-2"
-                        >Company / Organization</label
+                        >Company / Organization
+                        <span class="text-red-500 text-xl">*</span>
+                        </label
                       >
                       <input
                         type="text"
@@ -886,6 +888,7 @@ onBeforeMount(async () => {
                         :disabled="isLoading"
                         @change="v$.companyOrganization.$touch"
                         placeholder="Enter Organization name"
+                        required
                         class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border border-gray-300 rounded-md"
                       />
 
@@ -925,7 +928,9 @@ onBeforeMount(async () => {
                   </div>
 
                   <div class="flex flex-col w-full">
-                    <label for="location" class="text-sm mb-2">Location</label>
+                    <label for="location" class="text-sm mb-2">Location
+                      <span class="text-red-500 text-xl">*</span>
+                    </label>
                     <div class="w-full">
                      
                       <GMapAutocomplete
@@ -934,6 +939,7 @@ onBeforeMount(async () => {
                         @change="v$.companyLocation.$touch"
                         class="pl-2 placeholder:text-sm pr-4 h-11 w-full outline-none border rel border-gray-300 rounded-md"
                     placeholder="Enter location, e.g Lagos, Nigeria"
+                    required
                     @place_changed="setPlace"
                   >
                   </GMapAutocomplete>
@@ -953,7 +959,10 @@ onBeforeMount(async () => {
                 <div class="border-b-2 py-2 w-full" />
                 <div class="py-4 divide-black-600 md:w-2/3 md:p-2 space-y-2">
                   <div class="flex flex-col w-full">
-                    <label for="position" class="text-sm mb-2">Position</label>
+                    <label for="position" class="text-sm mb-2">Position
+                      <span class="text-red-500 text-xl">*</span>
+
+                    </label>
                     <div class="relative w-full">
                       <input
                         type="text"
@@ -961,6 +970,7 @@ onBeforeMount(async () => {
                         :disabled="isLoading"
                         @change="v$.jobTitle.$touch"
                         placeholder="Enter position"
+                        required
                         class="pl-2 placeholder:text-sm pr-4 h-11 w-full outline-none border rel border-gray-300 rounded-md"
                       />
 
@@ -978,7 +988,9 @@ onBeforeMount(async () => {
 
                   <div class="flex flex-col w-full items-start justify-start">
                     <label for="presentlyWorking" class="text-sm mb-2"
-                      >Presently Working here</label
+                      >Presently Working here             
+                     <span class="text-red-500 text-xl">*</span>
+                      </label
                     >
                     <div class="w-full flex items-center space-x-2">
                       <input
@@ -987,6 +999,7 @@ onBeforeMount(async () => {
                         :disabled="isLoading"
                         @change="v$.presentlyWorking.$touch"
                         class="h-5 w-5 outline-none rounded-md self-start"
+                        required
                       />
                       <span>Yes</span>
                     </div>
@@ -1016,6 +1029,7 @@ onBeforeMount(async () => {
                           v-model="workExperienceFormData.startingFrom"
                           :disabled="isLoading"
                           @change="v$.startingFrom.$touch"
+                          required
                           class="pl-2 placeholder:text-sm pr-4 h-11 w-full outline-none border rel border-gray-300 rounded-md"
                         />
 
@@ -1036,7 +1050,8 @@ onBeforeMount(async () => {
                       class="flex flex-col w-full"
                     >
                       <label for="first-name" class="text-sm mb-2"
-                        >End Date</label
+                        >End Date
+                        </label
                       >
                       <div class="relative w-full">
                         <input
@@ -1062,7 +1077,10 @@ onBeforeMount(async () => {
                   </div>
 
                   <div class="flex flex-col">
-                    <label for="first-name" class="text-sm mb-2">Details</label>
+                    <label for="first-name" class="text-sm mb-2">Details
+                      <span class="text-red-500 text-xl">*</span>
+
+                    </label>
                     <textarea
                       v-model="workExperienceFormData.details"
                       :disabled="isLoading"
@@ -1070,6 +1088,7 @@ onBeforeMount(async () => {
                       name="details"
                       rows="8"
                       class="border pl-2 border-black-200 rounded-8 w-full"
+                      required
                       placeholder="Enter details about work experience"
                     />
 
@@ -1206,7 +1225,9 @@ onBeforeMount(async () => {
               <div class="flex flex-col md:flex-row gap-x-2 gap-y-2 md:gap-y-0">
                 <div class="flex flex-col w-full">
                   <label for="first-name" class="text-sm mb-2"
-                    >School Name</label
+                    >School Name
+                    <span class="text-red-500 text-xl">*</span>
+                    </label
                   >
                   <input
                     type="text"
@@ -1216,6 +1237,7 @@ onBeforeMount(async () => {
                     placeholder="Enter School name"
                     class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border border-gray-300 rounded-md"
                     list="universities"
+                    required
                     @input="onSearchChange()"
                   />
                   <!-- <datalist id="universities">
@@ -1256,7 +1278,9 @@ onBeforeMount(async () => {
             <div class="py-4 divide-black-600 md:w-2/3 md:p-2 space-y-2">
               <div class="flex flex-col w-full">
                 <label for="fieldOfStudy" class="text-sm mb-2"
-                  >Course of study</label
+                  >Course of study
+                  <span class="text-red-500 text-xl">*</span>
+                  </label
                 >
                 <div class="relative w-full">
                   <input
@@ -1265,6 +1289,7 @@ onBeforeMount(async () => {
                     :disabled="isLoading"
                     @change="v2$.fieldOfStudy.$touch"
                     placeholder="Enter course of study"
+                    required
                     class="pl-2 placeholder:text-sm pr-4 h-11 w-full outline-none border rel border-gray-300 rounded-md"
                   />
 
@@ -1280,11 +1305,15 @@ onBeforeMount(async () => {
                 </div>
               </div>
               <div class="flex flex-col w-full">
-                <label for="fieldOfStudy" class="text-sm">Degree</label>
+                <label for="fieldOfStudy" class="text-sm">Degree
+                  <span class="text-red-500 text-xl">*</span>
+
+                </label>
                 <select
                   v-model="educationFormData.degree"
                   :disabled="isLoading"
                   @change="v2$.degree.$touch"
+                  required
                   class="outline-none mt-2 bg-white w-full text-sm font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2.5 border border-black-200 border-solid"
                 >
                   <option value="" disabled>Select your degree</option>
@@ -1319,11 +1348,14 @@ onBeforeMount(async () => {
               >
                 <div class="flex flex-col w-full">
                   <label for="first-name" class="text-sm mb-2"
-                    >Start Year</label
+                    >Start Year
+                    <span class="text-red-500 text-xl">*</span>
+                    </label
                   >
                   <div class="relative w-full">
                     <input
                       type="month"
+                      required
                       placeholder="Choose start date"
                       v-model="educationFormData.startingYear"
                       :disabled="isLoading"
@@ -1344,10 +1376,13 @@ onBeforeMount(async () => {
                 </div>
                 <!--  -->
                 <div class="flex flex-col w-full">
-                  <label for="first-name" class="text-sm mb-2">End Year</label>
+                  <label for="first-name" class="text-sm mb-2">End Year
+                    <span class="text-red-500 text-xl">*</span>
+                  </label>
                   <div class="relative w-full">
                     <input
                       type="month"
+                      required
                       placeholder="Choose end date"
                       v-model="educationFormData.endingYear"
                       :disabled="isLoading"
@@ -1501,13 +1536,17 @@ onBeforeMount(async () => {
           </div>
           <!-- skills -->
           <div class="space-y-3">
-            <h1 class="text xl font-black font-[Georgia]">Skills</h1>
+            <h1 class="text xl font-black font-[Georgia]">Skills
+              <span class="text-red-500 text-xl">*</span>
+
+            </h1>
             <p class="text-xs pt-3">Add or edit your skills</p>
             <!-- Input form to add new skills -->
             <div class="mt-4 flex flex-col">
               <Multiselect
                 v-model="skillsLangFormData.skills"
                 mode="tags"
+                required
                 :searchable="true"
                 :options="skillList"
                 placeholder="Add skills"
@@ -1542,7 +1581,9 @@ onBeforeMount(async () => {
 
         <!-- preferred location types -->
         <div class="bg-white mt-4 rounded-10 space-y-3 p-5">
-          <h1 class="text xl font-black font-[Georgia]">Preferred job type</h1>
+          <h1 class="text xl font-black font-[Georgia]">Preferred job type
+            <span class="text-red-500 text-xl">*</span>
+          </h1>
           <p class="text-xs pt-3">Add or edit your preferred job type</p>
           <div class="space-y-3">
             <!-- Input form to add new preferred job type -->
@@ -1550,6 +1591,7 @@ onBeforeMount(async () => {
               <Multiselect
                 v-model="jobLocationPreferenceFormData.preferredJobTypes"
                 mode="tags"
+                required
                 :searchable="true"
                 :options="jobTypeList"
                 placeholder="Select Job Types"
@@ -1569,13 +1611,16 @@ onBeforeMount(async () => {
           </div>
           <!-- Location Preference -->
           <div class="space-y-3">
-            <h1 class="text xl font-black font-[Georgia]">Location Preference</h1>
+            <h1 class="text xl font-black font-[Georgia]">Location Preference                  
+            <span class="text-red-500 text-xl">*</span>
+            </h1>
             <p class="text-xs pt-3">Add or edit your location preference</p>
             <!-- Input form -->
             <div class="mt-4 flex flex-col">
               <Multiselect
                 v-model="jobLocationPreferenceFormData.preferredLocationType"
                 mode="tags"
+                required
                 :searchable="true"
                 :options="jobLocationTypeList"
                 placeholder="Select location preference"

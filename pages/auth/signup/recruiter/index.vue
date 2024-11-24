@@ -120,11 +120,14 @@ onMounted(() => {
       >
         <div class="w-full">
           <label class="text-base font-thin mb-2 text-left mt-4"
-            >Full Name</label
+            >Full Name
+            <span class="text-red-500 text-xl">*</span>
+            </label
           >
           <input
             type="text"
             placeholder="Full name here"
+            required
             v-model="formData.fullName"
             :disabled="isLoading"
             @change="v$.lastName.$touch"
@@ -140,10 +143,13 @@ onMounted(() => {
         </div>
 
         <div class="w-full">
-          <label class="text-base font-thin mb-2 text-left mt-4">Email</label>
+          <label class="text-base font-thin mb-2 text-left mt-4">Email
+            <span class="text-red-500 text-xl">*</span>
+          </label>
           <input
             type="email"
             placeholder="Enter email address here"
+            required
             v-model="formData.email"
             :disabled="isLoading"
             @change="v$.email.$touch"
@@ -161,12 +167,15 @@ onMounted(() => {
 
         <div class="w-full">
           <label class="text-base font-thin mb-2 text-left mt-4"
-            >Password</label
+            >Password
+            <span class="text-red-500 text-xl">*</span>
+            </label
           >
           <div class="relative mb-3">
             <input
               :type="showPassword ? 'text' : 'password'"
               placeholder="Enter new password"
+              required
               pattern=".{8,}"
               v-model="formData.password"
               :disabled="isLoading"
@@ -189,9 +198,7 @@ onMounted(() => {
               :type="showPassword ? 'text' : 'password'"
               placeholder="Confirm password"
               pattern=".{8,}"
-              v-model="formData.password"
               :disabled="isLoading"
-              @change="v$.password.$touch"
               class="outline-none text-base leading-5 w-full p border border-solid border-black-200 rounded-lg px-3 py-2.5"
             />
             <button
