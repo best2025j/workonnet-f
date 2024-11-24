@@ -658,12 +658,6 @@ const setPlace = (value: any) => {
               <div class="flex gap-2">
                 <div class="flex flex-col w-full">
                   <label for="location" class="text-sm mb-2">Location</label>
-                  <input
-                    type="text"
-                    placeholder="Enter location"
-                   
-                  />
-
                   <GMapAutocomplete
                   v-model="formData.location"
                     :disabled="isLoading"

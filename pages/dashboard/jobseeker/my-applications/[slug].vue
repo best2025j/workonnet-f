@@ -48,7 +48,7 @@ onMounted(() => {
   <div class="flex flex-col md:flex-row gap-4 text-black-600">
     <div class="md:w-3/5">
       <div class="flex space-x-4 items-center">
-        <img :src="currentJobApp?.recruiter?.photo?.url" alt="ms image" />
+        <img :src="currentJobApp?.recruiter?.photo?.url" alt="ms image" class="w-10 h-10"   />
         <div>
           <h1 class="font-black capitalize">
             {{ currentJobApp?.jobListing?.title }}
@@ -411,7 +411,7 @@ onMounted(() => {
     <!--second div  -->
     <div class="bg-white w-full rounded-10 md:w-2/5">
       <div class="flex items-center flex-col space-y-3 py-4 border-b-2">
-        <img :src="currentJobApp?.recruiter?.photo?.url" alt="" />
+        <img :src="currentJobApp?.recruiter?.photo?.url" alt=""  class="w-10 h-10" />
         <h1 class="text base font-black capitalize">
           {{ currentJobApp?.jobListing?.title }}
         </h1>
