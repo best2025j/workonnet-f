@@ -672,7 +672,7 @@ const setPlace = (value: any) => {
               <!--  -->
               <div class="flex gap-2">
                 <div class="flex flex-col w-full">
-                  >
+                  
                   <label for="location" class="text-sm mb-2"
                     >Location
                     <span class="text-red-500 text-xl">*</span>

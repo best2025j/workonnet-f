@@ -807,7 +807,7 @@ const formatNumber = (): void => {
                   >
                 </div>
 
-                <div class="absolute top-10 left-3 flex items-center gap-2">
+                <div class="absolute top-12 left-3 flex items-center gap-2">
                   <svg
                     width="20"
                     height="20"
@@ -841,7 +841,7 @@ const formatNumber = (): void => {
                 <svg
                   width="18"
                   height="10"
-                  class="absolute left-20 top-11 h-4 w-4 text-gray-400"
+                  class="absolute left-20 top-12 h-4 w-4 text-gray-400"
                   viewBox="0 0 18 10"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"

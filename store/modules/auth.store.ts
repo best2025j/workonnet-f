@@ -19,6 +19,7 @@ interface IStepOneRecruiterForm {
   email: string;
   fullName: string;
   password: string;
+  confirmPassword: string;
   companySize: string;
   companyName: string;
   industry: string;

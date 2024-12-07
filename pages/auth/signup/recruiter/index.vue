@@ -1,6 +1,12 @@
 <script setup lang="ts">
 import { POSITION, useToast } from 'vue-toastification';
-import { required, helpers, email, minLength } from '@vuelidate/validators';
+import {
+  required,
+  helpers,
+  email,
+  minLength,
+  sameAs,
+} from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
 
 definePageMeta({
@@ -19,6 +25,7 @@ const formData = reactive({
   fullName: '',
   email: '',
   password: '',
+  confirmPassword: '', //
   companyName: '',
   companySize: '',
   industry: '',
@@ -26,13 +33,19 @@ const formData = reactive({
 });
 
 const showPassword = ref(false);
+const showConfirmPassword = ref(false);
+
 function toggleShowPassword() {
   showPassword.value = !showPassword.value;
 }
 
-const updateIsLoading  = (value: boolean) => {
-  isLoading.value = value
+function toggleShowConfirmPassword() {
+  showConfirmPassword.value = !showConfirmPassword.value;
 }
+
+const updateIsLoading = (value: boolean) => {
+  isLoading.value = value;
+};
 
 const rules = computed(() => {
   return {
@@ -48,6 +61,16 @@ const rules = computed(() => {
       minLength: helpers.withMessage(
         'Password cannot be less than 8 characters',
         minLength(8)
+      ),
+    },
+    confirmPassword: {
+      required: helpers.withMessage(
+        'Please enter a confirm password',
+        required
+      ),
+      sameAs: helpers.withMessage(
+        'Password does not match',
+        sameAs(formData.password)
       ),
     },
   };
@@ -88,6 +111,11 @@ onMounted(() => {
     if (authStore.stepOneRecruiterForm.password !== null) {
       formData.password = authStore.stepOneRecruiterForm?.password;
     }
+    if (authStore.stepOneRecruiterForm.confirmPassword !== null) {
+      formData.confirmPassword =
+        authStore.stepOneRecruiterForm?.confirmPassword;
+    }
+
     if (authStore.stepOneRecruiterForm.companyName !== null) {
       formData.companyName = authStore.stepOneRecruiterForm.companyName;
     }
@@ -122,8 +150,7 @@ onMounted(() => {
           <label class="text-base font-thin mb-2 text-left mt-4"
             >Full Name
             <span class="text-red-500 text-xl">*</span>
-            </label
-          >
+          </label>
           <input
             type="text"
             placeholder="Full name here"
@@ -143,7 +170,8 @@ onMounted(() => {
         </div>
 
         <div class="w-full">
-          <label class="text-base font-thin mb-2 text-left mt-4">Email
+          <label class="text-base font-thin mb-2 text-left mt-4"
+            >Email
             <span class="text-red-500 text-xl">*</span>
           </label>
           <input
@@ -169,8 +197,7 @@ onMounted(() => {
           <label class="text-base font-thin mb-2 text-left mt-4"
             >Password
             <span class="text-red-500 text-xl">*</span>
-            </label
-          >
+          </label>
           <div class="relative mb-3">
             <input
               :type="showPassword ? 'text' : 'password'"
@@ -190,26 +217,48 @@ onMounted(() => {
               <span v-if="showPassword">Hide</span>
               <span v-else>Show</span>
             </button>
+
+            <div
+              class="input-errors"
+              v-for="error of v$.password.$errors"
+              :key="error.$uid"
+            >
+              <span class="text-xs text-danger-500"
+                >* {{ error.$message }}</span
+              >
+            </div>
           </div>
 
-          <!-- <label class="text-base font-thin text-left">Confirm Password </label>
+          <label class="text-base font-thin text-left">Confirm Password </label>
           <div class="relative">
             <input
-              :type="showPassword ? 'text' : 'password'"
+              :type="showConfirmPassword ? 'text' : 'password'"
               placeholder="Confirm password"
               pattern=".{8,}"
+              v-model="formData.confirmPassword"
               :disabled="isLoading"
+              @change="v$.confirmPassword.$touch"
               class="outline-none text-base leading-5 w-full p border border-solid border-black-200 rounded-lg px-3 py-2.5"
             />
             <button
               type="button"
-              @click="toggleShowPassword"
+              @click="toggleShowConfirmPassword"
               class="absolute right-3 top-1/2 transform -translate-y-1/2"
             >
-              <span v-if="showPassword">Hide</span>
+              <span v-if="showConfirmPassword">Hide</span>
               <span v-else>Show</span>
             </button>
-          </div> -->
+
+            <div
+              class="input-errors"
+              v-for="error of v$.confirmPassword.$errors"
+              :key="error.$uid"
+            >
+              <span class="text-xs text-danger-500"
+                >* {{ error.$message }}</span
+              >
+            </div>
+          </div>
 
           <div
             class="input-errors"

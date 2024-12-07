@@ -6,6 +6,7 @@ import {
   email,
   minLength,
   alpha,
+  sameAs,
 } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
 import type { ApiErrorResponse, ApiSuccessResponse } from '~/types';
@@ -23,16 +24,22 @@ const isLoading = ref<boolean>(false);
 const authStore = useAuthStore();
 const userStore = useUserStore();
 
-const updateIsLoading  = (value: boolean) => {
-  isLoading.value = value
+const showConfirmPassword = ref(false);
+
+function toggleShowConfirmPassword() {
+  showConfirmPassword.value = !showConfirmPassword.value;
 }
 
+const updateIsLoading = (value: boolean) => {
+  isLoading.value = value;
+};
 
 const formData = reactive({
   firstName: '',
   lastName: '',
   email: '',
   password: '',
+  confirmPassword: '', //
 });
 
 const rules = computed(() => {
@@ -54,6 +61,16 @@ const rules = computed(() => {
       minLength: helpers.withMessage(
         'Password cannot be less than 8 characters',
         minLength(8)
+      ),
+    },
+    confirmPassword: {
+      required: helpers.withMessage(
+        'Please enter a confirm password',
+        required
+      ),
+      sameAs: helpers.withMessage(
+        'Password does not match',
+        sameAs(formData.password)
       ),
     },
   };
@@ -131,7 +148,6 @@ const showPassword = ref(false);
 function toggleShowPassword() {
   showPassword.value = !showPassword.value;
 }
-
 </script>
 <template>
   <div class="flex justify-center items-center w-full px-6 md:px-0">
@@ -142,14 +158,15 @@ function toggleShowPassword() {
         Create Account
       </h2>
 
-    <AuthSocialJobSeekerAuth v-on:update:isLoading="updateIsLoading" />
+      <AuthSocialJobSeekerAuth v-on:update:isLoading="updateIsLoading" />
 
       <form
         class="flex flex-col mt-6 mx-auto space-y-3 items-start justify-center text-left w-full max-w-md"
       >
         <div class="flex items-start justify-between space-x-2">
           <div>
-            <label class="text-sm font-thin text-left">First Name
+            <label class="text-sm font-thin text-left"
+              >First Name
               <span class="text-red-500 text-xl">*</span>
             </label>
             <input
@@ -170,7 +187,8 @@ function toggleShowPassword() {
             </div>
           </div>
           <div>
-            <label class="text-sm font-thin text-left">Last Name
+            <label class="text-sm font-thin text-left"
+              >Last Name
               <span class="text-red-500 text-xl">*</span>
             </label>
             <input
@@ -193,7 +211,8 @@ function toggleShowPassword() {
           </div>
         </div>
         <div class="w-full">
-          <label class="text-sm font-thin text-left">Email
+          <label class="text-sm font-thin text-left"
+            >Email
             <span class="text-red-500 text-xl">*</span>
           </label>
           <input
@@ -216,9 +235,9 @@ function toggleShowPassword() {
         </div>
 
         <div class="w-full">
-          <label class="text-base font-thin text-left">Create Password 
+          <label class="text-base font-thin text-left"
+            >Create Password
             <span class="text-red-500 text-xl">*</span>
-
           </label>
           <div class="relative mb-3">
             <input
@@ -239,37 +258,53 @@ function toggleShowPassword() {
               <span v-if="showPassword">Hide</span>
               <span v-else>Show</span>
             </button>
+
+            <div
+              class="input-errors"
+              v-for="error of v$.password.$errors"
+              :key="error.$uid"
+            >
+              <div class="text-xs text-danger-500">* {{ error.$message }}</div>
+            </div>
           </div>
 
-          <!-- <label class="text-base font-thin text-left mt-2"
-            >Confirm Password
-          </label>
+          <label class="text-base font-thin text-left">Confirm Password </label>
           <div class="relative">
             <input
-              :type="showPassword ? 'text' : 'password'"
+              :type="showConfirmPassword ? 'text' : 'password'"
               placeholder="Confirm password"
               pattern=".{8,}"
-              v-model="formData.password"
+              v-model="formData.confirmPassword"
               :disabled="isLoading"
-              @change="v$.password.$touch"
+              @change="v$.confirmPassword.$touch"
               class="outline-none text-base leading-5 w-full p border border-solid border-black-200 rounded-lg px-3 py-2.5"
             />
             <button
               type="button"
-              @click="toggleShowPassword"
+              @click="toggleShowConfirmPassword"
               class="absolute right-3 top-1/2 transform -translate-y-1/2"
             >
-              <span v-if="showPassword">Hide</span>
+              <span v-if="showConfirmPassword">Hide</span>
               <span v-else>Show</span>
             </button>
-          </div> -->
+
+            <div
+              class="input-errors"
+              v-for="error of v$.confirmPassword.$errors"
+              :key="error.$uid"
+            >
+              <span class="text-xs text-danger-500"
+                >* {{ error.$message }}</span
+              >
+            </div>
+          </div>
 
           <div
             class="input-errors"
             v-for="error of v$.password.$errors"
             :key="error.$uid"
           >
-            <div class="text-xs text-danger-500">* {{ error.$message }}</div>
+            <span class="text-xs text-danger-500">* {{ error.$message }}</span>
           </div>
         </div>
 
