@@ -92,11 +92,13 @@ const handleSignup = async () => {
     }, 2000);
     return;
   }
+  
+  const {confirmPassword, ...otherData} = formData
 
   try {
     await $fetch('/api/auth/jobseeker/register', {
       method: 'POST',
-      body: formData,
+      body: otherData,
     });
 
     const loginResponse = await $fetch('/api/auth/jobseeker/authenticate', {
