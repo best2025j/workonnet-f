@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="h-full w-full md:px-8 px-4 md:pt-10">
+  <div class="h-full w-full md:px-8 px-4 md:pt-10 overflow-x-hidden">
     <!-- grid divider vertical using daisy ui -->
     <div
       class="flex justify-between items-center w-full text-xs md:text-sm md:space-x-4 gap-x-2"
@@ -20,7 +20,7 @@
     >
       <div
         data-aos="fade-right"
-        data-aos-anchor-placement="center-center"
+        data-aos-anchor-placement="top-bottom"
         data-aos-easing="ease-in-out"
         data-aos-delay="500"
         class="md:w-1/2 space-y-4 pt-3 md:pt-0 h-[671px] bounce"
@@ -39,7 +39,7 @@
       <div
         data-aos="fade-left"
         data-aos-delay="500"
-        data-aos-anchor-placement="center-center"
+        data-aos-anchor-placement="top-bottom"
         class="md:w-1/2 w-full"
       >
         <h1 class="text-xs">

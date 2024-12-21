@@ -23,20 +23,20 @@
     <div
       class="flex flex-col md:flex-row md:space-x-6 space-y-8 h-full w-full py-14 justify-center items-center"
     >
-      <div class="flex flex-col md:w-[440px] space-y-4 justify-between md:h-[520px] px-4 md:mt-8">
+      <div class="flex flex-col md:w-[440px] space-y-2 justify-between md:h-[520px] px-4 md:mt-8">
         <h1 class="text-[32px] font-black max-w-[18rem] line">
           Connect Talent with Opportunity
         </h1>
 
         <div class="space-y-4 max-w-sm">
-          <p class="text-xs">
+          <p class="text-[16px]">
             With our integrated intuitive AI model, Workonnect guarantees you
             top skilled talents to shortlist under 2hrs. Instant matches based
             on a rigorous & seamless process to help you find the exact star
             candidate from a diverse pool of highly qualified candidates.
           </p>
 
-          <p class="text-xs">
+          <p class="text-[16px]">
             Our platform promises to deliver a fast, efficient, and reliable
             hiring experience, connecting recruiters with the right candidates
             seamlessly.

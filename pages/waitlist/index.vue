@@ -18,7 +18,7 @@ const selectUserType = (selectedType: SELECTED_USER_TYPE) => {
 }
 </script>
 <template>
-  <div class="w-full h-full">
+  <div class="w-full h-full overflow-x-hidden">
     <div
       class="flex flex-col items-center mx-auto h-full justify-center max-w-[516px] text-center space-y-3 p-3"
     >
