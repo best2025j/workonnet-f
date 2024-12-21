@@ -81,9 +81,8 @@
         </div>
         <div class="mt-8 md:mt-0">
           <h1 class="font-black text-base md:pl-4">Resources</h1>
-          <h1 class="pt-8 md:pl-4">Press Kit</h1>
-          <h1 class="pt-5 md:pl-4">How to - Blog</h1>
-          <h1 class="pt-5 md:pl-4">Youtube Playlist</h1>
+          <h1 class="pt-8 md:pl-4">How to - Blog</h1>
+          <h1 class="pt-5 md:pl-4">Articles</h1>
         </div>
       </div>
       <!--  -->

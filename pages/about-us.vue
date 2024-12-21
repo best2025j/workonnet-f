@@ -1,10 +1,9 @@
 <script lang="ts">
-import { ref } from "vue";
+import { ref, computed, defineComponent } from "vue";
 
 export default defineComponent({
   setup() {
     // Track the index of the active accordion
-    const activeIndex = ref(0); // Initialize the first accordion as active (0)
 
     // Toggle a specific accordion by index, and deactivate others
     const toggleAccordion = (index: number) => {
@@ -20,13 +19,89 @@ export default defineComponent({
       }
     };
 
+   
+    const activeCategory = ref<"jobseekers" | "recruiters">("jobseekers");
+    const activeIndex = ref(0); 
+
+
+    interface FAQ {
+      question: string;
+      answer: string;
+    }
+
+    // FAQ data
+    const faqs: Record<"jobseekers" | "recruiters", FAQ[]> = {
+      jobseekers: [
+        {
+          question: "How does Workonnect match me with job opportunities?",
+          answer:
+            "Workonnect uses an AI-powered matching algorithm to connect you with job opportunities that align with your skills, experience, and preferences. The more complete your profile, the better your chances of getting matched.",
+        },
+        {
+          question: "Is it free to create a profile on Workonnect?",
+          answer:
+            "Yes, it's completely free to create a profile on Workonnect. However, we also offer premium features, such as priority job visibility and personalized career assessments, for a small fee.",
+        },
+        {
+          question: "Can I apply for jobs outside my location?",
+          answer:
+            "Yes! Workonnect allows you to apply for jobs both within your location and remotely. You can also filter job listings based on the location preferences that suit you best.",
+        },
+        {
+          question: "How do I track the status of my job application?",
+          answer:
+            "Once you apply for a job, you can track your application status through your Workonnect dashboard. You'll also receive notifications via email when your application status is updated.",
+        },
+        {
+          question: "What should I do if I don’t hear back from a recruiter?",
+          answer:
+            "If you don’t hear back from a recruiter after applying for a job, feel free to continue applying for other roles. You can also improve your profile and keep an eye out for new opportunities that better match your qualifications.",
+        }
+      ],
+      recruiters: [
+        {
+          question: "How does Workonnect help me find the right candidates?",
+          answer:
+            "Workonnect uses an AI-driven system that automatically matches your job postings with the best candidates based on their skills, experience, and qualifications. You can also manually filter, rank, and review applications to ensure a perfect fit.",
+        },
+        {
+          question: "Is Workonnect suitable for small businesses?",
+          answer:
+            "Absolutely! Workonnect is designed to cater to businesses of all sizes. We offer tailored packages for startups and small businesses, making recruitment more efficient and cost-effective.",
+        },
+        {
+          question: "What are the benefits of using Workonnect’s premium services?",
+          answer:
+            "Our premium services provide enhanced features, such as detailed recruitment analytics, access to priority candidates, and the ability to post unlimited job listings. These tools give you greater control and insights during the hiring process.",
+        },
+        {
+          question: "How do I post a job listing on Workonnect?",
+          answer: `Posting a job listing on Workonnect is simple. After creating an account, go to your dashboard, click \`Post a Job\`, and fill out the required details about the role. Once submitted, your listing will be visible to potential candidates immediately.`,
+  },
+  {
+          question: "How does Workonnect ensure the quality of candidates?",
+          answer:
+            "We use a comprehensive ranking system that evaluates candidates based on qualifications, experience, and performance in past roles. We also verify key details such as educational background and professional certifications through integrated verification tools.",
+        },
+      ],
+    };
+
+    const filteredFAQs = computed(() => faqs[activeCategory.value]);
+
+    const setActiveCategory = (category: "jobseekers" | "recruiters") => {
+      activeCategory.value = category;
+    };
     return {
       activeIndex,
       toggleAccordion,
+      activeCategory,
+      filteredFAQs,
+      setActiveCategory,
     };
   },
 });
 </script>
+
 
 <template>
   <div class="w-full h-full">
@@ -49,11 +124,9 @@ export default defineComponent({
         </div>
 
         <p class="md:text-sm text-xs md:leading-8 hidden md:flex">
-          Lorem ipsum dolor sit amet consectetur. Nunc cras a gravida quis
-          augue. Ornare lacus ipsum diam leo nulla tellus volutpat quis. Dis id
-          nullam nisl risus facilisis. Posuere ac ipsum eu vestibulum. Nisi quam
-          cras eget tincidunt dolor nisi urna augue. Phasellus morbi metus nam
-          facilisis. Pellentesque.
+        Workonnect is a trusted recruitment platform designed to connect job seekers with potential employers
+        effortlessly. With its user-friendly interface, reliable job postings, and a focus on creating meaningful connections,
+        Workonnect is a valid and efficient solution for job hunting and talent acquisition in today's competitive market.
         </p>
         <button
           class="border-white border rounded-10 text-sm font-black text-white px-4 py-2.5"
@@ -409,42 +482,56 @@ export default defineComponent({
             <h1 class="md:text-4xl text-xl font-black">
               Frequently asked questions
             </h1>
+            <div class="mb-5 xs:border-2 xs:border-solid xs:border-red-500">
+              <button
+              @click="setActiveCategory('jobseekers')"
+               class="bg-primary-1 px-3 py-2 rounded-[14px] mr-5 text-white sm:mb-3"> 
+               For JobSeekers</button>
+            <button 
+            @click="setActiveCategory('recruiters')"
+            class="bg-primary-1 px-3 py-2 rounded-[14px]  text-white">
+            For Recruiters</button>
+            </div>
+
           </div>
 
           <!-- accordions -->
-          <div class="flex space-x-4 items-center">
+          <div 
+          v-for="(faq, index) in filteredFAQs" 
+          :key="index" 
+          class="flex space-x-4 items-center">
+  
             <div
-              @click="toggleAccordion(0)"
-              :class="{
+            @click="toggleAccordion(index)"
+            :class="{
                 'h-10 w-1.5 rounded-r-10 ': true,
-                'bg-primary-1 h-[80px]': activeIndex === 0,
-                'bg-gray-400 h-10': activeIndex !== 0,
+                'bg-primary-1 h-[80px]': activeIndex === index,
+                'bg-gray-400 h-10': activeIndex !== index,
               }"
             />
 
             <div class="collapse collapse-plus bg-base-200">
               <input
                 type="radio"
-                name="my-accordion-3"
-                @change="toggleAccordion(0)"
+                :name="'accordion-' + activeCategory"
+      @change="toggleAccordion(index)"
               />
               <div class="collapse-title text-xl font-medium">
                 <h1
                   :class="{
                     'font-black md:text-sm text-xs': true,
-                    'text-primary-1': activeIndex === 0,
-                    'text-gray-500': activeIndex !== 0,
+                   'text-primary-1': activeIndex === index,
+        'text-gray-500': activeIndex !== index, 
                   }"
                 >
-                  Lorem Ipsum is simply dummy text of the prin....?
-                </h1>
+                {{ faq.question }}
+              </h1>
               </div>
 
               <div class="collapse-content">
                 <p class="text-[#666C89] md:text-sm text-xs">
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s,
+                  {{ faq.answer }}
+
                 </p>
               </div>
             </div>
@@ -452,123 +539,11 @@ export default defineComponent({
           <!--  -->
           <div class="h-[2px] w-full bg-black-50" />
           <!--  -->
-          <div class="flex space-x-4 items-center">
-            <div
-              @click="toggleAccordion(1)"
-              :class="{
-                'h-10 w-1.5 rounded-r-10 ': true,
-                'bg-primary-1 h-[80px]': activeIndex === 1,
-                'bg-gray-400 h-10': activeIndex !== 1,
-              }"
-            />
-
-            <div class="collapse collapse-plus bg-base-200">
-              <input
-                type="radio"
-                name="my-accordion-3"
-                @change="toggleAccordion(1)"
-              />
-              <div class="collapse-title text-xl font-medium">
-                <h1
-                  :class="{
-                    'font-black md:text-sm text-xs': true,
-                    'text-primary-1': activeIndex === 1,
-                    'text-gray-500': activeIndex !== 1,
-                  }"
-                >
-                  Lorem Ipsum is simply dummy text of the prin....?
-                </h1>
-              </div>
-
-              <div class="collapse-content">
-                <p class="text-[#666C89] md:text-sm text-xs">
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s,
-                </p>
-              </div>
-            </div>
-          </div>
+         
           <!--  -->
-          <div class="h-[2px] w-full bg-black-50" />
+         
           <!--  -->
-          <div class="flex space-x-4 items-center">
-            <div
-              @click="toggleAccordion(2)"
-              :class="{
-                'h-10 w-1.5 rounded-r-10 ': true,
-                'bg-primary-1 h-[80px]': activeIndex === 2,
-                'bg-gray-400 h-10': activeIndex !== 2,
-              }"
-            />
-
-            <div class="collapse collapse-plus bg-base-200">
-              <input
-                type="radio"
-                name="my-accordion-3"
-                @change="toggleAccordion(2)"
-              />
-              <div class="collapse-title text-xl font-medium">
-                <h1
-                  :class="{
-                    'font-black md:text-sm text-xs': true,
-                    'text-primary-1': activeIndex === 2,
-                    'text-gray-500': activeIndex !== 2,
-                  }"
-                >
-                  Lorem Ipsum is simply dummy text of the prin....?
-                </h1>
-              </div>
-
-              <div class="collapse-content">
-                <p class="text-[#666C89] md:text-sm text-xs">
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s,
-                </p>
-              </div>
-            </div>
-          </div>
-          <!--  -->
-          <div class="h-[2px] w-full bg-black-50" />
-
-          <div class="flex space-x-4 items-center">
-            <div
-              @click="toggleAccordion(3)"
-              :class="{
-                'h-10 w-1.5 rounded-r-10 ': true,
-                'bg-primary-1 h-[80px]': activeIndex === 3,
-                'bg-gray-400 h-10': activeIndex !== 3,
-              }"
-            />
-
-            <div class="collapse collapse-plus bg-base-200">
-              <input
-                type="radio"
-                name="my-accordion-3"
-                @change="toggleAccordion(3)"
-              />
-              <div class="collapse-title text-xl font-medium">
-                <h1
-                  :class="{
-                    'font-black md:text-sm text-xs': true,
-                    'text-primary-1': activeIndex === 3,
-                    'text-gray-500': activeIndex !== 3,
-                  }"
-                >
-                  Lorem Ipsum is simply dummy text of the prin....?
-                </h1>
-              </div>
-
-              <div class="collapse-content">
-                <p class="text-[#666C89] md:text-sm text-xs">
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since the 1500s,
-                </p>
-              </div>
-            </div>
-          </div>
+         
         </div>
       </div>
     </div>

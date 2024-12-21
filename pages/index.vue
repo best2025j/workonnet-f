@@ -19,7 +19,7 @@ onMounted(() => {
 });
 </script>
 <template>
-  <div class="h-full w-full bg-white">
+  <div class="h-full w-full bg-white overflow-x-hidden">
     <div class="relative z-50">
       <LandingPageNavbar />
     </div>
@@ -32,3 +32,5 @@ onMounted(() => {
     <LandingPageFooter />
   </div>
 </template>
+
+

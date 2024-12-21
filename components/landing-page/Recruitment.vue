@@ -46,12 +46,12 @@
                 />
               </svg>
             </span>
-            <div class="flex flex-col space-y-4 py-4">
-              <h1 class="text-lg font-black">Candidate Shortlisting</h1>
+            <div class="flex flex-col space-y-4 py-4 cursor-pointer">
+              <h1 class="text-lg font-black">Candidate Matching</h1>
               <p class="text-xs max-w-[300px]">
-                Your opening will be matched immediately with 5-star candidates
-                automatically. You can also swipe right on your preferred
-                candidate.
+                Your opening will be matched immediately with 5-star
+                 candidates automatically. You
+                can also swipe right on your preferred candidate.
               </p>
             </div>
           </div>
@@ -73,12 +73,10 @@
                 />
               </svg>
             </span>
-            <div class="flex flex-col space-y-4 py-4">
-              <h1 class="text-lg font-black">Candidate Shortlisting</h1>
+            <div class="flex flex-col space-y-4 py-4 cursor-pointer">
+              <h1 class="text-lg font-black">Recruitment Analytics</h1>
               <p class="text-xs max-w-[300px]">
-                Your opening will be matched immediately with 5-star candidates
-                automatically. You can also swipe right on your preferred
-                candidate.
+                Generate intuitive report oon the go.
               </p>
             </div>
           </div>
@@ -99,12 +97,10 @@
                 />
               </svg>
             </span>
-            <div class="flex flex-col space-y-4 py-4">
-              <h1 class="text-lg font-black">Candidate Shortlisting</h1>
+            <div class="flex flex-col space-y-4 py-4 cursor-pointer">
+              <h1 class="text-lg font-black">Cut Recruitment by half </h1>
               <p class="text-xs max-w-[300px]">
-                Your opening will be matched immediately with 5-star candidates
-                automatically. You can also swipe right on your preferred
-                candidate.
+               Reduce the amount you spend hiring with recruitment consultants.
               </p>
             </div>
           </div>

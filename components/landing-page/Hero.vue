@@ -1,5 +1,5 @@
 <template>
-  <div class="carousel w-full h-full">
+  <div class="carousel w-full h-full overflow-x-hidden">
     <!-- slide -->
     <div class="text-white carousel-item w-full">
       <div class="relative w-full md:h-[745px]">
@@ -42,7 +42,7 @@
                 Get Matched With Jobs Under 24hrs
               </h1>
 
-              <p class="text-xs md:max-w-[669px] md:block hidden">
+              <p class="text-[14px] md:max-w-[669px] md:block hidden">
                 Our recruitment platform bridges the gap between talented job
                 seekers and forward-thinking recruiters. We offer Job seekers an
                 intuitive search experience that matches them with the right

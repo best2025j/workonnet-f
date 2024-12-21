@@ -9,7 +9,7 @@ const handleError = () => {
 };
 </script>
 <template>
-     <div class="w-full">
+     <div class="w-full overflow-x-hidden">
     <div
       class="flex flex-col md:flex-row items-center px-6 md:pl-36 pt-6 md:pt-24 md:pr-0"
     >
