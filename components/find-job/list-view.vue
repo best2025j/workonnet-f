@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import type { IJobPost, IRecruiterDetails } from '~/types';
-defineProps<{ jobList: IJobPost[], currentJobIndex: number }>();
+defineProps<{ jobList: IJobPost[], currentJobIndex: string }>();
 </script>
 <template>
   <div class="py-4 gap-4 space-y-4 w-full">
     <div
     v-for="(job, index) in jobList" :key="index"
       class="bg-white rounded-10 w-full h-full"
-      :class="[index === currentJobIndex ? 'border-2 border-westside-300 shadow': '']"
-      @click="$emit('setCurrentJobIndex', index)"
+      :class="[job.id === currentJobIndex ? 'border-2 border-westside-300 shadow': '']"
+      @click="$emit('setCurrentJobIndex', job)"
     >
       <div class="flex items-center justify-between border-b-2 p-3">
         <div class="flex items-center space-x-4">

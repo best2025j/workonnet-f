@@ -224,8 +224,8 @@ const handleProfilePhotoUpdate = async () => {
     }, 500);
 
     isSubmitted.value = true;
-    logoImageData.value = null
-    bannerImageData.value = null
+    logoImageData.value = null;
+    bannerImageData.value = null;
     userStore.setUserDetails(responseData.data);
   } catch (error: any) {
     const errorData = error.data as ApiErrorResponse;
@@ -452,7 +452,8 @@ const setPlace = (value: any) => {
             <div class="p-4 md:pl-12 font-[Nexa] w-full space-y-4">
               <!--  -->
               <div class="flex flex-col w-full">
-                <label for="first-name" class="text-sm mb-2">Full Name
+                <label for="first-name" class="text-sm mb-2"
+                  >Full Name
                   <span class="text-red-500 text-xl">*</span>
                 </label>
                 <input
@@ -505,8 +506,7 @@ const setPlace = (value: any) => {
                 <label for="company name" class="text-sm mb-2"
                   >Company Name
                   <span class="text-red-500 text-xl">*</span>
-                  </label
-                >
+                </label>
                 <input
                   type="text"
                   placeholder="Enter company name"
@@ -530,7 +530,8 @@ const setPlace = (value: any) => {
 
               <!--  -->
               <div class="flex flex-col">
-                <label for="first-name" class="text-sm mb-2">Website
+                <label for="first-name" class="text-sm mb-2"
+                  >Website
                   <span class="text-red-500 text-xl">*</span>
                 </label>
                 <input
@@ -565,8 +566,8 @@ const setPlace = (value: any) => {
                     :disabled="isLoading"
                     @change="v$.companySize.$touch"
                     class="outline-none mt-2 bg-white w-full text-base font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
-                 required
-                    >
+                    required
+                  >
                     Company Size
                     <option value="" disabled selected>
                       Select company size
@@ -599,8 +600,8 @@ const setPlace = (value: any) => {
                     :disabled="isLoading"
                     @change="v$.industry.$touch"
                     class="outline-none mt-2 bg-white w-full text-base font-thin placeholder:font-thin placeholder:text-[#958D8D] rounded-lg px-3 py-2 border border-black-200 border-solid"
-                  required
-                    >
+                    required
+                  >
                     <option value="" disabled selected>Select Industry</option>
                     <option value="Accounting & Finance">
                       Accounting & Finance
@@ -671,17 +672,14 @@ const setPlace = (value: any) => {
               <!--  -->
               <div class="flex gap-2">
                 <div class="flex flex-col w-full">
-                  <label for="location" class="text-sm mb-2">Location
+                  
+                  <label for="location" class="text-sm mb-2"
+                    >Location
                     <span class="text-red-500 text-xl">*</span>
                   </label>
-                  <input
-                    type="text"
-                    placeholder="Enter location"
-                   
-                  />
 
                   <GMapAutocomplete
-                  v-model="formData.location"
+                    v-model="formData.location"
                     :disabled="isLoading"
                     @change="v$.location.$touch"
                     class="pl-2 placeholder:text-sm pr-4 h-11 outline-none border border-gray-300 rounded-md"
@@ -708,7 +706,8 @@ const setPlace = (value: any) => {
 
         <!-- about -->
         <div id="about_me" class="bg-white p-4 rounded-10 font-[Nexa]">
-          <h1 class="font-bold text-xl font-[Georgia]">About me
+          <h1 class="font-bold text-xl font-[Georgia]">
+            About me
             <span class="text-red-500 text-xl">*</span>
           </h1>
           <p class="text-xs">
@@ -753,9 +752,9 @@ const setPlace = (value: any) => {
 
           <!-- company links -->
           <div class="flex w-full md:w-3/4 flex-col h-full">
-            <label for="company url" class="text-sm mb-2">Company URL
+            <label for="company url" class="text-sm mb-2"
+              >Company URL
               <span class="text-red-500 text-xl">*</span>
-
             </label>
             <div class="flex w-full gap-x-2">
               <div class="flex flex-grow w-full">
@@ -792,8 +791,7 @@ const setPlace = (value: any) => {
             <label for="company url" class="text-sm mb-2"
               >Company job URL
               <span class="text-red-500 text-xl">*</span>
-              </label
-            >
+            </label>
             <div class="flex w-full gap-x-2">
               <div class="flex flex-grow w-full">
                 <input
@@ -829,7 +827,7 @@ const setPlace = (value: any) => {
             <BtnPrimary
               @click="handleProfileUpdate()"
               :isLoading="isLoading"
-              :disabled="isLoading "
+              :disabled="isLoading"
               class="!px-10"
             >
               <template #text> Save </template>

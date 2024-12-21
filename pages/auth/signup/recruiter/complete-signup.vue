@@ -1,12 +1,6 @@
 <script setup lang="ts">
 import { POSITION, useToast } from 'vue-toastification';
-import {
-  required,
-  helpers,
-  email,
-  url,
-  minLength,
-} from '@vuelidate/validators';
+import { required, helpers, email, minLength } from '@vuelidate/validators';
 import { useVuelidate } from '@vuelidate/core';
 import type { ApiErrorResponse, ApiSuccessResponse } from '~/types';
 
@@ -34,17 +28,21 @@ const formData = reactive({
   fullName: '',
   email: '',
   password: '',
+  confirmPassword: '',
   companyName: '',
   companySize: '',
   industry: '',
   websiteUrl: '',
 });
 
-const fullNameValidator = helpers.withMessage('Please enter a valid name', (value: string) => {
-  if (!value) return false // Ensure value is provided
-  const fullNamePattern = /^[A-Za-z]+(?:\s[A-Za-z]+)?$/
-  return fullNamePattern.test(value)
-})
+const fullNameValidator = helpers.withMessage(
+  'Please enter a valid name',
+  (value: string) => {
+    if (!value) return false; // Ensure value is provided
+    const fullNamePattern = /^[A-Za-z]+(?:\s[A-Za-z]+)?$/;
+    return fullNamePattern.test(value);
+  }
+);
 
 const optionalUrlValidator = helpers.withMessage(
   'Please enter a valid URL',
@@ -60,7 +58,7 @@ const rules = computed(() => {
   return {
     fullName: {
       required: helpers.withMessage('Full names is required', required),
-      fullNameValidator
+      fullNameValidator,
     },
     email: {
       required: helpers.withMessage('Email is required', required),
@@ -110,10 +108,12 @@ const handleSignup = async () => {
     return;
   }
 
+  const {confirmPassword, ...cleanData} = formData
+
   try {
     await $fetch('/api/auth/recruiter/register', {
       method: 'POST',
-      body: formData,
+      body: cleanData,
     });
 
     toast.success('Signup successful, Please login', {
@@ -181,6 +181,11 @@ onMounted(() => {
     if (authStore.stepOneRecruiterForm.password !== null) {
       formData.password = authStore.stepOneRecruiterForm?.password;
     }
+
+    if (authStore.stepOneRecruiterForm.confirmPassword !== null) {
+      formData.confirmPassword = authStore.stepOneRecruiterForm?.confirmPassword;
+    }
+
     if (authStore.stepOneRecruiterForm.companyName !== null) {
       formData.companyName = authStore.stepOneRecruiterForm.companyName;
     }
@@ -221,8 +226,7 @@ onBeforeRouteLeave(() => {
           <label class="text-base font-thin mb-2 text-left mt-4"
             >Company Name
             <span class="text-red-500 text-xl">*</span>
-            </label
-          >
+          </label>
           <input
             type="text"
             required
@@ -378,8 +382,7 @@ onBeforeRouteLeave(() => {
           <label class="text-base font-thin mb-2 text-left mt-4"
             >Company Website
             <span class="text-red-500 text-xl">*</span>
-            </label
-          >
+          </label>
           <input
             type="url"
             placeholder="Website url"

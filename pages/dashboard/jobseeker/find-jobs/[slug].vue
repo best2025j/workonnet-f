@@ -327,10 +327,10 @@ onBeforeMount(async () => {
               </div>
 
               <div class="flex md:space-x-4 items-center relative md:right-5">
-                <span
+                <!-- <span
                   class="px-3 py-1 rounded-10 text-xs font-black text-success-600"
                   >80% match</span
-                >
+                > -->
                 <span
                   class="px-4 py-2 rounded-20 bg-gray-100 text-xs text-gray-500"
                   >Apply</span

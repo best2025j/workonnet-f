@@ -320,10 +320,10 @@ onBeforeMount(async () => {
         <div class="flex items-center justify-between py-2">
           <h1 class="text-sm font-black">Matched Candidates</h1>
           <button
-            v-if="currentJob!.applicants > 0"
+            v-if="matchedUsers.length"
             class="text-xs text-primary-1 flex gap-x-2 items-center"
           >
-            View all candidates (72)
+           Total matched candidates ({{matchedUsers.length}})
             <svg
               width="24"
               height="24"

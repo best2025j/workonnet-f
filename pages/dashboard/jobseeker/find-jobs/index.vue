@@ -57,7 +57,9 @@ const selectedJobTypeFilter = ref<string | null>(null); // Initially, no filter 
 const locationTypeFilters = ref(['hybrid', 'onsite', 'remote']); // locationType enum values
 const jobTypeFilters = ref(['contract', 'full-time', 'part-time']); // jobType enum values
 
-const currentJobIndex = ref(0);
+const currentJobIndex = ref<string>('');
+
+const currentJob = ref<IJobPost | null>(null)
 
 const clearFilters = () => {
   selectedLocationTypeFilter.value = null;
@@ -130,8 +132,9 @@ const setPlace = (value: any) => {
   searchFormData.locationSearchQuery = value.formatted_address;
 };
 
-const setCurrentJobIndex = (index: number) => {
-  currentJobIndex.value = index;
+const setCurrentJobIndex = (job: IJobPost) => {
+  currentJobIndex.value = job.id;
+  currentJob.value = job;
 };
 
 const showUpdateProfileModal = () => {
@@ -555,22 +558,22 @@ onBeforeMount(async () => {
 
     <!--  second div-->
     <div
-      v-if="jobsResult.length && jobsResult[currentJobIndex] && !isLoading"
+      v-if="currentJob && !isLoading"
       class="bg-white md:w-[35%] w-full h-full hidden md:block rounded-10"
     >
       <div class="flex items-center flex-col space-y-3 py-4 border-b-2">
         <img
-          v-if="(jobsResult[currentJobIndex].recruiter as IRecruiterDetails)?.photo"
-          :src="(jobsResult[currentJobIndex].recruiter as IRecruiterDetails)?.photo?.url"
-          :alt="(jobsResult[currentJobIndex].recruiter as IRecruiterDetails)?.companyName"
+          v-if="(currentJob.recruiter as IRecruiterDetails)?.photo"
+          :src="(currentJob.recruiter as IRecruiterDetails)?.photo?.url"
+          :alt="(currentJob.recruiter as IRecruiterDetails)?.companyName"
           class="h-10 w-10"
         />
         <h1 class="text base font-black capitalize">
-          {{ jobsResult[currentJobIndex].title }}
+          {{ currentJob.title }}
         </h1>
         <p class="text-xs capitalize">
           {{
-            (jobsResult[currentJobIndex].recruiter as IRecruiterDetails)
+            (currentJob.recruiter as IRecruiterDetails)
               .companyName
           }}
         </p>
@@ -582,7 +585,7 @@ onBeforeMount(async () => {
           <div class="space-y-2">
             <h1 class="text-xs">Job Type</h1>
             <h1 class="font-black text-sm capitalize">
-              {{ jobsResult[currentJobIndex].jobType }}
+              {{ currentJob.jobType }}
             </h1>
           </div>
 
@@ -590,7 +593,7 @@ onBeforeMount(async () => {
             <h1 class="text-xs">Location</h1>
             <h1 class="font-black text-sm">
               {{
-                (jobsResult[currentJobIndex].recruiter as IRecruiterDetails)
+                (currentJob.recruiter as IRecruiterDetails)
                   ?.location
               }}
             </h1>
@@ -600,7 +603,7 @@ onBeforeMount(async () => {
             <h1 class="text-xs">Salary</h1>
             <h1 class="font-black text-sm">
               {{
-                formatCurrency(jobsResult[currentJobIndex].expectedSalary)
+                formatCurrency(currentJob.expectedSalary)
               }}/month
             </h1>
           </div>
@@ -610,14 +613,14 @@ onBeforeMount(async () => {
           <div class="space-y-2">
             <h1 class="text-xs">Work Type</h1>
             <h1 class="font-black text-sm capitalize">
-              {{ jobsResult[currentJobIndex].location }}
+              {{ currentJob.location }}
             </h1>
           </div>
 
           <div class="space-y-2">
             <h1 class="text-xs">Experience</h1>
             <h1 class="font-black text-sm capitalize">
-              {{ jobsResult[currentJobIndex].level }}
+              {{ currentJob.level }}
             </h1>
           </div>
 
@@ -625,7 +628,7 @@ onBeforeMount(async () => {
             <BtnPrimary
               :isLoading="isApplying"
               :disabled="isApplying"
-              @click="applyNow(jobsResult[currentJobIndex].id)"
+              @click="applyNow(currentJob.id)"
               class="bg-primary-1 px-4 py-3 md:text-xs text-[8px] rounded-8 text-white"
             >
               <template #text> Apply Now </template>
@@ -655,7 +658,7 @@ onBeforeMount(async () => {
 
           <div class="text-xs">
             <p>
-              {{ jobsResult[currentJobIndex].description }}
+              {{ currentJob.description }}
             </p>
           </div>
         </div>
@@ -665,7 +668,7 @@ onBeforeMount(async () => {
           <div class="px-4">
             <ul class="space-y-3 list-disc text-xs">
               <li
-                v-for="(requirement, index) in jobsResult[currentJobIndex]
+                v-for="(requirement, index) in currentJob
                   ?.requirements"
                 :key="index"
                 class=""
@@ -681,7 +684,7 @@ onBeforeMount(async () => {
           <div class="px-4">
             <ul class="space-y-3 list-disc text-xs">
               <li
-                v-for="(benefit, index) in jobsResult[currentJobIndex]
+                v-for="(benefit, index) in currentJob
                   ?.benefits"
                 :key="index"
                 class=""
@@ -697,7 +700,7 @@ onBeforeMount(async () => {
           <div class="px-4">
             <ul class="space-y-3 list-disc text-xs">
               <li
-                v-for="(skill, index) in jobsResult[currentJobIndex]?.skills"
+                v-for="(skill, index) in currentJob?.skills"
                 :key="index"
                 class=""
               >
@@ -713,14 +716,14 @@ onBeforeMount(async () => {
               <BtnPrimary
                 :isLoading="isApplying"
                 :disabled="isApplying"
-                @click="applyNow(jobsResult[currentJobIndex].id)"
+                @click="applyNow(currentJob.id)"
                 class="bg-primary-1 w-auto px-4 py-3 md:text-xs text-[8px] rounded-8 text-white"
               >
                 <template #text> Apply Now </template>
               </BtnPrimary>
             </div>
             <NuxtLink
-              :to="`/dashboard/jobseeker/find-jobs/${jobsResult[currentJobIndex].id}`"
+              :to="`/dashboard/jobseeker/find-jobs/${currentJob.id}`"
               class="py-3 px-4 border text-primary-1 border-primary-1 rounded-10 text-xs"
             >
               More details

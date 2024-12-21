@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { IJobPost, IRecruiterDetails } from '~/types';
-defineProps<{ jobList: IJobPost[], currentJobIndex: number }>();
+defineProps<{ jobList: IJobPost[], currentJobIndex: string }>();
 </script>
 <template>
   <div class="py-4">
@@ -9,9 +9,9 @@ defineProps<{ jobList: IJobPost[], currentJobIndex: number }>();
         v-for="(job, index) in jobList"
         :key="index"
         class="bg-white rounded-10"
-        :class="[index === currentJobIndex ? 'border-2 border-westside-300': '']"
+        :class="[job.id === currentJobIndex ? 'border-2 border-westside-300': '']"
 
-        @click="$emit('setCurrentJobIndex', index)"
+        @click="$emit('setCurrentJobIndex', job)"
       >
         <div class="border-b-2 p-4 space-y-2">
           <div class="flex items-start space-x-4">

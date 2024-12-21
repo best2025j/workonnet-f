@@ -2,7 +2,6 @@
 import { required, helpers, minLength, sameAs } from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
 import { useToast, POSITION } from "vue-toastification";
-import VOtpInput from "vue3-otp-input";
 import type { ApiErrorResponse, ApiSuccessResponse } from "~/types";
 
 definePageMeta({
@@ -31,7 +30,7 @@ const rules = computed(() => {
       ),
     },
     confirmPassword: {
-      required: helpers.withMessage("Please enter a password", required),
+      required: helpers.withMessage("Please enter a confirm password", required),
       sameAs: helpers.withMessage(
         "Password does not match",
         sameAs(formData.password)
