@@ -58,11 +58,17 @@ module.exports = {
         12: "12px",
         20: "100px",
       },
+      fontFamily: {
+        'font-text': ['Georgia'], 
+      },
       transformOrigin: {
         0: "0%",
       },
       zIndex: {
         "-1": "-1",
+      },
+      screens: {
+        'sm': { 'max': '600px' },   // Small devices (phones)
       },
     },
   },
