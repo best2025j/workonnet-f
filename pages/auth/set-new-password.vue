@@ -2,7 +2,7 @@
 import { required, helpers, minLength, sameAs } from "@vuelidate/validators";
 import { useVuelidate } from "@vuelidate/core";
 import { useToast, POSITION } from "vue-toastification";
-import type { ApiErrorResponse, ApiSuccessResponse } from "~/types";
+import type { ApiErrorResponse } from "~/types";
 
 definePageMeta({
   title: "Set New Password",
