@@ -42,7 +42,7 @@ definePageMeta({
             to="/auth/signin/recruiter"
             class="bg-[#FFFBEC] text-primary-1 border-[#FE8900] border-2 border-solid rounded-8 px-40 sm:px-[8rem] md:px-32 py-3 text-xs font-bold transition duration-300"
           >
-            Active
+            Get Started
           </NuxtLink>
           <div class="flex items-center justify-center gap-4 mb-3 mt-5">
             <img src="/assets/images/Vector.png" alt="" class="w-7" />
