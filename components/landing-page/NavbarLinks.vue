@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useRoute, useRouter } from "vue-router";
 const route = useRoute();
 const router = useRouter();
 
@@ -55,7 +54,7 @@ const closeDropdown = () => {
   <li
     v-for="(link, index) in links"
     :key="index"
-    class=" cursor-pointer hidden md:block text-[#1D2939]"
+    class="cursor-pointer hidden md:block text-[#1D2939]"
   >
     <NuxtLink
     v-if="!link.hasSubLinks"
@@ -94,8 +93,6 @@ const closeDropdown = () => {
         </ul>
       </div>
   </li>
-
-  
 
   <!-- for mobile side nav -->
   <li v-for="(link, index) in links" :key="index" class="md:hidden block">

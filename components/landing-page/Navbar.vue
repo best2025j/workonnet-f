@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import "animate.css";
 
 // State to track whether the mobile side nav is open

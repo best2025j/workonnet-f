@@ -210,12 +210,6 @@ onBeforeMount(async () => {
           </div>
           <!-- btn -->
           <div class="space-y-3 pt-4 md:pt-0">
-            <!-- <div class="flex md:justify-end">
-              <button class="text-info-600 font-black text-xs">
-                Premium user
-              </button>
-            </div> -->
-
             <div class="space-y-3">
               <div class="space-x-2 flex items-center">
                 <h1 class="md:text-lg text-sm font-black">
