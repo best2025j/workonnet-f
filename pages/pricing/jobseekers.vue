@@ -36,12 +36,12 @@ definePageMeta({
           <h2 class="font-semibold text-[24px] mb-5">
             ₦0.00<span class="font-light text-sm">/month</span>
           </h2>
-           <NuxtLink
+          <NuxtLink
             to="/auth/signin/jobseeker"
             class="bg-[#FFFBEC] text-primary-1 border-[#FE8900] border-2 border-solid rounded-8 px-40 sm:px-[8rem] md:px-32 py-3 text-xs font-bold transition duration-300"
           >
             Get Started
-        </NuxtLink>
+          </NuxtLink>
           <div class="flex items-center justify-center gap-4 mb-3 mt-5">
             <img src="/assets/images/Vector.png" alt="" class="w-7" />
             <p class="text-xs font-light">Profile Creation</p>
@@ -92,7 +92,7 @@ definePageMeta({
             class="bg-[#FFFBEC] text-primary-1 border-[#FE8900] border-2 border-solid rounded-8 px-40 sm:px-[8rem] md:px-32 py-3 text-xs font-bold transition duration-300"
           >
             Get Started
-        </NuxtLink>
+          </NuxtLink>
           <div class="flex items-center justify-center gap-4 mb-3 mt-5">
             <img src="/assets/images/Vector.png" alt="" class="w-7" />
             <p class="text-xs font-light">Enhanced Profile Visibility</p>
@@ -158,7 +158,7 @@ definePageMeta({
             class="bg-[#FFFBEC] text-primary-1 border-[#FE8900] border-2 border-solid rounded-8 px-40 sm:px-[8rem] md:px-32 py-3 text-xs font-bold transition duration-300"
           >
             Get Started
-        </NuxtLink>
+          </NuxtLink>
           <div class="flex items-center justify-center gap-4 mb-3 mt-5">
             <img src="/assets/images/Vector.png" alt="" class="w-7" />
             <p class="text-xs font-light">Enhanced Profile Visibility</p>
