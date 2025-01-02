@@ -4,7 +4,7 @@ import { defineNuxtConfig } from 'nuxt/config';
 export default defineNuxtConfig({
   ssr: true,
   compatibilityDate: '2024-04-03',
-  devtools: { enabled: false },
+  devtools: { enabled: true },
   css: ['@/assets/css/main.css', '@/assets/css/loaders.css'],
   postcss: {
     plugins: {
@@ -40,9 +40,10 @@ export default defineNuxtConfig({
 
   // config
   runtimeConfig: {
-    apiBaseUrl: '',
+    apiBaseUrl: process.env.NUXT_API_BASE_URL || 'http://localhost:5400',	
+
     public: {
-      apiSecret: '',
+      apiSecret: 'process.env.',
       paystackKey: '',
       linkedinId: '',
       linkedinSecret: '',

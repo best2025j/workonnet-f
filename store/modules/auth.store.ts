@@ -8,6 +8,7 @@ import { type IPhoneNumberField, type IUserAuthData } from '~/types';
 import { skipHydrate } from 'pinia';
 import { storageSerializer } from '~/composables';
 
+
 interface IAuthState {
   userType: LOGGED_IN_USER;
   loggedInUser: IUserAuthData | null;
@@ -65,6 +66,10 @@ export const AuthStore = defineStore('auth-store', () => {
   function setUserToken(token: string) {
     userToken.value = token;
     isAuthenticated.value = true;
+
+      // Manually persist to localStorage
+      localStorage.setItem('userToken', token);
+      localStorage.setItem('isAuthenticated', 'true');
   }
 
   function setLoginSecret(token: string | null) {
@@ -82,6 +87,8 @@ export const AuthStore = defineStore('auth-store', () => {
     userToken.value = null;
     publicToken.value = null;
   }
+
+  
 
   return {
     currentUserType: skipHydrate(currentUserType),

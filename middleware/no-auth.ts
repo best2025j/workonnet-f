@@ -6,6 +6,6 @@ export default defineNuxtRouteMiddleware((to, from) => {
   if (import.meta.server) return;
 
   if (authStore.isAuthenticated && authStore.userToken !== 'no-auth') {
-    return navigateTo('/');
+    return navigateTo('/dashboard/jobseeker');
   }
 });

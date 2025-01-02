@@ -285,6 +285,20 @@ export interface ApiSuccessResponse {
   data: any;
 }
 
+/// Jobseeker Login 
+export interface AuthRequest {
+  email: string;
+  password: string;
+}
+
+export interface AuthResponse {
+  accessToken: string;
+  user: {
+    id: string;
+    email: string;
+  };
+}
+
 export enum JOB_APPLICATION_STATUS {
   IN_REVIEW = 'In Review',
   PENDING = 'Pending',

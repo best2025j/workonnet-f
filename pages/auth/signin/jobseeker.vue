@@ -16,7 +16,9 @@ const route = useRoute();
 const toast = useToast();
 const isLoading = ref<boolean>(false);
 const authStore = useAuthStore();
+const userStore = useUserStore();
 
+//Form Data
 const formData = reactive({
   email: route.query?.email ? route.query?.email : '',
   password: '',
@@ -59,17 +61,25 @@ const handleLogin = async () => {
 
     const responseData = response as ApiSuccessResponse;
     authStore.setLoginSecret(responseData.data.accessToken);
+    userStore.setUserDetails(responseData.data.user);
+    authStore.isAuthenticated = true;
+
+
     setTimeout(() => {
       isLoading.value = false;
     }, 1000);
 
+    // Redirect to dashboard  /auth/activation-code
+    return navigateTo('/dashboard/jobseeker');
+
     return router.push({
-      path: '/auth/activation-code',
+      path: '/dashboard/jobseeker',
       query: {
         tk: responseData.data.accessToken,
         email: formData.email,
       },
     });
+    
   } catch (error: any) {
     const errorData = error.data as ApiErrorResponse;
 

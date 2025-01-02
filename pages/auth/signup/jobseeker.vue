@@ -114,7 +114,7 @@ const handleSignup = async () => {
     }, 1000);
 
     return router.push({
-      path: '/auth/activation-code',
+      path: '/dashboard/jobseeker',
       query: {
         tk: responseData.data.accessToken,
         email: formData.email,

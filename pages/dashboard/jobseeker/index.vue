@@ -13,7 +13,18 @@ definePageMeta({
   title: "Dashboard",
   pageName: "dashboard.jobseeker.index",
   layout: "dashboard",
-  middleware: ["auth", "is-jobseeker"],
+  // middleware: ["auth", "is-jobseeker"],
+});
+
+//Get the current date & time
+const now = useNow();
+
+// This outputs a greeting based on the current time
+const greetings = computed(() => {
+  const currentHour = now.value.getHours();
+  if (currentHour < 12) return "Good Morning";
+  if (currentHour < 18) return "Good Afternoon";
+  return "Good Evening";
 });
 
 const userStore = useUserStore();
@@ -23,6 +34,9 @@ const jobStore = useJobStore();
 const jobStats = ref<IJobApplicationStats | null>(null);
 
 const userData = computed<IUserDetails>(() => userStore.loggedInUserDetails);
+
+console.log(userData.value);
+
 
 const getJobStats = async () => {
   try {
@@ -86,7 +100,7 @@ onBeforeMount(() => {
     <!-- Dashboard content goes here -->
     <div class="space-y-1 pb-2">
       <h2 class="text-2xl font-black">
-        Good Morning
+        {{ greetings }}
         <span v-if="!isLoading" class="capitalize">{{
           ", " + userData?.firstName || ""
         }}</span>

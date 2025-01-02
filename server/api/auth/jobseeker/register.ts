@@ -5,8 +5,11 @@ export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig(event);
   const data = await readBody(event);
 
+  // const URI = 'auth/jobseeker/register'; //Former URI
+  const URI = 'auth/signup/jobseeker';
+
   try {
-    const response = await axios.post('auth/signup/jobseeker', data, {
+    const response = await axios.post(URI, data, {
       baseURL: config.apiBaseUrl,
     });
     return { status: 200, data: response.data.data };

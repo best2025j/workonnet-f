@@ -8,6 +8,7 @@ const handleError = () => {
   });
 };
 </script>
+
 <template>
      <div class="w-full overflow-x-hidden">
     <div
@@ -31,7 +32,7 @@ const handleError = () => {
         </div>
 
         <div class="w-1/4">
-          <BtnPrimary @click="handleError()" :is-loading="false">
+          <BtnPrimary @click="handleError" :is-loading="false">
             <template #text>
                 Go to Home
             </template>

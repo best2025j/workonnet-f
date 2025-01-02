@@ -1,12 +1,14 @@
 import axios from 'axios';
+import { url } from 'node:inspector';
 import { ValidationError } from '~/types';
 
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig(event);
   const data = await readBody(event);
+  const URI = 'auth/recruiter/signin';
 
   try {
-    const response = await axios.post('auth/recruiter/signin', data, {
+    const response = await axios.post(URI, data, {
       baseURL: config.apiBaseUrl,
     });
     return { status: 200, data: response.data.data };
