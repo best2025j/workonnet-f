@@ -15,8 +15,9 @@
                     <p class="font-light mt-1 text-xs mb-5">These are the benefits under free plan</p>
                     <h2 class="font-semibold text-[24px] mb-5">₦0.00<span class="font-light text-sm">/month</span></h2>
                     <button 
-                    class="bg-[#EFFEF7] text-[#0FA968] border-white border-2 border-solid rounded-8 px-40 sm:px-[8rem] md:px-32 py-3 text-xs font-bold transition duration-300">
-  Active
+                    @click="buttonActive()"
+                    class="bg-[#FFFBEC] text-primary-1 border-[#FE8900]  border-2 border-solid rounded-8 px-40 sm:px-[8rem] md:px-32 py-3 text-xs font-bold transition duration-300">
+  Get Started
                 </button><div class="flex items-center justify-center gap-4 mb-3 mt-5">
                         <img src="/assets/images/Vector.png" alt="" class="w-7">
                         <p class="text-xs font-light">Profile Creation</p>
@@ -53,7 +54,8 @@
                     @click="buttonActive()"
                     class="bg-[#FFFBEC] text-primary-1 border-[#FE8900] border-2 border-solid rounded-8 px-40 sm:px-[8rem] md:px-32 py-3 text-xs font-bold transition duration-300">
  Get Started
-                </button><div class="flex items-center justify-center gap-4 mb-3 mt-5">
+                </button>
+                <div class="flex items-center justify-center gap-4 mb-3 mt-5">
                         <img src="/assets/images/Vector.png" alt="" class="w-7">
                         <p class="text-xs font-light">Enhanced Profile Visibility</p>
                     </div>

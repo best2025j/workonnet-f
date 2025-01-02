@@ -16,8 +16,8 @@
                     <h2 class="font-semibold text-[24px] mb-5">₦0.00<span class="font-light text-sm">/month</span></h2>
                     <button 
                     @click="buttonActive()"
-                    class="bg-[#EFFEF7] text-[#0FA968] border-white border-2 border-solid rounded-8 px-40 sm:px-[8rem] md:px-32 py-3 text-xs font-bold transition duration-300">
-  Active
+                    class="bg-[#FFFBEC] text-primary-1 border-[#FE8900]  border-2 border-solid rounded-8 px-40 sm:px-[8rem] md:px-32 py-3 text-xs font-bold transition duration-300">
+  Get Started
                 </button>
                  <div class="flex items-center justify-center gap-4 mb-3 mt-5">
                         <img src="/assets/images/Vector.png" alt="" class="w-7">
