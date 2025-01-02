@@ -15,14 +15,9 @@
                     <p class="font-light mt-1 text-xs mb-5">These are the benefits under free plan</p>
                     <h2 class="font-semibold text-[24px] mb-5">₦0.00<span class="font-light text-sm">/month</span></h2>
                     <button 
-                    @click="buttonActive('button1')"
-                    :class="[
-      'border-2 border-solid rounded-8 px-40 sm:px-[8rem] md:px-32 py-3 text-xs font-bold transition duration-300',
-      isActive === 'button1'
-        ? 'bg-[#EFFEF7] text-[#0FA968] border-white'
-        : 'bg-[#FFFBEC] text-primary-1 border-[#FE8900]'
-    ]">
-  {{ isActive === 'button1' ? 'Active' : 'Get Started' }}
+                    @click="buttonActive()"
+                    class="bg-[#EFFEF7] text-[#0FA968] border-white border-2 border-solid rounded-8 px-40 sm:px-[8rem] md:px-32 py-3 text-xs font-bold transition duration-300">
+  Active
                 </button>
                  <div class="flex items-center justify-center gap-4 mb-3 mt-5">
                         <img src="/assets/images/Vector.png" alt="" class="w-7">
@@ -48,14 +43,9 @@
                     <p class="font-light mt-1 text-xs mb-5">Best for small teams(Below 50 staffs)</p>
                     <h2 class="font-semibold text-[24px] mb-5">₦50,000<span class="font-light text-sm">/month</span></h2>
                     <button 
-                    @click="buttonActive('button2')"
-                    :class="[
-      'border-2 border-solid rounded-8 px-40 sm:px-[8rem] md:px-32 py-3 text-xs font-bold transition duration-300',
-      isActive === 'button2'
-        ? 'bg-[#EFFEF7] text-[#0FA968] border-white'
-        : 'bg-[#FFFBEC] text-primary-1 border-[#FE8900]'
-    ]">
-  {{ isActive === 'button2' ? 'Active' : 'Get Started' }}
+                    @click="buttonActive()"
+                    class="bg-[#FFFBEC] text-primary-1 border-[#FE8900] border-2 border-solid rounded-8 px-40 sm:px-[8rem] md:px-32 py-3 text-xs font-bold transition duration-300">
+Get Started
                 </button>
                     <div class="flex items-center justify-center gap-4 mb-3 mt-5">
                         <img src="/assets/images/Vector.png" alt="" class="w-7">
@@ -87,14 +77,9 @@
                     <p class="font-light mt-1 text-xs mb-5">Best for medium-sized teams (200+ staff)</p>
                     <h2 class="font-semibold text-[24px] mb-5">₦70,000.00<span class="font-light text-sm">/month</span></h2>
                     <button 
-                    @click="buttonActive('button3')"
-                    :class="[
-      'border-2 border-solid rounded-8 px-40 sm:px-[8rem] md:px-32 py-3 text-xs font-bold transition duration-300',
-      isActive === 'button3'
-        ? 'bg-[#EFFEF7] text-[#0FA968] border-white'
-        : 'bg-[#FFFBEC] text-primary-1 border-[#FE8900]'
-    ]">
-  {{ isActive  === 'button3' ? 'Active' : 'Get Started' }}
+                    @click="buttonActive()"
+                    class=" bg-[#FFFBEC] text-primary-1 border-[#FE8900] border-2 border-solid rounded-8 px-40 sm:px-[8rem] md:px-32 py-3 text-xs font-bold transition duration-300">
+  Get Started
                 </button>
                     <div class="flex items-center justify-center gap-4 mb-3 mt-5">
                         <img src="/assets/images/Vector.png" alt="" class="w-7">
@@ -128,14 +113,9 @@
                    <p class="font-light mt-1 text-xs mb-5">Best for large sized teams (500+ staffs)</p>
                    <h2 class="font-semibold text-[24px] mb-5">₦100,000.00<span class="font-light text-sm">/month</span></h2>
                    <button 
-                    @click="buttonActive('button4')"
-                    :class="[
-      'border-2 border-solid rounded-8 px-40 sm:px-[8rem] md:px-32 py-3 text-xs font-bold transition duration-300',
-      isActive === 'button4'
-        ? 'bg-[#EFFEF7] text-[#0FA968] border-white'
-        : 'bg-[#FFFBEC] text-primary-1 border-[#FE8900]'
-    ]">
-  {{ isActive === 'button4' ? 'Active' : 'Get Started' }}
+                    @click="buttonActive()"
+                    class="bg-[#FFFBEC] text-primary-1 border-[#FE8900] border-2 border-solid rounded-8 px-40 sm:px-[8rem] md:px-32 py-3 text-xs font-bold transition duration-300">
+  Get Started
                 </button>
                  <div class="flex items-center justify-center gap-4 mb-3 mt-5">
                        <img src="/assets/images/Vector.png" alt="" class="w-7">
@@ -162,6 +142,8 @@
                    
                </div>
 
+               
+
             </div>
       
         </section>
@@ -173,11 +155,18 @@
 
 <script setup>
 import { ref } from 'vue';
-//enables user to know which plan they paid for
-const isActive = ref(null);
+import {  useRouter } from 'vue-router';
 
-function buttonActive(buttonId){
-    isActive.value = isActive.value === buttonId ? null : buttonId;
+//enables user to know which plan they paid for
+//const isActive = ref(null);
+const route = useRouter()
+function buttonActive(){
+    route.push('/auth/signup/recruiter')
+
+const redirectUrl = '/pricing/recruiter'; 
+
+    sessionStorage.setItem('redirectUrl', redirectUrl);
+   // isActive.value = isActive.value === buttonId ? null : buttonId;
 
 }
 

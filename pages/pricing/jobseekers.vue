@@ -15,14 +15,8 @@
                     <p class="font-light mt-1 text-xs mb-5">These are the benefits under free plan</p>
                     <h2 class="font-semibold text-[24px] mb-5">₦0.00<span class="font-light text-sm">/month</span></h2>
                     <button 
-                    @click="buttonActive('button1')"
-                    :class="[
-      'border-2 border-solid rounded-8 px-40 sm:px-[8rem] md:px-32 py-3 text-xs font-bold transition duration-300',
-      isActive === 'button1'
-        ? 'bg-[#EFFEF7] text-[#0FA968] border-white'
-        : 'bg-[#FFFBEC] text-primary-1 border-[#FE8900]'
-    ]">
-  {{ isActive === 'button1' ? 'Active' : 'Get Started' }}
+                    class="bg-[#EFFEF7] text-[#0FA968] border-white border-2 border-solid rounded-8 px-40 sm:px-[8rem] md:px-32 py-3 text-xs font-bold transition duration-300">
+  Active
                 </button><div class="flex items-center justify-center gap-4 mb-3 mt-5">
                         <img src="/assets/images/Vector.png" alt="" class="w-7">
                         <p class="text-xs font-light">Profile Creation</p>
@@ -56,14 +50,9 @@
                     <p class="font-light mt-1 text-xs mb-5">These are the benefits under basic plan</p>
                     <h2 class="font-semibold text-[24px] mb-5">₦1,500<span class="font-light text-sm">/month</span></h2>
                     <button 
-                    @click="buttonActive('button2')"
-                    :class="[
-      'border-2 border-solid rounded-8 px-40 sm:px-[8rem] md:px-32 py-3 text-xs font-bold transition duration-300',
-      isActive === 'button2'
-        ? 'bg-[#EFFEF7] text-[#0FA968] border-white'
-        : 'bg-[#FFFBEC] text-primary-1 border-[#FE8900]'
-    ]">
-  {{ isActive === 'button2' ? 'Active' : 'Get Started' }}
+                    @click="buttonActive()"
+                    class="bg-[#FFFBEC] text-primary-1 border-[#FE8900] border-2 border-solid rounded-8 px-40 sm:px-[8rem] md:px-32 py-3 text-xs font-bold transition duration-300">
+ Get Started
                 </button><div class="flex items-center justify-center gap-4 mb-3 mt-5">
                         <img src="/assets/images/Vector.png" alt="" class="w-7">
                         <p class="text-xs font-light">Enhanced Profile Visibility</p>
@@ -112,14 +101,9 @@
                     <p class="font-light mt-1 text-xs mb-5">These are the benefits under premium plan</p>
                     <h2 class="font-semibold text-[24px] mb-5">₦5,000.00<span class="font-light text-sm">/month</span></h2>
                     <button 
-                    @click="buttonActive('button3')"
-                    :class="[
-      'border-2 border-solid rounded-8 px-40 sm:px-[8rem] md:px-32 py-3 text-xs font-bold transition duration-300',
-      isActive === 'button3'
-        ? 'bg-[#EFFEF7] text-[#0FA968] border-white'
-        : 'bg-[#FFFBEC] text-primary-1 border-[#FE8900]'
-    ]">
-  {{ isActive === 'button3' ? 'Active' : 'Get Started' }}
+                    @click="buttonActive()"
+                    class="bg-[#FFFBEC] text-primary-1 border-[#FE8900] border-2 border-solid rounded-8 px-40 sm:px-[8rem] md:px-32 py-3 text-xs font-bold transition duration-300">
+ Get Started
                 </button> <div class="flex items-center justify-center gap-4 mb-3 mt-5">
                         <img src="/assets/images/Vector.png" alt="" class="w-7">
                         <p class="text-xs font-light">Enhanced Profile Visibility</p>
@@ -178,13 +162,23 @@
 
 <script setup>
 import { ref } from 'vue';
+import {  useRouter } from 'vue-router';
 //enables user to know which plan they paid for
-const isActive = ref(null);
+//const isActive = ref(null);
 
-function buttonActive(buttonId){
-    isActive.value = isActive.value === buttonId ? null : buttonId;
+//rediect users to signup
+const route = useRouter();
+function buttonActive(){
+route.push('/auth/signup/jobseeker')
+
+const redirectUrl = '/pricing/jobseekers'; 
+
+    sessionStorage.setItem('redirectUrl', redirectUrl);
+console.log(route.push('/auth/signup/jobseeker'))
+   // isActive.value = isActive.value === buttonId ? null : buttonId;
 
 }
+
 
 
 </script>
