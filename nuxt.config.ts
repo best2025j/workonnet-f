@@ -1,11 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import { defineNuxtConfig } from 'nuxt/config';
+import { defineNuxtConfig } from "nuxt/config";
 
 export default defineNuxtConfig({
   ssr: true,
-  compatibilityDate: '2024-04-03',
+  compatibilityDate: "2024-04-03",
   devtools: { enabled: true },
-  css: ['@/assets/css/main.css', '@/assets/css/loaders.css'],
+  css: ["@/assets/css/main.css", "@/assets/css/loaders.css"],
   postcss: {
     plugins: {
       tailwindcss: {},
@@ -16,15 +16,15 @@ export default defineNuxtConfig({
   imports: {
     autoImport: true,
   },
-  plugins: [{ src: '@/plugins/scroll-behavior.client.ts', mode: 'client' }],
+  plugins: [{ src: "@/plugins/scroll-behavior.client.ts", mode: "client" }],
   modules: [
-    '@pinia/nuxt',
-    '@pinia-plugin-persistedstate/nuxt',
-    '@vueuse/nuxt',
-    'nuxt-vue3-google-signin',
+    "@pinia/nuxt",
+    "@pinia-plugin-persistedstate/nuxt",
+    "@vueuse/nuxt",
+    "nuxt-vue3-google-signin",
   ],
   pinia: {
-    storesDirs: ['./store/**', './store/modules/**'],
+    storesDirs: ["./store/**", "./store/modules/**"],
   },
   googleSignIn: {
     clientId: process.env.NUXT_PUBLIC_GOOGLE_CLIENT_ID,
@@ -40,19 +40,27 @@ export default defineNuxtConfig({
 
   // config
   runtimeConfig: {
-    apiBaseUrl: process.env.NUXT_API_BASE_URL || 'http://localhost:5400',	
+    apiBaseUrl: process.env.NUXT_API_BASE_URL || "http://localhost:5400",
 
     public: {
-      apiSecret: 'process.env.',
-      paystackKey: '',
-      linkedinId: '',
-      linkedinSecret: '',
-      linkedinRedirectBase: '',
-      googleApiKey: '',
+      apiSecret: "process.env.",
+      paystackKey: "",
+      linkedinId: "",
+      linkedinSecret: "",
+      linkedinRedirectBase: "",
+      googleApiKey: "",
     },
   },
 
+  nitro: {
+    routeRules: {
+      "/api/**": {
+        proxy: "https://backend-api-production-5d42.up.railway.app/api/v1/**",
+      },
+    },
+  },
+  
   build: {
-    transpile: ['vue-toastification', '@fawmi/vue-google-maps'],
+    transpile: ["vue-toastification", "@fawmi/vue-google-maps"],
   },
 });
