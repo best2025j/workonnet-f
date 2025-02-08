@@ -1,9 +1,22 @@
 <script setup lang="ts">
-const route = useRoute()
+definePageMeta({
+  title: "home",
+  pageName: 'home',
+  layout: 'no-layout',
+})
 </script>
-
 <template>
-  <div>
-    <h1 class="text-purple-700 font-bold text-5xl">This is the home page</h1>
+  <div class="h-full w-full bg-white">
+    <div class="relative z-50">
+      <LandingPageNavbar/>
+    </div>
+    <LandingPageHero />
+    <LandingPageSections />
+    <LandingPageRecruitment />
+    <LandingPageHiring />
+    <LandingPageTestimony />
+    <LandingPageConnect />
+    <LandingPageFooter />
   </div>
 </template>
+
